@@ -747,6 +747,9 @@ namespace FallGuysStats {
             // 
             // chkAutoUpdate
             // 
+#if !AllowUpdate
+            this.chkAutoUpdate.Visible = false;
+#endif
             this.chkAutoUpdate.AutoSize = true;
             this.chkAutoUpdate.Location = new System.Drawing.Point(250, 17);
             this.chkAutoUpdate.Name = "chkAutoUpdate";

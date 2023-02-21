@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+#if AllowUpdate
 using System.IO.Compression;
+#endif
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -86,14 +88,17 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (!this.CurrentSettings.FrenchVersion) {
-                        CurrentLanguage = 1;
+                    if (!this.CurrentSettings.FrenchyEdition) {
+                        this.CurrentSettings.FrenchyEdition = true;
                         this.CurrentSettings.Multilingual = 1;
                         this.CurrentSettings.OverlayColor = 0;
-                        this.UserSettings.Insert(this.CurrentSettings);
-                    } else {
-                        CurrentLanguage = this.CurrentSettings.Multilingual;
+                        this.CurrentSettings.SwitchBetweenPlayers = false;
+                        this.CurrentSettings.PlayerByConsoleType = true;
+                        this.CurrentSettings.ColorByRoundType = true;
+                        this.CurrentSettings.AutoUpdate = true;
+                        this.UserSettings.Upsert(this.CurrentSettings);
                     }
+                    CurrentLanguage = this.CurrentSettings.Multilingual;
                 } catch {
                     this.UserSettings.DeleteAll();
                     this.CurrentSettings = GetDefaultSettings();
@@ -696,7 +701,7 @@ namespace FallGuysStats {
         private UserSettings GetDefaultSettings() {
             return new UserSettings() {
                 ID = 1,
-                FrenchVersion = true,
+                FrenchyEdition = true,
                 Multilingual = 1,
                 CycleTimeSeconds = 5,
                 FilterType = 0,
@@ -708,7 +713,7 @@ namespace FallGuysStats {
                 OverlayLocationY = null,
                 SwitchBetweenLongest = true,
                 SwitchBetweenQualify = true,
-                SwitchBetweenPlayers = true,
+                SwitchBetweenPlayers = false,
                 SwitchBetweenStreaks = true,
                 OnlyShowLongest = false,
                 OnlyShowGold = false,
@@ -716,8 +721,8 @@ namespace FallGuysStats {
                 OnlyShowFinalStreak = false,
                 OverlayVisible = false,
                 OverlayNotOnTop = false,
-                PlayerByConsoleType = false,
-                ColorByRoundType = false,
+                PlayerByConsoleType = true,
+                ColorByRoundType = true,
                 PreviousWins = 0,
                 WinsFilter = 0,
                 QualifyFilter = 0,
@@ -727,7 +732,7 @@ namespace FallGuysStats {
                 HideTimeInfo = false,
                 ShowOverlayTabs = false,
                 ShowPercentages = false,
-                AutoUpdate = false,
+                AutoUpdate = true,
                 FormLocationX = null,
                 FormLocationY = null,
                 FormWidth = null,

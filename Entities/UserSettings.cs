@@ -49,6 +49,6 @@
         public string GameShortcutLocation { get; set; }
         public bool AutoLaunchGameOnStartup { get; set; }
         public string OverlayFontSerialized { get; set; }
-        public bool FrenchVersion { get; set; }
+        public bool FrenchyEdition { get; set; }
     }
 }
