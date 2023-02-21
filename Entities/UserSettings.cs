@@ -24,8 +24,8 @@
         public bool ColorByRoundType { get; set; }
         public int PreviousWins { get; set; }
         public int WinsFilter { get; set; }
-        public int FastestFilter { get; set; }
         public int QualifyFilter { get; set; }
+        public int FastestFilter { get; set; }
         public bool HideWinsInfo { get; set; }
         public bool HideRoundInfo { get; set; }
         public bool HideTimeInfo { get; set; }
@@ -49,5 +49,6 @@
         public string GameShortcutLocation { get; set; }
         public bool AutoLaunchGameOnStartup { get; set; }
         public string OverlayFontSerialized { get; set; }
+        public bool FrenchVersion { get; set; }
     }
 }

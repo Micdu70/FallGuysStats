@@ -1,46 +1,70 @@
-# Fall Guys Stats
-Simple program to generate stats for the game Fall Guys. Reads the games log file to track how you are doing.
+# Fall Guys Stats "FE" (Frenchy Edition) par Micdu70
+Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
-## Download
-  - [FallGuyStats.zip](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/FallGuyStats.zip)
+INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
-  - or if you have problems with false positives in your virus program this one removes the ability to auto update [FallGuyStatsManualUpdate.zip](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/FallGuyStatsManualUpdate.zip)
+## Téléchargement
+**Dernière version: 1.137**
+
+  - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
+
+***-OU-***
+
+  - Si votre logiciel antivirus bloque l'utilisation du programme, utilisez alors cette version qui ne possède pas la fonction de MAJ automatique => [FallGuysStatsManualUpdate.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip)
   
-## Usage
-  - Extract zip to it's own folder
-  - Run the program while playing Fall Guys to see new stats.
-  - Only updates after a show has been completed and results are given.
+## Utilisation
+  - Extraire le contenu du fichier zip téléchargé vers un nouveau dossier vide
+  - Dans ce nouveau dossier, lancer le programme
+  - Configurer le programme comme bon vous semble (afficher l'overlay/modifier des options/etc.)
+  - Lancer Fall Guys
+ 
+ **IMPORTANT: Les stats des émissions seront enregistrées dans le programme UNIQUEMENT à la fin de celles-ci.**
 
-![Fall Guys Stats](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/Properties/mainWindow.png)
+![Fall Guys Stats](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/mainWindow.png)
 
-![Fall Guys Level Stats](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/Properties/levelWindow.png)
+![Stats des manches de Fall Guys](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/levelWindow.png)
 
-## Multilingual Support
-  - FallGuysStats supports the following languages.
-    - English
-    - Korean
-    - Japanese
-    - Simplified Chinese
+## Langues disponibles
+  - FallGuysStats supporte les langues suivantes :
+    - English (Anglais)
+    - Français *[langue par défaut du programme]*
+    - Korean (Coréen)
+    - Japanese (Japonais)
+    - Simplified Chinese (Chinois Simplifié)
 
 ## Overlay
-![Overlay](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/Properties/overlay.png)
+![Overlay](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/overlay.png)
 
-  - Hit 'T' to toggle background colors.
-  - Hit 'F' to flip the Display.
-  - Hit 'P' to change the profile order.
-  - Hit Keys '1' through '9' to select profiles 1 through 9.
-  - Hit Shift + mouse wheel up and down to select a profile up or down.
-  - Hit Shift + up and down arrow keys to select a profile up or down.
-  - Hit 'C' to shows the number of users by platform.
-  - Hit 'R' the round name shows the colored badge for the round type.
+  - Appuyez sur la touche 'T' pour changer la couleur de l'arrière-plan.
+  - Appuyez sur la touche 'F' pour inverser horizontalement l'affichage.
+  - Appuyez sur touche 'P' pour passer au profil suivant.
+  - Appuyez sur les touches des chiffres situés au dessus des lettres (de '1' à '9') pour choisir le numéro du profil désiré.
+  - Maintenez la touche 'Maj' enfoncée et utilisez la molette de votre souris pour changer de profil.
+  - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Haut' ou 'Bas' pour changer de profil.
+  - Appuyez sur la touche 'C' pour afficher le nombre de joueurs par type de support.
+  - Appuyez sur la touche 'R' pour colorer le nom des manches selon leur type.
 
-## Deleting shows or moving shows to another profile
-![Shows](https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/Properties/showsWindow.png)
+## Supprimer des émissions ou déplacer des émissions vers un autre profil
+![Supprimer une ou plusieurs émissions](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/showsWindow.png)
 
-  - Click the blue Shows label on the main screen
-  - Highlight any number of shows and hit the 'DEL' key or right-click to manage the show through the 'Delete' and 'Move show data' menus.
+  - Cliquer pour voir les stats des émissions.
+  - Sélectionner une ou plusieurs émissions avec la touche 'Ctrl' ou avec la combinaison de touches 'Ctrl'+'Maj'.
+  - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
-## Changelog
+## Changelog de la "FE" (Frenchy Edition)
+  - 1.137
+    - ++++N.B.: Basée sur la Version Officielle 1.136 (datant du 12 février 2023)
+	- ++Ajouté: Langue 'Français'
+	- ++Ajouté: Type de manche "Logique" et "Invisibeans"
+	- +Corrigé: Visuel de l'interface utilisateur dans la fenêtre de configuration
+	- +Corrigé: Langue 'English'
+	- +Corrigé: Filtres 'Parties'
+	- +Corrigé: Ordre et enregistrement de la configuration des filtres
+	- +Corrigé: Détection des finales en émission Duos/Groupe
+	- +Corrigé: 2 ou 3 erreurs de type de manche
+	- +Corrigé: Sélection du bon profil après déplacement des données
+
+## Changelog de la Version Officielle
   - 1.135
     - Bug fixes and multilanguage updates
   - 1.134

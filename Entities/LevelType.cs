@@ -4,18 +4,22 @@ namespace FallGuysStats {
     public enum LevelType {
         Race,
         Survival,
-        Team,
         Hunt,
-        Unknown,
+        Logic,
+        Team,
         Final,
+        Invisibeans,
+        Unknown,
     }
     static class LevelTypeBehavior {
         public static int FastestLabel(this LevelType type) {
             switch (type) {
                 case LevelType.Race:
                 case LevelType.Hunt:
+                case LevelType.Invisibeans:
                     return 1; // FASTEST
                 case LevelType.Survival:
+                case LevelType.Logic:
                     return 0; // LONGEST
                 case LevelType.Team:
                     return 2; // HIGH_SCORE
@@ -24,33 +28,41 @@ namespace FallGuysStats {
         }
         public static Color LevelBackColor(this LevelType type, bool isFinal, int alpha) {
             if (isFinal) {
-                return Color.FromArgb(alpha, 251, 198, 0);
+                return Color.FromArgb(alpha, 249, 197, 3);
             }
             switch (type) {
                 case LevelType.Race:
-                    return Color.FromArgb(alpha, 0, 236, 106);
-                case LevelType.Hunt:
-                    return Color.FromArgb(alpha, 45, 101, 186);
+                    return Color.FromArgb(alpha, 5, 224, 109);
                 case LevelType.Survival:
-                    return Color.FromArgb(alpha, 184, 21, 213);
+                    return Color.FromArgb(alpha, 182, 27, 210);
+                case LevelType.Hunt:
+                    return Color.FromArgb(alpha, 48, 101, 184);
+                case LevelType.Logic:
+                    return Color.FromArgb(alpha, 0, 153, 153);
                 case LevelType.Team:
-                    return Color.FromArgb(alpha, 248, 82, 0);
+                    return Color.FromArgb(alpha, 245, 83, 3);
+                case LevelType.Invisibeans:
+                    return Color.FromArgb(alpha, 0, 0, 0);
             }
             return Color.White;
         }
         public static Color LevelForeColor(this LevelType type, bool isFinal) {
             if (isFinal) {
-                return Color.FromArgb(161, 126, 0);
+                return Color.FromArgb(149, 118, 1);
             }
             switch (type) {
                 case LevelType.Race:
-                    return Color.FromArgb(0, 151, 68);
-                case LevelType.Hunt:
-                    return Color.FromArgb(29, 65, 119);
+                    return Color.FromArgb(3, 134, 65);
                 case LevelType.Survival:
-                    return Color.FromArgb(118, 14, 136);
+                    return Color.FromArgb(109, 16, 126);
+                case LevelType.Hunt:
+                    return Color.FromArgb(28, 60, 110);
+                case LevelType.Logic:
+                    return Color.FromArgb(0, 91, 91);
                 case LevelType.Team:
-                    return Color.FromArgb(158, 53, 0);
+                    return Color.FromArgb(147, 49, 1);
+                case LevelType.Invisibeans:
+                    return Color.FromArgb(255, 255, 255);
             }
             return Color.Black;
         }
