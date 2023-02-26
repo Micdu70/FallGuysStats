@@ -25,6 +25,7 @@ namespace FallGuysStats {
         public int PlayersEtc { get; set; }
         public bool InParty { get; set; }
         public bool IsFinal { get; set; }
+        public bool IsTeam { get; set; }
         public bool PrivateLobby { get; set; }
         public DateTime Start { get; set; } = DateTime.MinValue;
         public DateTime End { get; set; } = DateTime.MinValue;
@@ -53,16 +54,14 @@ namespace FallGuysStats {
         public void VerifyName() {
             if (string.IsNullOrEmpty(SceneName)) { return; }
 
-            string roundName;
-            if (LevelStats.SceneToRound.TryGetValue(SceneName, out roundName)) {
+            if (LevelStats.SceneToRound.TryGetValue(SceneName, out var roundName)) {
                 Name = roundName;
             }
         }
         public string VerifiedName() {
             if (string.IsNullOrEmpty(SceneName)) { return Name; }
 
-            string roundName;
-            if (LevelStats.SceneToRound.TryGetValue(SceneName, out roundName)) {
+            if (LevelStats.SceneToRound.TryGetValue(SceneName, out var roundName)) {
                 return roundName;
             }
             return Name;
@@ -158,14 +157,14 @@ namespace FallGuysStats {
             { "round_bluejay",                    new LevelStats("Bean Hill Zone", LevelType.Hunt, false, 7) },
             { "round_hoops_revenge_symphony_launch_show", new LevelStats("Bounce Party", LevelType.Hunt, false, 7) },
             { "round_king_of_the_hill",           new LevelStats("Bubble Trouble", LevelType.Hunt, false, 5) },
-            { "round_1v1_button_basher",          new LevelStats("Button Bashers", LevelType.Hunt, false, 4) },
+            { "round_1v1_button_basher",          new LevelStats("Button Bashers", LevelType.HuntScore, false, 4) },
             { "round_ffa_button_bashers_squads_almond", new LevelStats("Frantic Factory", LevelType.Hunt, false, 8) },
             { "round_slippy_slide",               new LevelStats("Hoop Chute", LevelType.Hunt, false, 9) },
             { "round_hoops_blockade_solo",        new LevelStats("Hoopsie Legends", LevelType.Hunt, false, 2) },
             { "round_follow-the-leader_s6_launch",new LevelStats("Leading Light", LevelType.Hunt, false, 6) },
             { "round_penguin_solos",              new LevelStats("Pegwin Pool Party", LevelType.Hunt, false, 5) },
-            { "round_tail_tag",                   new LevelStats("Tail Tag", LevelType.Hunt, false, 1) },
-            { "round_1v1_volleyfall_symphony_launch_show", new LevelStats("Volleyfall", LevelType.Hunt, false, 7) },
+            { "round_tail_tag",                   new LevelStats("Tail Tag", LevelType.HuntScore, false, 1) },
+            { "round_1v1_volleyfall_symphony_launch_show", new LevelStats("Volleyfall", LevelType.HuntScore, false, 7) },
 
             { "round_match_fall",                 new LevelStats("Perfect Match", LevelType.Logic, false, 1) },
             { "round_fruit_bowl",                 new LevelStats("Sum Fruit", LevelType.Logic, false, 5) },
@@ -176,11 +175,11 @@ namespace FallGuysStats {
             { "round_fall_ball_60_players",       new LevelStats("Fall Ball", LevelType.Team, false, 1) },
             { "round_ballhogs",                   new LevelStats("Hoarders", LevelType.Team, false, 1) },
             { "round_hoops",                      new LevelStats("Hoopsie Daisy", LevelType.Team, false, 1) },
-            { "round_jinxed",                     new LevelStats("Jinxed", LevelType.Team, false, 1) },
+            { "round_jinxed",                     new LevelStats("Jinxed", LevelType.TeamTime, false, 1) },
             { "round_chicken_chase",              new LevelStats("Pegwin Pursuit", LevelType.Team, false, 3) },
             { "round_territory_control_s4_show",  new LevelStats("Power Trip", LevelType.Team, false, 4) },
-            { "round_rocknroll",                  new LevelStats("Rock 'n' Roll", LevelType.Team, false, 1) },
-            { "round_snowy_scrap",                new LevelStats("Snowy Scrap", LevelType.Team, false, 3) },
+            { "round_rocknroll",                  new LevelStats("Rock 'n' Roll", LevelType.TeamTime, false, 1) },
+            { "round_snowy_scrap",                new LevelStats("Snowy Scrap", LevelType.TeamTime, false, 3) },
             { "round_conveyor_arena",             new LevelStats("Team Tail Tag", LevelType.Team, false, 1) },
 
             { "round_blastball_arenasurvival_symphony_launch_show", new LevelStats("Blast Ball", LevelType.Survival, true, 7) },

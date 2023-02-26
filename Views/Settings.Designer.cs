@@ -139,7 +139,7 @@ namespace FallGuysStats {
             this.txtLogPath.Name = "txtLogPath";
             this.txtLogPath.Size = new System.Drawing.Size(575, 20);
             this.txtLogPath.TabIndex = 1;
-            this.txtLogPath.Validating += new System.ComponentModel.CancelEventHandler(this.txtLogPath_Validating);
+            this.txtLogPath.Validating += new System.ComponentModel.CancelEventHandler(this.TxtLogPath_Validating);
             // 
             // btnSave
             // 
@@ -150,7 +150,7 @@ namespace FallGuysStats {
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // grpOverlay
             // 
@@ -500,7 +500,7 @@ namespace FallGuysStats {
             this.txtCycleTimeSeconds.TabIndex = 6;
             this.txtCycleTimeSeconds.Text = "5";
             this.txtCycleTimeSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCycleTimeSeconds.Validating += new System.ComponentModel.CancelEventHandler(this.txtCycleTimeSeconds_Validating);
+            this.txtCycleTimeSeconds.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCycleTimeSeconds_Validating);
             // 
             // grpCycleWinFinalStreak
             // 
@@ -614,7 +614,7 @@ namespace FallGuysStats {
             this.btnSelectFont.TabIndex = 25;
             this.btnSelectFont.Text = "Select Font";
             this.btnSelectFont.UseVisualStyleBackColor = true;
-            this.btnSelectFont.Click += new System.EventHandler(this.btnSelectFont_Click);
+            this.btnSelectFont.Click += new System.EventHandler(this.BtnSelectFont_Click);
             // 
             // btnResetOverlayFont
             // 
@@ -625,7 +625,7 @@ namespace FallGuysStats {
             this.btnResetOverlayFont.TabIndex = 26;
             this.btnResetOverlayFont.Text = "Reset Font";
             this.btnResetOverlayFont.UseVisualStyleBackColor = true;
-            this.btnResetOverlayFont.Click += new System.EventHandler(this.btnResetOverlayFont_Click);
+            this.btnResetOverlayFont.Click += new System.EventHandler(this.BtnResetOverlayFont_Click);
             // 
             // grpOverlayFontExample
             // 
@@ -688,7 +688,7 @@ namespace FallGuysStats {
             this.picEpicGames.TabIndex = 1;
             this.picEpicGames.TabStop = false;
             this.platformToolTip.SetToolTip(this.picEpicGames, "Epic Games");
-            this.picEpicGames.Click += new System.EventHandler(this.launchPlatform_Click);
+            this.picEpicGames.Click += new System.EventHandler(this.LaunchPlatform_Click);
             // 
             // picSteam
             // 
@@ -702,7 +702,7 @@ namespace FallGuysStats {
             this.picSteam.TabIndex = 2;
             this.picSteam.TabStop = false;
             this.platformToolTip.SetToolTip(this.picSteam, "Steam");
-            this.picSteam.Click += new System.EventHandler(this.launchPlatform_Click);
+            this.picSteam.Click += new System.EventHandler(this.LaunchPlatform_Click);
             // 
             // cboMultilingual
             // 
@@ -717,7 +717,7 @@ namespace FallGuysStats {
             this.cboMultilingual.Name = "cboMultilingual";
             this.cboMultilingual.Size = new System.Drawing.Size(65, 21);
             this.cboMultilingual.TabIndex = 99;
-            this.cboMultilingual.SelectedIndexChanged += new System.EventHandler(this.cboMultilingual_SelectedIndexChanged);
+            this.cboMultilingual.SelectedIndexChanged += new System.EventHandler(this.CboMultilingual_SelectedIndexChanged);
             // 
             // grpStats
             // 
@@ -786,7 +786,7 @@ namespace FallGuysStats {
             this.txtPreviousWins.TabIndex = 1;
             this.txtPreviousWins.Text = "0";
             this.txtPreviousWins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPreviousWins.Validating += new System.ComponentModel.CancelEventHandler(this.txtPreviousWins_Validating);
+            this.txtPreviousWins.Validating += new System.ComponentModel.CancelEventHandler(this.TxtPreviousWins_Validating);
             // 
             // grpGameOptions
             // 
@@ -842,7 +842,7 @@ namespace FallGuysStats {
             this.btnGameExeLocationBrowse.TabIndex = 2;
             this.btnGameExeLocationBrowse.Text = "Browse";
             this.btnGameExeLocationBrowse.UseVisualStyleBackColor = true;
-            this.btnGameExeLocationBrowse.Click += new System.EventHandler(this.btnGameExeLocationBrowse_Click);
+            this.btnGameExeLocationBrowse.Click += new System.EventHandler(this.BtnGameExeLocationBrowse_Click);
             // 
             // chkAutoLaunchGameOnStart
             // 
@@ -898,7 +898,7 @@ namespace FallGuysStats {
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // Settings
             // 

@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.138**
+**Dernière version: 1.139**
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -52,9 +52,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.139
+    - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du programme
+	- +Corrigé: Type de manche affiché dans l'overlay, pour le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
+	- ++Changé: Divers changements mineurs...
   - 1.138
     - ++Hotfix: Votre ancienne configuration ne sera pas perdue si vous venez de la Version Officielle du tracker\*
-	- \* Cependant, les options "par défaut" données ci-après seront modifiées au passage à la "FE"
+	- \* Cependant, les options "par défaut" données ci-après seront appliquées au passage à la "FE"
     - ++Changé: Les options "par défaut" sont:
 	1) Langue 'Français' sélectionnée
 	2) "MAJ. auto du tracker" activée

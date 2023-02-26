@@ -107,7 +107,7 @@ namespace FallGuysStats {
             this.txtGameShortcutLocation.Text = this.CurrentSettings.GameShortcutLocation;
             this.chkAutoLaunchGameOnStart.Checked = this.CurrentSettings.AutoLaunchGameOnStartup;
             this.chkIgnoreLevelTypeWhenSorting.Checked = this.CurrentSettings.IgnoreLevelTypeWhenSorting;
-            
+
             this.picPlatformCheck.Image = this.ChangeOpacity(this.picPlatformCheck.Image, 0.8F);
             if (this.LaunchPlatform == 0) { // Epic Games
                 this.picPlatformCheck.Parent = this.picEpicGames;
@@ -130,7 +130,7 @@ namespace FallGuysStats {
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
+        private void BtnSave_Click(object sender, EventArgs e) {
             switch ((string)this.cboMultilingual.SelectedItem) {
                 case "English":
                     Stats.CurrentLanguage = 0;
@@ -326,32 +326,32 @@ namespace FallGuysStats {
                 this.CurrentSettings.OverlayFontSerialized = fontConverter.ConvertToString(this.lblOverlayFontExample.Font);
             } else {
                 this.CurrentSettings.OverlayFontSerialized = string.Empty;
-                Overlay.DefaultFont = Stats.CurrentLanguage <= 1 
+                Overlay.DefaultFont = Stats.CurrentLanguage <= 1
                     ? new Font(Overlay.DefaultFontCollection.Families[1], 18, FontStyle.Regular, GraphicsUnit.Pixel)
                     : new Font(Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
             }
-            
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-        private void txtCycleTimeSeconds_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void TxtCycleTimeSeconds_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
             if (!string.IsNullOrEmpty(this.txtCycleTimeSeconds.Text) && !int.TryParse(this.txtCycleTimeSeconds.Text, out _)) {
                 this.txtCycleTimeSeconds.Text = "5";
             }
         }
-        private void txtLogPath_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void TxtLogPath_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
             try {
                 if (this.txtLogPath.Text.IndexOf(".log", StringComparison.OrdinalIgnoreCase) > 0) {
                     this.txtLogPath.Text = Path.GetDirectoryName(this.txtLogPath.Text);
                 }
             } catch { }
         }
-        private void txtPreviousWins_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void TxtPreviousWins_Validating(object sender, System.ComponentModel.CancelEventArgs e) {
             if (!string.IsNullOrEmpty(this.txtPreviousWins.Text) && !int.TryParse(this.txtPreviousWins.Text, out _)) {
                 this.txtPreviousWins.Text = "0";
             }
         }
-        private void btnGameExeLocationBrowse_Click(object sender, EventArgs e) {
+        private void BtnGameExeLocationBrowse_Click(object sender, EventArgs e) {
             try {
                 using (OpenFileDialog openFile = new OpenFileDialog()) {
                     if (this.LaunchPlatform == 0) { // Epic Games
@@ -359,19 +359,18 @@ namespace FallGuysStats {
                         openFile.Filter = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_openfile_filter", this.DisplayLang);
                         openFile.FileName = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_openfile_name", this.DisplayLang);
                         openFile.Title = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_openfile_title", this.DisplayLang);
-                        
+
                         if (openFile.ShowDialog(this) == DialogResult.OK) {
                             string fileContent;
                             string epicGamesFallGuysApp = "50118b7f954e450f8823df1614b24e80%3A38ec4849ea4f4de6aa7b6fb0f2d278e1%3A0a2d9f6403244d12969e11da6713137b";
-                            FileStream fileStream = new FileStream(openFile.FileName ,FileMode.Open);
-                            using (StreamReader reader = new StreamReader(fileStream))
-                            {
+                            FileStream fileStream = new FileStream(openFile.FileName, FileMode.Open);
+                            using (StreamReader reader = new StreamReader(fileStream)) {
                                 fileContent = reader.ReadToEnd();
                             }
-                            
+
                             string[] splitContent = fileContent.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                             string url = string.Empty;
-                            
+
                             for (int i = 0; i < splitContent.Length; i++) {
                                 if (splitContent[i].ToLower().StartsWith("url=")) {
                                     url = splitContent[i].Substring(4);
@@ -411,7 +410,7 @@ namespace FallGuysStats {
                 ControlErrors.HandleException(this, ex, false);
             }
         }
-        private void launchPlatform_Click(object sender, EventArgs e) {
+        private void LaunchPlatform_Click(object sender, EventArgs e) {
             if ((bool)((PictureBox)sender)?.Name.Equals("picEpicGames")) { // Epic Games
                 this.picPlatformCheck.Parent = this.picEpicGames;
                 this.platformToolTip.SetToolTip(this.picPlatformCheck, "Epic Games");
@@ -474,31 +473,32 @@ namespace FallGuysStats {
                 this.LaunchPlatform = 1;
             }
         }
-        private void btnCancel_Click(object sender, EventArgs e) {
+        private void BtnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-        private void btnSelectFont_Click(object sender, EventArgs e) {
+        private void BtnSelectFont_Click(object sender, EventArgs e) {
             this.dlgOverlayFont.Font = this.lblOverlayFontExample.Font;
             if (this.dlgOverlayFont.ShowDialog(this) == DialogResult.OK) {
                 this.lblOverlayFontExample.Font = this.dlgOverlayFont.Font;
                 this.overlayFontSerialized = new FontConverter().ConvertToString(this.dlgOverlayFont.Font);
             }
         }
-        private void btnResetOverlayFont_Click(object sender, EventArgs e) {
+        private void BtnResetOverlayFont_Click(object sender, EventArgs e) {
             this.lblOverlayFontExample.Font = this.cboMultilingual.SelectedIndex <= 1
                 ? new Font(Overlay.DefaultFontCollection.Families[1], 18, FontStyle.Regular, GraphicsUnit.Pixel)
                 : new Font(Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
             this.overlayFontSerialized = string.Empty;
         }
-        private void cboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
+        private void CboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
         private Bitmap ChangeOpacity(Image imgData, float opacity) {
             Bitmap bmpTmp = new Bitmap(imgData.Width, imgData.Height);
             Graphics gp = Graphics.FromImage(bmpTmp);
-            ColorMatrix clrMatrix = new ColorMatrix();
-            clrMatrix.Matrix33 = opacity;
+            ColorMatrix clrMatrix = new ColorMatrix {
+                Matrix33 = opacity
+            };
             ImageAttributes imgAttribute = new ImageAttributes();
             imgAttribute.SetColorMatrix(clrMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
             gp.DrawImage(imgData, new Rectangle(0, 0, bmpTmp.Width, bmpTmp.Height), 0, 0, imgData.Width, imgData.Height, GraphicsUnit.Pixel, imgAttribute);

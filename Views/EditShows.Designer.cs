@@ -75,7 +75,7 @@ namespace FallGuysStats {
             this.cboEditShows.Name = "cboEditShows";
             this.cboEditShows.Size = new System.Drawing.Size(170, 20);
             this.cboEditShows.TabIndex = 0;
-            this.cboEditShows.SelectedIndexChanged += new EventHandler(this.cboEditShows_Changed);
+            this.cboEditShows.SelectedIndexChanged += new EventHandler(this.CboEditShows_Changed);
             // 
             // lblEditShowsBackColor
             // 
@@ -92,7 +92,7 @@ namespace FallGuysStats {
             this.btnEditShowsSave.TabIndex = 1;
             this.btnEditShowsSave.Text = "Save";
             this.btnEditShowsSave.UseVisualStyleBackColor = true;
-            this.btnEditShowsSave.Click += new System.EventHandler(this.btnEditShowsSave_Click);
+            this.btnEditShowsSave.Click += new System.EventHandler(this.BtnEditShowsSave_Click);
             // 
             // btnEditShowsCancel
             // 
@@ -102,7 +102,7 @@ namespace FallGuysStats {
             this.btnEditShowsCancel.TabIndex = 2;
             this.btnEditShowsCancel.Text = Multilingual.GetWord("profile_undo_change_button");
             this.btnEditShowsCancel.UseVisualStyleBackColor = true;
-            this.btnEditShowsCancel.Click += new System.EventHandler(this.btnEditShowsCancel_Click);
+            this.btnEditShowsCancel.Click += new System.EventHandler(this.BtnEditShowsCancel_Click);
             // 
             // EditShows
             // 

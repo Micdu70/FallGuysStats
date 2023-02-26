@@ -8,16 +8,14 @@ namespace FallGuysStats {
         public List<Profiles> Profiles { get; set; }
         public List<RoundInfo> AllStats { get; set; }
         public Stats StatsForm { get; set; }
-        public EditProfiles() => this.InitializeComponent();
-
+        public EditProfiles() {
+            this.InitializeComponent();
+        }
         private void EditProfiles_Load(object sender, EventArgs e) {
             this.ChangeLanguage();
             this.ReloadProfileList();
         }
-
         private void ReloadProfileList() {
-            
-            
             this.Profiles = this.Profiles.OrderByDescending(p => p.ProfileOrder).ToList();
             this.AddPageTextbox.Text = "";
             this.RenamePageTextbox.Text = "";
@@ -42,18 +40,15 @@ namespace FallGuysStats {
                 }
             }
         }
-
         private void DeleteAmpersend_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == 0x26) e.KeyChar = Convert.ToChar(0);
         }
-
         private void AddPageButton_Click(object sender, EventArgs e) {
             if (this.AddPageTextbox.Text.Length == 0) { return; }
 
             if (MessageBox.Show(this,
                     $"{Multilingual.GetWord("message_create_profile_prefix")} ({this.AddPageTextbox.Text}) {Multilingual.GetWord("message_create_profile_suffix")}",
-                    Multilingual.GetWord("message_create_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
+                    Multilingual.GetWord("message_create_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 int maxID = 0;
                 int order = 1;
                 for (int i = 0; i < this.Profiles.Count; i++) {
@@ -65,7 +60,6 @@ namespace FallGuysStats {
                 this.ReloadProfileList();
             }
         }
-
         private void RemovePageButton_Click(object sender, EventArgs e) {
             if (this.RemoveProfileCombobox.SelectedIndex < 0) { return; }
             if (MessageBox.Show(this,
@@ -75,11 +69,10 @@ namespace FallGuysStats {
                 for (int i = 0; i < this.RemoveProfileCombobox.Items.Count; i++) {
                     if (this.RemoveProfileCombobox.Items[i].ToString() == this.RemoveProfileCombobox.SelectedItem.ToString()) {
                         if (i > 0) {
-                            prevProfileName = this.RemoveProfileCombobox.Items[i-1].ToString();
+                            prevProfileName = this.RemoveProfileCombobox.Items[i - 1].ToString();
                         }
                     }
                 }
-
                 int prevProfileId;
                 if (string.IsNullOrEmpty(prevProfileName)) {
                     prevProfileId = 0;
@@ -96,7 +89,6 @@ namespace FallGuysStats {
                 this.ReloadProfileList();
             }
         }
-
         private void MovePageButton_Click(object sender, EventArgs e) {
             if (this.MoveToCombobox.SelectedIndex < 0) { return; }
             if (this.MoveFromCombobox.SelectedIndex < 0) { return; }
@@ -113,15 +105,13 @@ namespace FallGuysStats {
                 this.ReloadProfileList();
             }
         }
-
         private void RenameButton_Click(object sender, EventArgs e) {
             if (this.RenamePageCombobox.SelectedIndex < 0) { return; }
             if (this.RenamePageTextbox.Text.Length == 0) { return; }
             if (this.RenamePageCombobox.SelectedItem.ToString() == this.RenamePageTextbox.Text) { return; }
-            if (MessageBox.Show(this, 
+            if (MessageBox.Show(this,
                     $"{Multilingual.GetWord("message_rename_profile_prefix")} ({this.RenamePageCombobox.SelectedItem}) {Multilingual.GetWord("message_rename_profile_infix")} ({this.RenamePageTextbox.Text}) {Multilingual.GetWord("message_rename_profile_suffix")}",
-                    Multilingual.GetWord("message_rename_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
+                    Multilingual.GetWord("message_rename_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 for (int i = 0; i < this.Profiles.Count; i++) {
                     if (this.Profiles[i].ProfileName != this.RenamePageCombobox.SelectedItem.ToString()) { continue; }
                     this.Profiles[i].ProfileName = this.RenamePageTextbox.Text;
@@ -129,29 +119,27 @@ namespace FallGuysStats {
                 this.ReloadProfileList();
             }
         }
-
         private void ProfileListUp_Click(object sender, EventArgs e) {
             if (this.ProfileList.SelectedItems.Count <= 0) { return; }
             if (this.ProfileList.SelectedIndex <= 0) { return; }
-            
+
             int profileListIndex = this.ProfileList.SelectedIndex;
             int profileIndex = this.Profiles.Count - this.ProfileList.SelectedIndex - 1;
             (this.Profiles[profileIndex].ProfileOrder, this.Profiles[profileIndex + 1].ProfileOrder) = (this.Profiles[profileIndex + 1].ProfileOrder, this.Profiles[profileIndex].ProfileOrder);
             this.ReloadProfileList();
             this.ProfileList.SelectedIndex = profileListIndex - 1;
         }
-        
+
         private void ProfileListDown_Click(object sender, EventArgs e) {
             if (this.ProfileList.SelectedItems.Count <= 0) { return; }
             if (this.ProfileList.SelectedIndex >= this.ProfileList.Items.Count - 1) { return; }
-            
+
             int profileListIndex = this.ProfileList.SelectedIndex;
             int profileIndex = this.Profiles.Count - this.ProfileList.SelectedIndex - 1;
             (this.Profiles[profileIndex].ProfileOrder, this.Profiles[profileIndex - 1].ProfileOrder) = (this.Profiles[profileIndex - 1].ProfileOrder, this.Profiles[profileIndex].ProfileOrder);
             this.ReloadProfileList();
             this.ProfileList.SelectedIndex = profileListIndex + 1;
         }
-
         private void RenameComboxChanged(object sender, EventArgs e) {
             this.RenamePageTextbox.Text = this.RenamePageCombobox.SelectedItem.ToString();
         }
@@ -160,19 +148,18 @@ namespace FallGuysStats {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }*/
-        
+
         /*private void UndoChangeButton_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }*/
-        
+
         private void EditProfile_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
         }
-
         private void ChangeLanguage() {
             this.Font = new Font(Overlay.DefaultFontCollection.Families[0], 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.Text = Multilingual.GetWord("profile_title");
@@ -200,32 +187,32 @@ namespace FallGuysStats {
             //this.UndoChangeButton.Text = Multilingual.GetWord("profile_undo_change_button");
 
             if (Stats.CurrentLanguage == 0) { // English
-                this.AddPageTextbox.Location =        new Point(100, 10);
-                this.RenamePageCombobox.Location =    new Point(100, 10);
-                this.RenamePageTextbox.Location =     new Point(100, 44);
-                this.MoveFromCombobox.Location =      new Point(71, 10);
-                this.MoveToCombobox.Location =        new Point(71, 44);
+                this.AddPageTextbox.Location = new Point(100, 10);
+                this.RenamePageCombobox.Location = new Point(100, 10);
+                this.RenamePageTextbox.Location = new Point(100, 44);
+                this.MoveFromCombobox.Location = new Point(71, 10);
+                this.MoveToCombobox.Location = new Point(71, 44);
                 this.RemoveProfileCombobox.Location = new Point(65, 10);
             } else if (Stats.CurrentLanguage == 1) { // French
-                this.AddPageTextbox.Location =        new Point(100, 10);
-                this.RenamePageCombobox.Location =    new Point(100, 10);
-                this.RenamePageTextbox.Location =     new Point(100, 44);
-                this.MoveFromCombobox.Location =      new Point(71, 10);
-                this.MoveToCombobox.Location =        new Point(71, 44);
+                this.AddPageTextbox.Location = new Point(100, 10);
+                this.RenamePageCombobox.Location = new Point(100, 10);
+                this.RenamePageTextbox.Location = new Point(100, 44);
+                this.MoveFromCombobox.Location = new Point(71, 10);
+                this.MoveToCombobox.Location = new Point(71, 44);
                 this.RemoveProfileCombobox.Location = new Point(65, 10);
             } else if (Stats.CurrentLanguage == 2) { // Korean
-                this.AddPageTextbox.Location =        new Point(76, 7);
-                this.RenamePageCombobox.Location =    new Point(76, 7);
-                this.RenamePageTextbox.Location =     new Point(76, 41);
-                this.MoveFromCombobox.Location =      new Point(76, 7);
-                this.MoveToCombobox.Location =        new Point(76, 41);
+                this.AddPageTextbox.Location = new Point(76, 7);
+                this.RenamePageCombobox.Location = new Point(76, 7);
+                this.RenamePageTextbox.Location = new Point(76, 41);
+                this.MoveFromCombobox.Location = new Point(76, 7);
+                this.MoveToCombobox.Location = new Point(76, 41);
                 this.RemoveProfileCombobox.Location = new Point(76, 7);
             } else if (Stats.CurrentLanguage == 3) { // Japanese
-                this.AddPageTextbox.Location =        new Point(110, 8);
-                this.RenamePageCombobox.Location =    new Point(110, 8);
-                this.RenamePageTextbox.Location =     new Point(110, 44);
-                this.MoveFromCombobox.Location =      new Point(81, 10);
-                this.MoveToCombobox.Location =        new Point(81, 44);
+                this.AddPageTextbox.Location = new Point(110, 8);
+                this.RenamePageCombobox.Location = new Point(110, 8);
+                this.RenamePageTextbox.Location = new Point(110, 44);
+                this.MoveFromCombobox.Location = new Point(81, 10);
+                this.MoveToCombobox.Location = new Point(81, 44);
                 this.RemoveProfileCombobox.Location = new Point(95, 10);
             } else if (Stats.CurrentLanguage == 4) { // Simplified Chinese
                 this.RemoveProfileCombobox.Location = new Point(95, 10);

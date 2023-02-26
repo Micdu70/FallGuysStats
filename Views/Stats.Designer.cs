@@ -83,7 +83,7 @@
             this.menuSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.menuSettings.Size = new System.Drawing.Size(61, 20);
             this.menuSettings.Text = "Settings";
-            this.menuSettings.Click += new System.EventHandler(this.menuSettings_Click);
+            this.menuSettings.Click += new System.EventHandler(this.MenuSettings_Click);
             this.menuSettings.Image = Properties.Resources.setting_icon;
             // 
             // menuFilters
@@ -118,7 +118,7 @@
             | System.Windows.Forms.Keys.A)));
             this.menuAllStats.Size = new System.Drawing.Size(186, 22);
             this.menuAllStats.Text = "All";
-            this.menuAllStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuAllStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuSeasonStats
             // 
@@ -128,7 +128,7 @@
             | System.Windows.Forms.Keys.S)));
             this.menuSeasonStats.Size = new System.Drawing.Size(186, 22);
             this.menuSeasonStats.Text = "Season";
-            this.menuSeasonStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuSeasonStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuWeekStats
             // 
@@ -138,7 +138,7 @@
             | System.Windows.Forms.Keys.W)));
             this.menuWeekStats.Size = new System.Drawing.Size(186, 22);
             this.menuWeekStats.Text = "Week";
-            this.menuWeekStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuWeekStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuDayStats
             // 
@@ -148,7 +148,7 @@
             | System.Windows.Forms.Keys.D)));
             this.menuDayStats.Size = new System.Drawing.Size(186, 22);
             this.menuDayStats.Text = "Day";
-            this.menuDayStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuDayStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuSessionStats
             // 
@@ -158,7 +158,7 @@
             | System.Windows.Forms.Keys.G)));
             this.menuSessionStats.Size = new System.Drawing.Size(186, 22);
             this.menuSessionStats.Text = "Session";
-            this.menuSessionStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuSessionStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuPartyFilter
             // 
@@ -180,7 +180,7 @@
             | System.Windows.Forms.Keys.F)));
             this.menuAllPartyStats.Size = new System.Drawing.Size(173, 22);
             this.menuAllPartyStats.Text = "All";
-            this.menuAllPartyStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuAllPartyStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuSoloStats
             // 
@@ -190,7 +190,7 @@
             | System.Windows.Forms.Keys.O)));
             this.menuSoloStats.Size = new System.Drawing.Size(173, 22);
             this.menuSoloStats.Text = "Solo";
-            this.menuSoloStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuSoloStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuPartyStats
             // 
@@ -200,7 +200,7 @@
             | System.Windows.Forms.Keys.P)));
             this.menuPartyStats.Size = new System.Drawing.Size(173, 22);
             this.menuPartyStats.Text = "Party";
-            this.menuPartyStats.Click += new System.EventHandler(this.menuStats_Click);
+            this.menuPartyStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuProfile
             // 
@@ -217,7 +217,7 @@
             this.menuEditProfiles.Size = new System.Drawing.Size(180, 22);
             this.menuEditProfiles.Text = "Profile Settings";
             this.menuEditProfiles.BackColor = System.Drawing.Color.FromArgb(15, 0, 0, 0);
-            this.menuEditProfiles.Click += new System.EventHandler(this.menuEditProfiles_Click);
+            this.menuEditProfiles.Click += new System.EventHandler(this.MenuEditProfiles_Click);
             this.menuEditProfiles.Image = Properties.Resources.setting_icon;
             // 
             // menuOverlay
@@ -227,7 +227,7 @@
             this.menuOverlay.Size = new System.Drawing.Size(59, 20);
             this.menuOverlay.Text = "Show Overlay";
             this.menuOverlay.Image = Properties.Resources.stat_gray_icon;
-            this.menuOverlay.Click += new System.EventHandler(this.menuOverlay_Click);
+            this.menuOverlay.Click += new System.EventHandler(this.MenuOverlay_Click);
             // 
             // menuUpdate
             // 
@@ -236,7 +236,7 @@
             this.menuUpdate.Size = new System.Drawing.Size(57, 20);
             this.menuUpdate.Text = "Update";
             this.menuUpdate.Image = Properties.Resources.github_icon;
-            this.menuUpdate.Click += new System.EventHandler(this.menuUpdate_Click);
+            this.menuUpdate.Click += new System.EventHandler(this.MenuUpdate_Click);
             // 
             // menuHelp
             // 
@@ -245,7 +245,7 @@
             this.menuHelp.Size = new System.Drawing.Size(44, 20);
             this.menuHelp.Text = "Help";
             this.menuHelp.Image = Properties.Resources.github_icon;
-            this.menuHelp.Click += new System.EventHandler(this.menuHelp_Click);
+            this.menuHelp.Click += new System.EventHandler(this.MenuHelp_Click);
             // 
             // menuLaunchFallGuys
             // 
@@ -254,7 +254,7 @@
             this.menuLaunchFallGuys.Size = new System.Drawing.Size(109, 20);
             this.menuLaunchFallGuys.Text = "Launch Fall Guys";
             this.menuLaunchFallGuys.Image = Properties.Resources.fallguys_icon;
-            this.menuLaunchFallGuys.Click += new System.EventHandler(this.menuLaunchFallGuys_Click);
+            this.menuLaunchFallGuys.Click += new System.EventHandler(this.MenuLaunchFallGuys_Click);
             // 
             // infoStrip
             // 
@@ -284,9 +284,9 @@
             this.lblCurrentProfile.Image = Properties.Resources.profile2_icon;
             this.lblCurrentProfile.Text = ": Solo";
             this.lblCurrentProfile.ToolTipText = "Click to change your current profile.";
-            this.lblCurrentProfile.Click += new System.EventHandler(this.lblCurrentProfile_Click);
-            this.lblCurrentProfile.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblCurrentProfile.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblCurrentProfile.Click += new System.EventHandler(this.LblCurrentProfile_Click);
+            this.lblCurrentProfile.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblCurrentProfile.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblTotalTime
             // 
@@ -304,9 +304,9 @@
             this.lblTotalShows.Size = new System.Drawing.Size(51, 13);
             this.lblTotalShows.Text = "Shows : 0";
             this.lblTotalShows.ToolTipText = "Click to view shows stats.";
-            this.lblTotalShows.Click += new System.EventHandler(this.lblTotalShows_Click);
-            this.lblTotalShows.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblTotalShows.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblTotalShows.Click += new System.EventHandler(this.LblTotalShows_Click);
+            this.lblTotalShows.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblTotalShows.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblTotalRounds
             // 
@@ -316,9 +316,9 @@
             this.lblTotalRounds.Size = new System.Drawing.Size(56, 13);
             this.lblTotalRounds.Text = "Rounds : 0";
             this.lblTotalRounds.ToolTipText = "Click to view rounds stats.";
-            this.lblTotalRounds.Click += new System.EventHandler(this.lblTotalRounds_Click);
-            this.lblTotalRounds.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblTotalRounds.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblTotalRounds.Click += new System.EventHandler(this.LblTotalRounds_Click);
+            this.lblTotalRounds.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblTotalRounds.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblTotalWins
             // 
@@ -329,9 +329,9 @@
             this.lblTotalWins.Text = ": 0 (0.0%)";
             this.lblTotalWins.Image = Properties.Resources.crown_icon;
             this.lblTotalWins.ToolTipText = "Click to view wins stats.";
-            this.lblTotalWins.Click += new System.EventHandler(this.lblTotalWins_Click);
-            this.lblTotalWins.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblTotalWins.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblTotalWins.Click += new System.EventHandler(this.LblTotalWins_Click);
+            this.lblTotalWins.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblTotalWins.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblTotalFinals
             // 
@@ -342,9 +342,9 @@
             this.lblTotalFinals.Text = ": 0 (0.0%)";
             this.lblTotalFinals.Image = Properties.Resources.final_icon;
             this.lblTotalFinals.ToolTipText = "Click to view finals stats.";
-            this.lblTotalFinals.Click += new System.EventHandler(this.lblTotalFinals_Click);
-            this.lblTotalFinals.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblTotalFinals.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblTotalFinals.Click += new System.EventHandler(this.LblTotalFinals_Click);
+            this.lblTotalFinals.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblTotalFinals.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblKudos
             // 
@@ -373,12 +373,12 @@
             this.gridDetails.Size = new System.Drawing.Size(828, 548);
             this.gridDetails.TabIndex = 11;
             this.gridDetails.TabStop = false;
-            this.gridDetails.DataSourceChanged += new System.EventHandler(this.gridDetails_DataSourceChanged);
-            this.gridDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDetails_CellClick);
-            this.gridDetails.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridDetails_CellFormatting);
-            this.gridDetails.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDetails_CellMouseEnter);
-            this.gridDetails.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridDetails_ColumnHeaderMouseClick);
-            this.gridDetails.SelectionChanged += new System.EventHandler(this.gridDetails_SelectionChanged);
+            this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
+            this.gridDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetails_CellClick);
+            this.gridDetails.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridDetails_CellFormatting);
+            this.gridDetails.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetails_CellMouseEnter);
+            this.gridDetails.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridDetails_ColumnHeaderMouseClick);
+            this.gridDetails.SelectionChanged += new System.EventHandler(this.GridDetails_SelectionChanged);
             // 
             // Stats
             // 

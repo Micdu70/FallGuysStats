@@ -234,7 +234,7 @@ namespace FallGuysStats {
                             {"settings_fall_guys_shortcut_openfile_filter", "URL Files (*.url)|*.url"},
                             {"settings_browse", "Browse"},
                             {"settings_auto_launch_fall_guys_on_tracker", "Auto-launch Fall Guys on tracker"},
-                            {"settings_language", "language"},
+                            {"settings_language", "Language"},
                             {"settings_save", "Save"},
                             {"settings_cancel", "Cancel"},
 
@@ -521,7 +521,7 @@ namespace FallGuysStats {
                             {"settings_fall_guys_shortcut_openfile_filter", "Raccourcis URL (*.url)|*.url"},
                             {"settings_browse", "Localiser"},
                             {"settings_auto_launch_fall_guys_on_tracker", "Lancer Fall Guys au lancement du tracker"},
-                            {"settings_language", "langage"},
+                            {"settings_language", "Langue"},
                             {"settings_save", "Enregistrer"},
                             {"settings_cancel", "Annuler"},
 
@@ -3548,7 +3548,7 @@ namespace FallGuysStats {
             wordsDictionary?.TryGetValue(keyWord, out word);
             return word;
         }
-        public static string GetWordWithLang (string keyWord, int lang) {
+        public static string GetWordWithLang(string keyWord, int lang) {
             string word = string.Empty;
             string nation = string.Empty;
             switch (lang) {
@@ -3562,7 +3562,7 @@ namespace FallGuysStats {
             wordsDictionary?.TryGetValue(keyWord, out word);
             return word;
         }
-        public static string GetWordWithLang (string keyWord, string lang) {
+        public static string GetWordWithLang(string keyWord, string lang) {
             string word = string.Empty;
             MultilingualDictionary.TryGetValue(lang, out Dictionary<string, string> wordsDictionary);
             wordsDictionary?.TryGetValue(keyWord, out word);
@@ -3574,7 +3574,7 @@ namespace FallGuysStats {
             roundDictionary?.TryGetValue(keyWord, out name);
             return name;
         }*/
-        public static string GetShowName (string keyWord) {
+        public static string GetShowName(string keyWord) {
             string name = string.Empty;
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);
             showsDictionary?.TryGetValue(keyWord, out name);

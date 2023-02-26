@@ -27,36 +27,35 @@ namespace FallGuysStats {
             this.btnEditShowsSave.Text = this.SaveBtnName;
             this.Profiles = this.Profiles.OrderBy(p => p.ProfileOrder).ToList();
             this.cboEditShows.Items.Clear();
-            
+
             for (int i = this.Profiles.Count - 1; i >= 0; i--) {
                 if (this.FunctionFlag == "move" && this.Profiles[i].ProfileID == StatsForm.CurrentSettings.SelectedProfile) continue;
                 this.cboEditShows.Items.Insert(0, this.Profiles[i].ProfileName);
             }
             this.cboEditShows.SelectedIndex = 0;
         }
-        
-        private void cboEditShows_Changed(object sender, EventArgs e) {
+
+        private void CboEditShows_Changed(object sender, EventArgs e) {
             this.SelectedProfileId = this.Profiles.Find(p => p.ProfileName == (string)this.cboEditShows.SelectedItem).ProfileID;
         }
 
-        private void btnEditShowsSave_Click(object sender, EventArgs e) {
+        private void BtnEditShowsSave_Click(object sender, EventArgs e) {
             string questionStr = string.Empty;
             if (FunctionFlag == "add") {
                 questionStr = $"{Multilingual.GetWord("message_save_profile_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_profile_suffix")}";
             } else if (FunctionFlag == "move") {
-                questionStr = $"{Multilingual.GetWord("profile_move_select_question_prefix")} ({this.SelectedCount.ToString()}) {Multilingual.GetWord("profile_move_select_question_infix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("profile_move_select_question_suffix")}";
+                questionStr = $"{Multilingual.GetWord("profile_move_select_question_prefix")} ({this.SelectedCount}) {Multilingual.GetWord("profile_move_select_question_infix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("profile_move_select_question_suffix")}";
             }
             if (MessageBox.Show(this,
                     questionStr,
                     Multilingual.GetWord("message_save_profile_caption"), MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.OK)
-            {
+                    MessageBoxIcon.Question) == DialogResult.OK) {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
-        
-        private void btnEditShowsCancel_Click(object sender, EventArgs e) {
+
+        private void BtnEditShowsCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }

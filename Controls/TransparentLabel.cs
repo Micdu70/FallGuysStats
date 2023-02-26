@@ -32,9 +32,10 @@ namespace FallGuysStats {
             if (!this.DrawVisible) { return; }
             if (this.IsIcon) {
                 using (SolidBrush brFore = new SolidBrush(this.ForeColor)) {
-                    StringFormat stringFormat = new StringFormat();
-                    stringFormat.Alignment = StringAlignment.Far;
-                    stringFormat.LineAlignment = StringAlignment.Far;
+                    StringFormat stringFormat = new StringFormat {
+                        Alignment = StringAlignment.Far,
+                        LineAlignment = StringAlignment.Far
+                    };
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
@@ -50,8 +51,9 @@ namespace FallGuysStats {
                         g.InterpolationMode = InterpolationMode.HighQualityBilinear;
                         g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                        StringFormat stringFormat = new StringFormat();
-                        stringFormat.Alignment = StringAlignment.Near;
+                        StringFormat stringFormat = new StringFormat {
+                            Alignment = StringAlignment.Near
+                        };
                         switch (this.TextAlign) {
                             case ContentAlignment.BottomLeft:
                             case ContentAlignment.BottomCenter:
@@ -80,7 +82,7 @@ namespace FallGuysStats {
                         }
 
                         g.DrawString(this.Text, this.Font, brFore, this.ClientRectangle, stringFormat);
-                        
+
                         if (this.Image != null) {
                             g.DrawImage(this.Image, this.ImageX, this.ImageY, this.ImageWidth, this.ImageHeight);
                         }
@@ -90,9 +92,10 @@ namespace FallGuysStats {
                             if (this.Name.Equals("lblName")) {
                                 if (!this.LevelColor.IsEmpty) {
                                     int sizeOfText = TextRenderer.MeasureText(this.TextRight, this.GetFontForLongText()).Width;
-                                    Pen pen = new Pen(this.LevelColor, 0);
-                                    pen.Alignment = PenAlignment.Right;
-                                    this.FillRoundedRectangle(g, pen, new SolidBrush(this.LevelColor), (ClientRectangle.Width - sizeOfText), ClientRectangle.Y-1, sizeOfText, 22, 10);
+                                    Pen pen = new Pen(this.LevelColor, 0) {
+                                        Alignment = PenAlignment.Right
+                                    };
+                                    this.FillRoundedRectangle(g, pen, new SolidBrush(this.LevelColor), (ClientRectangle.Width - sizeOfText), ClientRectangle.Y - 1, sizeOfText, 22, 10);
                                 }
                                 g.DrawString(this.TextRight, this.GetFontForLongText(), brFore, this.ClientRectangle, stringFormat);
                             } else {
@@ -147,7 +150,7 @@ namespace FallGuysStats {
             path.AddArc(corner, 90, 90);
             path.CloseFigure();
             g.FillPath(brush, path);
-            if(pen != null) {
+            if (pen != null) {
                 g.DrawPath(pen, path);
             }
         }
