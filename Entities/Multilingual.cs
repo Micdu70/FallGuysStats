@@ -500,7 +500,7 @@ namespace FallGuysStats {
                             {"settings_ping_only", "Ping seul."},
                             {"settings_flip_display_horizontally", "Inversion horizontale de l'affichage"},
                             {"settings_always_show_on_top", "Toujours afficher"},
-                            {"settings_display_the_player_by_console_type", "Afficher joueurs par type de support"},
+                            {"settings_display_the_player_by_console_type", "Afficher joueurs par support de jeu"},
                             {"settings_display_the_color_by_round_type", "Colorer manches selon leur type"},
                             {"settings_custom_overlay_font", "Police d'écriture"},
                             {"settings_select_font", "Changer"},

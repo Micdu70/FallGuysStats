@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.139**
+**Dernière version: 1.140**
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -41,7 +41,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Appuyez sur les touches des chiffres situés au dessus des lettres (de '1' à '9') pour choisir le numéro du profil désiré.
   - Maintenez la touche 'Maj' enfoncée et utilisez la molette de votre souris pour changer de profil.
   - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Haut' ou 'Bas' pour changer de profil.
-  - Appuyez sur la touche 'C' pour afficher le nombre de joueurs par type de support.
+  - Appuyez sur la touche 'C' pour afficher le nombre de joueurs par support de jeu.
   - Appuyez sur la touche 'R' pour colorer le nom des manches selon leur type.
 
 ## Supprimer des émissions ou déplacer des émissions vers un autre profil
@@ -51,10 +51,35 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Sélectionner une ou plusieurs émissions avec la touche 'Ctrl' ou avec la combinaison de touches 'Ctrl'+'Maj'.
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
+## Bug(s) connu(s) de la dernière version "FE" (Frenchy Edition)
+  1) Si des stats précédentes d'émissions sont détectées, certaines manches où vous êtiez éliminé(e) peuvent avoir un temps "Finish"
+    *=> Pour éviter ce bug, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
+
+  2) L'info "Temps" sur l'overlay ne s'arrête pas en émission solo sur des manches de type survie - ou manches avec gélatine - en cas d'élimination
+    *=> Le temps s'arrêtera au chargement de la prochaine manche*
+	
+  3) L'info "Temps" sur l'overlay commence avant le compte-à-rebours de début de manche
+    *=> Survient normalement juste après le bug 2). Cependant, le temps redémarre correctement à la fin du compte-à-rebours de début de manche*
+	
+  4) L'info "Temps" et "Finish" de l'overlay ne s'arrêtent pas sur une manche non jouée (mode spectateur) si vous quittez la partie
+    *=> Ces infos seront stoppées au chargement de la première manche de la prochaine partie ou au redémarrage du programme*
+	
+  5) Le numéro de la manche dans l'overlay est erroné pour les manches non jouées (mode spectateur)
+    *=> Pas de solution trouvée pour l'instant*
+	
+  6) L'info "Temps" de l'overlay peut se mettre à "clignoter" par moment (entre deux manches)
+    *=> Pas de solution trouvée pour l'instant*
+
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.140
+    - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)
+    - ++Changé: Overlay => L'information "Finish" passe maintenant en rose lorsque vous êtes éliminé(e)
+    - ++Changé: Votre position indiquera maintenant toujours "1er" pour la dernière manche d'une émission gagnée
+    - ++Changé: Divers petits changements...
   - 1.139
     - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du programme
-	- +Corrigé: Type de manche affiché dans l'overlay, pour le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
+	- +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
 	- ++Changé: Divers changements mineurs...
   - 1.138
     - ++Hotfix: Votre ancienne configuration ne sera pas perdue si vous venez de la Version Officielle du tracker\*

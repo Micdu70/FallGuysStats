@@ -42,7 +42,6 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
         public static bool InShow = false;
-        public static bool EndedShow = false;
         public static int LastServerPing = 0;
         public static int CurrentLanguage = 1;
 
@@ -1604,7 +1603,7 @@ namespace FallGuysStats {
         }
         private void LaunchHelpInBrowser() {
             try {
-                Process.Start(@"https://github.com/Micdu70/FallGuysStats");
+                Process.Start(@"https://github.com/Micdu70/FallGuysStats#fall-guys-stats-fe-frenchy-edition-par-micdu70");
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

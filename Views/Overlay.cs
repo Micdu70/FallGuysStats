@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+
 namespace FallGuysStats {
     public partial class Overlay : Form {
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -261,10 +262,7 @@ namespace FallGuysStats {
 
             lock (this.StatsForm.CurrentRound) {
                 bool hasCurrentRound = this.StatsForm.CurrentRound != null && this.StatsForm.CurrentRound.Count > 0;
-                if (hasCurrentRound && (lastRound == null || Stats.InShow || Stats.EndedShow)) {
-                    if (Stats.EndedShow) {
-                        Stats.EndedShow = false;
-                    }
+                if (hasCurrentRound && (lastRound == null || Stats.InShow)) {
                     lastRound = this.StatsForm.CurrentRound[this.StatsForm.CurrentRound.Count - 1];
                 }
 
@@ -360,15 +358,23 @@ namespace FallGuysStats {
                         } else if (Time > levelInfo.LongestFinishOverall) {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
-                    } else if (this.lastRound.Playing) {
+                    } else if (End != DateTime.MinValue && LogRound.IsSpectating) {
+                        if (this.lastRound.Position > 0) {
+                            this.lblFinish.TextRight = $"　# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}";
+                        } else {
+                            this.lblFinish.TextRight = $"　{End - Start:m\\:ss\\.ff}";
+                        }
+                        this.lblFinish.ForeColor = Color.Pink;
+                    } else if (lastRound.Playing) {
                         if (Start > DateTime.UtcNow) {
                             this.lblFinish.TextRight = $"　{DateTime.UtcNow - startTime:m\\:ss}";
                         } else {
                             this.lblFinish.TextRight = $"　{DateTime.UtcNow - Start:m\\:ss}";
                         }
+                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
                     } else {
                         this.lblFinish.TextRight = "-";
-                        this.lblFinish.ForeColor = Color.White;
+                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
                     }
 
                     if (lastRound.GameDuration > 0) {
@@ -377,9 +383,9 @@ namespace FallGuysStats {
                         this.lblDuration.Text = $"{Multilingual.GetWord("overlay_duration")} :";
                     }
 
-                    if (End != DateTime.MinValue) {
+                    if (End != DateTime.MinValue && LogRound.IsEnded) {
                         this.lblDuration.TextRight = $"　{End - Start:m\\:ss\\.ff}";
-                    } else if (lastRound.Playing) {
+                    } else if (lastRound.Playing || (LogRound.IsSpectating && !LogRound.IsEnded)) {
                         if (Start > DateTime.UtcNow) {
                             this.lblDuration.TextRight = $"　{DateTime.UtcNow - startTime:m\\:ss}";
                         } else {
