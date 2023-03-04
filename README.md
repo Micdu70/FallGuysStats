@@ -56,21 +56,25 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pour éviter ce bug, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
 
   2) L'info "Temps" sur l'overlay ne s'arrête pas en émission solo sur des manches de type survie - ou manches avec gélatine - en cas d'élimination
-    *=> Le temps s'arrêtera au chargement de la prochaine manche*
+    *=> Le temps s'arrêtera au chargement de la prochaine manche ou au lancement d'une recherche d'une autre partie*
 	
   3) L'info "Temps" sur l'overlay commence avant le compte-à-rebours de début de manche
-    *=> Survient normalement juste après le bug 2). Cependant, le temps redémarre correctement à la fin du compte-à-rebours de début de manche*
+    *=> Survient après le bug 2). Cependant, le temps redémarre correctement à la fin du compte-à-rebours de début de manche*
 	
   4) L'info "Temps" et "Finish" de l'overlay ne s'arrêtent pas sur une manche non jouée (mode spectateur) si vous quittez la partie
-    *=> Ces infos seront stoppées au chargement de la première manche de la prochaine partie ou au redémarrage du programme*
+    *=> Ces infos seront stoppées au chargement de la première manche de la prochaine partie*
 	
   5) Le numéro de la manche dans l'overlay est erroné pour les manches non jouées (mode spectateur)
-    *=> Pas de solution trouvée pour l'instant*
+    *=> Partiellement résolu dans la version 1.141 (via suppression du numéro de la manche)*
 	
   6) L'info "Temps" de l'overlay peut se mettre à "clignoter" par moment (entre deux manches)
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.141
+    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera pas de numéro de manche maintenant
+	- +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
   - 1.140
     - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)

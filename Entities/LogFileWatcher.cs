@@ -42,6 +42,7 @@ namespace FallGuysStats {
         public RoundInfo Info;
         public static bool IsEnded { get; set; }
         public static bool IsSpectating { get; set; }
+        public static bool IsLastRound { get; set; }
     }
     public class LogFileWatcher {
         const int UpdateDelay = 500;
@@ -299,7 +300,8 @@ namespace FallGuysStats {
         }
 
         private bool GetIsModeException(string sceneName) {
-            return sceneName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+            return sceneName.IndexOf("ound_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) > 0
+                   || sceneName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                    || sceneName.IndexOf("ound_blastball_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                    || sceneName.IndexOf("ound_floor_fall_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                    || sceneName.IndexOf("ound_hexsnake_only_finals", StringComparison.OrdinalIgnoreCase) > 0
@@ -315,7 +317,8 @@ namespace FallGuysStats {
         }
 
         private bool GetIsFinalException(string sceneName) {
-            return ((sceneName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+            return ((sceneName.IndexOf("ound_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) > 0
+                     || sceneName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                      || sceneName.IndexOf("ound_blastball_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                      || sceneName.IndexOf("ound_floor_fall_only_finals", StringComparison.OrdinalIgnoreCase) > 0
                      || sceneName.IndexOf("ound_hexsnake_only_finals", StringComparison.OrdinalIgnoreCase) > 0
@@ -344,6 +347,7 @@ namespace FallGuysStats {
             if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.ShowNameId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
             } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
+                LogRound.IsLastRound = false;
                 logRound.Info = new RoundInfo {
                     ShowNameId = this.ShowNameId
                 };
@@ -447,11 +451,7 @@ namespace FallGuysStats {
                 logRound.FindingPosition = true;
             } else if (logRound.Info != null && logRound.FindingPosition && (index = line.Line.IndexOf("[ClientGameSession] NumPlayersAchievingObjective=")) > 0) {
                 int position = int.Parse(line.Line.Substring(index + 49));
-                if (position > 0) {
-                    logRound.Info.Position = position;
-                } else {
-                    logRound.Info.Position = 0;
-                }
+                logRound.Info.Position = (position > 0) ? position : 0;
                 logRound.FindingPosition = false;
             } else if (logRound.Info != null && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("RTT: ");
@@ -500,6 +500,7 @@ namespace FallGuysStats {
             } else if (line.Line.IndexOf(" == [CompletedEpisodeDto] ==", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (logRound.Info == null) { return false; }
 
+                LogRound.IsLastRound = true;
                 LogRound.IsSpectating = true;
 
                 RoundInfo temp = null;
@@ -566,17 +567,6 @@ namespace FallGuysStats {
                         } else if (detail.IndexOf("> Bonus Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             temp.Kudos += int.Parse(detail.Substring(15));
                         }
-                    } else if (detail.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0
-                        || detail.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0
-                        || detail.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
-                        LogRound.IsEnded = true;
-                        if (temp.End == DateTime.MinValue) {
-                            temp.End = line.Date;
-                        }
-                        if (temp.Start == DateTime.MinValue) {
-                            temp.Start = temp.End;
-                        }
-                        temp.Finish = null;
                     }
                 }
 
@@ -593,7 +583,6 @@ namespace FallGuysStats {
                     logRound.Info.Crown = true;
                     logRound.Info.Position = 1;
                 }
-                // logRound.Info = null;
                 return true;
             }
             return false;

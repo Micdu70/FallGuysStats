@@ -273,7 +273,13 @@ namespace FallGuysStats {
 
                 if (lastRound != null && !string.IsNullOrEmpty(lastRound.Name)) {
                     string roundName = lastRound.VerifiedName();
-                    lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
+                    if (LogRound.IsLastRound) {
+                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
+                    } else if (LogRound.IsSpectating) {
+                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{Multilingual.GetWord("overlay_name_suffix")} :";
+                    } else {
+                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
+                    }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out var level)) {
                         roundName = level.Name.ToUpper();
