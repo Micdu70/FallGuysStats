@@ -18,7 +18,7 @@ namespace FallGuysStats {
         private void LevelDetails_Load(object sender, EventArgs e) {
             this.dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dataGridViewCellStyle1.BackColor = Color.LightGray;
-            this.dataGridViewCellStyle1.Font = new Font(Overlay.DefaultFontCollection.Families[0], 7.5F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCellStyle1.Font = new Font(Stats.CurrentLanguage == 4 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 7.5F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCellStyle1.ForeColor = Color.Black;
             this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
             this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
@@ -27,7 +27,7 @@ namespace FallGuysStats {
 
             this.dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dataGridViewCellStyle2.BackColor = Color.White;
-            this.dataGridViewCellStyle2.Font = new Font(Overlay.DefaultFontCollection.Families[0], 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCellStyle2.Font = new Font(Stats.CurrentLanguage == 4 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCellStyle2.ForeColor = Color.Black;
             this.dataGridViewCellStyle2.SelectionBackColor = Color.DeepSkyBlue;
             this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
@@ -38,17 +38,17 @@ namespace FallGuysStats {
             this.gridDetails.ClearSelection();
             if (this.LevelName == "Shows") {
                 this.gridDetails.Name = "gridShowsStats";
-                this.Text = Multilingual.GetWord("level_detail_show_stats");
+                this.Text = $@"{Multilingual.GetWord("level_detail_show_stats")} - {StatsForm.GetCurrentProfile()}";
                 this._showStats = 2;
                 this.ClientSize = new Size(Width - (Stats.CurrentLanguage <= 1 ? 82 : Stats.CurrentLanguage == 2 ? 99 : 60), Height);
             } else if (this.LevelName == "Rounds") {
                 this.gridDetails.Name = "gridRoundsStats";
-                this.Text = Multilingual.GetWord("level_detail_round_stats");
+                this.Text = $@"{Multilingual.GetWord("level_detail_round_stats")} - {StatsForm.GetCurrentProfile()}";
                 this._showStats = 1;
                 this.ClientSize = new Size(Width + (Stats.CurrentLanguage <= 1 ? 700 : Stats.CurrentLanguage == 2 ? 626 : 677), Height);
             } else if (this.LevelName == "Finals") {
                 this.gridDetails.Name = "gridFinalsStats";
-                this.Text = Multilingual.GetWord("level_detail_final_stats");
+                this.Text = $@"{Multilingual.GetWord("level_detail_final_stats")} - {StatsForm.GetCurrentProfile()}";
                 this._showStats = 1;
                 this.ClientSize = new Size(Width + (Stats.CurrentLanguage <= 1 ? 700 : Stats.CurrentLanguage == 2 ? 626 : 677), Height);
             } else {

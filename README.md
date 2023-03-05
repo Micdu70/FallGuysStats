@@ -38,9 +38,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Appuyez sur la touche 'T' pour changer la couleur de l'arrière-plan.
   - Appuyez sur la touche 'F' pour inverser horizontalement l'affichage.
   - Appuyez sur touche 'P' pour passer au profil suivant.
-  - Appuyez sur les touches des chiffres situés au dessus des lettres (de '1' à '9') pour choisir le numéro du profil désiré.
+  - Appuyez sur les touches des chiffres situés au dessus des lettres (1 à 9) pour changer de profil.
   - Maintenez la touche 'Maj' enfoncée et utilisez la molette de votre souris pour changer de profil.
-  - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Haut' ou 'Bas' pour changer de profil.
+  - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Bas' ou 'Haut' pour changer de profil.
   - Appuyez sur la touche 'C' pour afficher le nombre de joueurs par support de jeu.
   - Appuyez sur la touche 'R' pour colorer le nom des manches selon leur type.
 

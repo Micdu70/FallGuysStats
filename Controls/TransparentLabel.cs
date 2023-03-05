@@ -89,13 +89,12 @@ namespace FallGuysStats {
 
                         if (!string.IsNullOrEmpty(this.TextRight)) {
                             stringFormat.Alignment = StringAlignment.Far;
-                            if (this.Name.Equals("lblName")) {
+                            if (this.Name.Equals("lblRound")) {
                                 if (!this.LevelColor.IsEmpty) {
                                     int sizeOfText = TextRenderer.MeasureText(this.TextRight, this.GetFontForLongText()).Width;
-                                    Pen pen = new Pen(this.LevelColor, 0) {
-                                        Alignment = PenAlignment.Right
-                                    };
-                                    this.FillRoundedRectangle(g, pen, new SolidBrush(this.LevelColor), (ClientRectangle.Width - sizeOfText), ClientRectangle.Y - 1, sizeOfText, 22, 10);
+                                    Pen pen = new Pen(this.LevelColor, 0);
+                                    pen.Alignment = PenAlignment.Right;
+                                    this.FillRoundedRectangle(g, pen, new SolidBrush(this.LevelColor), (this.ClientRectangle.Width - sizeOfText), this.ClientRectangle.Y-1, sizeOfText, 22, 10);
                                 }
                                 g.DrawString(this.TextRight, this.GetFontForLongText(), brFore, this.ClientRectangle, stringFormat);
                             } else {
