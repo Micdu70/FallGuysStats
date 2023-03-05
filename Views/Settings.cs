@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 namespace FallGuysStats {
@@ -107,8 +106,8 @@ namespace FallGuysStats {
             this.txtGameShortcutLocation.Text = this.CurrentSettings.GameShortcutLocation;
             this.chkAutoLaunchGameOnStart.Checked = this.CurrentSettings.AutoLaunchGameOnStartup;
             this.chkIgnoreLevelTypeWhenSorting.Checked = this.CurrentSettings.IgnoreLevelTypeWhenSorting;
+            this.picPlatformCheck.Image = Stats.ImageOpacity(this.picPlatformCheck.Image, 0.8F);
 
-            this.picPlatformCheck.Image = this.ChangeOpacity(this.picPlatformCheck.Image, 0.8F);
             if (this.LaunchPlatform == 0) { // Epic Games
                 this.picPlatformCheck.Parent = this.picEpicGames;
                 this.platformToolTip.SetToolTip(this.picPlatformCheck, "Epic Games");
@@ -326,9 +325,11 @@ namespace FallGuysStats {
                 this.CurrentSettings.OverlayFontSerialized = fontConverter.ConvertToString(this.lblOverlayFontExample.Font);
             } else {
                 this.CurrentSettings.OverlayFontSerialized = string.Empty;
-                Overlay.DefaultFont = Stats.CurrentLanguage <= 1
-                    ? new Font(Overlay.DefaultFontCollection.Families[1], 18, FontStyle.Regular, GraphicsUnit.Pixel)
-                    : new Font(Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
+                Overlay.DefaultFont = new Font(
+                    Stats.CurrentLanguage <= 1 ? Overlay.DefaultFontCollection.Families[2] : // eng, fre
+                    Stats.CurrentLanguage == 4 ? Overlay.DefaultFontCollection.Families[1] : // sc
+                    Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel
+				);
             }
 
             this.DialogResult = DialogResult.OK;
@@ -485,42 +486,34 @@ namespace FallGuysStats {
             }
         }
         private void BtnResetOverlayFont_Click(object sender, EventArgs e) {
-            this.lblOverlayFontExample.Font = this.cboMultilingual.SelectedIndex <= 1
-                ? new Font(Overlay.DefaultFontCollection.Families[1], 18, FontStyle.Regular, GraphicsUnit.Pixel)
-                : new Font(Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.lblOverlayFontExample.Font = new Font(
+                this.cboMultilingual.SelectedIndex <= 1 ? Overlay.DefaultFontCollection.Families[2] :
+                this.cboMultilingual.SelectedIndex == 4 ? Overlay.DefaultFontCollection.Families[1] :
+                Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel
+			);
             this.overlayFontSerialized = string.Empty;
         }
         private void CboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
-        private Bitmap ChangeOpacity(Image imgData, float opacity) {
-            Bitmap bmpTmp = new Bitmap(imgData.Width, imgData.Height);
-            Graphics gp = Graphics.FromImage(bmpTmp);
-            ColorMatrix clrMatrix = new ColorMatrix {
-                Matrix33 = opacity
-            };
-            ImageAttributes imgAttribute = new ImageAttributes();
-            imgAttribute.SetColorMatrix(clrMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-            gp.DrawImage(imgData, new Rectangle(0, 0, bmpTmp.Width, bmpTmp.Height), 0, 0, imgData.Width, imgData.Height, GraphicsUnit.Pixel, imgAttribute);
-            gp.Dispose();
-
-            return bmpTmp;
-        }
         private void ChangeLanguage(int lang) {
             this.DisplayLang = lang;
-            this.Font = new Font(Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.Font = new Font(this.DisplayLang == 4 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
             int tempLanguage = Stats.CurrentLanguage;
             Stats.CurrentLanguage = lang;
-            this.lblOverlayFontExample.Font = this.cboMultilingual.SelectedIndex <= 1
-                ? new Font(Overlay.DefaultFontCollection.Families[1], 18, FontStyle.Regular, GraphicsUnit.Pixel)
-                : new Font(Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.lblOverlayFontExample.Font = new Font(
+                this.cboMultilingual.SelectedIndex <= 1 ? Overlay.DefaultFontCollection.Families[2] :
+                this.cboMultilingual.SelectedIndex == 4 ? Overlay.DefaultFontCollection.Families[1] :
+                Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel);
             this.chkChangeHoopsieLegends.Visible = true;
-            if (lang == 0) { // English
+            this.chkChangeHoopsieLegends.Checked = this.CurrentSettings.HoopsieHeros;
+            if (this.DisplayLang == 0) { // English
                 this.txtLogPath.Location = new Point(98, 14);
                 this.txtLogPath.Size = new Size(667, 17);
                 this.lblLogPathNote.Location = new Point(98, 40);
 
                 this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+
                 this.txtPreviousWins.Location = new Point(111, 17);
                 this.lblPreviousWinsNote.Location = new Point(136, 20);
                 this.chkAutoUpdate.Location = new Point(285, 20);
@@ -531,7 +524,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(383, 85);
 
                 this.lblOverlayColor.Location = new Point(442, 146);
-                this.lblOverlayFont.Location = new Point(12, 275);
+				this.lblOverlayFont.Location = new Point(12, 275);
 
                 this.txtCycleTimeSeconds.Location = new Point(102, 140);
                 this.lblCycleTimeSecondsTag.Location = new Point(127, 143);
@@ -548,12 +541,13 @@ namespace FallGuysStats {
                     this.txtGameExeLocation.Size = new Size(420, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
-            } else if (lang == 1) { // French
+            } else if (this.DisplayLang == 1) { // French
                 this.txtLogPath.Location = new Point(178, 14);
                 this.txtLogPath.Size = new Size(587, 17);
                 this.lblLogPathNote.Location = new Point(178, 40);
 
                 this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+
                 this.txtPreviousWins.Location = new Point(102, 17);
                 this.lblPreviousWinsNote.Location = new Point(126, 20);
                 this.chkAutoUpdate.Location = new Point(250, 20);
@@ -564,7 +558,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(366, 85);
 
                 this.lblOverlayColor.Location = new Point(444, 146);
-                this.lblOverlayFont.Location = new Point(24, 275);
+				this.lblOverlayFont.Location = new Point(24, 275);
 
                 this.txtCycleTimeSeconds.Location = new Point(194, 140);
                 this.lblCycleTimeSecondsTag.Location = new Point(218, 143);
@@ -581,12 +575,13 @@ namespace FallGuysStats {
                     this.txtGameExeLocation.Size = new Size(470, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
-            } else if (lang == 2) { // Korean
+            } else if (this.DisplayLang == 2) { // Korean
                 this.txtLogPath.Location = new Point(95, 15);
                 this.txtLogPath.Size = new Size(670, 17);
                 this.lblLogPathNote.Location = new Point(95, 40);
 
                 this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+
                 this.txtPreviousWins.Location = new Point(96, 17);
                 this.lblPreviousWinsNote.Location = new Point(128, 20);
                 this.chkAutoUpdate.Location = new Point(285, 20);
@@ -614,12 +609,13 @@ namespace FallGuysStats {
                     this.txtGameExeLocation.Size = new Size(427, 20);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
-            } else if (lang == 3) { // Japanese
+            } else if (this.DisplayLang == 3) { // Japanese
                 this.txtLogPath.Location = new Point(95, 15);
                 this.txtLogPath.Size = new Size(670, 17);
                 this.lblLogPathNote.Location = new Point(95, 40);
-
+                
                 this.grpStats.Font = new Font(Font.FontFamily, 10.25F, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+
                 this.txtPreviousWins.Location = new Point(102, 17);
                 this.lblPreviousWinsNote.Location = new Point(134, 20);
                 this.chkAutoUpdate.Location = new Point(275, 20);
@@ -647,16 +643,17 @@ namespace FallGuysStats {
                     this.txtGameExeLocation.Size = new Size(384, 20);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
-            } else if (lang == 4) { // Simplified Chinese
+            } else if (this.DisplayLang == 4) { // Simplified Chinese
                 this.txtLogPath.Location = new Point(97, 15);
                 this.txtLogPath.Size = new Size(668, 17);
                 this.lblLogPathNote.Location = new Point(97, 40);
 
-                this.grpStats.Font = new Font(Font.FontFamily, 10.25F, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
-                this.txtPreviousWins.Location = new Point(94, 17);
-                this.lblPreviousWinsNote.Location = new Point(130, 20);
-                this.chkAutoUpdate.Location = new Point(275, 20);
-                this.chkChangeHoopsieLegends.Location = new Point(387, 20);
+                this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+
+                this.txtPreviousWins.Location = new Point(98, 23);
+                this.lblPreviousWinsNote.Location = new Point(140, 23);
+                this.chkAutoUpdate.Location = new Point(275, 23);
+                this.chkChangeHoopsieLegends.Location = new Point(387, 23);
 
                 // Hide following setting due to not applicable
                 this.chkChangeHoopsieLegends.Visible = false;
@@ -734,6 +731,7 @@ namespace FallGuysStats {
                 case 4: cboQualifyFilter.SelectedItem = Multilingual.GetWord("settings_day_stats"); break;
                 case 5: cboQualifyFilter.SelectedItem = Multilingual.GetWord("settings_session_stats"); break;
             }
+            
             this.lblQualifyFilter.Text = Multilingual.GetWord("settings_qualify__gold_filter");
             this.cboFastestFilter.Items.Clear();
             this.cboFastestFilter.Items.AddRange(new object[] {

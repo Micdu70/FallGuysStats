@@ -187,6 +187,7 @@ namespace FallGuysStats {
             }
             running = false;
         }
+
         private void ParseLines() {
             List<RoundInfo> round = new List<RoundInfo>();
             List<RoundInfo> allStats = new List<RoundInfo>();
@@ -215,6 +216,7 @@ namespace FallGuysStats {
                 Thread.Sleep(UpdateDelay);
             }
         }
+
         private readonly Dictionary<string, string> _roundNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             { "round_follow-the-leader_ss2_launch", "round_follow-the-leader_s6_launch" },
             
@@ -282,6 +284,7 @@ namespace FallGuysStats {
             {"round_blastball_arenasurvival_blast_ball_trials_02", "round_blastball_arenasurvival_symphony_launch_show"},
             {"round_blastball_arenasurvival_blast_ball_trials_fn", "round_blastball_arenasurvival_symphony_launch_show"},
         };
+
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" } };
 
         private bool GetIsRealLastRound(string roundName) {
