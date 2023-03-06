@@ -8,9 +8,9 @@ using System.Globalization;
 using System.IO;
 #if AllowUpdate
 using System.IO.Compression;
+using System.Net;
 #endif
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;

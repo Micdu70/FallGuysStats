@@ -189,6 +189,9 @@
     <EmbeddedResource Include="Resources\font\NotoSans-Regular.ttf" />
     <EmbeddedResource Include="Resources\font\TitanOne-Regular.ttf" />
     <EmbeddedResource Include="Resources\font\NotoSansSC-Regular.otf" />
+    <None Include="update.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\player_icon.png" />

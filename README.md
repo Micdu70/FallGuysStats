@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.142**
+**Dernière version: 1.143**
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -71,12 +71,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
-  - 1.142 [ Cette version possède les modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats ]
+  - 1.143 {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
+  - 1.142 { Cette version possède les modifications faites par [@qutrits] => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
-	- ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
+	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par [@qutrits])
+	- ++Changé: Le tableau des stats des victoires a été amélioré (par [@qutrits])
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
-	- ++Changé: Divers changements (par @qutrits et moi-même)
+	- ++Changé: Divers changements (par [@qutrits] et moi-même)
   - 1.141
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera pas de numéro de manche maintenant

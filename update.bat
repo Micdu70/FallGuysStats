@@ -1,5 +1,5 @@
 @echo off
-title Fall Guys Stats "FE" Update Script
+title Fall Guys Stats (Frenchy Edition) - Update Script
 echo Checking...
 if exist "%~dp0\update\" (
   move "%~dp0\update\"*.* .

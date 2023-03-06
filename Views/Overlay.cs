@@ -467,7 +467,7 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2) + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
-            this.picPositionLock.Location = new Point(!flippedImage ? 33 : this.Width - 80, this.Height - 25 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 30 : -5));
+            this.picPositionLock.Location = new Point(!flippedImage ? 12 : this.Width - 59, this.Height - 25);
         }
         //private void Overlay_MouseMove(object sender, MouseEventArgs e) {
         //}
@@ -1270,7 +1270,7 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2) + (showTabs ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (showTabs ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (showTabs ? 11 : -6));
-            this.picPositionLock.Location = new Point(!flipDisplay ? 33 : this.Width - 80, this.Height - 25 + (showTabs ? 30 : -5));
+            this.picPositionLock.Location = new Point(!flipDisplay ? 12 : this.Width - 59, this.Height - 25);
             if (this.isFixedPositionSe || this.isFixedPositionSw) {
                 this.Location = new Point(this.Location.X, this.Location.Y + (showTabs ? -35 : 35));
             }
@@ -1287,7 +1287,7 @@ namespace FallGuysStats {
 
             this.DisplayTabs(this.drawHeight > 99);
             this.DisplayProfile(this.drawHeight > 99);
-            this.picPositionLock.Location = new Point(!flipped ? 33 : this.Width - 80, this.Height - 25 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 30 : -5));
+            this.picPositionLock.Location = new Point(!flipped ? 12 : this.Width - 59, this.Height - 25);
         }
         private int GetCountNumeric(string s) {
             int count = 0;
