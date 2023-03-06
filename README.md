@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.141**
+**Dernière version: 1.142**
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -40,7 +40,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Appuyez sur touche 'P' pour passer au profil suivant.
   - Appuyez sur les touches des chiffres situés au dessus des lettres (1 à 9) pour changer de profil.
   - Maintenez la touche 'Maj' enfoncée et utilisez la molette de votre souris pour changer de profil.
-  - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Bas' ou 'Haut' pour changer de profil.
+  - Maintenez la touche 'Maj' enfoncée et utilisez la touche directionnelle 'Droite'/'Bas' ou 'Gauche'/'Haut' pour changer de profil.
   - Appuyez sur la touche 'C' pour afficher le nombre de joueurs par support de jeu.
   - Appuyez sur la touche 'R' pour colorer le nom des manches selon leur type.
 
@@ -65,12 +65,18 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Ces infos seront stoppées au chargement de la première manche de la prochaine partie*
 	
   5) Le numéro de la manche dans l'overlay est erroné pour les manches non jouées (mode spectateur)
-    *=> Partiellement résolu dans la version 1.141 (via suppression du numéro de la manche)*
+    *=> Partiellement résolu depuis la version 1.141 (via suppression du numéro de la manche)*
 	
-  6) L'info "Temps" de l'overlay peut se mettre à "clignoter" par moment (entre deux manches)
+  6) L'info "Temps" de l'overlay peut se mettre à "clignoter" par moment (souvent entre deux manches)
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.142 [ Cette version possède les modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats ]
+    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
+	- ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
+    - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
+	- ++Changé: Divers changements (par @qutrits et moi-même)
   - 1.141
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera pas de numéro de manche maintenant

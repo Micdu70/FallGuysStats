@@ -329,7 +329,7 @@ namespace FallGuysStats {
                     Stats.CurrentLanguage <= 1 ? Overlay.DefaultFontCollection.Families[2] : // eng, fre
                     Stats.CurrentLanguage == 4 ? Overlay.DefaultFontCollection.Families[1] : // sc
                     Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel
-				);
+                );
             }
 
             this.DialogResult = DialogResult.OK;
@@ -490,7 +490,7 @@ namespace FallGuysStats {
                 this.cboMultilingual.SelectedIndex <= 1 ? Overlay.DefaultFontCollection.Families[2] :
                 this.cboMultilingual.SelectedIndex == 4 ? Overlay.DefaultFontCollection.Families[1] :
                 Overlay.DefaultFontCollection.Families[0], 18, FontStyle.Regular, GraphicsUnit.Pixel
-			);
+            );
             this.overlayFontSerialized = string.Empty;
         }
         private void CboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
@@ -524,7 +524,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(383, 85);
 
                 this.lblOverlayColor.Location = new Point(442, 146);
-				this.lblOverlayFont.Location = new Point(12, 275);
+                this.lblOverlayFont.Location = new Point(12, 275);
 
                 this.txtCycleTimeSeconds.Location = new Point(102, 140);
                 this.lblCycleTimeSecondsTag.Location = new Point(127, 143);
@@ -558,7 +558,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(366, 85);
 
                 this.lblOverlayColor.Location = new Point(444, 146);
-				this.lblOverlayFont.Location = new Point(24, 275);
+                this.lblOverlayFont.Location = new Point(24, 275);
 
                 this.txtCycleTimeSeconds.Location = new Point(194, 140);
                 this.lblCycleTimeSecondsTag.Location = new Point(218, 143);
@@ -613,7 +613,7 @@ namespace FallGuysStats {
                 this.txtLogPath.Location = new Point(95, 15);
                 this.txtLogPath.Size = new Size(670, 17);
                 this.lblLogPathNote.Location = new Point(95, 40);
-                
+
                 this.grpStats.Font = new Font(Font.FontFamily, 10.25F, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
 
                 this.txtPreviousWins.Location = new Point(102, 17);
@@ -658,15 +658,15 @@ namespace FallGuysStats {
                 // Hide following setting due to not applicable
                 this.chkChangeHoopsieLegends.Visible = false;
 
-                this.lblWinsFilter.Location = new Point(423, 27);
-                this.lblQualifyFilter.Location = new Point(423, 56);
-                this.lblFastestFilter.Location = new Point(423, 85);
+                this.lblWinsFilter.Location = new Point(423, 32);
+                this.lblQualifyFilter.Location = new Point(423, 66);
+                this.lblFastestFilter.Location = new Point(423, 101);
 
-                this.lblOverlayColor.Location = new Point(481, 146);
-                this.lblOverlayFont.Location = new Point(12, 275);
+                this.lblOverlayColor.Location = new Point(482, 174);
+                this.lblOverlayFont.Location = new Point(12, 331);
 
-                this.txtCycleTimeSeconds.Location = new Point(90, 140);
-                this.lblCycleTimeSecondsTag.Location = new Point(116, 143);
+                this.txtCycleTimeSeconds.Location = new Point(90, 170);
+                this.lblCycleTimeSecondsTag.Location = new Point(116, 173);
 
                 this.grpLaunchPlatform.Size = new Size(88, 56);
                 this.lblGameExeLocation.Location = new Point(107, 24);
@@ -731,7 +731,7 @@ namespace FallGuysStats {
                 case 4: cboQualifyFilter.SelectedItem = Multilingual.GetWord("settings_day_stats"); break;
                 case 5: cboQualifyFilter.SelectedItem = Multilingual.GetWord("settings_session_stats"); break;
             }
-            
+
             this.lblQualifyFilter.Text = Multilingual.GetWord("settings_qualify__gold_filter");
             this.cboFastestFilter.Items.Clear();
             this.cboFastestFilter.Items.AddRange(new object[] {

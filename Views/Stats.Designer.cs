@@ -438,4 +438,3 @@
         private System.Windows.Forms.ToolStripMenuItem menuEditProfiles;
     }
 }
-

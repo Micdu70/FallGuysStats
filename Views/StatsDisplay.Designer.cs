@@ -59,7 +59,7 @@ namespace FallGuysStats {
             this.chkWins.Text = "Streak Wins";
             this.chkWins.ForeColor = Color.Red;
             this.chkWins.UseVisualStyleBackColor = true;
-            this.chkWins.CheckedChanged += new System.EventHandler(this.chkWins_CheckedChanged);
+            this.chkWins.CheckedChanged += new System.EventHandler(this.ChkWins_CheckedChanged);
             // 
             // chkFinals
             // 
@@ -71,7 +71,7 @@ namespace FallGuysStats {
             this.chkFinals.Text = "Streak Finals";
             this.chkFinals.ForeColor = Color.Green;
             this.chkFinals.UseVisualStyleBackColor = true;
-            this.chkFinals.CheckedChanged += new System.EventHandler(this.chkFinals_CheckedChanged);
+            this.chkFinals.CheckedChanged += new System.EventHandler(this.ChkFinals_CheckedChanged);
             // 
             // chkShows
             // 
@@ -83,7 +83,7 @@ namespace FallGuysStats {
             this.chkShows.Text = "Shows";
             this.chkShows.ForeColor = Color.Blue;
             this.chkShows.UseVisualStyleBackColor = true;
-            this.chkShows.CheckedChanged += new System.EventHandler(this.chkShows_CheckedChanged);
+            this.chkShows.CheckedChanged += new System.EventHandler(this.ChkShows_CheckedChanged);
             // 
             // StatsDisplay
             // 

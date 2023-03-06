@@ -10,6 +10,7 @@ using System.IO;
 using System.IO.Compression;
 #endif
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -19,7 +20,7 @@ using Microsoft.Win32;
 namespace FallGuysStats {
     public partial class Stats : Form {
         [STAThread]
-        static void Main(string[] args) {
+        static void Main() {
             try {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -48,8 +49,9 @@ namespace FallGuysStats {
         public static Bitmap ImageOpacity(Image imgData, float opacity) {
             Bitmap bmpTmp = new Bitmap(imgData.Width, imgData.Height);
             Graphics gp = Graphics.FromImage(bmpTmp);
-            ColorMatrix clrMatrix = new ColorMatrix();
-            clrMatrix.Matrix33 = opacity;
+            ColorMatrix clrMatrix = new ColorMatrix {
+                Matrix33 = opacity
+            };
             ImageAttributes imgAttribute = new ImageAttributes();
             imgAttribute.SetColorMatrix(clrMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
             gp.DrawImage(imgData, new Rectangle(0, 0, bmpTmp.Width, bmpTmp.Height), 0, 0, imgData.Width, imgData.Height, GraphicsUnit.Pixel, imgAttribute);
@@ -178,9 +180,6 @@ namespace FallGuysStats {
             this.overlay.StartTimer();
 
             this.UpdateGameExeLocation();
-            if (this.CurrentSettings.AutoLaunchGameOnStartup) {
-                this.LaunchGame(true);
-            }
 
             this.RemoveUpdateFiles();
 
@@ -917,6 +916,10 @@ namespace FallGuysStats {
                     return;
                 }
 #endif
+
+                if (this.CurrentSettings.AutoLaunchGameOnStartup) {
+                    this.LaunchGame(true);
+                }
 
                 this.menuProfile.DropDownItems["menuProfile" + this.CurrentSettings.SelectedProfile].PerformClick();
 
@@ -1873,7 +1876,7 @@ namespace FallGuysStats {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public bool CheckForUpdate() {
+        public bool CheckForUpdate(bool silent) {
 #if AllowUpdate
             using (ZipWebClient web = new ZipWebClient()) {
                 string assemblyInfo = web.DownloadString(@"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/AssemblyInfo.cs");
@@ -1884,29 +1887,21 @@ namespace FallGuysStats {
                     Version newVersion = new Version(assemblyInfo.Substring(index + 17, indexEnd - index - 17));
                     if (newVersion > Assembly.GetEntryAssembly().GetName().Version) {
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_question_prefix")} (v{newVersion.ToString(2)}) {Multilingual.GetWord("message_update_question_suffix")}", $"{Multilingual.GetWord("message_update_question_caption")}", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
-                            byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
-                            string exeName = null;
-                            using (MemoryStream ms = new MemoryStream(data)) {
-                                using (ZipArchive zipFile = new ZipArchive(ms, ZipArchiveMode.Read)) {
-                                    foreach (var entry in zipFile.Entries) {
-                                        if (entry.Name.IndexOf(".exe", StringComparison.OrdinalIgnoreCase) > 0) {
-											File.Move(entry.Name, $"{entry.Name}.bak");
-                                            exeName = entry.Name;
-                                        }
-                                        entry.ExtractToFile(entry.Name, true);
-                                    }
-                                }
-                            }
-
-                            Process.Start(new ProcessStartInfo(exeName));
+                            WebClient wc = new WebClient();
+                            wc.DownloadFile("https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip", "update.zip.tmp");
+                            File.Copy("update.zip.tmp", "update.zip", true);
+                            File.Delete("update.zip.tmp");
+                            ZipFile.ExtractToDirectory("update.zip", "update");
+                            File.Delete("update.zip");
+                            Process.Start(new ProcessStartInfo("update.bat"));
                             Visible = false;
                             Close();
                             return true;
                         }
-                    } else {
+                    } else if (!silent) {
                         MessageBox.Show(this, $"{Multilingual.GetWord("message_update_latest_version")}", $"{Multilingual.GetWord("message_update_question_caption")}", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
-                } else {
+                } else if (!silent) {
                     MessageBox.Show(this, $"{Multilingual.GetWord("message_update_not_determine_version")}", $"{Multilingual.GetWord("message_update_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

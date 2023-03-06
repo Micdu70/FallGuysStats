@@ -391,7 +391,7 @@ namespace FallGuysStats {
                             {"level_detail_wins", "Victoires"},
                             {"level_detail_date", "Date"},
                             {"level_detail_tooltiptext", "Cliquer pour voir les stats pour cette manche"},
-                            {"level_date_format", "dd/MM/yyyy"},
+                            {"level_date_format", "dd/MM/yyyy (ddd)"},
 
                             {"profile_change_tooltiptext", "Cliquer pour changer de profil"},
                             {"shows_detail_tooltiptext", "Cliquer pour voir les stats des émissions"},

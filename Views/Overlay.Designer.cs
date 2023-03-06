@@ -48,17 +48,23 @@ namespace FallGuysStats {
             this.lblRound = new FallGuysStats.TransparentLabel();
             this.lblWins = new FallGuysStats.TransparentLabel();
             this.lblFinish = new FallGuysStats.TransparentLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNE)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSE)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionLock)).BeginInit();
             this.SuspendLayout();
             // 
             // picPositionNE
             // 
             this.picPositionNE.BackColor = System.Drawing.Color.Transparent;
             this.picPositionNE.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPositionNE.Image = Properties.Resources.position_ne_off_icon;
-            this.picPositionNE.Location = new System.Drawing.Point(201, 46);
+            this.picPositionNE.Image = global::FallGuysStats.Properties.Resources.position_ne_off_icon;
+            this.picPositionNE.Location = new System.Drawing.Point(360, 19);
             this.picPositionNE.Name = "picPositionNE";
             this.picPositionNE.Size = new System.Drawing.Size(47, 30);
             this.picPositionNE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPositionNE.TabIndex = 0;
             this.picPositionNE.TabStop = false;
             this.picPositionNE.Visible = false;
             this.picPositionNE.Click += new System.EventHandler(this.FixedPosition_Click);
@@ -69,11 +75,12 @@ namespace FallGuysStats {
             // 
             this.picPositionNW.BackColor = System.Drawing.Color.Transparent;
             this.picPositionNW.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPositionNW.Image = Properties.Resources.position_nw_off_icon;
-            this.picPositionNW.Location = new System.Drawing.Point(251, 46);
+            this.picPositionNW.Image = global::FallGuysStats.Properties.Resources.position_nw_off_icon;
+            this.picPositionNW.Location = new System.Drawing.Point(410, 19);
             this.picPositionNW.Name = "picPositionNW";
             this.picPositionNW.Size = new System.Drawing.Size(47, 30);
             this.picPositionNW.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPositionNW.TabIndex = 1;
             this.picPositionNW.TabStop = false;
             this.picPositionNW.Visible = false;
             this.picPositionNW.Click += new System.EventHandler(this.FixedPosition_Click);
@@ -84,11 +91,12 @@ namespace FallGuysStats {
             // 
             this.picPositionSE.BackColor = System.Drawing.Color.Transparent;
             this.picPositionSE.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPositionSE.Image = Properties.Resources.position_se_off_icon;
-            this.picPositionSE.Location = new System.Drawing.Point(201, 80);
+            this.picPositionSE.Image = global::FallGuysStats.Properties.Resources.position_se_off_icon;
+            this.picPositionSE.Location = new System.Drawing.Point(360, 53);
             this.picPositionSE.Name = "picPositionSE";
             this.picPositionSE.Size = new System.Drawing.Size(47, 30);
             this.picPositionSE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPositionSE.TabIndex = 2;
             this.picPositionSE.TabStop = false;
             this.picPositionSE.Visible = false;
             this.picPositionSE.Click += new System.EventHandler(this.FixedPosition_Click);
@@ -99,26 +107,28 @@ namespace FallGuysStats {
             // 
             this.picPositionSW.BackColor = System.Drawing.Color.Transparent;
             this.picPositionSW.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPositionSW.Image = Properties.Resources.position_sw_off_icon;
-            this.picPositionSW.Location = new System.Drawing.Point(251, 80);
+            this.picPositionSW.Image = global::FallGuysStats.Properties.Resources.position_sw_off_icon;
+            this.picPositionSW.Location = new System.Drawing.Point(410, 53);
             this.picPositionSW.Name = "picPositionSW";
             this.picPositionSW.Size = new System.Drawing.Size(47, 30);
             this.picPositionSW.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPositionSW.TabIndex = 3;
             this.picPositionSW.TabStop = false;
             this.picPositionSW.Visible = false;
             this.picPositionSW.Click += new System.EventHandler(this.FixedPosition_Click);
             this.picPositionSW.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionSW.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
-            // picSwitchPositionLock
+            // picPositionLock
             // 
             this.picPositionLock.BackColor = System.Drawing.Color.Transparent;
             this.picPositionLock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picPositionLock.Image = Properties.Resources.switch_unlock_icon;
-            this.picPositionLock.Location = new System.Drawing.Point(12, 7);
+            this.picPositionLock.Image = global::FallGuysStats.Properties.Resources.switch_unlock_icon;
+            this.picPositionLock.Location = new System.Drawing.Point(12, 69);
             this.picPositionLock.Name = "picPositionLock";
             this.picPositionLock.Size = new System.Drawing.Size(47, 30);
             this.picPositionLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPositionLock.TabIndex = 4;
             this.picPositionLock.TabStop = false;
             this.picPositionLock.Visible = false;
             this.picPositionLock.Click += new System.EventHandler(this.FixedPosition_Click);
@@ -266,7 +276,7 @@ namespace FallGuysStats {
             // lblPlayersPc
             // 
             this.lblPlayersPc.DrawVisible = false;
-            this.lblPlayersPc.Image = Properties.Resources.pc_icon;
+            this.lblPlayersPc.Image = global::FallGuysStats.Properties.Resources.pc_icon;
             this.lblPlayersPc.ImageHeight = 13;
             this.lblPlayersPc.ImageWidth = 13;
             this.lblPlayersPc.ImageX = 0;
@@ -283,7 +293,7 @@ namespace FallGuysStats {
             // lblPlayersPs
             // 
             this.lblPlayersPs.DrawVisible = false;
-            this.lblPlayersPs.Image = Properties.Resources.ps_icon;
+            this.lblPlayersPs.Image = global::FallGuysStats.Properties.Resources.ps_icon;
             this.lblPlayersPs.ImageHeight = 13;
             this.lblPlayersPs.ImageWidth = 13;
             this.lblPlayersPs.ImageX = 0;
@@ -300,7 +310,7 @@ namespace FallGuysStats {
             // lblPlayersXbox
             // 
             this.lblPlayersXbox.DrawVisible = false;
-            this.lblPlayersXbox.Image = Properties.Resources.xbox_icon;
+            this.lblPlayersXbox.Image = global::FallGuysStats.Properties.Resources.xbox_icon;
             this.lblPlayersXbox.ImageHeight = 13;
             this.lblPlayersXbox.ImageWidth = 13;
             this.lblPlayersXbox.ImageX = 0;
@@ -317,7 +327,7 @@ namespace FallGuysStats {
             // lblPlayersSwitch
             // 
             this.lblPlayersSwitch.DrawVisible = false;
-            this.lblPlayersSwitch.Image = Properties.Resources.switch_icon;
+            this.lblPlayersSwitch.Image = global::FallGuysStats.Properties.Resources.switch_icon;
             this.lblPlayersSwitch.ImageHeight = 13;
             this.lblPlayersSwitch.ImageWidth = 13;
             this.lblPlayersSwitch.ImageX = 0;
@@ -421,15 +431,20 @@ namespace FallGuysStats {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.GotFocus += new System.EventHandler(this.Overlay_GotFocus);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Overlay_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Overlay_KeyUp);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseDown);
-            this.GotFocus += new System.EventHandler(this.Overlay_GotFocus);
             this.LostFocus += new System.EventHandler(this.Overlay_LostFocus);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseDown);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseWheel);
-            //this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseMove);
             this.Resize += new System.EventHandler(this.Overlay_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionLock)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

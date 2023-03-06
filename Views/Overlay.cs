@@ -33,26 +33,26 @@ namespace FallGuysStats {
         private bool shiftKeyToggle;
 
         private bool isPositionButtonMouseEnter;
-        private Image positionNeOffBlur = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.4F);
-        private Image positionNwOffBlur = Stats.ImageOpacity(Properties.Resources.position_nw_off_icon, 0.4F);
-        private Image positionSeOffBlur = Stats.ImageOpacity(Properties.Resources.position_se_off_icon, 0.4F);
-        private Image positionSwOffBlur = Stats.ImageOpacity(Properties.Resources.position_sw_off_icon, 0.4F);
-        private Image positionNeOffFocus = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.8F);
-        private Image positionNwOffFocus = Stats.ImageOpacity(Properties.Resources.position_nw_off_icon, 0.8F);
-        private Image positionSeOffFocus = Stats.ImageOpacity(Properties.Resources.position_se_off_icon, 0.8F);
-        private Image positionSwOffFocus = Stats.ImageOpacity(Properties.Resources.position_sw_off_icon, 0.8F);
-        private Image positionNeOnBlur = Stats.ImageOpacity(Properties.Resources.position_ne_on_icon, 0.4F);
-        private Image positionNwOnBlur = Stats.ImageOpacity(Properties.Resources.position_nw_on_icon, 0.4F);
-        private Image positionSeOnBlur = Stats.ImageOpacity(Properties.Resources.position_se_on_icon, 0.4F);
-        private Image positionSwOnBlur = Stats.ImageOpacity(Properties.Resources.position_sw_on_icon, 0.4F);
-        private Image positionNeOnFocus = Stats.ImageOpacity(Properties.Resources.position_ne_on_icon, 0.8F);
-        private Image positionNwOnFocus = Stats.ImageOpacity(Properties.Resources.position_nw_on_icon, 0.8F);
-        private Image positionSeOnFocus = Stats.ImageOpacity(Properties.Resources.position_se_on_icon, 0.8F);
-        private Image positionSwOnFocus = Stats.ImageOpacity(Properties.Resources.position_sw_on_icon, 0.8F);
-        private Image positionLockBlur = Stats.ImageOpacity(Properties.Resources.switch_lock_icon, 0.4F);
-        private Image positionLockFocus = Stats.ImageOpacity(Properties.Resources.switch_lock_icon, 0.8F);
-        private Image positionUnlockBlur = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.4F);
-        private Image positionUnlockFocus = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.8F);
+        private readonly Image positionNeOffBlur = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.4F);
+        private readonly Image positionNwOffBlur = Stats.ImageOpacity(Properties.Resources.position_nw_off_icon, 0.4F);
+        private readonly Image positionSeOffBlur = Stats.ImageOpacity(Properties.Resources.position_se_off_icon, 0.4F);
+        private readonly Image positionSwOffBlur = Stats.ImageOpacity(Properties.Resources.position_sw_off_icon, 0.4F);
+        private readonly Image positionNeOffFocus = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.8F);
+        private readonly Image positionNwOffFocus = Stats.ImageOpacity(Properties.Resources.position_nw_off_icon, 0.8F);
+        private readonly Image positionSeOffFocus = Stats.ImageOpacity(Properties.Resources.position_se_off_icon, 0.8F);
+        private readonly Image positionSwOffFocus = Stats.ImageOpacity(Properties.Resources.position_sw_off_icon, 0.8F);
+        private readonly Image positionNeOnBlur = Stats.ImageOpacity(Properties.Resources.position_ne_on_icon, 0.4F);
+        private readonly Image positionNwOnBlur = Stats.ImageOpacity(Properties.Resources.position_nw_on_icon, 0.4F);
+        private readonly Image positionSeOnBlur = Stats.ImageOpacity(Properties.Resources.position_se_on_icon, 0.4F);
+        private readonly Image positionSwOnBlur = Stats.ImageOpacity(Properties.Resources.position_sw_on_icon, 0.4F);
+        private readonly Image positionNeOnFocus = Stats.ImageOpacity(Properties.Resources.position_ne_on_icon, 0.8F);
+        private readonly Image positionNwOnFocus = Stats.ImageOpacity(Properties.Resources.position_nw_on_icon, 0.8F);
+        private readonly Image positionSeOnFocus = Stats.ImageOpacity(Properties.Resources.position_se_on_icon, 0.8F);
+        private readonly Image positionSwOnFocus = Stats.ImageOpacity(Properties.Resources.position_sw_on_icon, 0.8F);
+        private readonly Image positionLockBlur = Stats.ImageOpacity(Properties.Resources.switch_lock_icon, 0.4F);
+        private readonly Image positionLockFocus = Stats.ImageOpacity(Properties.Resources.switch_lock_icon, 0.8F);
+        private readonly Image positionUnlockBlur = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.4F);
+        private readonly Image positionUnlockFocus = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.8F);
         private bool isFixedPositionNe, isFixedPositionNw, isFixedPositionSe, isFixedPositionSw, isPositionLock;
 
         public static PrivateFontCollection DefaultFontCollection;
@@ -74,8 +74,8 @@ namespace FallGuysStats {
                     File.WriteAllBytes("NotoSans-Regular.ttf", fontdata);
                 }
             }
-            
-            if (!File.Exists("NotoSansSC-Regular.otf") ) {
+
+            if (!File.Exists("NotoSansSC-Regular.otf")) {
                 using (Stream fontStream = typeof(Overlay).Assembly.GetManifestResourceStream("FallGuysStats.Resources.font.NotoSansSC-Regular.otf")) {
                     byte[] fontdata = new byte[fontStream.Length];
                     fontStream.Read(fontdata, 0, (int)fontStream.Length);
@@ -85,7 +85,6 @@ namespace FallGuysStats {
 
             DefaultFontCollection = new PrivateFontCollection();
             DefaultFontCollection.AddFontFile("TitanOne-Regular.ttf");
-
             DefaultFontCollection.AddFontFile("NotoSans-Regular.ttf");
             DefaultFontCollection.AddFontFile("NotoSansSC-Regular.otf");
 
@@ -101,13 +100,13 @@ namespace FallGuysStats {
         public Overlay() {
             this.InitializeComponent();
             this.ChangeLanguage();
-            
+
             this.picPositionNE.Image = this.positionNeOffBlur;
             this.picPositionNW.Image = this.positionNwOffBlur;
             this.picPositionSE.Image = this.positionSeOffBlur;
             this.picPositionSW.Image = this.positionSwOffBlur;
             this.picPositionLock.Image = this.positionUnlockBlur;
-            
+
             this.picPositionNE.Location = new Point((this.Width / 2) - (this.picPositionNE.Size.Width + 2), (this.Height / 2) - (this.picPositionNE.Size.Height + 2));
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2);
@@ -442,7 +441,7 @@ namespace FallGuysStats {
                     this.picPositionNW.Show();
                     this.picPositionSE.Show();
                     this.picPositionSW.Show();
-                    
+
                 }
             } else {
                 if (this.picPositionNE.Visible && this.picPositionNW.Visible &&
@@ -468,6 +467,7 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2) + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 11 : -6));
+            this.picPositionLock.Location = new Point(!flippedImage ? 33 : this.Width - 80, this.Height - 25 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 30 : -5));
         }
         //private void Overlay_MouseMove(object sender, MouseEventArgs e) {
         //}
@@ -616,7 +616,7 @@ namespace FallGuysStats {
                 this.isFixedPositionSe = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("se");
                 this.isFixedPositionSw = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("sw");
                 this.isPositionLock = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("free");
-                 
+
                 bool hasCurrentRound = this.StatsForm.CurrentRound != null && this.StatsForm.CurrentRound.Count > 0;
                 if (hasCurrentRound && (lastRound == null || Stats.InShow)) {
                     lastRound = this.StatsForm.CurrentRound[this.StatsForm.CurrentRound.Count - 1];
@@ -630,11 +630,11 @@ namespace FallGuysStats {
                 if (lastRound != null && !string.IsNullOrEmpty(lastRound.Name)) {
                     string roundName = lastRound.VerifiedName();
                     if (LogRound.IsLastRound) {
-                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
+                        lblRound.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
                     } else if (LogRound.IsSpectating) {
-                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{Multilingual.GetWord("overlay_name_suffix")} :";
+                        lblRound.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{Multilingual.GetWord("overlay_name_suffix")} :";
                     } else {
-                        lblName.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
+                        lblRound.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out var level)) {
@@ -772,7 +772,7 @@ namespace FallGuysStats {
                         this.DrawGraphics.TranslateTransform(-label.Location.X, -label.Location.Y);
                     }
                 }
-                
+
                 e.Graphics.InterpolationMode = InterpolationMode.Default;
                 e.Graphics.PixelOffsetMode = PixelOffsetMode.None;
                 e.Graphics.SmoothingMode = SmoothingMode.None;
@@ -934,7 +934,7 @@ namespace FallGuysStats {
         }
         public void ArrangeDisplay(bool flipDisplay, bool showTabs, bool hideWins, bool hideRound, bool hideTime, int colorOption, int? width, int? height, string serializedFont) {
             this.FlipDisplay(false);
-            
+
             int heightOffset = showTabs ? 35 : 0;
             this.lblWins.Location = new Point(22, 9 + heightOffset);
             this.lblFinals.Location = new Point(22, 32 + heightOffset);
@@ -1260,7 +1260,7 @@ namespace FallGuysStats {
             if (height.HasValue) {
                 this.Height = height.Value;
             }
-            
+
             this.picPositionNE.Image = this.isFixedPositionNe ? this.positionNeOnBlur : this.positionNeOffBlur;
             this.picPositionNW.Image = this.isFixedPositionNw ? this.positionNwOnBlur : this.positionNwOffBlur;
             this.picPositionSE.Image = this.isFixedPositionSe ? this.positionSeOnBlur : this.positionSeOffBlur;
@@ -1270,7 +1270,7 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2) + (showTabs ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (showTabs ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (showTabs ? 11 : -6));
-            this.picPositionLock.Location = new Point(!flipDisplay ? (this.Width - this.Width + 14) : (this.Width - this.picPositionLock.Width - 14), (this.Height - this.Height) + 12 + (showTabs ? 30 : -5));
+            this.picPositionLock.Location = new Point(!flipDisplay ? 33 : this.Width - 80, this.Height - 25 + (showTabs ? 30 : -5));
             if (this.isFixedPositionSe || this.isFixedPositionSw) {
                 this.Location = new Point(this.Location.X, this.Location.Y + (showTabs ? -35 : 35));
             }
@@ -1287,7 +1287,7 @@ namespace FallGuysStats {
 
             this.DisplayTabs(this.drawHeight > 99);
             this.DisplayProfile(this.drawHeight > 99);
-            this.picPositionLock.Location = new Point(!flipped ? (this.Width - this.Width + 14) : (this.Width - this.picPositionLock.Width - 14), (this.Height - this.Height) + 12 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 30 : -5));
+            this.picPositionLock.Location = new Point(!flipped ? 33 : this.Width - 80, this.Height - 25 + (this.StatsForm.CurrentSettings.ShowOverlayTabs ? 30 : -5));
         }
         private int GetCountNumeric(string s) {
             int count = 0;

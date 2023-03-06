@@ -53,8 +53,8 @@ namespace FallGuysStats {
         private Pen[] pens;
         private int closeRowIndex, closeColumnIndex;
         private Point lastMousePosition;
-        private static Color[] Colors = { Color.Black, Color.Red, Color.Green, Color.Blue };
-        private Font GraphFont = new Font(Overlay.DefaultFontCollection.Families[Stats.CurrentLanguage == 4 ? 1 : 0], 10, FontStyle.Regular, GraphicsUnit.Point);
+        private static readonly Color[] Colors = { Color.Black, Color.Red, Color.Green, Color.Blue };
+        private readonly Font GraphFont = new Font(Overlay.DefaultFontCollection.Families[Stats.CurrentLanguage == 4 ? 1 : 0], 10, FontStyle.Regular, GraphicsUnit.Point);
 
         public Graph() {
             this.closeRowIndex = -1;
@@ -85,7 +85,6 @@ namespace FallGuysStats {
 
             if (this.dataSource == null || this.dataSource.DefaultView.Count == 0) { return; }
 
-            int w = Width; int h = Height;
             decimal xmax = decimal.MinValue; decimal xmin = decimal.MaxValue; decimal ymax = decimal.MinValue; decimal ymin = decimal.MaxValue;
             Type yType = null;
             Type xType = this.dataSource.Columns[XColumn].DataType;
@@ -113,7 +112,7 @@ namespace FallGuysStats {
             ymax += mod == 0 ? 0 : 8 - mod;
             //Get inital values
             int closeInd = 0;
-            int closeTemp = 0;
+            int closeTemp;
             int close = int.MaxValue;
             int closeIndY = 0;
             int i = 0;
@@ -206,7 +205,6 @@ namespace FallGuysStats {
             }
             if (!visible) {
                 ymax = 10;
-                ymin = 0;
             }
             ymin = 0;
 
@@ -222,8 +220,9 @@ namespace FallGuysStats {
             g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             decimal y8 = (ymax - ymin) / (decimal)8.0; decimal x8 = (xmax - xmin) / (decimal)8.0;
             double h8 = (hmax - hmin) / 8.0; double w8 = (wmax - wmin) / 8.0;
-            Pen bp = new Pen(Color.Black, 1);
-            bp.DashStyle = DashStyle.Dash;
+            Pen bp = new Pen(Color.Black, 1) {
+                DashStyle = DashStyle.Dash
+            };
             g.DrawLine(bp, wmin, 0, wmin, hmax);
             g.DrawLine(bp, wmin, hmax, w - 1, hmax);
             bp.Color = Color.FromArgb(30, 0, 0, 0);
@@ -272,7 +271,7 @@ namespace FallGuysStats {
                 string summaryShows = string.Empty;
                 int sizeWidth = TextRenderer.MeasureText(summaryTitle, this.GraphFont).Width;
                 int sizeHeight = TextRenderer.MeasureText(summaryTitle, this.GraphFont).Height;
-                
+
                 // Shows
                 if (yColumns[3]) {
                     summaryShows += $"{Environment.NewLine}{this.dataSource.Columns[3].ColumnName} : {this.dataSource.DefaultView[closeRowIndex][3]}{Multilingual.GetWord("main_inning")}";
@@ -308,9 +307,9 @@ namespace FallGuysStats {
                 }
 
                 int px = this.lastMousePosition.X + sizeWidth > w ? w - sizeWidth : this.lastMousePosition.X;
-                int py = this.lastMousePosition.Y - sizeHeight < 0 ? 0 : this.lastMousePosition.Y - sizeHeight;
+                int py = this.lastMousePosition.Y - sizeHeight < 0 ? 0 : this.lastMousePosition.Y - sizeHeight - (Stats.CurrentLanguage == 4 ? 0 : 16);
 
-                this.FillRoundedRectangle(g, new Pen(Color.FromArgb(95, 255, 0, 255), 0), new SolidBrush(Color.FromArgb(223, 255, 255, 255)), px - 6, py - 6, sizeWidth + 12, sizeHeight + 12, 10);
+                this.FillRoundedRectangle(g, new Pen(Color.FromArgb(95, 255, 0, 255), 0), new SolidBrush(Color.FromArgb(223, 255, 255, 255)), px - 6, py - 6, sizeWidth + 12, sizeHeight + (Stats.CurrentLanguage == 4 ? 12 : 26), 10);
                 g.DrawString(summaryTitle, this.GraphFont, Brushes.Black, px, py);
                 if (yColumns[1]) g.DrawString(summaryWins, this.GraphFont, Brushes.Red, px, py);
                 if (yColumns[2]) g.DrawString(summaryFinals, this.GraphFont, Brushes.Green, px, py);
@@ -330,7 +329,7 @@ namespace FallGuysStats {
             path.AddArc(corner, 90, 90);
             path.CloseFigure();
             g.FillPath(brush, path);
-            if(pen != null) {
+            if (pen != null) {
                 g.DrawPath(pen, path);
             }
         }
@@ -384,7 +383,7 @@ namespace FallGuysStats {
                 if (TimeSpan.FromTicks((long)range).Days > 0) {
                     return new DateTime((long)value).ToString(Multilingual.GetWord("level_date_format"));
                 } else {
-                    return new DateTime((long)value).ToString("HH:mm");
+                    return DateTime.Now.ToString(Multilingual.GetWord("level_date_format"));
                 }
             } else if (t == typeof(int)) {
                 return ((int)value).ToString();
