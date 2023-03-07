@@ -4,6 +4,7 @@ namespace FallGuysStats {
     public enum LevelType {
         Race,
         Survival,
+        SurvivalRace,
         Hunt,
         HuntScore,
         Logic,
@@ -17,6 +18,7 @@ namespace FallGuysStats {
         public static int FastestLabel(this LevelType type) {
             switch (type) {
                 case LevelType.Race:
+                case LevelType.SurvivalRace:
                 case LevelType.Hunt:
                 case LevelType.TeamTime:
                 case LevelType.Invisibeans:
@@ -38,6 +40,7 @@ namespace FallGuysStats {
                 case LevelType.Race:
                     return Color.FromArgb(alpha, 5, 224, 109);
                 case LevelType.Survival:
+                case LevelType.SurvivalRace:
                     return Color.FromArgb(alpha, 182, 27, 210);
                 case LevelType.Hunt:
                 case LevelType.HuntScore:
@@ -60,6 +63,7 @@ namespace FallGuysStats {
                 case LevelType.Race:
                     return Color.FromArgb(3, 134, 65);
                 case LevelType.Survival:
+                case LevelType.SurvivalRace:
                     return Color.FromArgb(109, 16, 126);
                 case LevelType.Hunt:
                 case LevelType.HuntScore:

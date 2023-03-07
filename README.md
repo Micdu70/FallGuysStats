@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.143**
+**Dernière version: 1.144**
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -71,28 +71,34 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
-  - 1.143 {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
-  - 1.142 { Cette version possède les modifications faites par [@qutrits] => https://github.com/qutrits/FallGuysStats }
+  - 1.144 *~ 07/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par [@qutrits])
-	- ++Changé: Le tableau des stats des victoires a été amélioré (par [@qutrits])
+	- ++Changé: Les deux manches "Survie" avec un hoverboard sont maintenant configurées comme si c'était des manches "Course" => L'overlay se basera sur le meilleur temps réalisé - au lieu du plus long temps - pour colorer l'info 'Finish' (en cas de record personnel par exemple)
+	- ++Changé: L'ordre initial des manches, dans la fenêtre principale du tracker, sera en fonction de leur nom en français (au lieu de l'anglais)
+  - 1.143 *~ 06/03/2023*
+    - {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
+  - 1.142 *~ 06/03/2023*
+  { Cette version possède les modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
+    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
+	- ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
-	- ++Changé: Divers changements (par [@qutrits] et moi-même)
-  - 1.141
+	- ++Changé: Divers changements (par @qutrits et moi-même)
+  - 1.141 *~ 04/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera pas de numéro de manche maintenant
+	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera aucun numéro de manche
 	- +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
-  - 1.140
+  - 1.140 *~ 03/03/2023*
     - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)
     - ++Changé: Overlay => L'information "Finish" passe maintenant en rose lorsque vous êtes éliminé(e)
     - ++Changé: Votre position indiquera maintenant toujours "1er" pour la dernière manche d'une émission gagnée
     - ++Changé: Divers petits changements...
-  - 1.139
+  - 1.139 *~ 26/02/2023*
     - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du programme
 	- +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
 	- ++Changé: Divers changements mineurs...
-  - 1.138
+  - 1.138 *~ 22/02/2023*
     - ++Hotfix: Votre ancienne configuration ne sera pas perdue si vous venez de la Version Officielle du tracker\*
 	- \* Cependant, les options "par défaut" données ci-après seront appliquées au passage à la "FE"
     - ++Changé: Les options "par défaut" sont:
@@ -102,7 +108,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 	4) "Afficher joueurs par type de support" pour l'overlay activée
 	5) "Colorer manches selon leur type" pour l'overlay activée
 
-  - 1.137
+  - 1.137 *~ 21/02/2023*
     - ++++N.B.: Basée sur la Version Officielle 1.136 (datant du 12 février 2023)
 	- ++Ajouté: Langue 'Français'
 	- ++Ajouté: Type de manche "Logique" et "Invisibeans"

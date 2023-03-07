@@ -1340,7 +1340,7 @@ namespace FallGuysStats {
                         }
                         switch (info.Type) {
                             case LevelType.Race: e.CellStyle.BackColor = Color.FromArgb(206, 255, 228); break;
-                            case LevelType.Survival: e.CellStyle.BackColor = Color.FromArgb(244, 206, 250); break;
+                            case LevelType.Survival: case LevelType.SurvivalRace: e.CellStyle.BackColor = Color.FromArgb(244, 206, 250); break;
                             case LevelType.Hunt: case LevelType.HuntScore: e.CellStyle.BackColor = Color.FromArgb(208, 222, 244); break;
                             case LevelType.Logic: e.CellStyle.BackColor = Color.FromArgb(183, 255, 255); break;
                             case LevelType.Team: case LevelType.TeamTime: e.CellStyle.BackColor = Color.FromArgb(255, 238, 230); break;

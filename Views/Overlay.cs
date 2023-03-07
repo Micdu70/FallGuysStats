@@ -709,7 +709,7 @@ namespace FallGuysStats {
                             this.lblFinish.TextRight = $"　{Time:m\\:ss\\.ff}";
                         }
 
-                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.TeamTime || levelType == LevelType.Invisibeans) {
+                        if (levelType == LevelType.Race || levelType == LevelType.SurvivalRace || levelType == LevelType.Hunt || levelType == LevelType.TeamTime || levelType == LevelType.Invisibeans) {
                             if (Time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && Time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (Time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
