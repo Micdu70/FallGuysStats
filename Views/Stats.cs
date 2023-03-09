@@ -143,9 +143,16 @@ namespace FallGuysStats {
             this.logFile.OnError += this.LogFile_OnError;
             this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
 
-            foreach (var entry in LevelStats.ALL) {
-                this.StatDetails.Add(entry.Value);
-                this.StatLookup.Add(entry.Key, entry.Value);
+            if (CurrentLanguage == 1) {
+                foreach (var entry in LevelStats.ALL_FRE) {
+                    this.StatDetails.Add(entry.Value);
+                    this.StatLookup.Add(entry.Key, entry.Value);
+                }
+            } else {
+                foreach (var entry in LevelStats.ALL) {
+                    this.StatDetails.Add(entry.Value);
+                    this.StatLookup.Add(entry.Key, entry.Value);
+                }
             }
 
             this.gridDetails.DataSource = this.StatDetails;
@@ -1142,7 +1149,7 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
-        public StatSummary GetLevelInfo(string name) {
+        public StatSummary GetLevelInfo(string name, string dname) {
             StatSummary summary = new StatSummary {
                 AllWins = 0,
                 TotalShows = 0,
@@ -1205,7 +1212,8 @@ namespace FallGuysStats {
                     }
 
                     if (isInFastestFilter) {
-                        if ((!hasLevelDetails || levelDetails.Type == LevelType.HuntScore || levelDetails.Type == LevelType.Team) && info.Score.HasValue && (!summary.BestScore.HasValue || info.Score.Value > summary.BestScore.Value)) {
+                        if ((!hasLevelDetails || levelDetails.Type == LevelType.Team || dname == "TAIL TAG" || dname == "1V1 BUTTON BASHER" || dname == "1V1 VOLLEYFALL SYMPHONY LAUNCH SHOW")
+                            && info.Score.HasValue && (!summary.BestScore.HasValue || info.Score.Value > summary.BestScore.Value)) {
                             summary.BestScore = info.Score;
                         }
                     }
@@ -1340,10 +1348,10 @@ namespace FallGuysStats {
                         }
                         switch (info.Type) {
                             case LevelType.Race: e.CellStyle.BackColor = Color.FromArgb(206, 255, 228); break;
-                            case LevelType.Survival: case LevelType.SurvivalRace: e.CellStyle.BackColor = Color.FromArgb(244, 206, 250); break;
-                            case LevelType.Hunt: case LevelType.HuntScore: e.CellStyle.BackColor = Color.FromArgb(208, 222, 244); break;
+                            case LevelType.Survival: e.CellStyle.BackColor = Color.FromArgb(244, 206, 250); break;
+                            case LevelType.Hunt: e.CellStyle.BackColor = Color.FromArgb(208, 222, 244); break;
                             case LevelType.Logic: e.CellStyle.BackColor = Color.FromArgb(183, 255, 255); break;
-                            case LevelType.Team: case LevelType.TeamTime: e.CellStyle.BackColor = Color.FromArgb(255, 238, 230); break;
+                            case LevelType.Team: e.CellStyle.BackColor = Color.FromArgb(255, 238, 230); break;
                             case LevelType.Invisibeans: e.CellStyle.BackColor = Color.FromArgb(255, 255, 255); break;
                             case LevelType.Unknown: e.CellStyle.BackColor = Color.LightGray; break;
                         }

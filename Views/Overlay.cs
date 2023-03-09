@@ -523,10 +523,12 @@ namespace FallGuysStats {
                     break;
             }
         }
-        private void SetFastestLabel(StatSummary levelInfo, LevelType type) {
+        private void SetFastestLabel(StatSummary levelInfo, LevelType type, string dname) {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
-                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 : type.FastestLabel();
+                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 :
+                    (dname == "HOVERBOARDSURVIVAL S4 SHOW" || dname == "HOVERBOARDSURVIVAL2 ALMOND" || dname == "SNOWY SCRAP" || dname == "JINXED" || dname == "ROCKNROLL") ? 1 :
+                    (dname == "TAIL TAG" || dname == "1V1 BUTTON BASHER" | dname == "1V1 VOLLEYFALL SYMPHONY LAUNCH SHOW") ? 2 : type.FastestLabel();
             }
             switch (fastestSwitchCount % (levelInfo.BestScore.HasValue ? 3 : 2)) {
                 case 0:
@@ -629,6 +631,7 @@ namespace FallGuysStats {
 
                 if (lastRound != null && !string.IsNullOrEmpty(lastRound.Name)) {
                     string roundName = lastRound.VerifiedName();
+                    string dRoundName = roundName;
                     if (LogRound.IsLastRound) {
                         lblRound.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
                     } else if (LogRound.IsSpectating) {
@@ -639,13 +642,15 @@ namespace FallGuysStats {
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out var level)) {
                         roundName = level.Name.ToUpper();
-                    }
-
-                    if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
+                    } else if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
                         roundName = roundName.Substring(6).Replace('_', ' ').ToUpper();
                     }
 
-                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName);
+                    if (dRoundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
+                        dRoundName = dRoundName.Substring(6).Replace('_', ' ').ToUpper();
+                    }
+
+                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, dRoundName);
                     if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
 
                     LevelType levelType = (level?.Type).GetValueOrDefault();
@@ -681,7 +686,7 @@ namespace FallGuysStats {
                     this.lblFinals.TextRight = $"　{finalText}{finalChanceDisplay}";
 
                     SetQualifyChanceLabel(levelInfo);
-                    SetFastestLabel(levelInfo, levelType);
+                    SetFastestLabel(levelInfo, levelType, dRoundName);
                     SetPlayersLabel();
                     SetStreakInfo(levelInfo);
                     if (this.isTimeToSwitch) {
@@ -709,7 +714,9 @@ namespace FallGuysStats {
                             this.lblFinish.TextRight = $"　{Time:m\\:ss\\.ff}";
                         }
 
-                        if (levelType == LevelType.Race || levelType == LevelType.SurvivalRace || levelType == LevelType.Hunt || levelType == LevelType.TeamTime || levelType == LevelType.Invisibeans) {
+                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans
+                            || dRoundName == "HOVERBOARDSURVIVAL S4 SHOW" || dRoundName == "HOVERBOARDSURVIVAL2 ALMOND"
+                            || dRoundName == "SNOWY SCRAP" || dRoundName == "JINXED" || dRoundName == "ROCKNROLL") {
                             if (Time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && Time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (Time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
