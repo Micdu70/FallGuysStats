@@ -73,7 +73,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog complet de la "FE" (Frenchy Edition)
   - 1.146 *~ 15/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Changé: Uniquement utile pour "FallGuysStatsManualUpdate" => Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
+	- ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
 	- ++Changé: Changements mineurs pour l'overlay (sur certaines manches)
   - 1.145 *~ 09/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
