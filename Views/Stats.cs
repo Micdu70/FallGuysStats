@@ -131,11 +131,6 @@ namespace FallGuysStats {
 
             this.ChangeMainLanguage();
 
-#if AllowUpdate
-            this.Text = $"Fall Guys Stats \"FE\" v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} ~ by Micdu70";
-#else
-            this.Text = $"Fall Guys Stats \"FE\" v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} [MANUAL UPDATE ONLY] ~ by Micdu70";
-#endif
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
             this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
@@ -911,21 +906,20 @@ namespace FallGuysStats {
         }
         private void Stats_Load(object sender, EventArgs e) {
             try {
-                if (this.CurrentSettings.FormWidth.HasValue) {
-                    this.ClientSize = new Size(this.CurrentSettings.FormWidth.Value, this.CurrentSettings.FormHeight.Value);
-                }
-                if (this.CurrentSettings.FormLocationX.HasValue && IsOnScreen(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value, this.Width)) {
-                    this.Location = new Point(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value);
-                }
-
 #if AllowUpdate
                 if (this.CurrentSettings.AutoUpdate && this.CheckForUpdate(true)) {
                     return;
                 }
 #endif
-
                 if (this.CurrentSettings.AutoLaunchGameOnStartup) {
                     this.LaunchGame(true);
+                }
+
+                if (this.CurrentSettings.FormWidth.HasValue) {
+                    this.ClientSize = new Size(this.CurrentSettings.FormWidth.Value, this.CurrentSettings.FormHeight.Value);
+                }
+                if (this.CurrentSettings.FormLocationX.HasValue && IsOnScreen(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value, this.Width)) {
+                    this.Location = new Point(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value);
                 }
 
                 this.menuProfile.DropDownItems["menuProfile" + this.CurrentSettings.SelectedProfile].PerformClick();
@@ -1149,7 +1143,7 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
-        public StatSummary GetLevelInfo(string name, string dname) {
+        public StatSummary GetLevelInfo(string name, int levelException) {
             StatSummary summary = new StatSummary {
                 AllWins = 0,
                 TotalShows = 0,
@@ -1212,7 +1206,7 @@ namespace FallGuysStats {
                     }
 
                     if (isInFastestFilter) {
-                        if ((!hasLevelDetails || levelDetails.Type == LevelType.Team || dname == "TAIL TAG" || dname == "1V1 BUTTON BASHER" || dname == "1V1 VOLLEYFALL SYMPHONY LAUNCH SHOW")
+                        if ((!hasLevelDetails || levelDetails.Type == LevelType.Team || levelException == 2)
                             && info.Score.HasValue && (!summary.BestScore.HasValue || info.Score.Value > summary.BestScore.Value)) {
                             summary.BestScore = info.Score;
                         }
@@ -2058,6 +2052,8 @@ namespace FallGuysStats {
             return false;
         }
         private void ChangeMainLanguage() {
+            this.Text = $"Fall Guys Stats \"FE\" v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+
             this.menu.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.menuLaunchFallGuys.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Bold, GraphicsUnit.Pixel, ((byte)(0)));
             this.infoStrip.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));

@@ -523,14 +523,16 @@ namespace FallGuysStats {
                     break;
             }
         }
-        private void SetFastestLabel(StatSummary levelInfo, LevelType type, string dname) {
+        private void SetFastestLabel(StatSummary levelInfo, LevelType type, int levelException) {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
-                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 :
-                    (dname == "HOVERBOARDSURVIVAL S4 SHOW" || dname == "HOVERBOARDSURVIVAL2 ALMOND" || dname == "SNOWY SCRAP" || dname == "JINXED" || dname == "ROCKNROLL") ? 1 :
-                    (dname == "TAIL TAG" || dname == "1V1 BUTTON BASHER" | dname == "1V1 VOLLEYFALL SYMPHONY LAUNCH SHOW") ? 2 : type.FastestLabel();
+                if (this.StatsForm.CurrentSettings.OnlyShowLongest) {
+                    fastestSwitchCount = 0;
+                } else {
+                    fastestSwitchCount = (levelException == 1) ? 1 : ((levelException == 2) ? 2 : type.FastestLabel());
+                }
             }
-            switch (fastestSwitchCount % (levelInfo.BestScore.HasValue ? 3 : 2)) {
+            switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && levelException != 1) ? 3 : 2)) {
                 case 0:
                     this.lblFastest.Text = $"{Multilingual.GetWord("overlay_longest")} :";
                     this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"　{levelInfo.LongestFinish:m\\:ss\\.ff}" : "　-";
@@ -631,7 +633,14 @@ namespace FallGuysStats {
 
                 if (lastRound != null && !string.IsNullOrEmpty(lastRound.Name)) {
                     string roundName = lastRound.VerifiedName();
-                    string dRoundName = roundName;
+
+                    var levelException = 0;
+                    if (roundName == "round_hoverboardsurvival_s4_show" || roundName == "round_hoverboardsurvival2_almond" || roundName == "round_snowy_scrap" || roundName == "round_jinxed" || roundName == "round_rocknroll" || roundName == "round_conveyor_arena") {
+                        levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
+                    } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
+                        levelException = 2; // Level is like a "Team" level type (score info is most important)
+                    }
+
                     if (LogRound.IsLastRound) {
                         lblRound.Text = $"{Multilingual.GetWord("overlay_name_prefix")}{lastRound.Round}{Multilingual.GetWord("overlay_name_suffix")} :";
                     } else if (LogRound.IsSpectating) {
@@ -646,11 +655,7 @@ namespace FallGuysStats {
                         roundName = roundName.Substring(6).Replace('_', ' ').ToUpper();
                     }
 
-                    if (dRoundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
-                        dRoundName = dRoundName.Substring(6).Replace('_', ' ').ToUpper();
-                    }
-
-                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, dRoundName);
+                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, levelException);
                     if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
 
                     LevelType levelType = (level?.Type).GetValueOrDefault();
@@ -686,7 +691,7 @@ namespace FallGuysStats {
                     this.lblFinals.TextRight = $"　{finalText}{finalChanceDisplay}";
 
                     SetQualifyChanceLabel(levelInfo);
-                    SetFastestLabel(levelInfo, levelType, dRoundName);
+                    SetFastestLabel(levelInfo, levelType, levelException);
                     SetPlayersLabel();
                     SetStreakInfo(levelInfo);
                     if (this.isTimeToSwitch) {
@@ -714,9 +719,7 @@ namespace FallGuysStats {
                             this.lblFinish.TextRight = $"　{Time:m\\:ss\\.ff}";
                         }
 
-                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans
-                            || dRoundName == "HOVERBOARDSURVIVAL S4 SHOW" || dRoundName == "HOVERBOARDSURVIVAL2 ALMOND"
-                            || dRoundName == "SNOWY SCRAP" || dRoundName == "JINXED" || dRoundName == "ROCKNROLL") {
+                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || levelException == 1) {
                             if (Time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && Time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (Time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
@@ -733,7 +736,7 @@ namespace FallGuysStats {
                         } else {
                             this.lblFinish.TextRight = $"　{End - Start:m\\:ss\\.ff}";
                         }
-                        this.lblFinish.ForeColor = Color.Pink;
+                        this.lblFinish.ForeColor = this.lastRound.Qualified ? Color.White : Color.Pink;
                     } else if (lastRound.Playing) {
                         if (Start > DateTime.UtcNow) {
                             this.lblFinish.TextRight = $"　{DateTime.UtcNow - startTime:m\\:ss}";

@@ -5,6 +5,11 @@ namespace FallGuysStats {
         public static readonly Dictionary<string, Dictionary<string, string>> MultilingualDictionary = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase) {
             { "eng", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Eunma"},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[MANUAL UPDATE ONLY] ~ by Micdu70"},
+#endif
                             {"main_multilingual", "Multilingual"},
                             {"main_settings", "Settings"},
                             {"main_filters", "Filters"},
@@ -293,6 +298,11 @@ namespace FallGuysStats {
             },
             { "fre", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Micdu70"},
+#if AllowUpdate
+                            {"main_title_suffix", "~ par Micdu70"},
+#else
+                            {"main_title_suffix", "[MISE A JOUR MANUELLE UNIQUEMENT] ~ par Micdu70"},
+#endif
                             {"main_multilingual", "Multilingue"},
                             {"main_settings", "Configuration"},
                             {"main_filters", "Filtres"},
@@ -581,6 +591,11 @@ namespace FallGuysStats {
             },
             { "kor", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "신모씨_"},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[MANUAL UPDATE ONLY] ~ by Micdu70"},
+#endif
                             {"main_multilingual", "다국어"},
                             {"main_settings", "설정"},
                             {"main_filters", "필터링"},
@@ -869,6 +884,11 @@ namespace FallGuysStats {
             },
             { "jpn", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Eunma, iku55"},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[MANUAL UPDATE ONLY] ~ by Micdu70"},
+#endif
                             {"main_multilingual", "多言語"},
                             {"main_settings", "設定"},
                             {"main_filters", "フィルタ"},
@@ -1157,6 +1177,11 @@ namespace FallGuysStats {
             },
             { "chs", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "JokerM"},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[MANUAL UPDATE ONLY] ~ by Micdu70"},
+#endif
                             {"main_multilingual", "多语言"},
                             {"main_settings", "设置"},
                             {"main_filters", "筛选"},
