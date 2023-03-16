@@ -28,19 +28,19 @@ namespace FallGuysStats {
         }
         public static Color LevelBackColor(this LevelType type, bool isFinal, int alpha) {
             if (isFinal) {
-                return Color.FromArgb(alpha, 249, 197, 3);
+                return Color.FromArgb(alpha, 250, 200, 0);
             }
             switch (type) {
                 case LevelType.Race:
-                    return Color.FromArgb(alpha, 5, 224, 109);
+                    return Color.FromArgb(alpha, 0, 235, 105);
                 case LevelType.Survival:
-                    return Color.FromArgb(alpha, 182, 27, 210);
+                    return Color.FromArgb(alpha, 185, 20, 210);
                 case LevelType.Hunt:
-                    return Color.FromArgb(alpha, 48, 101, 184);
+                    return Color.FromArgb(alpha, 45, 100, 185);
                 case LevelType.Logic:
-                    return Color.FromArgb(alpha, 0, 153, 153);
+                    return Color.FromArgb(alpha, 90, 180, 190);
                 case LevelType.Team:
-                    return Color.FromArgb(alpha, 245, 83, 3);
+                    return Color.FromArgb(alpha, 250, 80, 0);
                 case LevelType.Invisibeans:
                     return Color.FromArgb(alpha, 0, 0, 0);
             }
@@ -48,19 +48,19 @@ namespace FallGuysStats {
         }
         public static Color LevelForeColor(this LevelType type, bool isFinal) {
             if (isFinal) {
-                return Color.FromArgb(149, 118, 1);
+                return Color.FromArgb(250, 210, 40);
             }
             switch (type) {
                 case LevelType.Race:
-                    return Color.FromArgb(3, 134, 65);
+                    return Color.FromArgb(40, 235, 125);
                 case LevelType.Survival:
-                    return Color.FromArgb(109, 16, 126);
+                    return Color.FromArgb(190, 50, 210);
                 case LevelType.Hunt:
-                    return Color.FromArgb(28, 60, 110);
+                    return Color.FromArgb(75, 120, 185);
                 case LevelType.Logic:
-                    return Color.FromArgb(0, 91, 91);
+                    return Color.FromArgb(120, 185, 190);
                 case LevelType.Team:
-                    return Color.FromArgb(147, 49, 1);
+                    return Color.FromArgb(250, 110, 40);
                 case LevelType.Invisibeans:
                     return Color.FromArgb(0, 0, 0);
             }

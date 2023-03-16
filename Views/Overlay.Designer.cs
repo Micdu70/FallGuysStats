@@ -67,7 +67,7 @@ namespace FallGuysStats {
             this.picPositionNE.TabIndex = 0;
             this.picPositionNE.TabStop = false;
             this.picPositionNE.Visible = false;
-            this.picPositionNE.Click += new System.EventHandler(this.FixedPosition_Click);
+            this.picPositionNE.MouseClick += new MouseEventHandler(this.Position_MouseClick);
             this.picPositionNE.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionNE.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
@@ -83,7 +83,7 @@ namespace FallGuysStats {
             this.picPositionNW.TabIndex = 1;
             this.picPositionNW.TabStop = false;
             this.picPositionNW.Visible = false;
-            this.picPositionNW.Click += new System.EventHandler(this.FixedPosition_Click);
+            this.picPositionNW.MouseClick += new MouseEventHandler(this.Position_MouseClick);
             this.picPositionNW.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionNW.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
@@ -99,7 +99,7 @@ namespace FallGuysStats {
             this.picPositionSE.TabIndex = 2;
             this.picPositionSE.TabStop = false;
             this.picPositionSE.Visible = false;
-            this.picPositionSE.Click += new System.EventHandler(this.FixedPosition_Click);
+            this.picPositionSE.MouseClick += new MouseEventHandler(this.Position_MouseClick);
             this.picPositionSE.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionSE.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
@@ -115,7 +115,7 @@ namespace FallGuysStats {
             this.picPositionSW.TabIndex = 3;
             this.picPositionSW.TabStop = false;
             this.picPositionSW.Visible = false;
-            this.picPositionSW.Click += new System.EventHandler(this.FixedPosition_Click);
+            this.picPositionSW.MouseClick += new MouseEventHandler(this.Position_MouseClick);
             this.picPositionSW.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionSW.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
@@ -131,7 +131,7 @@ namespace FallGuysStats {
             this.picPositionLock.TabIndex = 4;
             this.picPositionLock.TabStop = false;
             this.picPositionLock.Visible = false;
-            this.picPositionLock.Click += new System.EventHandler(this.FixedPosition_Click);
+            this.picPositionLock.MouseClick += new MouseEventHandler(this.Position_MouseClick);
             this.picPositionLock.MouseEnter += new System.EventHandler(this.Position_MouseEnter);
             this.picPositionLock.MouseLeave += new System.EventHandler(this.Position_MouseLeave);
             // 
@@ -141,7 +141,6 @@ namespace FallGuysStats {
             this.lblFilter.ImageWidth = 0;
             this.lblFilter.ImageX = 0;
             this.lblFilter.ImageY = 0;
-            this.lblFilter.IsIcon = false;
             this.lblFilter.LevelColor = System.Drawing.Color.Empty;
             this.lblFilter.Location = new System.Drawing.Point(22, 77);
             this.lblFilter.Name = "lblFilter";
@@ -160,7 +159,6 @@ namespace FallGuysStats {
             this.lblProfile.ImageWidth = 0;
             this.lblProfile.ImageX = 0;
             this.lblProfile.ImageY = 0;
-            this.lblProfile.IsIcon = false;
             this.lblProfile.LevelColor = System.Drawing.Color.Empty;
             this.lblProfile.Location = new System.Drawing.Point(22, 27);
             this.lblProfile.Name = "lblProfile";
@@ -177,7 +175,6 @@ namespace FallGuysStats {
             this.lblStreak.ImageWidth = 0;
             this.lblStreak.ImageX = 0;
             this.lblStreak.ImageY = 0;
-            this.lblStreak.IsIcon = false;
             this.lblStreak.LevelColor = System.Drawing.Color.Empty;
             this.lblStreak.Location = new System.Drawing.Point(22, 55);
             this.lblStreak.Name = "lblStreak";
@@ -194,7 +191,6 @@ namespace FallGuysStats {
             this.lblFinals.ImageWidth = 0;
             this.lblFinals.ImageX = 0;
             this.lblFinals.ImageY = 0;
-            this.lblFinals.IsIcon = false;
             this.lblFinals.LevelColor = System.Drawing.Color.Empty;
             this.lblFinals.Location = new System.Drawing.Point(22, 32);
             this.lblFinals.Name = "lblFinals";
@@ -211,7 +207,6 @@ namespace FallGuysStats {
             this.lblQualifyChance.ImageWidth = 0;
             this.lblQualifyChance.ImageX = 0;
             this.lblQualifyChance.ImageY = 0;
-            this.lblQualifyChance.IsIcon = false;
             this.lblQualifyChance.LevelColor = System.Drawing.Color.Empty;
             this.lblQualifyChance.Location = new System.Drawing.Point(270, 32);
             this.lblQualifyChance.Name = "lblQualifyChance";
@@ -228,7 +223,6 @@ namespace FallGuysStats {
             this.lblFastest.ImageWidth = 0;
             this.lblFastest.ImageX = 0;
             this.lblFastest.ImageY = 0;
-            this.lblFastest.IsIcon = false;
             this.lblFastest.LevelColor = System.Drawing.Color.Empty;
             this.lblFastest.Location = new System.Drawing.Point(270, 55);
             this.lblFastest.Name = "lblFastest";
@@ -245,7 +239,6 @@ namespace FallGuysStats {
             this.lblDuration.ImageWidth = 0;
             this.lblDuration.ImageX = 0;
             this.lblDuration.ImageY = 0;
-            this.lblDuration.IsIcon = false;
             this.lblDuration.LevelColor = System.Drawing.Color.Empty;
             this.lblDuration.Location = new System.Drawing.Point(557, 32);
             this.lblDuration.Name = "lblDuration";
@@ -262,7 +255,6 @@ namespace FallGuysStats {
             this.lblPlayers.ImageWidth = 28;
             this.lblPlayers.ImageX = 5;
             this.lblPlayers.ImageY = 0;
-            this.lblPlayers.IsIcon = false;
             this.lblPlayers.LevelColor = System.Drawing.Color.Empty;
             this.lblPlayers.Location = new System.Drawing.Point(557, 10);
             this.lblPlayers.Name = "lblPlayers";
@@ -276,12 +268,11 @@ namespace FallGuysStats {
             // lblPlayersPc
             // 
             this.lblPlayersPc.DrawVisible = false;
-            this.lblPlayersPc.Image = global::FallGuysStats.Properties.Resources.pc_icon;
+            this.lblPlayersPc.PlatformIcon = Properties.Resources.pc_icon;
             this.lblPlayersPc.ImageHeight = 13;
             this.lblPlayersPc.ImageWidth = 13;
             this.lblPlayersPc.ImageX = 0;
             this.lblPlayersPc.ImageY = 0;
-            this.lblPlayersPc.IsIcon = true;
             this.lblPlayersPc.LevelColor = System.Drawing.Color.Empty;
             this.lblPlayersPc.Location = new System.Drawing.Point(723, 12);
             this.lblPlayersPc.Name = "lblPlayersPc";
@@ -293,12 +284,11 @@ namespace FallGuysStats {
             // lblPlayersPs
             // 
             this.lblPlayersPs.DrawVisible = false;
-            this.lblPlayersPs.Image = global::FallGuysStats.Properties.Resources.ps_icon;
+            this.lblPlayersPs.PlatformIcon = Properties.Resources.ps_icon;
             this.lblPlayersPs.ImageHeight = 13;
             this.lblPlayersPs.ImageWidth = 13;
             this.lblPlayersPs.ImageX = 0;
             this.lblPlayersPs.ImageY = 0;
-            this.lblPlayersPs.IsIcon = true;
             this.lblPlayersPs.LevelColor = System.Drawing.Color.Empty;
             this.lblPlayersPs.Location = new System.Drawing.Point(609, 12);
             this.lblPlayersPs.Name = "lblPlayersPs";
@@ -310,12 +300,11 @@ namespace FallGuysStats {
             // lblPlayersXbox
             // 
             this.lblPlayersXbox.DrawVisible = false;
-            this.lblPlayersXbox.Image = global::FallGuysStats.Properties.Resources.xbox_icon;
+            this.lblPlayersXbox.PlatformIcon = Properties.Resources.xbox_icon;
             this.lblPlayersXbox.ImageHeight = 13;
             this.lblPlayersXbox.ImageWidth = 13;
             this.lblPlayersXbox.ImageX = 0;
             this.lblPlayersXbox.ImageY = 0;
-            this.lblPlayersXbox.IsIcon = true;
             this.lblPlayersXbox.LevelColor = System.Drawing.Color.Empty;
             this.lblPlayersXbox.Location = new System.Drawing.Point(647, 12);
             this.lblPlayersXbox.Name = "lblPlayersXbox";
@@ -327,12 +316,11 @@ namespace FallGuysStats {
             // lblPlayersSwitch
             // 
             this.lblPlayersSwitch.DrawVisible = false;
-            this.lblPlayersSwitch.Image = global::FallGuysStats.Properties.Resources.switch_icon;
+            this.lblPlayersSwitch.PlatformIcon = Properties.Resources.switch_icon;
             this.lblPlayersSwitch.ImageHeight = 13;
             this.lblPlayersSwitch.ImageWidth = 13;
             this.lblPlayersSwitch.ImageX = 0;
             this.lblPlayersSwitch.ImageY = 0;
-            this.lblPlayersSwitch.IsIcon = true;
             this.lblPlayersSwitch.LevelColor = System.Drawing.Color.Empty;
             this.lblPlayersSwitch.Location = new System.Drawing.Point(685, 12);
             this.lblPlayersSwitch.Name = "lblPlayersSwitch";
@@ -348,7 +336,6 @@ namespace FallGuysStats {
             this.lblRound.ImageWidth = 0;
             this.lblRound.ImageX = 0;
             this.lblRound.ImageY = 0;
-            this.lblRound.IsIcon = false;
             this.lblRound.LevelColor = System.Drawing.Color.Empty;
             this.lblRound.Location = new System.Drawing.Point(270, 9);
             this.lblRound.Name = "lblRound";
@@ -365,7 +352,6 @@ namespace FallGuysStats {
             this.lblWins.ImageWidth = 0;
             this.lblWins.ImageX = 0;
             this.lblWins.ImageY = 0;
-            this.lblWins.IsIcon = false;
             this.lblWins.LevelColor = System.Drawing.Color.Empty;
             this.lblWins.Location = new System.Drawing.Point(22, 9);
             this.lblWins.Name = "lblWins";
@@ -382,7 +368,6 @@ namespace FallGuysStats {
             this.lblFinish.ImageWidth = 0;
             this.lblFinish.ImageX = 0;
             this.lblFinish.ImageY = 0;
-            this.lblFinish.IsIcon = false;
             this.lblFinish.LevelColor = System.Drawing.Color.Empty;
             this.lblFinish.Location = new System.Drawing.Point(557, 55);
             this.lblFinish.Name = "lblFinish";
