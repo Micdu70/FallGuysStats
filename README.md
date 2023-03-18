@@ -4,21 +4,28 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.146** *~ 15/03/2023*
+**Dernière version: 1.147** *~ 18/03/2023*
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
 ***-OU-***
 
-  - Si votre logiciel antivirus bloque l'utilisation du programme, utilisez alors cette version qui ne possède pas la fonction de MAJ automatique => [FallGuysStatsManualUpdate.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip)
+  - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors cette version qui ne possède pas la fonction de MAJ automatique => [FallGuysStatsManualUpdate.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip)
   
 ## Utilisation
-  - Extraire le contenu du fichier zip téléchargé vers un nouveau dossier vide
-  - Dans ce nouveau dossier, lancer le programme
-  - Configurer le programme comme bon vous semble (afficher l'overlay/modifier des options/etc.)
-  - Lancer Fall Guys
- 
- **IMPORTANT: Les stats des émissions seront enregistrées dans le programme UNIQUEMENT à la fin de celles-ci.**
+  - Première fois:
+    - Extraire le contenu du fichier zip téléchargé vers un nouveau dossier vide
+    - Dans ce nouveau dossier, lancer le tracker
+    - Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
+    - Lancer Fall Guys
+
+  - Mise à jour (depuis une Version Officielle ou d'une ancienne version "FE"):
+    - Extraire le contenu du fichier zip téléchargé vers le dossier contenant l'ancienne version du tracker à remplacer
+	- Lancer la nouvelle version du tracker
+    - Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
+    - Lancer Fall Guys
+
+ **IMPORTANT: Les stats des émissions seront enregistrées dans le tracker UNIQUEMENT à la fin de celles-ci.**
 
 ![Fall Guys Stats "FE"](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/mainWindow.png)
 
@@ -26,11 +33,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Langues disponibles
   - Fall Guys Stats "FE" supporte les langues suivantes :
-    - English (Anglais)
-    - Français *[ langue par défaut ]*
-    - Korean (Coréen)
-    - Japanese (Japonais)
-    - Simplified Chinese (Chinois Simplifié)
+    - 🇺🇸 English (Anglais)
+    - 🇫🇷 Français *[ langue par défaut ]*
+    - 🇰🇷 한국어 (Coréen)
+    - 🇯🇵 日本語 (Japonais)
+    - 🇨🇳 简体中文 (Chinois Simplifié)
 
 ## Overlay
 ![Overlay](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/overlay.png)
@@ -71,6 +78,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.147 *~ 18/03/2023*
+  { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
+    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+	- Pleins de changement à découvrir ! :)
   - 1.146 *~ 15/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
@@ -85,7 +96,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - 1.143 *~ 06/03/2023*
     - {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
   - 1.142 *~ 06/03/2023*
-  { Cette version possède les modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
+  { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
 	- ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
@@ -102,7 +113,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - ++Changé: Votre position indiquera maintenant toujours "1er" pour la dernière manche d'une émission gagnée
     - ++Changé: Divers petits changements...
   - 1.139 *~ 26/02/2023*
-    - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du programme
+    - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du tracker
 	- +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
 	- ++Changé: Divers changements mineurs...
   - 1.138 *~ 22/02/2023*

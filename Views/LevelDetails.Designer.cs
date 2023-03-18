@@ -26,10 +26,8 @@ namespace FallGuysStats {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            //System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            //System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelDetails));
             this.gridDetails = new FallGuysStats.Grid();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelDetails));
             ((System.ComponentModel.ISupportInitialize)(this.gridDetails)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,6 +77,6 @@ namespace FallGuysStats {
 
         #endregion
 
-        private Grid gridDetails;
+        private FallGuysStats.Grid gridDetails;
     }
 }

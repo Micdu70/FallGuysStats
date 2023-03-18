@@ -22,11 +22,30 @@ namespace FallGuysStats {
         [STAThread]
         static void Main() {
             try {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Stats());
+                if (!IsAlreadyRunning()) {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new Stats());
+                }
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), @"Run Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private static bool IsAlreadyRunning() {
+            try {
+                int processCount = 0;
+                Process[] processes = Process.GetProcesses();
+                for (int i = 0; i < processes.Length; i++) {
+                    if (AppDomain.CurrentDomain.FriendlyName.Equals(processes[i].ProcessName + ".exe")) processCount++;
+                    if (processCount > 1) {
+                        MessageBox.Show(Multilingual.GetWord("message_tracker_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return true;
+                    }
+                }
+                return false;
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, @"Process Exception");
+                return true;
             }
         }
         private static readonly string LOGNAME = "Player.log";
@@ -46,6 +65,7 @@ namespace FallGuysStats {
         public static bool InShow = false;
         public static int LastServerPing = 0;
         public static int CurrentLanguage = 1;
+
         public static Bitmap ImageOpacity(Image imgData, float opacity) {
             Bitmap bmpTmp = new Bitmap(imgData.Width, imgData.Height);
             Graphics gp = Graphics.FromImage(bmpTmp);
@@ -61,6 +81,7 @@ namespace FallGuysStats {
 
         readonly DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
         readonly DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+
         public List<LevelStats> StatDetails = new List<LevelStats>();
         public List<RoundInfo> CurrentRound = null;
         public List<RoundInfo> AllStats = new List<RoundInfo>();
@@ -74,6 +95,8 @@ namespace FallGuysStats {
         public int Kudos;
         private int nextShowID;
         private bool loadingExisting;
+        private bool updateFilterType;
+        private bool updateSelectedProfile;
         public LiteDatabase StatsDB;
         public ILiteCollection<RoundInfo> RoundDetails;
         public ILiteCollection<UserSettings> UserSettings;
@@ -88,6 +111,15 @@ namespace FallGuysStats {
         private readonly TextInfo textInfo;
         private int currentProfile;
         private Color infoStripForeColor;
+        private readonly Image numberOne = ImageOpacity(Properties.Resources.number_1, 0.7F);
+        private readonly Image numberTwo = ImageOpacity(Properties.Resources.number_2, 0.7F);
+        private readonly Image numberThree = ImageOpacity(Properties.Resources.number_3, 0.7F);
+        private readonly Image numberFour = ImageOpacity(Properties.Resources.number_4, 0.7F);
+        private readonly Image numberFive = ImageOpacity(Properties.Resources.number_5, 0.7F);
+        private readonly Image numberSix = ImageOpacity(Properties.Resources.number_6, 0.7F);
+        private readonly Image numberSeven = ImageOpacity(Properties.Resources.number_7, 0.7F);
+        private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.7F);
+        private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.7F);
 
         public Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -95,41 +127,34 @@ namespace FallGuysStats {
             this.UserSettings = this.StatsDB.GetCollection<UserSettings>("UserSettings");
             this.StatsDB.BeginTrans();
             if (this.UserSettings.Count() == 0) {
-                this.CurrentSettings = GetDefaultSettings();
-                SetLang setLang = new SetLang();
-                if (setLang.ShowDialog(this) == DialogResult.OK) {
-                    this.CurrentSettings.Multilingual = CurrentLanguage;
-                    this.UserSettings.Insert(this.CurrentSettings);
-                }
+                this.CurrentSettings = this.GetDefaultSettings();
+                this.UserSettings.Insert(this.CurrentSettings);
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (!this.CurrentSettings.FrenchyEdition) {
+                    if (this.CurrentSettings.FrenchyEditionUpdate < 1) {
+                        this.CurrentSettings.FrenchyEditionUpdate = 1;
+                        this.CurrentSettings.WinsFilter = 1;
+                        this.CurrentSettings.QualifyFilter = 1;
+                        this.CurrentSettings.FastestFilter = 0;
                         this.CurrentSettings.OverlayColor = 0;
                         this.CurrentSettings.SwitchBetweenPlayers = false;
                         this.CurrentSettings.PlayerByConsoleType = true;
                         this.CurrentSettings.ColorByRoundType = true;
+                        this.CurrentSettings.AutoChangeProfile = true;
                         this.CurrentSettings.AutoUpdate = true;
-                        SetLang setLang = new SetLang();
-                        if (setLang.ShowDialog(this) == DialogResult.OK) {
-                            this.CurrentSettings.Multilingual = CurrentLanguage;
-                            this.CurrentSettings.FrenchyEdition = true;
-                            this.UserSettings.Upsert(this.CurrentSettings);
-                        }
-                    } else {
-                        CurrentLanguage = this.CurrentSettings.Multilingual;
+                        this.UserSettings.Upsert(this.CurrentSettings);
                     }
+                    CurrentLanguage = this.CurrentSettings.Multilingual;
                 } catch {
                     this.UserSettings.DeleteAll();
                     this.CurrentSettings = GetDefaultSettings();
+                    this.UserSettings.Insert(this.CurrentSettings);
                 }
             }
-
             this.StatsDB.Commit();
 
             this.InitializeComponent();
-
-            this.ChangeMainLanguage();
 
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
@@ -137,6 +162,27 @@ namespace FallGuysStats {
             this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
             this.logFile.OnError += this.LogFile_OnError;
             this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
+            this.logFile.StatsForm = this;
+
+            this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
+            this.Profiles = this.StatsDB.GetCollection<Profiles>("Profiles");
+
+            this.StatsDB.BeginTrans();
+
+            if (this.Profiles.Count() == 0) {
+                using (SelectLanguage initLanguage = new SelectLanguage()) {
+                    initLanguage.Icon = this.Icon;
+                    if (initLanguage.ShowDialog(this) == DialogResult.OK) {
+                        CurrentLanguage = initLanguage.selectedLanguage;
+                        Overlay.DefaultFont = new Font(Overlay.GetDefaultFontFamilies(), 18, FontStyle.Regular, GraphicsUnit.Pixel);
+                        this.CurrentSettings.Multilingual = initLanguage.selectedLanguage;
+                        this.Profiles.Insert(new Profiles { ProfileId = 3, ProfileName = Multilingual.GetWord("main_profile_custom"), ProfileOrder = 4, LinkedShowId = "private_lobbies" });
+                        this.Profiles.Insert(new Profiles { ProfileId = 2, ProfileName = Multilingual.GetWord("main_profile_squad"), ProfileOrder = 3, LinkedShowId = "squads_4player" });
+                        this.Profiles.Insert(new Profiles { ProfileId = 1, ProfileName = Multilingual.GetWord("main_profile_duo"), ProfileOrder = 2, LinkedShowId = "squads_2player_template" });
+                        this.Profiles.Insert(new Profiles { ProfileId = 0, ProfileName = Multilingual.GetWord("main_profile_solo"), ProfileOrder = 1, LinkedShowId = "main_show" });
+                    }
+                }
+            }
 
             if (CurrentLanguage == 1) {
                 foreach (var entry in LevelStats.ALL_FRE) {
@@ -150,18 +196,10 @@ namespace FallGuysStats {
                 }
             }
 
-            this.gridDetails.DataSource = this.StatDetails;
+            this.InitMainDataGridView();
 
-            this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
-            this.Profiles = this.StatsDB.GetCollection<Profiles>("Profiles");
+            this.ChangeMainLanguage();
 
-            this.StatsDB.BeginTrans();
-
-            if (this.Profiles.Count() == 0) {
-                this.Profiles.Insert(new Profiles { ProfileID = 2, ProfileName = Multilingual.GetWord("main_profile_squad"), ProfileOrder = 3 });
-                this.Profiles.Insert(new Profiles { ProfileID = 1, ProfileName = Multilingual.GetWord("main_profile_duo"), ProfileOrder = 2 });
-                this.Profiles.Insert(new Profiles { ProfileID = 0, ProfileName = Multilingual.GetWord("main_profile_solo"), ProfileOrder = 1 });
-            }
             this.UpdateGridRoundName();
             this.UpdateHoopsieLegends();
 
@@ -176,7 +214,14 @@ namespace FallGuysStats {
 
             this.CurrentRound = new List<RoundInfo>();
 
-            this.overlay = new Overlay { StatsForm = this, Icon = this.Icon, ShowIcon = true };
+            this.overlay = new Overlay { StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName };
+            string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
+            this.overlay.isFixedPositionNe = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("ne");
+            this.overlay.isFixedPositionNw = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("nw");
+            this.overlay.isFixedPositionSe = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("se");
+            this.overlay.isFixedPositionSw = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("sw");
+            this.overlay.isPositionLock = !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("free");
+            if (this.overlay.IsFixed()) this.overlay.Cursor = Cursors.Default;
             this.overlay.Show();
             this.overlay.Visible = false;
             this.overlay.StartTimer();
@@ -197,48 +242,57 @@ namespace FallGuysStats {
             for (int i = this.AllProfiles.Count - 1; i >= 0; i--) {
                 Profiles profile = this.AllProfiles[i];
                 var menuItem = new ToolStripMenuItem {
-                    Checked = this.CurrentSettings.SelectedProfile == profile.ProfileID,
+                    Checked = this.CurrentSettings.SelectedProfile == profile.ProfileId,
                     CheckOnClick = true,
-                    CheckState = this.CurrentSettings.SelectedProfile == profile.ProfileID ? CheckState.Checked : CheckState.Unchecked,
-                    Name = "menuProfile" + profile.ProfileID
+                    CheckState = this.CurrentSettings.SelectedProfile == profile.ProfileId ? CheckState.Checked : CheckState.Unchecked,
+                    Name = "menuProfile" + profile.ProfileId
                 };
                 switch (profileNumber++) {
                     case 0:
-                        menuItem.Image = Properties.Resources.number_1;
+                        menuItem.Image = this.numberOne;
                         break;
                     case 1:
-                        menuItem.Image = Properties.Resources.number_2;
+                        menuItem.Image = this.numberTwo;
                         break;
                     case 2:
-                        menuItem.Image = Properties.Resources.number_3;
+                        menuItem.Image = this.numberThree;
                         break;
                     case 3:
-                        menuItem.Image = Properties.Resources.number_4;
+                        menuItem.Image = this.numberFour;
                         break;
                     case 4:
-                        menuItem.Image = Properties.Resources.number_5;
+                        menuItem.Image = this.numberFive;
                         break;
                     case 5:
-                        menuItem.Image = Properties.Resources.number_6;
+                        menuItem.Image = this.numberSix;
                         break;
                     case 6:
-                        menuItem.Image = Properties.Resources.number_7;
+                        menuItem.Image = this.numberSeven;
                         break;
                     case 7:
-                        menuItem.Image = Properties.Resources.number_8;
+                        menuItem.Image = this.numberEight;
                         break;
                     case 8:
-                        menuItem.Image = Properties.Resources.number_9;
+                        menuItem.Image = this.numberNine;
                         break;
                 }
                 menuItem.Size = new Size(180, 22);
                 menuItem.Text = profile.ProfileName;
                 menuItem.Click += this.MenuStats_Click;
+                menuItem.Paint += this.MenuProfile_Paint;
+                //((ToolStripDropDownMenu)menuProfile.DropDown).ShowCheckMargin = true;
+                //((ToolStripDropDownMenu)menuProfile.DropDown).ShowImageMargin = true;
                 menuProfile.DropDownItems.Add(menuItem);
                 this.ProfileMenuItems.Add(menuItem);
-                if (this.CurrentSettings.SelectedProfile == profile.ProfileID) {
+                if (this.CurrentSettings.SelectedProfile == profile.ProfileId) {
+                    this.SetCurrentProfileIcon(!string.IsNullOrEmpty(profile.LinkedShowId));
                     menuItem.PerformClick();
                 }
+            }
+        }
+        private void MenuProfile_Paint(object sender, PaintEventArgs e) {
+            if (this.AllProfiles.FindIndex(profile => profile.ProfileId.ToString() == ((ToolStripMenuItem)sender).Name.Substring(11) && !string.IsNullOrEmpty(profile.LinkedShowId)) != -1) {
+                e.Graphics.DrawImage(Properties.Resources.link_icon, 21, 5, 12, 12);
             }
         }
         private void RemoveUpdateFiles() {
@@ -731,12 +785,14 @@ namespace FallGuysStats {
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
                 ID = 1,
-                FrenchyEdition = true,
+                FrenchyEditionUpdate = 1,
                 CycleTimeSeconds = 5,
                 FilterType = 0,
                 SelectedProfile = 0,
                 FlippedDisplay = false,
                 LogPath = null,
+                OverlayBackground = 0,
+                OverlayBackgroundResourceName = string.Empty,
                 OverlayColor = 0,
                 OverlayLocationX = null,
                 OverlayLocationY = null,
@@ -758,6 +814,7 @@ namespace FallGuysStats {
                 OverlayNotOnTop = false,
                 PlayerByConsoleType = true,
                 ColorByRoundType = true,
+                AutoChangeProfile = true,
                 PreviousWins = 0,
                 WinsFilter = 1,
                 QualifyFilter = 1,
@@ -877,6 +934,7 @@ namespace FallGuysStats {
             }
 
             rounds.Sort();
+
             this.loadingExisting = true;
             this.LogFile_OnParsedLogLines(rounds);
             this.loadingExisting = false;
@@ -922,6 +980,24 @@ namespace FallGuysStats {
                     this.Location = new Point(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value);
                 }
 
+                switch (this.CurrentSettings.FilterType) {
+                    case 0:
+                        this.MenuStats_Click(this.menuAllStats, null);
+                        break;
+                    case 1:
+                        this.MenuStats_Click(this.menuSeasonStats, null);
+                        break;
+                    case 2:
+                        this.MenuStats_Click(this.menuWeekStats, null);
+                        break;
+                    case 3:
+                        this.MenuStats_Click(this.menuDayStats, null);
+                        break;
+                    case 4:
+                        this.MenuStats_Click(this.menuSessionStats, null);
+                        break;
+                }
+
                 this.menuProfile.DropDownItems["menuProfile" + this.CurrentSettings.SelectedProfile].PerformClick();
 
                 this.UpdateDates();
@@ -938,30 +1014,6 @@ namespace FallGuysStats {
                 this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs, this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo, this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight, this.CurrentSettings.OverlayFontSerialized);
                 if (this.CurrentSettings.OverlayVisible) {
                     ToggleOverlay(this.overlay);
-                }
-
-                this.menuAllStats.Checked = false;
-                switch (this.CurrentSettings.FilterType) {
-                    case 0:
-                        this.menuAllStats.Checked = true;
-                        this.MenuStats_Click(this.menuAllStats, null);
-                        break;
-                    case 1:
-                        this.menuSeasonStats.Checked = true;
-                        this.MenuStats_Click(this.menuSeasonStats, null);
-                        break;
-                    case 2:
-                        this.menuWeekStats.Checked = true;
-                        this.MenuStats_Click(this.menuWeekStats, null);
-                        break;
-                    case 3:
-                        this.menuDayStats.Checked = true;
-                        this.MenuStats_Click(this.menuDayStats, null);
-                        break;
-                    case 4:
-                        this.menuSessionStats.Checked = true;
-                        this.MenuStats_Click(this.menuSessionStats, null);
-                        break;
                 }
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -981,9 +1033,6 @@ namespace FallGuysStats {
         private void LogFile_OnNewLogFileDate(DateTime newDate) {
             if (SessionStart != newDate) {
                 SessionStart = newDate;
-                if (this.menuSessionStats.Checked) {
-                    MenuStats_Click(this.menuSessionStats, null);
-                }
             }
         }
         private void LogFile_OnParsedLogLinesCurrent(List<RoundInfo> round) {
@@ -1028,9 +1077,7 @@ namespace FallGuysStats {
                             if (info == null && stat.Start > this.lastAddedShow) {
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 0) {
                                     using (EditShows editShows = new EditShows()) {
-                                        editShows.Title = Multilingual.GetWord("profile_add_select_title");
                                         editShows.FunctionFlag = "add";
-                                        editShows.SaveBtnName = Multilingual.GetWord("profile_apply_change_button");
                                         editShows.Icon = this.Icon;
                                         editShows.Profiles = this.AllProfiles;
                                         editShows.StatsForm = this;
@@ -1078,7 +1125,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, 0);
+                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, 0, null);
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
                             this.gridDetails.DataSource = null;
@@ -1131,8 +1178,8 @@ namespace FallGuysStats {
         }
         private bool IsInPartyFilter(RoundInfo info) {
             return this.menuAllPartyStats.Checked ||
-                   (this.menuSoloStats.Checked && !info.InParty) ||
-                   (this.menuPartyStats.Checked && info.InParty);
+                   (this.menuSoloStats.Checked && info.InParty) ||
+                   (this.menuPartyStats.Checked && !info.InParty);
         }
         public string GetCurrentFilter() {
             return this.menuAllStats.Checked ? Multilingual.GetWord("main_all") : this.menuSeasonStats.Checked ? Multilingual.GetWord("main_season") : this.menuWeekStats.Checked ? Multilingual.GetWord("main_week") : this.menuDayStats.Checked ? Multilingual.GetWord("main_day") : Multilingual.GetWord("main_session");
@@ -1142,6 +1189,34 @@ namespace FallGuysStats {
         }
         public int GetCurrentProfileId() {
             return this.currentProfile;
+        }
+        public string GetCurrentProfileLinkedShowId() {
+            return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+        }
+        public void SetLinkedProfile(string showId, bool isPrivateLobbies) {
+            if (string.IsNullOrEmpty(showId) && this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
+            for (int i = 0; i < this.AllProfiles.Count; i++) {
+                if (isPrivateLobbies) {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
+                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                        if (!item.Checked) item.PerformClick();
+                        break;
+                    }
+                } else {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                        if (!item.Checked) item.PerformClick();
+                        break;
+                    }
+                }
+            }
+        }
+        public void SetCurrentProfileIcon(bool linked) {
+            if (this.CurrentSettings.AutoChangeProfile) {
+                this.lblCurrentProfile.Image = linked ? Properties.Resources.profile2_linked_icon : Properties.Resources.profile2_unlinked_icon;
+            } else {
+                this.lblCurrentProfile.Image = Properties.Resources.profile2_icon;
+            }
         }
         public StatSummary GetLevelInfo(string name, int levelException) {
             StatSummary summary = new StatSummary {
@@ -1153,9 +1228,9 @@ namespace FallGuysStats {
             };
             int lastShow = -1;
             if (!this.StatLookup.TryGetValue(name ?? string.Empty, out var currentLevel)) {
-                currentLevel = new LevelStats(name, LevelType.Unknown, false, 0);
+                currentLevel = new LevelStats(name, LevelType.Unknown, false, 0, null);
             }
-            int profile = currentProfile;
+            int profile = this.currentProfile;
 
             for (int i = 0; i < this.AllStats.Count; i++) {
                 RoundInfo info = this.AllStats[i];
@@ -1308,21 +1383,99 @@ namespace FallGuysStats {
             }
         }
         private void GridDetails_DataSourceChanged(object sender, EventArgs e) {
+            this.SetMainDataGridView();
+        }
+        private int GetDataGridViewColumnWidth(string columnName, String columnText) {
+            int sizeOfText;
+            switch (columnName) {
+                case "RoundIcon":
+                    sizeOfText = 13;
+                    break;
+                case "Name":
+                    return 0;
+                case "Played":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    break;
+                case "Qualified":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 2 || CurrentLanguage == 4 ? 5 : 0;
+                    break;
+                case "Gold":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 1 ? 12 : CurrentLanguage == 4 ? 5 : 0;
+                    break;
+                case "Silver":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 4 ? 5 : 0;
+                    break;
+                case "Bronze":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 4 ? 5 : 0;
+                    break;
+                case "Kudos":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    break;
+                case "Fastest":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 4 ? 20 : 0;
+                    break;
+                case "Longest":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 4 ? 20 : 0;
+                    break;
+                case "AveFinish":
+                    sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
+                    sizeOfText += CurrentLanguage == 4 ? 20 : 0;
+                    break;
+                default:
+                    return 0;
+            }
+
+            return sizeOfText + 24;
+        }
+        private void InitMainDataGridView() {
+            this.dataGridViewCellStyle1.Font = new Font(Overlay.GetMainFontFamilies(), 10, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewCellStyle1.BackColor = Color.LightGray;
+            this.dataGridViewCellStyle1.ForeColor = Color.Black;
+            this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
+            this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            this.dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            this.gridDetails.ColumnHeadersDefaultCellStyle = this.dataGridViewCellStyle1;
+            this.gridDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gridDetails.ColumnHeadersHeight = 20;
+
+            this.dataGridViewCellStyle2.Font = new Font(Overlay.GetMainFontFamilies(), 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewCellStyle2.BackColor = Color.White;
+            this.dataGridViewCellStyle2.ForeColor = Color.Black;
+            this.dataGridViewCellStyle2.SelectionBackColor = Color.DeepSkyBlue;
+            this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            this.dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            this.gridDetails.DefaultCellStyle = this.dataGridViewCellStyle2;
+            this.gridDetails.RowTemplate.Height = 25;
+
+            this.gridDetails.DataSource = this.StatDetails;
+        }
+        private void SetMainDataGridView() {
             try {
                 if (this.gridDetails.Columns.Count == 0) { return; }
+
                 int pos = 0;
                 this.gridDetails.Columns["AveKudos"].Visible = false;
                 this.gridDetails.Columns["AveDuration"].Visible = false;
-                this.gridDetails.Setup("Name", pos++, 0, Multilingual.GetWord("main_round_name"), DataGridViewContentAlignment.MiddleLeft);
-                this.gridDetails.Setup("Played", pos++, CurrentLanguage <= 1 ? 63 : CurrentLanguage == 2 ? 58 : 81, Multilingual.GetWord("main_played"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Qualified", pos++, CurrentLanguage <= 1 ? 66 : CurrentLanguage == 2 ? 55 : 51, Multilingual.GetWord("main_qualified"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Gold", pos++, CurrentLanguage <= 1 ? 53 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_gold"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Silver", pos++, CurrentLanguage <= 1 ? 58 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_silver"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Bronze", pos++, CurrentLanguage <= 1 ? 65 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_bronze"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Kudos", pos++, CurrentLanguage <= 1 ? 60 : CurrentLanguage == 2 ? 58 : 60, Multilingual.GetWord("main_kudos"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Fastest", pos++, CurrentLanguage <= 1 ? 67 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_fastest"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Longest", pos++, CurrentLanguage <= 1 ? 69 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_longest"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("AveFinish", pos, CurrentLanguage <= 1 ? 70 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_ave_finish"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("RoundIcon", pos++, this.GetDataGridViewColumnWidth("RoundIcon", ""), "", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Columns["RoundIcon"].Resizable = DataGridViewTriState.False;
+                this.gridDetails.Setup("Name", pos++, this.GetDataGridViewColumnWidth("Name", Multilingual.GetWord("main_round_name")), Multilingual.GetWord("main_round_name"), DataGridViewContentAlignment.MiddleLeft);
+                this.gridDetails.Setup("Played", pos++, this.GetDataGridViewColumnWidth("Played", Multilingual.GetWord("main_played")), Multilingual.GetWord("main_played"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Qualified", pos++, this.GetDataGridViewColumnWidth("Qualified", Multilingual.GetWord("main_qualified")), Multilingual.GetWord("main_qualified"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Gold", pos++, this.GetDataGridViewColumnWidth("Gold", Multilingual.GetWord("main_gold")), Multilingual.GetWord("main_gold"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Silver", pos++, this.GetDataGridViewColumnWidth("Silver", Multilingual.GetWord("main_silver")), Multilingual.GetWord("main_silver"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Bronze", pos++, this.GetDataGridViewColumnWidth("Bronze", Multilingual.GetWord("main_bronze")), Multilingual.GetWord("main_bronze"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Kudos", pos++, this.GetDataGridViewColumnWidth("Kudos", Multilingual.GetWord("main_kudos")), Multilingual.GetWord("main_kudos"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Fastest", pos++, this.GetDataGridViewColumnWidth("Fastest", Multilingual.GetWord("main_fastest")), Multilingual.GetWord("main_fastest"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Longest", pos++, this.GetDataGridViewColumnWidth("Longest", Multilingual.GetWord("main_longest")), Multilingual.GetWord("main_longest"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("AveFinish", pos, this.GetDataGridViewColumnWidth("AveFinish", Multilingual.GetWord("main_ave_finish")), Multilingual.GetWord("main_ave_finish"), DataGridViewContentAlignment.MiddleRight);
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1331,77 +1484,92 @@ namespace FallGuysStats {
             try {
                 if (e.RowIndex < 0) { return; }
 
-                LevelStats info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
+                LevelStats levelStats = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
 
                 switch (this.gridDetails.Columns[e.ColumnIndex].Name) {
-                    case "Name":
-                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_tooltiptext");
-                        if (info.IsFinal) {
-                            e.CellStyle.BackColor = Color.FromArgb(255, 230, 138);
+                    case "RoundIcon":
+                        if (levelStats.IsFinal) {
+                            e.CellStyle.BackColor = Color.FromArgb(255, 240, 200);
                             break;
                         }
-                        switch (info.Type) {
-                            case LevelType.Race: e.CellStyle.BackColor = Color.FromArgb(206, 255, 228); break;
-                            case LevelType.Survival: e.CellStyle.BackColor = Color.FromArgb(244, 206, 250); break;
-                            case LevelType.Hunt: e.CellStyle.BackColor = Color.FromArgb(208, 222, 244); break;
-                            case LevelType.Logic: e.CellStyle.BackColor = Color.FromArgb(183, 255, 255); break;
-                            case LevelType.Team: e.CellStyle.BackColor = Color.FromArgb(255, 238, 230); break;
+                        switch (levelStats.Type) {
+                            case LevelType.Race: e.CellStyle.BackColor = Color.FromArgb(210, 255, 220); break;
+                            case LevelType.Survival: e.CellStyle.BackColor = Color.FromArgb(250, 205, 255); break;
+                            case LevelType.Hunt: e.CellStyle.BackColor = Color.FromArgb(200, 220, 255); break;
+                            case LevelType.Logic: e.CellStyle.BackColor = Color.FromArgb(230, 250, 255); break;
+                            case LevelType.Team: e.CellStyle.BackColor = Color.FromArgb(255, 220, 205); break;
+                            case LevelType.Invisibeans: e.CellStyle.BackColor = Color.FromArgb(255, 255, 255); break;
+                            case LevelType.Unknown: e.CellStyle.BackColor = Color.LightGray; break;
+                        }
+                        break;
+                    case "Name":
+                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_tooltiptext");
+                        if (levelStats.IsFinal) {
+                            e.CellStyle.BackColor = Color.FromArgb(255, 240, 200);
+                            break;
+                        }
+                        switch (levelStats.Type) {
+                            case LevelType.Race: e.CellStyle.BackColor = Color.FromArgb(210, 255, 220); break;
+                            case LevelType.Survival: e.CellStyle.BackColor = Color.FromArgb(250, 205, 255); break;
+                            case LevelType.Hunt: e.CellStyle.BackColor = Color.FromArgb(200, 220, 255); break;
+                            case LevelType.Logic: e.CellStyle.BackColor = Color.FromArgb(230, 250, 255); break;
+                            case LevelType.Team: e.CellStyle.BackColor = Color.FromArgb(255, 220, 205); break;
                             case LevelType.Invisibeans: e.CellStyle.BackColor = Color.FromArgb(255, 255, 255); break;
                             case LevelType.Unknown: e.CellStyle.BackColor = Color.LightGray; break;
                         }
                         break;
                     case "Qualified": {
-                            float qualifyChance = info.Qualified * 100f / (info.Played == 0 ? 1 : info.Played);
+                            float qualifyChance = levelStats.Qualified * 100f / (levelStats.Played == 0 ? 1 : levelStats.Played);
                             if (this.CurrentSettings.ShowPercentages) {
                                 e.Value = $"{qualifyChance:0.0}%";
-                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{info.Qualified}";
+                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{levelStats.Qualified}";
                             } else {
-                                e.Value = info.Qualified;
+                                e.Value = levelStats.Qualified;
                                 this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{qualifyChance:0.0}%";
                             }
                             break;
                         }
                     case "Gold": {
-                            float qualifyChance = info.Gold * 100f / (info.Played == 0 ? 1 : info.Played);
+                            float qualifyChance = levelStats.Gold * 100f / (levelStats.Played == 0 ? 1 : levelStats.Played);
                             if (this.CurrentSettings.ShowPercentages) {
                                 e.Value = $"{qualifyChance:0.0}%";
-                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{info.Gold}";
+                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{levelStats.Gold}";
                             } else {
-                                e.Value = info.Gold;
+                                e.Value = levelStats.Gold;
                                 this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{qualifyChance:0.0}%";
                             }
                             break;
                         }
                     case "Silver": {
-                            float qualifyChance = info.Silver * 100f / (info.Played == 0 ? 1 : info.Played);
+                            float qualifyChance = levelStats.Silver * 100f / (levelStats.Played == 0 ? 1 : levelStats.Played);
                             if (this.CurrentSettings.ShowPercentages) {
                                 e.Value = $"{qualifyChance:0.0}%";
-                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{info.Silver}";
+                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{levelStats.Silver}";
                             } else {
-                                e.Value = info.Silver;
+                                e.Value = levelStats.Silver;
                                 this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{qualifyChance:0.0}%";
                             }
                             break;
                         }
                     case "Bronze": {
-                            float qualifyChance = info.Bronze * 100f / (info.Played == 0 ? 1 : info.Played);
+                            float qualifyChance = levelStats.Bronze * 100f / (levelStats.Played == 0 ? 1 : levelStats.Played);
                             if (this.CurrentSettings.ShowPercentages) {
                                 e.Value = $"{qualifyChance:0.0}%";
-                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{info.Bronze}";
+                                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{levelStats.Bronze}";
                             } else {
-                                e.Value = info.Bronze;
+                                e.Value = levelStats.Bronze;
                                 this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = $"{qualifyChance:0.0}%";
                             }
                             break;
                         }
                     case "AveFinish":
-                        e.Value = info.AveFinish.ToString("m\\:ss\\.ff");
+                        e.Value = levelStats.AveFinish.ToString("m\\:ss\\.ff");
                         break;
                     case "Fastest":
-                        e.Value = info.Fastest.ToString("m\\:ss\\.ff");
+                        e.Value = levelStats.Fastest.ToString("m\\:ss\\.ff");
                         break;
                     case "Longest":
-                        e.Value = info.Longest.ToString("m\\:ss\\.ff");
+                        e.Value = levelStats.Longest.ToString("m\\:ss\\.ff");
                         break;
                 }
             } catch (Exception ex) {
@@ -1410,8 +1578,17 @@ namespace FallGuysStats {
         }
         private void GridDetails_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
             try {
-                if (e.RowIndex >= 0 && this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
-                    this.gridDetails.Cursor = Cursors.Hand;
+                if (e.RowIndex >= 0) {
+                    if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name" || this.gridDetails.Columns[e.ColumnIndex].Name == "RoundIcon") {
+                        this.gridDetails.Cursor = Cursors.Hand;
+                    } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Qualified"
+                               || this.gridDetails.Columns[e.ColumnIndex].Name == "Gold"
+                               || this.gridDetails.Columns[e.ColumnIndex].Name == "Silver"
+                               || this.gridDetails.Columns[e.ColumnIndex].Name == "Bronze") {
+                        this.gridDetails.Cursor = new Cursor(Properties.Resources.transform_icon.GetHicon());
+                    } else {
+                        this.gridDetails.Cursor = Cursors.Default;
+                    }
                 } else {
                     this.gridDetails.Cursor = Cursors.Default;
                 }
@@ -1422,7 +1599,7 @@ namespace FallGuysStats {
         private void GridDetails_CellClick(object sender, DataGridViewCellEventArgs e) {
             try {
                 if (e.RowIndex < 0) { return; }
-                if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
+                if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name" || this.gridDetails.Columns[e.ColumnIndex].Name == "RoundIcon") {
                     LevelStats stats = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
                     using (LevelDetails levelDetails = new LevelDetails()) {
                         levelDetails.LevelName = stats.Name;
@@ -1432,8 +1609,11 @@ namespace FallGuysStats {
                         levelDetails.StatsForm = this;
                         levelDetails.ShowDialog(this);
                     }
-                } else {
-                    ToggleWinPercentageDisplay();
+                } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Qualified"
+                           || this.gridDetails.Columns[e.ColumnIndex].Name == "Gold"
+                           || this.gridDetails.Columns[e.ColumnIndex].Name == "Silver"
+                           || this.gridDetails.Columns[e.ColumnIndex].Name == "Bronze") {
+                    this.ToggleWinPercentageDisplay();
                 }
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1489,7 +1669,7 @@ namespace FallGuysStats {
         }
         private void ToggleWinPercentageDisplay() {
             this.CurrentSettings.ShowPercentages = !this.CurrentSettings.ShowPercentages;
-            SaveUserSettings();
+            this.SaveUserSettings();
             this.gridDetails.Invalidate();
         }
         private void ShowShows() {
@@ -1652,7 +1832,7 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fallguys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -1675,7 +1855,7 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fallguys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -1791,39 +1971,29 @@ namespace FallGuysStats {
             try {
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
                 if (button == this.menuAllStats || button == this.menuSeasonStats || button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats) {
-                    if (!this.menuAllStats.Checked && !this.menuSeasonStats.Checked && !this.menuWeekStats.Checked && !this.menuDayStats.Checked && !this.menuSessionStats.Checked) {
-                        button.Checked = true;
-                        return;
-                    }
-
+                    button.Checked = true;
+                    this.updateFilterType = true;
                     foreach (ToolStripItem item in this.menuStatsFilter.DropDownItems) {
                         if (item is ToolStripMenuItem menuItem && menuItem.Checked && menuItem != button) {
                             menuItem.Checked = false;
                         }
                     }
-                }
-
-                if (button == this.menuAllPartyStats || button == this.menuSoloStats || button == this.menuPartyStats) {
-                    if (!this.menuAllPartyStats.Checked && !this.menuSoloStats.Checked && !this.menuPartyStats.Checked) {
-                        button.Checked = true;
-                        return;
-                    }
-
+                } else if (button == this.menuAllPartyStats || button == this.menuSoloStats || button == this.menuPartyStats) {
+                    button.Checked = true;
                     foreach (ToolStripItem item in this.menuPartyFilter.DropDownItems) {
                         if (item is ToolStripMenuItem menuItem && menuItem.Checked && menuItem != button) {
                             menuItem.Checked = false;
                         }
                     }
-
-                    button = this.menuAllStats.Checked ? this.menuAllStats : this.menuSeasonStats.Checked ? this.menuSeasonStats : this.menuWeekStats.Checked ? this.menuWeekStats : this.menuDayStats.Checked ? this.menuDayStats : this.menuSessionStats;
-                }
-
-                if (this.ProfileMenuItems.Contains(button)) {
+                } else if (this.ProfileMenuItems.Contains(button)) {
                     for (int i = this.ProfileMenuItems.Count - 1; i >= 0; i--) {
+                        if (this.ProfileMenuItems[i].Name == button.Name) {
+                            this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileName == this.ProfileMenuItems[i].Text && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
+                        }
                         this.ProfileMenuItems[i].Checked = this.ProfileMenuItems[i].Name == button.Name;
                     }
                     this.currentProfile = Int32.Parse(button.Name.Substring(11));
-                    button = this.menuAllStats.Checked ? this.menuAllStats : this.menuSeasonStats.Checked ? this.menuSeasonStats : this.menuWeekStats.Checked ? this.menuWeekStats : this.menuDayStats.Checked ? this.menuDayStats : this.menuSessionStats;
+                    this.updateSelectedProfile = true;
                 }
 
                 for (int i = 0; i < this.StatDetails.Count; i++) {
@@ -1833,36 +2003,28 @@ namespace FallGuysStats {
 
                 this.ClearTotals();
 
-                int profile = this.currentProfile;
-                bool soloOnly = this.menuSoloStats.Checked;
                 List<RoundInfo> rounds = new List<RoundInfo>();
+                int profile = this.currentProfile;
 
                 DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue : this.menuSeasonStats.Checked ? SeasonStart : this.menuWeekStats.Checked ? WeekStart : this.menuDayStats.Checked ? DayStart : SessionStart;
                 for (int i = 0; i < this.AllStats.Count; i++) {
                     RoundInfo round = this.AllStats[i];
-                    if (round.Start > compareDate && round.Profile == profile && (this.menuAllPartyStats.Checked || round.InParty == soloOnly)) {
+                    if (round.Start > compareDate && round.Profile == profile && IsInPartyFilter(round)) {
                         rounds.Add(round);
                     }
                 }
 
                 rounds.Sort();
 
-                if (rounds.Count > 0 && (button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats)) {
-                    int minShowID = rounds[0].ShowID;
-
-                    for (int i = 0; i < this.AllStats.Count; i++) {
-                        RoundInfo round = this.AllStats[i];
-                        if (round.ShowID == minShowID && round.Start <= compareDate) {
-                            rounds.Add(round);
-                        }
-                    }
+                if (this.updateSelectedProfile) {
+                    this.updateSelectedProfile = false;
+                    this.CurrentSettings.SelectedProfile = profile;
+                    this.SaveUserSettings();
+                } else if (this.updateFilterType) {
+                    this.updateFilterType = false;
+                    this.CurrentSettings.FilterType = this.menuAllStats.Checked ? 0 : this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : 4;
+                    this.SaveUserSettings();
                 }
-
-                rounds.Sort();
-
-                this.CurrentSettings.SelectedProfile = profile;
-                this.CurrentSettings.FilterType = this.menuAllStats.Checked ? 0 : this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : 4;
-                this.SaveUserSettings();
 
                 this.loadingExisting = true;
                 this.LogFile_OnParsedLogLines(rounds);
@@ -1924,8 +2086,10 @@ namespace FallGuysStats {
                         this.SaveUserSettings();
                         this.ChangeMainLanguage();
                         this.gridDetails.ChangeContextMenuLanguage();
+                        this.overlay.BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName;
                         this.overlay.ChangeLanguage();
                         this.UpdateTotals();
+                        this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileId == this.GetCurrentProfileId() && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
                         this.UpdateGridRoundName();
                         this.UpdateHoopsieLegends();
 
@@ -1947,7 +2111,7 @@ namespace FallGuysStats {
             }
         }
         private void MenuOverlay_Click(object sender, EventArgs e) {
-            ToggleOverlay(overlay);
+            this.ToggleOverlay(overlay);
         }
         private void ToggleOverlay(Overlay overlay) {
             if (overlay.Visible) {
@@ -1995,9 +2159,9 @@ namespace FallGuysStats {
                 if (sender is ToolStripLabel lblInfo) {
                     this.infoStripForeColor = lblInfo.ForeColor;
                     if (lblInfo.Name == "lblCurrentProfile") {
-                        lblInfo.ForeColor = Color.FromArgb(245, 154, 168);
+                        lblInfo.ForeColor = Color.FromArgb(245, 155, 170);
                     } else {
-                        lblInfo.ForeColor = Color.FromArgb(147, 174, 248);
+                        lblInfo.ForeColor = Color.FromArgb(145, 175, 250);
                     }
                 }
             }
@@ -2048,49 +2212,30 @@ namespace FallGuysStats {
                     return true;
                 }
             }
-
             return false;
+        }
+        public Screen GetCurrentScreen(Point location) {
+            Screen[] scr = Screen.AllScreens;
+            Screen screen = null;
+            for (int i = 0; i < scr.Length; i++) {
+                if (scr[i].WorkingArea.Contains(location)) {
+                    screen = scr[i];
+                    break;
+                }
+            }
+            return screen;
         }
         private void ChangeMainLanguage() {
             this.Text = $"Fall Guys Stats \"FE\" v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
 
-            this.menu.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            this.menuLaunchFallGuys.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Bold, GraphicsUnit.Pixel, ((byte)(0)));
-            this.infoStrip.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.menu.Font = new Font(Overlay.GetMainFontFamilies(), 9, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.menuLaunchFallGuys.Font = new Font(Overlay.GetMainFontFamilies(), 12, FontStyle.Bold, GraphicsUnit.Pixel, ((byte)(0)));
+            this.infoStrip.Font = new Font(Overlay.GetMainFontFamilies(), 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
 
-            this.dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewCellStyle1.BackColor = Color.LightGray;
-            this.dataGridViewCellStyle1.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 10, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
-            this.dataGridViewCellStyle1.ForeColor = Color.Black;
-            this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
-            this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            this.dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            this.gridDetails.ColumnHeadersDefaultCellStyle = this.dataGridViewCellStyle1;
+            this.dataGridViewCellStyle1.Font = new Font(Overlay.GetMainFontFamilies(), 10, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.dataGridViewCellStyle2.Font = new Font(Overlay.GetMainFontFamilies(), 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
+            this.SetMainDataGridView();
 
-            this.dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewCellStyle2.BackColor = Color.White;
-            this.dataGridViewCellStyle2.Font = new Font(CurrentLanguage == 3 ? Overlay.DefaultFontCollection.Families[1] : Overlay.DefaultFontCollection.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
-            this.dataGridViewCellStyle2.ForeColor = Color.Black;
-            this.dataGridViewCellStyle2.SelectionBackColor = Color.DeepSkyBlue;
-            this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            this.dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            this.gridDetails.DefaultCellStyle = this.dataGridViewCellStyle2;
-
-            if (this.gridDetails.Columns.Count != 0) {
-                int pos = 0;
-                this.gridDetails.Columns["AveKudos"].Visible = false;
-                this.gridDetails.Columns["AveDuration"].Visible = false;
-                this.gridDetails.Setup("Name", pos++, 0, Multilingual.GetWord("main_round_name"), DataGridViewContentAlignment.MiddleLeft);
-                this.gridDetails.Setup("Played", pos++, CurrentLanguage <= 1 ? 63 : CurrentLanguage == 2 ? 58 : 81, Multilingual.GetWord("main_played"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Qualified", pos++, CurrentLanguage <= 1 ? 66 : CurrentLanguage == 2 ? 55 : 51, Multilingual.GetWord("main_qualified"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Gold", pos++, CurrentLanguage <= 1 ? 53 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_gold"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Silver", pos++, CurrentLanguage <= 1 ? 58 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_silver"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Bronze", pos++, CurrentLanguage <= 1 ? 65 : CurrentLanguage == 2 ? 58 : 71, Multilingual.GetWord("main_bronze"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Kudos", pos++, CurrentLanguage <= 1 ? 60 : CurrentLanguage == 2 ? 58 : 60, Multilingual.GetWord("main_kudos"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Fastest", pos++, CurrentLanguage <= 1 ? 67 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_fastest"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Longest", pos++, CurrentLanguage <= 1 ? 69 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_longest"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("AveFinish", pos, CurrentLanguage <= 1 ? 70 : CurrentLanguage == 2 ? 74 : 71, Multilingual.GetWord("main_ave_finish"), DataGridViewContentAlignment.MiddleRight);
-            }
             this.menuSettings.Text = $"{Multilingual.GetWord("main_settings")}";
             this.menuFilters.Text = $"{Multilingual.GetWord("main_filters")}";
             this.menuStatsFilter.Text = Multilingual.GetWord("main_stats");
