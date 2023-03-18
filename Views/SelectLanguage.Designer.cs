@@ -59,7 +59,7 @@ namespace FallGuysStats {
             this.cboLanguage.Name = "cboLanguage";
             this.cboLanguage.Size = new System.Drawing.Size(80, 26);
             this.cboLanguage.TabIndex = 0;
-            this.cboLanguage.SelectedIndexChanged += new EventHandler(this.cboLanguage_SelectedIndexChanged);
+            this.cboLanguage.SelectedIndexChanged += new EventHandler(this.CboLanguage_SelectedIndexChanged);
             // 
             // lblBackColor
             // 
@@ -76,7 +76,7 @@ namespace FallGuysStats {
             this.btnLanguageSave.TabIndex = 2;
             this.btnLanguageSave.Text = "Confirm";
             this.btnLanguageSave.UseVisualStyleBackColor = true;
-            this.btnLanguageSave.Click += new System.EventHandler(this.btnLanguageSave_Click);
+            this.btnLanguageSave.Click += new System.EventHandler(this.BtnLanguageSave_Click);
             // 
             // SelectLanguage
             // 

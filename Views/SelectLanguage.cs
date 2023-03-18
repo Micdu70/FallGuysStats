@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 namespace FallGuysStats {
     public partial class SelectLanguage : Form {
-        public int selectedLanguage = 0;
+        public int selectedLanguage = 1;
         public SelectLanguage() => this.InitializeComponent();
 
         private void SelectLanguage_Load(object sender, EventArgs e) {
-            this.ChangeLanguage(0);
-            this.cboLanguage.SelectedIndex = 0;
+            this.ChangeLanguage(1);
+            this.cboLanguage.SelectedIndex = 1;
         }
-        
-        private void cboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
+
+        private void CboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
             this.selectedLanguage = ((ComboBox)sender).SelectedIndex;
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
-        
-        private void btnLanguageSave_Click(object sender, EventArgs e) {
+
+        private void BtnLanguageSave_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

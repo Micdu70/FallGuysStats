@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using LiteDB;
 namespace FallGuysStats {
     public class RoundInfo : IComparable<RoundInfo> {
@@ -55,16 +55,14 @@ namespace FallGuysStats {
         public void VerifyName() {
             if (string.IsNullOrEmpty(this.SceneName)) { return; }
 
-            string roundName;
-            if (LevelStats.SceneToRound.TryGetValue(this.SceneName, out roundName)) {
+            if (LevelStats.SceneToRound.TryGetValue(this.SceneName, out var roundName)) {
                 this.Name = roundName;
             }
         }
         public string VerifiedName() {
             if (string.IsNullOrEmpty(this.SceneName)) { return this.Name; }
 
-            string roundName;
-            if (LevelStats.SceneToRound.TryGetValue(this.SceneName, out roundName)) {
+            if (LevelStats.SceneToRound.TryGetValue(this.SceneName, out var roundName)) {
                 return roundName;
             }
             return this.Name;

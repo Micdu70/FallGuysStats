@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.147** *~ 16/03/2023*
+**Dernière version: 1.147** *~ 18/03/2023*
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -78,12 +78,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
-  - 1.147 *~ 16/03/2023*
+  - 1.147 *~ 18/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- Added overlay background image change option
-	- Added a function to automatically select a linked profile when a show starts by linking a profile with a show
-	- Added rounds logo
+	- Pleins de changement à découvrir ! :)
   - 1.146 *~ 15/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)

@@ -78,7 +78,7 @@ namespace FallGuysStats {
             this.menuSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.menuSettings.Size = new System.Drawing.Size(78, 20);
             this.menuSettings.Text = "Settings";
-            this.menuSettings.Click += new System.EventHandler(this.menuSettings_Click);
+            this.menuSettings.Click += new System.EventHandler(this.MenuSettings_Click);
             // 
             // menuFilters
             // 
@@ -193,7 +193,7 @@ namespace FallGuysStats {
             this.menuEditProfiles.Name = "menuEditProfiles";
             this.menuEditProfiles.Size = new System.Drawing.Size(155, 22);
             this.menuEditProfiles.Text = "Profile Settings";
-            this.menuEditProfiles.Click += new System.EventHandler(this.menuEditProfiles_Click);
+            this.menuEditProfiles.Click += new System.EventHandler(this.MenuEditProfiles_Click);
             // 
             // menuOverlay
             // 
@@ -202,7 +202,7 @@ namespace FallGuysStats {
             this.menuOverlay.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.menuOverlay.Size = new System.Drawing.Size(109, 20);
             this.menuOverlay.Text = "Show Overlay";
-            this.menuOverlay.Click += new System.EventHandler(this.menuOverlay_Click);
+            this.menuOverlay.Click += new System.EventHandler(this.MenuOverlay_Click);
             // 
             // menuUpdate
             // 
@@ -211,7 +211,7 @@ namespace FallGuysStats {
             this.menuUpdate.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
             this.menuUpdate.Size = new System.Drawing.Size(73, 20);
             this.menuUpdate.Text = "Update";
-            this.menuUpdate.Click += new System.EventHandler(this.menuUpdate_Click);
+            this.menuUpdate.Click += new System.EventHandler(this.MenuUpdate_Click);
             // 
             // menuHelp
             // 
@@ -220,7 +220,7 @@ namespace FallGuysStats {
             this.menuHelp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.menuHelp.Size = new System.Drawing.Size(60, 20);
             this.menuHelp.Text = "Help";
-            this.menuHelp.Click += new System.EventHandler(this.menuHelp_Click);
+            this.menuHelp.Click += new System.EventHandler(this.MenuHelp_Click);
             // 
             // menuLaunchFallGuys
             // 
@@ -228,7 +228,7 @@ namespace FallGuysStats {
             this.menuLaunchFallGuys.Name = "menuLaunchFallGuys";
             this.menuLaunchFallGuys.Size = new System.Drawing.Size(126, 20);
             this.menuLaunchFallGuys.Text = "Launch Fall Guys";
-            this.menuLaunchFallGuys.Click += new System.EventHandler(this.menuLaunchFallGuys_Click);
+            this.menuLaunchFallGuys.Click += new System.EventHandler(this.MenuLaunchFallGuys_Click);
             // 
             // infoStrip
             // 

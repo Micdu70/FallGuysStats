@@ -18,13 +18,13 @@ namespace FallGuysStats {
             int lang = Stats.CurrentLanguage;
             switch (level) {
                 case "Shows":
-                    return this.Width - (lang == 0 ? 55 : lang == 1 ? 22 : lang == 2 ? 90 : lang == 3 ? 39 : 108);
+                    return this.Width + (lang == 0 ? 43 : lang == 1 ? 74 : lang == 2 ? -90 : lang == 3 ? 39 : -108);
                 case "Rounds":
-                    return this.Width + (lang == 0 ? 754 : lang == 1 ? 796 : lang == 2 ? 671 : lang == 3 ? 738 : 677);
+                    return this.Width + (lang == 0 ? 853 : lang == 1 ? 892 : lang == 2 ? 671 : lang == 3 ? 738 : 677);
                 case "Finals":
-                    return this.Width + (lang == 0 ? 754 : lang == 1 ? 796 : lang == 2 ? 671 : lang == 3 ? 738 : 677);
+                    return this.Width + (lang == 0 ? 853 : lang == 1 ? 892 : lang == 2 ? 671 : lang == 3 ? 738 : 677);
                 default:
-                    return this.Width + (lang == 0 ? 604 : lang == 1 ? 646 : lang == 2 ? 521 : lang == 3 ? 588 : 527);
+                    return this.Width + (lang == 0 ? 703 : lang == 1 ? 742 : lang == 2 ? 521 : lang == 3 ? 588 : 527);
             }
         }
         private int GetDataGridViewColumnWidth(string columnName, String columnText) {
@@ -91,7 +91,7 @@ namespace FallGuysStats {
                 default:
                     return 0;
             }
-            
+
             return sizeOfText + 24;
         }
         private void LevelDetails_Load(object sender, EventArgs e) {
@@ -188,7 +188,7 @@ namespace FallGuysStats {
             this.gridDetails.Columns["IsFinal"].Visible = false;
             this.gridDetails.Columns["IsTeam"].Visible = false;
             this.gridDetails.Columns["PrivateLobby"].Visible = false;
-            if (this._showStats == 0) {
+            if (this._showStats == 0) { // Level
                 this.gridDetails.Columns.Add(new DataGridViewImageColumn { Name = "RoundIcon", ImageLayout = DataGridViewImageCellLayout.Zoom });
                 this.gridDetails.Setup("RoundIcon", pos++, this.GetDataGridViewColumnWidth("RoundIcon", ""), "", DataGridViewContentAlignment.MiddleCenter);
             }
@@ -198,9 +198,6 @@ namespace FallGuysStats {
                 this.gridDetails.Columns.Add(new DataGridViewImageColumn { Name = "IsFinalIcon", ImageLayout = DataGridViewImageCellLayout.Zoom, ToolTipText = "IsFinalIcon" });
                 this.gridDetails.Setup("IsFinalIcon", pos++, this.GetDataGridViewColumnWidth("IsFinalIcon", $"{Multilingual.GetWord("level_detail_is_final")}"), $"{Multilingual.GetWord("level_detail_is_final")}", DataGridViewContentAlignment.MiddleCenter);
                 //this.gridDetails.Setup("IsFinal", pos++, this.GetDataGridViewColumnWidth("IsFinalIcon", $"{Multilingual.GetWord("level_detail_is_final")}"), $"{Multilingual.GetWord("level_detail_is_final")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Columns["IsFinal"].Visible = false;
-            } else {
-                this.gridDetails.Columns["IsFinal"].Visible = false;
             }
             this.gridDetails.Setup("ShowID", pos++, this.GetDataGridViewColumnWidth("ShowID", $"{Multilingual.GetWord("level_detail_show_id")}"), $"{Multilingual.GetWord("level_detail_show_id")}", DataGridViewContentAlignment.MiddleRight);
             this.gridDetails.Setup("ShowNameId", pos++, this.GetDataGridViewColumnWidth("ShowNameId", $"{Multilingual.GetWord("level_detail_show_name_id")}"), $"{Multilingual.GetWord("level_detail_show_name_id")}", DataGridViewContentAlignment.MiddleLeft);
@@ -222,28 +219,24 @@ namespace FallGuysStats {
                 this.gridDetails.Columns["PlayersPc"].Visible = false;
                 this.gridDetails.Columns["PlayersBots"].Visible = false;
                 this.gridDetails.Columns["PlayersEtc"].Visible = false;
-            } else {
-                this.gridDetails.Setup("Players", pos++,     this.GetDataGridViewColumnWidth("Players", $"{Multilingual.GetWord("level_detail_players")}"), $"{Multilingual.GetWord("level_detail_players")}", DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("PlayersPs4", pos++,  this.GetDataGridViewColumnWidth("PlayersPs4", $"{Multilingual.GetWord("level_detail_playersPs4")}"), $"{Multilingual.GetWord("level_detail_playersPs4")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersPs5", pos++,  this.GetDataGridViewColumnWidth("PlayersPs5", $"{Multilingual.GetWord("level_detail_playersPs5")}"), $"{Multilingual.GetWord("level_detail_playersPs5")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersXb1", pos++,  this.GetDataGridViewColumnWidth("PlayersXb1", $"{Multilingual.GetWord("level_detail_playersXb1")}"), $"{Multilingual.GetWord("level_detail_playersXb1")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersXsx", pos++,  this.GetDataGridViewColumnWidth("PlayersXsx", $"{Multilingual.GetWord("level_detail_playersXsx")}"), $"{Multilingual.GetWord("level_detail_playersXsx")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersSw", pos++,   this.GetDataGridViewColumnWidth("PlayersSw", $"{Multilingual.GetWord("level_detail_playersSw")}"), $"{Multilingual.GetWord("level_detail_playersSw")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersPc", pos++,   this.GetDataGridViewColumnWidth("PlayersPc", $"{Multilingual.GetWord("level_detail_playersPc")}"), $"{Multilingual.GetWord("level_detail_playersPc")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Setup("PlayersBots", pos++, this.GetDataGridViewColumnWidth("PlayersBots", $"{Multilingual.GetWord("level_detail_playersBots")}"), $"{Multilingual.GetWord("level_detail_playersBots")}", DataGridViewContentAlignment.MiddleCenter);
-                this.gridDetails.Columns["PlayersEtc"].Visible = false;
-            }
-            this.gridDetails.Setup("Start", pos++, this.GetDataGridViewColumnWidth("Start", $"{Multilingual.GetWord("level_detail_start")}"), $"{Multilingual.GetWord("level_detail_start")}", DataGridViewContentAlignment.MiddleCenter);
-            this.gridDetails.Setup("End", pos++, this.GetDataGridViewColumnWidth("End", $"{Multilingual.GetWord("level_detail_end")}"), $"{Multilingual.GetWord("level_detail_end")}", DataGridViewContentAlignment.MiddleCenter);
-            if (this._showStats == 2) { // Shows
+                this.gridDetails.Setup("Start", pos++, this.GetDataGridViewColumnWidth("Start", $"{Multilingual.GetWord("level_detail_start")}"), $"{Multilingual.GetWord("level_detail_start")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("End", pos++, this.GetDataGridViewColumnWidth("End", $"{Multilingual.GetWord("level_detail_end")}"), $"{Multilingual.GetWord("level_detail_end")}", DataGridViewContentAlignment.MiddleCenter);
                 this.gridDetails.Columns["Finish"].Visible = false;
-            } else {
-                this.gridDetails.Setup("Finish", pos++, this.GetDataGridViewColumnWidth("Finish", $"{Multilingual.GetWord("level_detail_finish")}"), $"{Multilingual.GetWord("level_detail_finish")}", DataGridViewContentAlignment.MiddleCenter);
-            }
-            if (this._showStats == 2) { // Shows
                 this.gridDetails.Columns["Position"].Visible = false;
                 this.gridDetails.Columns["Score"].Visible = false;
             } else {
+                this.gridDetails.Setup("Players", pos++, this.GetDataGridViewColumnWidth("Players", $"{Multilingual.GetWord("level_detail_players")}"), $"{Multilingual.GetWord("level_detail_players")}", DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("PlayersPs4", pos++, this.GetDataGridViewColumnWidth("PlayersPs4", $"{Multilingual.GetWord("level_detail_playersPs4")}"), $"{Multilingual.GetWord("level_detail_playersPs4")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersPs5", pos++, this.GetDataGridViewColumnWidth("PlayersPs5", $"{Multilingual.GetWord("level_detail_playersPs5")}"), $"{Multilingual.GetWord("level_detail_playersPs5")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersXb1", pos++, this.GetDataGridViewColumnWidth("PlayersXb1", $"{Multilingual.GetWord("level_detail_playersXb1")}"), $"{Multilingual.GetWord("level_detail_playersXb1")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersXsx", pos++, this.GetDataGridViewColumnWidth("PlayersXsx", $"{Multilingual.GetWord("level_detail_playersXsx")}"), $"{Multilingual.GetWord("level_detail_playersXsx")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersSw", pos++, this.GetDataGridViewColumnWidth("PlayersSw", $"{Multilingual.GetWord("level_detail_playersSw")}"), $"{Multilingual.GetWord("level_detail_playersSw")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersPc", pos++, this.GetDataGridViewColumnWidth("PlayersPc", $"{Multilingual.GetWord("level_detail_playersPc")}"), $"{Multilingual.GetWord("level_detail_playersPc")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("PlayersBots", pos++, this.GetDataGridViewColumnWidth("PlayersBots", $"{Multilingual.GetWord("level_detail_playersBots")}"), $"{Multilingual.GetWord("level_detail_playersBots")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Columns["PlayersEtc"].Visible = false;
+                this.gridDetails.Setup("Start", pos++, this.GetDataGridViewColumnWidth("Start", $"{Multilingual.GetWord("level_detail_start")}"), $"{Multilingual.GetWord("level_detail_start")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("End", pos++, this.GetDataGridViewColumnWidth("End", $"{Multilingual.GetWord("level_detail_end")}"), $"{Multilingual.GetWord("level_detail_end")}", DataGridViewContentAlignment.MiddleCenter);
+                this.gridDetails.Setup("Finish", pos++, this.GetDataGridViewColumnWidth("Finish", $"{Multilingual.GetWord("level_detail_finish")}"), $"{Multilingual.GetWord("level_detail_finish")}", DataGridViewContentAlignment.MiddleCenter);
                 this.gridDetails.Setup("Position", pos++, this.GetDataGridViewColumnWidth("Position", $"{Multilingual.GetWord("level_detail_position")}"), $"{Multilingual.GetWord("level_detail_position")}", DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("Score", pos++, this.GetDataGridViewColumnWidth("Score", $"{Multilingual.GetWord("level_detail_score")}"), $"{Multilingual.GetWord("level_detail_score")}", DataGridViewContentAlignment.MiddleRight);
             }
@@ -317,17 +310,11 @@ namespace FallGuysStats {
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Round") {
                 if (this._showStats == 1 && this.StatsForm.StatLookup.TryGetValue((string)this.gridDetails.Rows[e.RowIndex].Cells["Name"].Value, out LevelStats level)) {
-                    if (info.IsTeam) {
-                        level.Type = LevelType.Team;
-                    }
-                    e.CellStyle.ForeColor = level.Type.LevelForeColor(info.IsFinal);
+                    e.CellStyle.ForeColor = level.Type.LevelForeColor(info.IsFinal, info.IsTeam);
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
                 if (this.StatsForm.StatLookup.TryGetValue((string)e.Value, out LevelStats level)) {
-                    if (info.IsTeam) {
-                        level.Type = LevelType.Team;
-                    }
-                    e.CellStyle.ForeColor = level.Type.LevelForeColor(info.IsFinal);
+                    e.CellStyle.ForeColor = level.Type.LevelForeColor(info.IsFinal, info.IsTeam);
                     e.Value = level.Name;
                     //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
@@ -404,7 +391,7 @@ namespace FallGuysStats {
                             string nameOne = this.StatsForm.StatLookup.TryGetValue(one.Name, out LevelStats level1) ? level1.Name : one.Name;
                             string nameTwo = this.StatsForm.StatLookup.TryGetValue(two.Name, out LevelStats level2) ? level2.Name : two.Name;
                             int nameCompare = nameOne.CompareTo(nameTwo);
-                            return nameCompare != 0 ? nameCompare : roundCompare;    
+                            return nameCompare != 0 ? nameCompare : roundCompare;
                         }
                     case "Players":
                         int playerCompare = one.Players.CompareTo(two.Players);
@@ -443,8 +430,8 @@ namespace FallGuysStats {
                         int scoreCompare = one.Score.GetValueOrDefault(-1).CompareTo(two.Score.GetValueOrDefault(-1));
                         return scoreCompare != 0 ? scoreCompare : showCompare == 0 ? roundCompare : showCompare;
                     case "Medal":
-                        int tierOne = one.Qualified ? one.Tier == 0 ? 4 : one.Tier : 5;
-                        int tierTwo = two.Qualified ? two.Tier == 0 ? 4 : two.Tier : 5;
+                        int tierOne = !one.Qualified ? 5 : one.Tier == 0 ? 4 : one.Tier;
+                        int tierTwo = !two.Qualified ? 5 : two.Tier == 0 ? 4 : two.Tier;
                         int tierCompare = tierOne.CompareTo(tierTwo);
                         return tierCompare != 0 ? tierCompare : showCompare == 0 ? roundCompare : showCompare;
                     case "IsFinalIcon":

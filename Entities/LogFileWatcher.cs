@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace FallGuysStats {
     public class LogLine {
@@ -56,7 +55,6 @@ namespace FallGuysStats {
         private Thread watcher, parser;
         public Stats StatsForm { get; set; }
         private string selectedShowId;
-        private readonly object balanceLock = new object();
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -352,7 +350,7 @@ namespace FallGuysStats {
             int index;
             if (Stats.InShow && logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
-                if (!Stats.EndedShow && this.StatsForm.CurrentSettings.AutoChangeProfile) {
+                if (this.StatsForm.CurrentSettings.AutoChangeProfile) {
                     this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
                 }
             } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {

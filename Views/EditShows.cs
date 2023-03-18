@@ -24,7 +24,7 @@ namespace FallGuysStats {
             this.cboEditShows.SelectedIndex = 0;
         }
 
-        private void cboEditShows_Changed(object sender, EventArgs e) {
+        private void CboEditShows_Changed(object sender, EventArgs e) {
             this.SelectedProfileId = this.Profiles.Find(p => p.ProfileName == (string)this.cboEditShows.SelectedItem).ProfileId;
         }
 

@@ -13,7 +13,7 @@ namespace FallGuysStats {
         private DataGridViewComboBoxColumn cboShowsList;
         private int selectedRowIndex;
 
-        private string[] _shows = {
+        private readonly string[] _shows = {
             "",
             "main_show",
             "squads_2player_template",
@@ -48,8 +48,9 @@ namespace FallGuysStats {
         }
 
         private void InitProfileList() {
-            this.cboShowsList = new DataGridViewComboBoxColumn();
-            this.cboShowsList.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.cboShowsList = new DataGridViewComboBoxColumn {
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+            };
             DataTable showsData = new DataTable();
             showsData.Columns.Add("showName");
             showsData.Columns.Add("showId");
@@ -61,21 +62,21 @@ namespace FallGuysStats {
             this.cboShowsList.DataSource = showsData;
             this.cboShowsList.DisplayMember = "showName";
             this.cboShowsList.ValueMember = "showId";
-            
+
             this.ProfileList.Columns.Add("profile", "profile");
             this.ProfileList.Columns.Add(this.cboShowsList);
             this.ProfileList.Columns[0].ReadOnly = true;
             this.ProfileList.Columns[0].DataPropertyName = "profile";
             this.ProfileList.Columns[1].Name = "show";
             this.ProfileList.Columns[1].DataPropertyName = "show";
-            
+
             this.ProfilesData = new DataTable();
             this.ProfilesData.Columns.Add("profile");
             this.ProfilesData.Columns.Add("show");
-            
+
             this.ProfileList.DataSource = this.ProfilesData;
         }
-        
+
         private void ReloadProfileList() {
             this.Profiles = this.Profiles.OrderBy(p => p.ProfileOrder).ToList();
             this.ProfilesData.Clear();

@@ -89,7 +89,7 @@ namespace FallGuysStats {
             };
             this.cboOverlayBackground.SetImageItemData(imageItemArray);
             this.cboOverlayBackground.SelectedIndex = this.CurrentSettings.OverlayBackground;
-            
+
             switch (this.CurrentSettings.OverlayColor) {
                 case 0: this.cboOverlayColor.SelectedItem = Multilingual.GetWord("settings_transparent"); break;
                 case 1: this.cboOverlayColor.SelectedItem = Multilingual.GetWord("settings_black"); break;
@@ -443,7 +443,7 @@ namespace FallGuysStats {
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_location", "eng");
                 } else if (this.DisplayLang == 1) { // French
                     this.txtGameShortcutLocation.Location = new Point(204, 21);
-                    this.txtGameShortcutLocation.Size = new Size(470, 23);
+                    this.txtGameShortcutLocation.Size = new Size(450, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_location", "fre");
                 } else if (this.DisplayLang == 2) { // Korean
                     this.txtGameShortcutLocation.Location = new Point(250, 22);
@@ -474,7 +474,7 @@ namespace FallGuysStats {
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_exe_location", "eng");
                 } else if (this.DisplayLang == 1) { // French
                     this.txtGameExeLocation.Location = new Point(184, 21);
-                    this.txtGameExeLocation.Size = new Size(490, 23);
+                    this.txtGameExeLocation.Size = new Size(470, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_exe_location", "fre");
                 } else if (this.DisplayLang == 2) { // Korean
                     this.txtGameExeLocation.Location = new Point(228, 22);
@@ -512,11 +512,11 @@ namespace FallGuysStats {
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
         private void ChangeLanguage(int lang) {
-			this.Text = Multilingual.GetWord("settings_title");
             this.DisplayLang = lang;
             this.Font = new Font(Overlay.GetMainFontFamilies(this.DisplayLang), 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
             int tempLanguage = Stats.CurrentLanguage;
             Stats.CurrentLanguage = lang;
+            this.Text = Multilingual.GetWord("settings_title");
             this.lblOverlayFontExample.Font = new Font(Overlay.GetDefaultFontFamilies(this.cboMultilingual.SelectedIndex), 18, FontStyle.Regular, GraphicsUnit.Pixel);
             this.chkChangeHoopsieLegends.Visible = true;
             this.chkChangeHoopsieLegends.Checked = this.CurrentSettings.HoopsieHeros;
@@ -527,21 +527,22 @@ namespace FallGuysStats {
 
                 this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
 
-                this.txtPreviousWins.Location = new Point(105, 23);
-                this.lblPreviousWinsNote.Location = new Point(147, 23);
-                this.chkAutoUpdate.Location = new Point(290, 23);
-                this.chkChangeHoopsieLegends.Location = new Point(451, 23);
+                this.txtPreviousWins.Location = new Point(111, 17);
+                this.lblPreviousWinsNote.Location = new Point(136, 20);
+                this.chkAutoUpdate.Location = new Point(285, 20);
+                this.chkChangeHoopsieLegends.Location = new Point(446, 20);
 
-                this.lblWinsFilter.Location = new Point(400, 28);
-                this.lblQualifyFilter.Location = new Point(390, 64);
-                this.lblFastestFilter.Location = new Point(365, 100);
+                this.txtCycleTimeSeconds.Location = new Point(106, 140);
+                this.lblCycleTimeSecondsTag.Location = new Point(130, 143);
 
-                this.lblOverlayBackground.Location = new Point(391, 136);
-                this.lblOverlayColor.Location = new Point(429, 173);
-				this.lblOverlayFont.Location = new Point(12, 275);
+                this.lblWinsFilter.Location = new Point(415, 27);
+                this.lblQualifyFilter.Location = new Point(407, 56);
+                this.lblFastestFilter.Location = new Point(383, 85);
 
-                this.txtCycleTimeSeconds.Location = new Point(96, 171);
-                this.lblCycleTimeSecondsTag.Location = new Point(127, 170);
+                this.lblOverlayBackground.Location = new Point(404, 117);
+                this.lblOverlayColor.Location = new Point(441, 146);
+
+                this.lblOverlayFont.Location = new Point(12, 275);
 
                 this.grpLaunchPlatform.Size = new Size(88, 56);
                 this.lblGameExeLocation.Location = new Point(107, 24);
@@ -567,27 +568,28 @@ namespace FallGuysStats {
                 this.chkAutoUpdate.Location = new Point(250, 20);
                 this.chkChangeHoopsieLegends.Location = new Point(386, 20);
 
+                this.txtCycleTimeSeconds.Location = new Point(194, 140);
+                this.lblCycleTimeSecondsTag.Location = new Point(218, 143);
+
                 this.lblWinsFilter.Location = new Point(392, 27);
                 this.lblQualifyFilter.Location = new Point(413, 56);
                 this.lblFastestFilter.Location = new Point(366, 85);
 
-                this.lblOverlayBackground.Location = new Point(417, 136);
-                this.lblOverlayColor.Location = new Point(444, 146);
-                this.lblOverlayFont.Location = new Point(24, 275);
+                this.lblOverlayBackground.Location = new Point(398, 117);
+                this.lblOverlayColor.Location = new Point(419, 146);
 
-                this.txtCycleTimeSeconds.Location = new Point(194, 140);
-                this.lblCycleTimeSecondsTag.Location = new Point(218, 143);
+                this.lblOverlayFont.Location = new Point(24, 275);
 
                 this.grpLaunchPlatform.Size = new Size(88, 56);
                 this.lblGameExeLocation.Location = new Point(107, 24);
                 this.chkAutoLaunchGameOnStart.Location = new Point(110, 54);
                 if (this.LaunchPlatform == 0) {
                     this.txtGameShortcutLocation.Location = new Point(204, 21);
-                    this.txtGameShortcutLocation.Size = new Size(470, 23);
+                    this.txtGameShortcutLocation.Size = new Size(450, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_shortcut_location");
                 } else {
                     this.txtGameExeLocation.Location = new Point(184, 21);
-                    this.txtGameExeLocation.Size = new Size(490, 23);
+                    this.txtGameExeLocation.Size = new Size(470, 23);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
             } else if (this.DisplayLang == 2) { // Korean
@@ -597,21 +599,21 @@ namespace FallGuysStats {
 
                 this.grpStats.Font = new Font(Font.FontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel, ((byte)(0)));
 
-                this.txtPreviousWins.Location = new Point(94, 23);
-                this.lblPreviousWinsNote.Location = new Point(140, 23);
-                this.chkAutoUpdate.Location = new Point(285, 23);
-                this.chkChangeHoopsieLegends.Location = new Point(446, 23);
+                this.txtPreviousWins.Location = new Point(96, 17);
+                this.lblPreviousWinsNote.Location = new Point(128, 20);
+                this.chkAutoUpdate.Location = new Point(285, 20);
+                this.chkChangeHoopsieLegends.Location = new Point(446, 20);
 
-                this.lblWinsFilter.Location = new Point(391, 28);
-                this.lblQualifyFilter.Location = new Point(405, 64);
-                this.lblFastestFilter.Location = new Point(367, 100);
+                this.lblWinsFilter.Location = new Point(396, 27);
+                this.lblQualifyFilter.Location = new Point(411, 56);
+                this.lblFastestFilter.Location = new Point(369, 85);
 
                 this.lblOverlayBackground.Location = new Point(403, 136);
-                this.lblOverlayColor.Location = new Point(414, 173);
-				this.lblOverlayFont.Location = new Point(12, 275);
+                this.lblOverlayColor.Location = new Point(416, 146);
+                this.lblOverlayFont.Location = new Point(12, 275);
 
-                this.txtCycleTimeSeconds.Location = new Point(83, 171);
-                this.lblCycleTimeSecondsTag.Location = new Point(114, 170);
+                this.txtCycleTimeSeconds.Location = new Point(93, 140);
+                this.lblCycleTimeSecondsTag.Location = new Point(117, 143);
 
                 this.grpLaunchPlatform.Size = new Size(88, 56);
                 this.lblGameExeLocation.Location = new Point(107, 24);
@@ -637,16 +639,16 @@ namespace FallGuysStats {
                 this.chkAutoUpdate.Location = new Point(275, 20);
                 this.chkChangeHoopsieLegends.Location = new Point(407, 20);
 
-                this.lblWinsFilter.Location = new Point(355, 28);
-                this.lblQualifyFilter.Location = new Point(355, 64);
-                this.lblFastestFilter.Location = new Point(331, 100);
+                this.lblWinsFilter.Location = new Point(300, 28);
+                this.lblQualifyFilter.Location = new Point(389, 56);
+                this.lblFastestFilter.Location = new Point(356, 85);
 
                 this.lblOverlayBackground.Location = new Point(376, 136);
-                this.lblOverlayColor.Location = new Point(363, 173);
+                this.lblOverlayColor.Location = new Point(390, 146);
                 this.lblOverlayFont.Location = new Point(12, 275);
 
-                this.txtCycleTimeSeconds.Location = new Point(105, 171);
-                this.lblCycleTimeSecondsTag.Location = new Point(135, 170);
+                this.txtCycleTimeSeconds.Location = new Point(105, 140);
+                this.lblCycleTimeSecondsTag.Location = new Point(131, 143);
 
                 this.grpLaunchPlatform.Size = new Size(125, 56);
                 this.lblGameExeLocation.Location = new Point(147, 24);
@@ -680,7 +682,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(423, 101);
 
                 this.lblOverlayBackground.Location = new Point(457, 136);
-                this.lblOverlayColor.Location = new Point(469, 173);
+                this.lblOverlayColor.Location = new Point(482, 174);
                 this.lblOverlayFont.Location = new Point(12, 331);
 
                 this.txtCycleTimeSeconds.Location = new Point(90, 170);
@@ -712,10 +714,10 @@ namespace FallGuysStats {
 
             this.grpOverlay.Text = Multilingual.GetWord("settings_overlay");
 
-            this.chkHideWinsInfo.Text = Multilingual.GetWord("settings_hide_wins_info");;
+            this.chkHideWinsInfo.Text = Multilingual.GetWord("settings_hide_wins_info");
             this.chkHideRoundInfo.Text = Multilingual.GetWord("settings_hide_round_info");
             this.chkHideTimeInfo.Text = Multilingual.GetWord("settings_hide_time_info");
-            this.chkHidePercentages.Text = Multilingual.GetWord("settings_hide_percentages")
+            this.chkHidePercentages.Text = Multilingual.GetWord("settings_hide_percentages");
             this.chkShowTabs.Text = Multilingual.GetWord("settings_show_tab_for_currnet_filter__profile");
 
             this.lblCycleTimeSeconds.Text = Multilingual.GetWord("settings_cycle_time");
@@ -853,7 +855,7 @@ namespace FallGuysStats {
             this.grpLaunchPlatform.Text = Multilingual.GetWord("settings_game_options_platform");
             //this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_shortcut_location");
             this.btnGameExeLocationBrowse.Text = Multilingual.GetWord("settings_browse");
-            this.chkAutoLaunchGameOnStart.Text = Multilingual.GetWord("settings_auto_launch_fall_guys_on_tracker");
+            this.chkAutoLaunchGameOnStart.Text = Multilingual.GetWord("settings_launch_fall_guys_on_tracker_launch");
 
             //this.lblLanguageSelection.Text = Multilingual.GetWord("settings_language");
 
