@@ -118,7 +118,7 @@ namespace FallGuysStats {
                             {"finals_detail_tooltiptext", "Click to view rounds (reached finals only) stats."},
 
                             {"message_already_running_caption", "Already Running"},
-                            {"message_fallguys_already_running", "Fall Guys is already running."},
+                            {"message_fall_guys_already_running", "Fall Guys is already running."},
                             {"message_tracker_already_running", "Tracker is already running."},
                             {"message_register_shortcut_caption", "Need to set shortcut file path"},
                             {"message_register_shortcut", "Please set the shortcut file path of the Fall Guys."},
@@ -419,7 +419,7 @@ namespace FallGuysStats {
                             {"finals_detail_tooltiptext", "Cliquer pour voir les stats des manches (finale atteinte seulement)"},
 
                             {"message_already_running_caption", "Déjà lancé"},
-                            {"message_fallguys_already_running", "Fall Guys a déjà été lancé"},
+                            {"message_fall_guys_already_running", "Fall Guys a déjà été lancé"},
                             {"message_tracker_already_running", "Le tracker a déjà été lancé."},
                             {"message_register_shortcut_caption", "Chemin d'accès au raccourci de Fall Guys non configuré"},
                             {"message_register_shortcut", "Veuillez configurer le chemin d'accès au raccourci de Fall Guys"},
@@ -720,7 +720,7 @@ namespace FallGuysStats {
                             {"finals_detail_tooltiptext", "결승전 통계를 보려면 클릭하세요."},
 
                             {"message_already_running_caption", "이미 실행 중"},
-                            {"message_fallguys_already_running", "폴 가이즈 클라이언트가 이미 실행 중입니다."},
+                            {"message_fall_guys_already_running", "폴 가이즈 클라이언트가 이미 실행 중입니다."},
                             {"message_tracker_already_running", "스탯츠 이미 실행 중입니다."},
                             {"message_register_shortcut_caption", "바로가기 파일 경로 설정 필요"},
                             {"message_register_shortcut", "폴 가이즈 게임의 바로가기 파일 경로를 설정해 주세요."},
@@ -1021,7 +1021,7 @@ namespace FallGuysStats {
                             {"finals_detail_tooltiptext", "クリックして決勝戦の統計を見る"},
 
                             {"message_already_running_caption", "既に実行中"},
-                            {"message_fallguys_already_running", "Fall Guysは既に実行中です。"},
+                            {"message_fall_guys_already_running", "Fall Guysは既に実行中です。"},
                             {"message_tracker_already_running", "Statsは既に実行中です。"},
                             {"message_register_shortcut_caption", "ショートカットファイルパスの設定が必要"},
                             {"message_register_shortcut", "Fall Guysのショートカットファイルパスを設定してください。"},
@@ -1322,7 +1322,7 @@ namespace FallGuysStats {
                             {"finals_detail_tooltiptext", "点击查看决赛统计信息。"},
 
                             {"message_already_running_caption", "已在运行"},
-                            {"message_fallguys_already_running", "糖豆人已在运行。"},
+                            {"message_fall_guys_already_running", "糖豆人已在运行。"},
                             {"message_tracker_already_running", "统计已在运行。"},
                             {"message_register_shortcut_caption", "需要设置快捷方式路径"},
                             {"message_register_shortcut", "请设置糖豆人的快捷方式路径。"},

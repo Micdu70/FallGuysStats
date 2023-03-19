@@ -121,42 +121,41 @@ namespace FallGuysStats {
             }
         }
         private Font GetFontForLongText(string text) {
-            return new Font(this.Font.FontFamily, this.GetRoundNameFontSize(text.Length, 21), this.Font.Style, GraphicsUnit.Point);
+            return ((Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) && text.Length > 14) || (Stats.CurrentLanguage == 2 && text.Length > 12) || (Stats.CurrentLanguage == 3 && text.Length > 9)
+                ? new Font(this.Font.FontFamily, this.GetRoundNameFontSize(text.Length, 21), this.Font.Style, GraphicsUnit.Point)
+                : this.Font;
         }
+
         private float GetRoundNameFontSize(int textLength, int offset) {
             float weight = 1.0F;
             if (Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French
-                if (textLength > 14) {
-                    offset += 6;
-                    if (textLength == 15) {
-                        weight = 1.09F;
-                    } else if (textLength == 16) {
-                        weight = 1.1F;
-                    } else if (textLength == 17) {
-                        weight = 1.1F;
-                    } else if (textLength == 18) {
-                        weight = 1.2F;
-                    } else if (textLength == 19) {
-                        weight = 1.2F;
-                    } else if (textLength == 20) {
-                        weight = 1.3F;
-                    } else if (textLength == 21) {
-                        weight = 1.5F;
-                    } else if (textLength == 22) {
-                        weight = 1.7F;
-                    } else if (textLength == 23) {
-                        weight = 2.1F;
-                    } else if (textLength == 24) {
-                        weight = 2.6F;
-                    } else if (textLength == 25) {
-                        weight = 3.9F;
-                    } else if (textLength == 26) {
-                        weight = 7.2F;
-                    }
-                } else {
-                    return 13;
+                offset += 6;
+                if (textLength == 15) {
+                    weight = 1.09F;
+                } else if (textLength == 16) {
+                    weight = 1.1F;
+                } else if (textLength == 17) {
+                    weight = 1.1F;
+                } else if (textLength == 18) {
+                    weight = 1.2F;
+                } else if (textLength == 19) {
+                    weight = 1.2F;
+                } else if (textLength == 20) {
+                    weight = 1.3F;
+                } else if (textLength == 21) {
+                    weight = 1.5F;
+                } else if (textLength == 22) {
+                    weight = 1.7F;
+                } else if (textLength == 23) {
+                    weight = 2.1F;
+                } else if (textLength == 24) {
+                    weight = 2.6F;
+                } else if (textLength == 25) {
+                    weight = 3.9F;
+                } else if (textLength == 26) {
+                    weight = 7.2F;
                 }
-            } else if (Stats.CurrentLanguage == 2 && textLength > 12) { // Korean
+            } else if (Stats.CurrentLanguage == 2) { // Korean
                 offset += 3;
                 if (textLength == 13) {
                     weight = 1.15F;
@@ -165,7 +164,7 @@ namespace FallGuysStats {
                 } else if (textLength == 15) {
                     weight = 1.225F;
                 }
-            } else if (Stats.CurrentLanguage == 3 && textLength > 9) { // Japanese
+            } else if (Stats.CurrentLanguage == 3) { // Japanese
                 if (textLength == 10) {
                     weight = 1.075F;
                 } else if (textLength == 11) {

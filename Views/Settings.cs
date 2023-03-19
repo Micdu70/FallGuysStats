@@ -66,6 +66,7 @@ namespace FallGuysStats {
 
             ImageItem[] imageItemArray = {
                 new ImageItem(Properties.Resources.background, "", "Default", this.Font),
+                new ImageItem(Properties.Resources.background_aliens, "aliens", "Aliens", this.Font),
                 new ImageItem(Properties.Resources.background_candycane, "candycane", "Candy Cane", this.Font),
                 new ImageItem(Properties.Resources.background_coffee, "coffee", "Coffee", this.Font),
                 new ImageItem(Properties.Resources.background_dove, "dove", "Dove", this.Font),
@@ -78,6 +79,7 @@ namespace FallGuysStats {
                 new ImageItem(Properties.Resources.background_parade_guy, "parade_guy", "Parade Guy", this.Font),
                 new ImageItem(Properties.Resources.background_party_pegwin, "party_pegwin", "Party Pegwin", this.Font),
                 new ImageItem(Properties.Resources.background_penguin, "penguin", "Penguin", this.Font),
+                new ImageItem(Properties.Resources.background_popcorn, "popcorn", "Pop-corn", this.Font),
                 new ImageItem(Properties.Resources.background_suits_you, "suits_you", "Suits You", this.Font),
                 new ImageItem(Properties.Resources.background_sunny_guys, "sunny_guys", "Sunny Guys", this.Font),
                 new ImageItem(Properties.Resources.background_ta_da, "ta_da", "Ta Da", this.Font),
@@ -792,6 +794,7 @@ namespace FallGuysStats {
             this.lblFastestFilter.Text = Multilingual.GetWord("settings_fastest__longest_filter");
             //ImageItem[] imageItemArray = {
             //    new ImageItem(Properties.Resources.background, "", "Default", this.Font),
+            //    new ImageItem(Properties.Resources.background_aliens, "aliens", "Aliens", this.Font),
             //    new ImageItem(Properties.Resources.background_candycane, "candycane", "Candy Cane", this.Font),
             //    new ImageItem(Properties.Resources.background_coffee, "coffee", "Coffee", this.Font),
             //    new ImageItem(Properties.Resources.background_dove, "dove", "Dove", this.Font),
@@ -804,6 +807,7 @@ namespace FallGuysStats {
             //    new ImageItem(Properties.Resources.background_parade_guy, "parade_guy", "Parade Guy", this.Font),
             //    new ImageItem(Properties.Resources.background_party_pegwin, "party_pegwin", "Party Pegwin", this.Font),
             //    new ImageItem(Properties.Resources.background_penguin, "penguin", "Penguin", this.Font),
+            //    new ImageItem(Properties.Resources.background_popcorn, "popcorn", "Pop-corn", this.Font),
             //    new ImageItem(Properties.Resources.background_suits_you, "suits_you", "Suits You", this.Font),
             //    new ImageItem(Properties.Resources.background_sunny_guys, "sunny_guys", "Sunny Guys", this.Font),
             //    new ImageItem(Properties.Resources.background_ta_da, "ta_da", "Ta Da", this.Font),

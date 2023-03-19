@@ -329,12 +329,6 @@ namespace FallGuysStats {
             "Magenta",
             "Red",
             "Green",
-            "Blue",
-            "Transparent",
-            "Black",
-            "Magenta",
-            "Red",
-            "Green",
             "Blue"});
             this.cboOverlayColor.Location = new System.Drawing.Point(447, 123);
             this.cboOverlayColor.Name = "cboOverlayColor";
@@ -786,7 +780,9 @@ namespace FallGuysStats {
             this.chkAutoUpdate.TabIndex = 3;
             this.chkAutoUpdate.Text = "Auto Update Program";
             this.chkAutoUpdate.UseVisualStyleBackColor = true;
+#if !AllowUpdate
             this.chkAutoUpdate.Visible = false;
+#endif
             // 
             // lblPreviousWinsNote
             // 

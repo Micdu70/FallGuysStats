@@ -31,7 +31,7 @@ namespace FallGuysStats {
     public class LogRound {
         public bool CountingPlayers;
         public int Players;
-        public bool CurrentlyInParty;
+        public bool InParty;
         public bool PrivateLobby;
         public bool FindingPosition;
         public bool IsFinal;
@@ -383,7 +383,7 @@ namespace FallGuysStats {
                 }
                 logRound.Info.Round = round.Count;
                 logRound.Info.Start = line.Date;
-                logRound.Info.InParty = logRound.CurrentlyInParty;
+                logRound.Info.InParty = logRound.InParty;
                 logRound.Info.PrivateLobby = logRound.PrivateLobby;
                 logRound.Info.GameDuration = logRound.Duration;
                 logRound.CountingPlayers = true;
@@ -405,7 +405,7 @@ namespace FallGuysStats {
                 || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateMainMenu with FGClient.StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0) {
                 LogRound.IsSpectating = false;
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby") > 0;
-                logRound.CurrentlyInParty = logRound.PrivateLobby || (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) > 0);
+                logRound.InParty = !logRound.PrivateLobby || (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) < 0);
                 if (logRound.Info != null) {
                     if (logRound.Info.End == DateTime.MinValue) {
                         logRound.Info.End = line.Date;
@@ -542,11 +542,11 @@ namespace FallGuysStats {
                             if (roundNum == 1) {
                                 showStart = temp.Start;
                             }
-                            temp.ShowStart = showStart;
-                            temp.Playing = false;
                             temp.Round = roundNum;
+                            temp.ShowStart = showStart;
+                            logRound.InParty = temp.InParty;
                             logRound.PrivateLobby = temp.PrivateLobby;
-                            logRound.CurrentlyInParty = temp.InParty;
+                            temp.Playing = false;
                         } else {
                             return false;
                         }

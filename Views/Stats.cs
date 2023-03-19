@@ -17,6 +17,8 @@ using System.Threading;
 using System.Windows.Forms;
 using LiteDB;
 using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+
 namespace FallGuysStats {
     public partial class Stats : Form {
         [STAThread]
@@ -132,17 +134,20 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (this.CurrentSettings.FrenchyEditionUpdate < 1) {
-                        this.CurrentSettings.FrenchyEditionUpdate = 1;
+                    if (this.CurrentSettings.FrenchyEditionDB < 1) {
+                        this.CurrentSettings.FrenchyEditionDB = 1;
+                        this.CurrentSettings.HideOverlayPercentages = true;
                         this.CurrentSettings.WinsFilter = 1;
                         this.CurrentSettings.QualifyFilter = 1;
                         this.CurrentSettings.FastestFilter = 0;
                         this.CurrentSettings.OverlayColor = 0;
+                        this.CurrentSettings.OverlayVisible = true;
                         this.CurrentSettings.SwitchBetweenPlayers = false;
                         this.CurrentSettings.PlayerByConsoleType = true;
                         this.CurrentSettings.ColorByRoundType = true;
                         this.CurrentSettings.AutoChangeProfile = true;
                         this.CurrentSettings.AutoUpdate = true;
+                        this.CurrentSettings.Version = 23;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -765,27 +770,11 @@ namespace FallGuysStats {
                 this.CurrentSettings.Version = 23;
                 this.SaveUserSettings();
             }
-
-            if (this.CurrentSettings.Version == 23) {
-                this.CurrentSettings.GameExeLocation = string.Empty;
-                this.CurrentSettings.GameShortcutLocation = string.Empty;
-                this.CurrentSettings.AutoLaunchGameOnStartup = false;
-                this.CurrentSettings.Version = 24;
-                this.SaveUserSettings();
-            }
-
-            if (this.CurrentSettings.Version == 24) {
-                this.CurrentSettings.WinsFilter = 1;
-                this.CurrentSettings.QualifyFilter = 1;
-                this.CurrentSettings.FastestFilter = 1;
-                this.CurrentSettings.Version = 25;
-                this.SaveUserSettings();
-            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
                 ID = 1,
-                FrenchyEditionUpdate = 1,
+                FrenchyEditionDB = 1,
                 CycleTimeSeconds = 5,
                 FilterType = 0,
                 SelectedProfile = 0,
@@ -810,7 +799,7 @@ namespace FallGuysStats {
                 OnlyShowGold = false,
                 OnlyShowPing = false,
                 OnlyShowFinalStreak = false,
-                OverlayVisible = false,
+                OverlayVisible = true,
                 OverlayNotOnTop = false,
                 PlayerByConsoleType = true,
                 ColorByRoundType = true,
@@ -818,7 +807,7 @@ namespace FallGuysStats {
                 PreviousWins = 0,
                 WinsFilter = 1,
                 QualifyFilter = 1,
-                FastestFilter = 1,
+                FastestFilter = 0,
                 HideWinsInfo = false,
                 HideRoundInfo = false,
                 HideTimeInfo = false,
@@ -831,7 +820,7 @@ namespace FallGuysStats {
                 FormHeight = null,
                 OverlayWidth = 786,
                 OverlayHeight = 99,
-                HideOverlayPercentages = false,
+                HideOverlayPercentages = true,
                 HoopsieHeros = false,
                 Version = 23,
                 AutoLaunchGameOnStartup = false,
@@ -1251,22 +1240,22 @@ namespace FallGuysStats {
 
                 bool isInWinsFilter = !endShow.PrivateLobby && (this.CurrentSettings.WinsFilter == 0 ||
                     (this.CurrentSettings.WinsFilter == 1 && this.IsInStatsFilter(endShow.Start) && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.WinsFilter == 2 && endShow.Start > SeasonStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.WinsFilter == 3 && endShow.Start > WeekStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.WinsFilter == 4 && endShow.Start > DayStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.WinsFilter == 5 && endShow.Start > SessionStart && this.IsInPartyFilter(info)));
+                    (this.CurrentSettings.WinsFilter == 2 && endShow.Start > SeasonStart) ||
+                    (this.CurrentSettings.WinsFilter == 3 && endShow.Start > WeekStart) ||
+                    (this.CurrentSettings.WinsFilter == 4 && endShow.Start > DayStart) ||
+                    (this.CurrentSettings.WinsFilter == 5 && endShow.Start > SessionStart));
                 bool isInQualifyFilter = !endShow.PrivateLobby && (this.CurrentSettings.QualifyFilter == 0 ||
                     (this.CurrentSettings.QualifyFilter == 1 && this.IsInStatsFilter(endShow.Start) && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.QualifyFilter == 2 && endShow.Start > SeasonStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.QualifyFilter == 3 && endShow.Start > WeekStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.QualifyFilter == 4 && endShow.Start > DayStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.QualifyFilter == 5 && endShow.Start > SessionStart && this.IsInPartyFilter(info)));
+                    (this.CurrentSettings.QualifyFilter == 2 && endShow.Start > SeasonStart) ||
+                    (this.CurrentSettings.QualifyFilter == 3 && endShow.Start > WeekStart) ||
+                    (this.CurrentSettings.QualifyFilter == 4 && endShow.Start > DayStart) ||
+                    (this.CurrentSettings.QualifyFilter == 5 && endShow.Start > SessionStart));
                 bool isInFastestFilter = this.CurrentSettings.FastestFilter == 0 ||
                     (this.CurrentSettings.FastestFilter == 1 && this.IsInStatsFilter(endShow.Start) && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.FastestFilter == 2 && endShow.Start > SeasonStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.FastestFilter == 3 && endShow.Start > WeekStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.FastestFilter == 4 && endShow.Start > DayStart && this.IsInPartyFilter(info)) ||
-                    (this.CurrentSettings.FastestFilter == 5 && endShow.Start > SessionStart && this.IsInPartyFilter(info));
+                    (this.CurrentSettings.FastestFilter == 2 && endShow.Start > SeasonStart) ||
+                    (this.CurrentSettings.FastestFilter == 3 && endShow.Start > WeekStart) ||
+                    (this.CurrentSettings.FastestFilter == 4 && endShow.Start > DayStart) ||
+                    (this.CurrentSettings.FastestFilter == 5 && endShow.Start > SessionStart);
 
                 if (info.ShowID != lastShow) {
                     lastShow = info.ShowID;
@@ -1832,7 +1821,7 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_fallguys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -1855,7 +1844,7 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_fallguys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -2139,13 +2128,23 @@ namespace FallGuysStats {
                         overlay.FlipDisplay(this.CurrentSettings.FixedFlippedDisplay);
                         overlay.Location = new Point(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value);
                     } else {
-                        overlay.Location = this.Location;
+                        Screen screen = this.GetCurrentScreen(this.Location);
+                        if (this.CurrentSettings.FlippedDisplay) {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width - screen.WorkingArea.Right + overlay.Width, screen.WorkingArea.Top);
+                        } else {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width, screen.WorkingArea.Top);
+                        }
                     }
                 } else {
                     if (this.CurrentSettings.OverlayLocationX.HasValue && this.IsOnScreen(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value, overlay.Width)) {
                         overlay.Location = new Point(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value);
                     } else {
-                        overlay.Location = this.Location;
+                        Screen screen = this.GetCurrentScreen(this.Location);
+                        if (this.CurrentSettings.FlippedDisplay) {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width - screen.WorkingArea.Right + overlay.Width, screen.WorkingArea.Top);
+                        } else {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width, screen.WorkingArea.Top);
+                        }
                     }
                 }
             }

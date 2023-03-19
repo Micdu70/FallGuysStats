@@ -4,7 +4,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.147** *~ 18/03/2023*
+**Dernière version: 1.148** *~ 19/03/2023*
 
   - => [FallGuysStats.zip](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip)
 
@@ -78,34 +78,50 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Pas de solution trouvée pour l'instant*
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.148 *~ 19/03/2023*
+    - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - +Corrigé: L'option "MAJ auto. du tracker" n'était plus visible dans la version précédente
+    - ++Ajouté: Overlay => Arrière-plan "Aliens"
+    - ++Ajouté: Overlay => Arrière-plan "Pop-corn"
+    - ++Changé: Les options/réglages "par défaut" sont:
+      1) Langue 'Français' sélectionnée
+      2) "MAJ. auto du tracker" sélectionnée
+      3) L'overlay est affiché
+      4) "Masquer les pourcentages" pour l'overlay sélectionnée
+      5) "Joueurs seul." pour l'overlay sélectionnée (au lieu de "Cycle \*Joueurs / Ping\*")
+      6) "Filtre 'Stats' et 'Parties'" sélectionnée pour les filtres "\*Wins / Finales\*" et "\*Qualif. / Or\*" sur l'overlay
+      7) "Toutes les stats" sélectionnée pour le filtre "\*Meilleur / Plus long\*" sur l'overlay
+      8) "Afficher joueurs par support de jeu" pour l'overlay sélectionnée
+      9) "Colorer manches selon leur type" pour l'overlay sélectionnée
+     10) "Passer auto. sur le profil lié" pour l'overlay sélectionnée
   - 1.147 *~ 18/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- Pleins de changement à découvrir ! :)
+    - Pleins de changement à découvrir ! :)
   - 1.146 *~ 15/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
-	- ++Changé: Changements mineurs pour l'overlay (sur certaines manches)
+    - ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
+    - ++Changé: Changements mineurs pour l'overlay (sur certaines manches)
   - 1.145 *~ 09/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- +Corrigé: L'ordre et le tri des manches, dans la fenêtre principale du tracker, pour la langue 'Français' et 'English'
+    - +Corrigé: L'ordre et le tri des manches, dans la fenêtre principale du tracker, pour la langue 'Français' et 'English'
   - 1.144 *~ 07/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Changé: Les deux manches "Survie" avec un hoverboard sont maintenant configurées comme si c'était des manches "Course" => L'overlay se basera sur le meilleur temps réalisé - au lieu du plus long temps - pour colorer l'info 'Finish' (en cas de record personnel par exemple)
-	- ++Changé: L'ordre initial des manches, dans la fenêtre principale du tracker, sera en fonction de leur nom en français (au lieu de l'anglais)
+    - ++Changé: Les deux manches "Survie" avec un hoverboard sont maintenant configurées comme si c'était des manches "Course" => L'overlay se basera sur le meilleur temps réalisé - au lieu du plus long temps - pour colorer l'info 'Finish' (en cas de record personnel par exemple)
+    - ++Changé: L'ordre initial des manches, dans la fenêtre principale du tracker, sera en fonction de leur nom en français (au lieu de l'anglais)
   - 1.143 *~ 06/03/2023*
     - {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
   - 1.142 *~ 06/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
-	- ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
+    - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
+    - ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
-	- ++Changé: Divers changements (par @qutrits et moi-même)
+    - ++Changé: Divers changements (par @qutrits et moi-même)
   - 1.141 *~ 04/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-	- ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera aucun numéro de manche
-	- +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
+    - ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera aucun numéro de manche
+    - +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
   - 1.140 *~ 03/03/2023*
     - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)
@@ -114,29 +130,29 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - ++Changé: Divers petits changements...
   - 1.139 *~ 26/02/2023*
     - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du tracker
-	- +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
-	- ++Changé: Divers changements mineurs...
+    - +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
+    - ++Changé: Divers changements mineurs...
   - 1.138 *~ 22/02/2023*
     - ++Hotfix: Votre ancienne configuration ne sera pas perdue si vous venez de la Version Officielle du tracker\*
-	- \* Cependant, les options "par défaut" données ci-après seront appliquées au passage à la "FE"
+    - \* Cependant, les options "par défaut" données ci-après seront appliquées au passage à la "FE"
     - ++Changé: Les options "par défaut" sont:
-	1) Langue 'Français' sélectionnée
-	2) "MAJ. auto du tracker" activée
-	3) "Joueurs seul." pour l'overlay sélectionnée (au lieu de "Cycle \*Joueurs / Ping\*")
-	4) "Afficher joueurs par type de support" pour l'overlay activée
-	5) "Colorer manches selon leur type" pour l'overlay activée
+      1) Langue 'Français' sélectionnée
+      2) "MAJ. auto du tracker" activée
+      3) "Joueurs seul." pour l'overlay sélectionnée (au lieu de "Cycle \*Joueurs / Ping\*")
+      4) "Afficher joueurs par type de support" pour l'overlay activée
+    5) "Colorer manches selon leur type" pour l'overlay activée
 
   - 1.137 *~ 21/02/2023*
     - ++++N.B.: Basée sur la Version Officielle 1.136 (datant du 12 février 2023)
-	- ++Ajouté: Langue 'Français'
-	- ++Ajouté: Type de manche "Logique" et "Invisibeans"
-	- +Corrigé: Visuel de l'interface utilisateur dans la fenêtre de configuration
-	- +Corrigé: Langue 'English'
-	- +Corrigé: Filtres 'Parties'
-	- +Corrigé: Ordre et enregistrement de la configuration des filtres
-	- +Corrigé: Détection des finales en émission Duos/Groupe
-	- +Corrigé: 2 ou 3 erreurs de type de manche
-	- +Corrigé: Sélection du bon profil après déplacement des données
+    - ++Ajouté: Langue 'Français'
+    - ++Ajouté: Type de manche "Logique" et "Invisibeans"
+    - +Corrigé: Visuel de l'interface utilisateur dans la fenêtre de configuration
+    - +Corrigé: Langue 'English'
+    - +Corrigé: Filtres 'Parties'
+    - +Corrigé: Ordre et enregistrement de la configuration des filtres
+    - +Corrigé: Détection des finales en émission Duos/Groupe
+    - +Corrigé: 2 ou 3 erreurs de type de manche
+    - +Corrigé: Sélection du bon profil après déplacement des données
 
 ## Changelog récent de la Version Officielle
   - 1.135

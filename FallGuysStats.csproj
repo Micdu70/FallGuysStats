@@ -337,9 +337,10 @@
     <None Include="Resources\round_icon\team\icon_SnowyScrap.png" />
     <None Include="Resources\round_icon\team\icon_TeamTailTag.png" />
     <None Include="Resources\overlay\background.png" />
+    <None Include="Resources\overlay\background_aliens.png" />
     <None Include="Resources\overlay\background_candycane.png" />
     <None Include="Resources\overlay\background_coffee.png" />
-    <None Include="Resources\overlay\tab_unselected_dove.png" />
+    <None Include="Resources\overlay\background_dove.png" />
     <None Include="Resources\overlay\background_fall_guys_logo.png" />
     <None Include="Resources\overlay\background_helter_skelter.png" />
     <None Include="Resources\overlay\background_hex_a_thon.png" />
@@ -349,6 +350,7 @@
     <None Include="Resources\overlay\background_parade_guy.png" />
     <None Include="Resources\overlay\background_party_pegwin.png" />
     <None Include="Resources\overlay\background_penguin.png" />
+    <None Include="Resources\overlay\background_popcorn.png" />
     <None Include="Resources\overlay\background_suits_you.png" />
     <None Include="Resources\overlay\background_sunny_guys.png" />
     <None Include="Resources\overlay\background_ta_da.png" />
@@ -357,11 +359,12 @@
     <None Include="Resources\overlay\background_wallpaper_02.png" />
     <None Include="Resources\overlay\background_wallpaper_03.png" />
     <None Include="Resources\overlay\background_watermelon.png" />
-    <None Include="Resources\overlay\background_dove.png" />
     <None Include="Resources\overlay\tab_selected.png" />
     <None Include="Resources\overlay\tab_unselected.png" />
+    <None Include="Resources\overlay\tab_unselected_aliens.png" />
     <None Include="Resources\overlay\tab_unselected_candycane.png" />
     <None Include="Resources\overlay\tab_unselected_coffee.png" />
+    <None Include="Resources\overlay\tab_unselected_dove.png" />
     <None Include="Resources\overlay\tab_unselected_fall_guys_logo.png" />
     <None Include="Resources\overlay\tab_unselected_helter_skelter.png" />
     <None Include="Resources\overlay\tab_unselected_hex_a_thon.png" />
@@ -371,14 +374,15 @@
     <None Include="Resources\overlay\tab_unselected_parade_guy.png" />
     <None Include="Resources\overlay\tab_unselected_party_pegwin.png" />
     <None Include="Resources\overlay\tab_unselected_penguin.png" />
+    <None Include="Resources\overlay\tab_unselected_popcorn.png" />
     <None Include="Resources\overlay\tab_unselected_suits_you.png" />
     <None Include="Resources\overlay\tab_unselected_sunny_guys.png" />
     <None Include="Resources\overlay\tab_unselected_ta_da.png" />
     <None Include="Resources\overlay\tab_unselected_timeattack.png" />
-    <None Include="Resources\overlay\tab_unselected_watermelon.png" />
     <None Include="Resources\overlay\tab_unselected_wallpaper_01.png" />
     <None Include="Resources\overlay\tab_unselected_wallpaper_02.png" />
     <None Include="Resources\overlay\tab_unselected_wallpaper_03.png" />
+    <None Include="Resources\overlay\tab_unselected_watermelon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

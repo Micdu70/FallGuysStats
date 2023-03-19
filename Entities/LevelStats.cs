@@ -24,9 +24,9 @@ namespace FallGuysStats {
         public int PlayersPc { get; set; }
         public int PlayersBots { get; set; }
         public int PlayersEtc { get; set; }
-        public bool InParty { get; set; }
         public bool IsFinal { get; set; }
         public bool IsTeam { get; set; }
+        public bool InParty { get; set; }
         public bool PrivateLobby { get; set; }
         public DateTime Start { get; set; } = DateTime.MinValue;
         public DateTime End { get; set; } = DateTime.MinValue;
