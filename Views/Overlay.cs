@@ -33,7 +33,7 @@ namespace FallGuysStats {
         private DateTime startTime;
         private bool shiftKeyToggle;
         private bool ctrlKeyToggle;
-        private Size DefaultSize;
+        private new Size DefaultSize;
 
         private bool isPositionButtonMouseEnter;
         private Image positionNeOffBlur = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.4F);
@@ -1338,9 +1338,9 @@ namespace FallGuysStats {
             
             if (!string.IsNullOrEmpty(serializedFontColor)) {
                 ColorConverter colorConverter = new ColorConverter();
-                SetFontColor((Color)colorConverter.ConvertFromString(serializedFontColor));
+                this.SetFontColor((Color)colorConverter.ConvertFromString(serializedFontColor));
             } else {
-                SetDefaultFontColor();
+                this.SetDefaultFontColor();
             }
             
             this.Background = RecreateBackground();
@@ -1473,6 +1473,9 @@ namespace FallGuysStats {
                 if ((0x61 <= ch && ch <= 0x7A)) count++;
             }
             return count;
+        }
+        public void SetCurrentProfileForeColor(Color color) {
+            this.lblProfile.ForeColor = color;
         }
         private int GetOverlayProfileOffset(string s) {
             int sizeOfText = TextRenderer.MeasureText(s, this.lblProfile.Font).Width;
