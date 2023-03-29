@@ -73,6 +73,16 @@ namespace FallGuysStats.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background_aliens {
+            get {
+                object obj = ResourceManager.GetObject("background_aliens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap background_candycane {
             get {
                 object obj = ResourceManager.GetObject("background_candycane", resourceCulture);
@@ -186,6 +196,16 @@ namespace FallGuysStats.Properties {
         internal static System.Drawing.Bitmap background_penguin {
             get {
                 object obj = ResourceManager.GetObject("background_penguin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap background_popcorn {
+            get {
+                object obj = ResourceManager.GetObject("background_popcorn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1763,6 +1783,16 @@ namespace FallGuysStats.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tab_unselected_aliens {
+            get {
+                object obj = ResourceManager.GetObject("tab_unselected_aliens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tab_unselected_candycane {
             get {
                 object obj = ResourceManager.GetObject("tab_unselected_candycane", resourceCulture);
@@ -1876,6 +1906,16 @@ namespace FallGuysStats.Properties {
         internal static System.Drawing.Bitmap tab_unselected_penguin {
             get {
                 object obj = ResourceManager.GetObject("tab_unselected_penguin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tab_unselected_popcorn {
+            get {
+                object obj = ResourceManager.GetObject("tab_unselected_popcorn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

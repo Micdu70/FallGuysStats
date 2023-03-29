@@ -571,6 +571,9 @@
   <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="background_aliens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\overlay\background_aliens.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="background_candycane" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\background_candycane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -607,6 +610,9 @@
   <data name="background_penguin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\background_penguin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="background_popcorn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\overlay\background_popcorn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="background_suits_you" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\background_suits_you.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -639,6 +645,9 @@
   </data>
   <data name="tab_unselected" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\tab_unselected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tab_unselected_aliens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\overlay\tab_unselected_aliens.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tab_unselected_candycane" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\tab_unselected_candycane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -675,6 +684,9 @@
   </data>
   <data name="tab_unselected_penguin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\tab_unselected_penguin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tab_unselected_popcorn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\overlay\tab_unselected_popcorn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tab_unselected_suits_you" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlay\tab_unselected_suits_you.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

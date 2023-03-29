@@ -106,6 +106,7 @@ namespace FallGuysStats {
 
             ImageItem[] imageItems = {
                 new ImageItem(Properties.Resources.background, new[] { "background", "tab_unselected" }, "Default", this.Font, false),
+                new ImageItem(Properties.Resources.background_aliens, new[] { "background_aliens", "tab_unselected_aliens" }, "Aliens", this.Font, false),
                 new ImageItem(Properties.Resources.background_candycane, new[] { "background_candycane", "tab_unselected_candycane" }, "Candy Cane", this.Font, false),
                 new ImageItem(Properties.Resources.background_coffee, new[] { "background_coffee", "tab_unselected_coffee" }, "Coffee", this.Font, false),
                 new ImageItem(Properties.Resources.background_dove, new[] { "background_dove", "tab_unselected_dove" }, "Dove", this.Font, false),
@@ -118,15 +119,16 @@ namespace FallGuysStats {
                 new ImageItem(Properties.Resources.background_parade_guy, new[] { "background_parade_guy", "tab_unselected_parade_guy" }, "Parade Guy", this.Font, false),
                 new ImageItem(Properties.Resources.background_party_pegwin, new[] { "background_party_pegwin", "tab_unselected_party_pegwin" }, "Party Pegwin", this.Font, false),
                 new ImageItem(Properties.Resources.background_penguin, new[] { "background_penguin", "tab_unselected_penguin" }, "Penguin", this.Font, false),
+                new ImageItem(Properties.Resources.background_popcorn, new[] { "background_popcorn", "tab_unselected_popcorn" }, "Pop-corn", this.Font, false),
                 new ImageItem(Properties.Resources.background_suits_you, new[] { "background_suits_you", "tab_unselected_suits_you" }, "Suits You", this.Font, false),
                 new ImageItem(Properties.Resources.background_sunny_guys, new[] { "background_sunny_guys", "tab_unselected_sunny_guys" }, "Sunny Guys", this.Font, false),
+                new ImageItem(Properties.Resources.background_super_mario_bros, new[] { "background_super_mario_bros", "tab_unselected_super_mario_bros" }, "Super Mario Bros.", this.Font, false),
                 new ImageItem(Properties.Resources.background_ta_da, new[] { "background_ta_da", "tab_unselected_ta_da" }, "Ta Da", this.Font, false),
                 new ImageItem(Properties.Resources.background_timeattack, new[] { "background_timeattack", "tab_unselected_timeattack" }, "Time Attack", this.Font, false),
-                new ImageItem(Properties.Resources.background_watermelon, new[] { "background_watermelon", "tab_unselected_watermelon" }, "Watermelon", this.Font, false),
-                new ImageItem(Properties.Resources.background_super_mario_bros, new[] { "background_super_mario_bros", "tab_unselected_super_mario_bros" }, "Super Mario Bros.", this.Font, false),
                 new ImageItem(Properties.Resources.background_wallpaper_01, new[] { "background_wallpaper_01", "tab_unselected_wallpaper_01" }, "Wallpaper 01", this.Font, false),
                 new ImageItem(Properties.Resources.background_wallpaper_02, new[] { "background_wallpaper_02", "tab_unselected_wallpaper_02" }, "Wallpaper 02", this.Font, false),
-                new ImageItem(Properties.Resources.background_wallpaper_03, new[] { "background_wallpaper_03", "tab_unselected_wallpaper_03" }, "Wallpaper 03", this.Font, false)
+                new ImageItem(Properties.Resources.background_wallpaper_03, new[] { "background_wallpaper_03", "tab_unselected_wallpaper_03" }, "Wallpaper 03", this.Font, false),
+                new ImageItem(Properties.Resources.background_watermelon, new[] { "background_watermelon", "tab_unselected_watermelon" }, "Watermelon", this.Font, false)
             };
             imageItemArray.AddRange(imageItems);
             this.cboOverlayBackground.SetImageItemData(imageItemArray);
@@ -894,6 +896,7 @@ namespace FallGuysStats {
 
             //ImageItem[] imageItemArray = {
             //    new ImageItem(Properties.Resources.background, "", "Default", this.Font),
+            //    new ImageItem(Properties.Resources.background_aliens, "aliens", "Aliens", this.Font),
             //    new ImageItem(Properties.Resources.background_candycane, "candycane", "Candy Cane", this.Font),
             //    new ImageItem(Properties.Resources.background_coffee, "coffee", "Coffee", this.Font),
             //    new ImageItem(Properties.Resources.background_dove, "dove", "Dove", this.Font),
@@ -906,14 +909,16 @@ namespace FallGuysStats {
             //    new ImageItem(Properties.Resources.background_parade_guy, "parade_guy", "Parade Guy", this.Font),
             //    new ImageItem(Properties.Resources.background_party_pegwin, "party_pegwin", "Party Pegwin", this.Font),
             //    new ImageItem(Properties.Resources.background_penguin, "penguin", "Penguin", this.Font),
+            //    new ImageItem(Properties.Resources.background_popcorn, "popcorn", "Pop-corn", this.Font),
             //    new ImageItem(Properties.Resources.background_suits_you, "suits_you", "Suits You", this.Font),
             //    new ImageItem(Properties.Resources.background_sunny_guys, "sunny_guys", "Sunny Guys", this.Font),
+            //    new ImageItem(Properties.Resources.background_super_mario_bros, "super_mario_bros", "Super Mario Bros.", this.Font),
             //    new ImageItem(Properties.Resources.background_ta_da, "ta_da", "Ta Da", this.Font),
             //    new ImageItem(Properties.Resources.background_timeattack, "timeattack", "Time Attack", this.Font),
-            //    new ImageItem(Properties.Resources.background_watermelon, "watermelon", "Watermelon", this.Font),
             //    new ImageItem(Properties.Resources.background_wallpaper_01, "wallpaper_01", "Wallpaper 01", this.Font),
             //    new ImageItem(Properties.Resources.background_wallpaper_02, "wallpaper_02", "Wallpaper 02", this.Font),
             //    new ImageItem(Properties.Resources.background_wallpaper_03, "wallpaper_03", "Wallpaper 03", this.Font),
+            //    new ImageItem(Properties.Resources.background_watermelon, "watermelon", "Watermelon", this.Font)
             //};
             //this.cboOverlayBackground.SetImageItemData(imageItemArray);
             //this.cboOverlayBackground.SelectedIndex = this.CurrentSettings.OverlayBackground;
