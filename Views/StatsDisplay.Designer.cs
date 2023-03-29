@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace FallGuysStats {
+﻿namespace FallGuysStats {
     partial class StatsDisplay {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +43,7 @@ namespace FallGuysStats {
             this.chkWins.Text = "Wins";
             this.chkWins.UseCustomForeColor = true;
             this.chkWins.UseSelectable = true;
-            this.chkWins.CheckedChanged += new System.EventHandler(this.chkWins_CheckedChanged);
+            this.chkWins.CheckedChanged += new System.EventHandler(this.ChkWins_CheckedChanged);
             // 
             // chkFinals
             // 
@@ -59,7 +57,7 @@ namespace FallGuysStats {
             this.chkFinals.Text = "Finals";
             this.chkFinals.UseCustomForeColor = true;
             this.chkFinals.UseSelectable = true;
-            this.chkFinals.CheckedChanged += new System.EventHandler(this.chkFinals_CheckedChanged);
+            this.chkFinals.CheckedChanged += new System.EventHandler(this.ChkFinals_CheckedChanged);
             // 
             // chkShows
             // 
@@ -73,7 +71,7 @@ namespace FallGuysStats {
             this.chkShows.Text = "Shows";
             this.chkShows.UseCustomForeColor = true;
             this.chkShows.UseSelectable = true;
-            this.chkShows.CheckedChanged += new System.EventHandler(this.chkShows_CheckedChanged);
+            this.chkShows.CheckedChanged += new System.EventHandler(this.ChkShows_CheckedChanged);
             // 
             // formsPlot
             // 
@@ -83,8 +81,8 @@ namespace FallGuysStats {
             this.formsPlot.Name = "formsPlot";
             this.formsPlot.Size = new System.Drawing.Size(1280, 680);
             this.formsPlot.TabIndex = 4;
-            this.formsPlot.MouseLeave += new System.EventHandler(this.formsPlot_MouseLeave);
-            this.formsPlot.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formsPlot_MouseMove);
+            this.formsPlot.MouseLeave += new System.EventHandler(this.FormsPlot_MouseLeave);
+            this.formsPlot.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FormsPlot_MouseMove);
             // 
             // StatsDisplay
             // 
@@ -110,6 +108,7 @@ namespace FallGuysStats {
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StatsDisplay_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         
         #endregion

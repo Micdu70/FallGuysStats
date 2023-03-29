@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Controls;
+
 namespace FallGuysStats {
     public partial class EditProfiles : MetroFramework.Forms.MetroForm {
         public List<Profiles> Profiles { get; set; }
@@ -38,8 +39,8 @@ namespace FallGuysStats {
             "xtreme_party",
             "private_lobbies"
         };
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        private readonly DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        private readonly DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
 
         public EditProfiles() => this.InitializeComponent();
 
@@ -54,35 +55,35 @@ namespace FallGuysStats {
             this.ReloadProfileList();
             this.ProfileList.ClearSelection();
         }
-        
+
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
-            
+
             if (this.Theme == MetroThemeStyle.Light) {
                 this.dataGridViewCellStyle1.BackColor = Color.LightGray;
                 this.dataGridViewCellStyle1.ForeColor = Color.Black;
                 this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
                 //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            
+
                 this.dataGridViewCellStyle2.BackColor = Color.White;
                 this.dataGridViewCellStyle2.ForeColor = Color.Black;
                 this.dataGridViewCellStyle2.SelectionBackColor = Color.DeepSkyBlue;
                 this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             } else if (this.Theme == MetroThemeStyle.Dark) {
-                this.dataGridViewCellStyle1.BackColor = Color.FromArgb(2,2,2);
+                this.dataGridViewCellStyle1.BackColor = Color.FromArgb(2, 2, 2);
                 this.dataGridViewCellStyle1.ForeColor = Color.DarkGray;
                 this.dataGridViewCellStyle1.SelectionBackColor = Color.DarkSlateBlue;
                 //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            
-                this.dataGridViewCellStyle2.BackColor = Color.FromArgb(49,51,56);
+
+                this.dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 51, 56);
                 this.dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
                 this.dataGridViewCellStyle2.SelectionBackColor = Color.PaleGreen;
                 this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-                
+
                 this.ProfileList.AlternatingRowsDefaultCellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(225, 235, 255) : Color.FromArgb(40, 66, 66);
                 this.ProfileList.AlternatingRowsDefaultCellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
             }
-            
+
             foreach (Control c1 in Controls) {
                 if (c1 is MetroLabel ml1) {
                     ml1.Theme = theme;
@@ -127,7 +128,7 @@ namespace FallGuysStats {
                     foreach (Control c2 in gb1.Controls) {
                         if (c2 is MetroButton ml2) {
                             ml2.Theme = theme;
-                        } else if (c2 is DataGridView dgv2) {
+                            //} else if (c2 is DataGridView dgv2) {
                             //dgv2.Theme = theme;
                         }
                     }
@@ -136,8 +137,9 @@ namespace FallGuysStats {
         }
 
         private void InitProfileList() {
-            this.cboShowsList = new DataGridViewComboBoxColumn();
-            this.cboShowsList.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.cboShowsList = new DataGridViewComboBoxColumn {
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+            };
             DataTable showsData = new DataTable();
             showsData.Columns.Add("showName");
             showsData.Columns.Add("showId");
@@ -148,25 +150,25 @@ namespace FallGuysStats {
             this.cboShowsList.DataSource = showsData;
             this.cboShowsList.DisplayMember = "showName";
             this.cboShowsList.ValueMember = "showId";
-            
+
             this.ProfileList.Columns.Add("profile", "profile");
             this.ProfileList.Columns.Add(this.cboShowsList);
             this.ProfileList.Columns[0].ReadOnly = true;
             this.ProfileList.Columns[0].DataPropertyName = "profile";
             this.ProfileList.Columns[1].Name = "show";
             this.ProfileList.Columns[1].DataPropertyName = "show";
-            
+
             this.ProfilesData = new DataTable();
             this.ProfilesData.Columns.Add("profile");
             this.ProfilesData.Columns.Add("show");
-            
+
             this.ProfileList.DataSource = this.ProfilesData;
         }
-        
+
         private void ReloadProfileList() {
             this.Profiles = this.Profiles.OrderBy(p => p.ProfileOrder).ToList();
             this.ProfilesData.Clear();
-            foreach (var profile in this.Profiles) {
+            foreach (Profiles profile in this.Profiles) {
                 this.ProfilesData.Rows.Add($"{profile.ProfileName} [{AllStats.FindAll(r => r.Profile == profile.ProfileId).Count} {Multilingual.GetWord("profile_rounds_suffix")}]", profile.LinkedShowId);
             }
             this.Profiles = this.Profiles.OrderByDescending(p => p.ProfileOrder).ToList();
@@ -193,7 +195,7 @@ namespace FallGuysStats {
         }
 
         private void ProfileList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
-            var datagridview = sender as DataGridView;
+            DataGridView datagridview = sender as DataGridView;
             if (datagridview.CurrentCell.ColumnIndex == 1 & e.Control is ComboBox) {
                 ComboBox cb = e.Control as ComboBox;
                 this.selectedRowIndex = cb.SelectedIndex;
@@ -219,7 +221,7 @@ namespace FallGuysStats {
         }
 
         private void ProfileList_CellClick(object sender, DataGridViewCellEventArgs e) {
-            var datagridview = sender as DataGridView;
+            DataGridView datagridview = sender as DataGridView;
             if (e.ColumnIndex == 1) {
                 datagridview.BeginEdit(true);
                 ((ComboBox)datagridview.EditingControl).DroppedDown = true;
@@ -227,7 +229,7 @@ namespace FallGuysStats {
         }
 
         private void ProfileList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-            var datagridview = sender as DataGridView;
+            DataGridView datagridview = sender as DataGridView;
             if (datagridview.Columns[e.ColumnIndex].Name == "profile") {
                 datagridview.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = (string)e.Value;
             } else if (datagridview.Columns[e.ColumnIndex].Name == "profile") {
@@ -249,8 +251,7 @@ namespace FallGuysStats {
 
             if (MessageBox.Show(this,
                     $"{Multilingual.GetWord("message_create_profile_prefix")} ({this.AddPageTextbox.Text}) {Multilingual.GetWord("message_create_profile_suffix")}",
-                    Multilingual.GetWord("message_create_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
+                    Multilingual.GetWord("message_create_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 int maxID = 0;
                 int order = 1;
                 for (int i = 0; i < this.Profiles.Count; i++) {
@@ -273,17 +274,12 @@ namespace FallGuysStats {
                 for (int i = 0; i < this.RemoveProfileCombobox.Items.Count; i++) {
                     if (this.RemoveProfileCombobox.Items[i].ToString() == this.RemoveProfileCombobox.SelectedItem.ToString()) {
                         if (i > 0) {
-                            prevProfileName = this.RemoveProfileCombobox.Items[i-1].ToString();
+                            prevProfileName = this.RemoveProfileCombobox.Items[i - 1].ToString();
                         }
                     }
                 }
 
-                int prevProfileId;
-                if (string.IsNullOrEmpty(prevProfileName)) {
-                    prevProfileId = 0;
-                } else {
-                    prevProfileId = this.Profiles.Find(p => p.ProfileName == prevProfileName).ProfileId;
-                }
+                int prevProfileId = string.IsNullOrEmpty(prevProfileName) ? 0 : this.Profiles.Find(p => p.ProfileName == prevProfileName).ProfileId;
                 int profileId = this.Profiles.Find(p => p.ProfileName == this.RemoveProfileCombobox.SelectedItem.ToString()).ProfileId;
                 this.Profiles.Remove(this.Profiles.Find(p => p.ProfileName == this.RemoveProfileCombobox.SelectedItem.ToString()));
                 this.AllStats.RemoveAll(r => r.Profile == profileId);
@@ -316,10 +312,9 @@ namespace FallGuysStats {
             if (this.RenamePageCombobox.SelectedIndex < 0) { return; }
             if (this.RenamePageTextbox.Text.Length == 0) { return; }
             if (this.RenamePageCombobox.SelectedItem.ToString() == this.RenamePageTextbox.Text) { return; }
-            if (MessageBox.Show(this, 
+            if (MessageBox.Show(this,
                     $"{Multilingual.GetWord("message_rename_profile_prefix")} ({this.RenamePageCombobox.SelectedItem}) {Multilingual.GetWord("message_rename_profile_infix")} ({this.RenamePageTextbox.Text}) {Multilingual.GetWord("message_rename_profile_suffix")}",
-                    Multilingual.GetWord("message_rename_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
+                    Multilingual.GetWord("message_rename_profile_caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 for (int i = 0; i < this.Profiles.Count; i++) {
                     if (this.Profiles[i].ProfileName != this.RenamePageCombobox.SelectedItem.ToString()) { continue; }
                     this.Profiles[i].ProfileName = this.RenamePageTextbox.Text;
@@ -337,7 +332,7 @@ namespace FallGuysStats {
             this.ReloadProfileList();
             this.ProfileList[0, profileListIndex - 1].Selected = true;
         }
-        
+
         private void ProfileListDown_Click(object sender, EventArgs e) {
             if (this.ProfileList.SelectedRows.Count <= 0) { return; }
             if (this.ProfileList.CurrentCell.RowIndex >= this.ProfileList.Rows.Count - 1) { return; }
@@ -356,12 +351,12 @@ namespace FallGuysStats {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }*/
-        
+
         /*private void UndoChangeButton_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }*/
-        
+
         private void EditProfile_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.DialogResult = DialogResult.Cancel;
@@ -390,41 +385,41 @@ namespace FallGuysStats {
             this.RenameButton.Text = Multilingual.GetWord("profile_rename_tab_button");
             //this.ApplyChangeButton.Text = Multilingual.GetWord("profile_apply_change_button");
             //this.UndoChangeButton.Text = Multilingual.GetWord("profile_undo_change_button");
-            
+
             if (Stats.CurrentLanguage == 0) { // English
-                this.AddPageTextbox.Location =        new Point(96, 10);
-                this.RenamePageCombobox.Location =    new Point(96, 7);
-                this.RenamePageTextbox.Location =     new Point(96, 45);
-                this.MoveFromCombobox.Location =      new Point(96, 7);
-                this.MoveToCombobox.Location =        new Point(96, 45);
+                this.AddPageTextbox.Location = new Point(96, 10);
+                this.RenamePageCombobox.Location = new Point(96, 7);
+                this.RenamePageTextbox.Location = new Point(96, 45);
+                this.MoveFromCombobox.Location = new Point(96, 7);
+                this.MoveToCombobox.Location = new Point(96, 45);
                 this.RemoveProfileCombobox.Location = new Point(96, 7);
             } else if (Stats.CurrentLanguage == 1) { // French
-                this.AddPageTextbox.Location =        new Point(96, 10);
-                this.RenamePageCombobox.Location =    new Point(96, 7);
-                this.RenamePageTextbox.Location =     new Point(96, 45);
-                this.MoveFromCombobox.Location =      new Point(96, 7);
-                this.MoveToCombobox.Location =        new Point(96, 45);
+                this.AddPageTextbox.Location = new Point(96, 10);
+                this.RenamePageCombobox.Location = new Point(96, 7);
+                this.RenamePageTextbox.Location = new Point(96, 45);
+                this.MoveFromCombobox.Location = new Point(96, 7);
+                this.MoveToCombobox.Location = new Point(96, 45);
                 this.RemoveProfileCombobox.Location = new Point(96, 7);
             } else if (Stats.CurrentLanguage == 2) { // Korean
-                this.AddPageTextbox.Location =        new Point(96, 10);
-                this.RenamePageCombobox.Location =    new Point(96, 7);
-                this.RenamePageTextbox.Location =     new Point(96, 45);
-                this.MoveFromCombobox.Location =      new Point(96, 7);
-                this.MoveToCombobox.Location =        new Point(96, 45);
+                this.AddPageTextbox.Location = new Point(96, 10);
+                this.RenamePageCombobox.Location = new Point(96, 7);
+                this.RenamePageTextbox.Location = new Point(96, 45);
+                this.MoveFromCombobox.Location = new Point(96, 7);
+                this.MoveToCombobox.Location = new Point(96, 45);
                 this.RemoveProfileCombobox.Location = new Point(96, 7);
             } else if (Stats.CurrentLanguage == 3) { // Japanese
-                this.AddPageTextbox.Location =        new Point(130, 10);
-                this.RenamePageCombobox.Location =    new Point(130, 7);
-                this.RenamePageTextbox.Location =     new Point(130, 45);
-                this.MoveFromCombobox.Location =      new Point(96, 7);
-                this.MoveToCombobox.Location =        new Point(96, 45);
+                this.AddPageTextbox.Location = new Point(130, 10);
+                this.RenamePageCombobox.Location = new Point(130, 7);
+                this.RenamePageTextbox.Location = new Point(130, 45);
+                this.MoveFromCombobox.Location = new Point(96, 7);
+                this.MoveToCombobox.Location = new Point(96, 45);
                 this.RemoveProfileCombobox.Location = new Point(130, 7);
             } else if (Stats.CurrentLanguage == 4) { // Simplified Chinese
-                this.AddPageTextbox.Location =        new Point(120, 10);
-                this.RenamePageCombobox.Location =    new Point(120, 7);
-                this.RenamePageTextbox.Location =     new Point(120, 45);
-                this.MoveFromCombobox.Location =      new Point(96, 7);
-                this.MoveToCombobox.Location =        new Point(96, 45);
+                this.AddPageTextbox.Location = new Point(120, 10);
+                this.RenamePageCombobox.Location = new Point(120, 7);
+                this.RenamePageTextbox.Location = new Point(120, 45);
+                this.MoveFromCombobox.Location = new Point(96, 7);
+                this.MoveToCombobox.Location = new Point(96, 45);
                 this.RemoveProfileCombobox.Location = new Point(96, 7);
             }
         }

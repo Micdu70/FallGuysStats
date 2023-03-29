@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
+
 namespace FallGuysStats {
     public partial class SelectLanguage : MetroFramework.Forms.MetroForm {
-        public int selectedLanguage = 0;
-        public SelectLanguage() => this.InitializeComponent();
+        public int defaultLanguage;
+        public int selectedLanguage;
+
+        public SelectLanguage(string sysLang) {
+            this.defaultLanguage = sysLang.Substring(0, 2) == "fr" ? 1 : sysLang.Substring(0, 2) == "ko" ? 2 : sysLang.Substring(0, 2) == "ja" ? 3 : sysLang.Substring(0, 2) == "zh" ? 4 : 0;
+            this.InitializeComponent();
+        }
 
         private void SelectLanguage_Load(object sender, EventArgs e) {
-            this.ChangeLanguage(0);
-            this.cboLanguage.SelectedIndex = 0;
+            this.ChangeLanguage(this.defaultLanguage);
+            this.cboLanguage.SelectedIndex = this.defaultLanguage;
         }
-        
-        private void cboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
+
+        private void CboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
             this.selectedLanguage = ((ComboBox)sender).SelectedIndex;
             this.ChangeLanguage(this.selectedLanguage);
         }
-        
-        private void btnLanguageSave_Click(object sender, EventArgs e) {
+
+        private void BtnLanguageSave_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
