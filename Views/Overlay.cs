@@ -699,7 +699,13 @@ namespace FallGuysStats {
                     LevelType levelType = (level?.Type).GetValueOrDefault();
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
-                        this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
+                        if (LogRound.IsLastRound) {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
+                        } else if (LogRound.IsSpectating) {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
+                        } else {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
+                        }
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, 223);
                         this.lblRound.RoundIcon = level?.RoundIcon;
                         if (this.lblRound.RoundIcon.Height != 23) {
@@ -710,7 +716,13 @@ namespace FallGuysStats {
                             this.lblRound.ImageWidth = this.lblRound.RoundIcon.Width;
                         }
                     } else {
-                        this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
+                        if (LogRound.IsLastRound) {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
+                        } else if (LogRound.IsSpectating) {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{Multilingual.GetWord("overlay_round_suffix")} :";
+                        } else {
+                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
+                        }
                         this.lblRound.LevelColor = Color.Empty;
                         this.lblRound.RoundIcon = null;
                         this.lblRound.ImageWidth = 0;
@@ -777,15 +789,23 @@ namespace FallGuysStats {
                         } else if (Time > levelInfo.LongestFinishOverall) {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
+                    } else if (End != DateTime.MinValue && LogRound.IsSpectating) {
+                        if (this.lastRound.Position > 0) {
+                            this.lblFinish.TextRight = $"　# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}";
+                        } else {
+                            this.lblFinish.TextRight = $"　{End - Start:m\\:ss\\.ff}";
+                        }
+                        this.lblFinish.ForeColor = this.lastRound.Position == 1 ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {
                         if (Start > DateTime.UtcNow) {
                             this.lblFinish.TextRight = $"　{DateTime.UtcNow - startTime:m\\:ss}";
                         } else {
                             this.lblFinish.TextRight = $"　{DateTime.UtcNow - Start:m\\:ss}";
                         }
+                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
                     } else {
-                        this.lblFinish.TextRight = "-";
-                        this.lblFinish.ForeColor = this.ForeColor;
+                        this.lblFinish.TextRight = "　-";
+                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
                     }
 
                     if (this.lastRound.GameDuration > 0) {
@@ -794,9 +814,9 @@ namespace FallGuysStats {
                         this.lblDuration.Text = $"{Multilingual.GetWord("overlay_duration")} :";
                     }
 
-                    if (End != DateTime.MinValue) {
+                    if (End != DateTime.MinValue && LogRound.IsEnded) {
                         this.lblDuration.TextRight = $"　{End - Start:m\\:ss\\.ff}";
-                    } else if (this.lastRound.Playing) {
+                    } else if (this.lastRound.Playing || (LogRound.IsSpectating && !LogRound.IsEnded)) {
                         if (Start > DateTime.UtcNow) {
                             this.lblDuration.TextRight = $"　{DateTime.UtcNow - startTime:m\\:ss}";
                         } else {
