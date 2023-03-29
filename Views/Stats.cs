@@ -145,7 +145,7 @@ namespace FallGuysStats {
                         this.CurrentSettings.HideOverlayPercentages = true;
                         this.CurrentSettings.WinsFilter = 1;
                         this.CurrentSettings.QualifyFilter = 1;
-                        this.CurrentSettings.FastestFilter = 1;
+                        this.CurrentSettings.FastestFilter = 0;
                         this.CurrentSettings.OverlayColor = 0;
                         this.CurrentSettings.OverlayVisible = false;
                         this.CurrentSettings.SwitchBetweenPlayers = false;
@@ -1073,7 +1073,7 @@ namespace FallGuysStats {
                 PreviousWins = 0,
                 WinsFilter = 1,
                 QualifyFilter = 1,
-                FastestFilter = 1,
+                FastestFilter = 0,
                 HideWinsInfo = false,
                 HideRoundInfo = false,
                 HideTimeInfo = false,
@@ -1087,7 +1087,7 @@ namespace FallGuysStats {
                 FormHeight = null,
                 OverlayWidth = 786,
                 OverlayHeight = 99,
-                HideOverlayPercentages = false,
+                HideOverlayPercentages = true,
                 HoopsieHeros = false,
                 GameExeLocation = string.Empty,
                 GameShortcutLocation = string.Empty,
@@ -2464,12 +2464,24 @@ namespace FallGuysStats {
                         overlay.FlipDisplay(this.CurrentSettings.FixedFlippedDisplay);
                         overlay.Location = new Point(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value);
                     } else {
-                        overlay.Location = this.Location;
+                        Screen screen = this.GetCurrentScreen(this.Location);
+                        if (this.CurrentSettings.FlippedDisplay) {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width - screen.WorkingArea.Right + overlay.Width, screen.WorkingArea.Top);
+                        } else {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width, screen.WorkingArea.Top);
+                        }
                     }
                 } else {
-                    overlay.Location = this.CurrentSettings.OverlayLocationX.HasValue && this.IsOnScreen(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value, overlay.Width)
-                        ? new Point(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value)
-                        : this.Location;
+                    if (this.CurrentSettings.OverlayLocationX.HasValue && this.IsOnScreen(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value, overlay.Width)) {
+                        overlay.Location = new Point(this.CurrentSettings.OverlayLocationX.Value, this.CurrentSettings.OverlayLocationY.Value);
+                    } else {
+                        Screen screen = this.GetCurrentScreen(this.Location);
+                        if (this.CurrentSettings.FlippedDisplay) {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width - screen.WorkingArea.Right + overlay.Width, screen.WorkingArea.Top);
+                        } else {
+                            overlay.Location = new Point(screen.WorkingArea.Right - overlay.Width, screen.WorkingArea.Top);
+                        }
+                    }
                 }
             }
         }
