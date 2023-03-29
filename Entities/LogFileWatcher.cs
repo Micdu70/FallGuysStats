@@ -216,74 +216,6 @@ namespace FallGuysStats {
             }
         }
 
-        private readonly Dictionary<string, string> _roundNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-            { "round_follow-the-leader_ss2_launch", "round_follow-the-leader_s6_launch" },
-            
-            // Finals Marathon
-            {"round_kraken_attack_only_finals_v2_r1", "round_kraken_attack"},
-            {"round_kraken_attack_only_finals_v2_r2", "round_kraken_attack"},
-            {"round_kraken_attack_only_finals_v2_r3_r4", "round_kraken_attack"},
-            {"round_kraken_attack_only_finals_v2_final", "round_kraken_attack"},
-
-            {"round_blastball_only_finals_v2_r1", "round_blastball_arenasurvival_symphony_launch_show"},
-            {"round_blastball_only_finals_v2_r2", "round_blastball_arenasurvival_symphony_launch_show"},
-            {"round_blastball_only_finals_v2_r3_r4", "round_blastball_arenasurvival_symphony_launch_show"},
-            {"round_blastball_only_finals_v2_final", "round_blastball_arenasurvival_symphony_launch_show"},
-
-            {"round_floor_fall_only_finals_v2_r1", "round_floor_fall"},
-            {"round_floor_fall_only_finals_v2_r2", "round_floor_fall"},
-            {"round_floor_fall_only_finals_v2_r3_r4", "round_floor_fall"},
-            {"round_floor_fall_only_finals_v2_final", "round_floor_fall"},
-
-            {"round_hexsnake_only_finals_v2_r1", "round_hexsnake_almond"},
-            {"round_hexsnake_only_finals_v2_r2", "round_hexsnake_almond"},
-            {"round_hexsnake_only_finals_v2_r3_r4", "round_hexsnake_almond"},
-            {"round_hexsnake_only_finals_v2_final", "round_hexsnake_almond"},
-
-            {"round_jump_showdown_only_finals_v2_r1", "round_jump_showdown"},
-            {"round_jump_showdown_only_finals_v2_r2", "round_jump_showdown"},
-            {"round_jump_showdown_only_finals_v2_r3_r4", "round_jump_showdown"},
-            {"round_jump_showdown_only_finals_v2_final", "round_jump_showdown"},
-
-            {"round_hexaring_only_finals_v2_r1", "round_hexaring_symphony_launch_show"},
-            {"round_hexaring_only_finals_v2_r2", "round_hexaring_symphony_launch_show"},
-            {"round_hexaring_only_finals_v2_r3_r4", "round_hexaring_symphony_launch_show"},
-            {"round_hexaring_only_finals_v2_final", "round_hexaring_symphony_launch_show"},
-
-            {"round_tunnel_final_only_finals_v2_r1", "round_tunnel_final"},
-            {"round_tunnel_final_only_finals_v2_r2", "round_tunnel_final"},
-            {"round_tunnel_final_only_finals_v2_r3_r4", "round_tunnel_final"},
-            {"round_tunnel_final_only_finals_v2_final", "round_tunnel_final"},
-            
-            // Hex-a-gone Trials
-            {"round_floor_fall_event_only_01", "round_floor_fall"},
-            {"round_floor_fall_event_only_02", "round_floor_fall"},
-            {"round_floor_fall_event_only_final", "round_floor_fall"},
-            
-            // Hex-a-Gravity Trials
-            {"round_floor_fall_event_only_low_grav_01", "round_floor_fall"},
-            {"round_floor_fall_event_only_low_grav_02", "round_floor_fall"},
-            {"round_floor_fall_event_only_low_grav_final", "round_floor_fall"},
-            
-            // Hex-a-thon
-            {"round_floor_fall_event_walnut", "round_floor_fall"},
-            {"round_floor_fall_event_walnut_r2", "round_floor_fall"},
-            {"round_floor_fall_event_walnut_final", "round_floor_fall"},
-
-            {"round_hexaring_event_walnut", "round_hexaring_symphony_launch_show"},
-            {"round_hexaring_event_walnut_r2", "round_hexaring_symphony_launch_show"},
-            {"round_hexaring_event_walnut_final", "round_hexaring_symphony_launch_show"},
-
-            {"round_hexsnake_event_walnut", "round_hexsnake_almond"},
-            {"round_hexsnake_event_walnut_r2", "round_hexsnake_almond"},
-            {"round_hexsnake_event_walnut_final", "round_hexsnake_almond"},
-            
-            // Blast Ball Trials
-            {"round_blastball_arenasurvival_blast_ball_trials_01", "round_blastball_arenasurvival_symphony_launch_show"},
-            {"round_blastball_arenasurvival_blast_ball_trials_02", "round_blastball_arenasurvival_symphony_launch_show"},
-            {"round_blastball_arenasurvival_blast_ball_trials_fn", "round_blastball_arenasurvival_symphony_launch_show"},
-        };
-
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" } };
 
         private bool GetIsRealLastRound(string roundName) {
@@ -321,27 +253,27 @@ namespace FallGuysStats {
                    || sceneName.IndexOf("ound_robotrampage_arena_2_ss2_show1", StringComparison.OrdinalIgnoreCase) > 0;
         }
 
-        private bool GetIsFinalException(string sceneName) {
-            return ((sceneName.IndexOf("ound_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_blastball_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_floor_fall_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_hexsnake_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_jump_showdown_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_hexaring_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_tunnel_final_only_finals", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_floor_fall_event_only", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_floor_fall_event_only_low_grav", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_floor_fall_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_hexaring_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
-                     || sceneName.IndexOf("ound_hexsnake_event_walnut", StringComparison.OrdinalIgnoreCase) > 0)
-                         && sceneName.Substring(sceneName.Length - 6).ToLower() == "_final")
+        private bool GetIsFinalException(string roundName) {
+            return ((roundName.IndexOf("ound_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_blastball_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_floor_fall_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_hexsnake_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_jump_showdown_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_hexaring_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_tunnel_final_only_finals", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_floor_fall_event_only", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_floor_fall_event_only_low_grav", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_floor_fall_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_hexaring_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
+                     || roundName.IndexOf("ound_hexsnake_event_walnut", StringComparison.OrdinalIgnoreCase) > 0)
+                         && roundName.Substring(roundName.Length - 6).ToLower() == "_final")
 
-                     || (sceneName.IndexOf("ound_blastball_arenasurvival_blast_ball_trials", StringComparison.OrdinalIgnoreCase) > 0
-                         && sceneName.Substring(sceneName.Length - 3).ToLower() == "_fn")
+                     || (roundName.IndexOf("ound_blastball_arenasurvival_blast_ball_trials", StringComparison.OrdinalIgnoreCase) > 0
+                         && roundName.Substring(roundName.Length - 3).ToLower() == "_fn")
 
-                     || (sceneName.IndexOf("ound_robotrampage_arena_2_ss2_show1", StringComparison.OrdinalIgnoreCase) > 0
-                         && sceneName.Substring(sceneName.Length - 3) == "_03");
+                     || (roundName.IndexOf("ound_robotrampage_arena_2_ss2_show1", StringComparison.OrdinalIgnoreCase) > 0
+                         && roundName.Substring(roundName.Length - 3) == "_03");
         }
 
         private bool GetIsTeamException(string roundName) {
@@ -378,9 +310,6 @@ namespace FallGuysStats {
                 bool isFinalException = GetIsFinalException(logRound.Info.Name);
                 bool isTeamException = GetIsTeamException(logRound.Info.Name);
 
-                if (_roundNameReplacer.TryGetValue(logRound.Info.Name, out string newName)) {
-                    logRound.Info.Name = newName;
-                }
                 logRound.Info.Round = round.Count;
                 logRound.Info.Start = line.Date;
                 logRound.Info.InParty = logRound.CurrentlyInParty;
@@ -494,9 +423,6 @@ namespace FallGuysStats {
                         foundRound = true;
                         int roundNum = (int)detail[7] - 0x30 + 1;
                         string roundName = detail.Substring(11, detail.Length - 12);
-                        if (_roundNameReplacer.TryGetValue(roundName, out string newName)) {
-                            roundName = newName;
-                        }
 
                         if (roundNum - 1 < round.Count) {
                             if (roundNum > maxRound) {

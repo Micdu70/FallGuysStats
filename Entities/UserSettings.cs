@@ -56,6 +56,7 @@
         public bool HideOverlayPercentages { get; set; }
         public bool HoopsieHeros { get; set; }
         public int Version { get; set; }
+        public int FrenchyEditionDB { get; set; }
         public bool IgnoreLevelTypeWhenSorting { get; set; }
         public int LaunchPlatform { get; set; }
         public string GameExeLocation { get; set; }

@@ -194,8 +194,7 @@ namespace FallGuysStats {
             { "round_thin_ice",                   new LevelStats("Thin Ice", LevelType.Survival, true, 3, Properties.Resources.round_thin_ice_icon) },
             { "round_tiptoefinale_almond",        new LevelStats("Tip Toe Finale", LevelType.Race, true, 8, Properties.Resources.round_tip_toe_finale_icon) },
 
-            { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, 6, Properties.Resources.round_sweet_thieves_icon) },
-            { "round_pumpkin_pie",                new LevelStats("Treat Thieves", LevelType.Invisibeans, false, 8, Properties.Resources.round_treat_thieves_icon) }
+            { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, 6, Properties.Resources.round_sweet_thieves_icon) }
         };
         public static Dictionary<string, LevelStats> ALL_FRE = new Dictionary<string, LevelStats>(StringComparer.OrdinalIgnoreCase) {
             { "round_lava",                       new LevelStats("Slime Climb", LevelType.Race, false, 1, Properties.Resources.round_slime_climb_icon) },
@@ -284,7 +283,6 @@ namespace FallGuysStats {
             { "round_crown_maze",                 new LevelStats("Lost Temple", LevelType.Race, true, 5, Properties.Resources.round_lost_temple_icon) },
             { "round_kraken_attack",              new LevelStats("Kraken Slam", LevelType.Survival, true, 9, Properties.Resources.round_kraken_slam_icon) },
 
-            { "round_pumpkin_pie",                new LevelStats("Treat Thieves", LevelType.Invisibeans, false, 8, Properties.Resources.round_treat_thieves_icon) },
             { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, 6, Properties.Resources.round_sweet_thieves_icon) }
         };
         public static Dictionary<string, string> SceneToRound = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {

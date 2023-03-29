@@ -33,6 +33,7 @@ namespace FallGuysStats {
         private int drawWidth, drawHeight;
         private bool startedPlaying;
         private DateTime startTime;
+        private bool isAlreadyClicked;
         private bool shiftKeyToggle;
         private bool ctrlKeyToggle;
         private new Size DefaultSize;
@@ -141,14 +142,6 @@ namespace FallGuysStats {
             this.picPositionLock.Location = new Point(this.Location.X - 2, this.Location.Y - 8);
 
             this.SetBackground();
-
-            foreach (Control c in Controls) {
-                if (c is TransparentLabel label) {
-                    label.Parent = this;
-                    label.BackColor = Color.Transparent;
-                }
-                c.MouseDown += Overlay_MouseDown;
-            }
 
             SetFonts(this);
 
@@ -485,7 +478,24 @@ namespace FallGuysStats {
             }
             this.isPositionButtonMouseEnter = false;
         }
-        private void Overlay_GotFocus(object sender, EventArgs e) {
+        private void Overlay_MouseUp(object sender, MouseEventArgs e) {
+            if (this.IsFixed() && this.isPositionLock && e.Button == MouseButtons.Left) {
+                if (!this.isAlreadyClicked) { this.isAlreadyClicked = true; }
+                if (!this.picPositionLock.Visible) { this.picPositionLock.Show(); }
+                return;
+            }
+            if (this.isAlreadyClicked) {
+                this.isAlreadyClicked = false;
+                if (this.picPositionLock.Visible) { this.picPositionLock.Hide(); }
+                if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible) return;
+                this.picPositionNE.Hide();
+                this.picPositionNW.Hide();
+                this.picPositionSE.Hide();
+                this.picPositionSW.Hide();
+                return;
+            } else {
+                this.isAlreadyClicked = true;
+            }
             if (this.IsFixed()) {
                 if (this.isPositionLock) {
                     this.picPositionLock.Show();
@@ -499,11 +509,9 @@ namespace FallGuysStats {
                     this.picPositionNW.Show();
                     this.picPositionSE.Show();
                     this.picPositionSW.Show();
-
                 }
             } else {
-                if (this.picPositionNE.Visible && this.picPositionNW.Visible &&
-                    this.picPositionSE.Visible && this.picPositionSW.Visible && this.picPositionLock.Visible) return;
+                if (this.picPositionNE.Visible && this.picPositionNW.Visible && this.picPositionSE.Visible && this.picPositionSW.Visible && this.picPositionLock.Visible) return;
                 this.picPositionNE.Show();
                 this.picPositionNW.Show();
                 this.picPositionSE.Show();
@@ -512,8 +520,8 @@ namespace FallGuysStats {
             }
         }
         private void Overlay_LostFocus(object sender, EventArgs e) {
-            if (!this.picPositionNE.Visible && !this.picPositionNW.Visible &&
-                    !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) return;
+            this.isAlreadyClicked = false;
+            if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) return;
             this.picPositionNE.Hide();
             this.picPositionNW.Hide();
             this.picPositionSE.Hide();
@@ -525,10 +533,19 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNE.Size.Height + 2) + (this.drawHeight > 99 ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (this.drawHeight > 99 ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (this.drawHeight > 99 ? 11 : -6));
-            this.picPositionLock.Location = new Point(this.StatsForm.CurrentSettings.FlippedDisplay ? (this.Width - this.picPositionLock.Width - 14) : 14, (this.Height / 2) - (this.picPositionLock.Size.Height + 6) + (this.drawHeight > 99 ? 11 : -6));
+            this.picPositionLock.Location = new Point(this.StatsForm.CurrentSettings.FlippedDisplay ? this.Width - 59 : 12, this.Height - 25);
         }
         private void Overlay_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Left) return;
+
+            if (!this.IsFixed() && !this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) {
+                this.isAlreadyClicked = true;
+                this.picPositionNE.Show();
+                this.picPositionNW.Show();
+                this.picPositionSE.Show();
+                this.picPositionSW.Show();
+                this.picPositionLock.Show();
+            }
 
             if ((sender.GetType() == this.picPositionNE.GetType()) ||
                 (sender.GetType() == this.picPositionNW.GetType()) ||
@@ -1335,7 +1352,7 @@ namespace FallGuysStats {
             this.picPositionNW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) - (this.picPositionNW.Size.Height + 2) + (showTabs ? 11 : -6));
             this.picPositionSE.Location = new Point((this.Width / 2) - (this.picPositionSE.Size.Width + 2), (this.Height / 2) + 2 + (showTabs ? 11 : -6));
             this.picPositionSW.Location = new Point((this.Width / 2) + 2, (this.Height / 2) + 2 + (showTabs ? 11 : -6));
-            this.picPositionLock.Location = new Point(flipDisplay ? (this.Width - this.picPositionLock.Width - 14) : 14, (this.Height / 2) - (this.picPositionLock.Size.Height + 6) + (showTabs ? 11 : -6));
+            this.picPositionLock.Location = new Point(flipDisplay ? this.Width - 59 : 12, this.Height - 25);
 
             if (this.IsFixed()) {
                 if (this.isFixedPositionSe || this.isFixedPositionSw) {
@@ -1374,7 +1391,7 @@ namespace FallGuysStats {
 
             this.DisplayTabs(this.drawHeight > 99);
             this.DisplayProfile(this.drawHeight > 99);
-            this.picPositionLock.Location = new Point(flipped ? (this.Width - this.picPositionLock.Width - 14) : 14, (this.Height / 2) - (this.picPositionLock.Size.Height + 6) + (this.drawHeight > 99 ? 11 : -6));
+            this.picPositionLock.Location = new Point(flipped ? this.Width - 59 : 12, this.Height - 25);
         }
         private int GetCountNumeric(string s) {
             int count = 0;
