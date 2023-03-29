@@ -140,6 +140,22 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
+                    if (this.CurrentSettings.FrenchyEditionDB < 2) {
+                        this.CurrentSettings.FrenchyEditionDB = 2;
+                        this.CurrentSettings.HideOverlayPercentages = true;
+                        this.CurrentSettings.WinsFilter = 1;
+                        this.CurrentSettings.QualifyFilter = 1;
+                        this.CurrentSettings.FastestFilter = 1;
+                        this.CurrentSettings.OverlayColor = 0;
+                        this.CurrentSettings.OverlayVisible = false;
+                        this.CurrentSettings.SwitchBetweenPlayers = false;
+                        this.CurrentSettings.PlayerByConsoleType = true;
+                        this.CurrentSettings.ColorByRoundType = true;
+                        this.CurrentSettings.AutoChangeProfile = false;
+                        this.CurrentSettings.AutoUpdate = true;
+                        this.CurrentSettings.Version = 26;
+                        this.UserSettings.Upsert(this.CurrentSettings);
+                    }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
                 } catch {
                     this.UserSettings.DeleteAll();
@@ -985,38 +1001,6 @@ namespace FallGuysStats {
                 }
                 this.StatsDB.Commit();
                 this.AllStats.Clear();
-                this.CurrentSettings.Version = 22;
-                this.SaveUserSettings();
-            }
-
-            if (this.CurrentSettings.Version == 22) {
-                this.AllStats.AddRange(this.RoundDetails.FindAll());
-                this.StatsDB.BeginTrans();
-                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
-                    RoundInfo info = this.AllStats[i];
-
-                    if (info.Name.IndexOf("round_slippy_slide", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_slippy_slide";
-                        this.RoundDetails.Update(info);
-                    } else if (info.Name.IndexOf("round_follow_the_line", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_follow_the_line";
-                        this.RoundDetails.Update(info);
-                    } else if (info.Name.IndexOf("round_slide_chute", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_slide_chute";
-                        this.RoundDetails.Update(info);
-                    } else if (info.Name.IndexOf("round_blastballruins", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_blastballruins";
-                        this.RoundDetails.Update(info);
-                    } else if (info.Name.IndexOf("round_kraken_attack", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_kraken_attack";
-                        this.RoundDetails.Update(info);
-                    } else if (info.Name.IndexOf("round_bluejay", StringComparison.OrdinalIgnoreCase) == 0) {
-                        info.Name = "round_bluejay";
-                        this.RoundDetails.Update(info);
-                    }
-                }
-                this.StatsDB.Commit();
-                this.AllStats.Clear();
                 this.CurrentSettings.Version = 23;
                 this.SaveUserSettings();
             }
@@ -1048,6 +1032,7 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
         }
+
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
                 ID = 1,
@@ -1109,7 +1094,8 @@ namespace FallGuysStats {
                 AutoLaunchGameOnStartup = false,
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
-                Version = 26
+                Version = 26,
+                FrenchyEditionDB = 2
             };
         }
         private void UpdateHoopsieLegends() {
@@ -2107,7 +2093,7 @@ namespace FallGuysStats {
         }
         private void LaunchHelpInBrowser() {
             try {
-                Process.Start(@"https://github.com/ShootMe/FallGuysStats");
+                Process.Start(@"https://github.com/Micdu70/FallGuysStats#fall-guys-stats-fe-frenchy-edition-par-micdu70");
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -2339,7 +2325,7 @@ namespace FallGuysStats {
         public bool CheckForUpdate(bool silent) {
 #if AllowUpdate
             using (ZipWebClient web = new ZipWebClient()) {
-                string assemblyInfo = web.DownloadString(@"https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/Properties/AssemblyInfo.cs");
+                string assemblyInfo = web.DownloadString(@"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/AssemblyInfo.cs");
 
                 int index = assemblyInfo.IndexOf("AssemblyVersion(");
                 if (index > 0) {
@@ -2348,7 +2334,7 @@ namespace FallGuysStats {
                     Version newVersion = new Version(assemblyInfo.Substring(index + 17, indexEnd - index - 17));
                     if (newVersion > currentVersion) {
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_question_prefix")} [ v{newVersion.ToString(2)} ] {Multilingual.GetWord("message_update_question_suffix")}", $"{Multilingual.GetWord("message_update_question_caption")}", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
-                            byte[] data = web.DownloadData($"https://raw.githubusercontent.com/ShootMe/FallGuysStats/master/FallGuysStats.zip");
+                            byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
                             string exeName = null;
                             using (MemoryStream ms = new MemoryStream(data)) {
                                 using (ZipArchive zipFile = new ZipArchive(ms, ZipArchiveMode.Read)) {
