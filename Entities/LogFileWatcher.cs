@@ -335,6 +335,9 @@ namespace FallGuysStats {
 
             } else if (line.Line.IndexOf("[StateMatchmaking] Begin", StringComparison.OrdinalIgnoreCase) > 0 ||
                   line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateMainMenu with FGClient.StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0) {
+                LogRound.IsEnded = false;
+                LogRound.IsSpectating = false;
+                LogRound.IsLastRound = false;
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby") > 0;
                 logRound.CurrentlyInParty = !logRound.PrivateLobby && (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) == -1);
                 if (logRound.Info != null) {
