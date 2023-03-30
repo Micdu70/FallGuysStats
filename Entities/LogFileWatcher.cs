@@ -39,6 +39,11 @@ namespace FallGuysStats {
         public string CurrentPlayerID;
         public int LastPing;
         public int Duration;
+
+        public static bool IsEnded { get; set; }
+        public static bool IsSpectating { get; set; }
+        public static bool IsLastRound { get; set; }
+
         public RoundInfo Info;
     }
     public class LogFileWatcher {
@@ -290,6 +295,8 @@ namespace FallGuysStats {
                     this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
                 }
             } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
+                LogRound.IsEnded = true;
+                LogRound.IsLastRound = false;
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId };
                 int index2 = line.Line.IndexOf(' ', index + 44);
                 if (index2 < 0) { index2 = line.Line.Length; }
@@ -389,17 +396,24 @@ namespace FallGuysStats {
                 logRound.Info.Start = line.Date;
                 logRound.Info.Playing = true;
                 logRound.CountingPlayers = false;
-            } else if (logRound.Info != null &&
+            } else if ((logRound.Info != null) &&
                   (line.Line.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0
                   || line.Line.IndexOf("Changing local player state to: SpectatingEliminated", StringComparison.OrdinalIgnoreCase) > 0
                   || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0
                   || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0)) {
-                if (line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) { logRound.PrivateLobby = false; }
+                bool isRoundPlaying = false;
+                bool isStillInShow = true;
+                if (line.Line.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0) { LogRound.IsEnded = true; }
+                if (line.Line.IndexOf("Changing local player state to: SpectatingEliminated", StringComparison.OrdinalIgnoreCase) > 0) { LogRound.IsSpectating = true; isRoundPlaying = true; }
+                if (line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0) { LogRound.IsEnded = true; isStillInShow = false; }
+                if (line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) { LogRound.IsEnded = true; logRound.PrivateLobby = false; isStillInShow = false; }
                 if (logRound.Info.End == DateTime.MinValue) {
                     logRound.Info.End = line.Date;
                 }
-                logRound.Info.Playing = false;
+                logRound.Info.Playing = isRoundPlaying;
+                Stats.InShow = isStillInShow;
             } else if (line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
+                LogRound.IsEnded = true;
                 if (logRound.Info != null) {
                     if (logRound.Info.End == DateTime.MinValue) {
                         logRound.Info.End = line.Date;
@@ -411,6 +425,9 @@ namespace FallGuysStats {
                 Stats.InShow = false;
             } else if (line.Line.IndexOf(" == [CompletedEpisodeDto] ==", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (logRound.Info == null) { return false; }
+
+                LogRound.IsLastRound = true;
+                LogRound.IsSpectating = true;
 
                 RoundInfo temp = null;
                 StringReader sr = new StringReader(line.Line);
@@ -438,11 +455,11 @@ namespace FallGuysStats {
                             if (roundNum == 1) {
                                 showStart = temp.Start;
                             }
-                            temp.ShowStart = showStart;
-                            temp.Playing = false;
                             temp.Round = roundNum;
-                            logRound.PrivateLobby = temp.PrivateLobby;
+                            temp.ShowStart = showStart;
                             logRound.CurrentlyInParty = temp.InParty;
+                            logRound.PrivateLobby = temp.PrivateLobby;
+                            temp.Playing = false;
                         } else {
                             return false;
                         }
@@ -489,8 +506,8 @@ namespace FallGuysStats {
                     logRound.Info.Position = 1;
                     logRound.Info.Crown = true;
                 }
-                logRound.Info = null;
-                Stats.InShow = false;
+                //logRound.Info = null;
+                Stats.InShow = !LogRound.IsEnded;
                 Stats.EndedShow = true;
                 return true;
             }
