@@ -31,7 +31,7 @@ namespace FallGuysStats {
                 this.MyScatterPlot1 = this.formsPlot.Plot.AddScatter(this.dates, this.shows, color: this.chkShows.ForeColor, label: Multilingual.GetWord("level_detail_shows"));
                 this.MyScatterPlot2 = this.formsPlot.Plot.AddScatter(this.dates, this.finals, color: this.chkFinals.ForeColor, label: Multilingual.GetWord("level_detail_finals"));
                 this.MyScatterPlot3 = this.formsPlot.Plot.AddScatter(this.dates, this.wins, color: this.chkWins.ForeColor, label: Multilingual.GetWord("level_detail_wins"));
-                this.formsPlot.Plot.Legend();
+                this.formsPlot.Plot.Legend(true, Alignment.UpperRight);
                 this.formsPlot.Plot.XAxis.DateTimeFormat(true);
 
                 this.formsPlot.Plot.XAxis.ManualTickSpacing((this.manualSpacing <= 0 ? 1 : this.manualSpacing), ScottPlot.Ticks.DateTimeUnit.Day);

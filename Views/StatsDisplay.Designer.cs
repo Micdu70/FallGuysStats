@@ -75,7 +75,9 @@
             // 
             // formsPlot
             // 
-            this.formsPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.formsPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.formsPlot.Location = new System.Drawing.Point(0, 58);
             this.formsPlot.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.formsPlot.Name = "formsPlot";
@@ -87,7 +89,6 @@
             // StatsDisplay
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1294, 720);
             this.Controls.Add(this.formsPlot);
             this.Controls.Add(this.chkShows);

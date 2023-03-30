@@ -140,18 +140,19 @@ namespace FallGuysStats {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
                     if (this.CurrentSettings.FrenchyEditionDB < 2) {
                         this.CurrentSettings.FrenchyEditionDB = 2;
+                        this.CurrentSettings.OverlayBackgroundOpacity = 100;
                         this.CurrentSettings.HideOverlayPercentages = true;
                         this.CurrentSettings.WinsFilter = 1;
                         this.CurrentSettings.QualifyFilter = 1;
                         this.CurrentSettings.FastestFilter = 0;
                         this.CurrentSettings.OverlayColor = 0;
-                        this.CurrentSettings.OverlayVisible = false;
+                        this.CurrentSettings.OverlayVisible = true;
                         this.CurrentSettings.SwitchBetweenPlayers = false;
                         this.CurrentSettings.PlayerByConsoleType = true;
                         this.CurrentSettings.ColorByRoundType = true;
                         this.CurrentSettings.AutoChangeProfile = false;
                         this.CurrentSettings.AutoUpdate = true;
-                        this.CurrentSettings.Version = 26;
+                        this.CurrentSettings.Version = 27;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -1069,7 +1070,7 @@ namespace FallGuysStats {
                 OnlyShowGold = false,
                 OnlyShowPing = false,
                 OnlyShowFinalStreak = false,
-                OverlayVisible = false,
+                OverlayVisible = true,
                 OverlayNotOnTop = false,
                 OverlayFontSerialized = string.Empty,
                 OverlayFontColorSerialized = string.Empty,

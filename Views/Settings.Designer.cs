@@ -351,14 +351,13 @@
             // 
             this.cboOverlayBackground.BorderColor = System.Drawing.Color.Gray;
             this.cboOverlayBackground.ButtonColor = System.Drawing.Color.DarkGray;
-            this.cboOverlayBackground.DropDownHeight = 500;
+            this.cboOverlayBackground.DropDownHeight = 414;
             this.cboOverlayBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboOverlayBackground.FormattingEnabled = true;
-            this.cboOverlayBackground.IntegralHeight = true;
-            this.cboOverlayBackground.ItemHeight = 23;
-            this.cboOverlayBackground.Location = new System.Drawing.Point(599, 123);
+            this.cboOverlayBackground.IntegralHeight = false;
+            this.cboOverlayBackground.Location = new System.Drawing.Point(617, 123);
             this.cboOverlayBackground.Name = "cboOverlayBackground";
-            this.cboOverlayBackground.Size = new System.Drawing.Size(240, 20);
+            this.cboOverlayBackground.Size = new System.Drawing.Size(226, 21);
             this.cboOverlayBackground.TabIndex = 19;
             this.cboOverlayBackground.GotFocus += new System.EventHandler(this.CboOverlayBackground_GotFocus);
             this.cboOverlayBackground.LostFocus += new System.EventHandler(this.CboOverlayBackground_LostFocus);
@@ -406,7 +405,7 @@
             // 
             this.lblOverlayOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayOpacity.AutoSize = true;
-            this.lblOverlayOpacity.Location = new System.Drawing.Point(453, 195);
+            this.lblOverlayOpacity.Location = new System.Drawing.Point(483, 194);
             this.lblOverlayOpacity.Name = "lblOverlayOpacity";
             this.lblOverlayOpacity.Size = new System.Drawing.Size(128, 19);
             this.lblOverlayOpacity.TabIndex = 20;
@@ -415,9 +414,9 @@
             // trkOverlayOpacity
             // 
             this.trkOverlayOpacity.BackColor = System.Drawing.Color.Transparent;
-            this.trkOverlayOpacity.Location = new System.Drawing.Point(599, 193);
+            this.trkOverlayOpacity.Location = new System.Drawing.Point(620, 192);
             this.trkOverlayOpacity.Name = "trkOverlayOpacity";
-            this.trkOverlayOpacity.Size = new System.Drawing.Size(240, 29);
+            this.trkOverlayOpacity.Size = new System.Drawing.Size(208, 29);
             this.trkOverlayOpacity.TabIndex = 22;
             this.overlayOpacityToolTip.SetToolTip(this.trkOverlayOpacity, "100");
             this.trkOverlayOpacity.Value = 100;
@@ -564,7 +563,7 @@
             this.chkPlayerByConsoleType.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.chkPlayerByConsoleType.Location = new System.Drawing.Point(573, 283);
             this.chkPlayerByConsoleType.Name = "chkPlayerByConsoleType";
-            this.chkPlayerByConsoleType.Size = new System.Drawing.Size(234, 19);
+            this.chkPlayerByConsoleType.Size = new System.Drawing.Size(232, 19);
             this.chkPlayerByConsoleType.TabIndex = 24;
             this.chkPlayerByConsoleType.Text = "Display players based on platform";
             this.chkPlayerByConsoleType.UseSelectable = true;
@@ -575,7 +574,7 @@
             this.chkColorByRoundType.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.chkColorByRoundType.Location = new System.Drawing.Point(573, 308);
             this.chkColorByRoundType.Name = "chkColorByRoundType";
-            this.chkColorByRoundType.Size = new System.Drawing.Size(221, 19);
+            this.chkColorByRoundType.Size = new System.Drawing.Size(269, 19);
             this.chkColorByRoundType.TabIndex = 25;
             this.chkColorByRoundType.Text = "Color round name based on round type";
             this.chkColorByRoundType.UseSelectable = true;
@@ -586,7 +585,7 @@
             this.chkAutoChangeProfile.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.chkAutoChangeProfile.Location = new System.Drawing.Point(573, 333);
             this.chkAutoChangeProfile.Name = "chkAutoChangeProfile";
-            this.chkAutoChangeProfile.Size = new System.Drawing.Size(221, 19);
+            this.chkAutoChangeProfile.Size = new System.Drawing.Size(255, 19);
             this.chkAutoChangeProfile.TabIndex = 26;
             this.chkAutoChangeProfile.Text = "Automatically change to linked profile";
             this.chkAutoChangeProfile.UseSelectable = true;
@@ -893,7 +892,7 @@
             this.lblTheme.AutoSize = true;
             this.lblTheme.Location = new System.Drawing.Point(12, 22);
             this.lblTheme.Name = "lblTheme";
-            this.lblTheme.Size = new System.Drawing.Size(49, 19);
+            this.lblTheme.Size = new System.Drawing.Size(52, 19);
             this.lblTheme.TabIndex = 5;
             this.lblTheme.Text = "Theme:";
             // 
