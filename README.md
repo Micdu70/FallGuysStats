@@ -137,7 +137,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
   - 1.151 *~ 30/03/2023*
-  { Cette version est basée sur la Version Officielle (v1.141) datant du 29/03/2023 => https://github.com/ShootMe/FallGuysStats }
+  { Cette version est basée sur la Version Officielle (v1.142) datant du 30/03/2023 => https://github.com/ShootMe/FallGuysStats }
     - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Tout plein de chose à découvrir !
   - 1.150 *~ 20/03/2023*
@@ -224,6 +224,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - +Corrigé: Sélection du bon profil après déplacement des données
 
 ## Changelog récent de la Version Officielle
+  - 1.142
+    - Add overlay background opacity adjustment option
   - 1.141
     - Upgrade Win Per Day Charts
     - Finals bug fix

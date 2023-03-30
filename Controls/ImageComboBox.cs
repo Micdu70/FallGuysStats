@@ -54,7 +54,7 @@ namespace FallGuysStats {
                     dropDownRect.X = clientRect.Width - dropDownRect.Right;
                     dropDownRect.Width += 1;
                 }
-                //var innerBorderColor = Enabled ? BackColor : SystemColors.Control;
+                //Color innerBorderColor = Enabled ? BackColor : SystemColors.Control;
                 Color outerBorderColor = Enabled ? BorderColor : SystemColors.ControlDark;
                 Color buttonColor = Enabled ? ButtonColor : SystemColors.Control;
                 Point middle = new Point(dropDownRect.Left + (dropDownRect.Width / 2),

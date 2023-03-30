@@ -1334,7 +1334,7 @@ namespace FallGuysStats {
             } else {
                 this.SetDefaultFontColor();
             }
-            
+
             this.Background = this.RecreateBackground();
             if (width.HasValue) {
                 this.Width = width.Value;

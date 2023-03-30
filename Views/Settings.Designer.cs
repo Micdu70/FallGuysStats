@@ -39,6 +39,7 @@
             this.chkCycleFastestLongest = new MetroFramework.Controls.MetroRadioButton();
             this.chkHidePercentages = new MetroFramework.Controls.MetroCheckBox();
             this.chkHideWinsInfo = new MetroFramework.Controls.MetroCheckBox();
+            this.cboOverlayBackground = new FallGuysStats.ImageComboBox();
             this.lblOverlayBackground = new MetroFramework.Controls.MetroLabel();
             this.cboOverlayColor = new MetroFramework.Controls.MetroComboBox();
             this.lblOverlayColor = new MetroFramework.Controls.MetroLabel();
@@ -346,6 +347,24 @@
             this.chkHideWinsInfo.Text = "Hide Wins info";
             this.chkHideWinsInfo.UseSelectable = true;
             // 
+            // cboOverlayBackground
+            // 
+            this.cboOverlayBackground.BorderColor = System.Drawing.Color.Gray;
+            this.cboOverlayBackground.ButtonColor = System.Drawing.Color.DarkGray;
+            this.cboOverlayBackground.DropDownHeight = 500;
+            this.cboOverlayBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOverlayBackground.FormattingEnabled = true;
+            this.cboOverlayBackground.IntegralHeight = true;
+            this.cboOverlayBackground.ItemHeight = 23;
+            this.cboOverlayBackground.Location = new System.Drawing.Point(599, 123);
+            this.cboOverlayBackground.Name = "cboOverlayBackground";
+            this.cboOverlayBackground.Size = new System.Drawing.Size(240, 20);
+            this.cboOverlayBackground.TabIndex = 19;
+            this.cboOverlayBackground.GotFocus += new System.EventHandler(this.CboOverlayBackground_GotFocus);
+            this.cboOverlayBackground.LostFocus += new System.EventHandler(this.CboOverlayBackground_LostFocus);
+            this.cboOverlayBackground.MouseEnter += new System.EventHandler(this.CboOverlayBackground_MouseEnter);
+            this.cboOverlayBackground.MouseLeave += new System.EventHandler(this.CboOverlayBackground_MouseLeave);
+            // 
             // lblOverlayBackground
             // 
             this.lblOverlayBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -402,7 +421,7 @@
             this.trkOverlayOpacity.TabIndex = 22;
             this.overlayOpacityToolTip.SetToolTip(this.trkOverlayOpacity, "100");
             this.trkOverlayOpacity.Value = 100;
-            this.trkOverlayOpacity.ValueChanged += new System.EventHandler(this.trkOverlayOpacity_ValueChanged);
+            this.trkOverlayOpacity.ValueChanged += new System.EventHandler(this.TrkOverlayOpacity_ValueChanged);
             // 
             // chkFlipped
             // 
@@ -876,7 +895,7 @@
             this.lblTheme.Name = "lblTheme";
             this.lblTheme.Size = new System.Drawing.Size(49, 19);
             this.lblTheme.TabIndex = 5;
-            this.lblTheme.Text = "Theme";
+            this.lblTheme.Text = "Theme:";
             // 
             // chkChangeHoopsieLegends
             // 
@@ -902,7 +921,7 @@
             this.cboTheme.Size = new System.Drawing.Size(81, 29);
             this.cboTheme.TabIndex = 1;
             this.cboTheme.UseSelectable = true;
-            this.cboTheme.SelectedIndexChanged += new System.EventHandler(this.cboTheme_SelectedIndexChanged);
+            this.cboTheme.SelectedIndexChanged += new System.EventHandler(this.CboTheme_SelectedIndexChanged);
             // 
             // chkAutoUpdate
             // 

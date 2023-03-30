@@ -217,7 +217,7 @@ namespace FallGuysStats {
             } else {
                 this.lblOverlayFontExample.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             }
-            
+
             this.trkOverlayOpacity.Value = this.CurrentSettings.OverlayBackgroundOpacity;
         }
 
@@ -513,7 +513,7 @@ namespace FallGuysStats {
             }
 
             this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
-            
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -694,7 +694,7 @@ namespace FallGuysStats {
             if (this.DisplayLang == ((ComboBox)sender).SelectedIndex) return;
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
-        private void trkOverlayOpacity_ValueChanged(object sender, EventArgs e) {
+        private void TrkOverlayOpacity_ValueChanged(object sender, EventArgs e) {
             this.overlayOpacityToolTip.SetToolTip(((MetroTrackBar)sender), ((MetroTrackBar)sender).Value.ToString());
             this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
         }
