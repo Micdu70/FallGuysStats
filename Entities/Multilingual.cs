@@ -6,10 +6,13 @@ namespace FallGuysStats {
         public static readonly Dictionary<string, Dictionary<string, string>> MultilingualDictionary = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase) {
             { "eng", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Eunma"},
-                            {"main_by", "by"},
-                            {"main_on_twitch", "on Twitch"},
                             {"main_multilingual", "Multilingual"},
-                            {"main_fall_guys_stats", "Fall Guys Stats"},
+                            {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+#endif
                             {"main_settings", "Settings"},
                             {"main_filters", "Filters"},
                             {"main_stats", "Stats"},
@@ -310,11 +313,14 @@ namespace FallGuysStats {
             },
             { "fre", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Micdu70 & Eunma"},
-                            {"main_by", "par"},
-                            {"main_on_twitch", "sur Twitch"},
                             {"main_multilingual", "Multilingue"},
+                            {"main_fall_guys_stats", "Tracker Fall Guys \"FE\""},
+#if AllowUpdate
+                            {"main_title_suffix", "~ par Micdu70"},
+#else
+                            {"main_title_suffix", "[SANS MAJ AUTO] ~ par Micdu70"},
+#endif
                             {"main_settings", "Configuration"},
-                            {"main_fall_guys_stats", "Tracker Fall Guys"},
                             {"main_filters", "Filtres"},
                             {"main_stats", "Stats"},
                             {"main_all", "Toutes"},
@@ -604,7 +610,7 @@ namespace FallGuysStats {
                             {"profile_add_select_question_prefix", "Des stats d'émissions précédentes peuvent être"},
                             {"profile_add_select_question_suffix", "enregistrées dans le profil de votre choix."},
                             {"profile_move_select_title", "Déplacer les données"},
-                            {"profile_move_select_description_prefix", "Sélectionner un profil ci-dessous pour ajouter vos stats."},
+                            {"profile_move_select_description_prefix", "Sélectionner un profil ci-dessous pour déplacer les données."},
                             {"profile_move_select_description_suffix", "Nombre d'émissions sélectionnées"},
                             {"profile_move_select_question_prefix", "Voulez-vous déplacer la sélection"},
                             {"profile_move_select_question_infix", "d'émissions vers le profil"},
@@ -614,11 +620,14 @@ namespace FallGuysStats {
             },
             { "kor", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "신모씨_"},
-                            {"main_by", "by"},
-                            {"main_on_twitch", "on Twitch"},
                             {"main_multilingual", "다국어"},
+                            {"main_fall_guys_stats", "폴 가이즈 스탯츠 \"FE\""},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+#endif
                             {"main_settings", "설정"},
-                            {"main_fall_guys_stats", "폴 가이즈 스탯츠"},
                             {"main_filters", "필터링"},
                             {"main_stats", "통계"},
                             {"main_all", "전체"},
@@ -918,11 +927,14 @@ namespace FallGuysStats {
             },
             { "jpn", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Eunma"},
-                            {"main_by", "by"},
-                            {"main_on_twitch", "on Twitch"},
                             {"main_multilingual", "多言語"},
+                            {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+#endif
                             {"main_settings", "設定"},
-                            {"main_fall_guys_stats", "Fall Guys Stats"},
                             {"main_filters", "フィルタ"},
                             {"main_stats", "期間"},
                             {"main_all", "すべて"},
@@ -1222,11 +1234,14 @@ namespace FallGuysStats {
             },
             { "chs", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                             {"author", "Eunma"},
-                            {"main_by", "by"},
-                            {"main_on_twitch", "on Twitch"},
                             {"main_multilingual", "多语言"},
+                            {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
+#if AllowUpdate
+                            {"main_title_suffix", "~ by Micdu70"},
+#else
+                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+#endif
                             {"main_settings", "设置"},
-                            {"main_fall_guys_stats", "Fall Guys Stats"},
                             {"main_filters", "筛选"},
                             {"main_stats", "统计"},
                             {"main_all", "全部"},

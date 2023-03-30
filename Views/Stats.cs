@@ -209,7 +209,7 @@ namespace FallGuysStats {
             this.InitMainDataGridView();
 
             this.ChangeMainLanguage();
-            this.Text = $"　  {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+
             this.BackImage = this.Icon.ToBitmap();
             this.BackMaxSize = 32;
             this.BackImagePadding = new Padding(18, 18, 0, 0);
@@ -2124,7 +2124,7 @@ namespace FallGuysStats {
         }
         private void LaunchHelpInBrowser() {
             try {
-                Process.Start(@"https://github.com/Micdu70/FallGuysStats#fall-guys-stats-fe-frenchy-edition-par-micdu70");
+                Process.Start(@"https://github.com/Micdu70/FallGuysStats#sommaire");
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -2540,7 +2540,7 @@ namespace FallGuysStats {
             return screen;
         }
         private void ChangeMainLanguage() {
-            this.Text = $"　  {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            this.Text = $"　  {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);
