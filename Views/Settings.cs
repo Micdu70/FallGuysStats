@@ -19,6 +19,7 @@ namespace FallGuysStats {
         private string overlayFontColorSerialized = string.Empty;
         public UserSettings CurrentSettings { get; set; }
         public Stats StatsForm { get; set; }
+        public Overlay Overlay { get; set; }
         private int LaunchPlatform;
         private int DisplayLang;
         private bool CboOverlayBackgroundIsFocus;
@@ -216,6 +217,8 @@ namespace FallGuysStats {
             } else {
                 this.lblOverlayFontExample.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             }
+            
+            this.trkOverlayOpacity.Value = this.CurrentSettings.OverlayBackgroundOpacity;
         }
 
         private void SetTheme(MetroThemeStyle theme) {
@@ -249,6 +252,8 @@ namespace FallGuysStats {
                             mrb2.Theme = theme;
                         } else if (c2 is MetroComboBox mcbo2) {
                             mcbo2.Theme = theme;
+                        } else if (c2 is MetroTrackBar mtrb2) {
+                            mtrb2.Theme = theme;
                         } else if (c2 is GroupBox gb2) {
                             gb2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                             foreach (Control c3 in gb2.Controls) {
@@ -507,6 +512,8 @@ namespace FallGuysStats {
                 this.CurrentSettings.OverlayFontColorSerialized = string.Empty;
             }
 
+            this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
+            
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -687,6 +694,10 @@ namespace FallGuysStats {
             if (this.DisplayLang == ((ComboBox)sender).SelectedIndex) return;
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
+        private void trkOverlayOpacity_ValueChanged(object sender, EventArgs e) {
+            this.overlayOpacityToolTip.SetToolTip(((MetroTrackBar)sender), ((MetroTrackBar)sender).Value.ToString());
+            this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
+        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             if (keyData == Keys.Tab) {
                 SendKeys.Send("%");
@@ -727,6 +738,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(473, 93);
                 this.lblOverlayBackground.Location = new Point(491, 129);
                 this.lblOverlayColor.Location = new Point(532, 168);
+                this.lblOverlayOpacity.Location = new Point(453, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(90, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(118, 192);
@@ -758,6 +770,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(444, 93);
                 this.lblOverlayBackground.Location = new Point(480, 129);
                 this.lblOverlayColor.Location = new Point(516, 168);
+                this.lblOverlayOpacity.Location = new Point(478, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(190, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(218, 192);
@@ -789,6 +802,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(433, 93);
                 this.lblOverlayBackground.Location = new Point(478, 129);
                 this.lblOverlayColor.Location = new Point(492, 168);
+                this.lblOverlayOpacity.Location = new Point(438, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(90, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(118, 192);
@@ -820,6 +834,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(401, 93);
                 this.lblOverlayBackground.Location = new Point(469, 129);
                 this.lblOverlayColor.Location = new Point(455, 168);
+                this.lblOverlayOpacity.Location = new Point(389, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(110, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(138, 192);
@@ -851,6 +866,7 @@ namespace FallGuysStats {
                 this.lblFastestFilter.Location = new Point(500, 93);
                 this.lblOverlayBackground.Location = new Point(555, 129);
                 this.lblOverlayColor.Location = new Point(569, 168);
+                this.lblOverlayOpacity.Location = new Point(480, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(87, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(116, 192);
@@ -943,6 +959,7 @@ namespace FallGuysStats {
 
             this.lblOverlayBackground.Text = Multilingual.GetWord("settings_background_image");
             this.lblOverlayColor.Text = Multilingual.GetWord("settings_background");
+            this.lblOverlayOpacity.Text = Multilingual.GetWord("settings_background_opacity");
             this.chkFlipped.Text = Multilingual.GetWord("settings_flip_display_horizontally");
             this.chkShowTabs.Text = Multilingual.GetWord("settings_show_tab_for_currnet_filter__profile");
             this.chkHideTimeInfo.Text = Multilingual.GetWord("settings_hide_time_info");
