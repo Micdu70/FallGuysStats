@@ -727,13 +727,7 @@ namespace FallGuysStats {
                     LevelType levelType = (level?.Type).GetValueOrDefault();
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
-                        if (LogRound.IsLastRound) {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
-                        } else if (LogRound.IsSpectating) {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
-                        } else {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
-                        }
+                        this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{LogRound.Count}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundIcon;
                         if (this.lblRound.RoundIcon.Height != 23) {
@@ -744,13 +738,7 @@ namespace FallGuysStats {
                             this.lblRound.ImageWidth = this.lblRound.RoundIcon.Width;
                         }
                     } else {
-                        if (LogRound.IsLastRound) {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
-                        } else if (LogRound.IsSpectating) {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{Multilingual.GetWord("overlay_round_suffix")} :";
-                        } else {
-                            this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
-                        }
+                        this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{LogRound.Count}{Multilingual.GetWord("overlay_round_suffix")} :";
                         this.lblRound.LevelColor = Color.Empty;
                         this.lblRound.RoundIcon = null;
                         this.lblRound.ImageWidth = 0;
@@ -819,7 +807,7 @@ namespace FallGuysStats {
                             this.lblFinish.TextRight = $"　{End - Start:m\\:ss\\.ff}";
                         }
                         this.lblFinish.ForeColor = this.lastRound.Position == 1 ? Color.White : Color.Pink;
-                    } else if (this.lastRound.Playing) {
+                    } else if (LogRound.IsPlaying) {
                         this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"　{DateTime.UtcNow - startTime:m\\:ss}" : $"　{DateTime.UtcNow - Start:m\\:ss}";
                         this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
                     } else {
@@ -831,10 +819,10 @@ namespace FallGuysStats {
                         ? $"{Multilingual.GetWord("overlay_duration")} ({TimeSpan.FromSeconds(this.lastRound.GameDuration):m\\:ss}):"
                         : $"{Multilingual.GetWord("overlay_duration")} :";
 
-                    if (End != DateTime.MinValue && LogRound.IsEnded) {
-                        this.lblDuration.TextRight = $"　{End - Start:m\\:ss\\.ff}";
-                    } else if (this.lastRound.Playing || (LogRound.IsSpectating && !LogRound.IsEnded)) {
+                    if (LogRound.IsPlaying) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"　{DateTime.UtcNow - startTime:m\\:ss}" : $"　{DateTime.UtcNow - Start:m\\:ss}";
+                    } else if (End != DateTime.MinValue) {
+                        this.lblDuration.TextRight = $"　{End - Start:m\\:ss\\.ff}";
                     } else {
                         this.lblDuration.TextRight = "　-";
                     }

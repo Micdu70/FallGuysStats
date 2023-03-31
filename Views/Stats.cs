@@ -138,8 +138,9 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (this.CurrentSettings.FrenchyEditionDB < 2) {
-                        this.CurrentSettings.FrenchyEditionDB = 2;
+                    if (this.CurrentSettings.FrenchyEditionDB < 3) {
+                        this.CurrentSettings.FrenchyEditionDB = 3;
+                        this.CurrentSettings.Theme = 1;
                         this.CurrentSettings.OverlayBackgroundOpacity = 100;
                         this.CurrentSettings.HideOverlayPercentages = true;
                         this.CurrentSettings.WinsFilter = 1;
@@ -1017,7 +1018,7 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 24) {
                 this.CurrentSettings.WinsFilter = 1;
                 this.CurrentSettings.QualifyFilter = 1;
-                this.CurrentSettings.FastestFilter = 1;
+                this.CurrentSettings.FastestFilter = 0;
                 this.CurrentSettings.Version = 25;
                 this.SaveUserSettings();
             }
@@ -1042,7 +1043,7 @@ namespace FallGuysStats {
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
                 ID = 1,
-                Theme = 0,
+                Theme = 1,
                 CycleTimeSeconds = 5,
                 FilterType = 0,
                 SelectedProfile = 0,
@@ -1064,7 +1065,7 @@ namespace FallGuysStats {
                 FixedFlippedDisplay = false,
                 SwitchBetweenLongest = true,
                 SwitchBetweenQualify = true,
-                SwitchBetweenPlayers = true,
+                SwitchBetweenPlayers = false,
                 SwitchBetweenStreaks = true,
                 OnlyShowLongest = false,
                 OnlyShowGold = false,
@@ -1074,8 +1075,8 @@ namespace FallGuysStats {
                 OverlayNotOnTop = false,
                 OverlayFontSerialized = string.Empty,
                 OverlayFontColorSerialized = string.Empty,
-                PlayerByConsoleType = false,
-                ColorByRoundType = false,
+                PlayerByConsoleType = true,
+                ColorByRoundType = true,
                 AutoChangeProfile = false,
                 PreviousWins = 0,
                 WinsFilter = 1,
@@ -1086,7 +1087,7 @@ namespace FallGuysStats {
                 HideTimeInfo = false,
                 ShowOverlayTabs = false,
                 ShowPercentages = false,
-                AutoUpdate = false,
+                AutoUpdate = true,
                 MaximizedWindowState = false,
                 FormLocationX = null,
                 FormLocationY = null,
@@ -1102,7 +1103,7 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 Version = 27,
-                FrenchyEditionDB = 2
+                FrenchyEditionDB = 3
             };
         }
         private void UpdateHoopsieLegends() {

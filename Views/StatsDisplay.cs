@@ -38,6 +38,8 @@ namespace FallGuysStats {
                 this.formsPlot.Plot.XAxis.TickLabelStyle(rotation: 45);
                 this.formsPlot.Plot.XAxis.SetSizeLimit(min: 50);
 
+                this.formsPlot.Plot.YAxis.ManualTickSpacing(1.0);
+
                 this.HighlightedPoint = this.formsPlot.Plot.AddPoint(0, 0);
                 this.HighlightedPoint.Color = this.Theme == MetroThemeStyle.Light ? Color.Magenta : Color.Chartreuse;
                 this.HighlightedPoint.MarkerSize = 10;
