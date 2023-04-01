@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace FallGuysStats {
@@ -270,7 +271,8 @@ namespace FallGuysStats {
             this.infoStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.infoStrip.AutoSize = false;
-            this.infoStrip.BackColor = System.Drawing.Color.White;
+            this.infoStrip.BackColor = System.Drawing.Color.Transparent;
+            this.infoStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.infoStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.infoStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblCurrentProfile,
@@ -284,6 +286,7 @@ namespace FallGuysStats {
             this.infoStrip.Location = new System.Drawing.Point(20, 97);
             this.infoStrip.Name = "infoStrip";
             this.infoStrip.Padding = new System.Windows.Forms.Padding(0, 6, 0, 1);
+            this.infoStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.infoStrip.Size = new System.Drawing.Size(790, 26);
             this.infoStrip.Stretch = true;
             this.infoStrip.TabIndex = 13;
@@ -428,8 +431,9 @@ namespace FallGuysStats {
             this.ResumeLayout(false);
 
         }
-
+        
         #endregion
+
         private FallGuysStats.Grid gridDetails;
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem menuSettings;

@@ -65,6 +65,7 @@
             // 
             // cboEditShows
             // 
+            this.cboEditShows.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboEditShows.FormattingEnabled = true;
             this.cboEditShows.ItemHeight = 23;
             this.cboEditShows.Location = new System.Drawing.Point(185, 135);
@@ -84,6 +85,7 @@
             // 
             // btnEditShowsSave
             // 
+            this.btnEditShowsSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditShowsSave.Location = new System.Drawing.Point(240, 206);
             this.btnEditShowsSave.Name = "btnEditShowsSave";
             this.btnEditShowsSave.Size = new System.Drawing.Size(87, 25);
@@ -94,6 +96,7 @@
             // 
             // btnEditShowsCancel
             // 
+            this.btnEditShowsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditShowsCancel.Location = new System.Drawing.Point(339, 206);
             this.btnEditShowsCancel.Name = "btnEditShowsCancel";
             this.btnEditShowsCancel.Size = new System.Drawing.Size(87, 25);
