@@ -63,7 +63,7 @@ namespace FallGuysStats {
             this.tgGraph.UseCustomForeColor = true;
             this.tgGraph.UseSelectable = true;
             this.tgGraph.UseStyleColors = true;
-            this.tgGraph.CheckStateChanged += new System.EventHandler(this.tgGraph_CheckStateChanged);
+            this.tgGraph.CheckStateChanged += new System.EventHandler(this.TgGraph_CheckStateChanged);
             // 
             // chkWins
             // 

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Controls;
 using ScottPlot;
+using ScottPlot.Renderable;
 
 namespace FallGuysStats {
     public partial class StatsDisplay : MetroFramework.Forms.MetroForm {
@@ -34,7 +35,7 @@ namespace FallGuysStats {
                 this.MyBarPlot2.Label = Multilingual.GetWord("level_detail_finals");
                 this.MyBarPlot3 = this.formsPlot.Plot.AddBar(this.wins, this.dates, color: this.GetColorWithAlpha(this.chkWins.ForeColor, 255));
                 this.MyBarPlot3.Label = Multilingual.GetWord("level_detail_wins");
-                
+
                 this.MyScatterPlot1 = this.formsPlot.Plot.AddScatter(this.dates, this.shows, markerSize: 4, color: this.GetColorWithAlpha(this.chkShows.ForeColor, 255), label: Multilingual.GetWord("level_detail_shows"));
                 this.MyScatterPlot2 = this.formsPlot.Plot.AddScatter(this.dates, this.finals, markerSize: 4, color: this.GetColorWithAlpha(this.chkFinals.ForeColor, 255), label: Multilingual.GetWord("level_detail_finals"));
                 this.MyScatterPlot3 = this.formsPlot.Plot.AddScatter(this.dates, this.wins, markerSize: 4, color: this.GetColorWithAlpha(this.chkWins.ForeColor, 255), label: Multilingual.GetWord("level_detail_wins"));
@@ -46,7 +47,7 @@ namespace FallGuysStats {
                 this.formsPlot.Plot.XAxis.TickLabelStyle(rotation: 45);
                 //this.formsPlot.Plot.XAxis.SetSizeLimit(min: 50);
 
-                this.formsPlot.Plot.YAxis.ManualTickSpacing(1.0);
+                this.formsPlot.Plot.YAxis.ManualTickSpacing(this.manualSpacing <= 0 ? 1 : this.manualSpacing);
 
                 this.formsPlot.Plot.SetAxisLimits(yMin: 0);
 
@@ -63,7 +64,7 @@ namespace FallGuysStats {
                 this.MyBarPlot1.IsVisible = false;
                 this.MyBarPlot2.IsVisible = false;
                 this.MyBarPlot3.IsVisible = false;
-                
+
                 this.chkWins.Checked = true;
                 this.tgGraph.Checked = this.StatsForm.CurrentSettings.WinPerDayGraphStyle != 0;
             } else {
@@ -80,14 +81,14 @@ namespace FallGuysStats {
                 this.MyBarPlot1.Label = Multilingual.GetWord("level_detail_shows");
                 this.MyBarPlot2.Label = Multilingual.GetWord("level_detail_finals");
                 this.MyBarPlot3.Label = Multilingual.GetWord("level_detail_wins");
-                
+
                 this.MyScatterPlot1.Color = this.GetColorWithAlpha(this.chkShows.ForeColor, 0);
                 this.MyScatterPlot2.Color = this.GetColorWithAlpha(this.chkFinals.ForeColor, 0);
                 this.MyScatterPlot3.Color = this.GetColorWithAlpha(this.chkWins.ForeColor, 0);
                 this.MyScatterPlot1.Label = null;
                 this.MyScatterPlot2.Label = null;
                 this.MyScatterPlot3.Label = null;
-                
+
                 this.HighlightedPoint.MarkerShape = MarkerShape.none;
             } else { // ScatterPlot
                 this.StatsForm.CurrentSettings.WinPerDayGraphStyle = 0;
@@ -97,7 +98,7 @@ namespace FallGuysStats {
                 this.MyBarPlot1.Label = null;
                 this.MyBarPlot2.Label = null;
                 this.MyBarPlot3.Label = null;
-                
+
                 this.MyScatterPlot1.Color = this.GetColorWithAlpha(this.chkShows.ForeColor, 255);
                 this.MyScatterPlot2.Color = this.GetColorWithAlpha(this.chkFinals.ForeColor, 255);
                 this.MyScatterPlot3.Color = this.GetColorWithAlpha(this.chkWins.ForeColor, 255);
@@ -107,7 +108,7 @@ namespace FallGuysStats {
                 this.MyScatterPlot1.Label = Multilingual.GetWord("level_detail_shows");
                 this.MyScatterPlot2.Label = Multilingual.GetWord("level_detail_finals");
                 this.MyScatterPlot3.Label = Multilingual.GetWord("level_detail_wins");
-                
+
                 this.HighlightedPoint.MarkerShape = MarkerShape.openCircle;
             }
             this.formsPlot.Refresh();
@@ -203,14 +204,14 @@ namespace FallGuysStats {
                                                                  (this.MyScatterPlot2.IsVisible ? $"{Multilingual.GetWord("level_detail_finals")} : {this.MyScatterPlot2.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot3.IsVisible ? $"{Multilingual.GetWord("level_detail_wins")} : {this.MyScatterPlot3.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}" : ""),
                 x: this.HighlightedPoint.X, y: this.HighlightedPoint.Y);
-            
+
             this.tooltip.BorderWidth = 1;
-            this.tooltip.BorderColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(239, 49,51,56) : Color.FromArgb(239, 211,211,211);
-            this.tooltip.FillColor = Color.FromArgb(239, 49,51,56);
+            this.tooltip.BorderColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(239, 49, 51, 56) : Color.FromArgb(239, 211, 211, 211);
+            this.tooltip.FillColor = Color.FromArgb(239, 49, 51, 56);
             this.tooltip.Font.Size = 13;
             this.tooltip.Font.Color = Color.White;
             this.tooltip.ArrowSize = 5;
-            
+
             this.HighlightedPoint.IsVisible = true;
             this.formsPlot.Render();
         }
@@ -228,16 +229,16 @@ namespace FallGuysStats {
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
             this.tgGraph.Theme = theme;
-            this.picGraph.Image = this.tgGraph.Checked ? 
-                (this.Theme == MetroThemeStyle.Light ? Properties.Resources.bar_plot_icon : Properties.Resources.bar_plot_gray_icon) : 
+            this.picGraph.Image = this.tgGraph.Checked ?
+                (this.Theme == MetroThemeStyle.Light ? Properties.Resources.bar_plot_icon : Properties.Resources.bar_plot_gray_icon) :
                 (this.Theme == MetroThemeStyle.Light ? Properties.Resources.scatter_plot_icon : Properties.Resources.scatter_plot_gray_icon);
             this.chkWins.Theme = theme;
             this.chkFinals.Theme = theme;
             this.chkShows.Theme = theme;
             if (theme == MetroThemeStyle.Light) {
-                this.chkWins.ForeColor =  Color.Goldenrod;
-                this.chkFinals.ForeColor =  Color.DeepPink;
-                this.chkShows.ForeColor =  Color.RoyalBlue;
+                this.chkWins.ForeColor = Color.Goldenrod;
+                this.chkFinals.ForeColor = Color.DeepPink;
+                this.chkShows.ForeColor = Color.RoyalBlue;
             } else if (theme == MetroThemeStyle.Dark) {
                 this.chkWins.ForeColor = Color.Gold;
                 this.chkFinals.ForeColor = Color.DeepPink;
@@ -254,9 +255,9 @@ namespace FallGuysStats {
                 this.Close();
             }
         }
-        private void tgGraph_CheckStateChanged(object sender, EventArgs e) {
-            this.picGraph.Image = ((MetroToggle)sender).Checked ? 
-                (this.Theme == MetroThemeStyle.Light ? Properties.Resources.bar_plot_icon : Properties.Resources.bar_plot_gray_icon) : 
+        private void TgGraph_CheckStateChanged(object sender, EventArgs e) {
+            this.picGraph.Image = ((MetroToggle)sender).Checked ?
+                (this.Theme == MetroThemeStyle.Light ? Properties.Resources.bar_plot_icon : Properties.Resources.bar_plot_gray_icon) :
                 (this.Theme == MetroThemeStyle.Light ? Properties.Resources.scatter_plot_icon : Properties.Resources.scatter_plot_gray_icon);
             this.ChangeFormsPlotStyle(((MetroToggle)sender).Checked);
         }
