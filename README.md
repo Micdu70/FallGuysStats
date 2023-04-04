@@ -21,7 +21,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.153** *~ 31/03/2023*
+**Dernière version: 1.154** *~ 04/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -40,8 +40,6 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 	- Lancer la nouvelle version du tracker
     - Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
     - Lancer Fall Guys
-
- **IMPORTANT: Les stats des émissions seront enregistrées dans le tracker UNIQUEMENT à la fin de celles-ci.**
 
 
 ### Fenêtre Principale
@@ -140,13 +138,33 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   1) Si des stats précédentes d'émissions sont détectées, certaines manches où vous êtiez éliminé(e) peuvent avoir un temps "Finish"
     *=> Pour éviter ce bug mineur, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
 
-  2) L'info "Temps" de l'overlay peut se mettre à "clignoter" à certains moments
-    *=> Normalement résolu depuis la v1.153 (si pas complétement résolu, bah tant pis ! ^^)
+  2) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
+    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
+
+  3) L'info "Temps" / "Finish" ou encore le numéro de la manche dans l'overlay peuvent se mettre à "clignoter" à certains moments
+    *=> Résolu depuis la v1.154
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.154 *~ 04/04/2023*
+  { Cette version est basée sur la Version Officielle (v1.143) datant du 01/04/2023 => https://github.com/ShootMe/FallGuysStats }
+  { Correction de bugs de la "FE" }
+  - ++Changé: Les stats des émissions non terminés sont maintenant aussi enregistrées dans le tracker !
+  - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
+  - ++Changé: Les options/réglages "par défaut" sont:
+      1) Thème "Sombre" sélectionnée
+      2) "MAJ. auto du tracker" sélectionnée
+      3) L'overlay est affiché
+      4) "Masquer les pourcentages" pour l'overlay sélectionnée
+      5) "Joueurs seul." pour l'overlay sélectionnée (au lieu de "Cycle \*Joueurs / Ping\*")
+      6) "Filtre 'Stats' et 'Parties'" sélectionnée pour les filtres "\*Wins / Finales\*" et "\*Qualif. / Or\*" sur l'overlay
+      7) "Toutes les stats" sélectionnée pour le filtre "\*Meilleur / Plus long\*" sur l'overlay
+      8) "Afficher les joueurs par support de jeu" pour l'overlay sélectionnée
+      9) "Colorer la manche selon son type" pour l'overlay sélectionnée
+     10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
+	 11) Le graphique du nombre de victoires est en forme de barres (au lieu de points)
   - 1.152 et 1.153 *~ 31/03/2023*
   { Correction de bugs de la "FE" }
-    - ++Changé: Le graphique du nombre de victoire par jour a été amélioré
+    - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
     - ++Changé: Les options/réglages "par défaut" sont:
       1) Thème "Sombre" sélectionnée
       2) "MAJ. auto du tracker" sélectionnée
@@ -246,6 +264,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - +Corrigé: Sélection du bon profil après déplacement des données
 
 ## Changelog récent de la Version Officielle
+  - 1.143
+    - Add style option to the daily win stats graph
   - 1.142
     - Add overlay background opacity adjustment option
   - 1.141

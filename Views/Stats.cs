@@ -71,8 +71,8 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
         public static bool InShow = false;
-        public static bool EndedShow = false;
-        public static int LastServerPing = 0;
+        public static bool AbruptShowEnd = false;
+        public static int ServerPing = 0;
         public static int CurrentLanguage = 0;
         public static Bitmap ImageOpacity(Image sourceImage, float opacity = 1F) {
             Bitmap bmp = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -138,8 +138,7 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (this.CurrentSettings.FrenchyEditionDB < 3) {
-                        this.CurrentSettings.FrenchyEditionDB = 3;
+                    if (this.CurrentSettings.FrenchyEditionDB <= 3) {
                         this.CurrentSettings.Theme = 1;
                         this.CurrentSettings.OverlayBackgroundOpacity = 100;
                         this.CurrentSettings.HideOverlayPercentages = true;
@@ -154,6 +153,12 @@ namespace FallGuysStats {
                         this.CurrentSettings.AutoChangeProfile = false;
                         this.CurrentSettings.AutoUpdate = true;
                         this.CurrentSettings.Version = 27;
+                        this.CurrentSettings.FrenchyEditionDB = 4;
+                        this.UserSettings.Upsert(this.CurrentSettings);
+                    }
+                    if (this.CurrentSettings.FrenchyEditionDB == 4) {
+                        this.CurrentSettings.WinPerDayGraphStyle = 1;
+                        this.CurrentSettings.FrenchyEditionDB = 5;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -209,10 +214,6 @@ namespace FallGuysStats {
             this.InitMainDataGridView();
 
             this.ChangeMainLanguage();
-
-            this.BackImage = this.Icon.ToBitmap();
-            this.BackMaxSize = 32;
-            this.BackImagePadding = new Padding(18, 18, 0, 0);
 
             this.UpdateGridRoundName();
             this.UpdateHoopsieLegends();
@@ -1018,9 +1019,9 @@ namespace FallGuysStats {
                 AutoLaunchGameOnStartup = false,
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
-                WinPerDayGraphStyle = 0,
+                WinPerDayGraphStyle = 1,
                 Version = 27,
-                FrenchyEditionDB = 3
+                FrenchyEditionDB = 5
             };
         }
         private void UpdateHoopsieLegends() {
@@ -1966,10 +1967,10 @@ namespace FallGuysStats {
             }
             rounds.Sort();
 
-            //if (rounds.Count <= 0) {
-            //    MessageBox.Show(this, $"{Multilingual.GetWord("level_detail_no_data")}", Multilingual.GetWord("level_detail_no_data_caption"), MessageBoxButtons.OK);
-            //    return;
-            //}
+            if (rounds.Count <= 0) {
+                MessageBox.Show(this, $"{Multilingual.GetWord("level_detail_no_data")}", Multilingual.GetWord("level_detail_no_data_caption"), MessageBoxButtons.OK);
+                return;
+            }
 
             using (StatsDisplay display = new StatsDisplay { StatsForm = this, Text = $"{Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}" }) {
                 if (rounds.Count > 0) {
@@ -2469,7 +2470,11 @@ namespace FallGuysStats {
             return screen;
         }
         private void ChangeMainLanguage() {
-            this.Text = $"  {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+            this.Text = $"      {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+            this.BackImage = this.Icon.ToBitmap();
+            this.BackMaxSize = 32;
+            this.BackImagePadding = new Padding(18, 18, 0, 0);
+
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);

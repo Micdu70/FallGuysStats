@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Controls;
 using ScottPlot;
-using ScottPlot.Renderable;
 
 namespace FallGuysStats {
     public partial class StatsDisplay : MetroFramework.Forms.MetroForm {
@@ -49,7 +48,7 @@ namespace FallGuysStats {
 
                 this.formsPlot.Plot.YAxis.ManualTickSpacing(this.manualSpacing <= 0 ? 1 : this.manualSpacing);
 
-                this.formsPlot.Plot.SetAxisLimits(yMin: 0);
+                //this.formsPlot.Plot.SetAxisLimits(yMin: 0);
 
                 this.HighlightedPoint = this.formsPlot.Plot.AddPoint(0, 0);
                 this.HighlightedPoint.Color = this.Theme == MetroThemeStyle.Light ? Color.SlateGray : Color.LightGray;
@@ -199,7 +198,6 @@ namespace FallGuysStats {
             }
 
             this.tooltip = this.formsPlot.Plot.AddTooltip(label: ($"{DateTime.FromOADate(this.MyScatterPlot1.Xs[currentIndex]).ToString(Multilingual.GetWord("level_date_format"))}{Environment.NewLine}") +
-                                                                 Environment.NewLine +
                                                                  (this.MyScatterPlot1.IsVisible ? $"{Multilingual.GetWord("level_detail_shows")} : {this.MyScatterPlot1.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot2.IsVisible ? $"{Multilingual.GetWord("level_detail_finals")} : {this.MyScatterPlot2.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot3.IsVisible ? $"{Multilingual.GetWord("level_detail_wins")} : {this.MyScatterPlot3.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}" : ""),
