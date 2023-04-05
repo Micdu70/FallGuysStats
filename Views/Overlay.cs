@@ -798,11 +798,7 @@ namespace FallGuysStats {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
                     } else if (End != DateTime.MinValue && LogRound.IsSpectating) {
-                        if (this.lastRound.Position > 0) {
-                            this.lblFinish.TextRight = $"# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}";
-                        } else {
-                            this.lblFinish.TextRight = $"{End - Start:m\\:ss\\.ff}";
-                        }
+                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}" : $"{End - Start:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = this.lastRound.Position == 1 ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {
                         this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
@@ -819,9 +815,7 @@ namespace FallGuysStats {
                     if (this.lastRound.Playing || (LogRound.IsPlaying && LogRound.IsSpectating && LogRound.IsLastPlayed)) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                     } else if (End != DateTime.MinValue) {
-                        this.lblDuration.TextRight = LogRound.IsSpectating && LogRound.IsLastPlayed && LogRound.IsInfoEmpty
-                                                     ? Start > DateTime.UtcNow ? $"{LogRound.End - startTime:m\\:ss}" + ".00" : $"{LogRound.End - Start:m\\:ss}" + ".00"
-                                                     : $"{End - Start:m\\:ss\\.ff}";
+                        this.lblDuration.TextRight = LogRound.IsSpectating && LogRound.IsLastPlayed && LogRound.IsInfoEmpty ? $"{LogRound.End - Start:m\\:ss}.00" : $"{End - Start:m\\:ss\\.ff}";
                     } else {
                         this.lblDuration.TextRight = "-";
                     }

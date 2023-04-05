@@ -21,7 +21,7 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 ## Téléchargement
-**Dernière version: 1.154** *~ 04/04/2023*
+**Dernière version: 1.155** *~ 05/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -134,9 +134,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
 
-## Bug(s) connu(s) de la dernière version "FE" (Frenchy Edition)
+## Bug(s) connu(s) dans les dernières versions "FE" (Frenchy Edition)
   1) Si des stats précédentes d'émissions sont détectées, certaines manches où vous êtiez éliminé(e) peuvent avoir un temps "Finish"
-    *=> Pour éviter ce bug mineur, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
+    *=> Normalement résolu depuis la v1.155 mais pour éviter ce bug mineur, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
 
   2) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
     *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
@@ -145,12 +145,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     *=> Résolu depuis la v1.154
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+  - 1.155 *~ 05/04/2023*
+  { Correction de bugs de la "FE" }
   - 1.154 *~ 04/04/2023*
   { Cette version est basée sur la Version Officielle (v1.143) datant du 01/04/2023 => https://github.com/ShootMe/FallGuysStats }
   { Correction de bugs de la "FE" }
-  - ++Changé: Les stats des émissions non terminés sont maintenant aussi enregistrées dans le tracker !
-  - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
-  - ++Changé: Les options/réglages "par défaut" sont:
+    - ++Changé: Les stats des émissions non terminés sont maintenant aussi enregistrées dans le tracker !
+    - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
+    - ++Changé: Les options/réglages "par défaut" sont:
       1) Thème "Sombre" sélectionnée
       2) "MAJ. auto du tracker" sélectionnée
       3) L'overlay est affiché
