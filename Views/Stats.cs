@@ -1346,6 +1346,14 @@ namespace FallGuysStats {
                             }
                         }
                         levelStats.Add(stat);
+
+                        if (stat.Round == round.Count && !this.loadingExisting) {
+                            if (this.menuSoloStats.Checked && stat.InParty) {
+                                MenuStats_Click(this.menuSoloStats, null);
+                            } else if (this.menuPartyStats.Checked && !stat.InParty) {
+                                MenuStats_Click(this.menuPartyStats, null);
+                            }
+                        }
                     }
 
                     if (!this.loadingExisting) { this.StatsDB.Commit(); }
@@ -2470,10 +2478,12 @@ namespace FallGuysStats {
             return screen;
         }
         private void ChangeMainLanguage() {
-            this.Text = $"      {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+            this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+
             this.BackImage = this.Icon.ToBitmap();
-            this.BackMaxSize = 32;
-            this.BackImagePadding = new Padding(18, 18, 0, 0);
+            this.BackMaxSize = 56;
+            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 21)).Width;
+            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 40 : 2), 8, 0, 0);
 
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);

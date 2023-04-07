@@ -9,9 +9,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "Multilingual"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", "~ by Micdu70"},
+                            {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+                            {"main_title_suffix", "[NO AUTO UPDATE]"},
 #endif
                             {"main_settings", "Settings"},
                             {"main_filters", "Filters"},
@@ -313,13 +313,13 @@ namespace FallGuysStats {
                         }
             },
             { "fre", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-                            {"author", "Micdu70 & Eunma"},
+                            {"author", "Micdu70"},
                             {"main_multilingual", "Multilingue"},
                             {"main_fall_guys_stats", "Tracker Fall Guys \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", "~ par Micdu70"},
+                            {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[SANS MAJ AUTO] ~ par Micdu70"},
+                            {"main_title_suffix", "[SANS MAJ AUTO]"},
 #endif
                             {"main_settings", "Configuration"},
                             {"main_filters", "Filtres"},
@@ -625,9 +625,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "다국어"},
                             {"main_fall_guys_stats", "폴 가이즈 스탯츠 \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", "~ by Micdu70"},
+                            {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+                            {"main_title_suffix", "[NO AUTO UPDATE]"},
 #endif
                             {"main_settings", "설정"},
                             {"main_filters", "필터링"},
@@ -933,9 +933,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "多言語"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", "~ by Micdu70"},
+                            {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+                            {"main_title_suffix", "[NO AUTO UPDATE]"},
 #endif
                             {"main_settings", "設定"},
                             {"main_filters", "フィルタ"},
@@ -1241,9 +1241,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "多语言"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", "~ by Micdu70"},
+                            {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE] ~ by Micdu70"},
+                            {"main_title_suffix", "[NO AUTO UPDATE]"},
 #endif
                             {"main_settings", "设置"},
                             {"main_filters", "筛选"},
@@ -2580,13 +2580,13 @@ namespace FallGuysStats {
                      { "live_event_ss2_potoo_template", "THE POWER OF BEANSKULL" },
                      { "live_event_ss2_potoo_template_test", "POTOO TEST! NOT FINAL!" },
                      { "live_event_symphony_launch_show_template", "Stars du Stade" },
-                     { "live_event_timeattack_dizzyheights", "Épreuve contre-la-montre - Hauteurs Vertigineuses" },
-                     { "live_event_timeattack_lilyleapers", "Épreuve contre-la-montre - Virevoltes Tropicales" },
-                     { "live_event_timeattack_partyprom", "Épreuve contre-la-montre - Promenade Festive" },
-                     { "live_event_timeattack_shuffle", "Contre-la-montre aléatoire" },
-                     { "live_event_timeattack_trackattack", "Épreuve contre-la-montre - Attaque sur Piste" },
-                     { "live_event_timeattack_treetoptumble", "Épreuve contre-la-montre - Culbut'Arbre" },
-                     { "live_event_timeattack_tundrarun", "Épreuve contre-la-montre - Dans la Toundra" },
+                     { "live_event_timeattack_dizzyheights", "Épreuve c.-la-m. - Hauteurs Vertigineuses" },
+                     { "live_event_timeattack_lilyleapers", "Épreuve c.-la-m. - Virevoltes Tropicales" },
+                     { "live_event_timeattack_partyprom", "Épreuve c.-la-m. - Promenade Festive" },
+                     { "live_event_timeattack_shuffle", "C.-la-m. aléatoire" },
+                     { "live_event_timeattack_trackattack", "Épreuve c.-la-m. - Attaque sur Piste" },
+                     { "live_event_timeattack_treetoptumble", "Épreuve c.-la-m. - Culbut'Arbre" },
+                     { "live_event_timeattack_tundrarun", "Épreuve c.-la-m. - Dans la Toundra" },
                      { "main_show", "Solo" },
                      { "main_show_2player", "Principale (2 Joueurs)" },
                      { "main_show_40", "Principale" },

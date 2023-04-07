@@ -88,13 +88,13 @@
             this.lblPreviousWinsNote = new MetroFramework.Controls.MetroLabel();
             this.lblPreviousWins = new MetroFramework.Controls.MetroLabel();
             this.txtPreviousWins = new MetroFramework.Controls.MetroTextBox();
+            this.picLanguageSelection = new System.Windows.Forms.PictureBox();
             this.grpGameOptions = new System.Windows.Forms.GroupBox();
             this.lblGameExeLocation = new MetroFramework.Controls.MetroLabel();
             this.txtGameExeLocation = new MetroFramework.Controls.MetroTextBox();
             this.txtGameShortcutLocation = new MetroFramework.Controls.MetroTextBox();
             this.btnGameExeLocationBrowse = new MetroFramework.Controls.MetroButton();
             this.chkLaunchGameOnStart = new MetroFramework.Controls.MetroCheckBox();
-            this.picLanguageSelection = new System.Windows.Forms.PictureBox();
             this.grpSortingOptions = new System.Windows.Forms.GroupBox();
             this.chkIgnoreLevelTypeWhenSorting = new MetroFramework.Controls.MetroCheckBox();
             this.btnCancel = new MetroFramework.Controls.MetroButton();
@@ -112,8 +112,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picEpicGames)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteam)).BeginInit();
             this.grpStats.SuspendLayout();
-            this.grpGameOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLanguageSelection)).BeginInit();
+            this.grpGameOptions.SuspendLayout();
             this.grpSortingOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -894,7 +894,7 @@
             "🇰🇷 한국어",
             "🇯🇵 日本語",
             "🇨🇳 简体中文"});
-            this.cboMultilingual.Location = new System.Drawing.Point(57, 821);
+            this.cboMultilingual.Location = new System.Drawing.Point(54, 17);
             this.cboMultilingual.Name = "cboMultilingual";
             this.cboMultilingual.Size = new System.Drawing.Size(105, 29);
             this.cboMultilingual.TabIndex = 99;
@@ -911,7 +911,9 @@
             this.grpStats.Controls.Add(this.chkAutoUpdate);
             this.grpStats.Controls.Add(this.lblPreviousWinsNote);
             this.grpStats.Controls.Add(this.lblPreviousWins);
+            this.grpStats.Controls.Add(this.cboMultilingual);
             this.grpStats.Controls.Add(this.txtPreviousWins);
+            this.grpStats.Controls.Add(this.picLanguageSelection);
             this.grpStats.Location = new System.Drawing.Point(14, 123);
             this.grpStats.Name = "grpStats";
             this.grpStats.Size = new System.Drawing.Size(872, 89);
@@ -922,7 +924,7 @@
             // lblTheme
             // 
             this.lblTheme.AutoSize = true;
-            this.lblTheme.Location = new System.Drawing.Point(12, 22);
+            this.lblTheme.Location = new System.Drawing.Point(221, 22);
             this.lblTheme.Name = "lblTheme";
             this.lblTheme.Size = new System.Drawing.Size(52, 19);
             this.lblTheme.TabIndex = 5;
@@ -949,7 +951,7 @@
             this.cboTheme.Items.AddRange(new object[] {
             "Light",
             "Dark"});
-            this.cboTheme.Location = new System.Drawing.Point(70, 17);
+            this.cboTheme.Location = new System.Drawing.Point(279, 17);
             this.cboTheme.Name = "cboTheme";
             this.cboTheme.Size = new System.Drawing.Size(81, 29);
             this.cboTheme.TabIndex = 1;
@@ -961,11 +963,11 @@
             this.chkAutoUpdate.AutoSize = true;
             this.chkAutoUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkAutoUpdate.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkAutoUpdate.Location = new System.Drawing.Point(252, 22);
+            this.chkAutoUpdate.Location = new System.Drawing.Point(400, 22);
             this.chkAutoUpdate.Name = "chkAutoUpdate";
-            this.chkAutoUpdate.Size = new System.Drawing.Size(161, 19);
+            this.chkAutoUpdate.Size = new System.Drawing.Size(177, 19);
             this.chkAutoUpdate.TabIndex = 3;
-            this.chkAutoUpdate.Text = "Auto Update Program";
+            this.chkAutoUpdate.Text = "Check update on startup";
             this.chkAutoUpdate.UseSelectable = true;
             // 
             // lblPreviousWinsNote
@@ -1020,6 +1022,16 @@
             this.txtPreviousWins.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPreviousWins.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtPreviousWins.Validating += new System.ComponentModel.CancelEventHandler(this.TxtPreviousWins_Validating);
+            // 
+            // picLanguageSelection
+            // 
+            this.picLanguageSelection.Image = global::FallGuysStats.Properties.Resources.language_icon;
+            this.picLanguageSelection.Location = new System.Drawing.Point(19, 17);
+            this.picLanguageSelection.Name = "picLanguageSelection";
+            this.picLanguageSelection.Size = new System.Drawing.Size(29, 29);
+            this.picLanguageSelection.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLanguageSelection.TabIndex = 39;
+            this.picLanguageSelection.TabStop = false;
             // 
             // grpGameOptions
             // 
@@ -1139,16 +1151,6 @@
             this.chkLaunchGameOnStart.Text = "Auto-launch Fall Guys on tracker";
             this.chkLaunchGameOnStart.UseSelectable = true;
             // 
-            // picLanguageSelection
-            // 
-            this.picLanguageSelection.Image = global::FallGuysStats.Properties.Resources.language_icon;
-            this.picLanguageSelection.Location = new System.Drawing.Point(22, 821);
-            this.picLanguageSelection.Name = "picLanguageSelection";
-            this.picLanguageSelection.Size = new System.Drawing.Size(29, 29);
-            this.picLanguageSelection.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLanguageSelection.TabIndex = 39;
-            this.picLanguageSelection.TabStop = false;
-            // 
             // grpSortingOptions
             // 
             this.grpSortingOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1213,8 +1215,6 @@
             this.Controls.Add(this.grpOverlay);
             this.Controls.Add(this.grpStats);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.cboMultilingual);
-            this.Controls.Add(this.picLanguageSelection);
             this.Controls.Add(this.txtLogPath);
             this.Controls.Add(this.lblLogPathNote);
             this.Controls.Add(this.lblLogPath);
@@ -1246,9 +1246,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSteam)).EndInit();
             this.grpStats.ResumeLayout(false);
             this.grpStats.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLanguageSelection)).EndInit();
             this.grpGameOptions.ResumeLayout(false);
             this.grpGameOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLanguageSelection)).EndInit();
             this.grpSortingOptions.ResumeLayout(false);
             this.grpSortingOptions.PerformLayout();
             this.ResumeLayout(false);
@@ -1300,7 +1300,6 @@
         private MetroFramework.Controls.MetroCheckBox chkChangeHoopsieLegends;
         private System.Windows.Forms.GroupBox grpGameOptions;
         private MetroFramework.Controls.MetroLabel lblGameExeLocation;
-        private System.Windows.Forms.PictureBox picLanguageSelection;
         private MetroFramework.Controls.MetroTextBox txtGameExeLocation;
         private MetroFramework.Controls.MetroTextBox txtGameShortcutLocation;
         private MetroFramework.Controls.MetroButton btnGameExeLocationBrowse;
@@ -1336,5 +1335,6 @@
         private MetroFramework.Controls.MetroButton btnResetOverlayFont;
         private MetroFramework.Components.MetroToolTip platformToolTip;
         private MetroFramework.Components.MetroToolTip overlayOpacityToolTip;
+        private System.Windows.Forms.PictureBox picLanguageSelection;
     }
 }

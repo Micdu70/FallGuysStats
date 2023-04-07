@@ -211,6 +211,7 @@ namespace FallGuysStats {
                                             showStart = round[j].Start;
                                         }
                                         round[j].ShowStart = showStart;
+                                        round[j].PrivateLobby = true;
                                         round[j].Playing = false;
                                         if (j < (round.Count - 1)) {
                                             round[j].Qualified = true;
@@ -248,17 +249,19 @@ namespace FallGuysStats {
             return (roundName.IndexOf("ound_jinxed", StringComparison.OrdinalIgnoreCase) > 0
                     && roundName.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1)
 
-                   || (roundName.IndexOf("ound_fall_ball", StringComparison.OrdinalIgnoreCase) > 0
-                       && roundName.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1
-                       && roundName.IndexOf("_cup_only", StringComparison.OrdinalIgnoreCase) == -1)
+                    || (roundName.IndexOf("ound_fall_ball", StringComparison.OrdinalIgnoreCase) > 0
+                        && roundName.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1
+                        && roundName.IndexOf("_cup_only", StringComparison.OrdinalIgnoreCase) == -1)
 
-                   || (roundName.IndexOf("ound_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) > 0
-                       && roundName.IndexOf("_final", StringComparison.OrdinalIgnoreCase) > 0)
+                    || (roundName.IndexOf("ound_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) > 0
+                        && roundName.IndexOf("_final", StringComparison.OrdinalIgnoreCase) > 0)
 
-                   || (roundName.IndexOf("ound_pixelperfect", StringComparison.OrdinalIgnoreCase) > 0
-                       && roundName.Substring(roundName.Length - 6).ToLower() == "_final")
+                    || (roundName.IndexOf("ound_pixelperfect", StringComparison.OrdinalIgnoreCase) > 0
+                        && roundName.Substring(roundName.Length - 6).ToLower() == "_final")
 
-                   || roundName.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase);
+                    || roundName.EndsWith("_timeattack_final", StringComparison.OrdinalIgnoreCase)
+
+                    || roundName.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase);
         }
 
         private bool GetIsModeException(string sceneName) {
@@ -293,7 +296,7 @@ namespace FallGuysStats {
                      || roundName.IndexOf("ound_floor_fall_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
                      || roundName.IndexOf("ound_hexaring_event_walnut", StringComparison.OrdinalIgnoreCase) > 0
                      || roundName.IndexOf("ound_hexsnake_event_walnut", StringComparison.OrdinalIgnoreCase) > 0)
-                         && roundName.Substring(roundName.Length - 6).ToLower() == "_final")
+                        && roundName.Substring(roundName.Length - 6).ToLower() == "_final")
 
                      || (roundName.IndexOf("ound_blastball_arenasurvival_blast_ball_trials", StringComparison.OrdinalIgnoreCase) > 0
                          && roundName.Substring(roundName.Length - 3).ToLower() == "_fn")
@@ -304,8 +307,8 @@ namespace FallGuysStats {
 
         private bool GetIsTeamException(string roundName) {
             return roundName.IndexOf("ound_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) > 0
-                     && (roundName.IndexOf("_duos", StringComparison.OrdinalIgnoreCase) > 0
-                     || roundName.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) > 0);
+                   && (roundName.IndexOf("_duos", StringComparison.OrdinalIgnoreCase) > 0
+                   || roundName.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) > 0);
         }
 
         private bool ParseLine(LogLine line, List<RoundInfo> round, LogRound logRound) {
@@ -369,19 +372,19 @@ namespace FallGuysStats {
                     logRound.Info.Position = position;
                 }
                 return false;
-            } else if (LogRound.GetInfo >= 1 && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
-                index = line.Line.IndexOf("RTT: ");
-                if (index > 0) {
-                    int msIndex = line.Line.IndexOf("ms", index);
-                    Stats.ServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
-                }
-                return false;
             } else if (LogRound.GetInfo == 1 && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.StatsForm.CurrentSettings.AutoChangeProfile) {
                     this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
                 }
                 LogRound.GetInfo = 2;
+                return false;
+            } else if (LogRound.GetInfo >= 2 && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
+                index = line.Line.IndexOf("RTT: ");
+                if (index > 0) {
+                    int msIndex = line.Line.IndexOf("ms", index);
+                    Stats.ServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
+                }
                 return false;
             } else if ((LogRound.GetInfo == 2 || LogRound.IsSpectating) && (index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
                 LogRound.IsPlaying = false;
@@ -498,7 +501,7 @@ namespace FallGuysStats {
                 LogRound.IsSpectating = true;
                 LogRound.IsLastPlayed = true;
 
-                RoundInfo temp = null;
+                RoundInfo roundInfo = null;
                 StringReader sr = new StringReader(line.Line);
                 string detail;
                 bool foundRound = false;
@@ -515,49 +518,46 @@ namespace FallGuysStats {
                                 maxRound = roundNum;
                             }
 
-                            temp = round[roundNum - 1];
-                            if (string.IsNullOrEmpty(temp.Name) || !temp.Name.Equals(roundName, StringComparison.OrdinalIgnoreCase)) {
+                            roundInfo = round[roundNum - 1];
+                            if (string.IsNullOrEmpty(roundInfo.Name) || !roundInfo.Name.Equals(roundName, StringComparison.OrdinalIgnoreCase)) {
                                 return false;
                             }
+                            roundInfo.VerifyName();
 
-                            temp.VerifyName();
                             if (roundNum == 1) {
-                                showStart = temp.Start;
+                                showStart = roundInfo.Start;
                             }
-                            temp.Round = roundNum;
-                            temp.ShowStart = showStart;
-                            temp.InParty = logRound.CurrentlyInParty;
-                            temp.PrivateLobby = logRound.PrivateLobby;
-                            temp.Playing = false;
+                            roundInfo.ShowStart = showStart;
+                            roundInfo.Playing = false;
                         } else {
                             return false;
                         }
 
-                        if (temp.End == DateTime.MinValue) {
-                            temp.End = line.Date;
+                        if (roundInfo.End == DateTime.MinValue) {
+                            roundInfo.End = line.Date;
                         }
-                        if (temp.Start == DateTime.MinValue) {
-                            temp.Start = temp.End;
+                        if (roundInfo.Start == DateTime.MinValue) {
+                            roundInfo.Start = roundInfo.End;
                         }
-                        if (!temp.Finish.HasValue) {
-                            temp.Finish = temp.End;
+                        if (!roundInfo.Finish.HasValue) {
+                            roundInfo.Finish = roundInfo.End;
                         }
                     } else if (foundRound) {
                         if (detail.IndexOf("> Qualified: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             char qualified = detail[13];
-                            temp.Qualified = qualified == 'T';
-                            temp.Finish = temp.Qualified ? temp.Finish : null;
+                            roundInfo.Qualified = qualified == 'T';
+                            roundInfo.Finish = roundInfo.Qualified ? roundInfo.Finish : null;
                         } else if (detail.IndexOf("> Position: ", StringComparison.OrdinalIgnoreCase) == 0) {
-                            temp.Position = int.Parse(detail.Substring(12));
+                            roundInfo.Position = int.Parse(detail.Substring(12));
                         } else if (detail.IndexOf("> Team Score: ", StringComparison.OrdinalIgnoreCase) == 0) {
-                            temp.Score = int.Parse(detail.Substring(14));
+                            roundInfo.Score = int.Parse(detail.Substring(14));
                         } else if (detail.IndexOf("> Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
-                            temp.Kudos += int.Parse(detail.Substring(9));
+                            roundInfo.Kudos += int.Parse(detail.Substring(9));
                         } else if (detail.IndexOf("> Bonus Tier: ", StringComparison.OrdinalIgnoreCase) == 0 && detail.Length == 15) {
                             char tier = detail[14];
-                            temp.Tier = (int)tier - 0x30 + 1;
+                            roundInfo.Tier = (int)tier - 0x30 + 1;
                         } else if (detail.IndexOf("> Bonus Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
-                            temp.Kudos += int.Parse(detail.Substring(15));
+                            roundInfo.Kudos += int.Parse(detail.Substring(15));
                         }
                     }
                 }
@@ -570,10 +570,12 @@ namespace FallGuysStats {
                 for (int i = 0; i < round.Count; i++) {
                     round[i].ShowEnd = showEnd;
                 }
+
                 if (logRound.Info.Qualified) {
                     logRound.Info.Position = 1;
                     logRound.Info.Crown = true;
                 }
+
                 LogRound.SavedCount = logRound.Info.Round;
                 return true;
             }

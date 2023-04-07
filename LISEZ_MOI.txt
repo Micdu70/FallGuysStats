@@ -1,0 +1,66 @@
+# Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70
+
+Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
+
+
+## Raccourcis de l'overlay
+
+Cliquer une fois sur l'overlay pour le sélectionner puis :
+
+    - Appuyer sur **'Ctrl + Maj + D'** pour remettre les dimensions par défaut de l'overlay.
+    - Appuyer sur la touche **'T'** pour changer la couleur de l'arrière-plan.
+    - Appuyer sur la touche **'F'** pour inverser horizontalement l'affichage.
+    - Appuyer sur la touche **'P'** pour passer au profil suivant.
+    - Appuyer sur les touches des **chiffres situés au dessus des lettres (1 à 9)** pour changer de profil.
+    - Maintenir la touche **'Maj' enfoncée et utiliser la molette de votre souris** pour changer de profil.
+    - Maintenir la touche **'Maj' enfoncée et utiliser la touche directionnelle 'Droite'/'Bas' ou 'Gauche'/'Haut'** pour changer de profil.
+    - Appuyer sur la touche **'C'** pour afficher le nombre de joueurs par support de jeu.
+    - Appuyer sur la touche **'R'** pour colorer le nom des manches selon leur type.
+
+
+## Créer vos propres arrière-plans
+
+Prérequis : Lancer au moins une fois le tracker Fall Guys pour obtenir un dossier nommé "Overlay".
+
+  - Étape 1 : Modifier l'image **background.png** et **tab.png** qui sont dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+
+  - Étape 2 : Nommer les images modifiées comme ci-dessous.
+    - {Nom de mon image} doit être le même pour les deux fichiers
+      - background_{Nom de mon image}.png
+      - tab_{Nom de mon image}.png
+
+  - Étape 3 : Si pas déjà fait, placer les deux images dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+
+  - Étape 4 : Vous verrez maintenant dans le menu "Configuration" du tracker vos propres arrière-plans en haut de la liste "Arrière-plan (image)" pour l'overlay.
+
+  - Étape 5 : Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
+
+
+## Lier un profil à une émission spécifique
+
+Permet de changer de profil automatiquement au moment où l'émission spécifiée commence.
+
+  - Menu "Profil" > "Config. des profils" pour configurer un ou pluiseurs profils.
+
+  - Menu "Configuration" -> Option "Passer automatiquement sur le profil lié" pour activer le changement automatique.
+
+
+## Supprimer des émissions ou déplacer des émissions vers un autre profil
+
+  - Cliquer sur "Émissions: X" en haut de la fenêtre principale pour voir les stats des émissions.
+
+  - Sélectionner une ou plusieurs émissions avec la touche **'Ctrl'** ou avec la combinaison de touches **'Ctrl + Maj'**.
+
+  - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
+
+
+## Bug(s) connu(s) dans les dernières versions "FE" (Frenchy Edition)
+
+  1) Si des stats précédentes d'émissions sont détectées, certaines manches où vous êtiez éliminé(e) peuvent avoir un temps "Finish"
+     => Normalement résolu depuis la v1.155 mais pour éviter ce bug mineur, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
+
+  2) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
+     => Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
+
+  3) L'info "Temps" / "Finish" ou encore le numéro de la manche dans l'overlay peuvent se mettre à "clignoter" à certains moments
+     => Résolu depuis la v1.154
