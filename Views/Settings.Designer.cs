@@ -141,9 +141,6 @@
             // 
             this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
             this.txtLogPath.CustomButton.Image = null;
             this.txtLogPath.CustomButton.Location = new System.Drawing.Point(760, 2);
             this.txtLogPath.CustomButton.Name = "";
@@ -633,9 +630,6 @@
             // 
             // txtCycleTimeSeconds
             // 
-            // 
-            // 
-            // 
             this.txtCycleTimeSeconds.CustomButton.Image = null;
             this.txtCycleTimeSeconds.CustomButton.Location = new System.Drawing.Point(4, 1);
             this.txtCycleTimeSeconds.CustomButton.Name = "";
@@ -991,9 +985,6 @@
             // 
             // txtPreviousWins
             // 
-            // 
-            // 
-            // 
             this.txtPreviousWins.CustomButton.Image = null;
             this.txtPreviousWins.CustomButton.Location = new System.Drawing.Point(20, 1);
             this.txtPreviousWins.CustomButton.Name = "";
@@ -1064,9 +1055,6 @@
             // 
             // txtGameExeLocation
             // 
-            // 
-            // 
-            // 
             this.txtGameExeLocation.CustomButton.Image = null;
             this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
             this.txtGameExeLocation.CustomButton.Name = "";
@@ -1095,9 +1083,6 @@
             this.txtGameExeLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtGameShortcutLocation
-            // 
-            // 
-            // 
             // 
             this.txtGameShortcutLocation.CustomButton.Image = null;
             this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(484, 1);

@@ -61,7 +61,7 @@ namespace FallGuysStats {
         private readonly Image positionUnlockFocus = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.8F);
         public bool isFixedPositionNe, isFixedPositionNw, isFixedPositionSe, isFixedPositionSw, isPositionLock;
 
-        private static PrivateFontCollection DefaultFontCollection;
+        private static readonly PrivateFontCollection DefaultFontCollection;
         public static new Font DefaultFont;
 
         static Overlay() {
@@ -799,7 +799,7 @@ namespace FallGuysStats {
                         }
                     } else if (End != DateTime.MinValue && LogRound.IsSpectating) {
                         this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}" : $"{End - Start:m\\:ss\\.ff}";
-                        this.lblFinish.ForeColor = this.lastRound.Position == 1 ? Color.White : Color.Pink;
+                        this.lblFinish.ForeColor = LogRound.IsShowWon ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {
                         this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                         this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;

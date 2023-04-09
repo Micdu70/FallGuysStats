@@ -13,6 +13,7 @@ namespace FallGuysStats {
         public StatsDisplay() {
             this.InitializeComponent();
         }
+        //private double yMax;
         private ScottPlot.Plottable.ScatterPlot MyScatterPlot1, MyScatterPlot2, MyScatterPlot3;
         private ScottPlot.Plottable.BarPlot MyBarPlot1, MyBarPlot2, MyBarPlot3;
         private ScottPlot.Plottable.MarkerPlot HighlightedPoint;
@@ -28,6 +29,7 @@ namespace FallGuysStats {
             //this.formsPlot.Plot.YLabel("Vertical Axis");
 
             if (this.dates != null) {
+                //this.yMax = this.shows.Max() < this.finals.Max() ? (this.finals.Max() < this.wins.Max() ? this.wins.Max() : this.finals.Max()) : this.shows.Max();
                 this.MyBarPlot1 = this.formsPlot.Plot.AddBar(this.shows, this.dates, color: this.GetColorWithAlpha(this.chkShows.ForeColor, 255));
                 this.MyBarPlot1.Label = Multilingual.GetWord("level_detail_shows");
                 this.MyBarPlot2 = this.formsPlot.Plot.AddBar(this.finals, this.dates, color: this.GetColorWithAlpha(this.chkFinals.ForeColor, 255));
@@ -48,7 +50,12 @@ namespace FallGuysStats {
 
                 this.formsPlot.Plot.YAxis.ManualTickSpacing(this.manualSpacing <= 0 ? 1 : this.manualSpacing);
 
-                //this.formsPlot.Plot.SetAxisLimits(yMin: 0);
+                this.formsPlot.Plot.SetAxisLimits(
+                    //yMin: (this.dates.Length / 14D) * -1,
+                    //yMax: this.yMax + (this.dates.Length / 14D),
+                    xMin: DateTime.FromOADate(this.dates[0]).AddDays(-4).ToOADate(),
+                    xMax: DateTime.FromOADate(this.dates[this.dates.Length - 1]).AddDays(4).ToOADate()
+                );
 
                 this.HighlightedPoint = this.formsPlot.Plot.AddPoint(0, 0);
                 this.HighlightedPoint.Color = this.Theme == MetroThemeStyle.Light ? Color.SlateGray : Color.LightGray;
@@ -89,6 +96,13 @@ namespace FallGuysStats {
                 this.MyScatterPlot3.Label = null;
 
                 this.HighlightedPoint.MarkerShape = MarkerShape.none;
+
+                this.formsPlot.Plot.SetAxisLimits(
+                    //yMin: (this.dates.Length / 14D) * -1,
+                    //yMax: this.yMax + (this.dates.Length / 14D),
+                    xMin: DateTime.FromOADate(this.dates[0]).AddDays(-4).ToOADate(),
+                    xMax: DateTime.FromOADate(this.dates[this.dates.Length - 1]).AddDays(4).ToOADate()
+                );
             } else { // ScatterPlot
                 this.StatsForm.CurrentSettings.WinPerDayGraphStyle = 0;
                 this.MyBarPlot1.IsVisible = false;
@@ -109,6 +123,13 @@ namespace FallGuysStats {
                 this.MyScatterPlot3.Label = Multilingual.GetWord("level_detail_wins");
 
                 this.HighlightedPoint.MarkerShape = MarkerShape.openCircle;
+
+                this.formsPlot.Plot.SetAxisLimits(
+                    //yMin: (this.dates.Length / 14D) * -1,
+                    //yMax: this.yMax + (this.dates.Length / 14D),
+                    xMin: DateTime.FromOADate(this.dates[0]).AddDays(-4).ToOADate(),
+                    xMax: DateTime.FromOADate(this.dates[this.dates.Length - 1]).AddDays(4).ToOADate()
+                );
             }
             this.formsPlot.Refresh();
         }

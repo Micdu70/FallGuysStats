@@ -27,6 +27,14 @@ namespace FallGuysStats {
             this.InitializeComponent();
         }
         private void Settings_Load(object sender, EventArgs e) {
+            Label focusOutLabel = new Label() {
+                Text = "",
+                Name = "nolabel",
+                Visible = false,
+            };
+            this.Controls.Add(focusOutLabel);
+            this.ActiveControl = focusOutLabel;
+
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
