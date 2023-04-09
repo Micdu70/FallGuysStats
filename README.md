@@ -167,6 +167,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: Couleur erronée de l'info "Finish" en cas de victoire d'une émission (bug aléatoire présent uniquement juste après le lancement du programme) ["FE"]
     - +Corrigé: Le premier champ de texte (celui le plus haut) ne sera plus sélectionnée dès l'ouverture de la fenêtre "Configuration" ["FE"]
+    - ++Changé: Le temps "Finish" enregistré sera égal à la durée de la manche quand vous serez éliminé(e) mais que votre équipe arrive à se qualifier tout de même
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré [Version Officielle + Modifications "FE"]
     - ++Ajouté: Arrière-plan "Super Mario Bros. 3" pour l'overlay [Version Officielle]
 
