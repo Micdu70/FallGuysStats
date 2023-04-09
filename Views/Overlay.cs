@@ -61,7 +61,7 @@ namespace FallGuysStats {
         private readonly Image positionUnlockFocus = Stats.ImageOpacity(Properties.Resources.switch_unlock_icon, 0.8F);
         public bool isFixedPositionNe, isFixedPositionNw, isFixedPositionSe, isFixedPositionSw, isPositionLock;
 
-        public static PrivateFontCollection DefaultFontCollection;
+        private static PrivateFontCollection DefaultFontCollection;
         public static new Font DefaultFont;
 
         static Overlay() {

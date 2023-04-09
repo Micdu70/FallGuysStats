@@ -360,7 +360,7 @@ namespace FallGuysStats {
             //if (e.RowIndex > this.gridDetails.Rows.Count) {
             //    nextInfo = this.gridDetails.Rows[e.RowIndex+1].DataBoundItem as RoundInfo;
             //}
-            if (info.PrivateLobby) { // Custom or Abrupted Show End
+            if (info.PrivateLobby) { // Custom or Abrupt Show End
                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(8, 8, 8);
                 e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             }
@@ -474,7 +474,7 @@ namespace FallGuysStats {
                 int roundCompare = one.Round.CompareTo(two.Round);
                 int showCompare = one.ShowID.CompareTo(two.ShowID);
                 if (sortOrder == SortOrder.Descending) {
-                    (two, one) = (one, two);
+                    (one, two) = (two, one);
                 }
 
                 switch (columnName) {

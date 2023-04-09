@@ -300,13 +300,13 @@ namespace FallGuysStats {
                             tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon;
                         } else if (tsmi1.Name.Equals("menuProfile")) {
                             tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon;
-                        } else if (tsmi1.Name.Equals("menuOverlay")) {
+                        //} else if (tsmi1.Name.Equals("menuOverlay")) {
                         } else if (tsmi1.Name.Equals("menuUpdate")) {
                             tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
                         } else if (tsmi1.Name.Equals("menuHelp")) {
                             tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
-                        } else if (tsmi1.Name.Equals("menuLaunchFallGuys")) {
                         }
+                        //else if (tsmi1.Name.Equals("menuLaunchFallGuys")) { }
                         tsmi1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
                         tsmi1.MouseLeave += this.Menu_MouseLeave;
@@ -477,11 +477,10 @@ namespace FallGuysStats {
                 }
             }
         }
-
+        
         private void MenuProfile_Paint(object sender, PaintEventArgs e) {
-            //e.Graphics.DrawRectangle(Pens.Red, ((ToolStripMenuItem)sender).ContentRectangle);
-            if (this.AllProfiles.FindIndex(profile => profile.ProfileId.ToString() == ((ToolStripMenuItem)sender).Name.Substring(11) && !string.IsNullOrEmpty(profile.LinkedShowId)) != -1) {
-                e.Graphics.DrawImage(this.CurrentSettings.AutoChangeProfile ? Properties.Resources.link_on_icon : this.Theme == MetroThemeStyle.Light ? Properties.Resources.link_icon : Properties.Resources.link_gray_icon, 20, 5, 13, 13);
+            if (this.AllProfiles.FindIndex(profile => profile.ProfileId.ToString().Equals(((ToolStripMenuItem)sender).Name.Substring(11)) && !string.IsNullOrEmpty(profile.LinkedShowId)) != -1) {
+                e.Graphics.DrawImage(this.CurrentSettings.AutoChangeProfile ? Properties.Resources.link_on_icon : this.Theme == MetroThemeStyle.Light ? Properties.Resources.link_icon : Properties.Resources.link_gray_icon, 20, 4, 13, 13);
             }
         }
 
@@ -2518,8 +2517,6 @@ namespace FallGuysStats {
     }
 
     public class MyToolStripSystemRenderer : ToolStripSystemRenderer {
-        public MyToolStripSystemRenderer() { }
-
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
             //base.OnRenderToolStripBorder(e);
         }
