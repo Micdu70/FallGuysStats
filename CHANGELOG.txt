@@ -1,4 +1,15 @@
-! Changelog de la dernière version de la "FE" (Frenchy Edition)
+# Changelog de la dernière version de la "FE" (Frenchy Edition)
+
+  - 1.157 *~ 09/04/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Couleur erronée de l'info "Finish" en cas de victoire d'une émission (bug aléatoire présent uniquement juste après le lancement du programme) ["FE"]
+    - +Corrigé: Le premier champ de texte (celui le plus haut) ne sera plus sélectionnée dès l'ouverture de la fenêtre "Configuration" ["FE"]
+    - ++Changé: Le graphique du nombre de victoires par jour a été amélioré [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Arrière-plan "Super Mario Bros. 3" pour l'overlay [Version Officielle]
+
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - 1.156 *~ 07/04/2023*
     - +Corrigé: Détection comme manche finale pour les émissions de type "Contre-la-montre"
@@ -6,14 +17,11 @@
     - ++Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
     - ++Changé: Divers changements mineurs...
 
-
-! Changelog des précédentes versions de la "FE" (Frenchy Edition)
-
   - 1.155 *~ 05/04/2023*
   { Correction de bugs de la "FE" }
 
   - 1.154 *~ 04/04/2023*
-  { Cette version est basée sur la Version Officielle (v1.143) datant du 01/04/2023 => https://github.com/ShootMe/FallGuysStats }
+  { Cette version est basée sur la Version Officielle (v1.143) datant du 01/04/2023 }
   { Correction de bugs de la "FE" }
     - ++Changé: Les stats des émissions non terminés sont maintenant aussi enregistrées dans le tracker !
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
@@ -46,7 +54,7 @@
      10) "Passer automatiquement sur le profil lié" pour l'overlay N'EST PAS sélectionnée
 
   - 1.151 *~ 30/03/2023*
-  { Cette version est basée sur la Version Officielle (v1.142) datant du 30/03/2023 => https://github.com/ShootMe/FallGuysStats }
+  { Cette version est basée sur la Version Officielle (v1.142) datant du 30/03/2023 }
     - +Rappel+: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Tout plein de chose à découvrir !
 
@@ -78,7 +86,7 @@
      10) "Passer auto. sur le profil lié" pour l'overlay sélectionnée
 
   - 1.147 *~ 18/03/2023*
-  { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
+  { Cette version possède les dernières modifications faites par @qutrits }
     - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - Pleins de changement à découvrir ! :)
 
@@ -100,7 +108,7 @@
     - {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
 
   - 1.142 *~ 06/03/2023*
-  { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
+  { Cette version possède les dernières modifications faites par @qutrits }
     - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
     - ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)

@@ -664,7 +664,7 @@ namespace FallGuysStats {
 
                 this.LaunchPlatform = 1;
             }
-            this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(11, 1) : new Point(9, 1);
+            this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(10, 14) : new Point(14, 14);
         }
         private void BtnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
@@ -894,7 +894,7 @@ namespace FallGuysStats {
                 }
             }
 
-            this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(11, 1) : new Point(9, 1);
+            this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(10, 14) : new Point(14, 14);
 
             this.lblTheme.Text = Multilingual.GetWord("settings_theme");
             this.cboTheme.Items.Clear();

@@ -60,7 +60,6 @@ namespace FallGuysStats {
         private Thread watcher, parser;
         public Stats StatsForm { get; set; }
         private string selectedShowId;
-        //private readonly object balanceLock = new object();
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;

@@ -152,7 +152,7 @@ namespace FallGuysStats {
                         this.CurrentSettings.ColorByRoundType = true;
                         this.CurrentSettings.AutoChangeProfile = false;
                         this.CurrentSettings.AutoUpdate = true;
-                        this.CurrentSettings.Version = 27;
+                        this.CurrentSettings.Version = 28;
                         this.CurrentSettings.FrenchyEditionDB = 4;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
@@ -954,6 +954,12 @@ namespace FallGuysStats {
                 this.CurrentSettings.Version = 27;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.Version == 27) {
+                this.CurrentSettings.PreventMouseCursorBugs = false;
+                this.CurrentSettings.Version = 28;
+                this.SaveUserSettings();
+            }
         }
 
         private UserSettings GetDefaultSettings() {
@@ -1004,6 +1010,7 @@ namespace FallGuysStats {
                 ShowOverlayTabs = false,
                 ShowPercentages = false,
                 AutoUpdate = true,
+                PreventMouseCursorBugs = false,
                 MaximizedWindowState = false,
                 FormLocationX = null,
                 FormLocationY = null,
@@ -1019,7 +1026,7 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
-                Version = 27,
+                Version = 28,
                 FrenchyEditionDB = 5
             };
         }

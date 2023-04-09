@@ -141,6 +141,9 @@
             // 
             this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
             this.txtLogPath.CustomButton.Image = null;
             this.txtLogPath.CustomButton.Location = new System.Drawing.Point(760, 2);
             this.txtLogPath.CustomButton.Name = "";
@@ -630,6 +633,9 @@
             // 
             // txtCycleTimeSeconds
             // 
+            // 
+            // 
+            // 
             this.txtCycleTimeSeconds.CustomButton.Image = null;
             this.txtCycleTimeSeconds.CustomButton.Location = new System.Drawing.Point(4, 1);
             this.txtCycleTimeSeconds.CustomButton.Name = "";
@@ -834,7 +840,7 @@
             this.grpLaunchPlatform.Margin = new System.Windows.Forms.Padding(0);
             this.grpLaunchPlatform.Name = "grpLaunchPlatform";
             this.grpLaunchPlatform.Padding = new System.Windows.Forms.Padding(2);
-            this.grpLaunchPlatform.Size = new System.Drawing.Size(99, 60);
+            this.grpLaunchPlatform.Size = new System.Drawing.Size(99, 64);
             this.grpLaunchPlatform.TabIndex = 36;
             this.grpLaunchPlatform.TabStop = false;
             this.grpLaunchPlatform.Text = "Platform";
@@ -855,9 +861,9 @@
             this.picEpicGames.BackColor = System.Drawing.Color.Transparent;
             this.picEpicGames.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picEpicGames.Image = global::FallGuysStats.Properties.Resources.epic_icon;
-            this.picEpicGames.Location = new System.Drawing.Point(5, 17);
+            this.picEpicGames.Location = new System.Drawing.Point(8, 17);
             this.picEpicGames.Name = "picEpicGames";
-            this.picEpicGames.Size = new System.Drawing.Size(46, 38);
+            this.picEpicGames.Size = new System.Drawing.Size(38, 38);
             this.picEpicGames.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picEpicGames.TabIndex = 1;
             this.picEpicGames.TabStop = false;
@@ -869,9 +875,9 @@
             this.picSteam.BackColor = System.Drawing.Color.Transparent;
             this.picSteam.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picSteam.Image = global::FallGuysStats.Properties.Resources.steam_icon;
-            this.picSteam.Location = new System.Drawing.Point(47, 18);
+            this.picSteam.Location = new System.Drawing.Point(47, 17);
             this.picSteam.Name = "picSteam";
-            this.picSteam.Size = new System.Drawing.Size(45, 34);
+            this.picSteam.Size = new System.Drawing.Size(45, 38);
             this.picSteam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSteam.TabIndex = 2;
             this.picSteam.TabStop = false;
@@ -985,6 +991,9 @@
             // 
             // txtPreviousWins
             // 
+            // 
+            // 
+            // 
             this.txtPreviousWins.CustomButton.Image = null;
             this.txtPreviousWins.CustomButton.Location = new System.Drawing.Point(20, 1);
             this.txtPreviousWins.CustomButton.Name = "";
@@ -1055,6 +1064,9 @@
             // 
             // txtGameExeLocation
             // 
+            // 
+            // 
+            // 
             this.txtGameExeLocation.CustomButton.Image = null;
             this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
             this.txtGameExeLocation.CustomButton.Name = "";
@@ -1083,6 +1095,9 @@
             this.txtGameExeLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtGameShortcutLocation
+            // 
+            // 
+            // 
             // 
             this.txtGameShortcutLocation.CustomButton.Image = null;
             this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(484, 1);

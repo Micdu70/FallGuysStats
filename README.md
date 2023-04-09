@@ -26,7 +26,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.156** *~ 07/04/2023*
+**Dernière version: 1.157** *~ 09/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -163,11 +163,18 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - 1.157 *~ 09/04/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Couleur erronée de l'info "Finish" en cas de victoire d'une émission (bug aléatoire présent uniquement juste après le lancement du programme) ["FE"]
+    - +Corrigé: Le premier champ de texte (celui le plus haut) ne sera plus sélectionnée dès l'ouverture de la fenêtre "Configuration" ["FE"]
+    - ++Changé: Le graphique du nombre de victoires par jour a été amélioré [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Arrière-plan "Super Mario Bros. 3" pour l'overlay [Version Officielle]
+
   - 1.156 *~ 07/04/2023*
     - +Corrigé: Détection comme manche finale pour les émissions de type "Contre-la-montre"
     - +Corrigé: Bug (uniquement visuel) des valeurs dans la fenêtre principale du tracker dans certains scénarios
-    - +Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
-    - +Changé: Divers changements mineurs...
+    - ++Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
+    - ++Changé: Divers changements mineurs...
 
   - 1.155 *~ 05/04/2023*
   { Correction de bugs de la "FE" }
@@ -309,6 +316,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - 1.146
+    - Bug fixes
+  - 1.145
+    - Fixed additional prevent mouse cursor bugs **[Correction pas appliquée dans la "FE"]**
+  - 1.144
+    - Change Settings UI **[Changement pas appliqué dans la "FE"]**
+    - Add prevent mouse cursor bugs (Experimental) **[Option enlevée dans la "FE"]**
   - 1.143
     - Add style option to the daily win stats graph
   - 1.142
