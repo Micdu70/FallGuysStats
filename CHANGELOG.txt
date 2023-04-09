@@ -3,8 +3,8 @@
   - 1.156 *~ 07/04/2023*
     - +Corrigé: Détection comme manche finale pour les émissions de type "Contre-la-montre"
     - +Corrigé: Bug (uniquement visuel) des valeurs dans la fenêtre principale du tracker dans certains scénarios
-    - +Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
-    - +Changé: Divers changements mineurs...
+    - ++Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
+    - ++Changé: Divers changements mineurs...
 
 
 ! Changelog des précédentes versions de la "FE" (Frenchy Edition)
@@ -27,7 +27,7 @@
       7) "Toutes les stats" sélectionnée pour le filtre "\*Meilleur / Plus long\*" sur l'overlay
       8) "Afficher les joueurs par support de jeu" pour l'overlay sélectionnée
       9) "Colorer la manche selon son type" pour l'overlay sélectionnée
-     10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
+     10) "Passer automatiquement sur le profil lié" pour l'overlay N'EST PAS sélectionnée
 	 11) Le graphique du nombre de victoires est en forme de barres (au lieu de points)
 
   - 1.152 et 1.153 *~ 31/03/2023*
@@ -43,25 +43,25 @@
       7) "Toutes les stats" sélectionnée pour le filtre "\*Meilleur / Plus long\*" sur l'overlay
       8) "Afficher les joueurs par support de jeu" pour l'overlay sélectionnée
       9) "Colorer la manche selon son type" pour l'overlay sélectionnée
-     10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
+     10) "Passer automatiquement sur le profil lié" pour l'overlay N'EST PAS sélectionnée
 
   - 1.151 *~ 30/03/2023*
   { Cette version est basée sur la Version Officielle (v1.142) datant du 30/03/2023 => https://github.com/ShootMe/FallGuysStats }
-    - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - +Rappel+: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Tout plein de chose à découvrir !
 
   - 1.150 *~ 20/03/2023*
-    - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-    - +Corrigé: Les fitres 'en Solo' et 'en Groupe' dans le menu "Filtres => Parties" de la fenêtre principale ont été corrigés **ATTENTION: Toutes les émissions enregistrées avant l'utilisation de cette version ne seront pas filtrées correctement !**
+    - +Rappel+: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - +Corrigé: Les fitres 'en Solo' et 'en Groupe' dans le menu "Filtres => Parties" de la fenêtre principale ont été corrigés ATTENTION: Toutes les émissions enregistrées avant l'utilisation de cette version ne seront pas filtrées correctement !
     - +Corrigé: Le "bon" logo est maintenant visible en haut à gauche de toutes les fenêtres du programme
 
   - 1.149 *~ 20/03/2023*
-    - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - +Rappel+: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Réduction de la hauteur du menu de la liste des arrière-plans pour l'overlay afin d'empêcher le défilement automatique vers le bas selon la position du curseur
 	- +Corrigé: Visuel de l'interface utilisateur dans la fenêtre de configuration
 
   - 1.148 *~ 19/03/2023*
-    - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - +Rappel+: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - +Corrigé: L'option "MAJ auto. du tracker" n'était plus visible dans la version précédente
     - ++Ajouté: Overlay => Arrière-plan "Aliens"
     - ++Ajouté: Overlay => Arrière-plan "Pop-corn"
@@ -79,20 +79,20 @@
 
   - 1.147 *~ 18/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - Pleins de changement à découvrir ! :)
 
   - 1.146 *~ 15/03/2023*
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
     - ++Changé: Changements mineurs pour l'overlay (sur certaines manches)
 
   - 1.145 *~ 09/03/2023*
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - +Corrigé: L'ordre et le tri des manches, dans la fenêtre principale du tracker, pour la langue 'Français' et 'English'
 
   - 1.144 *~ 07/03/2023*
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Les deux manches "Survie" avec un hoverboard sont maintenant configurées comme si c'était des manches "Course" => L'overlay se basera sur le meilleur temps réalisé - au lieu du plus long temps - pour colorer l'info 'Finish' (en cas de record personnel par exemple)
     - ++Changé: L'ordre initial des manches, dans la fenêtre principale du tracker, sera en fonction de leur nom en français (au lieu de l'anglais)
 
@@ -101,19 +101,19 @@
 
   - 1.142 *~ 06/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
     - ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
     - ++Changé: Divers changements (par @qutrits et moi-même)
 
   - 1.141 *~ 04/03/2023*
-    - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Rappel: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera aucun numéro de manche
     - +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
 
   - 1.140 *~ 03/03/2023*
-    - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
+    - ++Ajouté: Overlay => -BETA- Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)
     - ++Changé: Overlay => L'information "Finish" passe maintenant en rose lorsque vous êtes éliminé(e)
     - ++Changé: Votre position indiquera maintenant toujours "1er" pour la dernière manche d'une émission gagnée

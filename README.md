@@ -16,11 +16,13 @@
   - [Changelog complet de la "FE" (Frenchy Edition)](#changelog-complet-de-la-fe-frenchy-edition)
   - [Changelog récent de la Version Officielle](#changelog-récent-de-la-version-officielle)
 
+
 # Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
+
 
 ## Téléchargement
 
@@ -30,6 +32,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
+
 
 ## Utilisation
 
@@ -45,9 +48,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
     - Lancer Fall Guys
 
+
 ### Fenêtre Principale
 
 ![Fenêtre Principale](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/mainWindow.png)
+
 
 ### Liste des Stats des Manches
 
@@ -57,17 +62,20 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
   - Le tracker supporte actuellement deux thèmes: "Clair" et "Sombre".
 
+
 ### Thème Clair
 
 ![Thème Clair - Fenêtre Principale)](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/mainWindowLightTheme.png)
 
 ![Thème Clair - Stats des Manches)](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/levelWindowLightTheme.png)
 
+
 ### Thème Sombre
 
 ![Thème Sombre - Fenêtre Principale](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/mainWindowDarkTheme.png)
 
 ![Thème Sombre - Stats des Manches](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/levelWindowDarkTheme.png)
+
 
 ## Langues disponibles
 
@@ -78,9 +86,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - 🇯🇵 日本語 (Japonais)
     - 🇨🇳 简体中文 (Chinois Simplifié)
 
+
 ## Overlay
 
 ![Overlay](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/overlay.png)
+
 
 ### Raccourcis
 
@@ -94,6 +104,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - Maintenir la touche **'Maj' enfoncée et utiliser la touche directionnelle 'Droite'/'Bas' ou 'Gauche'/'Haut'** pour changer de profil.
     - Appuyer sur la touche **'C'** pour afficher le nombre de joueurs par support de jeu.
     - Appuyer sur la touche **'R'** pour colorer le nom des manches selon leur type.
+
 
 ### Créer vos propres arrière-plans
 
@@ -119,6 +130,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
   - **Étape 5.** Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
 
+
 ## Profil
 
 ### Lier un profil à une émission spécifique
@@ -133,6 +145,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ![Configuration - Profil lié](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/automaticProfileChange.png)
 
+
 ### Supprimer des émissions ou déplacer des émissions vers un autre profil
 
 ![Émissions](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/showsWindow.png)
@@ -141,16 +154,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - Sélectionner une ou plusieurs émissions avec la touche **'Ctrl'** ou avec la combinaison de touches **'Ctrl + Maj'**.
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
-## Bug(s) connu(s) dans les dernières versions "FE" (Frenchy Edition)
 
-  1) Si des stats précédentes d'émissions sont détectées, certaines manches où vous êtiez éliminé(e) peuvent avoir un temps "Finish"
-    *=> Normalement résolu depuis la v1.155 mais pour éviter ce bug mineur, ne pas oublier de lancer le tracker avant de jouer au jeu/lancer une partie*
+## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
 
-  2) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
+  1) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
     *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
 
-  3) L'info "Temps" / "Finish" ou encore le numéro de la manche dans l'overlay peuvent se mettre à "clignoter" à certains moments
-    *=> Résolu depuis la v1.154
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
@@ -296,6 +305,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - +Corrigé: Détection des finales en émission Duos/Groupe
     - +Corrigé: 2 ou 3 erreurs de type de manche
     - +Corrigé: Sélection du bon profil après déplacement des données
+
 
 ## Changelog récent de la Version Officielle
 
