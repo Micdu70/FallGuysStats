@@ -783,7 +783,7 @@ namespace FallGuysStats {
                     this.lblFinish.Text = $"{Multilingual.GetWord("overlay_finish")} :";
                     if (Finish.HasValue) {
                         TimeSpan Time = Finish.GetValueOrDefault(End) - Start;
-                        //lblFinish.Text = $"{Multilingual.GetWord("overlay_finish")} :";
+
                         this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"# {this.lastRound.Position} - {Time:m\\:ss\\.ff}" : $"{Time:m\\:ss\\.ff}";
 
                         if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || this.levelException == 1) {
@@ -802,10 +802,10 @@ namespace FallGuysStats {
                         this.lblFinish.ForeColor = LogRound.IsShowWon ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {
                         this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
-                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
+                        this.lblFinish.ForeColor = !LogRound.IsSpectating ? Color.White : Color.Pink;
                     } else {
                         this.lblFinish.TextRight = "-";
-                        this.lblFinish.ForeColor = LogRound.IsSpectating ? Color.Pink : Color.White;
+                        this.lblFinish.ForeColor = !LogRound.IsSpectating ? Color.White : Color.Pink;
                     }
 
                     this.lblDuration.Text = this.lastRound.GameDuration > 0
@@ -819,6 +819,8 @@ namespace FallGuysStats {
                     } else {
                         this.lblDuration.TextRight = "-";
                     }
+                } else {
+                    this.lblFinish.ForeColor = LogRound.IsShowWon ? Color.White : Color.Pink;
                 }
                 Invalidate();
             }

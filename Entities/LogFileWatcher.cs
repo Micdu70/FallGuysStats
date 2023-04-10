@@ -385,6 +385,7 @@ namespace FallGuysStats {
                 LogRound.IsPlaying = false;
                 LogRound.IsLastPlayed = false;
                 LogRound.IsInfoEmpty = false;
+                LogRound.IsShowWon = false;
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId };
                 int index2 = line.Line.IndexOf(' ', index + 44);
                 if (index2 < 0) { index2 = line.Line.Length; }
@@ -425,7 +426,6 @@ namespace FallGuysStats {
                 LogRound.IsInfoEmpty = true;
                 LogRound.IsPlaying = false;
                 LogRound.IsSpectating = false;
-                LogRound.IsShowWon = false;
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0;
                 logRound.CurrentlyInParty = !logRound.PrivateLobby && (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) == -1);
                 if (logRound.Info != null) {
