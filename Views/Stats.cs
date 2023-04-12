@@ -200,16 +200,9 @@ namespace FallGuysStats {
                 }
             }
 
-            if (CurrentLanguage == 1) { // French
-                foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL_FRE) {
-                    this.StatDetails.Add(entry.Value);
-                    this.StatLookup.Add(entry.Key, entry.Value);
-                }
-            } else {
-                foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
-                    this.StatDetails.Add(entry.Value);
-                    this.StatLookup.Add(entry.Key, entry.Value);
-                }
+            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
+                this.StatDetails.Add(entry.Value);
+                this.StatLookup.Add(entry.Key, entry.Value);
             }
             this.InitMainDataGridView();
 
@@ -248,7 +241,9 @@ namespace FallGuysStats {
 
             this.RemoveUpdateFiles();
             this.ReloadProfileMenuItems();
-
+            
+            this.SortGridDetails(0, true);
+            
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
@@ -1044,6 +1039,7 @@ namespace FallGuysStats {
                 LevelStats level = StatLookup[item.Key];
                 level.Name = item.Value;
             }
+            this.SortGridDetails(0, true);
             this.gridDetails.Invalidate();
         }
         public void UpdateDates() {
@@ -1831,9 +1827,9 @@ namespace FallGuysStats {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void GridDetails_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
-            string columnName = this.gridDetails.Columns[e.ColumnIndex].Name;
-            SortOrder sortOrder = this.gridDetails.GetSortOrder(columnName);
+        private void SortGridDetails(int columnIndex, bool isInitialize) {
+            string columnName = this.gridDetails.Columns[columnIndex].Name;
+            SortOrder sortOrder = isInitialize ? SortOrder.None : this.gridDetails.GetSortOrder(columnName);
 
             this.StatDetails.Sort(delegate (LevelStats one, LevelStats two) {
                 LevelType oneType = one.IsFinal ? LevelType.Final : one.Type;
@@ -1842,7 +1838,7 @@ namespace FallGuysStats {
                 int typeCompare = this.CurrentSettings.IgnoreLevelTypeWhenSorting && sortOrder != SortOrder.None ? 0 : ((int)oneType).CompareTo((int)twoType);
 
                 if (sortOrder == SortOrder.Descending) {
-                    (two, one) = (one, two);
+                    (one, two) = (two, one);
                 }
 
                 int nameCompare = one.Name.CompareTo(two.Name);
@@ -1874,7 +1870,10 @@ namespace FallGuysStats {
             this.gridDetails.DataSource = this.StatDetails;
             this.gridDetails.Columns[columnName].HeaderCell.SortGlyphDirection = sortOrder;
         }
-        private void GridDetails_SelectionChanged(object sender, EventArgs e) {
+        private void gridDetails_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+            this.SortGridDetails(e.ColumnIndex, false);
+        }
+        private void gridDetails_SelectionChanged(object sender, EventArgs e) {
             if (this.gridDetails.SelectedCells.Count > 0) {
                 this.gridDetails.ClearSelection();
             }

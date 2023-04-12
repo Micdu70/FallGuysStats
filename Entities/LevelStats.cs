@@ -181,6 +181,9 @@ namespace FallGuysStats {
             { "round_rocknroll",                  new LevelStats("Rock 'n' Roll", LevelType.Team, false, 1, Properties.Resources.round_rock_n_roll_icon) },
             { "round_snowy_scrap",                new LevelStats("Snowy Scrap", LevelType.Team, false, 3, Properties.Resources.round_snowy_scrap_icon) },
             { "round_conveyor_arena",             new LevelStats("Team Tail Tag", LevelType.Team, false, 1, Properties.Resources.round_team_tail_tag_icon) },
+            
+            { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, 6, Properties.Resources.round_sweet_thieves_icon) },
+            { "round_pumpkin_pie",                new LevelStats("Treat Thieves", LevelType.Invisibeans, false, 8, Properties.Resources.round_treat_thieves_icon) },
 
             { "round_blastball_arenasurvival_symphony_launch_show", new LevelStats("Blast Ball", LevelType.Survival, true, 7, Properties.Resources.round_blast_ball_icon) },
             { "round_fall_mountain_hub_complete", new LevelStats("Fall Mountain", LevelType.Race, true, 1, Properties.Resources.round_fall_mountain_icon) },

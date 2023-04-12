@@ -42,7 +42,6 @@ namespace FallGuysStats {
         }
         public SortOrder GetSortOrder(string columnName) {
             this.Orders.TryGetValue(columnName, out SortOrder sortOrder);
-
             if (sortOrder == SortOrder.None) {
                 this.Columns[columnName].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
                 this.Orders[columnName] = SortOrder.Ascending;
