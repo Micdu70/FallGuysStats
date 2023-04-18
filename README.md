@@ -26,7 +26,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.157** *~ 09/04/2023*
+**Dernière version: 1.158** *~ 18/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -163,9 +163,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - 1.158 *~ 18/04/2023*
+    - +Corrigé: Détection de la manche finale pour l'émission "Fol'Virevoltes Tropicales"
+    - +Corrigé: Infos du graphique du nombre de victoires par jour
+    - ++Changé: Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
+    - ++Changé: Overlay => Divers petits changements concernant la récupération des infos ["FE"]
+
   - 1.157 *~ 09/04/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - +Corrigé: Couleur erronée de l'info "Finish" en cas de victoire d'une émission (bug aléatoire présent uniquement juste après le lancement du programme) ["FE"]
     - +Corrigé: Le premier champ de texte (celui le plus haut) ne sera plus sélectionnée dès l'ouverture de la fenêtre "Configuration" ["FE"]
     - ++Changé: Le temps "Finish" enregistré sera égal à la durée de la manche quand vous serez éliminé(e) mais que votre équipe arrive à se qualifier tout de même
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré [Version Officielle + Modifications "FE"]

@@ -1987,77 +1987,59 @@ namespace FallGuysStats {
             }
 
             using (StatsDisplay display = new StatsDisplay { StatsForm = this, Text = $"{Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}" }) {
-                if (rounds.Count > 0) {
-                    ArrayList dates = new ArrayList();
-                    ArrayList shows = new ArrayList();
-                    ArrayList finals = new ArrayList();
-                    ArrayList wins = new ArrayList();
-                    if (rounds.Count > 0) {
-                        DateTime start = rounds[0].StartLocal;
-                        int currentShows = 0;
-                        int currentFinals = 0;
-                        int currentWins = 0;
-                        for (int i = 0; i < rounds.Count; i++) {
-                            RoundInfo info = rounds[i];
-                            if (info.PrivateLobby) { continue; }
+                ArrayList dates = new ArrayList();
+                ArrayList shows = new ArrayList();
+                ArrayList finals = new ArrayList();
+                ArrayList wins = new ArrayList();
+                DateTime start = rounds[0].StartLocal;
+                int currentShows = 0;
+                int currentFinals = 0;
+                int currentWins = 0;
+                for (int i = 0; i < rounds.Count; i++) {
+                    RoundInfo info = rounds[i];
+                    if (info.PrivateLobby) { continue; }
 
-                            if (info.Round == 1) {
-                                currentShows++;
-                            }
+                    bool incrementedShows = false;
+                    bool incrementedFinals = false;
+                    bool incrementedWins = false;
 
-                            if (info.Crown || info.IsFinal) {
-                                currentFinals++;
-                                if (info.Qualified) {
-                                    currentWins++;
-                                }
-                            }
-
-                            if (info.StartLocal.Date != start.Date) {
-                                dates.Add(start.Date.ToOADate());
-                                shows.Add(Convert.ToDouble(currentShows));
-                                finals.Add(Convert.ToDouble(currentFinals));
-                                wins.Add(Convert.ToDouble(currentWins));
-
-                                int missingCount = (int)(info.StartLocal.Date - start.Date).TotalDays;
-                                while (missingCount > 1) {
-                                    missingCount--;
-                                    start = start.Date.AddDays(1);
-                                    dates.Add(start.ToOADate());
-                                    shows.Add(0D);
-                                    finals.Add(0D);
-                                    wins.Add(0D);
-                                }
-
-                                currentShows = 0;
-                                currentFinals = 0;
-                                currentWins = 0;
-                                start = info.StartLocal;
-                            }
-                        }
-
-                        dates.Add(start.Date.ToOADate());
-                        shows.Add(Convert.ToDouble(currentShows));
-                        finals.Add(Convert.ToDouble(currentFinals));
-                        wins.Add(Convert.ToDouble(currentWins));
-                    } else {
-                        dates.Add(DateTime.Now.Date.ToOADate());
-                        shows.Add(0D);
-                        finals.Add(0D);
-                        wins.Add(0D);
+                    if (info.Round == 1) {
+                        currentShows++;
+                        incrementedShows = true;
                     }
 
-                    display.manualSpacing = (int)Math.Ceiling(dates.Count / 28D);
-                    display.dates = (double[])dates.ToArray(typeof(double));
-                    display.shows = (double[])shows.ToArray(typeof(double));
-                    display.finals = (double[])finals.ToArray(typeof(double));
-                    display.wins = (double[])wins.ToArray(typeof(double));
-                } else {
-                    display.manualSpacing = 1;
-                    display.dates = null;
-                    display.shows = null;
-                    display.finals = null;
-                    display.wins = null;
+                    if (info.Crown || info.IsFinal) {
+                        currentFinals++;
+                        incrementedFinals = true;
+                        if (info.Qualified) {
+                            currentWins++;
+                            incrementedWins = true;
+                        }
+                    }
+
+                    if (info.StartLocal.Date > start.Date) {
+                        dates.Add(start.Date.ToOADate());
+                        shows.Add(Convert.ToDouble(incrementedShows ? --currentShows : currentShows));
+                        finals.Add(Convert.ToDouble(incrementedFinals ? --currentFinals : currentFinals));
+                        wins.Add(Convert.ToDouble(incrementedWins ? --currentWins : currentWins));
+
+                        currentShows = incrementedShows ? 1 : 0;
+                        currentFinals = incrementedFinals ? 1 : 0;
+                        currentWins = incrementedWins ? 1 : 0;
+                        start = info.StartLocal;
+                    }
                 }
+
+                dates.Add(start.Date.ToOADate());
+                shows.Add(Convert.ToDouble(currentShows));
+                finals.Add(Convert.ToDouble(currentFinals));
+                wins.Add(Convert.ToDouble(currentWins));
+
+                display.manualSpacing = (int)Math.Ceiling(dates.Count / 28D);
+                display.dates = (double[])dates.ToArray(typeof(double));
+                display.shows = (double[])shows.ToArray(typeof(double));
+                display.finals = (double[])finals.ToArray(typeof(double));
+                display.wins = (double[])wins.ToArray(typeof(double));
 
                 display.ShowDialog(this);
             }

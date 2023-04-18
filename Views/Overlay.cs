@@ -797,9 +797,9 @@ namespace FallGuysStats {
                         } else if (Time > levelInfo.LongestFinishOverall) {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
-                    } else if (End != DateTime.MinValue && LogRound.IsSpectating) {
+                    } else if (End != DateTime.MinValue) {
                         this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"# {this.lastRound.Position} - {End - Start:m\\:ss\\.ff}" : $"{End - Start:m\\:ss\\.ff}";
-                        this.lblFinish.ForeColor = LogRound.IsShowWon ? Color.White : Color.Pink;
+                        this.lblFinish.ForeColor = !LogRound.IsSpectating || this.lastRound.Crown ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {
                         this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                         this.lblFinish.ForeColor = !LogRound.IsSpectating ? Color.White : Color.Pink;
@@ -812,15 +812,13 @@ namespace FallGuysStats {
                         ? $"{Multilingual.GetWord("overlay_duration")} ({TimeSpan.FromSeconds(this.lastRound.GameDuration):m\\:ss}):"
                         : $"{Multilingual.GetWord("overlay_duration")} :";
 
-                    if (this.lastRound.Playing || (LogRound.IsPlaying && LogRound.IsSpectating && LogRound.IsLastPlayed)) {
+                    if (this.lastRound.Playing || (LogRound.IsLastPlayed && LogRound.IsPlaying && LogRound.IsSpectating)) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                     } else if (End != DateTime.MinValue) {
-                        this.lblDuration.TextRight = LogRound.IsSpectating && LogRound.IsLastPlayed && LogRound.IsInfoEmpty ? $"{LogRound.End - Start:m\\:ss}.00" : $"{End - Start:m\\:ss\\.ff}";
+                        this.lblDuration.TextRight = LogRound.IsInfoEmpty && LogRound.IsLastPlayed && LogRound.IsSpectating ? $"{LogRound.End - Start:m\\:ss}.00" : $"{End - Start:m\\:ss\\.ff}";
                     } else {
                         this.lblDuration.TextRight = "-";
                     }
-                } else {
-                    this.lblFinish.ForeColor = LogRound.IsShowWon ? Color.White : Color.Pink;
                 }
                 Invalidate();
             }
