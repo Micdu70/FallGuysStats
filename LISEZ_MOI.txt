@@ -4,6 +4,14 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 
 
 
+## FAQ
+
+Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?
+
+------> Cela peut signifier deux choses : Soit une manche jouée dans une partie personnalisée ou soit une manche jouée dans une émission qui a été quittée avant la fin de celle-ci.
+
+
+
 ## Raccourcis de l'overlay
 
 Cliquer une fois sur l'overlay pour le sélectionner puis :

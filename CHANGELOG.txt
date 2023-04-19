@@ -1,13 +1,17 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - 1.159 *~ 19/04/2023*
+    - +Corrigé: *HOTFIX* Infos du graphique du nombre de victoires par jour
+
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - 1.158 *~ 18/04/2023*
     - +Corrigé: Détection de la manche finale pour l'émission "Fol'Virevoltes Tropicales"
     - +Corrigé: Infos du graphique du nombre de victoires par jour
     - ++Changé: Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Overlay => Divers petits changements concernant la récupération des infos ["FE"]
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - 1.157 *~ 09/04/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }

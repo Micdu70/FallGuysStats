@@ -1995,13 +1995,12 @@ namespace FallGuysStats {
                 int currentShows = 0;
                 int currentFinals = 0;
                 int currentWins = 0;
+                bool incrementedShows = false;
+                bool incrementedFinals = false;
+                bool incrementedWins = false;
                 for (int i = 0; i < rounds.Count; i++) {
                     RoundInfo info = rounds[i];
                     if (info.PrivateLobby) { continue; }
-
-                    bool incrementedShows = false;
-                    bool incrementedFinals = false;
-                    bool incrementedWins = false;
 
                     if (info.Round == 1) {
                         currentShows++;
@@ -2017,17 +2016,31 @@ namespace FallGuysStats {
                         }
                     }
 
-                    if (info.StartLocal.Date > start.Date) {
+                    if (info.StartLocal.Date > start.Date && (incrementedShows || incrementedFinals || incrementedWins)) {
                         dates.Add(start.Date.ToOADate());
                         shows.Add(Convert.ToDouble(incrementedShows ? --currentShows : currentShows));
                         finals.Add(Convert.ToDouble(incrementedFinals ? --currentFinals : currentFinals));
                         wins.Add(Convert.ToDouble(incrementedWins ? --currentWins : currentWins));
+
+                        int daysWithoutStats = (int)(info.StartLocal.Date - start.Date).TotalDays - 1;
+                        while (daysWithoutStats > 0) {
+                            daysWithoutStats--;
+                            start = start.Date.AddDays(1);
+                            dates.Add(start.ToOADate());
+                            shows.Add(0D);
+                            finals.Add(0D);
+                            wins.Add(0D);
+                        }
 
                         currentShows = incrementedShows ? 1 : 0;
                         currentFinals = incrementedFinals ? 1 : 0;
                         currentWins = incrementedWins ? 1 : 0;
                         start = info.StartLocal;
                     }
+
+                    incrementedShows = false;
+                    incrementedFinals = false;
+                    incrementedWins = false;
                 }
 
                 dates.Add(start.Date.ToOADate());

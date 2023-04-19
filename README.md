@@ -3,6 +3,7 @@
   - [Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70](#tracker-fall-guys-fe-frenchy-edition-par-micdu70)
     - [Téléchargement](#téléchargement)
     - [Utilisation](#utilisation)
+    - [FAQ](#faq)
     - [Thème](#thème)
       - [Thème Clair](#thème-clair)
       - [Thème Sombre](#thème-sombre)
@@ -26,7 +27,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.158** *~ 18/04/2023*
+**Dernière version: 1.159** *~ 19/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -57,6 +58,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ### Liste des Stats des Manches
 
 ![Stats des Manches](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/levelWindow.png)
+
+
+## FAQ
+
+**Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?**
+
+------> Cela peut signifier deux choses : Soit une manche jouée dans une partie personnalisée ou soit une manche jouée dans une émission qui a été quittée avant la fin de celle-ci.
+
 
 ## Thème
 
@@ -162,6 +171,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - 1.159 *~ 19/04/2023*
+    - +Corrigé: *HOTFIX* Infos du graphique du nombre de victoires par jour
 
   - 1.158 *~ 18/04/2023*
     - +Corrigé: Détection de la manche finale pour l'émission "Fol'Virevoltes Tropicales"
