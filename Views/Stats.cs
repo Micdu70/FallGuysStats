@@ -2016,7 +2016,7 @@ namespace FallGuysStats {
                         }
                     }
 
-                    if (info.StartLocal.Date > start.Date && (incrementedShows || incrementedFinals || incrementedWins)) {
+                    if (info.StartLocal.Date > start.Date && (incrementedShows || incrementedFinals)) {
                         dates.Add(start.Date.ToOADate());
                         shows.Add(Convert.ToDouble(incrementedShows ? --currentShows : currentShows));
                         finals.Add(Convert.ToDouble(incrementedFinals ? --currentFinals : currentFinals));
