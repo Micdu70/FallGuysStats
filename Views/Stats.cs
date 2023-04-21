@@ -241,9 +241,9 @@ namespace FallGuysStats {
 
             this.RemoveUpdateFiles();
             this.ReloadProfileMenuItems();
-            
+
             this.SortGridDetails(0, true);
-            
+
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
@@ -1870,10 +1870,10 @@ namespace FallGuysStats {
             this.gridDetails.DataSource = this.StatDetails;
             this.gridDetails.Columns[columnName].HeaderCell.SortGlyphDirection = sortOrder;
         }
-        private void gridDetails_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private void GridDetails_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
             this.SortGridDetails(e.ColumnIndex, false);
         }
-        private void gridDetails_SelectionChanged(object sender, EventArgs e) {
+        private void GridDetails_SelectionChanged(object sender, EventArgs e) {
             if (this.gridDetails.SelectedCells.Count > 0) {
                 this.gridDetails.ClearSelection();
             }
