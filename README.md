@@ -173,7 +173,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog complet de la "FE" (Frenchy Edition)
 
   - 1.160 *~ 21/04/2023*
-    - +Corrigé: Overlay => Divers petits changements ["FE"]
+    - +Corrigé: Overlay => Divers petites corrections ["FE"]
+    - +Corrigé: Tri des manches par ordre alphabétique dans la fenêtre principale pour toutes les langues [Version Officielle]
 
   - 1.159 *~ 19/04/2023*
     - +Corrigé: *HOTFIX* Infos du graphique du nombre de victoires par jour

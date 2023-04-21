@@ -1,7 +1,8 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
   - 1.160 *~ 21/04/2023*
-    - +Corrigé: Overlay => Divers petits changements ["FE"]
+    - +Corrigé: Overlay => Divers petites corrections ["FE"]
+    - +Corrigé: Tri des manches par ordre alphabétique dans la fenêtre principale pour toutes les langues [Version Officielle]
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
