@@ -71,7 +71,7 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
         public static bool InShow = false;
-        public static bool AbruptShowEnd = false;
+        public static bool AbandonShow = false;
         public static int ServerPing = 0;
         public static int CurrentLanguage = 0;
         public static Bitmap ImageOpacity(Image sourceImage, float opacity = 1F) {

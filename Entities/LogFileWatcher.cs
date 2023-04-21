@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if Debug
+using System.Diagnostics;
+#endif
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -39,12 +42,12 @@ namespace FallGuysStats {
 
         public static int GetInfo { get; set; }
         public static int SavedCount { get; set; }
-        public static bool IsInfoEmpty { get; set; }
         public static bool IsLastPlayed { get; set; }
         public static bool IsPlaying { get; set; }
-        public static bool IsSpectating { get; set; }
+        public static bool IsShowCompletedOrEnded { get; set; }
 
-        public static DateTime End { get; set; } = DateTime.MinValue;
+        public static DateTime? SpecEnd { get; set; } = null;
+        public DateTime ShowEnd { get; set; }
 
         public RoundInfo Info;
     }
@@ -68,6 +71,9 @@ namespace FallGuysStats {
         public void Start(string logDirectory, string fileName) {
             if (this.running) { return; }
 
+#if Debug
+            Debug.WriteLine("LogFileWatcher is running!");
+#endif
             this.filePath = Path.Combine(logDirectory, fileName);
             this.prevFilePath = Path.Combine(logDirectory, Path.GetFileNameWithoutExtension(fileName) + "-prev.log");
             this.stop = false;
@@ -79,7 +85,11 @@ namespace FallGuysStats {
 
         public async Task Stop() {
             this.stop = true;
+#if Debug
+            while (this.running || this.watcher == null || this.watcher.ThreadState == System.Threading.ThreadState.Unstarted) {
+#else
             while (this.running || this.watcher == null || this.watcher.ThreadState == ThreadState.Unstarted) {
+#endif
                 await Task.Delay(50);
             }
             this.lines = new List<LogLine>();
@@ -161,6 +171,7 @@ namespace FallGuysStats {
                             LogLine line = tempLines[i];
                             currentLines.Add(line);
                             if (this.ParseLine(line, round, logRound)) {
+                                LogRound.SavedCount = 0;
                                 lastDate = line.Date;
                                 offset = line.Offset;
                                 lock (this.lines) {
@@ -201,10 +212,10 @@ namespace FallGuysStats {
                         for (int i = 0; i < this.lines.Count; i++) {
                             LogLine line = this.lines[i];
                             if (this.ParseLine(line, round, logRound)) {
-                                if (logRound.Info != null && !Stats.InShow && Stats.AbruptShowEnd) {
-                                    Stats.AbruptShowEnd = false;
+                                if (Stats.AbandonShow && !LogRound.IsShowCompletedOrEnded) {
+                                    LogRound.IsShowCompletedOrEnded = true;
+                                    Stats.AbandonShow = false;
                                     DateTime showStart = DateTime.MinValue;
-                                    DateTime showEnd = logRound.Info.End;
                                     for (int j = 0; j < round.Count; j++) {
                                         if (j == 0) {
                                             showStart = round[j].Start;
@@ -224,10 +235,16 @@ namespace FallGuysStats {
                                             round[j].Finish = null;
                                         }
                                         round[j].VerifyName();
-                                        round[j].ShowEnd = showEnd;
+                                        round[j].ShowEnd = logRound.ShowEnd;
                                     }
+                                    allStats.AddRange(round);
+                                } else if (LogRound.IsLastPlayed) {
+                                    allStats.AddRange(round);
+                                } else {
+                                    LogRound.IsShowCompletedOrEnded = true;
+                                    logRound.Info = null;
+                                    Stats.InShow = false;
                                 }
-                                allStats.AddRange(round);
                             }
                         }
 
@@ -317,54 +334,39 @@ namespace FallGuysStats {
 
         private bool ParseLine(LogLine line, List<RoundInfo> round, LogRound logRound) {
             int index;
-            if (line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
+            if (line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0) {
                 LogRound.GetInfo = 0;
-                LogRound.IsLastPlayed = false;
                 LogRound.IsPlaying = false;
                 if (logRound.Info != null) {
                     if (logRound.Info.End == DateTime.MinValue) {
                         logRound.Info.End = line.Date;
+                        LogRound.SpecEnd = line.Date;
                     }
                     logRound.Info.Playing = false;
-                    if (!LogRound.IsSpectating) {
-                        Stats.AbruptShowEnd = true;
-                        logRound.FindingPosition = false;
-                        Stats.InShow = false;
-                        return true;
+                    logRound.ShowEnd = logRound.Info.End;
+                    if (!LogRound.IsShowCompletedOrEnded) {
+                        Stats.AbandonShow = true;
                     }
+                    logRound.Info = null;
+                } else if (!LogRound.SpecEnd.HasValue) {
+                    LogRound.SpecEnd = line.Date;
                 }
-                logRound.FindingPosition = false;
                 Stats.InShow = false;
-            } else if (line.Line.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0
-                  || line.Line.IndexOf("Changing local player state to: SpectatingEliminated", StringComparison.OrdinalIgnoreCase) > 0
-                  || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0
-                  || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
-                bool isRoundPlaying = false;
-                bool isStillInShow = true;
-                if (line.Line.IndexOf("Changing local player state to: SpectatingEliminated", StringComparison.OrdinalIgnoreCase) > 0) { LogRound.IsSpectating = true; isRoundPlaying = true; }
-                if (line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0) { isStillInShow = false; }
-                if (line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) { logRound.PrivateLobby = false; isStillInShow = false; }
-                LogRound.IsPlaying = isRoundPlaying;
+                return true;
+            } else if (line.Line.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0) {
+                LogRound.GetInfo = 6;
+                LogRound.IsPlaying = false;
                 if (logRound.Info != null) {
                     if (logRound.Info.End == DateTime.MinValue) {
                         logRound.Info.End = line.Date;
+                        LogRound.SpecEnd = line.Date;
                     }
-                    logRound.Info.Playing = isRoundPlaying;
-                } else if (!LogRound.IsInfoEmpty) {
-                    LogRound.IsInfoEmpty = true;
-                    LogRound.End = DateTime.UtcNow;
-                }
-                Stats.InShow = isStillInShow;
-                if (!Stats.InShow) {
-                    LogRound.GetInfo = 0;
-                    LogRound.IsLastPlayed = false;
-                    logRound.FindingPosition = false;
-                    if (logRound.Info != null && !LogRound.IsSpectating) {
-                        Stats.AbruptShowEnd = true;
-                        return true;
-                    }
-                } else {
-                    LogRound.GetInfo = 2;
+                    logRound.Info.Playing = false;
+                } else if (!LogRound.SpecEnd.HasValue) {
+                    LogRound.SpecEnd = line.Date;
                 }
             } else if (logRound.Info != null && LogRound.GetInfo == 5 && logRound.FindingPosition && (index = line.Line.IndexOf("[ClientGameSession] NumPlayersAchievingObjective=")) > 0) {
                 int position = int.Parse(line.Line.Substring(index + 49));
@@ -384,11 +386,11 @@ namespace FallGuysStats {
                     int msIndex = line.Line.IndexOf("ms", index);
                     Stats.ServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
                 }
-            } else if ((LogRound.GetInfo == 2 || LogRound.IsSpectating) && (index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if ((LogRound.GetInfo == 2 || LogRound.GetInfo == 6 || LogRound.IsShowCompletedOrEnded) && (index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
+                if (LogRound.GetInfo == 2) { LogRound.IsShowCompletedOrEnded = false; }
                 LogRound.GetInfo = 3;
                 LogRound.IsLastPlayed = false;
-                LogRound.IsPlaying = false;
-                LogRound.IsInfoEmpty = false;
+                LogRound.SpecEnd = null;
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId };
                 int index2 = line.Line.IndexOf(' ', index + 44);
                 if (index2 < 0) { index2 = line.Line.Length; }
@@ -397,7 +399,6 @@ namespace FallGuysStats {
                 if (_sceneNameReplacer.TryGetValue(logRound.Info.SceneName, out string newName)) {
                     logRound.Info.SceneName = newName;
                 }
-                logRound.FindingPosition = false;
                 round.Add(logRound.Info);
             } else if (logRound.Info != null && LogRound.GetInfo == 3 && (index = line.Line.IndexOf("[StateGameLoading] Finished loading game level", StringComparison.OrdinalIgnoreCase)) > 0) {
                 LogRound.GetInfo = 4;
@@ -410,7 +411,7 @@ namespace FallGuysStats {
                 bool isFinalException = GetIsFinalException(logRound.Info.Name);
                 bool isTeamException = GetIsTeamException(logRound.Info.Name);
 
-                logRound.Info.Round = !LogRound.IsSpectating ? round.Count : LogRound.SavedCount + round.Count;
+                logRound.Info.Round = !LogRound.IsShowCompletedOrEnded ? round.Count : LogRound.SavedCount + round.Count;
                 logRound.Info.Start = line.Date;
                 logRound.Info.InParty = logRound.CurrentlyInParty;
                 logRound.Info.PrivateLobby = logRound.PrivateLobby;
@@ -426,9 +427,7 @@ namespace FallGuysStats {
                 logRound.Info.IsTeam = isTeamException;
             } else if (line.Line.IndexOf("[StateMatchmaking] Begin", StringComparison.OrdinalIgnoreCase) > 0 || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateConnectToGame", StringComparison.OrdinalIgnoreCase) > 0) {
                 LogRound.GetInfo = 1;
-                LogRound.IsInfoEmpty = true;
                 LogRound.IsPlaying = false;
-                LogRound.IsSpectating = false;
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0;
                 logRound.CurrentlyInParty = !logRound.PrivateLobby && (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) == -1);
                 if (logRound.Info != null) {
@@ -441,7 +440,7 @@ namespace FallGuysStats {
                 Stats.InShow = true;
                 round.Clear();
                 logRound.Info = null;
-            } else if ((index = line.Line.IndexOf("NetworkGameOptions: durationInSeconds=", StringComparison.OrdinalIgnoreCase)) > 0) { // legacy code // It seems to have been deleted from the log file now.
+            } else if ((index = line.Line.IndexOf("NetworkGameOptions: durationInSeconds=", StringComparison.OrdinalIgnoreCase)) > 0) { // legacy code (no more present in logs)
                 int nextIndex = line.Line.IndexOf(" ", index + 38);
                 logRound.Duration = int.Parse(line.Line.Substring(index + 38, nextIndex - index - 38));
                 index = line.Line.IndexOf("isFinalRound=", StringComparison.OrdinalIgnoreCase);
@@ -489,10 +488,10 @@ namespace FallGuysStats {
             } else if (line.Line.IndexOf(" == [CompletedEpisodeDto] ==", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (logRound.Info == null) { return false; }
 
-                LogRound.GetInfo = 0;
+                LogRound.GetInfo = 6;
                 LogRound.SavedCount = logRound.Info.Round;
                 LogRound.IsLastPlayed = true;
-                LogRound.IsSpectating = true;
+                LogRound.IsShowCompletedOrEnded = true;
 
                 RoundInfo roundInfo = null;
                 StringReader sr = new StringReader(line.Line);
@@ -565,8 +564,11 @@ namespace FallGuysStats {
                 }
 
                 if (logRound.Info.Qualified) {
+                    LogRound.GetInfo = 0;
                     logRound.Info.Position = 1;
                     logRound.Info.Crown = true;
+                    logRound.Info = null;
+                    Stats.InShow = false;
                 }
                 return true;
             }

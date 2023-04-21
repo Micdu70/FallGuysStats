@@ -27,7 +27,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.159** *~ 19/04/2023*
+**Dernière version: 1.160** *~ 21/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -171,6 +171,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - 1.160 *~ 21/04/2023*
+    - +Corrigé: Overlay => Divers petits changements ["FE"]
 
   - 1.159 *~ 19/04/2023*
     - +Corrigé: *HOTFIX* Infos du graphique du nombre de victoires par jour
