@@ -132,7 +132,7 @@
             this.lblLogPathNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblLogPathNote.Location = new System.Drawing.Point(103, 98);
             this.lblLogPathNote.Name = "lblLogPathNote";
-            this.lblLogPathNote.Size = new System.Drawing.Size(572, 19);
+            this.lblLogPathNote.Size = new System.Drawing.Size(486, 15);
             this.lblLogPathNote.TabIndex = 2;
             this.lblLogPathNote.Text = "* You should not need to set this. Only use when the program is not reading the c" +
     "orrect location.";
@@ -1202,6 +1202,86 @@
             this.overlayOpacityToolTip.Style = MetroFramework.MetroColorStyle.Blue;
             this.overlayOpacityToolTip.StyleManager = null;
             this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // panelFallalytics
+            // 
+            this.panelFallalytics.Controls.Add(this.fallalyticsAPIKeyLable);
+            this.panelFallalytics.Controls.Add(this.txtFallalyticsAPIKey);
+            this.panelFallalytics.Controls.Add(this.chkFallalyticsReporting);
+            this.panelFallalytics.HorizontalScrollbarBarColor = true;
+            this.panelFallalytics.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelFallalytics.HorizontalScrollbarSize = 10;
+            this.panelFallalytics.Location = new System.Drawing.Point(280, 7);
+            this.panelFallalytics.Name = "panelFallalytics";
+            this.panelFallalytics.Size = new System.Drawing.Size(640, 498);
+            this.panelFallalytics.TabIndex = 19;
+            this.panelFallalytics.VerticalScrollbarBarColor = true;
+            this.panelFallalytics.VerticalScrollbarHighlightOnWheel = false;
+            this.panelFallalytics.VerticalScrollbarSize = 10;
+            // 
+            // fallalyticsAPIKeyLable
+            // 
+            this.fallalyticsAPIKeyLable.AutoSize = true;
+            this.fallalyticsAPIKeyLable.Location = new System.Drawing.Point(15, 51);
+            this.fallalyticsAPIKeyLable.Name = "fallalyticsAPIKeyLable";
+            this.fallalyticsAPIKeyLable.Size = new System.Drawing.Size(206, 19);
+            this.fallalyticsAPIKeyLable.TabIndex = 5;
+            this.fallalyticsAPIKeyLable.Text = "(Optional) Enter Fallalytics API key";
+            // 
+            // txtFallalyticsAPIKey
+            // 
+            // 
+            // 
+            // 
+            this.txtFallalyticsAPIKey.CustomButton.Image = null;
+            this.txtFallalyticsAPIKey.CustomButton.Location = new System.Drawing.Point(281, 1);
+            this.txtFallalyticsAPIKey.CustomButton.Name = "";
+            this.txtFallalyticsAPIKey.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtFallalyticsAPIKey.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtFallalyticsAPIKey.CustomButton.TabIndex = 1;
+            this.txtFallalyticsAPIKey.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtFallalyticsAPIKey.CustomButton.UseSelectable = true;
+            this.txtFallalyticsAPIKey.CustomButton.Visible = false;
+            this.txtFallalyticsAPIKey.Lines = new string[] {
+        "4d328236-b3c2-4449-a158-d07128671920"};
+            this.txtFallalyticsAPIKey.Location = new System.Drawing.Point(15, 73);
+            this.txtFallalyticsAPIKey.MaxLength = 32767;
+            this.txtFallalyticsAPIKey.Name = "txtFallalyticsAPIKey";
+            this.txtFallalyticsAPIKey.PasswordChar = '\0';
+            this.txtFallalyticsAPIKey.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtFallalyticsAPIKey.SelectedText = "";
+            this.txtFallalyticsAPIKey.SelectionLength = 0;
+            this.txtFallalyticsAPIKey.SelectionStart = 0;
+            this.txtFallalyticsAPIKey.ShortcutsEnabled = true;
+            this.txtFallalyticsAPIKey.Size = new System.Drawing.Size(303, 23);
+            this.txtFallalyticsAPIKey.TabIndex = 4;
+            this.txtFallalyticsAPIKey.Text = "4d328236-b3c2-4449-a158-d07128671920";
+            this.txtFallalyticsAPIKey.UseSelectable = true;
+            this.txtFallalyticsAPIKey.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtFallalyticsAPIKey.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // chkFallalyticsReporting
+            // 
+            this.chkFallalyticsReporting.AutoSize = true;
+            this.chkFallalyticsReporting.Location = new System.Drawing.Point(15, 17);
+            this.chkFallalyticsReporting.Name = "chkFallalyticsReporting";
+            this.chkFallalyticsReporting.Size = new System.Drawing.Size(257, 15);
+            this.chkFallalyticsReporting.TabIndex = 2;
+            this.chkFallalyticsReporting.Text = "Send information about rounds to Fallalytics";
+            this.chkFallalyticsReporting.UseSelectable = true;
+            // 
+            // tileFallalytics
+            // 
+            this.tileFallalytics.ActiveControl = null;
+            this.tileFallalytics.BackColor = System.Drawing.Color.LightGray;
+            this.tileFallalytics.Location = new System.Drawing.Point(12, 257);
+            this.tileFallalytics.Name = "tileFallalytics";
+            this.tileFallalytics.Size = new System.Drawing.Size(200, 40);
+            this.tileFallalytics.TabIndex = 20;
+            this.tileFallalytics.Text = "Fallalytics";
+            this.tileFallalytics.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tileFallalytics.UseSelectable = true;
+            this.tileFallalytics.Click += new System.EventHandler(this.ChangeTab);
             // 
             // Settings
             // 

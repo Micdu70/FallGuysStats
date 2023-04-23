@@ -94,6 +94,9 @@ namespace FallGuysStats {
             this.chkHidePercentages.Checked = this.CurrentSettings.HideOverlayPercentages;
             this.chkChangeHoopsieLegends.Checked = this.CurrentSettings.HoopsieHeros;
 
+            this.chkFallalyticsReporting.Checked = this.CurrentSettings.EnableFallalyticsReporting;
+            this.txtFallalyticsAPIKey.Text = this.CurrentSettings.FallalyticsAPIKey;
+
             ArrayList imageItemArray = new ArrayList();
             if (Directory.Exists("Overlay")) {
                 DirectoryInfo di = new DirectoryInfo("Overlay");
@@ -523,6 +526,9 @@ namespace FallGuysStats {
 
             this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
 
+            this.CurrentSettings.EnableFallalyticsReporting = this.chkFallalyticsReporting.Checked;
+            this.CurrentSettings.FallalyticsAPIKey = this.txtFallalyticsAPIKey.Text;
+            
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

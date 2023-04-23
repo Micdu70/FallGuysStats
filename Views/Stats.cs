@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using FallGuysStats.Entities;
 using LiteDB;
 using MetroFramework;
 using Microsoft.Win32;
@@ -129,6 +130,8 @@ namespace FallGuysStats {
         private readonly Image numberSeven = ImageOpacity(Properties.Resources.number_7, 0.5F);
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
+
+        private static FallalyticsReporter StatsReporter = new FallalyticsReporter();
 
         public Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -1311,6 +1314,15 @@ namespace FallGuysStats {
                                 stat.Profile = profile;
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
+
+                                //Below is where reporting to fallaytics happen
+                                //Must have enabled the setting to enable tracking
+                                //Must not be a private lobby
+                                //Must be a game that is played after FallGuysStats started
+                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > startupTime) {
+                                    StatsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
+                                }
+
                             } else {
                                 continue;
                             }
