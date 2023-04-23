@@ -11,7 +11,6 @@ namespace FallGuysStats {
         public int ShowID { get; set; }
         public string ShowNameId { get; set; }
         public string SessionId { get; set; }
-        public string PlayerName { get; set; }
         public int Round { get; set; }
         public int Position { get; set; }
         public int? Score { get; set; }
@@ -95,8 +94,7 @@ namespace FallGuysStats {
                 && info.Start == this.Start
                 && info.Tier == this.Tier
                 && info.Name == this.Name
-                && info.SessionId == this.SessionId
-                && info.PlayerName == this.PlayerName;
+                && info.SessionId == this.SessionId;
         }
         public override int GetHashCode() {
             return Name.GetHashCode() ^ ShowID ^ Round;
