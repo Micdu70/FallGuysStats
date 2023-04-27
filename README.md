@@ -27,7 +27,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.160** *~ 21/04/2023*
+**Dernière version: 1.161** *~ 27/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -167,10 +167,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
 
   1) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
-    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
+    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au chargement de la première manche de la prochaine partie
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - 1.161 *~ 27/04/2023*
+  { Correction de bugs de la "FE" }
 
   - 1.160 *~ 21/04/2023*
     - +Corrigé: Overlay => Divers petites corrections ["FE"]

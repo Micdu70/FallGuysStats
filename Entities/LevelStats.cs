@@ -34,6 +34,7 @@ namespace FallGuysStats {
         public DateTime End { get; set; } = DateTime.MinValue;
         public DateTime? Finish { get; set; } = null;
         public bool Crown { get; set; }
+
         public DateTime StartLocal;
         public DateTime EndLocal;
         public DateTime? FinishLocal;
