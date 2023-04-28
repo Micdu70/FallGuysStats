@@ -83,7 +83,8 @@ namespace FallGuysStats {
             this.menu.Location = new System.Drawing.Point(0, 65);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(828, 24);
-            this.menu.TabIndex = 12;
+            this.menu.TabIndex = 0;
+            this.menu.TabStop = true;
             this.menu.Text = "menuStrip1";
             // 
             // menuSettings
@@ -289,7 +290,8 @@ namespace FallGuysStats {
             this.infoStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.infoStrip.Size = new System.Drawing.Size(790, 26);
             this.infoStrip.Stretch = true;
-            this.infoStrip.TabIndex = 13;
+            this.infoStrip.TabIndex = 1;
+            this.infoStrip.TabStop = true;
             // 
             // lblCurrentProfile
             // 
@@ -395,7 +397,8 @@ namespace FallGuysStats {
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
             this.gridDetails.Size = new System.Drawing.Size(810, 685);
-            this.gridDetails.TabIndex = 11;
+            this.gridDetails.StandardTab = true;
+            this.gridDetails.TabIndex = 2;
             this.gridDetails.TabStop = false;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
             this.gridDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetails_CellClick);

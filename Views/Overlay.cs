@@ -769,11 +769,10 @@ namespace FallGuysStats {
                         this.switchCount++;
                     }
 
-                    int NumPlayersQualified = LogRound.NumPlayersQualified;
+                    int numPlayersSucceeded = LogRound.NumPlayersSucceeded;
 
                     DateTime Start = this.lastRound.Start;
                     DateTime End = this.lastRound.End;
-                    DateTime? SpecEnd = LogRound.SpecEnd;
                     DateTime? Finish = this.lastRound.Finish;
 
                     if (this.lastRound.Playing != this.startedPlaying) {
@@ -787,7 +786,7 @@ namespace FallGuysStats {
                     if (Finish.HasValue) {
                         TimeSpan Time = Finish.GetValueOrDefault(End) - Start;
 
-                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{NumPlayersQualified} |{Time:m\\:ss\\.ff}" : $"[{NumPlayersQualified}]|{Time:m\\:ss\\.ff}";
+                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{numPlayersSucceeded} | {Time:m\\:ss\\.ff}" : $"( {numPlayersSucceeded} ) | {Time:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = !LogRound.IsShowCompletedOrEnded || this.lastRound.Crown ? Color.White : Color.Pink;
 
                         if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || this.levelException == 1) {
@@ -801,15 +800,12 @@ namespace FallGuysStats {
                         } else if (Time > levelInfo.LongestFinishOverall) {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
-                    } else if (SpecEnd.HasValue && LogRound.IsLastPlayed) {
-                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{NumPlayersQualified} |{SpecEnd - Start:m\\:ss\\.ff}" : $"[{NumPlayersQualified}]|{SpecEnd - Start:m\\:ss\\.ff}";
-                        this.lblFinish.ForeColor = !LogRound.IsShowCompletedOrEnded || this.lastRound.Crown ? Color.White : Color.Pink;
                     } else if (End != DateTime.MinValue) {
-                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{NumPlayersQualified} |{End - Start:m\\:ss\\.ff}" : $"[{NumPlayersQualified}]|{End - Start:m\\:ss\\.ff}";
+                        this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{numPlayersSucceeded} | {End - Start:m\\:ss\\.ff}" : $"( {numPlayersSucceeded} ) | {End - Start:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = !LogRound.IsShowCompletedOrEnded || this.lastRound.Crown ? Color.White : Color.Pink;
-                    } else if (this.lastRound.Playing && Stats.InShow) {
-                        if (NumPlayersQualified > 0) {
-                            this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"[{NumPlayersQualified}]|{DateTime.UtcNow - startTime:m\\:ss}" : $"[{NumPlayersQualified}]|{DateTime.UtcNow - Start:m\\:ss}";
+                    } else if (Stats.InShow && this.lastRound.Playing) {
+                        if (numPlayersSucceeded > 0) {
+                            this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - startTime:m\\:ss}" : $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - Start:m\\:ss}";
                         } else {
                             this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                         }
@@ -823,10 +819,9 @@ namespace FallGuysStats {
                         ? $"{Multilingual.GetWord("overlay_duration")} ({TimeSpan.FromSeconds(this.lastRound.GameDuration):m\\:ss}):"
                         : $"{Multilingual.GetWord("overlay_duration")} :";
 
-                    if ((this.lastRound.Playing || (LogRound.IsLastPlayed && LogRound.IsPlaying)) && Stats.InShow) {
+
+                    if (Stats.InShow && (this.lastRound.Playing || LogRound.IsLastRoundPlaying)) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
-                    } else if (SpecEnd.HasValue && LogRound.IsLastPlayed) {
-                        this.lblDuration.TextRight = $"{SpecEnd - Start:m\\:ss\\.ff}";
                     } else if (End != DateTime.MinValue) {
                         this.lblDuration.TextRight = $"{End - Start:m\\:ss\\.ff}";
                     } else {

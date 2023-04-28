@@ -1,5 +1,10 @@
-﻿using System;
+﻿#if !Debug
+using System;
+#endif
 using System.Collections.Generic;
+#if Debug
+using System.Diagnostics;
+#endif
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
@@ -23,15 +28,19 @@ namespace FallGuysStats.Entities {
             try {
                 await client.SendAsync(request);
             } catch (HttpRequestException e) {
+#if Debug
+                Debug.WriteLine("Error in FallalyticsReporter. Should not be a problem as it only affects the reporting. Error: " + e.ToString());
+#else
                 Console.WriteLine("Error in FallalyticsReporter. Should not be a problem as it only affects the reporting. Error: " + e.ToString());
+#endif
             }
 
-            if(stat.Round == 1) {
+            if (stat.Round == 1) {
                 foreach (RoundInfo game in gameList.ToList()) {
-                    if(game.ShowID != stat.ShowID) {
+                    if (game.ShowID != stat.ShowID) {
                         gameList.Remove(game);
                     }
-                } 
+                }
             }
 
             gameList.Add(stat);
@@ -39,7 +48,7 @@ namespace FallGuysStats.Entities {
             bool foundMissMatch = false;
             int finalRound = -1;
             foreach (RoundInfo game in gameList.ToList()) {
-                if(game.SessionId != stat.SessionId) {
+                if (game.SessionId != stat.SessionId) {
                     foundMissMatch = true;
                 }
                 if (game.IsFinal) {
@@ -47,10 +56,10 @@ namespace FallGuysStats.Entities {
                 }
             }
             if (gameList.Count == finalRound && !foundMissMatch) {
-                gameComplete(APIKey);
+                GameComplete(APIKey);
             }
         }
-        public async void gameComplete(string APIKey) {
+        public async void GameComplete(string APIKey) {
             var requestArray = new HttpRequestMessage(HttpMethod.Post, APIEndpoint);
             requestArray.Headers.Authorization = new AuthenticationHeaderValue("Bearer", APIKey);
             string jsonArraystring = "[";
@@ -66,9 +75,13 @@ namespace FallGuysStats.Entities {
             try {
                 await client.SendAsync(requestArray);
             } catch (HttpRequestException e) {
+#if Debug
+                Debug.WriteLine("Error in FallalyticsReporter. Should not be a problem as it only affects the reporting. Error: " + e.ToString());
+#else
                 Console.WriteLine("Error in FallalyticsReporter. Should not be a problem as it only affects the reporting. Error: " + e.ToString());
+#endif
             }
-            
+
             gameList = new List<RoundInfo>();
         }
         public string RoundInfoToJSONString(RoundInfo round) {
@@ -76,7 +89,7 @@ namespace FallGuysStats.Entities {
             JSON += "{\"round\":\"" + round.Name + "\",";
             JSON += "\"index\":" + round.Round + ",";
             JSON += "\"show\":\"" + round.ShowNameId + "\",";
-            JSON += "\"isfinal\":" + round.IsFinal.ToString().ToLower() + ",";
+            JSON += "\"isfinal\":" + (round.IsFinal ? "true" : "false") + ",";
             JSON += "\"session\":\"" + round.SessionId + "\"}";
             return JSON;
         }

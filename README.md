@@ -27,7 +27,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.161** *~ 27/04/2023*
+**Dernière version: 1.161** *~ 28/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -167,13 +167,15 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
 
   1) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
-    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au chargement de la première manche de la prochaine partie
+    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au chargement de la première manche de votre prochaine partie
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - 1.161 *~ 27/04/2023*
+  - 1.161 *~ 28/04/2023*
   { Correction de bugs de la "FE" }
+    - +Ajouté: Option (activée par défaut) pour envoyer l'info des manches jouées vers le site <a href="https://fallalytics.com/">Fallalytics</a> (merci à @Hoier)
+    - +Ajouté: Overlay => Affichage du nombre d'haricots qui ont réussi la manche (fini la course/survécu)
 
   - 1.160 *~ 21/04/2023*
     - +Corrigé: Overlay => Divers petites corrections ["FE"]
@@ -294,10 +296,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - 1.142 *~ 06/03/2023*
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
-    - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (par @qutrits)
-    - ++Changé: Le tableau des stats des victoires a été amélioré (par @qutrits)
+    - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (merci à @qutrits)
+    - ++Changé: Le tableau des stats des victoires a été amélioré (merci à @qutrits)
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
-    - ++Changé: Divers changements (par @qutrits et moi-même)
+    - ++Changé: Divers changements (merci à @qutrits)
 
   - 1.141 *~ 04/03/2023*
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !

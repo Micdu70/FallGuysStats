@@ -90,7 +90,7 @@ namespace FallGuysStats {
             this.ProfileListUp.Location = new System.Drawing.Point(375, 19);
             this.ProfileListUp.Name = "ProfileListUp";
             this.ProfileListUp.Size = new System.Drawing.Size(20, 50);
-            this.ProfileListUp.TabIndex = 3;
+            this.ProfileListUp.TabIndex = 1;
             this.ProfileListUp.Text = "∧";
             this.ProfileListUp.UseSelectable = true;
             this.ProfileListUp.Click += new System.EventHandler(this.ProfileListUp_Click);
@@ -101,7 +101,7 @@ namespace FallGuysStats {
             this.ProfileListDown.Location = new System.Drawing.Point(375, 218);
             this.ProfileListDown.Name = "ProfileListDown";
             this.ProfileListDown.Size = new System.Drawing.Size(20, 50);
-            this.ProfileListDown.TabIndex = 4;
+            this.ProfileListDown.TabIndex = 2;
             this.ProfileListDown.Text = "∨";
             this.ProfileListDown.UseSelectable = true;
             this.ProfileListDown.Click += new System.EventHandler(this.ProfileListDown_Click);
@@ -114,7 +114,7 @@ namespace FallGuysStats {
             this.groupBox1.Location = new System.Drawing.Point(9, 238);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(400, 275);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile List";
             // 
@@ -128,7 +128,7 @@ namespace FallGuysStats {
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(382, 165);
-            this.tabControl1.TabIndex = 6;
+            this.tabControl1.TabIndex = 0;
             this.tabControl1.UseSelectable = true;
             // 
             // AddTabPage
@@ -226,7 +226,7 @@ namespace FallGuysStats {
             this.RenameButton.Location = new System.Drawing.Point(8, 88);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(76, 26);
-            this.RenameButton.TabIndex = 4;
+            this.RenameButton.TabIndex = 3;
             this.RenameButton.Text = "Rename";
             this.RenameButton.UseSelectable = true;
             this.RenameButton.Click += new System.EventHandler(this.RenameButton_Click);
@@ -256,7 +256,7 @@ namespace FallGuysStats {
             this.RenamePageTextbox.SelectionStart = 0;
             this.RenamePageTextbox.ShortcutsEnabled = true;
             this.RenamePageTextbox.Size = new System.Drawing.Size(178, 25);
-            this.RenamePageTextbox.TabIndex = 3;
+            this.RenamePageTextbox.TabIndex = 2;
             this.RenamePageTextbox.UseSelectable = true;
             this.RenamePageTextbox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.RenamePageTextbox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -275,9 +275,10 @@ namespace FallGuysStats {
             // 
             this.RenamePageCombobox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RenamePageCombobox.FormattingEnabled = true;
+            this.RenamePageCombobox.ItemHeight = 23;
             this.RenamePageCombobox.Location = new System.Drawing.Point(96, 7);
             this.RenamePageCombobox.Name = "RenamePageCombobox";
-            this.RenamePageCombobox.Size = new System.Drawing.Size(192, 22);
+            this.RenamePageCombobox.Size = new System.Drawing.Size(192, 29);
             this.RenamePageCombobox.TabIndex = 1;
             this.RenamePageCombobox.UseSelectable = true;
             this.RenamePageCombobox.SelectedIndexChanged += new System.EventHandler(this.RenameComboxChanged);
@@ -317,7 +318,7 @@ namespace FallGuysStats {
             this.MovePageButton.Location = new System.Drawing.Point(8, 88);
             this.MovePageButton.Name = "MovePageButton";
             this.MovePageButton.Size = new System.Drawing.Size(76, 26);
-            this.MovePageButton.TabIndex = 4;
+            this.MovePageButton.TabIndex = 3;
             this.MovePageButton.Text = "Move";
             this.MovePageButton.UseSelectable = true;
             this.MovePageButton.Click += new System.EventHandler(this.MovePageButton_Click);
@@ -335,9 +336,10 @@ namespace FallGuysStats {
             // 
             this.MoveToCombobox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MoveToCombobox.FormattingEnabled = true;
+            this.MoveToCombobox.ItemHeight = 23;
             this.MoveToCombobox.Location = new System.Drawing.Point(96, 45);
             this.MoveToCombobox.Name = "MoveToCombobox";
-            this.MoveToCombobox.Size = new System.Drawing.Size(192, 22);
+            this.MoveToCombobox.Size = new System.Drawing.Size(192, 29);
             this.MoveToCombobox.TabIndex = 2;
             this.MoveToCombobox.UseSelectable = true;
             // 
@@ -354,10 +356,11 @@ namespace FallGuysStats {
             // 
             this.MoveFromCombobox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MoveFromCombobox.FormattingEnabled = true;
+            this.MoveFromCombobox.ItemHeight = 23;
             this.MoveFromCombobox.Location = new System.Drawing.Point(96, 7);
             this.MoveFromCombobox.Name = "MoveFromCombobox";
-            this.MoveFromCombobox.Size = new System.Drawing.Size(192, 22);
-            this.MoveFromCombobox.TabIndex = 0;
+            this.MoveFromCombobox.Size = new System.Drawing.Size(192, 29);
+            this.MoveFromCombobox.TabIndex = 1;
             this.MoveFromCombobox.UseSelectable = true;
             // 
             // RemoveTabPage
@@ -392,9 +395,10 @@ namespace FallGuysStats {
             // 
             this.RemoveProfileCombobox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.RemoveProfileCombobox.FormattingEnabled = true;
+            this.RemoveProfileCombobox.ItemHeight = 23;
             this.RemoveProfileCombobox.Location = new System.Drawing.Point(96, 7);
             this.RemoveProfileCombobox.Name = "RemoveProfileCombobox";
-            this.RemoveProfileCombobox.Size = new System.Drawing.Size(192, 22);
+            this.RemoveProfileCombobox.Size = new System.Drawing.Size(192, 29);
             this.RemoveProfileCombobox.TabIndex = 1;
             this.RemoveProfileCombobox.UseSelectable = true;
             // 
@@ -439,6 +443,7 @@ namespace FallGuysStats {
             this.RemoveTabPage.ResumeLayout(false);
             this.RemoveTabPage.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -268,6 +268,7 @@ namespace FallGuysStats {
             if (this.gridDetails.Columns.Count == 0) { return; }
 
             int pos = 0;
+            this.gridDetails.Columns["SessionId"].Visible = false;
             this.gridDetails.Columns["Tier"].Visible = false;
             this.gridDetails.Columns["ID"].Visible = false;
             this.gridDetails.Columns["Crown"].Visible = false;

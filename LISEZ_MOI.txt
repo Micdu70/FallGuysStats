@@ -70,4 +70,4 @@ Permet de changer de profil automatiquement au moment où l'émission spécifié
 ## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
 
   1) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
-     => Bug aléatoire : Dans tous les cas, les temps seront réinitialisés au lancement de la prochaine partie
+     => Bug aléatoire : Dans tous les cas, les temps seront réinitialisés au chargement de la première manche de votre prochaine partie

@@ -131,7 +131,7 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
-        private static FallalyticsReporter StatsReporter = new FallalyticsReporter();
+        private static readonly FallalyticsReporter StatsReporter = new FallalyticsReporter();
 
         public Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -165,6 +165,12 @@ namespace FallGuysStats {
                     if (this.CurrentSettings.FrenchyEditionDB == 4) {
                         this.CurrentSettings.WinPerDayGraphStyle = 1;
                         this.CurrentSettings.FrenchyEditionDB = 5;
+                        this.UserSettings.Upsert(this.CurrentSettings);
+                    }
+                    if (this.CurrentSettings.FrenchyEditionDB == 5) {
+                        this.CurrentSettings.EnableFallalyticsReporting = true;
+                        this.CurrentSettings.Version = 29;
+                        this.CurrentSettings.FrenchyEditionDB = 6;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -961,6 +967,13 @@ namespace FallGuysStats {
                 this.CurrentSettings.Version = 28;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.Version == 28) {
+                this.CurrentSettings.EnableFallalyticsReporting = true;
+                this.CurrentSettings.FallalyticsAPIKey = string.Empty;
+                this.CurrentSettings.Version = 29;
+                this.SaveUserSettings();
+            }
         }
 
         private UserSettings GetDefaultSettings() {
@@ -970,8 +983,9 @@ namespace FallGuysStats {
                 CycleTimeSeconds = 5,
                 FilterType = 0,
                 SelectedProfile = 0,
-                FlippedDisplay = false,
                 LogPath = null,
+                EnableFallalyticsReporting = true,
+                FallalyticsAPIKey = string.Empty,
                 OverlayBackground = 0,
                 OverlayBackgroundResourceName = string.Empty,
                 OverlayTabResourceName = string.Empty,
@@ -985,6 +999,7 @@ namespace FallGuysStats {
                 OverlayFixedPositionY = null,
                 OverlayFixedWidth = null,
                 OverlayFixedHeight = null,
+                FlippedDisplay = false,
                 FixedFlippedDisplay = false,
                 SwitchBetweenLongest = true,
                 SwitchBetweenQualify = true,
@@ -1027,8 +1042,8 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
-                Version = 28,
-                FrenchyEditionDB = 5
+                Version = 29,
+                FrenchyEditionDB = 6
             };
         }
         private void UpdateHoopsieLegends() {
@@ -1319,10 +1334,9 @@ namespace FallGuysStats {
                                 //Must have enabled the setting to enable tracking
                                 //Must not be a private lobby
                                 //Must be a game that is played after FallGuysStats started
-                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > startupTime) {
+                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
                                     StatsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
                                 }
-
                             } else {
                                 continue;
                             }

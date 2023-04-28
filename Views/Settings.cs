@@ -27,6 +27,8 @@ namespace FallGuysStats {
             this.InitializeComponent();
         }
         private void Settings_Load(object sender, EventArgs e) {
+            Screen s = Screen.FromPoint(Cursor.Position);
+            Cursor.Position = new Point(s.Bounds.Left + s.Bounds.Width / 2, s.Bounds.Top + s.Bounds.Height / 2);
             Label focusOutLabel = new Label() {
                 Text = "",
                 Name = "nolabel",
@@ -528,7 +530,7 @@ namespace FallGuysStats {
 
             this.CurrentSettings.EnableFallalyticsReporting = this.chkFallalyticsReporting.Checked;
             this.CurrentSettings.FallalyticsAPIKey = this.txtFallalyticsAPIKey.Text;
-            
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -672,6 +674,9 @@ namespace FallGuysStats {
             }
             this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(10, 14) : new Point(14, 14);
         }
+        private void AboutFallalytics_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://fallalytics.com/about");
+        }
         private void BtnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
@@ -748,6 +753,9 @@ namespace FallGuysStats {
                 this.lblPreviousWinsNote.Location = new Point(170, 55);
                 this.chkChangeHoopsieLegends.Location = new Point(399, 55);
 
+                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+
                 this.lblWinsFilter.Location = new Point(501, 23);
                 this.lblQualifyFilter.Location = new Point(487, 58);
                 this.lblFastestFilter.Location = new Point(473, 93);
@@ -779,6 +787,9 @@ namespace FallGuysStats {
                 this.txtPreviousWins.Location = new Point(154, 55);
                 this.lblPreviousWinsNote.Location = new Point(200, 55);
                 this.chkChangeHoopsieLegends.Location = new Point(429, 55);
+
+                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.txtFallalyticsAPIKey.Location = new Point(290, 55);
 
                 this.lblWinsFilter.Location = new Point(477, 23);
                 this.lblQualifyFilter.Location = new Point(491, 58);
@@ -812,6 +823,9 @@ namespace FallGuysStats {
                 this.lblPreviousWinsNote.Location = new Point(166, 55);
                 this.chkChangeHoopsieLegends.Location = new Point(399, 55);
 
+                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+
                 this.lblWinsFilter.Location = new Point(465, 23);
                 this.lblQualifyFilter.Location = new Point(483, 58);
                 this.lblFastestFilter.Location = new Point(433, 93);
@@ -844,6 +858,9 @@ namespace FallGuysStats {
                 this.lblPreviousWinsNote.Location = new Point(166, 55);
                 this.chkChangeHoopsieLegends.Location = new Point(390, 55);
 
+                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+
                 this.lblWinsFilter.Location = new Point(430, 23);
                 this.lblQualifyFilter.Location = new Point(430, 58);
                 this.lblFastestFilter.Location = new Point(401, 93);
@@ -875,6 +892,9 @@ namespace FallGuysStats {
                 this.txtPreviousWins.Location = new Point(110, 55);
                 this.lblPreviousWinsNote.Location = new Point(155, 55);
                 this.chkChangeHoopsieLegends.Location = new Point(399, 55);
+
+                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
 
                 this.lblWinsFilter.Location = new Point(500, 23);
                 this.lblQualifyFilter.Location = new Point(500, 58);
@@ -1033,6 +1053,9 @@ namespace FallGuysStats {
             this.chkAutoUpdate.Text = Multilingual.GetWord("settings_auto_update_program");
             this.lblPreviousWinsNote.Text = Multilingual.GetWord("settings_before_using_tracker");
             this.lblPreviousWins.Text = Multilingual.GetWord("settings_previous_win");
+            this.lnkAboutFallalytics.Text = Multilingual.GetWord("settings_fallalytics_about");
+            this.lblFallalyticsAPIKey.Text = Multilingual.GetWord("settings_fallalytics_api_key");
+            this.chkFallalyticsReporting.Text = Multilingual.GetWord("settings_fallalytics_reporting");
             this.grpGameOptions.Text = Multilingual.GetWord("settings_game_options");
             this.grpLaunchPlatform.Text = Multilingual.GetWord("settings_game_options_platform");
             //this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_shortcut_location");
