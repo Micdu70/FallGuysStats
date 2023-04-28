@@ -357,7 +357,7 @@ namespace FallGuysStats {
             } else if (!LogRound.IsShowCompletedOrEnded && logRound.Info == null && line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 //Store SessionID to prevent duplicates
                 this.sessionId = line.Line.Substring(line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase) + 33);
-            } else if (Stats.InShow && logRound.Info != null && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (logRound.Info != null && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("RTT: ");
                 if (index > 0) {
                     int msIndex = line.Line.IndexOf("ms", index);
@@ -380,6 +380,7 @@ namespace FallGuysStats {
                     LogRound.LastRoundStart = line.Date;
                     LogRound.succeededPlayerIds.Clear();
                     LogRound.NumPlayersSucceeded = 0;
+                    Stats.InShow = true;
                 }
 
                 int index2 = line.Line.IndexOf(". ", index + 62);
@@ -415,7 +416,6 @@ namespace FallGuysStats {
                 index = line.Line.IndexOf("isFinalRound=True", StringComparison.OrdinalIgnoreCase);
                 logRound.IsFinal = index > 0;
             } else if (logRound.Info != null && line.Line.IndexOf("[GameSession] Changing state from Countdown to Playing", StringComparison.OrdinalIgnoreCase) > 0) {
-                Stats.InShow = true;
                 logRound.Info.Start = line.Date;
                 logRound.Info.Playing = true;
                 logRound.CountingPlayers = false;
@@ -580,6 +580,7 @@ namespace FallGuysStats {
                 if (logRound.Info.Qualified) {
                     logRound.Info.Position = 1;
                     logRound.Info.Crown = true;
+                    Stats.InShow = false;
                 }
                 logRound.Info = null;
                 return true;

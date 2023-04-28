@@ -166,8 +166,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
 
-  1) Les temps sur l'overlay peuvent ne pas s'arrêter après avoir quitté une partie
-    *=> Bug aléatoire: Dans tous les cas, les temps seront réinitialisés au chargement de la première manche de votre prochaine partie
+  - Tous les bugs connus ont normalement été résolus dans la v1.161 !
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
