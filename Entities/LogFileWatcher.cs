@@ -442,7 +442,7 @@ namespace FallGuysStats {
             } else if (logRound.Info != null && line.Line.IndexOf("[ClientGameManager] Handling bootstrap for local player FallGuy", StringComparison.OrdinalIgnoreCase) > 0 && (index = line.Line.IndexOf("playerID = ", StringComparison.OrdinalIgnoreCase)) > 0) {
                 int prevIndex = line.Line.IndexOf(",", index + 11);
                 logRound.CurrentPlayerID = line.Line.Substring(index + 11, prevIndex - index - 11);
-            } else if (Stats.InShow && logRound.Info != null && line.Line.IndexOf($"HandleServerPlayerProgress PlayerId={logRound.CurrentPlayerID} is succeeded=", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (logRound.Info != null && line.Line.IndexOf($"HandleServerPlayerProgress PlayerId={logRound.CurrentPlayerID} is succeeded=", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("succeeded=True", StringComparison.OrdinalIgnoreCase);
                 if (index > 0) {
                     logRound.Info.Finish = logRound.Info.End == DateTime.MinValue ? line.Date : logRound.Info.End;
@@ -502,8 +502,6 @@ namespace FallGuysStats {
             } else if (line.Line.IndexOf(" == [CompletedEpisodeDto] ==", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (logRound.Info == null) { return false; }
 
-                LogRound.SavedRoundCount = logRound.Info.Round;
-                LogRound.IsLastRoundPlaying = true;
                 LogRound.IsShowCompletedOrEnded = true;
 
                 RoundInfo roundInfo = null;
@@ -581,8 +579,12 @@ namespace FallGuysStats {
                     logRound.Info.Position = 1;
                     logRound.Info.Crown = true;
                     Stats.InShow = false;
+                } else {
+                    LogRound.SavedRoundCount = logRound.Info.Round;
+                    LogRound.IsLastRoundPlaying = true;
                 }
                 logRound.Info = null;
+
                 return true;
             }
             return false;

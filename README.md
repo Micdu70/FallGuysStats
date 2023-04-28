@@ -27,7 +27,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version: 1.162** *~ 28/04/2023*
+**Dernière version: 1.163** *~ 28/04/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -171,7 +171,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - 1.161/1.162 *~ 28/04/2023*
+  - 1.161/1.162/1.163 *~ 28/04/2023*
   { Correction de bugs de la "FE" }
     - +Ajouté: Option (activée par défaut) pour envoyer l'info des manches jouées vers le site <a href="https://fallalytics.com/">Fallalytics</a> (merci à @Hoier)
     - +Ajouté: Overlay => Affichage du nombre d'haricots qui ont réussi la manche (fini la course/survécu)
