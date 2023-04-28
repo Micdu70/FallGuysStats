@@ -1,6 +1,6 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - 1.161 *~ 28/04/2023*
+  - 1.161/1.162 *~ 28/04/2023*
   { Correction de bugs de la "FE" }
     - +Ajouté: Option (activée par défaut) pour envoyer l'info des manches jouées vers le site https://fallalytics.com/ (merci à @Hoier)
     - +Ajouté: Overlay => Affichage du nombre d'haricots qui ont réussi la manche (fini la course/survécu)

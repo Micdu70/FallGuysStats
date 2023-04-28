@@ -500,7 +500,7 @@ namespace FallGuysStats {
                 LogRound.IsShowCompletedOrEnded = true;
                 Stats.InShow = false;
             } else if (line.Line.IndexOf(" == [CompletedEpisodeDto] ==", StringComparison.OrdinalIgnoreCase) > 0) {
-                if (logRound.Info == null && LogRound.IsShowCompletedOrEnded) { return false; }
+                if (logRound.Info == null) { return false; }
 
                 LogRound.SavedRoundCount = logRound.Info.Round;
                 LogRound.IsLastRoundPlaying = true;
