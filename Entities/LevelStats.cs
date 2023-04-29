@@ -16,7 +16,7 @@ namespace FallGuysStats {
         public int? Score { get; set; }
         public int Tier { get; set; }
         public bool Qualified { get; set; }
-        public bool DidNotFinish { get; set; }
+        public bool DidFinish { get; set; }
         public int Kudos { get; set; }
         public int Players { get; set; }
         public int PlayersPs4 { get; set; }

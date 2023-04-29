@@ -47,6 +47,7 @@ namespace FallGuysStats {
             this.picGraph.Size = new System.Drawing.Size(20, 20);
             this.picGraph.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picGraph.TabIndex = 0;
+            this.picGraph.TabStop = false;
             // 
             // tgGraph
             // 
@@ -115,10 +116,10 @@ namespace FallGuysStats {
             this.formsPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.formsPlot.Location = new System.Drawing.Point(0, 58);
+            this.formsPlot.Location = new System.Drawing.Point(2, 58);
             this.formsPlot.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.formsPlot.Name = "formsPlot";
-            this.formsPlot.Size = new System.Drawing.Size(1280, 680);
+            this.formsPlot.Size = new System.Drawing.Size(1278, 680);
             this.formsPlot.TabIndex = 5;
             this.formsPlot.MouseLeave += new System.EventHandler(this.FormsPlot_MouseLeave);
             this.formsPlot.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FormsPlot_MouseMove);

@@ -819,8 +819,9 @@ namespace FallGuysStats {
                         ? $"{Multilingual.GetWord("overlay_duration")} ({TimeSpan.FromSeconds(this.lastRound.GameDuration):m\\:ss}):"
                         : $"{Multilingual.GetWord("overlay_duration")} :";
 
-
-                    if (Stats.InShow && (this.lastRound.Playing || LogRound.IsLastRoundPlaying)) {
+                    if (LogRound.LastPlayedRoundEnd.HasValue) {
+                        this.lblDuration.TextRight = $"{LogRound.LastPlayedRoundEnd - LogRound.LastPlayedRoundStart:m\\:ss\\.ff}";
+                    } else if (Stats.InShow && (this.lastRound.Playing || LogRound.IsRealLastPlayedRound)) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                     } else if (End != DateTime.MinValue) {
                         this.lblDuration.TextRight = $"{End - Start:m\\:ss\\.ff}";
