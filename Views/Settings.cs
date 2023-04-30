@@ -95,6 +95,7 @@ namespace FallGuysStats {
             this.chkFlipped.Checked = this.CurrentSettings.FlippedDisplay;
             this.chkHidePercentages.Checked = this.CurrentSettings.HideOverlayPercentages;
             this.chkChangeHoopsieLegends.Checked = this.CurrentSettings.HoopsieHeros;
+            this.chkStartMinimized.Checked = this.CurrentSettings.StartMinimized;
 
             this.chkFallalyticsReporting.Checked = this.CurrentSettings.EnableFallalyticsReporting;
             this.txtFallalyticsAPIKey.Text = this.CurrentSettings.FallalyticsAPIKey;
@@ -428,6 +429,10 @@ namespace FallGuysStats {
             this.CurrentSettings.FlippedDisplay = this.chkFlipped.Checked;
             this.CurrentSettings.HideOverlayPercentages = this.chkHidePercentages.Checked;
             this.CurrentSettings.HoopsieHeros = this.chkChangeHoopsieLegends.Checked;
+            this.CurrentSettings.StartMinimized = this.chkStartMinimized.Checked;
+
+            this.CurrentSettings.EnableFallalyticsReporting = this.chkFallalyticsReporting.Checked;
+            this.CurrentSettings.FallalyticsAPIKey = this.txtFallalyticsAPIKey.Text;
 
             this.CurrentSettings.OverlayBackgroundResourceName = ((ImageItem)this.cboOverlayBackground.SelectedItem).ResourceName[0];
             this.CurrentSettings.OverlayTabResourceName = ((ImageItem)this.cboOverlayBackground.SelectedItem).ResourceName[1];
@@ -527,9 +532,6 @@ namespace FallGuysStats {
             }
 
             this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
-
-            this.CurrentSettings.EnableFallalyticsReporting = this.chkFallalyticsReporting.Checked;
-            this.CurrentSettings.FallalyticsAPIKey = this.txtFallalyticsAPIKey.Text;
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -740,18 +742,14 @@ namespace FallGuysStats {
             //    this.overlayFontColorSerialized = string.Empty;
             //}
 
-            this.chkChangeHoopsieLegends.Visible = true;
-            this.chkChangeHoopsieLegends.Checked = this.CurrentSettings.HoopsieHeros;
-
             if (this.DisplayLang == 0) {
                 // English
                 this.txtLogPath.Location = new Point(103, 73);
                 this.txtLogPath.Size = new Size(760, 22);
                 this.lblLogPathNote.Location = new Point(103, 98);
 
-                this.txtPreviousWins.Location = new Point(120, 55);
-                this.lblPreviousWinsNote.Location = new Point(170, 55);
-                this.chkChangeHoopsieLegends.Location = new Point(399, 55);
+                this.txtPreviousWins.Location = new Point(120, 72);
+                this.lblPreviousWinsNote.Location = new Point(170, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(225, 55);
@@ -784,9 +782,8 @@ namespace FallGuysStats {
                 this.txtLogPath.Size = new Size(675, 22);
                 this.lblLogPathNote.Location = new Point(188, 98);
 
-                this.txtPreviousWins.Location = new Point(154, 55);
-                this.lblPreviousWinsNote.Location = new Point(200, 55);
-                this.chkChangeHoopsieLegends.Location = new Point(429, 55);
+                this.txtPreviousWins.Location = new Point(154, 72);
+                this.lblPreviousWinsNote.Location = new Point(200, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(290, 55);
@@ -819,9 +816,8 @@ namespace FallGuysStats {
                 this.txtLogPath.Size = new Size(749, 22);
                 this.lblLogPathNote.Location = new Point(114, 98);
 
-                this.txtPreviousWins.Location = new Point(116, 55);
-                this.lblPreviousWinsNote.Location = new Point(166, 55);
-                this.chkChangeHoopsieLegends.Location = new Point(399, 55);
+                this.txtPreviousWins.Location = new Point(116, 72);
+                this.lblPreviousWinsNote.Location = new Point(166, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(225, 55);
@@ -854,9 +850,8 @@ namespace FallGuysStats {
                 this.txtLogPath.Size = new Size(727, 22);
                 this.lblLogPathNote.Location = new Point(67, 98);
 
-                this.txtPreviousWins.Location = new Point(121, 55);
-                this.lblPreviousWinsNote.Location = new Point(166, 55);
-                this.chkChangeHoopsieLegends.Location = new Point(390, 55);
+                this.txtPreviousWins.Location = new Point(127, 72);
+                this.lblPreviousWinsNote.Location = new Point(172, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(225, 55);
@@ -889,9 +884,8 @@ namespace FallGuysStats {
                 this.txtLogPath.Size = new Size(754, 22);
                 this.lblLogPathNote.Location = new Point(109, 98);
 
-                this.txtPreviousWins.Location = new Point(110, 55);
-                this.lblPreviousWinsNote.Location = new Point(155, 55);
-                this.chkChangeHoopsieLegends.Location = new Point(399, 55);
+                this.txtPreviousWins.Location = new Point(110, 72);
+                this.lblPreviousWinsNote.Location = new Point(155, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(225, 55);
@@ -1051,6 +1045,7 @@ namespace FallGuysStats {
             this.grpStats.Text = Multilingual.GetWord("settings_stats");
             this.chkChangeHoopsieLegends.Text = Multilingual.GetWord("settings_rename_hoopsie_legends_to_hoopsie_heroes");
             this.chkAutoUpdate.Text = Multilingual.GetWord("settings_auto_update_program");
+            this.chkStartMinimized.Text = Multilingual.GetWord("settings_start_program_minimized");
             this.lblPreviousWinsNote.Text = Multilingual.GetWord("settings_before_using_tracker");
             this.lblPreviousWins.Text = Multilingual.GetWord("settings_previous_win");
             this.lnkAboutFallalytics.Text = Multilingual.GetWord("settings_fallalytics_about");

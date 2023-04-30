@@ -1028,6 +1028,7 @@ namespace FallGuysStats {
                 AutoUpdate = true,
                 PreventMouseCursorBugs = false,
                 MaximizedWindowState = false,
+                StartMinimized = false,
                 FormLocationX = null,
                 FormLocationY = null,
                 FormWidth = null,
@@ -1196,6 +1197,9 @@ namespace FallGuysStats {
             try {
                 if (this.WindowState != FormWindowState.Minimized) {
                     this.WindowState = this.CurrentSettings.MaximizedWindowState ? FormWindowState.Maximized : FormWindowState.Normal;
+                }
+                if (this.CurrentSettings.StartMinimized) {
+                    this.WindowState = FormWindowState.Minimized;
                 }
                 if (this.CurrentSettings.FormWidth.HasValue) {
                     this.Size = new Size(this.CurrentSettings.FormWidth.Value, this.CurrentSettings.FormHeight.Value);

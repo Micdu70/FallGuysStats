@@ -2,6 +2,7 @@
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
+INFO: Il y a 0 bug génant connu dans la dernière version (1.165) de la "FE" (Frenchy Edition)
 
 
 ## FAQ
@@ -9,7 +10,6 @@ Programme qui permet de récupérer les stats de Fall Guys (via la lecture des l
 Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?
 
 ------> Cela peut signifier deux choses : Soit une manche jouée dans une partie personnalisée ou soit une manche jouée dans une émission qui a été quittée avant la fin de celle-ci.
-
 
 
 ## Raccourcis de l'overlay
@@ -25,7 +25,6 @@ Cliquer une fois sur l'overlay pour le sélectionner puis :
     - Maintenir la touche 'Maj' enfoncée et utiliser la touche directionnelle 'Droite'/'Bas' ou 'Gauche'/'Haut' pour changer de profil.
     - Appuyer sur la touche 'C' pour afficher le nombre de joueurs par support de jeu.
     - Appuyer sur la touche 'R' pour colorer le nom des manches selon leur type.
-
 
 
 ## Créer vos propres arrière-plans
@@ -46,7 +45,6 @@ Cliquer une fois sur l'overlay pour le sélectionner puis :
   - Étape 5 : Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
 
 
-
 ## Lier un profil à une émission spécifique
 
 Permet de changer de profil automatiquement au moment où l'émission spécifiée commence.
@@ -56,7 +54,6 @@ Permet de changer de profil automatiquement au moment où l'émission spécifié
   - Menu "Configuration" -> Option "Passer automatiquement sur le profil lié" pour activer le changement automatique.
 
 
-
 ## Supprimer des émissions ou déplacer des émissions vers un autre profil
 
   - Cliquer sur "Émissions: X" en haut de la fenêtre principale pour voir les stats des émissions.
@@ -64,11 +61,4 @@ Permet de changer de profil automatiquement au moment où l'émission spécifié
   - Sélectionner une ou plusieurs émissions avec la touche 'Ctrl' ou avec la combinaison de touches 'Ctrl + Maj'.
 
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
-
-
-
-## Bug(s) connu(s) dans la dernière version de la "FE" (Frenchy Edition)
-
-  - Tous les bugs connus ont normalement été résolus dans la v1.164 !
-
 

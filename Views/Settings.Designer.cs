@@ -57,6 +57,7 @@
             this.lblPreviousWinsNote = new MetroFramework.Controls.MetroLabel();
             this.chkAutoUpdate = new MetroFramework.Controls.MetroCheckBox();
             this.cboTheme = new MetroFramework.Controls.MetroComboBox();
+            this.chkStartMinimized = new MetroFramework.Controls.MetroCheckBox();
             this.chkChangeHoopsieLegends = new MetroFramework.Controls.MetroCheckBox();
             this.lblTheme = new MetroFramework.Controls.MetroLabel();
             this.grpStats = new System.Windows.Forms.GroupBox();
@@ -180,7 +181,7 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Location = new System.Drawing.Point(702, 954);
+            this.btnSave.Location = new System.Drawing.Point(700, 978);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 25);
             this.btnSave.TabIndex = 101;
@@ -194,7 +195,7 @@
             this.grpFallalytics.Controls.Add(this.txtFallalyticsAPIKey);
             this.grpFallalytics.Controls.Add(this.lblFallalyticsAPIKey);
             this.grpFallalytics.Controls.Add(this.chkFallalyticsReporting);
-            this.grpFallalytics.Location = new System.Drawing.Point(11, 221);
+            this.grpFallalytics.Location = new System.Drawing.Point(12, 243);
             this.grpFallalytics.Name = "grpFallalytics";
             this.grpFallalytics.Size = new System.Drawing.Size(871, 89);
             this.grpFallalytics.TabIndex = 2;
@@ -272,7 +273,7 @@
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(795, 954);
+            this.btnCancel.Location = new System.Drawing.Point(793, 978);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 25);
             this.btnCancel.TabIndex = 102;
@@ -367,9 +368,9 @@
             this.chkLaunchGameOnStart.Location = new System.Drawing.Point(118, 55);
             this.chkLaunchGameOnStart.Margin = new System.Windows.Forms.Padding(2);
             this.chkLaunchGameOnStart.Name = "chkLaunchGameOnStart";
-            this.chkLaunchGameOnStart.Size = new System.Drawing.Size(226, 19);
+            this.chkLaunchGameOnStart.Size = new System.Drawing.Size(238, 19);
             this.chkLaunchGameOnStart.TabIndex = 3;
-            this.chkLaunchGameOnStart.Text = "Auto-launch Fall Guys on tracker";
+            this.chkLaunchGameOnStart.Text = "Launch Fall Guys on tracker launch";
             this.chkLaunchGameOnStart.UseSelectable = true;
             // 
             // btnGameExeLocationBrowse
@@ -468,7 +469,7 @@
             this.grpGameOptions.Controls.Add(this.btnGameExeLocationBrowse);
             this.grpGameOptions.Controls.Add(this.chkLaunchGameOnStart);
             this.grpGameOptions.Controls.Add(this.grpLaunchPlatform);
-            this.grpGameOptions.Location = new System.Drawing.Point(11, 851);
+            this.grpGameOptions.Location = new System.Drawing.Point(12, 875);
             this.grpGameOptions.Margin = new System.Windows.Forms.Padding(2);
             this.grpGameOptions.Name = "grpGameOptions";
             this.grpGameOptions.Padding = new System.Windows.Forms.Padding(2);
@@ -495,7 +496,7 @@
             this.grpSortingOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpSortingOptions.Controls.Add(this.chkIgnoreLevelTypeWhenSorting);
-            this.grpSortingOptions.Location = new System.Drawing.Point(11, 782);
+            this.grpSortingOptions.Location = new System.Drawing.Point(12, 807);
             this.grpSortingOptions.Margin = new System.Windows.Forms.Padding(2);
             this.grpSortingOptions.Name = "grpSortingOptions";
             this.grpSortingOptions.Padding = new System.Windows.Forms.Padding(2);
@@ -530,7 +531,7 @@
             this.txtPreviousWins.CustomButton.Visible = false;
             this.txtPreviousWins.Lines = new string[] {
         "0"};
-            this.txtPreviousWins.Location = new System.Drawing.Point(118, 55);
+            this.txtPreviousWins.Location = new System.Drawing.Point(121, 72);
             this.txtPreviousWins.MaxLength = 5;
             this.txtPreviousWins.Name = "txtPreviousWins";
             this.txtPreviousWins.PasswordChar = '\0';
@@ -540,7 +541,7 @@
             this.txtPreviousWins.SelectionStart = 0;
             this.txtPreviousWins.ShortcutsEnabled = true;
             this.txtPreviousWins.Size = new System.Drawing.Size(40, 21);
-            this.txtPreviousWins.TabIndex = 3;
+            this.txtPreviousWins.TabIndex = 5;
             this.txtPreviousWins.Text = "0";
             this.txtPreviousWins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPreviousWins.UseSelectable = true;
@@ -568,7 +569,7 @@
             // lblPreviousWins
             // 
             this.lblPreviousWins.AutoSize = true;
-            this.lblPreviousWins.Location = new System.Drawing.Point(12, 55);
+            this.lblPreviousWins.Location = new System.Drawing.Point(15, 72);
             this.lblPreviousWins.Name = "lblPreviousWins";
             this.lblPreviousWins.Size = new System.Drawing.Size(101, 19);
             this.lblPreviousWins.TabIndex = 0;
@@ -578,7 +579,7 @@
             // 
             this.lblPreviousWinsNote.AutoSize = true;
             this.lblPreviousWinsNote.ForeColor = System.Drawing.Color.DimGray;
-            this.lblPreviousWinsNote.Location = new System.Drawing.Point(160, 55);
+            this.lblPreviousWinsNote.Location = new System.Drawing.Point(163, 72);
             this.lblPreviousWinsNote.Name = "lblPreviousWinsNote";
             this.lblPreviousWinsNote.Size = new System.Drawing.Size(134, 19);
             this.lblPreviousWinsNote.TabIndex = 0;
@@ -589,10 +590,10 @@
             this.chkAutoUpdate.AutoSize = true;
             this.chkAutoUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkAutoUpdate.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkAutoUpdate.Location = new System.Drawing.Point(400, 22);
+            this.chkAutoUpdate.Location = new System.Drawing.Point(400, 47);
             this.chkAutoUpdate.Name = "chkAutoUpdate";
             this.chkAutoUpdate.Size = new System.Drawing.Size(177, 19);
-            this.chkAutoUpdate.TabIndex = 2;
+            this.chkAutoUpdate.TabIndex = 3;
             this.chkAutoUpdate.Text = "Check update on startup";
             this.chkAutoUpdate.UseSelectable = true;
             // 
@@ -612,12 +613,24 @@
             this.cboTheme.UseSelectable = true;
             this.cboTheme.SelectedIndexChanged += new System.EventHandler(this.CboTheme_SelectedIndexChanged);
             // 
+            // chkStartMinimized
+            // 
+            this.chkStartMinimized.AutoSize = true;
+            this.chkStartMinimized.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkStartMinimized.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.chkStartMinimized.Location = new System.Drawing.Point(400, 22);
+            this.chkStartMinimized.Name = "chkStartMinimized";
+            this.chkStartMinimized.Size = new System.Drawing.Size(121, 19);
+            this.chkStartMinimized.TabIndex = 2;
+            this.chkStartMinimized.Text = "Start Minimized";
+            this.chkStartMinimized.UseSelectable = true;
+            // 
             // chkChangeHoopsieLegends
             // 
             this.chkChangeHoopsieLegends.AutoSize = true;
             this.chkChangeHoopsieLegends.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkChangeHoopsieLegends.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkChangeHoopsieLegends.Location = new System.Drawing.Point(395, 55);
+            this.chkChangeHoopsieLegends.Location = new System.Drawing.Point(400, 72);
             this.chkChangeHoopsieLegends.Name = "chkChangeHoopsieLegends";
             this.chkChangeHoopsieLegends.Size = new System.Drawing.Size(301, 19);
             this.chkChangeHoopsieLegends.TabIndex = 4;
@@ -637,6 +650,7 @@
             // 
             this.grpStats.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpStats.Controls.Add(this.chkStartMinimized);
             this.grpStats.Controls.Add(this.lblTheme);
             this.grpStats.Controls.Add(this.chkChangeHoopsieLegends);
             this.grpStats.Controls.Add(this.cboTheme);
@@ -648,7 +662,7 @@
             this.grpStats.Controls.Add(this.picLanguageSelection);
             this.grpStats.Location = new System.Drawing.Point(11, 123);
             this.grpStats.Name = "grpStats";
-            this.grpStats.Size = new System.Drawing.Size(871, 89);
+            this.grpStats.Size = new System.Drawing.Size(871, 105);
             this.grpStats.TabIndex = 1;
             this.grpStats.TabStop = false;
             this.grpStats.Text = "Stats";
@@ -1263,7 +1277,7 @@
             this.grpOverlay.Controls.Add(this.btnSelectFont);
             this.grpOverlay.Controls.Add(this.btnResetOverlayFont);
             this.grpOverlay.Controls.Add(this.grpOverlayFontExample);
-            this.grpOverlay.Location = new System.Drawing.Point(11, 322);
+            this.grpOverlay.Location = new System.Drawing.Point(12, 347);
             this.grpOverlay.Name = "grpOverlay";
             this.grpOverlay.Size = new System.Drawing.Size(871, 446);
             this.grpOverlay.TabIndex = 3;
@@ -1293,14 +1307,14 @@
             this.AcceptButton = this.btnSave;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(900, 1000);
+            this.ClientSize = new System.Drawing.Size(900, 1024);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grpFallalytics);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpGameOptions);
             this.Controls.Add(this.grpSortingOptions);
             this.Controls.Add(this.grpOverlay);
             this.Controls.Add(this.grpStats);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtLogPath);
             this.Controls.Add(this.lblLogPathNote);
             this.Controls.Add(this.lblLogPath);
@@ -1377,6 +1391,7 @@
         private MetroFramework.Controls.MetroLabel lblPreviousWinsNote;
         private MetroFramework.Controls.MetroCheckBox chkAutoUpdate;
         private MetroFramework.Controls.MetroComboBox cboTheme;
+        private MetroFramework.Controls.MetroCheckBox chkStartMinimized;
         private MetroFramework.Controls.MetroCheckBox chkChangeHoopsieLegends;
         private MetroFramework.Controls.MetroLabel lblTheme;
         private System.Windows.Forms.GroupBox grpStats;
