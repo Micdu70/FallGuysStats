@@ -14,10 +14,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using FallGuysStats.Entities;
 using LiteDB;
-using MetroFramework;
 using Microsoft.Win32;
+using MetroFramework;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -77,7 +76,10 @@ namespace FallGuysStats {
         public static int LastServerPing = 0;
 
         public static int CurrentLanguage = 0;
+
         public static MetroThemeStyle CurrentTheme = MetroThemeStyle.Dark;
+
+        private static FallalyticsReporter FallalyticsReporter = new FallalyticsReporter();
 
         public static Bitmap ImageOpacity(Image sourceImage, float opacity = 1F) {
             Bitmap bmp = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -131,8 +133,6 @@ namespace FallGuysStats {
         private readonly Image numberSeven = ImageOpacity(Properties.Resources.number_7, 0.5F);
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
-
-        private static readonly FallalyticsReporter StatsReporter = new FallalyticsReporter();
 
         private Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -1386,8 +1386,8 @@ namespace FallGuysStats {
                                 //Must have enabled the setting to enable tracking
                                 //Must not be a private lobby
                                 //Must be a game that is played after FallGuysStats started
-                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
-                                    StatsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
+                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > startupTime) {
+                                    FallalyticsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
                                 }
                             } else {
                                 continue;

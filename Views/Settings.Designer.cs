@@ -141,13 +141,12 @@
             this.lblLogPathNote.Name = "lblLogPathNote";
             this.lblLogPathNote.Size = new System.Drawing.Size(572, 19);
             this.lblLogPathNote.TabIndex = 0;
-            this.lblLogPathNote.Text = "* You should not need to set this. Only use when the program is not reading the c" +
-    "orrect location.";
+            this.lblLogPathNote.Text = "* You should not need to set this." +
+                " Only use when the program is not reading the correct location.";
             // 
             // txtLogPath
             // 
-            this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
@@ -217,9 +216,6 @@
             this.lnkAboutFallalytics.Click += new System.EventHandler(this.AboutFallalytics_Click);
             // 
             // txtFallalyticsAPIKey
-            // 
-            // 
-            // 
             // 
             this.txtFallalyticsAPIKey.CustomButton.Image = null;
             this.txtFallalyticsAPIKey.CustomButton.Location = new System.Drawing.Point(281, 1);
@@ -387,9 +383,6 @@
             // 
             // txtGameShortcutLocation
             // 
-            // 
-            // 
-            // 
             this.txtGameShortcutLocation.CustomButton.Image = null;
             this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
             this.txtGameShortcutLocation.CustomButton.Name = "";
@@ -418,9 +411,6 @@
             this.txtGameShortcutLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtGameExeLocation
-            // 
-            // 
-            // 
             // 
             this.txtGameExeLocation.CustomButton.Image = null;
             this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
@@ -516,9 +506,6 @@
             this.picLanguageSelection.TabStop = false;
             // 
             // txtPreviousWins
-            // 
-            // 
-            // 
             // 
             this.txtPreviousWins.CustomButton.Image = null;
             this.txtPreviousWins.CustomButton.Location = new System.Drawing.Point(20, 1);
@@ -832,9 +819,6 @@
             this.chkCycleWinFinalStreak.UseSelectable = true;
             // 
             // txtCycleTimeSeconds
-            // 
-            // 
-            // 
             // 
             this.txtCycleTimeSeconds.CustomButton.Image = null;
             this.txtCycleTimeSeconds.CustomButton.Location = new System.Drawing.Point(4, 1);
@@ -1355,7 +1339,6 @@
             this.grpOverlay.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

@@ -23,6 +23,10 @@ namespace FallGuysStats {
         private int LaunchPlatform;
         private int DisplayLang;
         private bool CboOverlayBackgroundIsFocus;
+
+        private Bitmap ResizeImage(Bitmap source, int scale) {
+            return new Bitmap(source, new Size(source.Width / scale, source.Height / scale));
+        }
         public Settings() {
             this.InitializeComponent();
         }
