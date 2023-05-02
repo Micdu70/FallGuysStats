@@ -535,6 +535,7 @@ namespace FallGuysStats {
                 bool foundRound = false;
                 int maxRound = 0;
                 DateTime showStart = DateTime.MinValue;
+                int questKudos = 0;
                 while ((detail = sr.ReadLine()) != null) {
                     if (detail.IndexOf("[Round ", StringComparison.OrdinalIgnoreCase) == 0) {
                         foundRound = true;
@@ -588,8 +589,14 @@ namespace FallGuysStats {
                         } else if (detail.IndexOf("> Bonus Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             roundInfo.Kudos += int.Parse(detail.Substring(15));
                         }
+                    } else {
+                        if (detail.IndexOf("> Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
+                            questKudos = int.Parse(detail.Substring(9));
+                            //> Fame:, > Crowns:, > CurrentCrownShards:
+                        }
                     }
                 }
+                roundInfo.Kudos += questKudos;
 
                 if (round.Count > maxRound) {
                     return false;
