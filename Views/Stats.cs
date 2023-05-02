@@ -135,6 +135,8 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
+        private bool shiftKeyToggle, ctrlKeyToggle;
+
         private Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
             this.StatsDB.Pragma("UTC_DATE", true);
@@ -2741,6 +2743,28 @@ namespace FallGuysStats {
             this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0
                 ? Properties.Resources.epic_main_icon
                 : Properties.Resources.steam_main_icon;
+        }
+
+        private void Stats_KeyUp(object sender, KeyEventArgs e) {
+            switch (e.KeyCode) {
+                case Keys.ShiftKey:
+                    this.shiftKeyToggle = false;
+                    break;
+                case Keys.ControlKey:
+                    this.ctrlKeyToggle = false;
+                    break;
+            }
+        }
+
+        private void Stats_KeyDown(object sender, KeyEventArgs e) {
+            switch (e.KeyCode) {
+                case Keys.ShiftKey:
+                    this.shiftKeyToggle = true;
+                    break;
+                case Keys.ControlKey:
+                    this.ctrlKeyToggle = true;
+                    break;
+            }
         }
     }
 }
