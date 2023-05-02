@@ -817,7 +817,7 @@ namespace FallGuysStats {
                             {"settings_auto_update_program", "스탯츠 자동 업데이트"},
                             {"settings_rename_hoopsie_legends_to_hoopsie_heroes", "후프의 전설을 후프의 영웅으로 표시하기"},
                             {"settings_fallalytics_about", "Fallalytics 정보"},
-                            {"settings_fallalytics_reporting", "플레이한 라운드에 대한 정보를 Fallalytics 전송"},
+                            {"settings_fallalytics_reporting", "플레이한 라운드 정보를 Fallalytics 전송"},
                             {"settings_fallalytics_api_key", "(선택 사항) Fallalytics API 키 입력"},
                             {"settings_overlay", "통계표시 설정"},
                             {"settings_hide_wins_info", "우승 정보 숨기기"},

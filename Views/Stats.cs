@@ -79,7 +79,7 @@ namespace FallGuysStats {
 
         public static MetroThemeStyle CurrentTheme = MetroThemeStyle.Dark;
 
-        private static FallalyticsReporter FallalyticsReporter = new FallalyticsReporter();
+        private static readonly FallalyticsReporter FallalyticsReporter = new FallalyticsReporter();
 
         public static Bitmap ImageOpacity(Image sourceImage, float opacity = 1F) {
             Bitmap bmp = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -370,7 +370,7 @@ namespace FallGuysStats {
                             case "menuUpdate":
                             case "menuHelp":
                                 tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon; break;
-                            //case "menuLaunchFallGuys": break;
+                                //case "menuLaunchFallGuys": break;
                         }
                         tsmi1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
@@ -1791,24 +1791,56 @@ namespace FallGuysStats {
                 switch (this.gridDetails.Columns[e.ColumnIndex].Name) {
                     case "RoundIcon":
                         if (levelStats.IsFinal) {
-                            e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(255, 240, 200) : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
+                            e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                ? Color.FromArgb(255, 240, 200)
+                                : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
                             break;
                         }
                         switch (levelStats.Type) {
-                            case LevelType.Race: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(210, 255, 220) : Color.FromArgb((int)(210 * fBrightness), (int)(255 * fBrightness), (int)(220 * fBrightness)); break;
-                            case LevelType.Survival: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(250, 205, 255) : Color.FromArgb((int)(250 * fBrightness), (int)(205 * fBrightness), (int)(255 * fBrightness)); break;
-                            case LevelType.Hunt: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(200, 220, 255) : Color.FromArgb((int)(220 * fBrightness), (int)(220 * fBrightness), (int)(255 * fBrightness)); break;
-                            case LevelType.Logic: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(230, 250, 255) : Color.FromArgb((int)(230 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness)); break;
-                            case LevelType.Team: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(255, 220, 205) : Color.FromArgb((int)(255 * fBrightness), (int)(220 * fBrightness), (int)(205 * fBrightness)); break;
-                            case LevelType.Invisibeans: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(255, 255, 255) : Color.FromArgb((int)(255 * fBrightness), (int)(255 * fBrightness), (int)(255 * fBrightness)); break;
-                            case LevelType.Unknown: e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.DarkGray; break;
+                            case LevelType.Race:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(210, 255, 220)
+                                    : Color.FromArgb((int)(210 * fBrightness), (int)(255 * fBrightness), (int)(220 * fBrightness));
+                                break;
+                            case LevelType.Survival:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(250, 205, 255)
+                                    : Color.FromArgb((int)(250 * fBrightness), (int)(205 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Hunt:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(200, 220, 255)
+                                    : Color.FromArgb((int)(220 * fBrightness), (int)(220 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Logic:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(230, 250, 255)
+                                    : Color.FromArgb((int)(230 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Team:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(255, 220, 205)
+                                    : Color.FromArgb((int)(255 * fBrightness), (int)(220 * fBrightness), (int)(205 * fBrightness));
+                                break;
+                            case LevelType.Invisibeans:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(255, 255, 255)
+                                    : Color.FromArgb((int)(255 * fBrightness), (int)(255 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Unknown:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.LightGray
+                                    : Color.DarkGray;
+                                break;
                         }
                         break;
                     case "Name":
                         e.CellStyle.ForeColor = Color.Black;
                         this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_tooltiptext");
                         if (levelStats.IsFinal) {
-                            e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(255, 240, 200) : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
+                            e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                ? Color.FromArgb(255, 240, 200)
+                                : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
                             break;
                         }
                         switch (levelStats.Type) {
@@ -2416,7 +2448,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                 this.CheckForUpdate(false);
 #else
-				Process.Start(@"https://github.com/Micdu70/FallGuysStats#t%C3%A9l%C3%A9chargement");
+                Process.Start(@"https://github.com/Micdu70/FallGuysStats#t%C3%A9l%C3%A9chargement");
 #endif
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}",
@@ -2437,8 +2469,7 @@ namespace FallGuysStats {
                         if (MessageBox.Show(this,
                                 $"{Multilingual.GetWord("message_update_question_prefix")} [ v{newVersion.ToString(2)} ] {Multilingual.GetWord("message_update_question_suffix")}",
                                 $"{Multilingual.GetWord("message_update_question_caption")}",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                        {
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
                             string exeName = null;
                             using (MemoryStream ms = new MemoryStream(data)) {
@@ -2501,8 +2532,7 @@ namespace FallGuysStats {
                         this.Refresh();
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
-                            (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase)))
-                        {
+                            (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {
                             await this.logFile.Stop();
 
                             string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low", "Mediatonic", "FallGuys_client");
@@ -2551,8 +2581,7 @@ namespace FallGuysStats {
 
                 if (overlay.IsFixed()) {
                     if (this.CurrentSettings.OverlayFixedPositionX.HasValue &&
-                        this.IsOnScreen(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value, overlay.Width))
-                    {
+                        this.IsOnScreen(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value, overlay.Width)) {
                         overlay.FlipDisplay(this.CurrentSettings.FixedFlippedDisplay);
                         overlay.Location = new Point(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value);
                     } else {
@@ -2639,8 +2668,11 @@ namespace FallGuysStats {
             this.BackImage = this.Icon.ToBitmap();
             this.BackMaxSize = 56;
             int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 20)).Width;
+#if AllowUpdate
+            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 40 : CurrentLanguage == 4 ? 14 : 8), 8, 0, 0);
+#else
             this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 185 : CurrentLanguage == 3 ? 130 : CurrentLanguage == 4 ? 50 : 0), 8, 0, 0);
-
+#endif
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);

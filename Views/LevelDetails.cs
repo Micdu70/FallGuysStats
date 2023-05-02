@@ -44,7 +44,7 @@ namespace FallGuysStats {
             int lang = Stats.CurrentLanguage;
             switch (level) {
                 case "Shows":
-                    return this.Width + (lang == 0 ? 99 : lang == 1 ? 130 : lang == 2 ? 73 : lang == 3 ? 80 : 50);
+                    return this.Width + (lang == 0 ? 109 : lang == 1 ? 140 : lang == 2 ? 86 : lang == 3 ? 90 : 50);
                 case "Rounds":
                     return this.Width + (lang == 0 ? 909 : lang == 1 ? 948 : lang == 2 ? 848 : lang == 3 ? 858 : 836);
                 case "Finals":

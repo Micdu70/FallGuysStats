@@ -34,9 +34,9 @@ namespace FallGuysStats {
 #endif
             }
 
-            if(stat.Round == 1) {
+            if (stat.Round == 1) {
                 foreach (RoundInfo roundInfo in this.roundList.ToList()) {
-                    if(roundInfo.ShowID != stat.ShowID) {
+                    if (roundInfo.ShowID != stat.ShowID) {
                         this.roundList.Remove(roundInfo);
                     }
                 }
@@ -47,7 +47,7 @@ namespace FallGuysStats {
             bool foundMissMatch = false;
             int finalRound = -1;
             foreach (RoundInfo roundInfo in this.roundList.ToList()) {
-                if(roundInfo.SessionId != stat.SessionId) {
+                if (roundInfo.SessionId != stat.SessionId) {
                     foundMissMatch = true;
                 }
                 if (roundInfo.IsFinal) {
@@ -55,12 +55,14 @@ namespace FallGuysStats {
                 }
             }
             if (this.roundList.Count == finalRound && !foundMissMatch) {
-                this.showComplete(APIKey);
+                this.ShowComplete(APIKey);
             }
         }
-        public async void showComplete(string APIKey) {
+        public async void ShowComplete(string APIKey) {
             HttpRequestMessage requestArray = new HttpRequestMessage(HttpMethod.Post, APIEndpoint);
+
             requestArray.Headers.Authorization = new AuthenticationHeaderValue("Bearer", APIKey);
+
             string jsonArraystring = "[";
             foreach (RoundInfo game in this.roundList) {
                 jsonArraystring += this.RoundInfoToJSONString(game);
