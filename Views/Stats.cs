@@ -36,7 +36,7 @@ namespace FallGuysStats {
                     Application.Run(new Stats());
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString(), @"Run Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, @"Run Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private static bool IsAlreadyRunning(string sysLang) {
@@ -53,7 +53,7 @@ namespace FallGuysStats {
                 }
                 return false;
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message, @"Process Exception");
+                MessageBox.Show(ex.Message, @"Process Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
         }
@@ -77,6 +77,7 @@ namespace FallGuysStats {
         public static int LastServerPing = 0;
 
         public static int CurrentLanguage = 0;
+        public static MetroThemeStyle CurrentTheme = MetroThemeStyle.Dark;
 
         public static Bitmap ImageOpacity(Image sourceImage, float opacity = 1F) {
             Bitmap bmp = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -133,7 +134,7 @@ namespace FallGuysStats {
 
         private static readonly FallalyticsReporter StatsReporter = new FallalyticsReporter();
 
-        public Stats() {
+        private Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
             this.StatsDB.Pragma("UTC_DATE", true);
             this.UserSettings = this.StatsDB.GetCollection<UserSettings>("UserSettings");
@@ -174,6 +175,8 @@ namespace FallGuysStats {
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
+                    CurrentTheme = this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
+                        this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
                 } catch {
                     this.UserSettings.DeleteAll();
                     this.CurrentSettings = GetDefaultSettings();
@@ -212,17 +215,6 @@ namespace FallGuysStats {
                 }
             }
 
-            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
-                this.StatDetails.Add(entry.Value);
-                this.StatLookup.Add(entry.Key, entry.Value);
-            }
-            this.InitMainDataGridView();
-
-            this.ChangeMainLanguage();
-
-            this.UpdateGridRoundName();
-            this.UpdateHoopsieLegends();
-
             this.RoundDetails.EnsureIndex(x => x.Name);
             this.RoundDetails.EnsureIndex(x => x.ShowID);
             this.RoundDetails.EnsureIndex(x => x.Round);
@@ -231,6 +223,18 @@ namespace FallGuysStats {
             this.StatsDB.Commit();
 
             this.UpdateDatabaseVersion();
+
+            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
+                this.StatDetails.Add(entry.Value);
+                this.StatLookup.Add(entry.Key, entry.Value);
+            }
+
+            this.InitMainDataGridView();
+
+            this.ChangeMainLanguage();
+
+            this.UpdateGridRoundName();
+            this.UpdateHoopsieLegends();
 
             this.CurrentRound = new List<RoundInfo>();
 
@@ -260,7 +264,63 @@ namespace FallGuysStats {
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
 
-            this.infoStrip.Renderer = new MyToolStripSystemRenderer();
+            this.menu.Renderer = new CustomArrowRenderer();
+            this.infoStrip.Renderer = new CustomToolStripSystemRenderer();
+        }
+
+        public class CustomArrowRenderer : ToolStripProfessionalRenderer {
+            public CustomArrowRenderer() : base(new CustomColorTable()) { }
+            protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e) {
+                //var tsMenuItem = e.Item as ToolStripMenuItem;
+                //if (tsMenuItem != null) e.ArrowColor = CurrentTheme == MetroThemeStyle.Dark ? Color.DarkGray : Color.FromArgb(17, 17, 17);
+                //Point point = new Point(e.ArrowRectangle.Left + e.ArrowRectangle.Width / 2, e.ArrowRectangle.Top + e.ArrowRectangle.Height / 2);
+                //Point[] points = new Point[3]
+                //{
+                //    new Point(point.X - 2, point.Y - 4),
+                //    new Point(point.X - 2, point.Y + 4),
+                //    new Point(point.X + 2, point.Y)
+                //};
+                //e.Graphics.FillPolygon(Brushes.DarkGray, points);
+                e.ArrowColor = CurrentTheme == MetroThemeStyle.Dark ? Color.DarkGray : Color.FromArgb(17, 17, 17);
+                base.OnRenderArrow(e);
+            }
+        }
+
+        private class CustomColorTable : ProfessionalColorTable {
+            public CustomColorTable() { UseSystemColors = false; }
+            //public override Color ToolStripBorder {
+            //    get { return Color.Red; }
+            //}
+            public override Color MenuBorder {
+                get { return CurrentTheme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17); }
+            }
+            public override Color ToolStripDropDownBackground {
+                get { return CurrentTheme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17); }
+            }
+            public override Color MenuItemBorder {
+                get { return Color.DarkSeaGreen; }
+            }
+            public override Color MenuItemSelected {
+                get { return Color.LightGreen; }
+            }
+            //public override Color MenuItemSelectedGradientBegin {
+            //    get { return Color.LawnGreen; }
+            //}
+            //public override Color MenuItemSelectedGradientEnd {
+            //    get { return Color.MediumSeaGreen; }
+            //}
+            //public override Color MenuStripGradientBegin {
+            //    get { return Color.AliceBlue; }
+            //}
+            //public override Color MenuStripGradientEnd {
+            //    get { return Color.DodgerBlue; }
+            //}
+        }
+
+        public class CustomToolStripSystemRenderer : ToolStripSystemRenderer {
+            protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
+                //base.OnRenderToolStripBorder(e);
+            }
         }
 
         public sealed override string Text {
@@ -277,14 +337,12 @@ namespace FallGuysStats {
                     tsi.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                     tsi.MouseEnter += CMenu_MouseEnter;
                     tsi.MouseLeave += CMenu_MouseLeave;
-                    if (tsi.Name.Equals("exportItemCSV")) {
-                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                    } else if (tsi.Name.Equals("exportItemHTML")) {
-                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                    } else if (tsi.Name.Equals("exportItemBBCODE")) {
-                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                    } else if (tsi.Name.Equals("exportItemMD")) {
-                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
+                    switch (tsi.Name) {
+                        case "exportItemCSV":
+                        case "exportItemHTML":
+                        case "exportItemBBCODE":
+                        case "exportItemMD":
+                            tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray; break;
                     }
                 }
             }
@@ -301,19 +359,19 @@ namespace FallGuysStats {
             foreach (Control c1 in Controls) {
                 if (c1 is MenuStrip ms1) {
                     foreach (ToolStripMenuItem tsmi1 in ms1.Items) {
-                        if (tsmi1.Name.Equals("menuSettings")) {
-                            tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
-                        } else if (tsmi1.Name.Equals("menuFilters")) {
-                            tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon;
-                        } else if (tsmi1.Name.Equals("menuProfile")) {
-                            tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon;
-                            //} else if (tsmi1.Name.Equals("menuOverlay")) {
-                        } else if (tsmi1.Name.Equals("menuUpdate")) {
-                            tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
-                        } else if (tsmi1.Name.Equals("menuHelp")) {
-                            tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
+                        switch (tsmi1.Name) {
+                            case "menuSettings":
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
+                            case "menuFilters":
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon; break;
+                            case "menuProfile":
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon; break;
+                            //case "menuOverlay": break;
+                            case "menuUpdate":
+                            case "menuHelp":
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon; break;
+                            //case "menuLaunchFallGuys": break;
                         }
-                        //else if (tsmi1.Name.Equals("menuLaunchFallGuys")) { }
                         tsmi1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
                         tsmi1.MouseLeave += this.Menu_MouseLeave;
@@ -334,22 +392,22 @@ namespace FallGuysStats {
                 } else if (c1 is ToolStrip ts1) {
                     ts1.BackColor = Color.Transparent;
                     foreach (ToolStripLabel tsl1 in ts1.Items) {
-                        if (tsl1.Name.Equals("lblCurrentProfile")) {
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192);
-                        } else if (tsl1.Name.Equals("lblTotalTime")) {
-                            tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.clock_icon : Properties.Resources.clock_gray_icon;
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                        } else if (tsl1.Name.Equals("lblTotalShows")) {
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
-                        } else if (tsl1.Name.Equals("lblTotalRounds")) {
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
-                        } else if (tsl1.Name.Equals("lblTotalWins")) {
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
-                        } else if (tsl1.Name.Equals("lblTotalFinals")) {
-                            tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.final_icon : Properties.Resources.final_gray_icon;
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
-                        } else if (tsl1.Name.Equals("lblKudos")) {
-                            tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                        switch (tsl1.Name) {
+                            case "lblCurrentProfile": tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192); break;
+                            case "lblTotalTime":
+                                tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.clock_icon : Properties.Resources.clock_gray_icon;
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                break;
+                            case "lblTotalShows":
+                            case "lblTotalRounds":
+                            case "lblTotalWins":
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
+                                break;
+                            case "lblTotalFinals":
+                                tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.final_icon : Properties.Resources.final_gray_icon;
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
+                                break;
+                            case "lblKudos": tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray; break;
                         }
                     }
                 }
@@ -359,86 +417,70 @@ namespace FallGuysStats {
         private void CMenu_MouseEnter(object sender, EventArgs e) {
             if (sender is ToolStripMenuItem tsi) {
                 tsi.ForeColor = Color.Black;
-                if (tsi.Name.Equals("exportItemCSV")) {
-                    tsi.Image = Properties.Resources.export;
-                } else if (tsi.Name.Equals("exportItemHTML")) {
-                    tsi.Image = Properties.Resources.export;
-                } else if (tsi.Name.Equals("exportItemBBCODE")) {
-                    tsi.Image = Properties.Resources.export;
-                } else if (tsi.Name.Equals("exportItemMD")) {
-                    tsi.Image = Properties.Resources.export;
+                switch (tsi.Name) {
+                    case "exportItemCSV":
+                    case "exportItemHTML":
+                    case "exportItemBBCODE":
+                    case "exportItemMD":
+                        tsi.Image = Properties.Resources.export; break;
                 }
             }
         }
         private void CMenu_MouseLeave(object sender, EventArgs e) {
             if (sender is ToolStripMenuItem tsi) {
                 tsi.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                if (tsi.Name.Equals("exportItemCSV")) {
-                    tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                } else if (tsi.Name.Equals("exportItemHTML")) {
-                    tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                } else if (tsi.Name.Equals("exportItemBBCODE")) {
-                    tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
-                } else if (tsi.Name.Equals("exportItemMD")) {
-                    tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
+                switch (tsi.Name) {
+                    case "exportItemCSV":
+                    case "exportItemHTML":
+                    case "exportItemBBCODE":
+                    case "exportItemMD":
+                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray; break;
                 }
             }
         }
         private void Menu_MouseEnter(object sender, EventArgs e) {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            if (tsmi.Name.Equals("menuSettings")) {
-                tsmi.Image = Properties.Resources.setting_icon;
-            } else if (tsmi.Name.Equals("menuFilters")) {
-                tsmi.Image = Properties.Resources.filter_icon;
-            } else if (tsmi.Name.Equals("menuProfile")) {
-                tsmi.Image = Properties.Resources.profile_icon;
-            } else if (tsmi.Name.Equals("menuOverlay")) {
-            } else if (tsmi.Name.Equals("menuUpdate")) {
-                tsmi.Image = Properties.Resources.github_icon;
-            } else if (tsmi.Name.Equals("menuHelp")) {
-                tsmi.Image = Properties.Resources.github_icon;
-            } else if (tsmi.Name.Equals("menuLaunchFallGuys")) {
-            } else if (tsmi.Name.Equals("menuEditProfiles")) {
-                tsmi.Image = Properties.Resources.setting_icon;
+            switch (tsmi.Name) {
+                case "menuSettings": tsmi.Image = Properties.Resources.setting_icon; break;
+                case "menuFilters": tsmi.Image = Properties.Resources.filter_icon; break;
+                case "menuProfile": tsmi.Image = Properties.Resources.profile_icon; break;
+                //case "menuOverlay": break;
+                case "menuUpdate":
+                case "menuHelp":
+                    tsmi.Image = Properties.Resources.github_icon; break;
+                //case "menuLaunchFallGuys": break;
+                case "menuEditProfiles": tsmi.Image = Properties.Resources.setting_icon; break;
             }
             tsmi.ForeColor = Color.Black;
         }
         private void Menu_MouseLeave(object sender, EventArgs e) {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            if (tsmi.Name.Equals("menuSettings")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.setting_gray_icon : Properties.Resources.setting_icon;
-            } else if (tsmi.Name.Equals("menuFilters")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.filter_gray_icon : Properties.Resources.filter_icon;
-            } else if (tsmi.Name.Equals("menuProfile")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.profile_gray_icon : Properties.Resources.profile_icon;
-            } else if (tsmi.Name.Equals("menuOverlay")) {
-            } else if (tsmi.Name.Equals("menuUpdate")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.github_gray_icon : Properties.Resources.github_icon;
-            } else if (tsmi.Name.Equals("menuHelp")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.github_gray_icon : Properties.Resources.github_icon;
-            } else if (tsmi.Name.Equals("menuLaunchFallGuys")) {
-            } else if (tsmi.Name.Equals("menuEditProfiles")) {
-                tsmi.Image = this.Theme == MetroThemeStyle.Dark ? Properties.Resources.setting_gray_icon : Properties.Resources.setting_icon;
+            switch (tsmi.Name) {
+                case "menuSettings": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
+                case "menuFilters": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon; break;
+                case "menuProfile": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon; break;
+                //case "menuOverlay": break;
+                case "menuUpdate":
+                case "menuHelp":
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon; break;
+                //case "menuLaunchFallGuys": break;
+                case "menuEditProfiles": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
             }
             tsmi.ForeColor = this.Theme == MetroThemeStyle.Dark ? Color.DarkGray : Color.Black;
         }
         private void InfoStrip_MouseEnter(object sender, EventArgs e) {
             this.Cursor = Cursors.Hand;
-            if (sender.GetType().ToString() == "System.Windows.Forms.ToolStripLabel") {
-                if (sender is ToolStripLabel lblInfo) {
-                    this.infoStripForeColor = lblInfo.ForeColor;
-                    lblInfo.ForeColor = lblInfo.Name == "lblCurrentProfile"
-                        ? this.Theme == MetroThemeStyle.Light ? Color.FromArgb(245, 154, 168) : Color.FromArgb(231, 251, 255)
-                        : this.Theme == MetroThemeStyle.Light ? Color.FromArgb(147, 174, 248) : Color.FromArgb(255, 250, 244);
-                }
+            if (sender is ToolStripLabel lblInfo) {
+                this.infoStripForeColor = lblInfo.ForeColor;
+                lblInfo.ForeColor = lblInfo.Name == "lblCurrentProfile"
+                    ? this.Theme == MetroThemeStyle.Light ? Color.FromArgb(245, 154, 168) : Color.FromArgb(231, 251, 255)
+                    : this.Theme == MetroThemeStyle.Light ? Color.FromArgb(147, 174, 248) : Color.FromArgb(255, 250, 244);
             }
         }
         private void InfoStrip_MouseLeave(object sender, EventArgs e) {
             this.Cursor = Cursors.Default;
-            if (sender.GetType().ToString() == "System.Windows.Forms.ToolStripLabel") {
-                if (sender is ToolStripLabel lblInfo) {
-                    lblInfo.ForeColor = this.infoStripForeColor;
-                }
+            if (sender is ToolStripLabel lblInfo) {
+                lblInfo.ForeColor = this.infoStripForeColor;
             }
         }
 
@@ -487,7 +529,10 @@ namespace FallGuysStats {
 
         private void MenuProfile_Paint(object sender, PaintEventArgs e) {
             if (this.AllProfiles.FindIndex(profile => profile.ProfileId.ToString().Equals(((ToolStripMenuItem)sender).Name.Substring(11)) && !string.IsNullOrEmpty(profile.LinkedShowId)) != -1) {
-                e.Graphics.DrawImage(this.CurrentSettings.AutoChangeProfile ? Properties.Resources.link_on_icon : this.Theme == MetroThemeStyle.Light ? Properties.Resources.link_icon : Properties.Resources.link_gray_icon, 20, 4, 13, 13);
+                e.Graphics.DrawImage(
+                    this.CurrentSettings.AutoChangeProfile ? Properties.Resources.link_on_icon :
+                    this.Theme == MetroThemeStyle.Light ? Properties.Resources.link_icon :
+                    Properties.Resources.link_gray_icon, 20, 4, 13, 13);
             }
         }
 
@@ -1188,7 +1233,7 @@ namespace FallGuysStats {
                     this.LaunchGame(true);
                 }
 
-                this.menuProfile.DropDownItems["menuProfile" + this.CurrentSettings.SelectedProfile].PerformClick();
+                this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"].PerformClick();
 
                 this.UpdateDates();
             } catch { }
@@ -1214,10 +1259,11 @@ namespace FallGuysStats {
                 }
                 this.logFile.Start(logPath, LOGNAME);
 
-                this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs, this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo, this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight, this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
-                if (this.CurrentSettings.OverlayVisible) {
-                    this.ToggleOverlay(this.overlay);
-                }
+                this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
+                    this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo,
+                    this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight,
+                    this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
+                if (this.CurrentSettings.OverlayVisible) { this.ToggleOverlay(this.overlay); }
 
                 switch (this.CurrentSettings.FilterType) {
                     case 0:
@@ -1242,7 +1288,8 @@ namespace FallGuysStats {
                         break;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void LogFile_OnError(string error) {
@@ -1251,7 +1298,8 @@ namespace FallGuysStats {
                     if (this.InvokeRequired) {
                         Invoke((Action<string>)LogFile_OnError, error);
                     } else {
-                        MessageBox.Show(this, error, $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, error, $"{Multilingual.GetWord("message_program_error_caption")}",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } catch { }
             }
@@ -1281,7 +1329,7 @@ namespace FallGuysStats {
         }
         private void LogFile_OnParsedLogLines(List<RoundInfo> round) {
             try {
-                if (InvokeRequired) {
+                if (this.InvokeRequired) {
                     this.Invoke((Action<List<RoundInfo>>)this.LogFile_OnParsedLogLines, round);
                     return;
                 }
@@ -1411,7 +1459,8 @@ namespace FallGuysStats {
                     } catch { }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private bool IsInStatsFilter(DateTime showEnd) {
@@ -1427,10 +1476,13 @@ namespace FallGuysStats {
                    (this.menuPartyStats.Checked && info.InParty);
         }
         public string GetCurrentFilter() {
-            return this.menuAllStats.Checked ? Multilingual.GetWord("main_all") : this.menuSeasonStats.Checked ? Multilingual.GetWord("main_season") : this.menuWeekStats.Checked ? Multilingual.GetWord("main_week") : this.menuDayStats.Checked ? Multilingual.GetWord("main_day") : Multilingual.GetWord("main_session");
+            return this.menuAllStats.Checked ? Multilingual.GetWord("main_all") :
+                this.menuSeasonStats.Checked ? Multilingual.GetWord("main_season") :
+                this.menuWeekStats.Checked ? Multilingual.GetWord("main_week") :
+                this.menuDayStats.Checked ? Multilingual.GetWord("main_day") : Multilingual.GetWord("main_session");
         }
         public string GetCurrentProfile() {
-            return this.menuProfile.DropDownItems["menuProfile" + this.CurrentSettings.SelectedProfile].Text;
+            return this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"].Text;
         }
         public int GetCurrentProfileId() {
             return this.currentProfile;
@@ -1444,14 +1496,12 @@ namespace FallGuysStats {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) item.PerformClick();
-                        break;
+                        if (!item.Checked) { item.PerformClick(); break; }
                     }
                 } else {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) item.PerformClick();
-                        break;
+                        if (!item.Checked) { item.PerformClick(); break; }
                     }
                 }
             }
@@ -1459,10 +1509,13 @@ namespace FallGuysStats {
         public void SetCurrentProfileIcon(bool linked) {
             if (this.CurrentSettings.AutoChangeProfile) {
                 this.lblCurrentProfile.Image = linked ? Properties.Resources.profile2_linked_icon : Properties.Resources.profile2_unlinked_icon;
-                this.overlay.SetCurrentProfileForeColor(linked ? Color.GreenYellow : string.IsNullOrEmpty(this.CurrentSettings.OverlayFontColorSerialized) ? Color.White : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
+                this.overlay.SetCurrentProfileForeColor(linked ? Color.GreenYellow
+                    : string.IsNullOrEmpty(this.CurrentSettings.OverlayFontColorSerialized) ? Color.White
+                    : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
             } else {
                 this.lblCurrentProfile.Image = Properties.Resources.profile2_icon;
-                this.overlay.SetCurrentProfileForeColor(string.IsNullOrEmpty(this.CurrentSettings.OverlayFontColorSerialized) ? Color.White : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
+                this.overlay.SetCurrentProfileForeColor(string.IsNullOrEmpty(this.CurrentSettings.OverlayFontColorSerialized) ? Color.White
+                    : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
             }
         }
         public StatSummary GetLevelInfo(string name, int levelException) {
@@ -1626,7 +1679,8 @@ namespace FallGuysStats {
                 this.lblKudos.Text = $"{this.Kudos}";
                 this.gridDetails.Refresh();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void GridDetails_DataSourceChanged(object sender, EventArgs e) {
@@ -1724,7 +1778,8 @@ namespace FallGuysStats {
                 this.gridDetails.Setup("Longest", pos++, this.GetDataGridViewColumnWidth("Longest", Multilingual.GetWord("main_longest")), Multilingual.GetWord("main_longest"), DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("AveFinish", pos, this.GetDataGridViewColumnWidth("AveFinish", Multilingual.GetWord("main_ave_finish")), Multilingual.GetWord("main_ave_finish"), DataGridViewContentAlignment.MiddleRight);
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void GridDetails_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
@@ -1821,7 +1876,8 @@ namespace FallGuysStats {
                         break;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void GridDetails_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
@@ -1837,7 +1893,8 @@ namespace FallGuysStats {
                         : Cursors.Default;
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void GridDetails_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -1857,7 +1914,8 @@ namespace FallGuysStats {
                     this.ToggleWinPercentageDisplay();
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void SortGridDetails(int columnIndex, bool isInitialize) {
@@ -2093,7 +2151,8 @@ namespace FallGuysStats {
             try {
                 Process.Start(@"https://github.com/Micdu70/FallGuysStats#sommaire");
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void LaunchGame(bool ignoreExisting) {
@@ -2145,18 +2204,19 @@ namespace FallGuysStats {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void UpdateGameExeLocation() {
-            if (string.IsNullOrEmpty(this.CurrentSettings.GameExeLocation)) {
-                string fallGuysExeLocation = this.FindGameExeLocation();
-                if (!string.IsNullOrEmpty(fallGuysExeLocation)) {
-                    this.menuLaunchFallGuys.Image = Properties.Resources.steam_main_icon;
-                    this.CurrentSettings.LaunchPlatform = 1;
-                    this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
-                    this.SaveUserSettings();
-                }
+            if (!string.IsNullOrEmpty(this.CurrentSettings.GameExeLocation)) { return; }
+
+            string fallGuysExeLocation = this.FindGameExeLocation();
+            if (!string.IsNullOrEmpty(fallGuysExeLocation)) {
+                this.menuLaunchFallGuys.Image = Properties.Resources.steam_main_icon;
+                this.CurrentSettings.LaunchPlatform = 1;
+                this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
+                this.SaveUserSettings();
             }
         }
         private string FindGameExeLocation() {
@@ -2171,9 +2231,8 @@ namespace FallGuysStats {
                 }
 
                 string fallGuys = Path.Combine(steamPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
-                if (File.Exists(fallGuys)) {
-                    return fallGuys;
-                }
+
+                if (File.Exists(fallGuys)) { return fallGuys; }
                 // read libraryfolders.vdf from install folder to get games installation folder
                 // note: this parsing is terrible, but does technically work fine. There's a better way by specifying a schema and
                 // fully parsing the file or something like that. This is quick and dirty, for sure.
@@ -2186,15 +2245,15 @@ namespace FallGuysStats {
                             if (!string.IsNullOrEmpty(libraryPath)) {
                                 // look for exe in standard location under library
                                 fallGuys = Path.Combine(libraryPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
-                                if (File.Exists(fallGuys)) {
-                                    return fallGuys;
-                                }
+
+                                if (File.Exists(fallGuys)) { return fallGuys; }
                             }
                         }
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return string.Empty;
@@ -2217,28 +2276,32 @@ namespace FallGuysStats {
             try {
                 this.ShowFinals();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void LblTotalShows_Click(object sender, EventArgs e) {
             try {
                 this.ShowShows();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void LblTotalRounds_Click(object sender, EventArgs e) {
             try {
                 this.ShowRounds();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void LblTotalWins_Click(object sender, EventArgs e) {
             try {
                 this.ShowWinGraph();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void MenuStats_Click(object sender, EventArgs e) {
@@ -2283,22 +2346,24 @@ namespace FallGuysStats {
 
                 this.ClearTotals();
 
-                List<RoundInfo> rounds = new List<RoundInfo>();
                 int profile = this.currentProfile;
 
-                DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue : this.menuSeasonStats.Checked ? SeasonStart : this.menuWeekStats.Checked ? WeekStart : this.menuDayStats.Checked ? DayStart : SessionStart;
-                for (int i = 0; i < this.AllStats.Count; i++) {
-                    RoundInfo round = this.AllStats[i];
-                    if (round.Start > compareDate && round.Profile == profile && IsInPartyFilter(round)) {
-                        rounds.Add(round);
-                    }
-                }
+                DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
+                    this.menuSeasonStats.Checked ? SeasonStart :
+                    this.menuWeekStats.Checked ? WeekStart :
+                    this.menuDayStats.Checked ? DayStart : SessionStart;
+                List<RoundInfo> rounds = this.AllStats.Where(roundInfo => {
+                    return roundInfo.Start > compareDate && roundInfo.Profile == profile && IsInPartyFilter(roundInfo);
+                }).ToList();
 
                 rounds.Sort();
 
                 if (this.updateFilterType) {
                     this.updateFilterType = false;
-                    this.CurrentSettings.FilterType = this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : this.menuSessionStats.Checked ? 4 : 0;
+                    this.CurrentSettings.FilterType = this.menuSeasonStats.Checked ? 1 :
+                        this.menuWeekStats.Checked ? 2 :
+                        this.menuDayStats.Checked ? 3 :
+                        this.menuSessionStats.Checked ? 4 : 0;
                     this.SaveUserSettings();
                 } else if (this.updateSelectedProfile) {
                     this.updateSelectedProfile = false;
@@ -2310,14 +2375,16 @@ namespace FallGuysStats {
                 this.LogFile_OnParsedLogLines(rounds);
                 this.loadingExisting = false;
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void MenuUpdate_Click(object sender, EventArgs e) {
             try {
                 this.CheckForUpdate(false);
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public bool CheckForUpdate(bool silent) {
@@ -2331,7 +2398,11 @@ namespace FallGuysStats {
                     Version currentVersion = Assembly.GetEntryAssembly().GetName().Version;
                     Version newVersion = new Version(assemblyInfo.Substring(index + 17, indexEnd - index - 17));
                     if (newVersion > currentVersion) {
-                        if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_question_prefix")} [ v{newVersion.ToString(2)} ] {Multilingual.GetWord("message_update_question_suffix")}", $"{Multilingual.GetWord("message_update_question_caption")}", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
+                        if (MessageBox.Show(this,
+                                $"{Multilingual.GetWord("message_update_question_prefix")} [ v{newVersion.ToString(2)} ] {Multilingual.GetWord("message_update_question_suffix")}",
+                                $"{Multilingual.GetWord("message_update_question_caption")}",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        {
                             byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
                             string exeName = null;
                             using (MemoryStream ms = new MemoryStream(data)) {
@@ -2352,10 +2423,16 @@ namespace FallGuysStats {
                             return true;
                         }
                     } else if (!silent) {
-                        MessageBox.Show(this, $"{Multilingual.GetWord("message_update_latest_version")}", $"{Multilingual.GetWord("message_update_question_caption")}", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show(this,
+                            $"{Multilingual.GetWord("message_update_latest_version")}",
+                            $"{Multilingual.GetWord("message_update_question_caption")}",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 } else if (!silent) {
-                    MessageBox.Show(this, $"{Multilingual.GetWord("message_update_not_determine_version")}", $"{Multilingual.GetWord("message_update_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this,
+                        $"{Multilingual.GetWord("message_update_not_determine_version")}",
+                        $"{Multilingual.GetWord("message_update_error_caption")}",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 #else
@@ -2374,7 +2451,8 @@ namespace FallGuysStats {
                     if (settings.ShowDialog(this) == DialogResult.OK) {
                         this.CurrentSettings = settings.CurrentSettings;
                         this.SuspendLayout();
-                        this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
+                        this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
+                            this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
                         this.ResumeLayout(false);
                         this.SaveUserSettings();
                         this.ChangeMainLanguage();
@@ -2386,8 +2464,11 @@ namespace FallGuysStats {
                         this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileId == this.GetCurrentProfileId() && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
                         this.UpdateGridRoundName();
                         this.UpdateHoopsieLegends();
+                        this.Refresh();
 
-                        if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) || (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {
+                        if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
+                            (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase)))
+                        {
                             await this.logFile.Stop();
 
                             string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low", "Mediatonic", "FallGuys_client");
@@ -2397,13 +2478,17 @@ namespace FallGuysStats {
                             this.logFile.Start(logPath, LOGNAME);
                         }
 
-                        this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs, this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo, this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight, this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
+                        this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
+                            this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo,
+                            this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight,
+                            this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
                     } else {
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void MenuOverlay_Click(object sender, EventArgs e) {
@@ -2431,7 +2516,9 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
 
                 if (overlay.IsFixed()) {
-                    if (this.CurrentSettings.OverlayFixedPositionX.HasValue && this.IsOnScreen(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value, overlay.Width)) {
+                    if (this.CurrentSettings.OverlayFixedPositionX.HasValue &&
+                        this.IsOnScreen(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value, overlay.Width))
+                    {
                         overlay.FlipDisplay(this.CurrentSettings.FixedFlippedDisplay);
                         overlay.Location = new Point(this.CurrentSettings.OverlayFixedPositionX.Value, this.CurrentSettings.OverlayFixedPositionY.Value);
                     } else {
@@ -2480,14 +2567,16 @@ namespace FallGuysStats {
                     this.ReloadProfileMenuItems();
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void MenuLaunchFallGuys_Click(object sender, EventArgs e) {
             try {
                 this.LaunchGame(false);
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public bool IsOnScreen(int x, int y, int w) {
@@ -2546,13 +2635,9 @@ namespace FallGuysStats {
             this.menuUpdate.Text = $"{Multilingual.GetWord("main_update")}";
             this.menuHelp.Text = $"{Multilingual.GetWord("main_help")}";
             this.menuLaunchFallGuys.Text = $"{Multilingual.GetWord("main_launch_fall_guys")}";
-            this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0 ? Properties.Resources.epic_main_icon : Properties.Resources.steam_main_icon;
-        }
-    }
-
-    public class MyToolStripSystemRenderer : ToolStripSystemRenderer {
-        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
-            //base.OnRenderToolStripBorder(e);
+            this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0
+                ? Properties.Resources.epic_main_icon
+                : Properties.Resources.steam_main_icon;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using MetroFramework;
 
 namespace FallGuysStats {
     public sealed class Grid : DataGridView {
@@ -20,6 +21,33 @@ namespace FallGuysStats {
         private bool IsEditOnEnter, readOnly;
         private bool? allowUpdate, allowNew, allowDelete;
         public Dictionary<string, SortOrder> Orders = new Dictionary<string, SortOrder>(StringComparer.OrdinalIgnoreCase);
+        private class CustomColorTable : ProfessionalColorTable {
+            public CustomColorTable() { UseSystemColors = false; }
+            public override Color MenuBorder {
+                get { return Stats.CurrentTheme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17); }
+            }
+            public override Color ToolStripDropDownBackground {
+                get { return Stats.CurrentTheme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17); }
+            }
+            public override Color MenuItemBorder {
+                get { return Color.DarkSeaGreen; }
+            }
+            public override Color MenuItemSelected {
+                get { return Color.LightGreen; }
+            }
+            //public override Color MenuItemSelectedGradientBegin {
+            //    get { return Color.LawnGreen; }
+            //}
+            //public override Color MenuItemSelectedGradientEnd {
+            //    get { return Color.MediumSeaGreen; }
+            //}
+            //public override Color MenuStripGradientBegin {
+            //    get { return Color.AliceBlue; }
+            //}
+            //public override Color MenuStripGradientEnd {
+            //    get { return Color.DodgerBlue; }
+            //}
+        }
         public Grid() {
             this.SetContextMenu();
             this.AllowUserToAddRows = false;
@@ -39,6 +67,7 @@ namespace FallGuysStats {
             this.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             this.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
             this.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            this.CMenu.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
         }
         public SortOrder GetSortOrder(string columnName) {
             this.Orders.TryGetValue(columnName, out SortOrder sortOrder);
