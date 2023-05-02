@@ -860,7 +860,7 @@ namespace FallGuysStats {
                 this.lblPreviousWinsNote.Location = new Point(172, 72);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(240, 55);
 
                 this.lblWinsFilter.Location = new Point(430, 23);
                 this.lblQualifyFilter.Location = new Point(430, 58);
@@ -893,7 +893,7 @@ namespace FallGuysStats {
                 this.txtPreviousWins.Location = new Point(110, 72);
                 this.lblPreviousWinsNote.Location = new Point(155, 72);
 
-                this.lnkAboutFallalytics.Location = new Point(70, 0);
+                this.lnkAboutFallalytics.Location = new Point(80, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(225, 55);
 
                 this.lblWinsFilter.Location = new Point(500, 23);

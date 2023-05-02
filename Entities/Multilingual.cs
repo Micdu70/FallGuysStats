@@ -11,7 +11,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                             {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE]"},
+                            {"main_title_suffix", "(Manual Update Version)"},
 #endif
                             {"main_settings", "Settings"},
                             {"main_filters", "Filters"},
@@ -29,7 +29,6 @@ namespace FallGuysStats {
                             {"main_show_overlay", "Show Overlay"},
                             {"main_hide_overlay", "Hide Overlay"},
                             {"main_update", "Update"},
-                            {"main_manual_update_version", "Manual Update Version"},
                             {"main_help", "Help"},
                             {"main_launch_fall_guys", "Launch Fall Guys"},
                             {"main_plays", "Time Played"},
@@ -324,7 +323,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                             {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[SANS MAJ AUTO]"},
+                            {"main_title_suffix", "(version sans MAJ auto)"},
 #endif
                             {"main_settings", "Configuration"},
                             {"main_filters", "Filtres"},
@@ -342,7 +341,6 @@ namespace FallGuysStats {
                             {"main_show_overlay", "Afficher l'overlay"},
                             {"main_hide_overlay", "Masquer l'overlay"},
                             {"main_update", "Rechercher une MAJ"},
-                            {"main_manual_update_version", "Version de la mise à jour du manuel"},
                             {"main_help", "Aide"},
                             {"main_launch_fall_guys", "Lancer Fall Guys"},
                             {"main_plays", "Temps de jeu"},
@@ -507,7 +505,7 @@ namespace FallGuysStats {
                             {"settings_rename_hoopsie_legends_to_hoopsie_heroes", "Renommer manche 'Les Cerceaux' en 'Légendes Badaboum'"},
                             {"settings_fallalytics_about", "À propos de Fallalytics (en anglais)"},
                             {"settings_fallalytics_reporting", "Envoyer l'info des manches jouées à Fallalytics"},
-                            {"settings_fallalytics_api_key", "(Optionnelle) Taper la clé API pour Fallalytics :"},
+                            {"settings_fallalytics_api_key", "(Facultatif) Taper votre clé API pour Fallalytics :"},
                             {"settings_overlay", "Overlay"},
                             {"settings_hide_wins_info", "Masquer les infos concernant les wins / finales"},
                             {"settings_hide_round_info", "Masquer les infos concernant la manche"},
@@ -637,7 +635,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                             {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE]"},
+                            {"main_title_suffix", "(수동 업데이트 버전)"},
 #endif
                             {"main_settings", "설정"},
                             {"main_filters", "필터링"},
@@ -815,7 +813,7 @@ namespace FallGuysStats {
                             {"settings_theme_dark", "다크"},
                             {"settings_previous_win", "이전 우승 횟수"},
                             {"settings_before_using_tracker", "(트래커를 사용하기 전)"},
-                            {"settings_start_program_minimized", "Start Program Minimized"},
+                            {"settings_start_program_minimized", "시작 시 프로그램 최소화"},
                             {"settings_auto_update_program", "스탯츠 자동 업데이트"},
                             {"settings_rename_hoopsie_legends_to_hoopsie_heroes", "후프의 전설을 후프의 영웅으로 표시하기"},
                             {"settings_fallalytics_about", "Fallalytics 정보"},
@@ -950,7 +948,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                             {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE]"},
+                            {"main_title_suffix", "(マニュアル更新版)"},
 #endif
                             {"main_settings", "設定"},
                             {"main_filters", "フィルタ"},
@@ -1128,7 +1126,7 @@ namespace FallGuysStats {
                             {"settings_theme_dark", "ダーク"},
                             {"settings_previous_win", "以前の優勝回数"},
                             {"settings_before_using_tracker", "(Statsを使用する前の回数)"},
-                            {"settings_start_program_minimized", "Start Program Minimized"},
+                            {"settings_start_program_minimized", "起動時にプログラムを最小化する"},
                             {"settings_auto_update_program", "Statsを自動更新"},
                             {"settings_rename_hoopsie_legends_to_hoopsie_heroes", "フープ・ループ・レジェンドをフープ・ループ・ヒーローで表示する"},
                             {"settings_fallalytics_about", "Fallalyticsついては"},
@@ -1263,7 +1261,7 @@ namespace FallGuysStats {
 #if AllowUpdate
                             {"main_title_suffix", ""},
 #else
-                            {"main_title_suffix", "[NO AUTO UPDATE]"},
+                            {"main_title_suffix", "（手动更新版本）"},
 #endif
                             {"main_settings", "设置"},
                             {"main_filters", "筛选"},
@@ -1441,7 +1439,7 @@ namespace FallGuysStats {
                             {"settings_theme_dark", "深色"},
                             {"settings_previous_win", "之前获胜次数"},
                             {"settings_before_using_tracker", "(使用此软件前)"},
-                            {"settings_start_program_minimized", "Start Program Minimized"},
+                            {"settings_start_program_minimized", "启动时最小化程序"},
                             {"settings_auto_update_program", "自动更新"},
                             {"settings_rename_hoopsie_legends_to_hoopsie_heroes", "将 钻圈王者 重命名为 钻圈英雄"},
                             {"settings_fallalytics_about", "关于Fallalytics"},

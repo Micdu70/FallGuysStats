@@ -2381,7 +2381,11 @@ namespace FallGuysStats {
         }
         private void MenuUpdate_Click(object sender, EventArgs e) {
             try {
+#if AllowUpdate
                 this.CheckForUpdate(false);
+#else
+				Process.Start(@"https://github.com/Micdu70/FallGuysStats#t%C3%A9l%C3%A9chargement");
+#endif
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -2435,8 +2439,6 @@ namespace FallGuysStats {
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-#else
-            this.LaunchHelpInBrowser();
 #endif
             return false;
         }
@@ -2604,8 +2606,8 @@ namespace FallGuysStats {
 
             this.BackImage = this.Icon.ToBitmap();
             this.BackMaxSize = 56;
-            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 21)).Width;
-            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 40 : 2), 8, 0, 0);
+            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 20)).Width;
+            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 185 : CurrentLanguage == 3 ? 130 : CurrentLanguage == 4 ? 50 : 0), 8, 0, 0);
 
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);
