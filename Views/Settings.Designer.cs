@@ -127,6 +127,7 @@
             // lblLogPath
             // 
             this.lblLogPath.AutoSize = true;
+            this.lblLogPath.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLogPath.Location = new System.Drawing.Point(12, 73);
             this.lblLogPath.Name = "lblLogPath";
             this.lblLogPath.Size = new System.Drawing.Size(87, 19);
@@ -136,6 +137,7 @@
             // lblLogPathNote
             // 
             this.lblLogPathNote.AutoSize = true;
+            this.lblLogPathNote.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLogPathNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblLogPathNote.Location = new System.Drawing.Point(103, 98);
             this.lblLogPathNote.Name = "lblLogPathNote";
@@ -247,6 +249,7 @@
             // lblFallalyticsAPIKey
             // 
             this.lblFallalyticsAPIKey.AutoSize = true;
+            this.lblFallalyticsAPIKey.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblFallalyticsAPIKey.Location = new System.Drawing.Point(10, 55);
             this.lblFallalyticsAPIKey.Name = "lblFallalyticsAPIKey";
             this.lblFallalyticsAPIKey.Size = new System.Drawing.Size(209, 19);
@@ -442,6 +445,7 @@
             // lblGameExeLocation
             // 
             this.lblGameExeLocation.AutoSize = true;
+            this.lblGameExeLocation.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblGameExeLocation.Location = new System.Drawing.Point(113, 23);
             this.lblGameExeLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGameExeLocation.Name = "lblGameExeLocation";
@@ -556,6 +560,7 @@
             // lblPreviousWins
             // 
             this.lblPreviousWins.AutoSize = true;
+            this.lblPreviousWins.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblPreviousWins.Location = new System.Drawing.Point(15, 72);
             this.lblPreviousWins.Name = "lblPreviousWins";
             this.lblPreviousWins.Size = new System.Drawing.Size(101, 19);
@@ -565,6 +570,7 @@
             // lblPreviousWinsNote
             // 
             this.lblPreviousWinsNote.AutoSize = true;
+            this.lblPreviousWinsNote.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblPreviousWinsNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblPreviousWinsNote.Location = new System.Drawing.Point(163, 72);
             this.lblPreviousWinsNote.Name = "lblPreviousWinsNote";
@@ -627,6 +633,7 @@
             // lblTheme
             // 
             this.lblTheme.AutoSize = true;
+            this.lblTheme.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTheme.Location = new System.Drawing.Point(221, 22);
             this.lblTheme.Name = "lblTheme";
             this.lblTheme.Size = new System.Drawing.Size(52, 19);
@@ -671,6 +678,7 @@
             this.lblOverlayFontExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOverlayFontExample.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayFontExample.Location = new System.Drawing.Point(5, 14);
             this.lblOverlayFontExample.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOverlayFontExample.Name = "lblOverlayFontExample";
@@ -706,6 +714,7 @@
             // lblOverlayFont
             // 
             this.lblOverlayFont.AutoSize = true;
+            this.lblOverlayFont.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayFont.Location = new System.Drawing.Point(14, 355);
             this.lblOverlayFont.Name = "lblOverlayFont";
             this.lblOverlayFont.Size = new System.Drawing.Size(133, 19);
@@ -852,6 +861,7 @@
             // lblCycleTimeSeconds
             // 
             this.lblCycleTimeSeconds.AutoSize = true;
+            this.lblCycleTimeSeconds.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCycleTimeSeconds.Location = new System.Drawing.Point(10, 192);
             this.lblCycleTimeSeconds.Name = "lblCycleTimeSeconds";
             this.lblCycleTimeSeconds.Size = new System.Drawing.Size(76, 19);
@@ -861,6 +871,7 @@
             // lblCycleTimeSecondsTag
             // 
             this.lblCycleTimeSecondsTag.AutoSize = true;
+            this.lblCycleTimeSecondsTag.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCycleTimeSecondsTag.Location = new System.Drawing.Point(116, 192);
             this.lblCycleTimeSecondsTag.Name = "lblCycleTimeSecondsTag";
             this.lblCycleTimeSecondsTag.Size = new System.Drawing.Size(27, 19);
@@ -918,6 +929,7 @@
             // lblWinsFilter
             // 
             this.lblWinsFilter.AutoSize = true;
+            this.lblWinsFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblWinsFilter.Location = new System.Drawing.Point(501, 18);
             this.lblWinsFilter.Name = "lblWinsFilter";
             this.lblWinsFilter.Size = new System.Drawing.Size(110, 19);
@@ -946,6 +958,7 @@
             // 
             this.lblQualifyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblQualifyFilter.AutoSize = true;
+            this.lblQualifyFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblQualifyFilter.Location = new System.Drawing.Point(486, 53);
             this.lblQualifyFilter.Name = "lblQualifyFilter";
             this.lblQualifyFilter.Size = new System.Drawing.Size(124, 19);
@@ -974,6 +987,7 @@
             // 
             this.lblFastestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFastestFilter.AutoSize = true;
+            this.lblFastestFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblFastestFilter.Location = new System.Drawing.Point(472, 88);
             this.lblFastestFilter.Name = "lblFastestFilter";
             this.lblFastestFilter.Size = new System.Drawing.Size(138, 19);
@@ -1050,6 +1064,7 @@
             // 
             this.lblOverlayOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayOpacity.AutoSize = true;
+            this.lblOverlayOpacity.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayOpacity.Location = new System.Drawing.Point(482, 194);
             this.lblOverlayOpacity.Name = "lblOverlayOpacity";
             this.lblOverlayOpacity.Size = new System.Drawing.Size(128, 19);
@@ -1060,6 +1075,7 @@
             // 
             this.lblOverlayColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayColor.AutoSize = true;
+            this.lblOverlayColor.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayColor.Location = new System.Drawing.Point(531, 163);
             this.lblOverlayColor.Name = "lblOverlayColor";
             this.lblOverlayColor.Size = new System.Drawing.Size(79, 19);
@@ -1088,6 +1104,7 @@
             // 
             this.lblOverlayBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayBackground.AutoSize = true;
+            this.lblOverlayBackground.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayBackground.Location = new System.Drawing.Point(490, 125);
             this.lblOverlayBackground.Name = "lblOverlayBackground";
             this.lblOverlayBackground.Size = new System.Drawing.Size(120, 19);

@@ -48,6 +48,7 @@
             // lblEditShowsQuestion
             // 
             this.lblEditShowsQuestion.AutoSize = true;
+            this.lblEditShowsQuestion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEditShowsQuestion.Location = new System.Drawing.Point(100, 80);
             this.lblEditShowsQuestion.Name = "lblEditShowsQuestion";
             this.lblEditShowsQuestion.Size = new System.Drawing.Size(74, 19);
@@ -57,6 +58,7 @@
             // lblEditShowslabel
             // 
             this.lblEditShowslabel.AutoSize = true;
+            this.lblEditShowslabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEditShowslabel.Location = new System.Drawing.Point(86, 137);
             this.lblEditShowslabel.Name = "lblEditShowslabel";
             this.lblEditShowslabel.Size = new System.Drawing.Size(69, 19);

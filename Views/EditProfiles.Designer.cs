@@ -124,6 +124,7 @@ namespace FallGuysStats {
             this.tabControl1.Controls.Add(this.RenameTabPage);
             this.tabControl1.Controls.Add(this.MoveTabPage);
             this.tabControl1.Controls.Add(this.RemoveTabPage);
+            this.tabControl1.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
             this.tabControl1.Location = new System.Drawing.Point(9, 65);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -194,6 +195,7 @@ namespace FallGuysStats {
             // AddPageLabel1
             // 
             this.AddPageLabel1.AutoSize = true;
+            this.AddPageLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.AddPageLabel1.Location = new System.Drawing.Point(7, 9);
             this.AddPageLabel1.Name = "AddPageLabel1";
             this.AddPageLabel1.Size = new System.Drawing.Size(87, 19);
@@ -233,9 +235,6 @@ namespace FallGuysStats {
             // 
             // RenamePageTextbox
             // 
-            // 
-            // 
-            // 
             this.RenamePageTextbox.CustomButton.Image = null;
             this.RenamePageTextbox.CustomButton.Location = new System.Drawing.Point(154, 1);
             this.RenamePageTextbox.CustomButton.Name = "";
@@ -265,6 +264,7 @@ namespace FallGuysStats {
             // RenamePageLabel2
             // 
             this.RenamePageLabel2.AutoSize = true;
+            this.RenamePageLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.RenamePageLabel2.Location = new System.Drawing.Point(7, 47);
             this.RenamePageLabel2.Name = "RenamePageLabel2";
             this.RenamePageLabel2.Size = new System.Drawing.Size(87, 19);
@@ -286,6 +286,7 @@ namespace FallGuysStats {
             // RenamePageLabel1
             // 
             this.RenamePageLabel1.AutoSize = true;
+            this.RenamePageLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.RenamePageLabel1.Location = new System.Drawing.Point(7, 9);
             this.RenamePageLabel1.Name = "RenamePageLabel1";
             this.RenamePageLabel1.Size = new System.Drawing.Size(47, 19);
@@ -326,9 +327,10 @@ namespace FallGuysStats {
             // MovePageLabel2
             // 
             this.MovePageLabel2.AutoSize = true;
+            this.MovePageLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.MovePageLabel2.Location = new System.Drawing.Point(7, 47);
             this.MovePageLabel2.Name = "MovePageLabel2";
-            this.MovePageLabel2.Size = new System.Drawing.Size(22, 19);
+            this.MovePageLabel2.Size = new System.Drawing.Size(23, 19);
             this.MovePageLabel2.TabIndex = 3;
             this.MovePageLabel2.Text = "To";
             // 
@@ -346,6 +348,7 @@ namespace FallGuysStats {
             // MovePageLabel1
             // 
             this.MovePageLabel1.AutoSize = true;
+            this.MovePageLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.MovePageLabel1.Location = new System.Drawing.Point(7, 9);
             this.MovePageLabel1.Name = "MovePageLabel1";
             this.MovePageLabel1.Size = new System.Drawing.Size(41, 19);
@@ -405,6 +408,7 @@ namespace FallGuysStats {
             // RemovePageLabel1
             // 
             this.RemovePageLabel1.AutoSize = true;
+            this.RemovePageLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.RemovePageLabel1.Location = new System.Drawing.Point(7, 9);
             this.RemovePageLabel1.Name = "RemovePageLabel1";
             this.RemovePageLabel1.Size = new System.Drawing.Size(47, 19);
