@@ -310,10 +310,11 @@ namespace FallGuysStats {
             // lblTotalShows
             // 
             this.lblTotalShows.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalShows.Image = global::FallGuysStats.Properties.Resources.show_icon;
             this.lblTotalShows.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblTotalShows.Name = "lblTotalShows";
-            this.lblTotalShows.Size = new System.Drawing.Size(56, 15);
-            this.lblTotalShows.Text = "Shows : 0";
+            this.lblTotalShows.Size = new System.Drawing.Size(60, 15);
+            this.lblTotalShows.Text = "0";
             this.lblTotalShows.ToolTipText = "Click to view shows stats.";
             this.lblTotalShows.Click += new System.EventHandler(this.LblTotalShows_Click);
             this.lblTotalShows.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
@@ -322,10 +323,11 @@ namespace FallGuysStats {
             // lblTotalRounds
             // 
             this.lblTotalRounds.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalRounds.Image = global::FallGuysStats.Properties.Resources.round_icon;
             this.lblTotalRounds.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblTotalRounds.Name = "lblTotalRounds";
-            this.lblTotalRounds.Size = new System.Drawing.Size(62, 15);
-            this.lblTotalRounds.Text = "Rounds : 0";
+            this.lblTotalRounds.Size = new System.Drawing.Size(65, 15);
+            this.lblTotalRounds.Text = "0";
             this.lblTotalRounds.ToolTipText = "Click to view rounds stats.";
             this.lblTotalRounds.Click += new System.EventHandler(this.LblTotalRounds_Click);
             this.lblTotalRounds.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);

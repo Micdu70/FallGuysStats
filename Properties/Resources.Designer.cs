@@ -1123,6 +1123,16 @@ namespace FallGuysStats.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap round_gray_icon {
+            get {
+                object obj = ResourceManager.GetObject("round_gray_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap round_hex_a_gone_icon {
             get {
                 object obj = ResourceManager.GetObject("round_hex_a_gone_icon", resourceCulture);
@@ -1216,6 +1226,16 @@ namespace FallGuysStats.Properties {
         internal static System.Drawing.Bitmap round_hyperdrive_heroes_icon {
             get {
                 object obj = ResourceManager.GetObject("round_hyperdrive_heroes_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap round_icon {
+            get {
+                object obj = ResourceManager.GetObject("round_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1736,6 +1756,36 @@ namespace FallGuysStats.Properties {
         internal static System.Drawing.Bitmap setting_icon {
             get {
                 object obj = ResourceManager.GetObject("setting_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap show_icon {
+            get {
+                object obj = ResourceManager.GetObject("show_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shutdown_gray_icon {
+            get {
+                object obj = ResourceManager.GetObject("shutdown_gray_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shutdown_icon {
+            get {
+                object obj = ResourceManager.GetObject("shutdown_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
