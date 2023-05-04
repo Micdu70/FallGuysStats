@@ -2359,15 +2359,23 @@ namespace FallGuysStats {
         }
         private void LblCurrentProfile_Click(object sender, EventArgs e) {
             for (int i = 0; i < this.ProfileMenuItems.Count; i++) {
-                ToolStripItem item = this.ProfileMenuItems[i];
-                if (!(item is ToolStripMenuItem menuItem)) { continue; }
-
-                if (menuItem.Checked && i + 1 < this.ProfileMenuItems.Count) {
-                    this.ProfileMenuItems[i + 1].PerformClick();
-                    break;
-                } else if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
-                    this.ProfileMenuItems[0].PerformClick();
-                    break;
+                if (!(this.ProfileMenuItems[i] is ToolStripMenuItem menuItem)) { continue; }
+                if (this.shiftKeyToggle) {
+                    if (menuItem.Checked && i - 1 >= 0) {
+                        this.ProfileMenuItems[i - 1].PerformClick();
+                        break;
+                    } else if (menuItem.Checked && i - 1 < 0) {
+                        this.ProfileMenuItems[this.ProfileMenuItems.Count - 1].PerformClick();
+                        break;
+                    }
+                } else {
+                    if (menuItem.Checked && i + 1 < this.ProfileMenuItems.Count) {
+                        this.ProfileMenuItems[i + 1].PerformClick();
+                        break;
+                    } else if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
+                        this.ProfileMenuItems[0].PerformClick();
+                        break;
+                    }
                 }
             }
         }
