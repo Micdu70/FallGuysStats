@@ -339,9 +339,9 @@ namespace FallGuysStats {
             this.lblTotalFinals.Size = new System.Drawing.Size(69, 16);
             this.lblTotalFinals.Text = "0 (0.0%)";
             this.lblTotalFinals.ToolTipText = "Click to view finals stats.";
-            this.lblTotalFinals.Click += new System.EventHandler(this.lblTotalFinals_Click);
-            this.lblTotalFinals.MouseEnter += new System.EventHandler(this.infoStrip_MouseEnter);
-            this.lblTotalFinals.MouseLeave += new System.EventHandler(this.infoStrip_MouseLeave);
+            this.lblTotalFinals.Click += new System.EventHandler(this.LblTotalFinals_Click);
+            this.lblTotalFinals.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
+            this.lblTotalFinals.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);
             // 
             // lblTotalWins
             // 
