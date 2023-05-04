@@ -136,7 +136,7 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
-        private bool shiftKeyToggle, ctrlKeyToggle;
+        private bool shiftKeyToggle; //, ctrlKeyToggle;
 
         private Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -2418,7 +2418,7 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = false;
                     break;
                 case Keys.ControlKey:
-                    this.ctrlKeyToggle = false;
+                    //this.ctrlKeyToggle = false;
                     break;
             }
         }
@@ -2429,7 +2429,7 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = true;
                     break;
                 case Keys.ControlKey:
-                    this.ctrlKeyToggle = true;
+                    //this.ctrlKeyToggle = true;
                     break;
             }
         }
