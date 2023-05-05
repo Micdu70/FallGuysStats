@@ -118,11 +118,12 @@ namespace FallGuysStats {
         public List<Profiles> AllProfiles = new List<Profiles>();
         public List<ToolStripMenuItem> ProfileMenuItems = new List<ToolStripMenuItem>();
         public UserSettings CurrentSettings;
-        private Overlay overlay;
+        public Overlay overlay;
+        public bool isUpdate;
         private DateTime lastAddedShow = DateTime.MinValue;
-        private DateTime startupTime = DateTime.UtcNow;
+        private readonly DateTime startupTime = DateTime.UtcNow;
         private int askedPreviousShows = 0;
-        private TextInfo textInfo;
+        private readonly TextInfo textInfo;
         private int currentProfile;
         private int currentLanguage;
         private Color infoStripForeColor;
@@ -362,7 +363,7 @@ namespace FallGuysStats {
                             case "menuHelp":
                                 tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
                                 break;
-                            //case "menuLaunchFallGuys": break;
+                                //case "menuLaunchFallGuys": break;
                         }
                         tsmi1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
@@ -1247,37 +1248,45 @@ namespace FallGuysStats {
             this.LogFile_OnParsedLogLines(rounds);
             this.loadingExisting = false;
         }
+        public void SaveWindowState() {
+            if (this.overlay.Visible) {
+                if (!this.overlay.IsFixed()) {
+                    this.CurrentSettings.OverlayLocationX = this.overlay.Location.X;
+                    this.CurrentSettings.OverlayLocationY = this.overlay.Location.Y;
+                    this.CurrentSettings.OverlayWidth = this.overlay.Width;
+                    this.CurrentSettings.OverlayHeight = this.overlay.Height;
+                }
+            }
+
+            if (this.WindowState != FormWindowState.Normal) {
+                this.CurrentSettings.FormLocationX = RestoreBounds.Location.X;
+                this.CurrentSettings.FormLocationY = RestoreBounds.Location.Y;
+                this.CurrentSettings.FormWidth = RestoreBounds.Size.Width;
+                this.CurrentSettings.FormHeight = RestoreBounds.Size.Height;
+                this.CurrentSettings.MaximizedWindowState = this.WindowState == FormWindowState.Maximized;
+            } else {
+                this.CurrentSettings.FormLocationX = this.Location.X;
+                this.CurrentSettings.FormLocationY = this.Location.Y;
+                this.CurrentSettings.FormWidth = this.Size.Width;
+                this.CurrentSettings.FormHeight = this.Size.Height;
+                this.CurrentSettings.MaximizedWindowState = false;
+            }
+        }
         private void Stats_FormClosing(object sender, FormClosingEventArgs e) {
             try {
                 if (!this.overlay.Disposing && !this.overlay.IsDisposed && !this.IsDisposed && !this.Disposing) {
-                    if (this.overlay.Visible) {
-                        if (!this.overlay.IsFixed()) {
-                            this.CurrentSettings.OverlayLocationX = this.overlay.Location.X;
-                            this.CurrentSettings.OverlayLocationY = this.overlay.Location.Y;
-                            this.CurrentSettings.OverlayWidth = this.overlay.Width;
-                            this.CurrentSettings.OverlayHeight = this.overlay.Height;
-                        }
-                    }
                     //this.CurrentSettings.FilterType = this.menuAllStats.Checked ? 0 : this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : 4;
                     //this.CurrentSettings.SelectedProfile = this.currentProfile;
-
-                    if (this.WindowState != FormWindowState.Normal) {
-                        this.CurrentSettings.FormLocationX = RestoreBounds.Location.X;
-                        this.CurrentSettings.FormLocationY = RestoreBounds.Location.Y;
-                        this.CurrentSettings.FormWidth = RestoreBounds.Size.Width;
-                        this.CurrentSettings.FormHeight = RestoreBounds.Size.Height;
-                        this.CurrentSettings.MaximizedWindowState = this.WindowState == FormWindowState.Maximized;
-                    } else {
-                        this.CurrentSettings.FormLocationX = this.Location.X;
-                        this.CurrentSettings.FormLocationY = this.Location.Y;
-                        this.CurrentSettings.FormWidth = this.Size.Width;
-                        this.CurrentSettings.FormHeight = this.Size.Height;
-                        this.CurrentSettings.MaximizedWindowState = false;
+                    if (!this.isUpdate) {
+                        this.SaveWindowState();
                     }
                     this.SaveUserSettings();
                 }
                 this.StatsDB.Dispose();
-            } catch { }
+            } catch {
+                //Application.ExitThread();
+                //Environment.Exit(0);
+            }
         }
         private void Stats_Load(object sender, EventArgs e) {
             try {
@@ -2647,11 +2656,10 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public bool CheckForUpdate(bool silent) {
 #if AllowUpdate
+        public bool CheckForUpdate(bool silent) {
             using (ZipWebClient web = new ZipWebClient()) {
                 string assemblyInfo = web.DownloadString(@"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/AssemblyInfo.cs");
-
                 int index = assemblyInfo.IndexOf("AssemblyVersion(");
                 if (index > 0) {
                     int indexEnd = assemblyInfo.IndexOf("\")", index);
@@ -2659,25 +2667,14 @@ namespace FallGuysStats {
                     Version newVersion = new Version(assemblyInfo.Substring(index + 17, indexEnd - index - 17));
                     if (newVersion > currentVersion) {
                         if (MessageBox.Show(this,
-                                $"{Multilingual.GetWord("message_update_question_prefix")} [ v{newVersion.ToString(2)} ] {Multilingual.GetWord("message_update_question_suffix")}",
+                                $"{Multilingual.GetWord("message_update_question_prefix")} (v{newVersion.ToString(2)}) {Multilingual.GetWord("message_update_question_suffix")}",
                                 $"{Multilingual.GetWord("message_update_question_caption")}",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
-                            byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
-                            string exeName = null;
-                            using (MemoryStream ms = new MemoryStream(data)) {
-                                using (ZipArchive zipFile = new ZipArchive(ms, ZipArchiveMode.Read)) {
-                                    foreach (var entry in zipFile.Entries) {
-                                        if (entry.Name.IndexOf(".exe", StringComparison.OrdinalIgnoreCase) > 0) {
-                                            exeName = entry.Name;
-                                        }
-                                        if (File.Exists(entry.Name)) File.Move(entry.Name, $"{entry.Name}.bak");
-                                        entry.ExtractToFile(entry.Name, true);
-                                    }
-                                }
-                            }
-
-                            Process.Start(new ProcessStartInfo(exeName));
-                            this.Visible = false;
+                            this.SaveWindowState();
+                            this.Hide();
+                            this.overlay.Hide();
+                            this.DownloadNewVersion(web);
+                            this.isUpdate = true;
                             this.Close();
                             return true;
                         }
@@ -2694,9 +2691,25 @@ namespace FallGuysStats {
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-#endif
             return false;
         }
+        public void DownloadNewVersion(ZipWebClient web) {
+            byte[] data = web.DownloadData($"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip");
+            string exeName = null;
+            using (MemoryStream ms = new MemoryStream(data)) {
+                using (ZipArchive zipFile = new ZipArchive(ms, ZipArchiveMode.Read)) {
+                    foreach (var entry in zipFile.Entries) {
+                        if (entry.Name.IndexOf(".exe", StringComparison.OrdinalIgnoreCase) > 0) {
+                            exeName = entry.Name;
+                        }
+                        if (File.Exists(entry.Name)) File.Move(entry.Name, $"{entry.Name}.bak");
+                        entry.ExtractToFile(entry.Name, true);
+                    }
+                }
+            }
+            Process.Start(new ProcessStartInfo(exeName));
+        }
+#endif
         private async void MenuSettings_Click(object sender, EventArgs e) {
             try {
                 using (Settings settings = new Settings()) {
