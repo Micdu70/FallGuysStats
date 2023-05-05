@@ -835,7 +835,7 @@ namespace FallGuysStats {
 
                     if (LogRound.LastPlayedRoundEnd.HasValue) {
                         this.lblDuration.TextRight = $"{LogRound.LastPlayedRoundEnd - LogRound.LastPlayedRoundStart:m\\:ss\\.ff}";
-                    } else if (Stats.InShow && (this.lastRound.Playing || LogRound.IsLastPlayedRoundPlaying)) {
+                    } else if (Stats.InShow && (this.lastRound.Playing || LogRound.IsLastPlayedRoundStillPlaying)) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                     } else if (End != DateTime.MinValue) {
                         this.lblDuration.TextRight = $"{End - Start:m\\:ss\\.ff}";

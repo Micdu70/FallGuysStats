@@ -48,7 +48,7 @@ namespace FallGuysStats {
         public static int NumPlayersSucceeded { get; set; }
         public static bool IsLastRoundRunning { get; set; }
         public static bool IsShowCompletedOrEnded { get; set; }
-        public static bool IsLastPlayedRoundPlaying { get; set; }
+        public static bool IsLastPlayedRoundStillPlaying { get; set; }
 
         public static DateTime LastRoundStart { get; set; } = DateTime.MinValue;
         public static DateTime? LastPlayedRoundStart { get; set; } = null;
@@ -362,8 +362,8 @@ namespace FallGuysStats {
                 if (this.StatsForm.CurrentSettings.AutoChangeProfile) {
                     this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
                 }
-            } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
-                //Store SessionID to prevent duplicates
+            } else if (!LogRound.IsShowCompletedOrEnded && logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
+                //Store SessionID to prevent duplicates (for Fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
             } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("RTT: ");
@@ -389,7 +389,7 @@ namespace FallGuysStats {
                     LogRound.LastRoundStart = line.Date;
                     LogRound.LastPlayedRoundStart = null;
                     LogRound.LastPlayedRoundEnd = null;
-                    LogRound.IsLastPlayedRoundPlaying = false;
+                    LogRound.IsLastPlayedRoundStillPlaying = false;
                     LogRound.IsLastRoundRunning = true;
                     LogRound.succeededPlayerIds.Clear();
                     LogRound.NumPlayersSucceeded = 0;
@@ -499,7 +499,7 @@ namespace FallGuysStats {
                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0) {
                 LogRound.IsLastRoundRunning = false;
-                LogRound.IsLastPlayedRoundPlaying = false;
+                LogRound.IsLastPlayedRoundStillPlaying = false;
                 if (Stats.InShow && LogRound.LastPlayedRoundStart.HasValue && !LogRound.LastPlayedRoundEnd.HasValue) {
                     LogRound.LastPlayedRoundEnd = line.Date;
                 }
@@ -619,7 +619,7 @@ namespace FallGuysStats {
                     LogRound.SavedRoundCount = logRound.Info.Round;
                     if (LogRound.IsLastRoundRunning) {
                         LogRound.LastPlayedRoundStart = logRound.Info.Start;
-                        LogRound.IsLastPlayedRoundPlaying = true;
+                        LogRound.IsLastPlayedRoundStillPlaying = true;
                     }
                 }
                 logRound.Info = null;

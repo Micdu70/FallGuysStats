@@ -130,7 +130,7 @@
             this.lblLogPath.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLogPath.Location = new System.Drawing.Point(12, 73);
             this.lblLogPath.Name = "lblLogPath";
-            this.lblLogPath.Size = new System.Drawing.Size(87, 19);
+            this.lblLogPath.Size = new System.Drawing.Size(91, 19);
             this.lblLogPath.TabIndex = 0;
             this.lblLogPath.Text = "Log File Path:";
             // 
@@ -141,17 +141,15 @@
             this.lblLogPathNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblLogPathNote.Location = new System.Drawing.Point(103, 98);
             this.lblLogPathNote.Name = "lblLogPathNote";
-            this.lblLogPathNote.Size = new System.Drawing.Size(572, 19);
+            this.lblLogPathNote.Size = new System.Drawing.Size(603, 19);
             this.lblLogPathNote.TabIndex = 0;
-            this.lblLogPathNote.Text = "* You should not need to set this." +
-                " Only use when the program is not reading the correct location.";
+            this.lblLogPathNote.Text = "* You should not need to set this. Only use when the program is not reading the c" +
+    "orrect location.";
             // 
             // txtLogPath
             // 
-            this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
+            this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogPath.CustomButton.Image = null;
             this.txtLogPath.CustomButton.Location = new System.Drawing.Point(731, 2);
             this.txtLogPath.CustomButton.Name = "";
@@ -230,7 +228,7 @@
             this.txtFallalyticsAPIKey.CustomButton.Visible = false;
             this.txtFallalyticsAPIKey.Lines = new string[] {
         "4d328236-b3c2-4449-a158-d07128671920"};
-            this.txtFallalyticsAPIKey.Location = new System.Drawing.Point(225, 55);
+            this.txtFallalyticsAPIKey.Location = new System.Drawing.Point(234, 55);
             this.txtFallalyticsAPIKey.MaxLength = 32767;
             this.txtFallalyticsAPIKey.Name = "txtFallalyticsAPIKey";
             this.txtFallalyticsAPIKey.PasswordChar = '\0';
@@ -252,7 +250,7 @@
             this.lblFallalyticsAPIKey.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblFallalyticsAPIKey.Location = new System.Drawing.Point(10, 55);
             this.lblFallalyticsAPIKey.Name = "lblFallalyticsAPIKey";
-            this.lblFallalyticsAPIKey.Size = new System.Drawing.Size(209, 19);
+            this.lblFallalyticsAPIKey.Size = new System.Drawing.Size(220, 19);
             this.lblFallalyticsAPIKey.TabIndex = 0;
             this.lblFallalyticsAPIKey.Text = "(Optional) Enter Fallalytics API key:";
             // 
@@ -387,7 +385,7 @@
             // txtGameShortcutLocation
             // 
             this.txtGameShortcutLocation.CustomButton.Image = null;
-            this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
+            this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(474, 1);
             this.txtGameShortcutLocation.CustomButton.Name = "";
             this.txtGameShortcutLocation.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtGameShortcutLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -397,7 +395,7 @@
             this.txtGameShortcutLocation.CustomButton.Visible = false;
             this.txtGameShortcutLocation.Enabled = false;
             this.txtGameShortcutLocation.Lines = new string[0];
-            this.txtGameShortcutLocation.Location = new System.Drawing.Point(267, 23);
+            this.txtGameShortcutLocation.Location = new System.Drawing.Point(277, 23);
             this.txtGameShortcutLocation.Margin = new System.Windows.Forms.Padding(2);
             this.txtGameShortcutLocation.MaxLength = 32767;
             this.txtGameShortcutLocation.Name = "txtGameShortcutLocation";
@@ -407,7 +405,7 @@
             this.txtGameShortcutLocation.SelectionLength = 0;
             this.txtGameShortcutLocation.SelectionStart = 0;
             this.txtGameShortcutLocation.ShortcutsEnabled = true;
-            this.txtGameShortcutLocation.Size = new System.Drawing.Size(508, 25);
+            this.txtGameShortcutLocation.Size = new System.Drawing.Size(498, 25);
             this.txtGameShortcutLocation.TabIndex = 0;
             this.txtGameShortcutLocation.UseSelectable = true;
             this.txtGameShortcutLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -416,7 +414,7 @@
             // txtGameExeLocation
             // 
             this.txtGameExeLocation.CustomButton.Image = null;
-            this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(484, 1);
+            this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(474, 1);
             this.txtGameExeLocation.CustomButton.Name = "";
             this.txtGameExeLocation.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtGameExeLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -426,7 +424,7 @@
             this.txtGameExeLocation.CustomButton.Visible = false;
             this.txtGameExeLocation.Enabled = false;
             this.txtGameExeLocation.Lines = new string[0];
-            this.txtGameExeLocation.Location = new System.Drawing.Point(267, 23);
+            this.txtGameExeLocation.Location = new System.Drawing.Point(277, 23);
             this.txtGameExeLocation.Margin = new System.Windows.Forms.Padding(2);
             this.txtGameExeLocation.MaxLength = 32767;
             this.txtGameExeLocation.Name = "txtGameExeLocation";
@@ -436,7 +434,7 @@
             this.txtGameExeLocation.SelectionLength = 0;
             this.txtGameExeLocation.SelectionStart = 0;
             this.txtGameExeLocation.ShortcutsEnabled = true;
-            this.txtGameExeLocation.Size = new System.Drawing.Size(508, 25);
+            this.txtGameExeLocation.Size = new System.Drawing.Size(498, 25);
             this.txtGameExeLocation.TabIndex = 1;
             this.txtGameExeLocation.UseSelectable = true;
             this.txtGameExeLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -449,7 +447,7 @@
             this.lblGameExeLocation.Location = new System.Drawing.Point(113, 23);
             this.lblGameExeLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGameExeLocation.Name = "lblGameExeLocation";
-            this.lblGameExeLocation.Size = new System.Drawing.Size(153, 19);
+            this.lblGameExeLocation.Size = new System.Drawing.Size(160, 19);
             this.lblGameExeLocation.TabIndex = 0;
             this.lblGameExeLocation.Text = "Game Shortcut Location:";
             // 
@@ -532,7 +530,7 @@
             this.txtPreviousWins.SelectionStart = 0;
             this.txtPreviousWins.ShortcutsEnabled = true;
             this.txtPreviousWins.Size = new System.Drawing.Size(40, 21);
-            this.txtPreviousWins.TabIndex = 5;
+            this.txtPreviousWins.TabIndex = 4;
             this.txtPreviousWins.Text = "0";
             this.txtPreviousWins.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPreviousWins.UseSelectable = true;
@@ -563,7 +561,7 @@
             this.lblPreviousWins.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblPreviousWins.Location = new System.Drawing.Point(15, 72);
             this.lblPreviousWins.Name = "lblPreviousWins";
-            this.lblPreviousWins.Size = new System.Drawing.Size(101, 19);
+            this.lblPreviousWins.Size = new System.Drawing.Size(106, 19);
             this.lblPreviousWins.TabIndex = 0;
             this.lblPreviousWins.Text = "Previous Win(s):";
             // 
@@ -574,7 +572,7 @@
             this.lblPreviousWinsNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblPreviousWinsNote.Location = new System.Drawing.Point(163, 72);
             this.lblPreviousWinsNote.Name = "lblPreviousWinsNote";
-            this.lblPreviousWinsNote.Size = new System.Drawing.Size(134, 19);
+            this.lblPreviousWinsNote.Size = new System.Drawing.Size(139, 19);
             this.lblPreviousWinsNote.TabIndex = 0;
             this.lblPreviousWinsNote.Text = "(before using tracker)";
             // 
@@ -626,7 +624,7 @@
             this.chkChangeHoopsieLegends.Location = new System.Drawing.Point(400, 72);
             this.chkChangeHoopsieLegends.Name = "chkChangeHoopsieLegends";
             this.chkChangeHoopsieLegends.Size = new System.Drawing.Size(301, 19);
-            this.chkChangeHoopsieLegends.TabIndex = 4;
+            this.chkChangeHoopsieLegends.TabIndex = 5;
             this.chkChangeHoopsieLegends.Text = "Rename Hoopsie Legends to Hoopsie Heroes";
             this.chkChangeHoopsieLegends.UseSelectable = true;
             // 
@@ -636,7 +634,7 @@
             this.lblTheme.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTheme.Location = new System.Drawing.Point(221, 22);
             this.lblTheme.Name = "lblTheme";
-            this.lblTheme.Size = new System.Drawing.Size(52, 19);
+            this.lblTheme.Size = new System.Drawing.Size(53, 19);
             this.lblTheme.TabIndex = 0;
             this.lblTheme.Text = "Theme:";
             // 
@@ -714,9 +712,9 @@
             // 
             this.lblOverlayFont.AutoSize = true;
             this.lblOverlayFont.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOverlayFont.Location = new System.Drawing.Point(14, 355);
+            this.lblOverlayFont.Location = new System.Drawing.Point(6, 355);
             this.lblOverlayFont.Name = "lblOverlayFont";
-            this.lblOverlayFont.Size = new System.Drawing.Size(133, 19);
+            this.lblOverlayFont.Size = new System.Drawing.Size(140, 19);
             this.lblOverlayFont.TabIndex = 0;
             this.lblOverlayFont.Text = "Custom Overlay Font";
             // 
@@ -863,7 +861,7 @@
             this.lblCycleTimeSeconds.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCycleTimeSeconds.Location = new System.Drawing.Point(10, 192);
             this.lblCycleTimeSeconds.Name = "lblCycleTimeSeconds";
-            this.lblCycleTimeSeconds.Size = new System.Drawing.Size(76, 19);
+            this.lblCycleTimeSeconds.Size = new System.Drawing.Size(77, 19);
             this.lblCycleTimeSeconds.TabIndex = 0;
             this.lblCycleTimeSeconds.Text = "Cycle Time:";
             // 
@@ -873,7 +871,7 @@
             this.lblCycleTimeSecondsTag.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCycleTimeSecondsTag.Location = new System.Drawing.Point(116, 192);
             this.lblCycleTimeSecondsTag.Name = "lblCycleTimeSecondsTag";
-            this.lblCycleTimeSecondsTag.Size = new System.Drawing.Size(27, 19);
+            this.lblCycleTimeSecondsTag.Size = new System.Drawing.Size(28, 19);
             this.lblCycleTimeSecondsTag.TabIndex = 0;
             this.lblCycleTimeSecondsTag.Text = "sec";
             // 
@@ -929,9 +927,9 @@
             // 
             this.lblWinsFilter.AutoSize = true;
             this.lblWinsFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblWinsFilter.Location = new System.Drawing.Point(501, 18);
+            this.lblWinsFilter.Location = new System.Drawing.Point(500, 18);
             this.lblWinsFilter.Name = "lblWinsFilter";
-            this.lblWinsFilter.Size = new System.Drawing.Size(110, 19);
+            this.lblWinsFilter.Size = new System.Drawing.Size(114, 19);
             this.lblWinsFilter.TabIndex = 0;
             this.lblWinsFilter.Text = "Wins / Final Filter";
             // 
@@ -960,7 +958,7 @@
             this.lblQualifyFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblQualifyFilter.Location = new System.Drawing.Point(486, 53);
             this.lblQualifyFilter.Name = "lblQualifyFilter";
-            this.lblQualifyFilter.Size = new System.Drawing.Size(124, 19);
+            this.lblQualifyFilter.Size = new System.Drawing.Size(128, 19);
             this.lblQualifyFilter.TabIndex = 0;
             this.lblQualifyFilter.Text = "Qualify / Gold Filter";
             // 
@@ -987,9 +985,9 @@
             this.lblFastestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFastestFilter.AutoSize = true;
             this.lblFastestFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblFastestFilter.Location = new System.Drawing.Point(472, 88);
+            this.lblFastestFilter.Location = new System.Drawing.Point(466, 88);
             this.lblFastestFilter.Name = "lblFastestFilter";
-            this.lblFastestFilter.Size = new System.Drawing.Size(138, 19);
+            this.lblFastestFilter.Size = new System.Drawing.Size(148, 19);
             this.lblFastestFilter.TabIndex = 0;
             this.lblFastestFilter.Text = "Fastest / Longest Filter";
             // 
@@ -1064,9 +1062,9 @@
             this.lblOverlayOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayOpacity.AutoSize = true;
             this.lblOverlayOpacity.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOverlayOpacity.Location = new System.Drawing.Point(482, 194);
+            this.lblOverlayOpacity.Location = new System.Drawing.Point(481, 194);
             this.lblOverlayOpacity.Name = "lblOverlayOpacity";
-            this.lblOverlayOpacity.Size = new System.Drawing.Size(128, 19);
+            this.lblOverlayOpacity.Size = new System.Drawing.Size(133, 19);
             this.lblOverlayOpacity.TabIndex = 0;
             this.lblOverlayOpacity.Text = "Background Opacity";
             // 
@@ -1077,7 +1075,7 @@
             this.lblOverlayColor.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayColor.Location = new System.Drawing.Point(531, 163);
             this.lblOverlayColor.Name = "lblOverlayColor";
-            this.lblOverlayColor.Size = new System.Drawing.Size(79, 19);
+            this.lblOverlayColor.Size = new System.Drawing.Size(82, 19);
             this.lblOverlayColor.TabIndex = 0;
             this.lblOverlayColor.Text = "Background";
             // 
@@ -1106,7 +1104,7 @@
             this.lblOverlayBackground.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblOverlayBackground.Location = new System.Drawing.Point(490, 125);
             this.lblOverlayBackground.Name = "lblOverlayBackground";
-            this.lblOverlayBackground.Size = new System.Drawing.Size(120, 19);
+            this.lblOverlayBackground.Size = new System.Drawing.Size(124, 19);
             this.lblOverlayBackground.TabIndex = 0;
             this.lblOverlayBackground.Text = "Background Image";
             // 
@@ -1355,6 +1353,7 @@
             this.grpOverlay.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

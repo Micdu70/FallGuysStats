@@ -626,8 +626,8 @@ namespace FallGuysStats {
                 this.txtGameExeLocation.Visible = false;
 
                 if (this.DisplayLang == 0) { // English
-                    this.txtGameShortcutLocation.Location = new Point(267, 23);
-                    this.txtGameShortcutLocation.Size = new Size(508, 25);
+                    this.txtGameShortcutLocation.Location = new Point(277, 23);
+                    this.txtGameShortcutLocation.Size = new Size(498, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_location", "eng");
                 } else if (this.DisplayLang == 1) { // French
                     this.txtGameShortcutLocation.Location = new Point(215, 23);
@@ -638,8 +638,8 @@ namespace FallGuysStats {
                     this.txtGameShortcutLocation.Size = new Size(497, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_location", "kor");
                 } else if (this.DisplayLang == 3) { // Japanese
-                    this.txtGameShortcutLocation.Location = new Point(293, 23);
-                    this.txtGameShortcutLocation.Size = new Size(482, 25);
+                    this.txtGameShortcutLocation.Location = new Point(260, 23);
+                    this.txtGameShortcutLocation.Size = new Size(515, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_shortcut_location", "jpn");
                 } else if (this.DisplayLang == 4) { // Simplified Chinese
                     this.txtGameShortcutLocation.Location = new Point(252, 23);
@@ -657,8 +657,8 @@ namespace FallGuysStats {
                 this.txtGameExeLocation.Visible = true;
 
                 if (this.DisplayLang == 0) { // English
-                    this.txtGameExeLocation.Location = new Point(240, 23);
-                    this.txtGameExeLocation.Size = new Size(535, 25);
+                    this.txtGameExeLocation.Location = new Point(250, 23);
+                    this.txtGameExeLocation.Size = new Size(525, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_exe_location", "eng");
                 } else if (this.DisplayLang == 1) { // French
                     this.txtGameExeLocation.Location = new Point(195, 23);
@@ -669,8 +669,8 @@ namespace FallGuysStats {
                     this.txtGameExeLocation.Size = new Size(525, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_exe_location", "kor");
                 } else if (this.DisplayLang == 3) { // Japanese
-                    this.txtGameExeLocation.Location = new Point(280, 23);
-                    this.txtGameExeLocation.Size = new Size(495, 25);
+                    this.txtGameExeLocation.Location = new Point(260, 23);
+                    this.txtGameExeLocation.Size = new Size(515, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWordWithLang("settings_fall_guys_exe_location", "jpn");
                 } else if (this.DisplayLang == 4) { // Simplified Chinese
                     this.txtGameExeLocation.Location = new Point(224, 23);
@@ -750,22 +750,23 @@ namespace FallGuysStats {
 
             if (this.DisplayLang == 0) {
                 // English
-                this.txtLogPath.Location = new Point(103, 73);
+                this.txtLogPath.Location = new Point(105, 73);
                 this.txtLogPath.Size = new Size(760, 22);
                 this.lblLogPathNote.Location = new Point(103, 98);
 
-                this.txtPreviousWins.Location = new Point(120, 72);
+                this.txtPreviousWins.Location = new Point(126, 72);
                 this.lblPreviousWinsNote.Location = new Point(170, 72);
+                this.lblTheme.Location = new Point(221, 22);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(235, 55);
 
-                this.lblWinsFilter.Location = new Point(501, 23);
-                this.lblQualifyFilter.Location = new Point(487, 58);
-                this.lblFastestFilter.Location = new Point(473, 93);
-                this.lblOverlayBackground.Location = new Point(491, 126);
-                this.lblOverlayColor.Location = new Point(532, 168);
-                this.lblOverlayOpacity.Location = new Point(482, 195);
+                this.lblWinsFilter.Location = new Point(500, 23);
+                this.lblQualifyFilter.Location = new Point(486, 58);
+                this.lblFastestFilter.Location = new Point(466, 93);
+                this.lblOverlayBackground.Location = new Point(489, 126);
+                this.lblOverlayColor.Location = new Point(531, 168);
+                this.lblOverlayOpacity.Location = new Point(481, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(90, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(118, 192);
@@ -774,32 +775,33 @@ namespace FallGuysStats {
                 this.lblGameExeLocation.Location = new Point(113, 23);
                 this.chkLaunchGameOnStart.Location = new Point(118, 55);
                 if (this.LaunchPlatform == 0) {
-                    this.txtGameShortcutLocation.Location = new Point(267, 23);
-                    this.txtGameShortcutLocation.Size = new Size(508, 25);
+                    this.txtGameShortcutLocation.Location = new Point(277, 23);
+                    this.txtGameShortcutLocation.Size = new Size(498, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_shortcut_location");
                 } else {
-                    this.txtGameExeLocation.Location = new Point(267, 23);
-                    this.txtGameExeLocation.Size = new Size(508, 25);
+                    this.txtGameExeLocation.Location = new Point(250, 23);
+                    this.txtGameExeLocation.Size = new Size(525, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
             } else if (this.DisplayLang == 1) {
                 // French
-                this.txtLogPath.Location = new Point(188, 73);
-                this.txtLogPath.Size = new Size(675, 22);
-                this.lblLogPathNote.Location = new Point(188, 98);
+                this.txtLogPath.Location = new Point(195, 73);
+                this.txtLogPath.Size = new Size(670, 22);
+                this.lblLogPathNote.Location = new Point(194, 98);
 
-                this.txtPreviousWins.Location = new Point(154, 72);
+                this.txtPreviousWins.Location = new Point(158, 72);
                 this.lblPreviousWinsNote.Location = new Point(200, 72);
+                this.lblTheme.Location = new Point(221, 22);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(290, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(300, 55);
 
-                this.lblWinsFilter.Location = new Point(477, 23);
-                this.lblQualifyFilter.Location = new Point(491, 58);
-                this.lblFastestFilter.Location = new Point(444, 93);
-                this.lblOverlayBackground.Location = new Point(480, 126);
-                this.lblOverlayColor.Location = new Point(516, 168);
-                this.lblOverlayOpacity.Location = new Point(533, 195);
+                this.lblWinsFilter.Location = new Point(473, 23);
+                this.lblQualifyFilter.Location = new Point(489, 58);
+                this.lblFastestFilter.Location = new Point(439, 93);
+                this.lblOverlayBackground.Location = new Point(481, 126);
+                this.lblOverlayColor.Location = new Point(515, 168);
+                this.lblOverlayOpacity.Location = new Point(534, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(190, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(218, 192);
@@ -818,22 +820,23 @@ namespace FallGuysStats {
                 }
             } else if (this.DisplayLang == 2) {
                 // Korean
-                this.txtLogPath.Location = new Point(114, 73);
-                this.txtLogPath.Size = new Size(749, 22);
+                this.txtLogPath.Location = new Point(115, 73);
+                this.txtLogPath.Size = new Size(750, 22);
                 this.lblLogPathNote.Location = new Point(114, 98);
 
-                this.txtPreviousWins.Location = new Point(116, 72);
+                this.txtPreviousWins.Location = new Point(118, 72);
                 this.lblPreviousWinsNote.Location = new Point(166, 72);
+                this.lblTheme.Location = new Point(234, 22);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(228, 55);
 
                 this.lblWinsFilter.Location = new Point(465, 23);
                 this.lblQualifyFilter.Location = new Point(483, 58);
                 this.lblFastestFilter.Location = new Point(433, 93);
                 this.lblOverlayBackground.Location = new Point(478, 126);
                 this.lblOverlayColor.Location = new Point(492, 168);
-                this.lblOverlayOpacity.Location = new Point(464, 195);
+                this.lblOverlayOpacity.Location = new Point(466, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(90, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(118, 192);
@@ -852,22 +855,23 @@ namespace FallGuysStats {
                 }
             } else if (this.DisplayLang == 3) {
                 // Japanese
-                this.txtLogPath.Location = new Point(136, 73);
-                this.txtLogPath.Size = new Size(727, 22);
-                this.lblLogPathNote.Location = new Point(67, 98);
+                this.txtLogPath.Location = new Point(120, 73);
+                this.txtLogPath.Size = new Size(745, 22);
+                this.lblLogPathNote.Location = new Point(118, 98);
 
                 this.txtPreviousWins.Location = new Point(127, 72);
                 this.lblPreviousWinsNote.Location = new Point(172, 72);
+                this.lblTheme.Location = new Point(221, 22);
 
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(240, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(233, 55);
 
-                this.lblWinsFilter.Location = new Point(430, 23);
-                this.lblQualifyFilter.Location = new Point(430, 58);
-                this.lblFastestFilter.Location = new Point(401, 93);
-                this.lblOverlayBackground.Location = new Point(469, 126);
-                this.lblOverlayColor.Location = new Point(455, 168);
-                this.lblOverlayOpacity.Location = new Point(413, 195);
+                this.lblWinsFilter.Location = new Point(446, 23);
+                this.lblQualifyFilter.Location = new Point(456, 58);
+                this.lblFastestFilter.Location = new Point(417, 93);
+                this.lblOverlayBackground.Location = new Point(487, 126);
+                this.lblOverlayColor.Location = new Point(474, 168);
+                this.lblOverlayOpacity.Location = new Point(435, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(110, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(138, 192);
@@ -876,32 +880,33 @@ namespace FallGuysStats {
                 this.lblGameExeLocation.Location = new Point(113, 23);
                 this.chkLaunchGameOnStart.Location = new Point(118, 55);
                 if (this.LaunchPlatform == 0) {
-                    this.txtGameShortcutLocation.Location = new Point(293, 23);
-                    this.txtGameShortcutLocation.Size = new Size(482, 25);
+                    this.txtGameShortcutLocation.Location = new Point(260, 23);
+                    this.txtGameShortcutLocation.Size = new Size(515, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_shortcut_location");
                 } else {
-                    this.txtGameExeLocation.Location = new Point(280, 23);
-                    this.txtGameExeLocation.Size = new Size(495, 25);
+                    this.txtGameExeLocation.Location = new Point(260, 23);
+                    this.txtGameExeLocation.Size = new Size(515, 25);
                     this.lblGameExeLocation.Text = Multilingual.GetWord("settings_fall_guys_exe_location");
                 }
             } else if (this.DisplayLang == 4) {
                 // Simplified Chinese
-                this.txtLogPath.Location = new Point(109, 73);
-                this.txtLogPath.Size = new Size(754, 22);
+                this.txtLogPath.Location = new Point(110, 73);
+                this.txtLogPath.Size = new Size(755, 22);
                 this.lblLogPathNote.Location = new Point(109, 98);
 
                 this.txtPreviousWins.Location = new Point(110, 72);
                 this.lblPreviousWinsNote.Location = new Point(155, 72);
+                this.lblTheme.Location = new Point(230, 22);
 
                 this.lnkAboutFallalytics.Location = new Point(80, 0);
-                this.txtFallalyticsAPIKey.Location = new Point(225, 55);
+                this.txtFallalyticsAPIKey.Location = new Point(220, 55);
 
                 this.lblWinsFilter.Location = new Point(500, 23);
                 this.lblQualifyFilter.Location = new Point(500, 58);
                 this.lblFastestFilter.Location = new Point(500, 93);
                 this.lblOverlayBackground.Location = new Point(555, 126);
                 this.lblOverlayColor.Location = new Point(569, 168);
-                this.lblOverlayOpacity.Location = new Point(513, 195);
+                this.lblOverlayOpacity.Location = new Point(515, 195);
 
                 this.txtCycleTimeSeconds.Location = new Point(87, 192);
                 this.lblCycleTimeSecondsTag.Location = new Point(116, 192);

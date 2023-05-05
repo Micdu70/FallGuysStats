@@ -359,7 +359,7 @@ namespace FallGuysStats {
             this.dataGridViewCellStyle2.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(49, 51, 56);
             this.dataGridViewCellStyle2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
             this.dataGridViewCellStyle2.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
-            this.dataGridViewCellStyle2.SelectionForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.Black;
+            //this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
 
             foreach (Control c1 in Controls) {
                 if (c1 is MenuStrip ms1) {
@@ -1764,7 +1764,7 @@ namespace FallGuysStats {
                 this.lblBronzeMedal.Visible = this.BronzeMedals != 0 || this.CustomBronzeMedals != 0;
                 this.lblPinkMedal.Visible = this.PinkMedals != 0 || this.CustomPinkMedals != 0;
                 this.lblEliminatedMedal.Visible = this.EliminatedMedals != 0 || this.CustomEliminatedMedals != 0;
-                
+
                 this.lblKudos.Text = $"{this.Kudos}";
                 this.lblKudos.Visible = this.Kudos != 0;
                 this.gridDetails.Refresh();
@@ -2053,10 +2053,10 @@ namespace FallGuysStats {
                 if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name" || this.gridDetails.Columns[e.ColumnIndex].Name == "RoundIcon") {
                     LevelStats stats = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
                     using (LevelDetails levelDetails = new LevelDetails {
-                               LevelName = stats.Name,
-                               RoundIcon = stats.RoundIcon,
-                               StatsForm = this
-                           }) {
+                        LevelName = stats.Name,
+                        RoundIcon = stats.RoundIcon,
+                        StatsForm = this
+                    }) {
                         List<RoundInfo> rounds = stats.Stats;
                         rounds.Sort();
                         levelDetails.RoundDetails = rounds;
@@ -2222,81 +2222,93 @@ namespace FallGuysStats {
                 rounds.AddRange(StatDetails[i].Stats);
             }
             rounds.Sort();
-            
+
             using (StatsDisplay display = new StatsDisplay {
-                       StatsForm = this,
-                       Text = $"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}",
-                       BackImage = Properties.Resources.crown_icon,
-                       BackMaxSize = 32,
-                       BackImagePadding = new Padding(20, 20, 0, 0)
-                   })
-            {
+                StatsForm = this,
+                Text = $"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}",
+                BackImage = Properties.Resources.crown_icon,
+                BackMaxSize = 32,
+                BackImagePadding = new Padding(20, 20, 0, 0)
+            }) {
                 ArrayList dates = new ArrayList();
                 ArrayList shows = new ArrayList();
                 ArrayList finals = new ArrayList();
                 ArrayList wins = new ArrayList();
-                DateTime start = rounds[0].StartLocal;
-                int currentShows = 0;
-                int currentFinals = 0;
-                int currentWins = 0;
-                bool incrementedShows = false;
-                bool incrementedFinals = false;
-                bool incrementedWins = false;
-                for (int i = 0; i < rounds.Count; i++) {
-                    RoundInfo info = rounds[i];
-                    if (info.PrivateLobby) { continue; }
+                if (rounds.Count > 0) {
+                    DateTime start = rounds[0].StartLocal;
+                    int currentShows = 0;
+                    int currentFinals = 0;
+                    int currentWins = 0;
+                    bool incrementedShows = false;
+                    bool incrementedFinals = false;
+                    bool incrementedWins = false;
+                    for (int i = 0; i < rounds.Count; i++) {
+                        RoundInfo info = rounds[i];
+                        if (info.PrivateLobby) { continue; }
 
-                    if (info.Round == 1) {
-                        currentShows++;
-                        incrementedShows = true;
-                    }
-
-                    if (info.Crown || info.IsFinal) {
-                        currentFinals++;
-                        incrementedFinals = true;
-                        if (info.Qualified) {
-                            currentWins++;
-                            incrementedWins = true;
-                        }
-                    }
-
-                    if (info.StartLocal.Date > start.Date && (incrementedShows || incrementedFinals)) {
-                        dates.Add(start.Date.ToOADate());
-                        shows.Add(Convert.ToDouble(incrementedShows ? --currentShows : currentShows));
-                        finals.Add(Convert.ToDouble(incrementedFinals ? --currentFinals : currentFinals));
-                        wins.Add(Convert.ToDouble(incrementedWins ? --currentWins : currentWins));
-
-                        int daysWithoutStats = (int)(info.StartLocal.Date - start.Date).TotalDays - 1;
-                        while (daysWithoutStats > 0) {
-                            daysWithoutStats--;
-                            start = start.Date.AddDays(1);
-                            dates.Add(start.ToOADate());
-                            shows.Add(0D);
-                            finals.Add(0D);
-                            wins.Add(0D);
+                        if (info.Round == 1) {
+                            currentShows++;
+                            incrementedShows = true;
                         }
 
-                        currentShows = incrementedShows ? 1 : 0;
-                        currentFinals = incrementedFinals ? 1 : 0;
-                        currentWins = incrementedWins ? 1 : 0;
-                        start = info.StartLocal;
+                        if (info.Crown || info.IsFinal) {
+                            currentFinals++;
+                            incrementedFinals = true;
+                            if (info.Qualified) {
+                                currentWins++;
+                                incrementedWins = true;
+                            }
+                        }
+
+                        if (info.StartLocal.Date > start.Date && (incrementedShows || incrementedFinals)) {
+                            dates.Add(start.Date.ToOADate());
+                            shows.Add(Convert.ToDouble(incrementedShows ? --currentShows : currentShows));
+                            finals.Add(Convert.ToDouble(incrementedFinals ? --currentFinals : currentFinals));
+                            wins.Add(Convert.ToDouble(incrementedWins ? --currentWins : currentWins));
+
+                            int daysWithoutStats = (int)(info.StartLocal.Date - start.Date).TotalDays - 1;
+                            while (daysWithoutStats > 0) {
+                                daysWithoutStats--;
+                                start = start.Date.AddDays(1);
+                                dates.Add(start.ToOADate());
+                                shows.Add(0D);
+                                finals.Add(0D);
+                                wins.Add(0D);
+                            }
+
+                            currentShows = incrementedShows ? 1 : 0;
+                            currentFinals = incrementedFinals ? 1 : 0;
+                            currentWins = incrementedWins ? 1 : 0;
+                            start = info.StartLocal;
+                        }
+
+                        incrementedShows = false;
+                        incrementedFinals = false;
+                        incrementedWins = false;
                     }
 
-                    incrementedShows = false;
-                    incrementedFinals = false;
-                    incrementedWins = false;
+                    dates.Add(start.Date.ToOADate());
+                    shows.Add(Convert.ToDouble(currentShows));
+                    finals.Add(Convert.ToDouble(currentFinals));
+                    wins.Add(Convert.ToDouble(currentWins));
+
+                    display.manualSpacing = (int)Math.Ceiling(dates.Count / 28D);
+                    display.dates = (double[])dates.ToArray(typeof(double));
+                    display.shows = (double[])shows.ToArray(typeof(double));
+                    display.finals = (double[])finals.ToArray(typeof(double));
+                    display.wins = (double[])wins.ToArray(typeof(double));
+                } else {
+                    dates.Add(DateTime.Now.Date.ToOADate());
+                    shows.Add(0D);
+                    finals.Add(0D);
+                    wins.Add(0D);
+
+                    display.manualSpacing = 1;
+                    display.dates = (double[])dates.ToArray(typeof(double));
+                    display.shows = (double[])shows.ToArray(typeof(double));
+                    display.finals = (double[])finals.ToArray(typeof(double));
+                    display.wins = (double[])wins.ToArray(typeof(double));
                 }
-
-                dates.Add(start.Date.ToOADate());
-                shows.Add(Convert.ToDouble(currentShows));
-                finals.Add(Convert.ToDouble(currentFinals));
-                wins.Add(Convert.ToDouble(currentWins));
-
-                display.manualSpacing = (int)Math.Ceiling(dates.Count / 28D);
-                display.dates = (double[])dates.ToArray(typeof(double));
-                display.shows = (double[])shows.ToArray(typeof(double));
-                display.finals = (double[])finals.ToArray(typeof(double));
-                display.wins = (double[])wins.ToArray(typeof(double));
 
                 display.ShowDialog(this);
             }
