@@ -38,7 +38,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.167` *~ 06/05/2023*
+**Dernière version:** `v1.168` *~ 06/05/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -46,7 +46,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
 
 
-### Il y a 0 bug génant connu dans la v1.167 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.168 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -180,9 +180,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - `v1.167` *~ 06/05/2023*
+  - `v1.167` et `v1.168` *~ 06/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - ++Changé: **[FIX]** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
+    - +Corrigé: **[FIX]** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
     - ++Changé: Optimisation du programme (merci à @qutrits)
 
@@ -246,7 +246,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
      10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
 	 11) Le graphique du nombre de victoires est en forme de barres (au lieu de points)
 
-  - **v1.152/1.153** *~ 31/03/2023*
+  - `v1.152` et `1.153` *~ 31/03/2023*
   { Correction de bugs de la "FE" }
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
     - ++Changé: Les options/réglages "par défaut" sont:

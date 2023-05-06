@@ -1,8 +1,8 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.167 *~ 06/05/2023*
+  - v1.167 et v1.168 *~ 06/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - ++Changé: [FIX] Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
+    - +Corrigé: Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
     - ++Changé: Optimisation du programme (merci à @qutrits)
 
