@@ -28,17 +28,17 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Différences entre la "FE" et la Version Officielle
 
-1) La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) contrairement à la Version Officielle
-2) L'overlay de la "FE" fonctionne aussi en mode spectateur contrairement à la Version Officielle
-3) L'overlay de la "FE" indique le nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale) contrairement à la Version Officielle
----
-4) La "FE" ne possède pas d'icône de notification (systray) contrairement à la Version Officielle qui l'a récemment rajoutée
-5) La "FE" utilise toujours l'ancienne fenêtre de "Configuration" contrairement à la Version Officielle qui possède maintenant des "tuiles"
+- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) contrairement à la Version Officielle
+- L'overlay de la "FE" fonctionne aussi en mode spectateur contrairement à la Version Officielle
+- L'overlay de la "FE" indique le nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale) contrairement à la Version Officielle
+
+- La "FE" ne possède pas d'icône de notification (systray) contrairement à la Version Officielle qui l'a récemment rajoutée
+- La "FE" utilise toujours l'ancienne fenêtre de "Configuration" contrairement à la Version Officielle qui possède maintenant des "tuiles"
 
 
 ## Téléchargement
 
-**Dernière version:** `v1.166` *~ 05/05/2023*
+**Dernière version:** `v1.167` *~ 06/05/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -46,7 +46,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
 
 
-### Il y a 0 bug génant connu dans la v1.166 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.167 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -78,7 +78,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 **Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?**
 
-------> Cela peut signifier deux choses : Soit une manche jouée dans une partie personnalisée ou soit une manche jouée dans une émission qui a été quittée avant la fin de celle-ci.
+------> Cela signifie tout simplement que c'est une manche jouée dans une Partie Personnalisée.
 
 
 ## Thème
@@ -180,6 +180,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - `v1.167` *~ 06/05/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Changé: **[FIX]** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
+    - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
+    - ++Changé: Optimisation du programme (merci à @qutrits)
+
   - `v1.166` *~ 05/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.155) datant du 04/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: Détection des Kudos gagnés à la fin d'une émission (merci à @qutrits)
@@ -216,7 +222,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
   - `v1.156` *~ 07/04/2023*
     - +Corrigé: Détection comme manche finale pour les émissions de type "Contre-la-montre"
     - +Corrigé: Bug (uniquement visuel) des valeurs dans la fenêtre principale du tracker dans certains scénarios
-    - ++Changé: Les émissions non terminées seront maintenant traitées comme si c'était des Parties Personnalisées => Pour une meilleure visibilité entre les émissions terminées et non terminées
+    - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des Parties Personnalisées (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
     - ++Changé: Divers changements mineurs...
 
   - `v1.155` *~ 05/04/2023*
@@ -359,6 +365,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.157`
+    - Program optimization
+  - `1.156`
+    - Added the option to use the system tray icon **[Non ajoutée dans la "FE"]**
   - `1.155`
     - UI updates
   - `1.154`

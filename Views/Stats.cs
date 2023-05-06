@@ -2667,7 +2667,7 @@ namespace FallGuysStats {
                     Version newVersion = new Version(assemblyInfo.Substring(index + 17, indexEnd - index - 17));
                     if (newVersion > currentVersion) {
                         if (MessageBox.Show(this,
-                                $"{Multilingual.GetWord("message_update_question_prefix")} (v{newVersion.ToString(2)}) {Multilingual.GetWord("message_update_question_suffix")}",
+                                $"{Multilingual.GetWord("message_update_question_prefix")} ( v{newVersion.ToString(2)} ) {Multilingual.GetWord("message_update_question_suffix")}",
                                 $"{Multilingual.GetWord("message_update_question_caption")}",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             this.SaveWindowState();
