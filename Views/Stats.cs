@@ -118,12 +118,13 @@ namespace FallGuysStats {
         public List<Profiles> AllProfiles = new List<Profiles>();
         public List<ToolStripMenuItem> ProfileMenuItems = new List<ToolStripMenuItem>();
         public UserSettings CurrentSettings;
-        private readonly Overlay overlay;
+        private Overlay overlay;
         private DateTime lastAddedShow = DateTime.MinValue;
-        private readonly DateTime startupTime = DateTime.UtcNow;
+        private DateTime startupTime = DateTime.UtcNow;
         private int askedPreviousShows = 0;
-        private readonly TextInfo textInfo;
+        private TextInfo textInfo;
         private int currentProfile;
+        private int currentLanguage;
         private Color infoStripForeColor;
 
         private readonly Image numberOne = ImageOpacity(Properties.Resources.number_1, 0.5F);
@@ -176,6 +177,12 @@ namespace FallGuysStats {
                         this.CurrentSettings.EnableFallalyticsReporting = true;
                         this.CurrentSettings.Version = 29;
                         this.CurrentSettings.FrenchyEditionDB = 6;
+                        this.UserSettings.Upsert(this.CurrentSettings);
+                    }
+                    if (this.CurrentSettings.FrenchyEditionDB == 6) {
+                        this.CurrentSettings.SystemTrayIcon = false;
+                        this.CurrentSettings.Version = 30;
+                        this.CurrentSettings.FrenchyEditionDB = 7;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -334,48 +341,28 @@ namespace FallGuysStats {
         }
 
         private void SetTheme(MetroThemeStyle theme) {
+            if (this.Theme == theme) return;
             this.Theme = theme;
-
-            foreach (object item in this.gridDetails.CMenu.Items) {
-                if (item is ToolStripMenuItem tsi) {
-                    tsi.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
-                    tsi.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                    tsi.MouseEnter += CMenu_MouseEnter;
-                    tsi.MouseLeave += CMenu_MouseLeave;
-                    switch (tsi.Name) {
-                        case "exportItemCSV":
-                        case "exportItemHTML":
-                        case "exportItemBBCODE":
-                        case "exportItemMD":
-                            tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray; break;
-                    }
-                }
-            }
-
-            this.dataGridViewCellStyle1.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(2, 2, 2);
-            this.dataGridViewCellStyle1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-            this.dataGridViewCellStyle1.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.Cyan : Color.DarkSlateBlue;
-            //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            this.dataGridViewCellStyle2.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(49, 51, 56);
-            this.dataGridViewCellStyle2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
-            this.dataGridViewCellStyle2.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
-            //this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
 
             foreach (Control c1 in Controls) {
                 if (c1 is MenuStrip ms1) {
                     foreach (ToolStripMenuItem tsmi1 in ms1.Items) {
                         switch (tsmi1.Name) {
                             case "menuSettings":
-                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
+                                break;
                             case "menuFilters":
-                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon; break;
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon;
+                                break;
                             case "menuProfile":
-                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon; break;
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon;
+                                break;
                             //case "menuOverlay": break;
                             case "menuUpdate":
                             case "menuHelp":
-                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon; break;
-                                //case "menuLaunchFallGuys": break;
+                                tsmi1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
+                                break;
+                            //case "menuLaunchFallGuys": break;
                         }
                         tsmi1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
@@ -398,7 +385,9 @@ namespace FallGuysStats {
                     ts1.BackColor = Color.Transparent;
                     foreach (ToolStripLabel tsl1 in ts1.Items) {
                         switch (tsl1.Name) {
-                            case "lblCurrentProfile": tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192); break;
+                            case "lblCurrentProfile":
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192);
+                                break;
                             case "lblTotalTime":
                                 tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.clock_icon : Properties.Resources.clock_gray_icon;
                                 tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
@@ -420,11 +409,40 @@ namespace FallGuysStats {
                             case "lblBronzeMedal":
                             case "lblPinkMedal":
                             case "lblEliminatedMedal":
-                            case "lblKudos": tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray; break;
+                            case "lblKudos":
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                break;
                         }
                     }
                 }
             }
+
+            foreach (object item in this.gridDetails.CMenu.Items) {
+                if (item is ToolStripMenuItem tsi) {
+                    tsi.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
+                    tsi.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                    tsi.MouseEnter += this.CMenu_MouseEnter;
+                    tsi.MouseLeave += this.CMenu_MouseLeave;
+                    switch (tsi.Name) {
+                        case "exportItemCSV":
+                        case "exportItemHTML":
+                        case "exportItemBBCODE":
+                        case "exportItemMD":
+                            tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
+                            break;
+                    }
+                }
+            }
+
+            this.dataGridViewCellStyle1.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(2, 2, 2);
+            this.dataGridViewCellStyle1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+            this.dataGridViewCellStyle1.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.Cyan : Color.DarkSlateBlue;
+            //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            this.dataGridViewCellStyle2.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(49, 51, 56);
+            this.dataGridViewCellStyle2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
+            this.dataGridViewCellStyle2.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
+            this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+
             this.Refresh();
         }
         private void CMenu_MouseEnter(object sender, EventArgs e) {
@@ -435,7 +453,8 @@ namespace FallGuysStats {
                     case "exportItemHTML":
                     case "exportItemBBCODE":
                     case "exportItemMD":
-                        tsi.Image = Properties.Resources.export; break;
+                        tsi.Image = Properties.Resources.export;
+                        break;
                 }
             }
         }
@@ -447,37 +466,56 @@ namespace FallGuysStats {
                     case "exportItemHTML":
                     case "exportItemBBCODE":
                     case "exportItemMD":
-                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray; break;
+                        tsi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.export : Properties.Resources.export_gray;
+                        break;
                 }
             }
         }
         private void Menu_MouseEnter(object sender, EventArgs e) {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             switch (tsmi.Name) {
-                case "menuSettings": tsmi.Image = Properties.Resources.setting_icon; break;
-                case "menuFilters": tsmi.Image = Properties.Resources.filter_icon; break;
-                case "menuProfile": tsmi.Image = Properties.Resources.profile_icon; break;
+                case "menuSettings":
+                    tsmi.Image = Properties.Resources.setting_icon;
+                    break;
+                case "menuFilters":
+                    tsmi.Image = Properties.Resources.filter_icon;
+                    break;
+                case "menuProfile":
+                    tsmi.Image = Properties.Resources.profile_icon;
+                    break;
                 //case "menuOverlay": break;
                 case "menuUpdate":
                 case "menuHelp":
-                    tsmi.Image = Properties.Resources.github_icon; break;
+                    tsmi.Image = Properties.Resources.github_icon;
+                    break;
                 //case "menuLaunchFallGuys": break;
-                case "menuEditProfiles": tsmi.Image = Properties.Resources.setting_icon; break;
+                case "menuEditProfiles":
+                    tsmi.Image = Properties.Resources.setting_icon;
+                    break;
             }
             tsmi.ForeColor = Color.Black;
         }
         private void Menu_MouseLeave(object sender, EventArgs e) {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
             switch (tsmi.Name) {
-                case "menuSettings": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
-                case "menuFilters": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon; break;
-                case "menuProfile": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon; break;
+                case "menuSettings":
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
+                    break;
+                case "menuFilters":
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.filter_icon : Properties.Resources.filter_gray_icon;
+                    break;
+                case "menuProfile":
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.profile_icon : Properties.Resources.profile_gray_icon;
+                    break;
                 //case "menuOverlay": break;
                 case "menuUpdate":
                 case "menuHelp":
-                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon; break;
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.github_icon : Properties.Resources.github_gray_icon;
+                    break;
                 //case "menuLaunchFallGuys": break;
-                case "menuEditProfiles": tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; break;
+                case "menuEditProfiles":
+                    tsmi.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
+                    break;
             }
             tsmi.ForeColor = this.Theme == MetroThemeStyle.Dark ? Color.DarkGray : Color.Black;
         }
@@ -1032,6 +1070,12 @@ namespace FallGuysStats {
                 this.CurrentSettings.Version = 29;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.Version == 29) {
+                this.CurrentSettings.SystemTrayIcon = true;
+                this.CurrentSettings.Version = 30;
+                this.SaveUserSettings();
+            }
         }
 
         private UserSettings GetDefaultSettings() {
@@ -1086,6 +1130,7 @@ namespace FallGuysStats {
                 AutoUpdate = true,
                 PreventMouseCursorBugs = false,
                 MaximizedWindowState = false,
+                SystemTrayIcon = false,
                 StartMinimized = false,
                 FormLocationX = null,
                 FormLocationY = null,
@@ -1101,8 +1146,8 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
-                Version = 29,
-                FrenchyEditionDB = 6
+                Version = 30,
+                FrenchyEditionDB = 7
             };
         }
         private void UpdateHoopsieLegends() {
@@ -1110,7 +1155,6 @@ namespace FallGuysStats {
             string newName = this.CurrentSettings.HoopsieHeros ? Multilingual.GetWord("main_hoopsie_heroes") : Multilingual.GetWord("main_hoopsie_legends");
             if (level.Name != newName) {
                 level.Name = newName;
-                this.gridDetails.Invalidate();
             }
         }
         private void UpdateGridRoundName() {
@@ -2663,20 +2707,20 @@ namespace FallGuysStats {
                     string lastLogPath = this.CurrentSettings.LogPath;
                     if (settings.ShowDialog(this) == DialogResult.OK) {
                         this.CurrentSettings = settings.CurrentSettings;
-                        this.SuspendLayout();
                         this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
                             this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
-                        this.ResumeLayout(false);
                         this.SaveUserSettings();
-                        this.ChangeMainLanguage();
-                        this.gridDetails.ChangeContextMenuLanguage();
+                        if (this.currentLanguage != CurrentLanguage) {
+                            this.ChangeMainLanguage();
+                            this.UpdateTotals();
+                            this.gridDetails.ChangeContextMenuLanguage();
+                            this.UpdateGridRoundName();
+                            this.overlay.ChangeLanguage();
+                        }
+                        this.UpdateHoopsieLegends();
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
                         this.overlay.SetBackgroundResourcesName(this.CurrentSettings.OverlayBackgroundResourceName, this.CurrentSettings.OverlayTabResourceName);
-                        this.overlay.ChangeLanguage();
-                        this.UpdateTotals();
                         this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileId == this.GetCurrentProfileId() && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
-                        this.UpdateGridRoundName();
-                        this.UpdateHoopsieLegends();
                         this.Refresh();
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
@@ -2811,6 +2855,7 @@ namespace FallGuysStats {
             return screen;
         }
         private void ChangeMainLanguage() {
+            this.currentLanguage = CurrentLanguage;
             this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
 
             this.BackImage = this.Icon.ToBitmap();

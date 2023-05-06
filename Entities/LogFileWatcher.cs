@@ -232,19 +232,21 @@ namespace FallGuysStats {
                                             showStart = round[j].Start;
                                         }
                                         round[j].ShowStart = showStart;
-                                        round[j].PrivateLobby = true;
                                         round[j].Playing = false;
                                         round[j].Round = j + 1;
+                                        if (round[j].End == DateTime.MinValue) {
+                                            round[j].End = line.Date;
+                                        }
+                                        if (round[j].Start == DateTime.MinValue) {
+                                            round[j].Start = round[j].End;
+                                        }
                                         if (j < (round.Count - 1)) {
                                             round[j].Qualified = true;
-                                            if (round[j].Position == 0) {
+                                            if (!round[j].Finish.HasValue || round[j].Position == 0) {
                                                 round[j].Position = round[j + 1].Players;
                                             }
-                                        } else if (!round[j].DidFinish || round[j].Position == 0) {
+                                        } else if (!round[j].Finish.HasValue || round[j].Position == 0) {
                                             round[j].Position = round[j].Players;
-                                        }
-                                        if (!round[j].DidFinish) {
-                                            round[j].Finish = null;
                                         }
                                         round[j].VerifyName();
                                         round[j].ShowEnd = logRound.ShowEnd;
@@ -357,12 +359,12 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (!LogRound.IsShowCompletedOrEnded && logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.StatsForm.CurrentSettings.AutoChangeProfile) {
                     this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
                 }
-            } else if (!LogRound.IsShowCompletedOrEnded && logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
                 //Store SessionID to prevent duplicates (for Fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
             } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
@@ -458,14 +460,11 @@ namespace FallGuysStats {
             } else if (logRound.Info != null && line.Line.IndexOf($"HandleServerPlayerProgress PlayerId={logRound.CurrentPlayerID} is succeeded=", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("succeeded=True", StringComparison.OrdinalIgnoreCase);
                 if (index > 0) {
-                    logRound.Info.DidFinish = true;
                     logRound.Info.Finish = logRound.Info.End == DateTime.MinValue ? line.Date : logRound.Info.End;
                     if (line.Date > LogRound.LastRoundStart && !LogRound.succeededPlayerIds.Contains(logRound.CurrentPlayerID)) {
                         LogRound.succeededPlayerIds.Add(logRound.CurrentPlayerID);
                         LogRound.NumPlayersSucceeded++;
                     }
-                } else {
-                    logRound.Info.DidFinish = false;
                 }
                 logRound.FindingPosition = true;
             } else if (logRound.Info != null && !LogRound.IsShowCompletedOrEnded && logRound.FindingPosition && (index = line.Line.IndexOf("[ClientGameSession] NumPlayersAchievingObjective=")) > 0) {
@@ -570,14 +569,10 @@ namespace FallGuysStats {
                         if (roundInfo.Start == DateTime.MinValue) {
                             roundInfo.Start = roundInfo.End;
                         }
-                        if (!roundInfo.Finish.HasValue) {
-                            roundInfo.Finish = roundInfo.End;
-                        }
                     } else if (foundRound) {
                         if (detail.IndexOf("> Qualified: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             char qualified = detail[13];
                             roundInfo.Qualified = qualified == 'T';
-                            roundInfo.Finish = roundInfo.DidFinish || roundInfo.Qualified ? roundInfo.Finish : null;
                         } else if (detail.IndexOf("> Position: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             roundInfo.Position = int.Parse(detail.Substring(12));
                         } else if (detail.IndexOf("> Team Score: ", StringComparison.OrdinalIgnoreCase) == 0) {
