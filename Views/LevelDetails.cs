@@ -283,7 +283,6 @@ namespace FallGuysStats {
             this.gridDetails.Columns["InParty"].Visible = false;
             this.gridDetails.Columns["PrivateLobby"].Visible = false;
             this.gridDetails.Columns["Qualified"].Visible = false;
-            this.gridDetails.Columns["DidFinish"].Visible = false;
             this.gridDetails.Columns["IsFinal"].Visible = false;
             this.gridDetails.Columns["IsTeam"].Visible = false;
             if (this._showStats == 0) {
