@@ -69,6 +69,7 @@ namespace FallGuysStats {
 
         public Stats StatsForm { get; set; }
 
+        private bool autoChangeProfile;
         private string selectedShowId;
         private string sessionId;
 
@@ -76,6 +77,10 @@ namespace FallGuysStats {
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
         public event Action<DateTime> OnNewLogFileDate;
         public event Action<string> OnError;
+
+        public void SetAutoChangeProfile(bool option) {
+            this.autoChangeProfile = option;
+        }
 
         public void Start(string logDirectory, string fileName) {
             if (this.running) { return; }
@@ -195,9 +200,13 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0
-                                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0) {
+                                       || line.Line.IndexOf("[ClientGlobalGameState] Client has been disconnected", StringComparison.OrdinalIgnoreCase) > 0) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
+                            } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
+                                if (this.autoChangeProfile && !LogRound.IsShowCompletedOrEnded) {
+                                    this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
+                                }
                             }
                         }
 
@@ -210,7 +219,7 @@ namespace FallGuysStats {
                         currentFilePath = filePath;
                     }
                 } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.ToString());
+                    this.OnError?.Invoke(ex.Message);
                 }
                 Thread.Sleep(UpdateDelay);
             }
@@ -240,7 +249,7 @@ namespace FallGuysStats {
                         this.lines.Clear();
                     }
                 } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.ToString());
+                    this.OnError?.Invoke(ex.Message);
                 }
                 Thread.Sleep(UpdateDelay);
             }
@@ -339,11 +348,8 @@ namespace FallGuysStats {
                 round.Clear();
             } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
-                if (this.StatsForm.CurrentSettings.AutoChangeProfile) {
-                    this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
-                }
             } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
-                //Store SessionID to prevent duplicates (for Fallalytics)
+                //Store SessionID to prevent duplicates
                 this.sessionId = line.Line.Substring(index + 33);
             } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("RTT: ");
@@ -481,7 +487,7 @@ namespace FallGuysStats {
                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[GlobalGameStateClient] SwitchToDisconnectingState", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0
-                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0) {
+                       || line.Line.IndexOf("[ClientGlobalGameState] Client has been disconnected", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (LogRound.LastPlayedRoundStart.HasValue && !LogRound.LastPlayedRoundEnd.HasValue) {
                     LogRound.LastPlayedRoundEnd = line.Date;
                 }

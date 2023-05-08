@@ -218,12 +218,6 @@ namespace FallGuysStats {
 
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
-            this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
-            this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
-            this.logFile.OnError += this.LogFile_OnError;
-            this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
-            this.logFile.StatsForm = this;
-
             this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
             this.Profiles = this.StatsDB.GetCollection<Profiles>("Profiles");
 
@@ -244,6 +238,11 @@ namespace FallGuysStats {
                 }
             }
 
+            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
+                this.StatDetails.Add(entry.Value);
+                this.StatLookup.Add(entry.Key, entry.Value);
+            }
+
             this.RoundDetails.EnsureIndex(x => x.Name);
             this.RoundDetails.EnsureIndex(x => x.ShowID);
             this.RoundDetails.EnsureIndex(x => x.Round);
@@ -253,13 +252,7 @@ namespace FallGuysStats {
 
             this.UpdateDatabaseVersion();
 
-            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
-                this.StatDetails.Add(entry.Value);
-                this.StatLookup.Add(entry.Key, entry.Value);
-            }
-
             this.InitMainDataGridView();
-
             this.ChangeMainLanguage();
 
             this.UpdateGridRoundName();
@@ -267,7 +260,15 @@ namespace FallGuysStats {
 
             this.CurrentRound = new List<RoundInfo>();
 
-            this.overlay = new Overlay { StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName, TabResourceName = this.CurrentSettings.OverlayTabResourceName };
+            this.overlay = new Overlay { Text = @"Fall Guys Stats Overlay", StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName, TabResourceName = this.CurrentSettings.OverlayTabResourceName };
+
+            this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
+            this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
+            this.logFile.OnError += this.LogFile_OnError;
+            this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
+            this.logFile.StatsForm = this;
+            this.logFile.SetAutoChangeProfile(this.CurrentSettings.AutoChangeProfile);
+
             string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
             this.overlay.SetFixedPosition(
                     !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("ne"),
@@ -1289,15 +1290,14 @@ namespace FallGuysStats {
                 this.CurrentSettings.MaximizedWindowState = false;
             }
         }
-        private void Stats_FormClosing(object sender, FormClosingEventArgs e) {
+        private async void Stats_FormClosing(object sender, FormClosingEventArgs e) {
             try {
                 if (!this.overlay.Disposing && !this.overlay.IsDisposed && !this.IsDisposed && !this.Disposing) {
                     //this.CurrentSettings.FilterType = this.menuAllStats.Checked ? 0 : this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : 4;
                     //this.CurrentSettings.SelectedProfile = this.currentProfile;
-                    if (!this.isUpdate) {
-                        this.SaveWindowState();
-                    }
+                    if (!this.isUpdate) { this.SaveWindowState(); }
                     this.SaveUserSettings();
+                    await this.logFile.Stop();
                 }
                 this.StatsDB.Dispose();
             } catch {
@@ -2752,6 +2752,7 @@ namespace FallGuysStats {
                         this.overlay.SetBackgroundResourcesName(this.CurrentSettings.OverlayBackgroundResourceName, this.CurrentSettings.OverlayTabResourceName);
                         this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileId == this.GetCurrentProfileId() && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
                         this.Refresh();
+                        this.logFile.SetAutoChangeProfile(this.CurrentSettings.AutoChangeProfile);
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
                             (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {
