@@ -1322,14 +1322,13 @@ namespace FallGuysStats {
                 this.CurrentSettings.MaximizedWindowState = false;
             }
         }
-        private async void Stats_FormClosing(object sender, FormClosingEventArgs e) {
+        private void Stats_FormClosing(object sender, FormClosingEventArgs e) {
             try {
                 if (!this.overlay.Disposing && !this.overlay.IsDisposed && !this.IsDisposed && !this.Disposing) {
                     //this.CurrentSettings.FilterType = this.menuAllStats.Checked ? 0 : this.menuSeasonStats.Checked ? 1 : this.menuWeekStats.Checked ? 2 : this.menuDayStats.Checked ? 3 : 4;
                     //this.CurrentSettings.SelectedProfile = this.currentProfile;
                     if (!this.isUpdate) { this.SaveWindowState(); }
                     this.SaveUserSettings();
-                    await this.logFile.Stop();
                 }
                 this.StatsDB.Dispose();
             } catch {
@@ -1453,6 +1452,7 @@ namespace FallGuysStats {
                     if (!this.loadingExisting) { this.StatsDB.BeginTrans(); }
 
                     int profile = this.currentProfile;
+                    int linkedProfile = -1;
                     for (int k = 0; k < round.Count; k++) {
                         RoundInfo stat = round[k];
 
@@ -1488,12 +1488,17 @@ namespace FallGuysStats {
                                     continue;
                                 }
 
+                                if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 1) {
+                                    MenuStats_Click(this.menuAllPartyStats, null);
+                                }
+
                                 if (stat.Round == 1) {
                                     this.nextShowID++;
                                     this.lastAddedShow = stat.Start;
                                 }
                                 stat.ShowID = nextShowID;
-                                stat.Profile = profile;
+                                linkedProfile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby);
+                                stat.Profile = linkedProfile >= 0 ? linkedProfile : profile;
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
 
@@ -1501,7 +1506,7 @@ namespace FallGuysStats {
                                 //Must have enabled the setting to enable tracking
                                 //Must not be a private lobby
                                 //Must be a game that is played after FallGuysStats started
-                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > startupTime) {
+                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
                                     FallalyticsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
                                 }
                             } else {
@@ -1648,23 +1653,45 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
+        public int GetLinkedProfileId(string showId, bool isPrivateLobbies) {
+            if (string.IsNullOrEmpty(showId)) return -1;
+            for (int i = 0; i < this.AllProfiles.Count; i++) {
+                if (isPrivateLobbies) {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
+                        return this.AllProfiles.Count - 1 - i;
+                    }
+                } else {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                        return this.AllProfiles.Count - 1 - i;
+                    }
+                }
+            }
+            return -1;
+        }
         public string GetCurrentProfileLinkedShowId() {
             return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
         }
         public void SetLinkedProfile(string showId, bool isPrivateLobbies) {
-            if (string.IsNullOrEmpty(showId) && this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
+            if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
+            bool linkedProfileFound = false;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
+                        linkedProfileFound = true;
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                         if (!item.Checked) { item.PerformClick(); break; }
                     }
                 } else {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                        linkedProfileFound = true;
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                         if (!item.Checked) { item.PerformClick(); break; }
                     }
                 }
+            }
+            if (!linkedProfileFound) {
+                ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1];
+                if (!item.Checked) { item.PerformClick(); }
             }
         }
         public void SetCurrentProfileIcon(bool linked) {

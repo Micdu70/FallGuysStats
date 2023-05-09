@@ -78,8 +78,8 @@ namespace FallGuysStats {
         public event Action<DateTime> OnNewLogFileDate;
         public event Action<string> OnError;
 
-        public void SetAutoChangeProfile(bool option) {
-            this.autoChangeProfile = option;
+        public void SetAutoChangeProfile(bool isEnabled) {
+            this.autoChangeProfile = isEnabled;
         }
 
         public void Start(string logDirectory, string fileName) {
@@ -203,10 +203,6 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[ClientGlobalGameState] Client has been disconnected", StringComparison.OrdinalIgnoreCase) > 0) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
-                            } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
-                                if (this.autoChangeProfile && !LogRound.IsShowCompletedOrEnded) {
-                                    this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby);
-                                }
                             }
                         }
 
@@ -348,8 +344,9 @@ namespace FallGuysStats {
                 round.Clear();
             } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
+                if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
             } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
-                //Store SessionID to prevent duplicates
+                //Store SessionID to prevent duplicates (for fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
             } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
                 index = line.Line.IndexOf("RTT: ");
