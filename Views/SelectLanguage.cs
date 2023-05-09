@@ -3,11 +3,15 @@ using System.Windows.Forms;
 
 namespace FallGuysStats {
     public partial class SelectLanguage : MetroFramework.Forms.MetroForm {
-        public int defaultLanguage;
+        private int defaultLanguage;
         public int selectedLanguage;
+        public bool autoGenerateProfiles;
 
         public SelectLanguage(string sysLang) {
-            this.defaultLanguage = sysLang.Substring(0, 2) == "fr" ? 1 : sysLang.Substring(0, 2) == "ko" ? 2 : sysLang.Substring(0, 2) == "ja" ? 3 : sysLang.Substring(0, 2) == "zh" ? 4 : 0;
+            this.defaultLanguage = sysLang == "fr" ? 1 :
+                                    sysLang == "ko" ? 2 :
+                                    sysLang == "ja" ? 3 :
+                                    sysLang == "zh" ? 4 : 0;
             this.InitializeComponent();
         }
 
@@ -19,6 +23,10 @@ namespace FallGuysStats {
         private void CboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
             this.selectedLanguage = ((ComboBox)sender).SelectedIndex;
             this.ChangeLanguage(this.selectedLanguage);
+        }
+
+        private void ChkAutoGenerateProfile_CheckedChanged(object sender, EventArgs e) {
+            this.autoGenerateProfiles = ((CheckBox)sender).Checked;
         }
 
         private void BtnLanguageSave_Click(object sender, EventArgs e) {

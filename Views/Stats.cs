@@ -155,7 +155,31 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
-        private bool shiftKeyToggle; //, ctrlKeyToggle;
+        private bool shiftKeyToggle;//, ctrlKeyToggle;
+
+        public readonly string[] publicShowIdList = {
+            "main_show",
+            "squads_2player_template",
+            "squads_4player",
+            "event_xtreme_fall_guys_template",
+            "event_xtreme_fall_guys_squads_template",
+            "event_only_finals_v2_template",
+            "event_only_races_any_final_template",
+            "event_only_fall_ball_template",
+            "event_only_hexaring_template",
+            "event_only_floor_fall_template",
+            "event_only_floor_fall_low_grav",
+            "event_only_blast_ball_trials_template",
+            "event_only_slime_climb",
+            "event_only_jump_club_template",
+            "event_walnut_template",
+            "event_only_survival_ss2_3009_0210_2022",
+            "show_robotrampage_ss2_show1_template",
+            "event_le_anchovy_template",
+            "event_pixel_palooza_template",
+            "xtreme_party",
+            "private_lobbies"
+        };
 
         private Stats() {
             this.StatsDB = new LiteDatabase(@"data.db");
@@ -224,16 +248,24 @@ namespace FallGuysStats {
             this.StatsDB.BeginTrans();
 
             if (this.Profiles.Count() == 0) {
-                using (SelectLanguage initLanguageForm = new SelectLanguage(CultureInfo.CurrentUICulture.Name)) {
+                using (SelectLanguage initLanguageForm = new SelectLanguage(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
                     initLanguageForm.Icon = this.Icon;
                     if (initLanguageForm.ShowDialog(this) == DialogResult.OK) {
                         CurrentLanguage = initLanguageForm.selectedLanguage;
                         Overlay.SetDefaultFont(CurrentLanguage, 18);
                         this.CurrentSettings.Multilingual = initLanguageForm.selectedLanguage;
-                        this.Profiles.Insert(new Profiles { ProfileId = 3, ProfileName = Multilingual.GetWord("main_profile_custom"), ProfileOrder = 4, LinkedShowId = "private_lobbies" });
-                        this.Profiles.Insert(new Profiles { ProfileId = 2, ProfileName = Multilingual.GetWord("main_profile_squad"), ProfileOrder = 3, LinkedShowId = "squads_4player" });
-                        this.Profiles.Insert(new Profiles { ProfileId = 1, ProfileName = Multilingual.GetWord("main_profile_duo"), ProfileOrder = 2, LinkedShowId = "squads_2player_template" });
-                        this.Profiles.Insert(new Profiles { ProfileId = 0, ProfileName = Multilingual.GetWord("main_profile_solo"), ProfileOrder = 1, LinkedShowId = "main_show" });
+                        if (initLanguageForm.autoGenerateProfiles) {
+                            for (int i = this.publicShowIdList.Length; i >= 1; i--) {
+                                string showId = this.publicShowIdList[i - 1];
+                                this.Profiles.Insert(new Profiles { ProfileId = i - 1, ProfileName = Multilingual.GetShowName(showId), ProfileOrder = i, LinkedShowId = showId });
+                            }
+                            this.CurrentSettings.AutoChangeProfile = true;
+                        } else {
+                            this.Profiles.Insert(new Profiles { ProfileId = 3, ProfileName = Multilingual.GetWord("main_profile_custom"), ProfileOrder = 4, LinkedShowId = "private_lobbies" });
+                            this.Profiles.Insert(new Profiles { ProfileId = 2, ProfileName = Multilingual.GetWord("main_profile_squad"), ProfileOrder = 3, LinkedShowId = "squads_4player" });
+                            this.Profiles.Insert(new Profiles { ProfileId = 1, ProfileName = Multilingual.GetWord("main_profile_duo"), ProfileOrder = 2, LinkedShowId = "squads_2player_template" });
+                            this.Profiles.Insert(new Profiles { ProfileId = 0, ProfileName = Multilingual.GetWord("main_profile_solo"), ProfileOrder = 1, LinkedShowId = "main_show" });
+                        }
                     }
                 }
             }
@@ -2523,7 +2555,8 @@ namespace FallGuysStats {
                         if (menuItem.Checked && i - 1 >= 0) {
                             this.ProfileMenuItems[i - 1].PerformClick();
                             break;
-                        } else if (menuItem.Checked && i - 1 < 0) {
+                        }
+                        if (menuItem.Checked && i - 1 < 0) {
                             this.ProfileMenuItems[this.ProfileMenuItems.Count - 1].PerformClick();
                             break;
                         }
@@ -2531,7 +2564,8 @@ namespace FallGuysStats {
                         if (menuItem.Checked && i + 1 < this.ProfileMenuItems.Count) {
                             this.ProfileMenuItems[i + 1].PerformClick();
                             break;
-                        } else if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
+                        }
+                        if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
                             this.ProfileMenuItems[0].PerformClick();
                             break;
                         }
@@ -2543,7 +2577,8 @@ namespace FallGuysStats {
                     if (menuItem.Checked && i - 1 >= 0) {
                         this.ProfileMenuItems[i - 1].PerformClick();
                         break;
-                    } else if (menuItem.Checked && i - 1 < 0) {
+                    }
+                    if (menuItem.Checked && i - 1 < 0) {
                         this.ProfileMenuItems[this.ProfileMenuItems.Count - 1].PerformClick();
                         break;
                     }
