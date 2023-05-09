@@ -18,7 +18,7 @@ INFO: Il y a 0 bug génant connu dans la v1.168 de la "FE" (Frenchy Edition)
 
 Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?
 
-------> Cela peut signifier deux choses : Soit une manche jouée dans une partie personnalisée ou soit une manche jouée dans une émission qui a été quittée avant la fin de celle-ci.
+------> Cela signifie tout simplement que c'est une manche jouée dans une Partie Personnalisée.
 
 
 ## Raccourcis de l'overlay

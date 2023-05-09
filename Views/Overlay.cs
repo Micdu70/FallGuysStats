@@ -4,9 +4,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace FallGuysStats {
     public partial class Overlay : Form {
@@ -784,6 +786,13 @@ namespace FallGuysStats {
                     if (Finish.HasValue) {
                         TimeSpan Time = Finish.GetValueOrDefault(End) - Start;
 
+                        if (Time.ToString("m\\:ss\\.ff") == "0:00.00") {
+                            File.Create(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt"));
+                            Application.Restart();
+                            Environment.Exit(0);
+                            return;
+                        }
+
                         if (this.lastRound.Position > 0 && numPlayersSucceeded == 0) {
                             numPlayersSucceeded = -1;
                         }
@@ -807,6 +816,15 @@ namespace FallGuysStats {
                             this.lblFinish.ForeColor = Color.Gold;
                         }
                     } else if (End != DateTime.MinValue) {
+                        TimeSpan Time = End - Start;
+
+                        if (Time.ToString("m\\:ss\\.ff") == "0:00.00") {
+                            File.Create(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt"));
+                            Application.Restart();
+                            Environment.Exit(0);
+                            return;
+                        }
+
                         if (this.lastRound.Position > 0 && numPlayersSucceeded == 0) {
                             numPlayersSucceeded = -1;
                         }
@@ -817,7 +835,7 @@ namespace FallGuysStats {
                             this.lblFinish.TextRight = $"# {this.lastRound.Position} | {End - Start:m\\:ss\\.ff}";
                         }
                         this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown ? Color.White : Color.Pink;
-                    } else if (Stats.InShow && this.lastRound.Playing) {
+                    } else if (this.lastRound.Playing) {
                         if (numPlayersSucceeded > 0) {
                             this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - startTime:m\\:ss}" : $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - Start:m\\:ss}";
                         } else {
@@ -835,7 +853,9 @@ namespace FallGuysStats {
 
                     if (LogRound.LastPlayedRoundEnd.HasValue) {
                         this.lblDuration.TextRight = $"{LogRound.LastPlayedRoundEnd - LogRound.LastPlayedRoundStart:m\\:ss\\.ff}";
-                    } else if (Stats.InShow && (this.lastRound.Playing || LogRound.IsLastPlayedRoundStillPlaying)) {
+                    } else if (LogRound.IsLastPlayedRoundStillPlaying) {
+                        this.lblDuration.TextRight = $"{DateTime.UtcNow - LogRound.LastPlayedRoundStart:m\\:ss}";
+                    } else if (this.lastRound.Playing) {
                         this.lblDuration.TextRight = Start > DateTime.UtcNow ? $"{DateTime.UtcNow - startTime:m\\:ss}" : $"{DateTime.UtcNow - Start:m\\:ss}";
                     } else if (End != DateTime.MinValue) {
                         this.lblDuration.TextRight = $"{End - Start:m\\:ss\\.ff}";

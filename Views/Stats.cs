@@ -23,13 +23,31 @@ namespace FallGuysStats {
         [STAThread]
         private static void Main() {
             try {
-                bool isAppUpdated = false;
+                string bugFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt");
 #if AllowUpdate
-                if (File.Exists(Path.GetFileName(Assembly.GetEntryAssembly().Location) + ".bak")) {
-                    isAppUpdated = true;
+                bool isAppUpdatedOrRestarted = false;
+                if (File.Exists(Path.GetFileName(Assembly.GetEntryAssembly().Location) + ".bak")
+                    || File.Exists(bugFile)) {
+                    isAppUpdatedOrRestarted = true;
+                    if (File.Exists(bugFile)) {
+                        try {
+                            File.SetAttributes(bugFile, FileAttributes.Normal);
+                            File.Delete(bugFile);
+                        } catch { }
+                    }
                 }
+                if (isAppUpdatedOrRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name)) {
+#else
+                bool isAppRestarted = false;
+                if (File.Exists(bugFile)) {
+                    isAppRestarted = true;
+                    try {
+                        File.SetAttributes(bugFile, FileAttributes.Normal);
+                        File.Delete(bugFile);
+                    } catch { }
+                }
+                if (isAppRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name)) {
 #endif
-                if (isAppUpdated || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name)) {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new Stats());
@@ -72,7 +90,6 @@ namespace FallGuysStats {
         private static DateTime SessionStart = DateTime.UtcNow;
 
         public static bool InShow = false;
-        public static bool AbandonShow = false;
         public static int LastServerPing = 0;
 
         public static int CurrentLanguage = 0;

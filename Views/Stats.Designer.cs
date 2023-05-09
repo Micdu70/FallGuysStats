@@ -297,7 +297,6 @@ namespace FallGuysStats {
             this.infoStrip.Size = new System.Drawing.Size(790, 26);
             this.infoStrip.Stretch = true;
             this.infoStrip.TabIndex = 1;
-            this.infoStrip.TabStop = true;
             // 
             // lblCurrentProfile
             // 
@@ -387,7 +386,7 @@ namespace FallGuysStats {
             this.infoStrip2.Padding = new System.Windows.Forms.Padding(14, 6, 14, 1);
             this.infoStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.infoStrip2.Size = new System.Drawing.Size(828, 27);
-            this.infoStrip2.TabIndex = 14;
+            this.infoStrip2.TabIndex = 2;
             // 
             // lblTotalTime
             // 
@@ -470,7 +469,7 @@ namespace FallGuysStats {
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
             this.gridDetails.Size = new System.Drawing.Size(808, 672);
-            this.gridDetails.TabIndex = 11;
+            this.gridDetails.TabIndex = 3;
             this.gridDetails.TabStop = false;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
             this.gridDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetails_CellClick);
