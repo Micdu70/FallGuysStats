@@ -186,8 +186,6 @@ namespace FallGuysStats {
                             currentLines.Add(line);
                             if (this.ParseLine(line, round, logRound)) {
                                 LogRound.SavedRoundCount = 0;
-                                //LogRound.LastPlayedRoundStart = null;
-                                //LogRound.LastPlayedRoundEnd = null;
                                 lastDate = line.Date;
                                 offset = line.Offset;
                                 lock (this.lines) {

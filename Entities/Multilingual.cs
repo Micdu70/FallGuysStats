@@ -260,6 +260,7 @@ namespace FallGuysStats {
                             {"settings_save", "Save"},
                             {"settings_cancel", "Cancel"},
                             {"settings_select_language_title", "Select your language"},
+                            {"settings_auto_generate_profiles", "Auto-generate profiles"},
                             {"settings_select_language_button", "Confirm"},
 
                             {"overlay_streak", "WIN STREAK"},
@@ -572,6 +573,7 @@ namespace FallGuysStats {
                             {"settings_save", "Enregistrer"},
                             {"settings_cancel", "Annuler"},
                             {"settings_select_language_title", "Sélectionnez votre langue"},
+                            {"settings_auto_generate_profiles", "Génération automatique de profils"},
                             {"settings_select_language_button", "Confirmer"},
 
                             {"overlay_streak", "WIN STREAK"},
@@ -885,6 +887,7 @@ namespace FallGuysStats {
                             {"settings_save", "저장"},
                             {"settings_cancel", "취소"},
                             {"settings_select_language_title", "언어 선택"},
+                            {"settings_auto_generate_profiles", "프로필 자동 생성"},
                             {"settings_select_language_button", "확인"},
 
                             {"overlay_streak", "연승"},
@@ -1198,6 +1201,7 @@ namespace FallGuysStats {
                             {"settings_save", "保存"},
                             {"settings_cancel", "キャンセル"},
                             {"settings_select_language_title", "言語を選択"},
+                            {"settings_auto_generate_profiles", "プロファイルの自動生成"},
                             {"settings_select_language_button", "保存"},
 
                             {"overlay_streak", "連勝"},
@@ -1511,6 +1515,7 @@ namespace FallGuysStats {
                             {"settings_save", "保存"},
                             {"settings_cancel", "取消"},
                             {"settings_select_language_title", "选择你的语言"},
+                            {"settings_auto_generate_profiles", "自动生成配置文件"},
                             {"settings_select_language_button", "选择"},
 
                             {"overlay_streak", "连胜"},

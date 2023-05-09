@@ -54,7 +54,7 @@
             "🇨🇳 简体中文"});
             this.cboLanguage.Location = new System.Drawing.Point(135, 76);
             this.cboLanguage.Name = "cboLanguage";
-            this.cboLanguage.Size = new System.Drawing.Size(110, 29);
+            this.cboLanguage.Size = new System.Drawing.Size(120, 29);
             this.cboLanguage.TabIndex = 0;
             this.cboLanguage.UseSelectable = true;
             this.cboLanguage.SelectedIndexChanged += new System.EventHandler(this.CboLanguage_SelectedIndexChanged);
@@ -85,7 +85,7 @@
             // 
             // btnLanguageSave
             // 
-            this.btnLanguageSave.Location = new System.Drawing.Point(250, 143);
+            this.btnLanguageSave.Location = new System.Drawing.Point(250, 146);
             this.btnLanguageSave.Name = "btnLanguageSave";
             this.btnLanguageSave.Size = new System.Drawing.Size(75, 25);
             this.btnLanguageSave.TabIndex = 2;

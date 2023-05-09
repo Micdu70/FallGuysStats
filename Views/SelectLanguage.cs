@@ -16,8 +16,8 @@ namespace FallGuysStats {
         }
 
         private void SelectLanguage_Load(object sender, EventArgs e) {
-            this.ChangeLanguage(this.defaultLanguage);
             this.cboLanguage.SelectedIndex = this.defaultLanguage;
+            this.ChangeLanguage(this.defaultLanguage);
         }
 
         private void CboLanguage_SelectedIndexChanged(object sender, EventArgs e) {
@@ -41,6 +41,7 @@ namespace FallGuysStats {
         private void ChangeLanguage(int lang) {
             this.Font = Overlay.GetMainFont(9, lang);
             this.Text = Multilingual.GetWordWithLang("settings_select_language_title", lang);
+            this.chkAutoGenerateProfile.Text = Multilingual.GetWordWithLang("settings_auto_generate_profiles", lang);
             this.btnLanguageSave.Text = Multilingual.GetWordWithLang("settings_select_language_button", lang);
             this.Refresh();
         }
