@@ -829,9 +829,9 @@ namespace FallGuysStats {
                         }
 
                         if (numPlayersSucceeded >= 0) {
-                            this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{numPlayersSucceeded} | {End - Start:m\\:ss\\.ff}" : $"( {numPlayersSucceeded} ) | {End - Start:m\\:ss\\.ff}";
+                            this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"{this.lastRound.Position}/{numPlayersSucceeded} | {Time:m\\:ss\\.ff}" : $"( {numPlayersSucceeded} ) | {Time:m\\:ss\\.ff}";
                         } else {
-                            this.lblFinish.TextRight = $"# {this.lastRound.Position} | {End - Start:m\\:ss\\.ff}";
+                            this.lblFinish.TextRight = $"# {this.lastRound.Position} | {Time:m\\:ss\\.ff}";
                         }
                         this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing) {

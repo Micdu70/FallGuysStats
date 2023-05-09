@@ -22,7 +22,7 @@ namespace FallGuysStats {
         private bool IsEditOnEnter, readOnly;
         private bool? allowUpdate, allowNew, allowDelete;
         public Dictionary<string, SortOrder> Orders = new Dictionary<string, SortOrder>(StringComparer.OrdinalIgnoreCase);
-        private DWM_WINDOW_CORNER_PREFERENCE conerPreference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
+        private readonly DWM_WINDOW_CORNER_PREFERENCE conerPreference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
         public enum DWMWINDOWATTRIBUTE {
             DWMWA_WINDOW_CORNER_PREFERENCE = 33
         }

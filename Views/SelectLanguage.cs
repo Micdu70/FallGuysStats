@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace FallGuysStats {
     public partial class SelectLanguage : MetroFramework.Forms.MetroForm {
-        private int defaultLanguage;
+        private readonly int defaultLanguage;
         public int selectedLanguage;
         public bool autoGenerateProfiles;
 
