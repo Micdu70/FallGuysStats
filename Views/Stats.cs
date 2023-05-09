@@ -285,9 +285,11 @@ namespace FallGuysStats {
             this.UpdateDatabaseVersion();
 
             this.InitMainDataGridView();
+
             this.ChangeMainLanguage();
 
             this.UpdateGridRoundName();
+
             this.UpdateHoopsieLegends();
 
             this.CurrentRound = new List<RoundInfo>();
@@ -489,7 +491,7 @@ namespace FallGuysStats {
             this.dataGridViewCellStyle1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             this.dataGridViewCellStyle1.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.Cyan : Color.DarkSlateBlue;
             //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            this.dataGridViewCellStyle2.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(49, 51, 56);
+            this.dataGridViewCellStyle2.BackColor = this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(49, 51, 56);
             this.dataGridViewCellStyle2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
             this.dataGridViewCellStyle2.SelectionBackColor = this.Theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
             this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
@@ -1956,7 +1958,7 @@ namespace FallGuysStats {
         private void InitMainDataGridView() {
             this.dataGridViewCellStyle1.Font = Overlay.GetMainFont(10);
             this.dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //this.dataGridViewCellStyle1.BackColor = Color.LightGray;
+            this.dataGridViewCellStyle1.BackColor = Color.LightGray;
             //this.dataGridViewCellStyle1.ForeColor = Color.Black;
             //this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
             //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
