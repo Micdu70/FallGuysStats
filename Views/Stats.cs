@@ -1576,7 +1576,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, 0, null);
+                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, 0, Properties.Resources.icon_Gauntlet);
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
                             this.gridDetails.DataSource = null;

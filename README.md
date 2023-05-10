@@ -38,7 +38,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.169` *~ 10/05/2023*
+**Dernière version:** `v1.169` *~ 10/05/2023* [compatible S10 (SS4)!]
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -182,8 +182,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
   - `v1.169` *~ 10/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.159) datant du 09/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - +Corrigé: 
-    - ++Ajouté: 
+    - +Corrigé: L'ajout des stats des émissions précédentes a été amélioré (le tri des émissions en fonction des profils liés est fonctionnel)
+    - ++Ajouté: Détection d'un bug aléatoire de l'overlay (quand l'info Finish = "0:00.00") qui relancera automatiquement le tracker
+    - ++Ajouté: Support de la S10 (SS4) de Fall Guys !
 
   - `v1.167` et `v1.168` *~ 06/05/2023*
 
