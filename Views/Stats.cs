@@ -179,6 +179,7 @@ namespace FallGuysStats {
             "event_le_anchovy_template",
             "event_pixel_palooza_template",
             "xtreme_party",
+            "fall_guys_creative_mode",
             "private_lobbies"
         };
 
@@ -1576,7 +1577,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, 0, Properties.Resources.icon_Gauntlet);
+                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null);
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
                             this.gridDetails.DataSource = null;
@@ -1677,7 +1678,7 @@ namespace FallGuysStats {
         public string GetCurrentProfileLinkedShowId() {
             return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
         }
-        public void SetLinkedProfile(string showId, bool isPrivateLobbies) {
+        public void SetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
             bool linkedProfileFound = false;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
@@ -1689,11 +1690,20 @@ namespace FallGuysStats {
                         break;
                     }
                 } else {
-                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
-                        linkedProfileFound = true;
-                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { item.PerformClick(); }
-                        break;
+                    if (isCreativeShow) {
+                        if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
+                            linkedProfileFound = true;
+                            ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                            if (!item.Checked) { item.PerformClick(); }
+                            break;
+                        }
+                    } else {
+                        if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                            linkedProfileFound = true;
+                            ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                            if (!item.Checked) { item.PerformClick(); }
+                            break;
+                        }
                     }
                 }
             }
@@ -1724,7 +1734,7 @@ namespace FallGuysStats {
             };
             int lastShow = -1;
             if (!this.StatLookup.TryGetValue(name ?? string.Empty, out LevelStats currentLevel)) {
-                currentLevel = new LevelStats(name, LevelType.Unknown, false, 0, null);
+                currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null);
             }
             int profile = this.currentProfile;
 

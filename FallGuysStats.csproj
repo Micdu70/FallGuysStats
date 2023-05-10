@@ -384,6 +384,7 @@
     <None Include="Resources\bar_plot_gray_icon.png" />
     <None Include="Resources\scatter_plot_icon.png" />
     <None Include="Resources\scatter_plot_gray_icon.png" />
+    <None Include="Resources\round_icon\creative\icon_Creative.png" />
     <None Include="Resources\round_icon\final\icon_Blast_Ball.png" />
     <None Include="Resources\round_icon\final\icon_FallMountain.png" />
     <None Include="Resources\round_icon\final\icon_Hex-A-Ring.png" />
@@ -515,9 +516,6 @@
     <None Include="Resources\overlay\tab_unselected_wallpaper_02.png" />
     <None Include="Resources\overlay\tab_unselected_wallpaper_03.png" />
     <None Include="Resources\overlay\tab_unselected_watermelon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\round_icon\creative\icon_Gauntlet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

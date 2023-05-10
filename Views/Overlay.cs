@@ -717,20 +717,22 @@ namespace FallGuysStats {
 
                     StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, this.levelException);
 
-                    if (Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French
-                        if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
-                    } else {
-                        if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
-                    }
+                    //if (Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French
+                    //    if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
+                    //} else {
+                    //    if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
+                    //}
+                    if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
 
                     LevelType levelType = (level?.Type).GetValueOrDefault();
+                    this.lblRound.IsCreativeRound = level != null && level.isCreative ? true : false;
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
                         this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = Properties.Resources.icon_Gauntlet;
+                            this.lblRound.RoundIcon = Properties.Resources.round_creative_icon;
                         }
                         if (this.lblRound.RoundIcon.Height != 23) {
                             this.lblRound.ImageHeight = 23;

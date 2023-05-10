@@ -374,7 +374,7 @@ namespace FallGuysStats {
                     LogRound.LastPlayedRoundStart = null;
                     LogRound.LastPlayedRoundEnd = null;
                     Stats.InShow = true;
-                    if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
+                    if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_")); }
                 }
 
                 int index2 = line.Line.IndexOf(". ", index + 62);
@@ -499,7 +499,7 @@ namespace FallGuysStats {
                     }
                     logRound.Info.Playing = false;
                     if (!LogRound.IsShowCompletedOrEnded) {
-                        if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
+                        if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_")); }
                         DateTime showStart = DateTime.MinValue;
                         DateTime showEnd = logRound.Info.End;
                         for (int i = 0; i < round.Count; i++) {
@@ -622,7 +622,7 @@ namespace FallGuysStats {
                     return false;
                 }
 
-                if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
+                if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_")); }
 
                 DateTime showEnd = logRound.Info.End;
                 for (int i = 0; i < round.Count; i++) {
