@@ -36,7 +36,7 @@ namespace FallGuysStats {
                         } catch { }
                     }
                 }
-                if (isAppUpdatedOrRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name)) {
+                if (isAppUpdatedOrRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
 #else
                 bool isAppRestarted = false;
                 if (File.Exists(bugFile)) {
@@ -46,7 +46,7 @@ namespace FallGuysStats {
                         File.Delete(bugFile);
                     } catch { }
                 }
-                if (isAppRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name)) {
+                if (isAppRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
 #endif
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
@@ -63,7 +63,10 @@ namespace FallGuysStats {
                 for (int i = 0; i < processes.Length; i++) {
                     if (AppDomain.CurrentDomain.FriendlyName.Equals(processes[i].ProcessName + ".exe")) processCount++;
                     if (processCount > 1) {
-                        CurrentLanguage = sysLang.Substring(0, 2) == "fr" ? 1 : sysLang.Substring(0, 2) == "ko" ? 2 : sysLang.Substring(0, 2) == "ja" ? 3 : sysLang.Substring(0, 2) == "zh" ? 4 : 0;
+                        CurrentLanguage = sysLang == "fr" ? 1 :
+                                        sysLang == "ko" ? 2 :
+                                        sysLang == "ja" ? 3 :
+                                        sysLang == "zh" ? 4 : 0;
                         MessageBox.Show(Multilingual.GetWord("message_tracker_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return true;
                     }

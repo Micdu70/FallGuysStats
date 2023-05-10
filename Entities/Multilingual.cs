@@ -3010,7 +3010,7 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "Fête Xtrême"},
                     {"private_lobbies", "Partie Personnalisée"},
-                    {"fall_guys_creative_mode", "Fall Guys Creative"},
+                    {"fall_guys_creative_mode", "Créatif de Fall Guys"},
                 }
             },
             { "kor", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -3720,7 +3720,7 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "エクストリームパーティー"},
                     {"private_lobbies", "カスタムショー"},
-                    {"fall_guys_creative_mode", "Fall Guys Creative"},
+                    {"fall_guys_creative_mode", "フォールガイズ クリエイティブ"},
                 }
             },
             { "chs", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
