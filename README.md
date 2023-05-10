@@ -38,7 +38,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.168` *~ 06/05/2023*
+**Dernière version:** `v1.169` *~ 10/05/2023*
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -46,7 +46,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
 
 
-### Il y a 0 bug génant connu dans la v1.168 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.169 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -180,7 +180,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - `v1.169` *~ 10/05/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.159) datant du 09/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: 
+    - ++Ajouté: 
+
   - `v1.167` et `v1.168` *~ 06/05/2023*
+
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: **[FIX]** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
@@ -365,6 +371,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.159`
+    - Added the option to auto-generate profiles on first run
+    - Bugfix and program optimization
+  - `1.158`
+    - Bugfix and program optimization
   - `1.157`
     - Program optimization
   - `1.156`

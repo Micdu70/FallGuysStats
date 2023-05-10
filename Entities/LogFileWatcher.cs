@@ -340,10 +340,9 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
-                if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
-            } else if (logRound.Info == null && !LogRound.IsShowCompletedOrEnded && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
                 //Store SessionID to prevent duplicates (for fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
             } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
@@ -353,7 +352,7 @@ namespace FallGuysStats {
                     int msIndex = line.Line.IndexOf("ms", index);
                     Stats.LastServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
                 }
-            } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
+            } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0 && line.Line.IndexOf("at path", StringComparison.OrdinalIgnoreCase) == -1) {
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId };
                 int index2 = line.Line.IndexOf(" ", index + 44);
                 if (index2 < 0) { index2 = line.Line.Length; }
@@ -376,6 +375,7 @@ namespace FallGuysStats {
                     LogRound.LastPlayedRoundStart = null;
                     LogRound.LastPlayedRoundEnd = null;
                     Stats.InShow = true;
+                    if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
                 }
 
                 int index2 = line.Line.IndexOf(". ", index + 62);
@@ -499,6 +499,7 @@ namespace FallGuysStats {
                     }
                     logRound.Info.Playing = false;
                     if (!LogRound.IsShowCompletedOrEnded) {
+                        if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
                         DateTime showStart = DateTime.MinValue;
                         DateTime showEnd = logRound.Info.End;
                         for (int i = 0; i < round.Count; i++) {
@@ -620,6 +621,8 @@ namespace FallGuysStats {
                     LogRound.IsShowCompletedOrEnded = true;
                     return false;
                 }
+
+                if (this.autoChangeProfile) { this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby); }
 
                 DateTime showEnd = logRound.Info.End;
                 for (int i = 0; i < round.Count; i++) {

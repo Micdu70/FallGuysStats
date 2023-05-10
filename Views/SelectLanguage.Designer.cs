@@ -52,7 +52,7 @@
             "🇰🇷 한국어",
             "🇯🇵 日本語",
             "🇨🇳 简体中文"});
-            this.cboLanguage.Location = new System.Drawing.Point(135, 76);
+            this.cboLanguage.Location = new System.Drawing.Point(128, 75);
             this.cboLanguage.Name = "cboLanguage";
             this.cboLanguage.Size = new System.Drawing.Size(120, 29);
             this.cboLanguage.TabIndex = 0;
@@ -65,7 +65,7 @@
             this.chkAutoGenerateProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(182)))), ((int)(((byte)(254)))));
             this.chkAutoGenerateProfile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkAutoGenerateProfile.ForeColor = System.Drawing.Color.Teal;
-            this.chkAutoGenerateProfile.Location = new System.Drawing.Point(15, 153);
+            this.chkAutoGenerateProfile.Location = new System.Drawing.Point(15, 148);
             this.chkAutoGenerateProfile.Name = "chkAutoGenerateProfile";
             this.chkAutoGenerateProfile.Size = new System.Drawing.Size(142, 15);
             this.chkAutoGenerateProfile.TabIndex = 2;
@@ -85,7 +85,7 @@
             // 
             // btnLanguageSave
             // 
-            this.btnLanguageSave.Location = new System.Drawing.Point(250, 146);
+            this.btnLanguageSave.Location = new System.Drawing.Point(252, 143);
             this.btnLanguageSave.Name = "btnLanguageSave";
             this.btnLanguageSave.Size = new System.Drawing.Size(75, 25);
             this.btnLanguageSave.TabIndex = 2;
@@ -114,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLanguageSelection)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

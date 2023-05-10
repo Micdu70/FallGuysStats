@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using LiteDB;
 using Microsoft.Win32;
 using MetroFramework;
+using static System.Windows.Forms.AxHost;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -1477,9 +1478,10 @@ namespace FallGuysStats {
                                         editShows.StatsForm = this;
                                         if (editShows.ShowDialog(this) == DialogResult.OK) {
                                             this.askedPreviousShows = 1;
-                                            profile = editShows.SelectedProfileId;
-                                            this.CurrentSettings.SelectedProfile = profile;
-                                            this.ReloadProfileMenuItems();
+                                            if (!this.CurrentSettings.AutoChangeProfile) {
+                                                profile = editShows.SelectedProfileId;
+                                                this.CurrentSettings.SelectedProfile = profile;
+                                            }
                                         } else {
                                             this.askedPreviousShows = 2;
                                         }
@@ -1488,10 +1490,6 @@ namespace FallGuysStats {
 
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 2) {
                                     continue;
-                                }
-
-                                if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 1) {
-                                    MenuStats_Click(this.menuAllPartyStats, null);
                                 }
 
                                 if (stat.Round == 1) {
@@ -1607,7 +1605,13 @@ namespace FallGuysStats {
                         }
                     }
 
-                    if (!this.loadingExisting) { this.StatsDB.Commit(); }
+                    if (!this.loadingExisting) {
+                        this.StatsDB.Commit();
+                        if (this.askedPreviousShows == 1) {
+                            this.askedPreviousShows = 0;
+                            this.ReloadProfileMenuItems();
+                        }
+                    }
                 }
 
                 lock (this.CurrentRound) {
@@ -1681,13 +1685,15 @@ namespace FallGuysStats {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         linkedProfileFound = true;
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { item.PerformClick(); break; }
+                        if (!item.Checked) { item.PerformClick(); }
+                        break;
                     }
                 } else {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                         linkedProfileFound = true;
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { item.PerformClick(); break; }
+                        if (!item.Checked) { item.PerformClick(); }
+                        break;
                     }
                 }
             }
