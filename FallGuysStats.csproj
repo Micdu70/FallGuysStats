@@ -385,6 +385,7 @@
     <None Include="Resources\scatter_plot_icon.png" />
     <None Include="Resources\scatter_plot_gray_icon.png" />
     <None Include="Resources\round_icon\creative\icon_Creative.png" />
+    <None Include="Resources\round_icon\creative\icon_Gauntlet.png" />
     <None Include="Resources\round_icon\final\icon_Blast_Ball.png" />
     <None Include="Resources\round_icon\final\icon_FallMountain.png" />
     <None Include="Resources\round_icon\final\icon_Hex-A-Ring.png" />
