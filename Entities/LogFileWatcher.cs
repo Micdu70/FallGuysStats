@@ -392,10 +392,12 @@ namespace FallGuysStats {
                 logRound.Info.PrivateLobby = logRound.PrivateLobby;
                 logRound.Info.GameDuration = logRound.Duration;
 
-                if (isRealLastRound) {
+                if (isRealLastRound || this.selectedShowId.StartsWith("show_wle_s10_wk01_srs_") || this.selectedShowId.StartsWith("ugc-")) {
                     logRound.Info.IsFinal = true;
                 } else if (isModeException) {
                     logRound.Info.IsFinal = isFinalException;
+                } else if (logRound.Info.Name.StartsWith("wle_s10_")) {
+                    logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats stats) && stats.IsFinal);
                 } else {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.SceneToRound.TryGetValue(logRound.Info.SceneName, out string roundName) && LevelStats.ALL.TryGetValue(roundName, out LevelStats stats) && stats.IsFinal);
                 }

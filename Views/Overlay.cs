@@ -711,6 +711,8 @@ namespace FallGuysStats {
                         roundName = level.Name.ToUpper();
                     } else if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
                         roundName = roundName.Substring(6).Replace('_', ' ').ToUpper();
+                    } else {
+                        roundName = roundName.ToUpper();
                     }
 
                     StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, this.levelException);

@@ -199,7 +199,7 @@ namespace FallGuysStats {
 
             { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, 6, Properties.Resources.round_sweet_thieves_icon) },
 
-            //S10 Creative Rounds
+            //S10 (SS4) Creative Rounds
             { "wle_s10_orig_round_001", new LevelStats("BEANS AHOY!", LevelType.Race, false, 10, Properties.Resources.icon_Gauntlet) },
             { "wle_s10_orig_round_002", new LevelStats("AIRBORNE ANTICS", LevelType.Race, false, 10, Properties.Resources.icon_Gauntlet) },
             { "wle_s10_orig_round_003", new LevelStats("SCYTHES & ROUNDABOUTS", LevelType.Race, false, 10, Properties.Resources.icon_Gauntlet) },

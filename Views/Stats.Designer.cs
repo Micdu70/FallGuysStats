@@ -468,7 +468,7 @@ namespace FallGuysStats {
             this.gridDetails.Name = "gridDetails";
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
-            this.gridDetails.Size = new System.Drawing.Size(808, 672);
+            this.gridDetails.Size = new System.Drawing.Size(808, 352);
             this.gridDetails.TabIndex = 3;
             this.gridDetails.TabStop = false;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
@@ -482,7 +482,7 @@ namespace FallGuysStats {
             // Stats
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(830, 830);
+            this.ClientSize = new System.Drawing.Size(830, 510);
             this.Controls.Add(this.infoStrip);
             this.Controls.Add(this.infoStrip2);
             this.Controls.Add(this.gridDetails);

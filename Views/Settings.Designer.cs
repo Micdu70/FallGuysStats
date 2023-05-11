@@ -107,6 +107,7 @@
             this.chkCycleQualifyGold = new MetroFramework.Controls.MetroRadioButton();
             this.grpOverlay = new System.Windows.Forms.GroupBox();
             this.cboOverlayBackground = new FallGuysStats.ImageComboBox();
+            this.panelSettings = new MetroFramework.Controls.MetroPanel();
             this.grpFallalytics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSteam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEpicGames)).BeginInit();
@@ -122,13 +123,14 @@
             this.grpCycleFastestLongest.SuspendLayout();
             this.grpCycleQualifyGold.SuspendLayout();
             this.grpOverlay.SuspendLayout();
+            this.panelSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLogPath
             // 
             this.lblLogPath.AutoSize = true;
             this.lblLogPath.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblLogPath.Location = new System.Drawing.Point(12, 73);
+            this.lblLogPath.Location = new System.Drawing.Point(11, 72);
             this.lblLogPath.Name = "lblLogPath";
             this.lblLogPath.Size = new System.Drawing.Size(91, 19);
             this.lblLogPath.TabIndex = 0;
@@ -139,7 +141,7 @@
             this.lblLogPathNote.AutoSize = true;
             this.lblLogPathNote.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLogPathNote.ForeColor = System.Drawing.Color.DimGray;
-            this.lblLogPathNote.Location = new System.Drawing.Point(103, 98);
+            this.lblLogPathNote.Location = new System.Drawing.Point(105, 97);
             this.lblLogPathNote.Name = "lblLogPathNote";
             this.lblLogPathNote.Size = new System.Drawing.Size(603, 19);
             this.lblLogPathNote.TabIndex = 0;
@@ -150,8 +152,11 @@
             // 
             this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
             this.txtLogPath.CustomButton.Image = null;
-            this.txtLogPath.CustomButton.Location = new System.Drawing.Point(731, 2);
+            this.txtLogPath.CustomButton.Location = new System.Drawing.Point(733, 2);
             this.txtLogPath.CustomButton.Name = "";
             this.txtLogPath.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtLogPath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -160,7 +165,7 @@
             this.txtLogPath.CustomButton.UseSelectable = true;
             this.txtLogPath.CustomButton.Visible = false;
             this.txtLogPath.Lines = new string[0];
-            this.txtLogPath.Location = new System.Drawing.Point(103, 73);
+            this.txtLogPath.Location = new System.Drawing.Point(105, 72);
             this.txtLogPath.MaxLength = 32767;
             this.txtLogPath.Name = "txtLogPath";
             this.txtLogPath.PasswordChar = '\0';
@@ -169,7 +174,7 @@
             this.txtLogPath.SelectionLength = 0;
             this.txtLogPath.SelectionStart = 0;
             this.txtLogPath.ShortcutsEnabled = true;
-            this.txtLogPath.Size = new System.Drawing.Size(751, 22);
+            this.txtLogPath.Size = new System.Drawing.Size(753, 22);
             this.txtLogPath.TabIndex = 0;
             this.txtLogPath.UseSelectable = true;
             this.txtLogPath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -180,7 +185,7 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Location = new System.Drawing.Point(700, 978);
+            this.btnSave.Location = new System.Drawing.Point(681, 571);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 25);
             this.btnSave.TabIndex = 101;
@@ -194,9 +199,9 @@
             this.grpFallalytics.Controls.Add(this.txtFallalyticsAPIKey);
             this.grpFallalytics.Controls.Add(this.lblFallalyticsAPIKey);
             this.grpFallalytics.Controls.Add(this.chkFallalyticsReporting);
-            this.grpFallalytics.Location = new System.Drawing.Point(12, 243);
+            this.grpFallalytics.Location = new System.Drawing.Point(8, 123);
             this.grpFallalytics.Name = "grpFallalytics";
-            this.grpFallalytics.Size = new System.Drawing.Size(871, 89);
+            this.grpFallalytics.Size = new System.Drawing.Size(861, 89);
             this.grpFallalytics.TabIndex = 2;
             this.grpFallalytics.TabStop = false;
             this.grpFallalytics.Text = "Fallalytics";
@@ -216,6 +221,9 @@
             this.lnkAboutFallalytics.Click += new System.EventHandler(this.AboutFallalytics_Click);
             // 
             // txtFallalyticsAPIKey
+            // 
+            // 
+            // 
             // 
             this.txtFallalyticsAPIKey.CustomButton.Image = null;
             this.txtFallalyticsAPIKey.CustomButton.Location = new System.Drawing.Point(281, 1);
@@ -270,7 +278,7 @@
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(793, 978);
+            this.btnCancel.Location = new System.Drawing.Point(774, 571);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 25);
             this.btnCancel.TabIndex = 102;
@@ -341,7 +349,7 @@
             this.grpLaunchPlatform.Margin = new System.Windows.Forms.Padding(0);
             this.grpLaunchPlatform.Name = "grpLaunchPlatform";
             this.grpLaunchPlatform.Padding = new System.Windows.Forms.Padding(2);
-            this.grpLaunchPlatform.Size = new System.Drawing.Size(99, 64);
+            this.grpLaunchPlatform.Size = new System.Drawing.Size(93, 64);
             this.grpLaunchPlatform.TabIndex = 0;
             this.grpLaunchPlatform.TabStop = false;
             this.grpLaunchPlatform.Text = "Platform";
@@ -384,8 +392,11 @@
             // 
             // txtGameShortcutLocation
             // 
+            // 
+            // 
+            // 
             this.txtGameShortcutLocation.CustomButton.Image = null;
-            this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(474, 1);
+            this.txtGameShortcutLocation.CustomButton.Location = new System.Drawing.Point(469, 1);
             this.txtGameShortcutLocation.CustomButton.Name = "";
             this.txtGameShortcutLocation.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtGameShortcutLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -395,7 +406,7 @@
             this.txtGameShortcutLocation.CustomButton.Visible = false;
             this.txtGameShortcutLocation.Enabled = false;
             this.txtGameShortcutLocation.Lines = new string[0];
-            this.txtGameShortcutLocation.Location = new System.Drawing.Point(277, 23);
+            this.txtGameShortcutLocation.Location = new System.Drawing.Point(282, 23);
             this.txtGameShortcutLocation.Margin = new System.Windows.Forms.Padding(2);
             this.txtGameShortcutLocation.MaxLength = 32767;
             this.txtGameShortcutLocation.Name = "txtGameShortcutLocation";
@@ -405,7 +416,7 @@
             this.txtGameShortcutLocation.SelectionLength = 0;
             this.txtGameShortcutLocation.SelectionStart = 0;
             this.txtGameShortcutLocation.ShortcutsEnabled = true;
-            this.txtGameShortcutLocation.Size = new System.Drawing.Size(498, 25);
+            this.txtGameShortcutLocation.Size = new System.Drawing.Size(493, 25);
             this.txtGameShortcutLocation.TabIndex = 0;
             this.txtGameShortcutLocation.UseSelectable = true;
             this.txtGameShortcutLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -413,8 +424,11 @@
             // 
             // txtGameExeLocation
             // 
+            // 
+            // 
+            // 
             this.txtGameExeLocation.CustomButton.Image = null;
-            this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(474, 1);
+            this.txtGameExeLocation.CustomButton.Location = new System.Drawing.Point(469, 1);
             this.txtGameExeLocation.CustomButton.Name = "";
             this.txtGameExeLocation.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtGameExeLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -424,7 +438,7 @@
             this.txtGameExeLocation.CustomButton.Visible = false;
             this.txtGameExeLocation.Enabled = false;
             this.txtGameExeLocation.Lines = new string[0];
-            this.txtGameExeLocation.Location = new System.Drawing.Point(277, 23);
+            this.txtGameExeLocation.Location = new System.Drawing.Point(282, 23);
             this.txtGameExeLocation.Margin = new System.Windows.Forms.Padding(2);
             this.txtGameExeLocation.MaxLength = 32767;
             this.txtGameExeLocation.Name = "txtGameExeLocation";
@@ -434,7 +448,7 @@
             this.txtGameExeLocation.SelectionLength = 0;
             this.txtGameExeLocation.SelectionStart = 0;
             this.txtGameExeLocation.ShortcutsEnabled = true;
-            this.txtGameExeLocation.Size = new System.Drawing.Size(498, 25);
+            this.txtGameExeLocation.Size = new System.Drawing.Size(493, 25);
             this.txtGameExeLocation.TabIndex = 1;
             this.txtGameExeLocation.UseSelectable = true;
             this.txtGameExeLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -444,7 +458,7 @@
             // 
             this.lblGameExeLocation.AutoSize = true;
             this.lblGameExeLocation.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblGameExeLocation.Location = new System.Drawing.Point(113, 23);
+            this.lblGameExeLocation.Location = new System.Drawing.Point(118, 23);
             this.lblGameExeLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGameExeLocation.Name = "lblGameExeLocation";
             this.lblGameExeLocation.Size = new System.Drawing.Size(160, 19);
@@ -461,11 +475,11 @@
             this.grpGameOptions.Controls.Add(this.btnGameExeLocationBrowse);
             this.grpGameOptions.Controls.Add(this.chkLaunchGameOnStart);
             this.grpGameOptions.Controls.Add(this.grpLaunchPlatform);
-            this.grpGameOptions.Location = new System.Drawing.Point(12, 875);
+            this.grpGameOptions.Location = new System.Drawing.Point(8, 755);
             this.grpGameOptions.Margin = new System.Windows.Forms.Padding(2);
             this.grpGameOptions.Name = "grpGameOptions";
             this.grpGameOptions.Padding = new System.Windows.Forms.Padding(2);
-            this.grpGameOptions.Size = new System.Drawing.Size(871, 88);
+            this.grpGameOptions.Size = new System.Drawing.Size(861, 88);
             this.grpGameOptions.TabIndex = 5;
             this.grpGameOptions.TabStop = false;
             this.grpGameOptions.Text = "Game Options";
@@ -488,11 +502,11 @@
             this.grpSortingOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpSortingOptions.Controls.Add(this.chkIgnoreLevelTypeWhenSorting);
-            this.grpSortingOptions.Location = new System.Drawing.Point(12, 807);
+            this.grpSortingOptions.Location = new System.Drawing.Point(8, 687);
             this.grpSortingOptions.Margin = new System.Windows.Forms.Padding(2);
             this.grpSortingOptions.Name = "grpSortingOptions";
             this.grpSortingOptions.Padding = new System.Windows.Forms.Padding(2);
-            this.grpSortingOptions.Size = new System.Drawing.Size(871, 55);
+            this.grpSortingOptions.Size = new System.Drawing.Size(861, 55);
             this.grpSortingOptions.TabIndex = 4;
             this.grpSortingOptions.TabStop = false;
             this.grpSortingOptions.Text = "Sorting Options";
@@ -508,6 +522,9 @@
             this.picLanguageSelection.TabStop = false;
             // 
             // txtPreviousWins
+            // 
+            // 
+            // 
             // 
             this.txtPreviousWins.CustomButton.Image = null;
             this.txtPreviousWins.CustomButton.Location = new System.Drawing.Point(20, 1);
@@ -652,9 +669,9 @@
             this.grpStats.Controls.Add(this.cboMultilingual);
             this.grpStats.Controls.Add(this.txtPreviousWins);
             this.grpStats.Controls.Add(this.picLanguageSelection);
-            this.grpStats.Location = new System.Drawing.Point(11, 123);
+            this.grpStats.Location = new System.Drawing.Point(8, 3);
             this.grpStats.Name = "grpStats";
-            this.grpStats.Size = new System.Drawing.Size(871, 105);
+            this.grpStats.Size = new System.Drawing.Size(861, 105);
             this.grpStats.TabIndex = 1;
             this.grpStats.TabStop = false;
             this.grpStats.Text = "Stats";
@@ -729,7 +746,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(546, 40);
+            this.groupBox1.Size = new System.Drawing.Size(536, 40);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
@@ -782,7 +799,7 @@
             this.grpCycleWinFinalStreak.Margin = new System.Windows.Forms.Padding(0);
             this.grpCycleWinFinalStreak.Name = "grpCycleWinFinalStreak";
             this.grpCycleWinFinalStreak.Padding = new System.Windows.Forms.Padding(2);
-            this.grpCycleWinFinalStreak.Size = new System.Drawing.Size(546, 40);
+            this.grpCycleWinFinalStreak.Size = new System.Drawing.Size(536, 40);
             this.grpCycleWinFinalStreak.TabIndex = 8;
             this.grpCycleWinFinalStreak.TabStop = false;
             // 
@@ -825,6 +842,9 @@
             this.chkCycleWinFinalStreak.UseSelectable = true;
             // 
             // txtCycleTimeSeconds
+            // 
+            // 
+            // 
             // 
             this.txtCycleTimeSeconds.CustomButton.Image = null;
             this.txtCycleTimeSeconds.CustomButton.Location = new System.Drawing.Point(4, 1);
@@ -927,7 +947,7 @@
             // 
             this.lblWinsFilter.AutoSize = true;
             this.lblWinsFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblWinsFilter.Location = new System.Drawing.Point(500, 18);
+            this.lblWinsFilter.Location = new System.Drawing.Point(490, 18);
             this.lblWinsFilter.Name = "lblWinsFilter";
             this.lblWinsFilter.Size = new System.Drawing.Size(114, 19);
             this.lblWinsFilter.TabIndex = 0;
@@ -956,7 +976,7 @@
             this.lblQualifyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblQualifyFilter.AutoSize = true;
             this.lblQualifyFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblQualifyFilter.Location = new System.Drawing.Point(486, 53);
+            this.lblQualifyFilter.Location = new System.Drawing.Point(476, 53);
             this.lblQualifyFilter.Name = "lblQualifyFilter";
             this.lblQualifyFilter.Size = new System.Drawing.Size(128, 19);
             this.lblQualifyFilter.TabIndex = 0;
@@ -985,7 +1005,7 @@
             this.lblFastestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFastestFilter.AutoSize = true;
             this.lblFastestFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblFastestFilter.Location = new System.Drawing.Point(466, 88);
+            this.lblFastestFilter.Location = new System.Drawing.Point(456, 88);
             this.lblFastestFilter.Name = "lblFastestFilter";
             this.lblFastestFilter.Size = new System.Drawing.Size(148, 19);
             this.lblFastestFilter.TabIndex = 0;
@@ -1062,7 +1082,7 @@
             this.lblOverlayOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayOpacity.AutoSize = true;
             this.lblOverlayOpacity.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOverlayOpacity.Location = new System.Drawing.Point(481, 194);
+            this.lblOverlayOpacity.Location = new System.Drawing.Point(471, 194);
             this.lblOverlayOpacity.Name = "lblOverlayOpacity";
             this.lblOverlayOpacity.Size = new System.Drawing.Size(133, 19);
             this.lblOverlayOpacity.TabIndex = 0;
@@ -1073,7 +1093,7 @@
             this.lblOverlayColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayColor.AutoSize = true;
             this.lblOverlayColor.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOverlayColor.Location = new System.Drawing.Point(531, 163);
+            this.lblOverlayColor.Location = new System.Drawing.Point(522, 163);
             this.lblOverlayColor.Name = "lblOverlayColor";
             this.lblOverlayColor.Size = new System.Drawing.Size(82, 19);
             this.lblOverlayColor.TabIndex = 0;
@@ -1102,7 +1122,7 @@
             this.lblOverlayBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOverlayBackground.AutoSize = true;
             this.lblOverlayBackground.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOverlayBackground.Location = new System.Drawing.Point(490, 125);
+            this.lblOverlayBackground.Location = new System.Drawing.Point(480, 123);
             this.lblOverlayBackground.Name = "lblOverlayBackground";
             this.lblOverlayBackground.Size = new System.Drawing.Size(124, 19);
             this.lblOverlayBackground.TabIndex = 0;
@@ -1143,7 +1163,7 @@
             this.grpCycleFastestLongest.Margin = new System.Windows.Forms.Padding(0);
             this.grpCycleFastestLongest.Name = "grpCycleFastestLongest";
             this.grpCycleFastestLongest.Padding = new System.Windows.Forms.Padding(2);
-            this.grpCycleFastestLongest.Size = new System.Drawing.Size(546, 40);
+            this.grpCycleFastestLongest.Size = new System.Drawing.Size(536, 40);
             this.grpCycleFastestLongest.TabIndex = 7;
             this.grpCycleFastestLongest.TabStop = false;
             // 
@@ -1196,7 +1216,7 @@
             this.grpCycleQualifyGold.Margin = new System.Windows.Forms.Padding(0);
             this.grpCycleQualifyGold.Name = "grpCycleQualifyGold";
             this.grpCycleQualifyGold.Padding = new System.Windows.Forms.Padding(2);
-            this.grpCycleQualifyGold.Size = new System.Drawing.Size(546, 40);
+            this.grpCycleQualifyGold.Size = new System.Drawing.Size(536, 40);
             this.grpCycleQualifyGold.TabIndex = 6;
             this.grpCycleQualifyGold.TabStop = false;
             // 
@@ -1275,9 +1295,9 @@
             this.grpOverlay.Controls.Add(this.btnSelectFont);
             this.grpOverlay.Controls.Add(this.btnResetOverlayFont);
             this.grpOverlay.Controls.Add(this.grpOverlayFontExample);
-            this.grpOverlay.Location = new System.Drawing.Point(12, 347);
+            this.grpOverlay.Location = new System.Drawing.Point(8, 227);
             this.grpOverlay.Name = "grpOverlay";
-            this.grpOverlay.Size = new System.Drawing.Size(871, 446);
+            this.grpOverlay.Size = new System.Drawing.Size(861, 446);
             this.grpOverlay.TabIndex = 3;
             this.grpOverlay.TabStop = false;
             this.grpOverlay.Text = "Overlay";
@@ -1300,22 +1320,39 @@
             this.cboOverlayBackground.MouseEnter += new System.EventHandler(this.CboOverlayBackground_MouseEnter);
             this.cboOverlayBackground.MouseLeave += new System.EventHandler(this.CboOverlayBackground_MouseLeave);
             // 
+            // panelSettings
+            // 
+            this.panelSettings.AutoScroll = true;
+            this.panelSettings.Controls.Add(this.grpStats);
+            this.panelSettings.Controls.Add(this.grpFallalytics);
+            this.panelSettings.Controls.Add(this.grpSortingOptions);
+            this.panelSettings.Controls.Add(this.grpOverlay);
+            this.panelSettings.Controls.Add(this.grpGameOptions);
+            this.panelSettings.HorizontalScrollbar = true;
+            this.panelSettings.HorizontalScrollbarBarColor = false;
+            this.panelSettings.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelSettings.HorizontalScrollbarSize = 10;
+            this.panelSettings.Location = new System.Drawing.Point(3, 129);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(895, 428);
+            this.panelSettings.TabIndex = 1;
+            this.panelSettings.VerticalScrollbar = true;
+            this.panelSettings.VerticalScrollbarBarColor = true;
+            this.panelSettings.VerticalScrollbarHighlightOnWheel = true;
+            this.panelSettings.VerticalScrollbarSize = 10;
+            // 
             // Settings
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(900, 1024);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.grpFallalytics);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.grpGameOptions);
-            this.Controls.Add(this.grpSortingOptions);
-            this.Controls.Add(this.grpOverlay);
-            this.Controls.Add(this.grpStats);
+            this.ClientSize = new System.Drawing.Size(900, 610);
             this.Controls.Add(this.txtLogPath);
             this.Controls.Add(this.lblLogPathNote);
             this.Controls.Add(this.lblLogPath);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.panelSettings);
             this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1351,6 +1388,7 @@
             this.grpCycleQualifyGold.PerformLayout();
             this.grpOverlay.ResumeLayout(false);
             this.grpOverlay.PerformLayout();
+            this.panelSettings.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1441,5 +1479,6 @@
         private MetroFramework.Controls.MetroRadioButton chkCycleQualifyGold;
         private System.Windows.Forms.GroupBox grpOverlay;
         private MetroFramework.Controls.MetroLabel lnkAboutFallalytics;
+        private MetroFramework.Controls.MetroPanel panelSettings;
     }
 }

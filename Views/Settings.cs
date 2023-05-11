@@ -31,8 +31,6 @@ namespace FallGuysStats {
             this.InitializeComponent();
         }
         private void Settings_Load(object sender, EventArgs e) {
-            Screen s = Screen.FromPoint(Cursor.Position);
-            Cursor.Position = new Point(s.Bounds.Left + s.Bounds.Width / 2, s.Bounds.Top + s.Bounds.Height / 2);
             Label focusOutLabel = new Label() {
                 Text = "",
                 Name = "nolabel",
@@ -250,40 +248,39 @@ namespace FallGuysStats {
                     mtb1.Theme = theme;
                 } else if (c1 is MetroButton mb1) {
                     mb1.Theme = theme;
-                } else if (c1 is MetroCheckBox mcb1) {
-                    mcb1.Theme = theme;
-                } else if (c1 is MetroRadioButton mrb1) {
-                    mrb1.Theme = theme;
-                } else if (c1 is MetroComboBox mcbo1) {
-                    mcbo1.Theme = theme;
-                } else if (c1 is GroupBox gb1) {
-                    gb1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                    foreach (Control c2 in gb1.Controls) {
-                        if (c2 is MetroLabel ml2) {
-                            ml2.Theme = theme;
-                        } else if (c2 is MetroTextBox mtb2) {
-                            mtb2.Theme = theme;
-                        } else if (c2 is MetroButton mb2) {
-                            mb2.Theme = theme;
-                        } else if (c2 is MetroCheckBox mcb2) {
-                            mcb2.Theme = theme;
-                        } else if (c2 is MetroRadioButton mrb2) {
-                            mrb2.Theme = theme;
-                        } else if (c2 is MetroComboBox mcbo2) {
-                            mcbo2.Theme = theme;
-                        } else if (c2 is MetroTrackBar mtrb2) {
-                            mtrb2.Theme = theme;
-                        } else if (c2 is GroupBox gb2) {
+                } else if (c1 is MetroPanel mp1) {
+                    mp1.Theme = theme;
+                    foreach (Control c2 in mp1.Controls) {
+                        if (c2 is GroupBox gb2) {
                             gb2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                             foreach (Control c3 in gb2.Controls) {
-                                if (c3 is MetroRadioButton mrb3) {
+                                if (c3 is MetroLabel ml3) {
+                                    ml3.Theme = theme;
+                                } else if (c3 is MetroTextBox mtb3) {
+                                    mtb3.Theme = theme;
+                                } else if (c3 is MetroButton mb3) {
+                                    mb3.Theme = theme;
+                                } else if (c3 is MetroCheckBox mcb3) {
+                                    mcb3.Theme = theme;
+                                } else if (c3 is MetroRadioButton mrb3) {
                                     mrb3.Theme = theme;
-                                } else if (c3 is Label lb3) { //lblOverlayFontExample
-                                    if (!string.IsNullOrEmpty(this.overlayFontColorSerialized)) {
-                                        ColorConverter colorConverter = new ColorConverter();
-                                        lb3.ForeColor = (Color)colorConverter.ConvertFromString(this.overlayFontColorSerialized);
-                                    } else {
-                                        lb3.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                } else if (c3 is MetroComboBox mcbo3) {
+                                    mcbo3.Theme = theme;
+                                } else if (c3 is MetroTrackBar mtrb3) {
+                                    mtrb3.Theme = theme;
+                                } else if (c3 is GroupBox gb3) {
+                                    gb3.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                    foreach (Control c4 in gb3.Controls) {
+                                        if (c4 is MetroRadioButton mrb4) {
+                                            mrb4.Theme = theme;
+                                        } else if (c4 is Label lb4) { //lblOverlayFontExample
+                                            if (!string.IsNullOrEmpty(this.overlayFontColorSerialized)) {
+                                                ColorConverter colorConverter = new ColorConverter();
+                                                lb4.ForeColor = (Color)colorConverter.ConvertFromString(this.overlayFontColorSerialized);
+                                            } else {
+                                                lb4.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                            }
+                                        }
                                     }
                                 }
                             }
