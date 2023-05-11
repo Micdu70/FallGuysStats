@@ -276,8 +276,8 @@ namespace FallGuysStats {
             }
 
             foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
-                this.StatDetails.Add(entry.Value);
                 this.StatLookup.Add(entry.Key, entry.Value);
+                this.StatDetails.Add(entry.Value);
             }
 
             this.RoundDetails.EnsureIndex(x => x.Name);
@@ -1580,7 +1580,10 @@ namespace FallGuysStats {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null);
+                            LevelStats newLevel = stat.UseShareCode
+                                                  ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon)
+                                                  : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null);
+
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
                             this.gridDetails.DataSource = null;
@@ -1737,7 +1740,11 @@ namespace FallGuysStats {
             };
             int lastShow = -1;
             if (!this.StatLookup.TryGetValue(name ?? string.Empty, out LevelStats currentLevel)) {
-                currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null);
+                if (levelException == 3) {
+                    currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon);
+                } else {
+                    currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null);
+                }
             }
             int profile = this.currentProfile;
 
@@ -2032,15 +2039,15 @@ namespace FallGuysStats {
                     case "RoundIcon":
                         if (levelStats.IsFinal) {
                             e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                ? Color.FromArgb(255, 240, 200)
-                                : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
+                                ? Color.FromArgb(255, 245, 205)
+                                : Color.FromArgb((int)(255 * fBrightness), (int)(245 * fBrightness), (int)(205 * fBrightness));
                             break;
                         }
                         switch (levelStats.Type) {
                             case LevelType.Race:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(210, 255, 220)
-                                    : Color.FromArgb((int)(210 * fBrightness), (int)(255 * fBrightness), (int)(220 * fBrightness));
+                                    ? Color.FromArgb(205, 255, 225)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(255 * fBrightness), (int)(225 * fBrightness));
                                 break;
                             case LevelType.Survival:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
@@ -2049,13 +2056,13 @@ namespace FallGuysStats {
                                 break;
                             case LevelType.Hunt:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(200, 220, 255)
-                                    : Color.FromArgb((int)(220 * fBrightness), (int)(220 * fBrightness), (int)(255 * fBrightness));
+                                    ? Color.FromArgb(205, 225, 255)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(225 * fBrightness), (int)(255 * fBrightness));
                                 break;
                             case LevelType.Logic:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(230, 250, 255)
-                                    : Color.FromArgb((int)(230 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness));
+                                    ? Color.FromArgb(205, 250, 255)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness));
                                 break;
                             case LevelType.Team:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
@@ -2066,6 +2073,11 @@ namespace FallGuysStats {
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
                                     ? Color.FromArgb(255, 255, 255)
                                     : Color.FromArgb((int)(255 * fBrightness), (int)(255 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Creative:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(255, 205, 235)
+                                    : Color.FromArgb((int)(255 * fBrightness), (int)(205 * fBrightness), (int)(235 * fBrightness));
                                 break;
                             case LevelType.Unknown:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
@@ -2079,15 +2091,15 @@ namespace FallGuysStats {
                         this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_tooltiptext");
                         if (levelStats.IsFinal) {
                             e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                ? Color.FromArgb(255, 240, 200)
-                                : Color.FromArgb((int)(255 * fBrightness), (int)(240 * fBrightness), (int)(200 * fBrightness));
+                                ? Color.FromArgb(255, 245, 205)
+                                : Color.FromArgb((int)(255 * fBrightness), (int)(245 * fBrightness), (int)(205 * fBrightness));
                             break;
                         }
                         switch (levelStats.Type) {
                             case LevelType.Race:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(210, 255, 220)
-                                    : Color.FromArgb((int)(210 * fBrightness), (int)(255 * fBrightness), (int)(220 * fBrightness));
+                                    ? Color.FromArgb(205, 255, 225)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(255 * fBrightness), (int)(225 * fBrightness));
                                 break;
                             case LevelType.Survival:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
@@ -2096,13 +2108,13 @@ namespace FallGuysStats {
                                 break;
                             case LevelType.Hunt:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(200, 220, 255)
-                                    : Color.FromArgb((int)(220 * fBrightness), (int)(220 * fBrightness), (int)(255 * fBrightness));
+                                    ? Color.FromArgb(205, 225, 255)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(225 * fBrightness), (int)(255 * fBrightness));
                                 break;
                             case LevelType.Logic:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
-                                    ? Color.FromArgb(230, 250, 255)
-                                    : Color.FromArgb((int)(230 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness));
+                                    ? Color.FromArgb(205, 250, 255)
+                                    : Color.FromArgb((int)(205 * fBrightness), (int)(250 * fBrightness), (int)(255 * fBrightness));
                                 break;
                             case LevelType.Team:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
@@ -2113,6 +2125,11 @@ namespace FallGuysStats {
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
                                     ? Color.FromArgb(255, 255, 255)
                                     : Color.FromArgb((int)(255 * fBrightness), (int)(255 * fBrightness), (int)(255 * fBrightness));
+                                break;
+                            case LevelType.Creative:
+                                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
+                                    ? Color.FromArgb(255, 205, 235)
+                                    : Color.FromArgb((int)(255 * fBrightness), (int)(205 * fBrightness), (int)(235 * fBrightness));
                                 break;
                             case LevelType.Unknown:
                                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light

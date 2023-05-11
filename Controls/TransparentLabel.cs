@@ -251,7 +251,7 @@ namespace FallGuysStats {
                     }
                 }
             }
-            
+
             return (offset - textLength) * weight;
         }
         private void FillRoundedRectangle(Graphics g, Pen pen, Brush brush, int x, int y, int width, int height, int radius) {

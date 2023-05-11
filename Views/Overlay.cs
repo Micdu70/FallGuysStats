@@ -705,14 +705,14 @@ namespace FallGuysStats {
                         this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
                     } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
                         this.levelException = 2; // Level is like a "Team" level type (score info is most important)
+                    } else if (this.lastRound.UseShareCode) {
+                        this.levelException = 3; // Level is a creative map made by a player
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {
                         roundName = level.Name.ToUpper();
                     } else if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
                         roundName = roundName.Substring(6).Replace('_', ' ').ToUpper();
-                    } else {
-                        roundName = roundName.ToUpper();
                     }
 
                     StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, this.levelException);
@@ -724,22 +724,26 @@ namespace FallGuysStats {
                     //}
                     if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
 
-                    LevelType levelType = (level?.Type).GetValueOrDefault();
-                    this.lblRound.IsCreativeRound = level != null && level.isCreative ? true : false;
+                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.lastRound.UseShareCode ? true : false;
+
+                    LevelType levelType = this.lblRound.IsCreativeRound ? LevelType.Creative : (level?.Type).GetValueOrDefault();
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
                         this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = Properties.Resources.round_creative_icon;
+                            this.lblRound.RoundIcon = this.lastRound.UseShareCode ? Properties.Resources.round_creative_icon :
+                                                      this.lblRound.IsCreativeRound ? Properties.Resources.round_gauntlet_icon : null;
                         }
-                        if (this.lblRound.RoundIcon.Height != 23) {
-                            this.lblRound.ImageHeight = 23;
-                            this.lblRound.ImageWidth = (int)Math.Ceiling(Convert.ToDouble(this.lblRound.ImageHeight) / this.lblRound.RoundIcon.Height * this.lblRound.RoundIcon.Width);
-                        } else {
-                            this.lblRound.ImageHeight = this.lblRound.RoundIcon.Height;
-                            this.lblRound.ImageWidth = this.lblRound.RoundIcon.Width;
+                        if (this.lblRound.RoundIcon != null) {
+                            if (this.lblRound.RoundIcon.Height != 23) {
+                                this.lblRound.ImageHeight = 23;
+                                this.lblRound.ImageWidth = (int)Math.Ceiling(Convert.ToDouble(this.lblRound.ImageHeight) / this.lblRound.RoundIcon.Height * this.lblRound.RoundIcon.Width);
+                            } else {
+                                this.lblRound.ImageHeight = this.lblRound.RoundIcon.Height;
+                                this.lblRound.ImageWidth = this.lblRound.RoundIcon.Width;
+                            }
                         }
                     } else {
                         this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_suffix")} :";
@@ -810,7 +814,7 @@ namespace FallGuysStats {
                         }
                         this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown ? Color.White : Color.Pink;
 
-                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || this.levelException == 1) {
+                        if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || levelType == LevelType.Creative || this.levelException == 1) {
                             if (Time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && Time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (Time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
@@ -870,7 +874,7 @@ namespace FallGuysStats {
                         this.lblDuration.TextRight = "-";
                     }
                 }
-                Invalidate();
+                this.Invalidate();
             }
         }
         protected override void OnPaint(PaintEventArgs e) {

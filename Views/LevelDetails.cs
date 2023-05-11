@@ -35,7 +35,7 @@ namespace FallGuysStats {
                 //this.dataGridViewCellStyle1.SelectionBackColor = Color.DarkSlateBlue;
                 this.dataGridViewCellStyle1.SelectionBackColor = Color.DarkMagenta;
                 this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            
+
                 this.dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 51, 56);
                 this.dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
                 this.dataGridViewCellStyle2.SelectionBackColor = Color.SpringGreen;
@@ -277,6 +277,7 @@ namespace FallGuysStats {
 
             int pos = 0;
             this.gridDetails.Columns["SessionId"].Visible = false;
+            this.gridDetails.Columns["UseShareCode"].Visible = false;
             this.gridDetails.Columns["Tier"].Visible = false;
             this.gridDetails.Columns["ID"].Visible = false;
             this.gridDetails.Columns["Crown"].Visible = false;
@@ -365,11 +366,7 @@ namespace FallGuysStats {
 
             RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
 
-            //RoundInfo nextInfo = null;
-            //if (e.RowIndex > this.gridDetails.Rows.Count) {
-            //    nextInfo = this.gridDetails.Rows[e.RowIndex+1].DataBoundItem as RoundInfo;
-            //}
-            if (info.PrivateLobby) { // Custom or Abrupt Show End
+            if (info.PrivateLobby) { // Custom Show
                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(8, 8, 8);
                 e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             }

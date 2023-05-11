@@ -10,6 +10,7 @@ namespace FallGuysStats {
         public string Name { get; set; }
         public int ShowID { get; set; }
         public string ShowNameId { get; set; }
+        public bool UseShareCode { get; set; }
         public string SessionId { get; set; }
         public int Round { get; set; }
         public int Position { get; set; }
@@ -64,8 +65,8 @@ namespace FallGuysStats {
         }
         public string VerifiedName() {
             return string.IsNullOrEmpty(this.SceneName)
-                ? this.Name
-                : LevelStats.SceneToRound.TryGetValue(this.SceneName, out string roundName) ? roundName : this.Name;
+                   ? this.Name
+                   : LevelStats.SceneToRound.TryGetValue(this.SceneName, out string roundName) ? roundName : this.Name;
         }
         public override string ToString() {
             return $"{this.Name}: Round={this.Round} Position={this.Position} Duration={this.End - this.Start} Kudos={this.Kudos}";
@@ -168,6 +169,7 @@ namespace FallGuysStats {
             { "round_tail_tag",                   new LevelStats("Tail Tag", LevelType.Hunt, false, false, 1, Properties.Resources.round_tail_tag_icon) },
             { "round_1v1_volleyfall_symphony_launch_show", new LevelStats("Volleyfall", LevelType.Hunt, false, false, 7, Properties.Resources.round_volleyfall_icon) },
 
+
             { "round_match_fall",                 new LevelStats("Perfect Match", LevelType.Logic, false, false, 1, Properties.Resources.round_perfect_match_icon) },
             { "round_fruit_bowl",                 new LevelStats("Sum Fruit", LevelType.Logic, false, false, 5, Properties.Resources.round_sum_fruit_icon) },
 
@@ -184,83 +186,85 @@ namespace FallGuysStats {
             { "round_snowy_scrap",                new LevelStats("Snowy Scrap", LevelType.Team, false, false, 3, Properties.Resources.round_snowy_scrap_icon) },
             { "round_conveyor_arena",             new LevelStats("Team Tail Tag", LevelType.Team, false, false, 1, Properties.Resources.round_team_tail_tag_icon) },
 
-            { "round_blastball_arenasurvival_symphony_launch_show", new LevelStats("Blast Ball", LevelType.Survival,false, true, 7, Properties.Resources.round_blast_ball_icon) },
-            { "round_fall_mountain_hub_complete", new LevelStats("Fall Mountain", LevelType.Race,false, true, 1, Properties.Resources.round_fall_mountain_icon) },
-            { "round_floor_fall",                 new LevelStats("Hex-A-Gone", LevelType.Survival,false, true, 1, Properties.Resources.round_hex_a_gone_icon) },
-            { "round_hexaring_symphony_launch_show", new LevelStats("Hex-A-Ring", LevelType.Survival,false, true, 7, Properties.Resources.round_hex_a_ring_icon) },
-            { "round_hexsnake_almond",            new LevelStats("Hex-A-Terrestrial", LevelType.Survival,false, true, 8, Properties.Resources.round_hex_a_terrestrial_icon) },
-            { "round_jump_showdown",              new LevelStats("Jump Showdown", LevelType.Survival,false, true, 1, Properties.Resources.round_jump_showdown_icon) },
-            { "round_kraken_attack",              new LevelStats("Kraken Slam", LevelType.Survival,false, true, 9, Properties.Resources.round_kraken_slam_icon) },
-            { "round_crown_maze",                 new LevelStats("Lost Temple", LevelType.Race,false, true, 5, Properties.Resources.round_lost_temple_icon) },
-            { "round_tunnel_final",               new LevelStats("Roll Off", LevelType.Survival,false, true, 3, Properties.Resources.round_roll_off_icon) },
-            { "round_royal_rumble",               new LevelStats("Royal Fumble", LevelType.Hunt,false, true, 1, Properties.Resources.round_royal_fumble_icon) },
-            { "round_thin_ice",                   new LevelStats("Thin Ice", LevelType.Survival,false, true, 3, Properties.Resources.round_thin_ice_icon) },
-            { "round_tiptoefinale_almond",        new LevelStats("Tip Toe Finale", LevelType.Race,false, true, 8, Properties.Resources.round_tip_toe_finale_icon) },
+            { "round_blastball_arenasurvival_symphony_launch_show", new LevelStats("Blast Ball", LevelType.Survival, false, true, 7, Properties.Resources.round_blast_ball_icon) },
+            { "round_fall_mountain_hub_complete", new LevelStats("Fall Mountain", LevelType.Race, false, true, 1, Properties.Resources.round_fall_mountain_icon) },
+            { "round_floor_fall",                 new LevelStats("Hex-A-Gone", LevelType.Survival, false, true, 1, Properties.Resources.round_hex_a_gone_icon) },
+            { "round_hexaring_symphony_launch_show", new LevelStats("Hex-A-Ring", LevelType.Survival, false, true, 7, Properties.Resources.round_hex_a_ring_icon) },
+            { "round_hexsnake_almond",            new LevelStats("Hex-A-Terrestrial", LevelType.Survival, false, true, 8, Properties.Resources.round_hex_a_terrestrial_icon) },
+            { "round_jump_showdown",              new LevelStats("Jump Showdown", LevelType.Survival, false, true, 1, Properties.Resources.round_jump_showdown_icon) },
+            { "round_kraken_attack",              new LevelStats("Kraken Slam", LevelType.Survival, false, true, 9, Properties.Resources.round_kraken_slam_icon) },
+            { "round_crown_maze",                 new LevelStats("Lost Temple", LevelType.Race, false, true, 5, Properties.Resources.round_lost_temple_icon) },
+            { "round_tunnel_final",               new LevelStats("Roll Off", LevelType.Survival, false, true, 3, Properties.Resources.round_roll_off_icon) },
+            { "round_royal_rumble",               new LevelStats("Royal Fumble", LevelType.Hunt, false, true, 1, Properties.Resources.round_royal_fumble_icon) },
+            { "round_thin_ice",                   new LevelStats("Thin Ice", LevelType.Survival, false, true, 3, Properties.Resources.round_thin_ice_icon) },
+            { "round_tiptoefinale_almond",        new LevelStats("Tip Toe Finale", LevelType.Race, false, true, 8, Properties.Resources.round_tip_toe_finale_icon) },
 
             { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, false, false, 6, Properties.Resources.round_sweet_thieves_icon) },
 
-            //S10 (SS4) Creative Rounds
-            { "wle_s10_orig_round_001",           new LevelStats("Beans Ahoy!", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_002",           new LevelStats("Airborne Antics", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_003",           new LevelStats("Scythes & Roundabouts", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_004",           new LevelStats("Cardio Runners", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_005",           new LevelStats("Fan Flingers", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_006",           new LevelStats("Uphill Struggle", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_007",           new LevelStats("Spinner Sprint", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_008",           new LevelStats("Lane Changers", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_009",           new LevelStats("Gentle Gauntlet", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_012",           new LevelStats("Up & Down", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_013",           new LevelStats("Choo Choo Challenge", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_014",           new LevelStats("Runner Beans", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_015",           new LevelStats("Disc Dashers", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_016",           new LevelStats("Two Faced", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_019",           new LevelStats("Blueberry Bombardment", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_020",           new LevelStats("Chuting Stars", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_021",           new LevelStats("Slimy Slopes", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_022",           new LevelStats("Circuit Breakers", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_023",           new LevelStats("Winding Walkways", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_026",           new LevelStats("Hyperlink Hijinks", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_027",           new LevelStats("Fan Frolics", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_028",           new LevelStats("Windmill Road", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_029",           new LevelStats("Conveyor Clash", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_032",           new LevelStats("Fortress Frolics", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_033",           new LevelStats("Super Door Dash", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_034",           new LevelStats("Spiral Of Woo", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_035",           new LevelStats("Tornado Trial", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_036",           new LevelStats("Hopscotch Havoc", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_037",           new LevelStats("Beat Bouncers", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_038",           new LevelStats("Blunder Bridges", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_039",           new LevelStats("Incline Rewind", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_040",           new LevelStats("Prismatic Parade", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_041",           new LevelStats("Swept Away", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_042",           new LevelStats("Balancing Act", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_043",           new LevelStats("Trouble Tower", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_044",           new LevelStats("Serpent Slalom", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_045",           new LevelStats("Floorless", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_046",           new LevelStats("In The Cloud", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_047",           new LevelStats("Downstream Duel", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_048",           new LevelStats("Lost Palace", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_001",                new LevelStats("Digi Trek", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_002",                new LevelStats("Shortcut Links", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_003",                new LevelStats("Upload Heights", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_005",                new LevelStats("Data Streams", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_006",                new LevelStats("Gigabyte Gauntlet", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_007",                new LevelStats("Cube Corruption", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_008",                new LevelStats("Wham Bam Boom", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_010",                new LevelStats("Pixel Hearts", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_011",                new LevelStats("Cyber Circuit", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_012",                new LevelStats("Boom Blaster Trial", LevelType.Race, true, false, 10, Properties.Resources.round_creative_icon) },
+            //
+            //S10 (SS4) Creative Rounds Made By the Fall Guys Team
+            //
+            { "wle_s10_orig_round_001",           new LevelStats("Beans Ahoy!", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_002",           new LevelStats("Airborne Antics", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_003",           new LevelStats("Scythes & Roundabouts", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_004",           new LevelStats("Cardio Runners", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_005",           new LevelStats("Fan Flingers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_006",           new LevelStats("Uphill Struggle", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_007",           new LevelStats("Spinner Sprint", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_008",           new LevelStats("Lane Changers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_009",           new LevelStats("Gentle Gauntlet", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_012",           new LevelStats("Up & Down", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_013",           new LevelStats("Choo Choo Challenge", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_014",           new LevelStats("Runner Beans", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_015",           new LevelStats("Disc Dashers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_016",           new LevelStats("Two Faced", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_019",           new LevelStats("Blueberry Bombardment", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_020",           new LevelStats("Chuting Stars", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_021",           new LevelStats("Slimy Slopes", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_022",           new LevelStats("Circuit Breakers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_023",           new LevelStats("Winding Walkways", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_026",           new LevelStats("Hyperlink Hijinks", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_027",           new LevelStats("Fan Frolics", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_028",           new LevelStats("Windmill Road", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_029",           new LevelStats("Conveyor Clash", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_032",           new LevelStats("Fortress Frolics", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_033",           new LevelStats("Super Door Dash", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_034",           new LevelStats("Spiral Of Woo", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_035",           new LevelStats("Tornado Trial", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_036",           new LevelStats("Hopscotch Havoc", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_037",           new LevelStats("Beat Bouncers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_038",           new LevelStats("Blunder Bridges", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_039",           new LevelStats("Incline Rewind", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_040",           new LevelStats("Prismatic Parade", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_041",           new LevelStats("Swept Away", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_042",           new LevelStats("Balancing Act", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_043",           new LevelStats("Trouble Tower", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_044",           new LevelStats("Serpent Slalom", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_045",           new LevelStats("Floorless", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_046",           new LevelStats("In The Cloud", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_047",           new LevelStats("Downstream Duel", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_048",           new LevelStats("Lost Palace", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_001",                new LevelStats("Digi Trek", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_002",                new LevelStats("Shortcut Links", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_003",                new LevelStats("Upload Heights", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_005",                new LevelStats("Data Streams", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_006",                new LevelStats("Gigabyte Gauntlet", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_007",                new LevelStats("Cube Corruption", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_008",                new LevelStats("Wham Bam Boom", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_010",                new LevelStats("Pixel Hearts", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_011",                new LevelStats("Cyber Circuit", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_012",                new LevelStats("Boom Blaster Trial", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon) },
 
-            { "wle_s10_orig_round_010",           new LevelStats("Square Up", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_011",           new LevelStats("Slide Showdown", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_017",           new LevelStats("Bellyflop Battlers", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_018",           new LevelStats("Apples & Oranges", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_024",           new LevelStats("Wooseleum", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_025",           new LevelStats("Mount Boom", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_030",           new LevelStats("Mega Monument", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_orig_round_031",           new LevelStats("Transfer Turnpike", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_004",                new LevelStats("Parkour Panic", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
-            { "wle_s10_round_009",                new LevelStats("Firewall Finale", LevelType.Race, true, true, 10, Properties.Resources.round_creative_icon) },
+            { "wle_s10_orig_round_010",           new LevelStats("Square Up", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_011",           new LevelStats("Slide Showdown", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_017",           new LevelStats("Bellyflop Battlers", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_018",           new LevelStats("Apples & Oranges", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_024",           new LevelStats("Wooseleum", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_025",           new LevelStats("Mount Boom", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_030",           new LevelStats("Mega Monument", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_orig_round_031",           new LevelStats("Transfer Turnpike", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_004",                new LevelStats("Parkour Panic", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
+            { "wle_s10_round_009",                new LevelStats("Firewall Finale", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon) },
         };
         public static Dictionary<string, string> SceneToRound = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             { "FallGuy_DoorDash",                  "round_door_dash" },
@@ -351,7 +355,7 @@ namespace FallGuysStats {
             { "FallGuy_FollowTheLine",             "round_follow_the_line" },
             { "FallGuy_Kraken_Attack",             "round_kraken_attack" },
             { "FallGuy_SlippySlide",               "round_slippy_slide" },
-            { "FallGuy_SlideChute",                "round_slide_chute" }
+            { "FallGuy_SlideChute",                "round_slide_chute" },
         };
         public Image RoundIcon { get; set; }
         public string Name { get; set; }
@@ -401,7 +405,7 @@ namespace FallGuysStats {
         }
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
-            if (!stat.PrivateLobby) {
+            if (!stat.PrivateLobby || stat.UseShareCode) {
                 this.Played++;
 
                 switch (stat.Tier) {
@@ -423,7 +427,7 @@ namespace FallGuysStats {
 
             TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.End) - stat.Start;
             if (stat.Finish.HasValue && finishTime.TotalSeconds > 1.1) {
-                if (!stat.PrivateLobby) {
+                if (!stat.PrivateLobby || stat.UseShareCode) {
                     this.FinishedCount++;
                     this.FinishTime += finishTime;
                 }
