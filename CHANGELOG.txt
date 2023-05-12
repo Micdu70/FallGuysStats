@@ -1,13 +1,17 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.170 *~ 12/05/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.162) datant du 11/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Changé: Tout plein de chose à découvrir !
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.169 *~ 10/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.159) datant du 09/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: L'ajout des stats des émissions précédentes a été amélioré (le tri des émissions en fonction des profils liés est fonctionnel)
     - ++Ajouté: Détection d'un bug aléatoire de l'overlay (quand l'info Finish = "0:00.00") qui relancera automatiquement le tracker
     - ++Ajouté: Support de la S10 (SS4) de Fall Guys !
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.167 et v1.168 *~ 06/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }

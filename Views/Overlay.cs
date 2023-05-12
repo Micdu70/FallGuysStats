@@ -592,7 +592,7 @@ namespace FallGuysStats {
                     qualifyChance = levelInfo.TotalGolds * 100f / (levelInfo.TotalPlays == 0 ? 1 : levelInfo.TotalPlays);
                     qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {qualifyChance:0.0}%";
                     qualifyDisplay = $"{levelInfo.TotalGolds}{(levelInfo.TotalPlays < 1000 ? " / " + levelInfo.TotalPlays : Multilingual.GetWord("overlay_inning"))}";
-                    this.lblQualifyChance.TextRight = $"{qualifyDisplay}{qualifyChanceDisplay}";
+                    this.lblQualifyChance.TextRight = this.levelException != 3 ? $"{qualifyDisplay}{qualifyChanceDisplay}" : "0 / 0";
                     break;
             }
         }
@@ -704,7 +704,10 @@ namespace FallGuysStats {
                     } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
                         this.levelException = 2; // Level is like a "Team" level type (score info is most important)
                     } else if (this.lastRound.UseShareCode) {
-                        this.levelException = 3; // Level is a creative map made by a player
+                        this.levelException = 3; // Level is a creative map made by a player and played in Custom
+                    } else if (roundName.StartsWith("ugc-")) {
+                        this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
+                        roundName = roundName.Substring(4);
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {
@@ -722,7 +725,7 @@ namespace FallGuysStats {
                     //}
                     if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
 
-                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.lastRound.UseShareCode ? true : false;
+                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException >= 3 ? true : false;
 
                     LevelType levelType = this.lblRound.IsCreativeRound ? LevelType.Creative : (level?.Type).GetValueOrDefault();
 
@@ -731,8 +734,7 @@ namespace FallGuysStats {
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = this.lastRound.UseShareCode ? Properties.Resources.round_creative_icon :
-                                                      this.lblRound.IsCreativeRound ? Properties.Resources.round_gauntlet_icon : null;
+                            this.lblRound.RoundIcon = this.levelException >= 3 ? Properties.Resources.round_creative_icon : null;
                         }
                         if (this.lblRound.RoundIcon != null) {
                             if (this.lblRound.RoundIcon.Height != 23) {
@@ -810,7 +812,7 @@ namespace FallGuysStats {
                         } else {
                             this.lblFinish.TextRight = this.lastRound.Position > 0 ? $"# {Multilingual.GetWord("overlay_position_prefix")}{this.lastRound.Position}{Multilingual.GetWord("overlay_position_suffix")} | {Time:m\\:ss\\.ff}" : $"{Time:m\\:ss\\.ff}";
                         }
-                        this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown ? Color.White : Color.Pink;
+                        this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown || ((this.lastRound.IsFinal || this.lastRound.UseShareCode) && this.lastRound.Qualified) ? Color.White : Color.Pink;
 
                         if (levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || levelType == LevelType.Creative || this.levelException == 1) {
                             if (Time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && Time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
@@ -842,7 +844,7 @@ namespace FallGuysStats {
                         } else {
                             this.lblFinish.TextRight = $"# {this.lastRound.Position} | {Time:m\\:ss\\.ff}";
                         }
-                        this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown ? Color.White : Color.Pink;
+                        this.lblFinish.ForeColor = (Stats.InShow && !LogRound.IsShowCompletedOrEnded) || this.lastRound.Crown || ((this.lastRound.IsFinal || this.lastRound.UseShareCode) && this.lastRound.Qualified) ? Color.White : Color.Pink;
                     } else if (this.lastRound.Playing && Stats.IsPlaying) {
                         if (numPlayersSucceeded > 0) {
                             this.lblFinish.TextRight = Start > DateTime.UtcNow ? $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - startTime:m\\:ss}" : $"( {numPlayersSucceeded} ) | {DateTime.UtcNow - Start:m\\:ss}";

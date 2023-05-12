@@ -405,9 +405,10 @@ namespace FallGuysStats {
         }
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
-            if (!stat.PrivateLobby || stat.UseShareCode) {
-                this.Played++;
 
+            if (!stat.PrivateLobby) {
+                this.Played++;
+                this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {
                     case (int)QualifyTier.Gold:
                         this.Gold++;
@@ -421,16 +422,17 @@ namespace FallGuysStats {
                 }
 
                 this.Kudos += stat.Kudos;
+                this.Qualified += stat.Qualified ? 1 : 0;
+            } else if (stat.UseShareCode) {
+                this.Played++;
                 this.Duration += stat.End - stat.Start;
                 this.Qualified += stat.Qualified ? 1 : 0;
             }
 
             TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.End) - stat.Start;
             if (stat.Finish.HasValue && finishTime.TotalSeconds > 1.1) {
-                if (!stat.PrivateLobby || stat.UseShareCode) {
-                    this.FinishedCount++;
-                    this.FinishTime += finishTime;
-                }
+                this.FinishedCount++;
+                this.FinishTime += finishTime;
                 if (this.Fastest == TimeSpan.Zero || this.Fastest > finishTime) {
                     this.Fastest = finishTime;
                 }

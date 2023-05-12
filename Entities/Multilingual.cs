@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace FallGuysStats {
     public static class Multilingual {
@@ -4135,6 +4136,10 @@ namespace FallGuysStats {
         }*/
         public static string GetShowName(string keyWord) {
             string name = string.Empty;
+            string shareCodePattern = @"^\d{4}(-\d{4}){2}$";
+            if (!string.IsNullOrEmpty(keyWord) && Regex.IsMatch(keyWord, shareCodePattern)) {
+                keyWord = "fall_guys_creative_mode";
+            }
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);
             showsDictionary?.TryGetValue(keyWord, out name);
             return name;

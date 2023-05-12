@@ -1,8 +1,8 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.169 du 10/05/2023 [compatible S10 (SS4)!] ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.170 du 12/05/2023 [compatible S10 (SS4)!] ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
-INFO: Il y a 0 bug génant connu dans la v1.169 de la "FE" (Frenchy Edition)
+INFO: Il y a 0 bug génant connu dans la v1.170 de la "FE" (Frenchy Edition)
 
 ## Différences entre la "FE" et la Version Officielle
 

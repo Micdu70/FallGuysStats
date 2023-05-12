@@ -286,8 +286,6 @@ namespace FallGuysStats {
                         || roundName.IndexOf("wle_s10_orig_round_031", StringComparison.OrdinalIgnoreCase) != -1
                         || roundName.IndexOf("wle_s10_round_004", StringComparison.OrdinalIgnoreCase) != -1
                         || roundName.IndexOf("wle_s10_round_009", StringComparison.OrdinalIgnoreCase) != -1);
-
-            //|| roundName.StartsWith("ugc-");
         }
 
         private bool GetIsModeException(string roundName) {

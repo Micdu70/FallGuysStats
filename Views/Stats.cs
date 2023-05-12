@@ -1502,7 +1502,9 @@ namespace FallGuysStats {
                                     this.lastAddedShow = stat.Start;
                                 }
                                 stat.ShowID = nextShowID;
-                                linkedProfile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby);
+                                if (this.CurrentSettings.AutoChangeProfile) {
+                                    linkedProfile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby);
+                                }
                                 stat.Profile = linkedProfile >= 0 ? linkedProfile : profile;
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
@@ -1695,6 +1697,11 @@ namespace FallGuysStats {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                         if (!item.Checked) { item.PerformClick(); }
                         break;
+                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
+                        linkedProfileFound = true;
+                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                        if (!item.Checked) { item.PerformClick(); }
+                        break;
                     }
                 } else {
                     if (isCreativeShow) {
@@ -1741,7 +1748,7 @@ namespace FallGuysStats {
             };
             int lastShow = -1;
             if (!this.StatLookup.TryGetValue(name ?? string.Empty, out LevelStats currentLevel)) {
-                if (levelException == 3) {
+                if (levelException >= 3) {
                     currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon);
                 } else {
                     currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null);
@@ -1772,7 +1779,7 @@ namespace FallGuysStats {
                     (this.CurrentSettings.WinsFilter == 3 && endShow.Start > WeekStart) ||
                     (this.CurrentSettings.WinsFilter == 4 && endShow.Start > DayStart) ||
                     (this.CurrentSettings.WinsFilter == 5 && endShow.Start > SessionStart));
-                bool isInQualifyFilter = !endShow.PrivateLobby && (this.CurrentSettings.QualifyFilter == 0 ||
+                bool isInQualifyFilter = (!endShow.PrivateLobby || endShow.UseShareCode) && (this.CurrentSettings.QualifyFilter == 0 ||
                     (this.CurrentSettings.QualifyFilter == 1 && this.IsInStatsFilter(endShow.Start) && this.IsInPartyFilter(info)) ||
                     (this.CurrentSettings.QualifyFilter == 2 && endShow.Start > SeasonStart) ||
                     (this.CurrentSettings.QualifyFilter == 3 && endShow.Start > WeekStart) ||
