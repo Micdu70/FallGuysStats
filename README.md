@@ -38,7 +38,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.170` *~ 12/05/2023* [compatible S10 (SS4)!]
+**Dernière version:** `v1.171` *~ 13/05/2023* [compatible S10 (SS4)!]
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -46,7 +46,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
 
 
-### Il y a 0 bug génant connu dans la v1.170 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.171 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -180,9 +180,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - `v1.171` *~ 13/05/2023*
+  { Cette version, bien que basée sur la Version Officielle (v1.164) datant du 13/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: L'activation de l'option "Passer automatiquement sur le profil lié" pouvait faire planter l'application
+    - ++Changé: Tout plein de chose à découvrir !
+
   - `v1.170` *~ 12/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.162) datant du 11/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-	- ++Changé: Tout plein de chose à découvrir !
+    - ++Changé: Tout plein de chose à découvrir !
 
   - `v1.169` *~ 10/05/2023*
   { Cette version, bien que basée sur la Version Officielle (v1.159) datant du 09/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }

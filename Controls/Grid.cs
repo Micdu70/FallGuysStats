@@ -311,7 +311,8 @@ namespace FallGuysStats {
                         fs.Close();
                     }
 
-                    MessageBox.Show(this, $"{Multilingual.GetWord("message_save_csv")}{Environment.NewLine}({this._saveFile.FileName})", Multilingual.GetWord("message_save_csv_caption"), MessageBoxButtons.OK);
+                    MessageBox.Show(this, $"{Multilingual.GetWord("message_save_csv")}{Environment.NewLine}({this._saveFile.FileName})", Multilingual.GetWord("message_save_csv_caption"),
+                        MessageBoxButtons.OK);
                 }
             } catch (Exception ex) {
                 ControlErrors.HandleException(this, ex, false);
@@ -347,7 +348,8 @@ namespace FallGuysStats {
                 sb.Append("</table>");
                 Clipboard.SetText(sb.ToString(), TextDataFormat.Text);
 
-                MessageBox.Show(this, Multilingual.GetWord("message_save_html"), Multilingual.GetWord("message_save_html_caption"), MessageBoxButtons.OK);
+                MessageBox.Show(this, Multilingual.GetWord("message_save_html"), Multilingual.GetWord("message_save_html_caption"),
+                    MessageBoxButtons.OK);
             } catch (Exception ex) {
                 ControlErrors.HandleException(this, ex, false);
             }
@@ -382,7 +384,8 @@ namespace FallGuysStats {
                 sb.Append("[/table]");
                 Clipboard.SetText(sb.ToString(), TextDataFormat.Text);
 
-                MessageBox.Show(this, Multilingual.GetWord("message_save_bbcode"), Multilingual.GetWord("message_save_bbcode_caption"), MessageBoxButtons.OK);
+                MessageBox.Show(this, Multilingual.GetWord("message_save_bbcode"), Multilingual.GetWord("message_save_bbcode_caption"),
+                    MessageBoxButtons.OK);
             } catch (Exception ex) {
                 ControlErrors.HandleException(this, ex, false);
             }
@@ -419,7 +422,8 @@ namespace FallGuysStats {
 
                 Clipboard.SetText(sb.ToString(), TextDataFormat.Text);
 
-                MessageBox.Show(this, Multilingual.GetWord("message_save_markdown"), Multilingual.GetWord("message_save_markdown_caption"), MessageBoxButtons.OK);
+                MessageBox.Show(this, Multilingual.GetWord("message_save_markdown"), Multilingual.GetWord("message_save_markdown_caption"),
+                    MessageBoxButtons.OK);
             } catch (Exception ex) {
                 ControlErrors.HandleException(this, ex, false);
             }

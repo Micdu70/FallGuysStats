@@ -4136,8 +4136,7 @@ namespace FallGuysStats {
         }*/
         public static string GetShowName(string keyWord) {
             string name = string.Empty;
-            string shareCodePattern = @"^\d{4}(-\d{4}){2}$";
-            if (!string.IsNullOrEmpty(keyWord) && Regex.IsMatch(keyWord, shareCodePattern)) {
+            if (Regex.IsMatch(keyWord, @"^\d{4}(-\d{4}){2}$")) {
                 keyWord = "fall_guys_creative_mode";
             }
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);

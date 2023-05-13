@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace FallGuysStats {
@@ -8,10 +9,10 @@ namespace FallGuysStats {
         public bool autoGenerateProfiles;
 
         public SelectLanguage(string sysLang) {
-            this.defaultLanguage = sysLang == "fr" ? 1 :
-                                    sysLang == "ko" ? 2 :
-                                    sysLang == "ja" ? 3 :
-                                    sysLang == "zh" ? 4 : 0;
+            this.defaultLanguage = string.Equals(sysLang, "fr", StringComparison.Ordinal) ? 1 :
+                                    string.Equals(sysLang, "ko", StringComparison.Ordinal) ? 2 :
+                                    string.Equals(sysLang, "ja", StringComparison.Ordinal) ? 3 :
+                                    string.Equals(sysLang, "zh", StringComparison.Ordinal) ? 4 : 0;
             this.InitializeComponent();
         }
 
@@ -39,7 +40,7 @@ namespace FallGuysStats {
         }
 
         private void ChangeLanguage(int lang) {
-            this.Font = Overlay.GetMainFont(9, lang);
+            this.Font = Overlay.GetMainFont(9, FontStyle.Regular, lang);
             this.Text = Multilingual.GetWordWithLang("settings_select_language_title", lang);
             this.chkAutoGenerateProfile.Text = Multilingual.GetWordWithLang("settings_auto_generate_profiles", lang);
             this.btnLanguageSave.Text = Multilingual.GetWordWithLang("settings_select_language_button", lang);

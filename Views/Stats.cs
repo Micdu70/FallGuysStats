@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using LiteDB;
 using Microsoft.Win32;
 using MetroFramework;
+using System.Text.RegularExpressions;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -53,7 +54,8 @@ namespace FallGuysStats {
                     Application.Run(new Stats());
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message, @"Run Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, @"Run Exception",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private static bool IsAlreadyRunning(string sysLang) {
@@ -63,17 +65,19 @@ namespace FallGuysStats {
                 for (int i = 0; i < processes.Length; i++) {
                     if (AppDomain.CurrentDomain.FriendlyName.Equals(processes[i].ProcessName + ".exe")) processCount++;
                     if (processCount > 1) {
-                        CurrentLanguage = sysLang == "fr" ? 1 :
-                                        sysLang == "ko" ? 2 :
-                                        sysLang == "ja" ? 3 :
-                                        sysLang == "zh" ? 4 : 0;
-                        MessageBox.Show(Multilingual.GetWord("message_tracker_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        CurrentLanguage = string.Equals(sysLang, "fr", StringComparison.Ordinal) ? 1 :
+                                          string.Equals(sysLang, "ko", StringComparison.Ordinal) ? 2 :
+                                          string.Equals(sysLang, "ja", StringComparison.Ordinal) ? 3 :
+                                          string.Equals(sysLang, "zh", StringComparison.Ordinal) ? 4 : 0;
+                        MessageBox.Show(Multilingual.GetWord("message_tracker_already_running"), Multilingual.GetWord("message_already_running_caption"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return true;
                     }
                 }
                 return false;
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message, @"Process Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, @"Process Exception",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
         }
@@ -94,10 +98,9 @@ namespace FallGuysStats {
         private static DateTime SessionStart = DateTime.UtcNow;
 
         public static bool InShow = false;
-        public static bool IsPlaying = false;
         public static int LastServerPing = 0;
 
-        public static int CurrentLanguage = 0;
+        public static int CurrentLanguage = 1;
 
         public static MetroThemeStyle CurrentTheme = MetroThemeStyle.Dark;
 
@@ -449,7 +452,7 @@ namespace FallGuysStats {
                                 break;
                             case "lblTotalTime":
                                 tsl1.Image = this.Theme == MetroThemeStyle.Light ? Properties.Resources.clock_icon : Properties.Resources.clock_gray_icon;
-                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.DarkSlateGray : Color.DarkGray;
                                 break;
                             case "lblTotalShows":
                             case "lblTotalWins":
@@ -469,7 +472,7 @@ namespace FallGuysStats {
                             case "lblPinkMedal":
                             case "lblEliminatedMedal":
                             case "lblKudos":
-                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                tsl1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.DarkSlateGray : Color.DarkGray;
                                 break;
                         }
                     }
@@ -1217,8 +1220,7 @@ namespace FallGuysStats {
             }
         }
         private void UpdateGridRoundName() {
-            Dictionary<string, string> rounds = Multilingual.GetRoundsDictionary();
-            foreach (KeyValuePair<string, string> item in rounds) {
+            foreach (KeyValuePair<string, string> item in Multilingual.GetRoundsDictionary()) {
                 LevelStats level = StatLookup[item.Key];
                 level.Name = item.Value;
             }
@@ -1339,9 +1341,9 @@ namespace FallGuysStats {
                     this.SaveUserSettings();
                 }
                 this.StatsDB.Dispose();
-            } catch {
-                //Application.ExitThread();
-                //Environment.Exit(0);
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void Stats_Load(object sender, EventArgs e) {
@@ -1358,7 +1360,10 @@ namespace FallGuysStats {
                 this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"].PerformClick();
 
                 this.UpdateDates();
-            } catch { }
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Stats_Shown(object sender, EventArgs e) {
             try {
@@ -1483,10 +1488,8 @@ namespace FallGuysStats {
                                         editShows.StatsForm = this;
                                         if (editShows.ShowDialog(this) == DialogResult.OK) {
                                             this.askedPreviousShows = 1;
-                                            if (!this.CurrentSettings.AutoChangeProfile) {
-                                                profile = editShows.SelectedProfileId;
-                                                this.CurrentSettings.SelectedProfile = profile;
-                                            }
+                                            profile = editShows.SelectedProfileId;
+                                            this.CurrentSettings.SelectedProfile = profile;
                                         } else {
                                             this.askedPreviousShows = 2;
                                         }
@@ -1503,7 +1506,7 @@ namespace FallGuysStats {
                                 }
                                 stat.ShowID = nextShowID;
                                 if (this.CurrentSettings.AutoChangeProfile) {
-                                    linkedProfile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby);
+                                    linkedProfile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10_"));
                                 }
                                 stat.Profile = linkedProfile >= 0 ? linkedProfile : profile;
                                 this.RoundDetails.Insert(stat);
@@ -1535,7 +1538,7 @@ namespace FallGuysStats {
                         this.Duration += stat.End - stat.Start;
 
                         if (!stat.PrivateLobby) {
-                            if (stat.Qualified) {
+                            if (!stat.AbandonShow && stat.Qualified) {
                                 switch (stat.Tier) {
                                     case 0:
                                         this.PinkMedals++;
@@ -1554,7 +1557,7 @@ namespace FallGuysStats {
                                 this.EliminatedMedals++;
                             }
                         } else {
-                            if (stat.Qualified) {
+                            if (!stat.AbandonShow && stat.Qualified) {
                                 switch (stat.Tier) {
                                     case 0:
                                         this.CustomPinkMedals++;
@@ -1578,12 +1581,15 @@ namespace FallGuysStats {
 
                         // add new type of round to the rounds lookup
                         if (!this.StatLookup.ContainsKey(stat.Name)) {
+                            bool isCreative = false;
                             string roundName = stat.Name;
                             if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
+                            } else if (Regex.IsMatch(roundName, @"^\d{4}(-\d{4}){2}$")) {
+                                isCreative = true;
                             }
 
-                            LevelStats newLevel = stat.UseShareCode
+                            LevelStats newLevel = stat.UseShareCode || isCreative
                                                   ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon)
                                                   : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null);
 
@@ -1635,10 +1641,12 @@ namespace FallGuysStats {
                     }
                 }
 
-                if (!Disposing && !IsDisposed) {
+                if (!this.Disposing && !this.IsDisposed) {
                     try {
-                        UpdateTotals();
-                    } catch { }
+                        this.UpdateTotals();
+                    } catch {
+                        // ignored
+                    }
                 }
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
@@ -1669,23 +1677,32 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
-        public int GetLinkedProfileId(string showId, bool isPrivateLobbies) {
+        public int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) return -1;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         return this.AllProfiles.Count - 1 - i;
+                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
+                        return this.AllProfiles.Count - 1 - i;
                     }
                 } else {
-                    if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
-                        return this.AllProfiles.Count - 1 - i;
+                    if (isCreativeShow) {
+                        if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
+                            return this.AllProfiles.Count - 1 - i;
+                        }
+                    } else {
+                        if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                            return this.AllProfiles.Count - 1 - i;
+                        }
                     }
                 }
             }
             return -1;
         }
         public string GetCurrentProfileLinkedShowId() {
-            return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+            string currentProfileLinkedShowId = this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+            return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
         public void SetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
@@ -1760,7 +1777,8 @@ namespace FallGuysStats {
                 RoundInfo info = this.AllStats[i];
                 if (info.Profile != profile) { continue; }
 
-                TimeSpan finishTime = info.Finish.GetValueOrDefault(info.End) - info.Start;
+                TimeSpan finishTime = info.Finish.GetValueOrDefault(info.Start) - info.Start;
+                bool hasFinishTime = finishTime.TotalSeconds > 1.1 ? true : false;
                 bool hasLevelDetails = StatLookup.TryGetValue(info.Name, out LevelStats levelDetails);
                 bool isCurrentLevel = currentLevel.Name.Equals(hasLevelDetails ? levelDetails.Name : info.Name, StringComparison.OrdinalIgnoreCase);
 
@@ -1821,7 +1839,7 @@ namespace FallGuysStats {
                     }
                 }
 
-                if (info.Qualified) {
+                if (!info.AbandonShow && info.Qualified) {
                     if (hasLevelDetails && (info.IsFinal || info.Crown)) {
                         if (!info.PrivateLobby) {
                             summary.AllWins++;
@@ -1849,28 +1867,61 @@ namespace FallGuysStats {
                         }
 
                         if (isInFastestFilter) {
-                            if (finishTime.TotalSeconds > 1.1 && (!summary.BestFinish.HasValue || summary.BestFinish.Value > finishTime)) {
+                            if (hasFinishTime && (!summary.BestFinish.HasValue || summary.BestFinish.Value > finishTime)) {
                                 summary.BestFinish = finishTime;
                             }
-                            if (finishTime.TotalSeconds > 1.1 && info.Finish.HasValue && (!summary.LongestFinish.HasValue || summary.LongestFinish.Value < finishTime)) {
+                            if (hasFinishTime && (!summary.LongestFinish.HasValue || summary.LongestFinish.Value < finishTime)) {
                                 summary.LongestFinish = finishTime;
                             }
                         }
 
-                        if (finishTime.TotalSeconds > 1.1 && (!summary.BestFinishOverall.HasValue || summary.BestFinishOverall.Value > finishTime)) {
+                        if (hasFinishTime && (!summary.BestFinishOverall.HasValue || summary.BestFinishOverall.Value > finishTime)) {
                             summary.BestFinishOverall = finishTime;
                         }
-                        if (finishTime.TotalSeconds > 1.1 && info.Finish.HasValue && (!summary.LongestFinishOverall.HasValue || summary.LongestFinishOverall.Value < finishTime)) {
+                        if (hasFinishTime && (!summary.LongestFinishOverall.HasValue || summary.LongestFinishOverall.Value < finishTime)) {
                             summary.LongestFinishOverall = finishTime;
                         }
                     }
                 } else if (!info.PrivateLobby) {
+                    if (info.Qualified && isCurrentLevel) {
+                        if (isInFastestFilter) {
+                            if (hasFinishTime && (!summary.BestFinish.HasValue || summary.BestFinish.Value > finishTime)) {
+                                summary.BestFinish = finishTime;
+                            }
+                            if (hasFinishTime && (!summary.LongestFinish.HasValue || summary.LongestFinish.Value < finishTime)) {
+                                summary.LongestFinish = finishTime;
+                            }
+                        }
+
+                        if (hasFinishTime && (!summary.BestFinishOverall.HasValue || summary.BestFinishOverall.Value > finishTime)) {
+                            summary.BestFinishOverall = finishTime;
+                        }
+                        if (hasFinishTime && (!summary.LongestFinishOverall.HasValue || summary.LongestFinishOverall.Value < finishTime)) {
+                            summary.LongestFinishOverall = finishTime;
+                        }
+                    }
                     if (!info.IsFinal && !info.Crown) {
                         summary.CurrentFinalStreak = 0;
                     }
                     summary.CurrentStreak = 0;
                     if (isInWinsFilter && hasLevelDetails && (info.IsFinal || info.Crown)) {
                         summary.TotalFinals++;
+                    }
+                } else if (info.AbandonShow && info.Qualified && isCurrentLevel) {
+                    if (isInFastestFilter) {
+                        if (hasFinishTime && (!summary.BestFinish.HasValue || summary.BestFinish.Value > finishTime)) {
+                            summary.BestFinish = finishTime;
+                        }
+                        if (hasFinishTime && (!summary.LongestFinish.HasValue || summary.LongestFinish.Value < finishTime)) {
+                            summary.LongestFinish = finishTime;
+                        }
+                    }
+
+                    if (hasFinishTime && (!summary.BestFinishOverall.HasValue || summary.BestFinishOverall.Value > finishTime)) {
+                        summary.BestFinishOverall = finishTime;
+                    }
+                    if (hasFinishTime && (!summary.LongestFinishOverall.HasValue || summary.LongestFinishOverall.Value < finishTime)) {
+                        summary.LongestFinishOverall = finishTime;
                     }
                 }
             }
@@ -2506,7 +2557,8 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -2518,7 +2570,8 @@ namespace FallGuysStats {
                             this.WindowState = FormWindowState.Minimized;
                         }
                     } else {
-                        MessageBox.Show(this, Multilingual.GetWord("message_register_shortcut"), Multilingual.GetWord("message_register_shortcut_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, Multilingual.GetWord("message_register_shortcut"), Multilingual.GetWord("message_register_shortcut_caption"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } else {
                     this.UpdateGameExeLocation();
@@ -2529,7 +2582,8 @@ namespace FallGuysStats {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
                                 if (!ignoreExisting) {
-                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, Multilingual.GetWord("message_fall_guys_already_running"), Multilingual.GetWord("message_already_running_caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 return;
                             }
@@ -2541,7 +2595,8 @@ namespace FallGuysStats {
                             this.WindowState = FormWindowState.Minimized;
                         }
                     } else {
-                        MessageBox.Show(this, Multilingual.GetWord("message_register_exe"), Multilingual.GetWord("message_register_exe_caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, Multilingual.GetWord("message_register_exe"), Multilingual.GetWord("message_register_exe_caption"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             } catch (Exception ex) {
@@ -2593,7 +2648,7 @@ namespace FallGuysStats {
                     }
                 }
             } catch (Exception ex) {
-                MetroMessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
+                MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -3008,6 +3063,7 @@ namespace FallGuysStats {
             this.menu.Font = Overlay.GetMainFont(12);
             this.menuLaunchFallGuys.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);
+            this.infoStrip2.Font = Overlay.GetMainFont(13, FontStyle.Bold);
 
             this.dataGridViewCellStyle1.Font = Overlay.GetMainFont(10);
             this.dataGridViewCellStyle2.Font = Overlay.GetMainFont(12);

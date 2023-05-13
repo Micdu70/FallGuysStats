@@ -350,14 +350,14 @@ namespace FallGuysStats {
         }
 
         private void BtnSave_Click(object sender, EventArgs e) {
+            this.CurrentSettings.LogPath = this.txtLogPath.Text;
+
             Stats.CurrentLanguage = this.cboMultilingual.SelectedIndex;
             this.CurrentSettings.Multilingual = this.cboMultilingual.SelectedIndex;
 
-            this.CurrentSettings.LogPath = this.txtLogPath.Text;
-
+            Stats.CurrentTheme = this.cboTheme.SelectedIndex == 0 ? MetroThemeStyle.Light :
+                this.cboTheme.SelectedIndex == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
             this.CurrentSettings.Theme = this.cboTheme.SelectedIndex;
-            Stats.CurrentTheme = this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
-                this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
 
             if (string.IsNullOrEmpty(this.txtCycleTimeSeconds.Text)) {
                 this.CurrentSettings.CycleTimeSeconds = 5;
@@ -593,12 +593,14 @@ namespace FallGuysStats {
                             if (url.ToLower().StartsWith("com.epicgames.launcher://apps") && url.IndexOf(epicGamesFallGuysApp) > 0) {
                                 this.txtGameShortcutLocation.Text = url;
                             } else {
-                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_epicgames", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_epicgames", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     } else { // Steam
                         if (string.IsNullOrEmpty(this.txtGameExeLocation.Text)) {
-                            MessageBox.Show(Multilingual.GetWordWithLang("message_not_installed_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_steam_caption", this.DisplayLang), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Multilingual.GetWordWithLang("message_not_installed_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_steam_caption", this.DisplayLang),
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         FileInfo currentExeLocation = new FileInfo(this.txtGameExeLocation.Text);
@@ -613,7 +615,8 @@ namespace FallGuysStats {
                             if (openFile.FileName.IndexOf("FallGuys_client", StringComparison.OrdinalIgnoreCase) >= 0) {
                                 txtGameExeLocation.Text = openFile.FileName;
                             } else {
-                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -739,7 +742,7 @@ namespace FallGuysStats {
 
         private void ChangeLanguage(int lang) {
             this.DisplayLang = lang;
-            this.Font = Overlay.GetMainFont(12, this.DisplayLang);
+            this.Font = Overlay.GetMainFont(12, FontStyle.Regular, this.DisplayLang);
             int tempLanguage = Stats.CurrentLanguage;
             Stats.CurrentLanguage = lang;
 

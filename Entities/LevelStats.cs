@@ -35,6 +35,7 @@ namespace FallGuysStats {
         public DateTime End { get; set; } = DateTime.MinValue;
         public DateTime? Finish { get; set; } = null;
         public bool Crown { get; set; }
+        public bool AbandonShow { get; set; }
 
         public DateTime StartLocal;
         public DateTime EndLocal;
@@ -406,7 +407,7 @@ namespace FallGuysStats {
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
 
-            if (!stat.PrivateLobby) {
+            if (!stat.PrivateLobby || stat.UseShareCode) {
                 this.Played++;
                 this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {
@@ -422,11 +423,7 @@ namespace FallGuysStats {
                 }
 
                 this.Kudos += stat.Kudos;
-                this.Qualified += stat.Qualified ? 1 : 0;
-            } else if (stat.UseShareCode) {
-                this.Played++;
-                this.Duration += stat.End - stat.Start;
-                this.Qualified += stat.Qualified ? 1 : 0;
+                this.Qualified += !stat.AbandonShow && stat.Qualified ? 1 : 0;
             }
 
             TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.End) - stat.Start;

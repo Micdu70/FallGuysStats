@@ -287,6 +287,7 @@ namespace FallGuysStats {
             this.gridDetails.Columns["Qualified"].Visible = false;
             this.gridDetails.Columns["IsFinal"].Visible = false;
             this.gridDetails.Columns["IsTeam"].Visible = false;
+            this.gridDetails.Columns["AbandonShow"].Visible = false;
             if (this._showStats == 0) {
                 this.gridDetails.Columns.Add(new DataGridViewImageColumn { Name = "RoundIcon", ImageLayout = DataGridViewImageCellLayout.Zoom });
                 this.gridDetails.Setup("RoundIcon", pos++, this.GetDataGridViewColumnWidth("RoundIcon", ""), "", DataGridViewContentAlignment.MiddleCenter);
@@ -381,7 +382,7 @@ namespace FallGuysStats {
             } else if (this._showStats == 2 && this.gridDetails.Columns[e.ColumnIndex].Name == "Qualified") { // Shows
                 e.Value = !string.IsNullOrEmpty(info.Name);
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Medal" && e.Value == null) {
-                if (info.Qualified) {
+                if (!info.AbandonShow && info.Qualified) {
                     switch (info.Tier) {
                         case 0:
                             this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_pink");
@@ -434,6 +435,10 @@ namespace FallGuysStats {
                     e.Value = Multilingual.GetShowName((string)e.Value);
                 }
                 //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Position") {
+                if ((int)e.Value == 0) {
+                    e.Value = "";
+                }
             } else if (this._showStats != 2 && this.gridDetails.Columns[e.ColumnIndex].Name == "PlayersPs4") {
                 gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_playersPs4_desc");
                 if ((int)e.Value == 0) {
