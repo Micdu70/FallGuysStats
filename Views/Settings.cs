@@ -521,6 +521,7 @@ namespace FallGuysStats {
             }
 
             this.CurrentSettings.IgnoreLevelTypeWhenSorting = this.chkIgnoreLevelTypeWhenSorting.Checked;
+
             this.CurrentSettings.LaunchPlatform = this.LaunchPlatform;
             this.CurrentSettings.GameExeLocation = this.txtGameExeLocation.Text;
             this.CurrentSettings.GameShortcutLocation = this.txtGameShortcutLocation.Text;
@@ -542,6 +543,8 @@ namespace FallGuysStats {
             }
 
             this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
+
+            this.StatsForm.UpdateMenuLaunchFallGuysImage();
 
             this.DialogResult = DialogResult.OK;
             this.Close();

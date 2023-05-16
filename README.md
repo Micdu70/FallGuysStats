@@ -3,6 +3,7 @@
   - [**Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70**](#-tracker-fall-guys-fe-frenchy-edition-par-micdu70)
     - [**Différences entre la "FE" et la Version Officielle**](#différences-entre-la-fe-et-la-version-officielle)
     - [**Téléchargement**](#téléchargement)
+    - [**Changelog de la dernière version**](#changelog-de-la-dernière-version)
     - [**Utilisation**](#utilisation)
     - [**FAQ**](#faq)
     - [**Thème**](#thème)
@@ -15,6 +16,7 @@
   - [**Profil**](#profil)
     - [**Lier un profil à une émission spécifique**](#lier-un-profil-à-une-émission-spécifique)
     - [**Supprimer des émissions ou déplacer des émissions vers un autre profil**](#supprimer-des-émissions-ou-déplacer-des-émissions-vers-un-autre-profil)
+  - [**Copier le code de partage d'une map que vous avez précédemment jouée**](#copier-le-code-de-partage-d-une-map-que-vous-avez-précédemment-jouée)
   - [**Changelog complet de la "FE" (Frenchy Edition)**](#changelog-complet-de-la-fe-frenchy-edition)
   - [**Changelog récent de la Version Officielle**](#changelog-récent-de-la-version-officielle)
 
@@ -38,7 +40,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.171` *~ 13/05/2023* [compatible S10 (SS4)!]
+**Dernière version:** `v1.172` ~ 16/05/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -46,7 +48,18 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStatsManualUpdate.zip">![FallGuysStats.zip](Resources/FallGuysStatsManualUpdate-download.svg)</a>
 
 
-### Il y a 0 bug génant connu dans la v1.171 de la "FE" (Frenchy Edition)
+## Changelog de la dernière version
+
+{ Correction de bugs de la "FE" }
+{ Cette version, bien que basée sur la Version Officielle (v1.166) datant du 16/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- +Corrigé: Détection des manches finales pour les nouvelles émissions hebdomadaires
+- ++Changé: Modification/Amélioration de l'ajout des stats d'émissions précédentes
+- ++Changé: Les émissions abandonnées (quittées prématurément) auront maintenant une couleur spécifique - violet sombre - dans la liste des stats des manches
+- ++Changé: Overlay => Le temps "Meilleur" sera maintenant toujours égal au temps "Le plus long" pour les manches de survie et de logique 
+- ++Ajouté: Copie du code de partage d'une map [Version Officielle + Modifications "FE"]
+
+
+### Il y a 0 bug génant connu dans la v1.172 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -160,11 +173,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
   - Permet de changer de profil automatiquement au moment où l'émission spécifiée commence.
 
-  - Menu "Profil" > "Config. des profils"
+  - Fenêtre principale > Menu "Profil" > "Gestion des profils"
 
 ![Configuration des profils](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/profileAndShowLinkage.png)
 
-  - Menu "Configuration" -> Option "Passer automatiquement sur le profil lié"
+  - Fenêtre principale > Menu "Configuration" -> Option "Passer automatiquement sur le profil lié"
 
 ![Configuration - Profil lié](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/automaticProfileChange.png)
 
@@ -173,78 +186,98 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ![Émissions](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/showsWindow.png)
 
-  - Cliquer sur "Émissions: X" en haut de la fenêtre principale pour voir les stats des émissions.
+  - En haut de la fenêtre principale, cliquer sur le premier nombre à droite du nom du profil pour voir la liste des stats des émissions.
   - Sélectionner une ou plusieurs émissions avec la touche **'Ctrl'** ou avec la combinaison de touches **'Ctrl + Maj'**.
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
 
 
+## Copier le code de partage d'une map que vous avez précédemment jouée
+
+- Méthode 1:
+  - Dans la fenêtre principale, cliquer sur le nom de la manche dont vous voulez copier le code.
+  - Double-cliquer sur le code de partage présent dans le tableau, dans la colonne "Nom de l'émission".
+
+- Méthode 2:
+  - En haut de la fenêtre principale, cliquer sur le deuxième ou troisième nombre à droite du nom du profil pour voir une liste des stats des manches.
+  - Double-cliquer sur le code partage souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
+
+
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - `v1.171` *~ 13/05/2023*
+  - `v1.172` ~ 16/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.166) datant du 16/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Détection des manches finales pour les nouvelles émissions hebdomadaires
+    - ++Changé: Modification/Amélioration de l'ajout des stats d'émissions précédentes
+    - ++Changé: Les émissions abandonnées (quittées prématurément) auront maintenant une couleur spécifique - violet sombre - dans la liste des stats des manches
+    - ++Changé: Overlay => Le temps "Meilleur" sera maintenant toujours égal au temps "Le plus long" pour les manches de survie et de logique 
+    - ++Ajouté: Copie du code de partage d'une map [Version Officielle + Modifications "FE"]
+
+  - `v1.171` ~ 13/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.164) datant du 13/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: L'activation de l'option "Passer automatiquement sur le profil lié" pouvait faire planter l'application
     - ++Changé: Tout plein de chose à découvrir !
 
-  - `v1.170` *~ 12/05/2023*
+  - `v1.170` ~ 12/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.162) datant du 11/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Changé: Tout plein de chose à découvrir !
 
-  - `v1.169` *~ 10/05/2023*
+  - `v1.169` ~ 10/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.159) datant du 09/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: L'ajout des stats des émissions précédentes a été amélioré (le tri des émissions en fonction des profils liés est fonctionnel)
     - ++Ajouté: Détection d'un bug aléatoire de l'overlay (quand l'info Finish = "0:00.00") qui relancera automatiquement le tracker
     - ++Ajouté: Support de la S10 (SS4) de Fall Guys !
 
-  - `v1.167` et `v1.168` *~ 06/05/2023*
+  - `v1.167` et `v1.168` ~ 06/05/2023
 
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: **FIX** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
     - ++Changé: Optimisation du programme (merci à @qutrits)
 
-  - `v1.166` *~ 05/05/2023*
+  - `v1.166` ~ 05/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.155) datant du 04/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: Détection des Kudos gagnés à la fin d'une émission (merci à @qutrits)
     - ++Changé: Amélioration de l'interface (merci à @qutrits)
     - ++Changé: Amélioration des traductions
     - ++Changé: Divers petits changements
 
-  - `v1.165` *~ 30/04/2023*
+  - `v1.165` ~ 30/04/2023
   { Correction de bugs de la "FE" }
     - +Ajouté: Option pour minimiser la fenêtre du programme à son lancement
     - +Ajouté: Option (activée par défaut) pour envoyer l'info des manches jouées vers le site <a href="https://fallalytics.com/">Fallalytics</a> (merci à @Hoier)
     - +Ajouté: Overlay => Affichage du nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale)
 
-  - `v1.160` *~ 21/04/2023*
+  - `v1.160` ~ 21/04/2023
     - +Corrigé: Overlay => Divers petites corrections ["FE"]
     - +Corrigé: Tri des manches par ordre alphabétique dans la fenêtre principale pour toutes les langues [Version Officielle]
 
-  - `v1.159` *~ 19/04/2023*
+  - `v1.159` ~ 19/04/2023
     - +Corrigé: **HOTFIX** Infos du graphique du nombre de victoires par jour
 
-  - `v1.158` *~ 18/04/2023*
+  - `v1.158` ~ 18/04/2023
     - +Corrigé: Détection de la manche finale pour l'émission "Fol'Virevoltes Tropicales"
     - +Corrigé: Infos du graphique du nombre de victoires par jour
     - ++Changé: Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Overlay => Divers petits changements concernant la récupération des infos ["FE"]
 
-  - `v1.157` *~ 09/04/2023*
+  - `v1.157` ~ 09/04/2023
   { Cette version, bien que basée sur la Version Officielle (v1.146) datant du 09/04/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: Le premier champ de texte (celui le plus haut) ne sera plus sélectionnée dès l'ouverture de la fenêtre "Configuration" ["FE"]
     - ++Changé: Le temps "Finish" enregistré sera égal à la durée de la manche quand vous serez éliminé(e) mais que votre équipe arrive à se qualifier tout de même
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré [Version Officielle + Modifications "FE"]
     - ++Ajouté: Arrière-plan "Super Mario Bros. 3" pour l'overlay [Version Officielle]
 
-  - `v1.156` *~ 07/04/2023*
+  - `v1.156` ~ 07/04/2023
     - +Corrigé: Détection comme manche finale pour les émissions de type "Contre-la-montre"
     - +Corrigé: Bug (uniquement visuel) des valeurs dans la fenêtre principale du tracker dans certains scénarios
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des Parties Personnalisées (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
     - ++Changé: Divers changements mineurs...
 
-  - `v1.155` *~ 05/04/2023*
+  - `v1.155` ~ 05/04/2023
   { Correction de bugs de la "FE" }
 
-  - `v1.154` *~ 04/04/2023*
+  - `v1.154` ~ 04/04/2023
   { Cette version est basée sur la Version Officielle (v1.143) datant du 01/04/2023 => https://github.com/ShootMe/FallGuysStats }
   { Correction de bugs de la "FE" }
     - ++Changé: Les stats des émissions non terminés sont maintenant aussi enregistrées dans le tracker !
@@ -262,7 +295,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
      10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
 	 11) Le graphique du nombre de victoires est en forme de barres (au lieu de points)
 
-  - `v1.152` et `1.153` *~ 31/03/2023*
+  - `v1.152` et `1.153` ~ 31/03/2023
   { Correction de bugs de la "FE" }
     - ++Changé: Le graphique du nombre de victoires par jour a été amélioré
     - ++Changé: Les options/réglages "par défaut" sont:
@@ -277,22 +310,22 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
       9) "Colorer la manche selon son type" pour l'overlay sélectionnée
      10) "Passer automatiquement sur le profil lié" pour l'overlay **N'EST PAS** sélectionnée
 
-  - `v1.151` *~ 30/03/2023*
+  - `v1.151` ~ 30/03/2023
   { Cette version est basée sur la Version Officielle (v1.142) datant du 30/03/2023 => https://github.com/ShootMe/FallGuysStats }
     - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
 	- ++Changé: Tout plein de chose à découvrir !
 
-  - `v1.150` *~ 20/03/2023*
+  - `v1.150` ~ 20/03/2023
     - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - +Corrigé: Les fitres 'en Solo' et 'en Groupe' dans le menu "Filtres => Parties" de la fenêtre principale ont été corrigés **ATTENTION: Toutes les émissions enregistrées avant l'utilisation de cette version ne seront pas filtrées correctement !**
     - +Corrigé: Le "bon" logo est maintenant visible en haut à gauche de toutes les fenêtres du programme
 
-  - `v1.149` *~ 20/03/2023*
+  - `v1.149` ~ 20/03/2023
     - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Réduction de la hauteur du menu de la liste des arrière-plans pour l'overlay afin d'empêcher le défilement automatique vers le bas selon la position du curseur
 	- +Corrigé: Visuel de l'interface utilisateur dans la fenêtre de configuration
 
-  - `v1.148` *~ 19/03/2023*
+  - `v1.148` ~ 19/03/2023
     - +Rappel+: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - +Corrigé: L'option "MAJ auto. du tracker" n'était plus visible dans la version précédente
     - ++Ajouté: Overlay => Arrière-plan "Aliens"
@@ -309,29 +342,29 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
       9) "Colorer manches selon leur type" pour l'overlay sélectionnée
      10) "Passer auto. sur le profil lié" pour l'overlay sélectionnée
 
-  - `v1.147` *~ 18/03/2023*
+  - `v1.147` ~ 18/03/2023
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - Pleins de changement à découvrir ! :)
 
-  - `v1.146` *~ 15/03/2023*
+  - `v1.146` ~ 15/03/2023
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Le titre de la fenêtre principale du tracker peut être traduit dans toutes les langues ('Français' et 'English' ont été fait)
     - ++Changé: Changements mineurs pour l'overlay (sur certaines manches)
 
-  - `v1.145` *~ 09/03/2023*
+  - `v1.145` ~ 09/03/2023
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - +Corrigé: L'ordre et le tri des manches, dans la fenêtre principale du tracker, pour la langue 'Français' et 'English'
 
-  - `v1.144` *~ 07/03/2023*
+  - `v1.144` ~ 07/03/2023
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Les deux manches "Survie" avec un hoverboard sont maintenant configurées comme si c'était des manches "Course" => L'overlay se basera sur le meilleur temps réalisé - au lieu du plus long temps - pour colorer l'info 'Finish' (en cas de record personnel par exemple)
     - ++Changé: L'ordre initial des manches, dans la fenêtre principale du tracker, sera en fonction de leur nom en français (au lieu de l'anglais)
 
-  - `v1.143` *~ 06/03/2023*
+  - `v1.143` ~ 06/03/2023
     - {-Hotfix-} Correction de l'affichage du bouton pour verrouiller/déverrouiller la position de l'overlay quand l'option "Afficher les onglets d'info du filtre et profil actuels" est activée
 
-  - `v1.142` *~ 06/03/2023*
+  - `v1.142` ~ 06/03/2023
   { Cette version possède les dernières modifications faites par @qutrits => https://github.com/qutrits/FallGuysStats }
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Bouton pour verrouiller/déverrouiller la position de l'overlay (merci à @qutrits)
@@ -339,24 +372,24 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - ++Changé: Nouveau système de MAJ automatique du programme (via utilisation d'un fichier .bat)
     - ++Changé: Divers changements (merci à @qutrits)
 
-  - `v1.141` *~ 04/03/2023*
+  - `v1.141` ~ 04/03/2023
     - ++Rappel: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Changé: Pour les manches non jouées (mode spectateur), l'overlay n'affichera aucun numéro de manche
     - +Corrigé: Détection de la finale "Ascension Gélatineuse" dans l'émission "Trek Gélatineux"
 
-  - `v1.140` *~ 03/03/2023*
+  - `v1.140` ~ 03/03/2023
     - ++Ajouté: Overlay => **-BETA-** Les informations sur les manches non jouées (mode spectateur) sont maintenant disponibles !
     - ++Ajouté: Overlay => L'information "Finish" affiche maintenant votre position lorsque vous êtes éliminé(e)
     - ++Changé: Overlay => L'information "Finish" passe maintenant en rose lorsque vous êtes éliminé(e)
     - ++Changé: Votre position indiquera maintenant toujours "1er" pour la dernière manche d'une émission gagnée
     - ++Changé: Divers petits changements...
 
-  - `v1.139` *~ 26/02/2023*
+  - `v1.139` ~ 26/02/2023
     - ++Ajouté: Fenêtre de sélection de la langue au tout premier démarrage du tracker
     - +Corrigé: Type de manche affiché dans l'overlay et dans la liste des stats des manches, concernant le Volleyfall, dans les émissions "Duos" et "Spéciale Groupe"
     - ++Changé: Divers changements mineurs...
 
-  - `v1.138` *~ 22/02/2023*
+  - `v1.138` ~ 22/02/2023
     - ++Hotfix: Votre ancienne configuration ne sera pas perdue si vous venez de la Version Officielle du tracker\*
     - \* Cependant, les options "par défaut" données ci-après seront appliquées au passage à la "FE"
     - ++Changé: Les options "par défaut" sont:
@@ -366,7 +399,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
       4) "Afficher joueurs par type de support" pour l'overlay activée
       5) "Colorer manches selon leur type" pour l'overlay activée
 
-  - `v1.137` *~ 21/02/2023*
+  - `v1.137` ~ 21/02/2023
     - ++++N.B.: Basée sur la Version Officielle 1.136 (datant du 12 février 2023)
     - ++Ajouté: Langue 'Français'
     - ++Ajouté: Type de manche "Logique" et "Invisibeans"
@@ -381,6 +414,16 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.166`
+    - Display overlay information for rounds played with shared code
+    - Double-click a share code in the round details to copy it to the clipboard
+    - Program optimization
+  - `1.165`
+    - Bugfix and program optimization
+  - `1.164`
+    - Bug fixes
+  - `1.163`
+    - Save user creative round
   - `1.162`
     - Bug fixes
   - `1.161`

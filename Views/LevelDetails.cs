@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MetroFramework;
 
@@ -370,6 +371,9 @@ namespace FallGuysStats {
             if (info.PrivateLobby) { // Custom Show
                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(8, 8, 8);
                 e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+            } else if (info.AbandonShow) {
+                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightPink : Color.FromArgb(24, 0, 24);
+                e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             }
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "End") {
                 e.Value = (info.End - info.Start).ToString("m\\:ss");
@@ -382,7 +386,7 @@ namespace FallGuysStats {
             } else if (this._showStats == 2 && this.gridDetails.Columns[e.ColumnIndex].Name == "Qualified") { // Shows
                 e.Value = !string.IsNullOrEmpty(info.Name);
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Medal" && e.Value == null) {
-                if (!info.AbandonShow && info.Qualified) {
+                if (info.Qualified) {
                     switch (info.Tier) {
                         case 0:
                             this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_pink");
@@ -421,18 +425,24 @@ namespace FallGuysStats {
                 if (this._showStats == 1 && this.StatsForm.StatLookup.TryGetValue((string)this.gridDetails.Rows[e.RowIndex].Cells["Name"].Value, out LevelStats level)) {
                     Color c1 = level.Type.LevelForeColor(info.IsFinal, info.IsTeam, this.Theme);
                     //e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : Color.FromArgb(c1.A, (int)(c1.R * 0.5), (int)(c1.G * 0.5), (int)(c1.B * 0.5));
-                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : info.PrivateLobby ? c1 : ControlPaint.LightLight(c1);
+                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light || info.PrivateLobby || info.AbandonShow ? c1 : ControlPaint.LightLight(c1);
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
                 if (this.StatsForm.StatLookup.TryGetValue((string)e.Value, out LevelStats level)) {
                     Color c1 = level.Type.LevelForeColor(info.IsFinal, info.IsTeam, this.Theme);
-                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : info.PrivateLobby ? c1 : ControlPaint.LightLight(c1);
+                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light || info.PrivateLobby || info.AbandonShow ? c1 : ControlPaint.LightLight(c1);
                     e.Value = level.Name;
+                    if (Regex.IsMatch((string)e.Value, @"^\d{4}-\d{4}-\d{4}$")) {
+                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_copy_share_code");
+                    }
                     //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId") {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
                     e.Value = Multilingual.GetShowName((string)e.Value);
+                }
+                if (this._showStats != 2 && Regex.IsMatch((string)e.Value, @"^\d{4}-\d{4}-\d{4}$")) {
+                    this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_copy_share_code");
                 }
                 //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Position") {
@@ -440,7 +450,7 @@ namespace FallGuysStats {
                     e.Value = "";
                 }
             } else if (this._showStats != 2 && this.gridDetails.Columns[e.ColumnIndex].Name == "PlayersPs4") {
-                gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_playersPs4_desc");
+                this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_playersPs4_desc");
                 if ((int)e.Value == 0) {
                     e.Value = "-";
                 }
@@ -663,6 +673,7 @@ namespace FallGuysStats {
                 }
             }
         }
+
         private void DeleteShows_Click(object sender, EventArgs e) {
             int selectedCount = this.gridDetails.SelectedCells.Count;
             if (selectedCount > 0) {
@@ -696,6 +707,27 @@ namespace FallGuysStats {
                     }
 
                     this.StatsForm.ResetStats();
+                }
+            }
+        }
+
+        private void GridDetails_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= this.gridDetails.Rows.Count) { return; }
+            ToolTip tip = new ToolTip();
+            Point cursorPosition = this.PointToClient(Cursor.Position);
+            Point tipPosition = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
+            if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
+                string shareCode = (string)this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                Clipboard.SetText(shareCode, TextDataFormat.Text);
+                tip.Show(Multilingual.GetWord("level_detail_share_code_copied"), this, tipPosition, 5000);
+                //this.StatsForm.ShowNotification(Multilingual.GetWord("level_detail_share_code_copied"), shareCode, ToolTipIcon.Info);
+            }
+            if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
+                string roundName = (string)this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                if (Regex.IsMatch(roundName, @"^\d{4}-\d{4}-\d{4}$")) {
+                    Clipboard.SetText(roundName, TextDataFormat.Text);
+                    tip.Show(Multilingual.GetWord("level_detail_share_code_copied"), this, tipPosition, 5000);
+                    //this.StatsForm.ShowNotification(Multilingual.GetWord("level_detail_share_code_copied"), shareCode, ToolTipIcon.Info);
                 }
             }
         }

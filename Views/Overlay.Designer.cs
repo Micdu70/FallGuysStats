@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace FallGuysStats {
-    partial class Overlay {
+    sealed partial class Overlay {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -411,6 +411,11 @@ namespace FallGuysStats {
             this.LostFocus += new System.EventHandler(this.Overlay_LostFocus);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseWheel);
             this.Resize += new System.EventHandler(this.Overlay_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionNW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionSW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPositionLock)).EndInit();
             this.ResumeLayout(false);
         }
 

@@ -106,8 +106,8 @@
             this.chkOnlyShowQualify = new MetroFramework.Controls.MetroRadioButton();
             this.chkCycleQualifyGold = new MetroFramework.Controls.MetroRadioButton();
             this.grpOverlay = new System.Windows.Forms.GroupBox();
-            this.cboOverlayBackground = new FallGuysStats.ImageComboBox();
             this.panelSettings = new MetroFramework.Controls.MetroPanel();
+            this.cboOverlayBackground = new FallGuysStats.ImageComboBox();
             this.grpFallalytics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSteam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEpicGames)).BeginInit();
@@ -1303,6 +1303,28 @@
             this.grpOverlay.TabStop = false;
             this.grpOverlay.Text = "Overlay";
             // 
+            // panelSettings
+            // 
+            this.panelSettings.AutoScroll = true;
+            this.panelSettings.Controls.Add(this.grpStats);
+            this.panelSettings.Controls.Add(this.grpFallalytics);
+            this.panelSettings.Controls.Add(this.grpSortingOptions);
+            this.panelSettings.Controls.Add(this.grpOverlay);
+            this.panelSettings.Controls.Add(this.grpGameOptions);
+            this.panelSettings.HorizontalScrollbar = true;
+            this.panelSettings.HorizontalScrollbarBarColor = false;
+            this.panelSettings.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelSettings.HorizontalScrollbarSize = 10;
+            this.panelSettings.Location = new System.Drawing.Point(3, 129);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(895, 428);
+            this.panelSettings.TabIndex = 0;
+            this.panelSettings.TabStop = true;
+            this.panelSettings.VerticalScrollbar = true;
+            this.panelSettings.VerticalScrollbarBarColor = true;
+            this.panelSettings.VerticalScrollbarHighlightOnWheel = true;
+            this.panelSettings.VerticalScrollbarSize = 10;
+            // 
             // cboOverlayBackground
             // 
             this.cboOverlayBackground.BorderColor = System.Drawing.Color.Gray;
@@ -1320,27 +1342,6 @@
             this.cboOverlayBackground.LostFocus += new System.EventHandler(this.CboOverlayBackground_LostFocus);
             this.cboOverlayBackground.MouseEnter += new System.EventHandler(this.CboOverlayBackground_MouseEnter);
             this.cboOverlayBackground.MouseLeave += new System.EventHandler(this.CboOverlayBackground_MouseLeave);
-            // 
-            // panelSettings
-            // 
-            this.panelSettings.AutoScroll = true;
-            this.panelSettings.Controls.Add(this.grpStats);
-            this.panelSettings.Controls.Add(this.grpFallalytics);
-            this.panelSettings.Controls.Add(this.grpSortingOptions);
-            this.panelSettings.Controls.Add(this.grpOverlay);
-            this.panelSettings.Controls.Add(this.grpGameOptions);
-            this.panelSettings.HorizontalScrollbar = true;
-            this.panelSettings.HorizontalScrollbarBarColor = false;
-            this.panelSettings.HorizontalScrollbarHighlightOnWheel = false;
-            this.panelSettings.HorizontalScrollbarSize = 10;
-            this.panelSettings.Location = new System.Drawing.Point(3, 129);
-            this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(895, 428);
-            this.panelSettings.TabIndex = 1;
-            this.panelSettings.VerticalScrollbar = true;
-            this.panelSettings.VerticalScrollbarBarColor = true;
-            this.panelSettings.VerticalScrollbarHighlightOnWheel = true;
-            this.panelSettings.VerticalScrollbarSize = 10;
             // 
             // Settings
             // 

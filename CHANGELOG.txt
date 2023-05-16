@@ -1,12 +1,21 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.172 ~ 16/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.166) datant du 16/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Détection des manches finales pour les nouvelles émissions hebdomadaires
+    - ++Changé: Modification/Amélioration de l'ajout des stats d'émissions précédentes
+    - ++Changé: Les émissions abandonnées (quittées prématurément) auront maintenant une couleur spécifique - violet sombre - dans la liste des stats des manches
+    - ++Changé: Overlay => Le temps "Meilleur" sera maintenant toujours égal au temps "Le plus long" pour les manches de survie et de logique 
+    - ++Ajouté: Copie du code de partage d'une map [Version Officielle + Modifications "FE"]
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.171 ~ 13/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.164) datant du 13/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: L'activation de l'option "Passer automatiquement sur le profil lié" pouvait faire planter l'application
     - ++Changé: Tout plein de chose à découvrir !
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.170 ~ 12/05/2023
   { Cette version, bien que basée sur la Version Officielle (v1.162) datant du 11/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }

@@ -32,6 +32,7 @@
             this.lblEditShowsBackColor = new System.Windows.Forms.Label();
             this.btnEditShowsSave = new MetroFramework.Controls.MetroButton();
             this.btnEditShowsCancel = new MetroFramework.Controls.MetroButton();
+            this.chkUseLinkedProfiles = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picEditShowsIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.lblEditShowsQuestion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEditShowsQuestion.Location = new System.Drawing.Point(100, 80);
             this.lblEditShowsQuestion.Name = "lblEditShowsQuestion";
-            this.lblEditShowsQuestion.Size = new System.Drawing.Size(74, 19);
+            this.lblEditShowsQuestion.Size = new System.Drawing.Size(78, 19);
             this.lblEditShowsQuestion.TabIndex = 1;
             this.lblEditShowsQuestion.Text = "Description";
             // 
@@ -61,7 +62,7 @@
             this.lblEditShowslabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEditShowslabel.Location = new System.Drawing.Point(86, 137);
             this.lblEditShowslabel.Name = "lblEditShowslabel";
-            this.lblEditShowslabel.Size = new System.Drawing.Size(69, 19);
+            this.lblEditShowslabel.Size = new System.Drawing.Size(72, 19);
             this.lblEditShowslabel.TabIndex = 2;
             this.lblEditShowslabel.Text = "Profile List";
             // 
@@ -80,18 +81,18 @@
             // lblEditShowsBackColor
             // 
             this.lblEditShowsBackColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(182)))), ((int)(((byte)(254)))));
-            this.lblEditShowsBackColor.Location = new System.Drawing.Point(0, 191);
+            this.lblEditShowsBackColor.Location = new System.Drawing.Point(1, 191);
             this.lblEditShowsBackColor.Name = "lblEditShowsBackColor";
-            this.lblEditShowsBackColor.Size = new System.Drawing.Size(445, 53);
+            this.lblEditShowsBackColor.Size = new System.Drawing.Size(515, 53);
             this.lblEditShowsBackColor.TabIndex = 3;
             // 
             // btnEditShowsSave
             // 
             this.btnEditShowsSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditShowsSave.Location = new System.Drawing.Point(240, 206);
+            this.btnEditShowsSave.Location = new System.Drawing.Point(309, 206);
             this.btnEditShowsSave.Name = "btnEditShowsSave";
             this.btnEditShowsSave.Size = new System.Drawing.Size(87, 25);
-            this.btnEditShowsSave.TabIndex = 1;
+            this.btnEditShowsSave.TabIndex = 2;
             this.btnEditShowsSave.Text = "Save";
             this.btnEditShowsSave.UseSelectable = true;
             this.btnEditShowsSave.Click += new System.EventHandler(this.BtnEditShowsSave_Click);
@@ -99,18 +100,35 @@
             // btnEditShowsCancel
             // 
             this.btnEditShowsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditShowsCancel.Location = new System.Drawing.Point(339, 206);
+            this.btnEditShowsCancel.Location = new System.Drawing.Point(408, 206);
             this.btnEditShowsCancel.Name = "btnEditShowsCancel";
             this.btnEditShowsCancel.Size = new System.Drawing.Size(87, 25);
-            this.btnEditShowsCancel.TabIndex = 2;
+            this.btnEditShowsCancel.TabIndex = 3;
             this.btnEditShowsCancel.Text = "Cancel";
             this.btnEditShowsCancel.UseSelectable = true;
             this.btnEditShowsCancel.Click += new System.EventHandler(this.BtnEditShowsCancel_Click);
             // 
+            // chkUseLinkedProfiles
+            // 
+            this.chkUseLinkedProfiles.AutoSize = true;
+            this.chkUseLinkedProfiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(182)))), ((int)(((byte)(254)))));
+            this.chkUseLinkedProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkUseLinkedProfiles.ForeColor = System.Drawing.Color.Teal;
+            this.chkUseLinkedProfiles.Location = new System.Drawing.Point(16, 211);
+            this.chkUseLinkedProfiles.Name = "chkUseLinkedProfiles";
+            this.chkUseLinkedProfiles.Size = new System.Drawing.Size(119, 15);
+            this.chkUseLinkedProfiles.TabIndex = 1;
+            this.chkUseLinkedProfiles.Text = "Use linked profiles";
+            this.chkUseLinkedProfiles.UseCustomBackColor = true;
+            this.chkUseLinkedProfiles.UseCustomForeColor = true;
+            this.chkUseLinkedProfiles.UseSelectable = true;
+            this.chkUseLinkedProfiles.CheckedChanged += new System.EventHandler(this.ChkUseLinkedProfiles_CheckedChanged);
+            // 
             // EditShows
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(445, 244);
+            this.ClientSize = new System.Drawing.Size(515, 244);
+            this.Controls.Add(this.chkUseLinkedProfiles);
             this.Controls.Add(this.picEditShowsIcon);
             this.Controls.Add(this.lblEditShowsQuestion);
             this.Controls.Add(this.lblEditShowslabel);
@@ -144,5 +162,6 @@
         private System.Windows.Forms.Label lblEditShowsBackColor;
         private MetroFramework.Controls.MetroButton btnEditShowsSave;
         private MetroFramework.Controls.MetroButton btnEditShowsCancel;
+        private MetroFramework.Controls.MetroCheckBox chkUseLinkedProfiles;
     }
 }

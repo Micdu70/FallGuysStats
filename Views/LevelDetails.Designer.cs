@@ -56,6 +56,7 @@
             this.gridDetails.Size = new System.Drawing.Size(670, 392);
             this.gridDetails.TabIndex = 10;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
+            this.gridDetails.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetails_CellContentDoubleClick);
             this.gridDetails.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.GridDetails_CellFormatting);
             this.gridDetails.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridDetails_ColumnHeaderMouseClick);
             this.gridDetails.SelectionChanged += new System.EventHandler(this.GridDetails_SelectionChanged);

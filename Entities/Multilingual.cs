@@ -115,6 +115,8 @@ namespace FallGuysStats {
                             {"level_date_format", "MMM d, yyyy (ddd)"},
                             {"level_detail_no_data", "The data does not exist."},
                             {"level_detail_no_data_caption", "No data"},
+                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied", "Share code copied!"},
 
                             {"profile_change_tooltiptext", "Click to change your current profile."},
                             {"shows_detail_tooltiptext", "Click to view shows stats."},
@@ -142,6 +144,10 @@ namespace FallGuysStats {
                             {"message_save_bbcode", "Saved BBCode to clipboard."},
                             {"message_save_markdown_caption", "Export as Markdown"},
                             {"message_save_markdown", "Saved MarkDown to clipboard."},
+                            {"message_save_data_caption", "Save Data"},
+                            {"message_save_data_linked_profiles", "Do you want to save data to linked profiles?"},
+                            {"message_save_data_linked_profiles_info_prefix", "NOTE: Default profile is"},
+                            {"message_save_data_linked_profiles_info_suffix", ""},
                             {"message_delete_show_caption", "Remove Shows"},
                             {"message_delete_show_prefix", "Are you sure you want to remove the selected"},
                             {"message_delete_show_suffix", "Shows?"},
@@ -161,7 +167,7 @@ namespace FallGuysStats {
                             {"message_delete_profile_infix", "profile you have played so far will be deleted."},
                             {"message_delete_profile_suffix", "Are you sure you want to delete?"},
                             {"message_save_profile_caption", "Save Profile"},
-                            {"message_save_profile_prefix", "Do you want to save current data to"},
+                            {"message_save_profile_prefix", "Do you want to save data to"},
                             {"message_save_profile_suffix", "profile?"},
                             {"message_execution_caption", "Running Fall Guys"},
                             {"message_execution_question", "Do you want to run the Fall Guys client?"},
@@ -261,7 +267,7 @@ namespace FallGuysStats {
                             {"settings_save", "Save"},
                             {"settings_cancel", "Cancel"},
                             {"settings_select_language_title", "Select your language"},
-                            {"settings_auto_generate_profiles", "Auto-generate profiles"},
+                            {"settings_auto_generate_profiles", "Generate a profile for each show"},
                             {"settings_select_language_button", "Confirm"},
 
                             {"overlay_streak", "WIN STREAK"},
@@ -311,6 +317,8 @@ namespace FallGuysStats {
                             {"profile_add_select_title", "Add Shows"},
                             {"profile_add_select_question_prefix", "There are previous shows not in your current stats."},
                             {"profile_add_select_question_suffix", "Select a profile below to add your data."},
+                            {"profile_add_select_question_suffix_linked_profiles", "Data will be added in linked profiles."},
+                            {"profile_add_select_use_linked_profiles", "Use linked profiles"},
                             {"profile_move_select_title", "Move show data"},
                             {"profile_move_select_description_prefix", "Select a profile below to move your show data."},
                             {"profile_move_select_description_suffix", "Number of selected show data"},
@@ -430,6 +438,8 @@ namespace FallGuysStats {
                             {"level_date_format", "dd/MM/yyyy (ddd)"},
                             {"level_detail_no_data", "Pas de données disponibles."},
                             {"level_detail_no_data_caption", "Aucune donnée"},
+                            {"level_detail_copy_share_code", "Double-cliquer sur le code de partage pour le copier"},
+                            {"level_detail_share_code_copied", "Code de partage copié !"},
 
                             {"profile_change_tooltiptext", "Cliquer pour changer de profil"},
                             {"shows_detail_tooltiptext", "Cliquer pour voir les stats des émissions"},
@@ -457,6 +467,10 @@ namespace FallGuysStats {
                             {"message_save_bbcode", "Code BBCode copié dans le presse-papiers"},
                             {"message_save_markdown_caption", "Exporter en Markdown"},
                             {"message_save_markdown", "Code MarkDown copié dans le presse-papiers"},
+                            {"message_save_data_caption", "Enregistrer des données"},
+                            {"message_save_data_linked_profiles", "Enregistrer les données dans les profils liés ?"},
+                            {"message_save_data_linked_profiles_info_prefix", "INFO : Le profil par défaut est"},
+                            {"message_save_data_linked_profiles_info_suffix", ""},
                             {"message_delete_show_caption", "Supprimer des émissions"},
                             {"message_delete_show_prefix", "Voulez-vous vraiment supprimer cette sélection d'émissions"},
                             {"message_delete_show_suffix", "?"},
@@ -576,7 +590,7 @@ namespace FallGuysStats {
                             {"settings_save", "Enregistrer"},
                             {"settings_cancel", "Annuler"},
                             {"settings_select_language_title", "Sélectionnez votre langue"},
-                            {"settings_auto_generate_profiles", "Génération automatique de profils"},
+                            {"settings_auto_generate_profiles", "Créer un profil pour chaque émission"},
                             {"settings_select_language_button", "Confirmer"},
 
                             {"overlay_streak", "WIN STREAK"},
@@ -624,8 +638,10 @@ namespace FallGuysStats {
                             {"profile_apply_change_button", "Enregistrer"},
                             {"profile_undo_change_button", "Annuler"},
                             {"profile_add_select_title", "Stats d'émissions précédentes détectées"},
-                            {"profile_add_select_question_prefix", "Des stats d'émissions précédentes peuvent être"},
-                            {"profile_add_select_question_suffix", "enregistrées dans le profil de votre choix."},
+                            {"profile_add_select_question_prefix", "Des stats d'émissions précédentes n'ont pas été enregistrées."},
+                            {"profile_add_select_question_suffix", "Sélectionner un profil ci-dessous pour enregistrer les données."},
+                            {"profile_add_select_question_suffix_linked_profiles", "Les données seront enregistrées dans les profils liés."},
+                            {"profile_add_select_use_linked_profiles", "Utiliser les profils liés"},
                             {"profile_move_select_title", "Déplacer les données"},
                             {"profile_move_select_description_prefix", "Sélectionner un profil ci-dessous pour déplacer les données."},
                             {"profile_move_select_description_suffix", "Nombre d'émissions sélectionnées"},
@@ -646,7 +662,7 @@ namespace FallGuysStats {
 #endif
                             {"main_settings", "설정"},
                             {"main_filters", "필터링"},
-                            {"main_stats", "통계"},
+                            {"main_stats", "통계 범위"},
                             {"main_all", "전체"},
                             {"main_season", "시즌"},
                             {"main_week", "주간"},
@@ -746,6 +762,8 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy년 M월 d일 (ddd)"},
                             {"level_detail_no_data", "데이터가 존재하지 않습니다."},
                             {"level_detail_no_data_caption", "데이터 없음"},
+                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied", "공유 코드가 복사되었습니다!"},
 
                             {"profile_change_tooltiptext", "현재 프로필을 변경하려면 클릭하세요."},
                             {"shows_detail_tooltiptext", "쇼 통계를 보려면 클릭하세요."},
@@ -773,6 +791,10 @@ namespace FallGuysStats {
                             {"message_save_bbcode", "BBCode 형식으로 클립보드에 저장했습니다."},
                             {"message_save_markdown_caption", "MarkDown으로 내보내기"},
                             {"message_save_markdown", "MarkDown 포맷으로 클립보드에 저장했습니다."},
+                            {"message_save_data_caption", "Save Data"},
+                            {"message_save_data_linked_profiles", "Do you want to save data to linked profiles?"},
+                            {"message_save_data_linked_profiles_info_prefix", "NOTE: Default profile is"},
+                            {"message_save_data_linked_profiles_info_suffix", ""},
                             {"message_delete_show_caption", "쇼 삭제"},
                             {"message_delete_show_prefix", "선택한"},
                             {"message_delete_show_suffix", "개의 쇼를 삭제하시겠습니까?"},
@@ -836,7 +858,7 @@ namespace FallGuysStats {
                             {"settings_qualify__gold_filter", "완주 / 금메달 필터"},
                             {"settings_fastest__longest_filter", "최단 기록 / 최장 기록 필터"},
                             {"settings_all_time_stats", "전체 통계"},
-                            {"settings_stats_and_party_filter", "통계 및 파티 유형"},
+                            {"settings_stats_and_party_filter", "통계 범위 및 파티 유형"},
                             {"settings_season_stats", "시즌 통계"},
                             {"settings_week_stats", "주간 통계"},
                             {"settings_day_stats", "일일 통계"},
@@ -942,6 +964,8 @@ namespace FallGuysStats {
                             {"profile_add_select_title", "쇼 추가"},
                             {"profile_add_select_question_prefix", "현재 통계에 없는 이전 쇼의 데이터가 존재합니다."},
                             {"profile_add_select_question_suffix", "아래 프로필을 선택해서 데이터를 추가하세요."},
+                            {"profile_add_select_question_suffix_linked_profiles", "Data will be added in linked profiles."},
+                            {"profile_add_select_use_linked_profiles", "Use linked profiles"},
                             {"profile_move_select_title", "쇼 데이터 이동"},
                             {"profile_move_select_description_prefix", "아래 프로필을 선택해서 쇼 데이터를 이동하세요."},
                             {"profile_move_select_description_suffix", "선택한 쇼 데이터 개수"},
@@ -1062,6 +1086,8 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy/M/d (ddd)"},
                             {"level_detail_no_data", "データが存在しません。"},
                             {"level_detail_no_data_caption", "データなし"},
+                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied", "シェアコードをコピーした！"},
 
                             {"profile_change_tooltiptext", "クリックして現在のプロファイルを変更"},
                             {"shows_detail_tooltiptext", "クリックして全てのショーの記録を見る"},
@@ -1089,6 +1115,10 @@ namespace FallGuysStats {
                             {"message_save_bbcode", "BBCode形式でクリップボードに保存しました。"},
                             {"message_save_markdown_caption", "MarkDownにエクスポート"},
                             {"message_save_markdown", "MarkDown形式でクリップボードに保存しました。"},
+                            {"message_save_data_caption", "Save Data"},
+                            {"message_save_data_linked_profiles", "Do you want to save data to linked profiles?"},
+                            {"message_save_data_linked_profiles_info_prefix", "NOTE: Default profile is"},
+                            {"message_save_data_linked_profiles_info_suffix", ""},
                             {"message_delete_show_caption", "ショーを削除"},
                             {"message_delete_show_prefix", "選択した"},
                             {"message_delete_show_suffix", "つのショーを削除しますか？"},
@@ -1258,6 +1288,8 @@ namespace FallGuysStats {
                             {"profile_add_select_title", "ショーを追加"},
                             {"profile_add_select_question_prefix", "統計に記録されていないショーのデータがログに残っています。"},
                             {"profile_add_select_question_suffix", "以下からプロファイルを選択してデータを追加してください。"},
+                            {"profile_add_select_question_suffix_linked_profiles", "Data will be added in linked profiles."},
+                            {"profile_add_select_use_linked_profiles", "Use linked profiles"},
                             {"profile_move_select_title", "ショーデータの移動"},
                             {"profile_move_select_description_prefix", "移動先のプロファイルを選択してください。"},
                             {"profile_move_select_description_suffix", "選択したショーデータ数"},
@@ -1378,6 +1410,8 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy年 M月 d日 (ddd)"},
                             {"level_detail_no_data", "数据不存在。"},
                             {"level_detail_no_data_caption", "没有数据"},
+                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied", "分享代码已复制!"},
 
                             {"profile_change_tooltiptext", "点击更换当前的个人资料。"},
                             {"shows_detail_tooltiptext", "点击查看每场统计信息。"},
@@ -1405,6 +1439,10 @@ namespace FallGuysStats {
                             {"message_save_bbcode", "BBCode 已保存至剪贴板。"},
                             {"message_save_markdown_caption", "导出 Markdown"},
                             {"message_save_markdown", "MarkDown 已保存至剪贴板。"},
+                            {"message_save_data_caption", "Save Data"},
+                            {"message_save_data_linked_profiles", "Do you want to save data to linked profiles?"},
+                            {"message_save_data_linked_profiles_info_prefix", "NOTE: Default profile is"},
+                            {"message_save_data_linked_profiles_info_suffix", ""},
                             {"message_delete_show_caption", "移除场次"},
                             {"message_delete_show_prefix", "确定要移除已选中的"},
                             {"message_delete_show_suffix", "场次吗？"},
@@ -1574,6 +1612,8 @@ namespace FallGuysStats {
                             {"profile_add_select_title", "添加场次"},
                             {"profile_add_select_question_prefix", "存在尚未导入的比赛记录。"},
                             {"profile_add_select_question_suffix", "选择一个个人资料来导入。"},
+                            {"profile_add_select_question_suffix_linked_profiles", "Data will be added in linked profiles."},
+                            {"profile_add_select_use_linked_profiles", "Use linked profiles"},
                             {"profile_move_select_title", "移动游玩数据"},
                             {"profile_move_select_description_prefix", "选择一个个人资料来移动游玩数据。"},
                             {"profile_move_select_description_suffix", "选中的游玩数据"},
@@ -4135,10 +4175,10 @@ namespace FallGuysStats {
             return name;
         }*/
         public static string GetShowName(string keyWord) {
-            string name = string.Empty;
-            if (Regex.IsMatch(keyWord, @"^\d{4}(-\d{4}){2}$")) {
-                keyWord = "fall_guys_creative_mode";
+            if (Regex.IsMatch(keyWord, @"^\d{4}-\d{4}-\d{4}$")) {
+                return keyWord;
             }
+            string name = string.Empty;
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);
             showsDictionary?.TryGetValue(keyWord, out name);
             return name;

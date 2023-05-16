@@ -423,7 +423,7 @@ namespace FallGuysStats {
                 }
 
                 this.Kudos += stat.Kudos;
-                this.Qualified += !stat.AbandonShow && stat.Qualified ? 1 : 0;
+                this.Qualified += stat.Qualified ? 1 : 0;
             }
 
             TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.End) - stat.Start;

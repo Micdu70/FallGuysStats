@@ -20,6 +20,7 @@ namespace FallGuysStats {
         public int SelectedProfileId = 0;
         public string FunctionFlag = string.Empty;
         public int SelectedCount = 0;
+        public bool UseLinkedProfiles;
         public EditShows() => this.InitializeComponent();
 
         private void EditShows_Load(object sender, EventArgs e) {
@@ -33,6 +34,7 @@ namespace FallGuysStats {
             if (this.Profiles.Count == 1) {
                 this.cboEditShows.Items.Insert(0, this.Profiles[0].ProfileName);
                 this.cboEditShows.SelectedIndex = 0;
+                this.chkUseLinkedProfiles.Visible = false;
                 return;
             }
 
@@ -41,6 +43,13 @@ namespace FallGuysStats {
                 this.cboEditShows.Items.Insert(0, this.Profiles[i].ProfileName);
             }
             this.cboEditShows.SelectedIndex = 0;
+
+            if (this.FunctionFlag == "move") {
+                this.chkUseLinkedProfiles.Visible = false;
+            } else if (this.FunctionFlag == "add" && this.StatsForm.CurrentSettings.AutoChangeProfile) {
+                this.chkUseLinkedProfiles.Visible = false;
+                this.chkUseLinkedProfiles.Checked = true;
+            }
         }
 
         private void SetTheme(MetroThemeStyle theme) {
@@ -120,17 +129,34 @@ namespace FallGuysStats {
             this.SelectedProfileId = this.Profiles.Find(p => p.ProfileName == (string)this.cboEditShows.SelectedItem).ProfileId;
         }
 
+        private void ChkUseLinkedProfiles_CheckedChanged(object sender, EventArgs e) {
+            this.UseLinkedProfiles = ((CheckBox)sender).Checked;
+            this.lblEditShowsQuestion.Text = $"{Multilingual.GetWord("profile_add_select_question_prefix")}{Environment.NewLine}" + (this.UseLinkedProfiles ?
+                                             $"{Multilingual.GetWord("profile_add_select_question_suffix_linked_profiles")}" : $"{Multilingual.GetWord("profile_add_select_question_suffix")}");
+            if (this.UseLinkedProfiles) {
+                this.lblEditShowslabel.Visible = false;
+                this.cboEditShows.Visible = false;
+                this.cboEditShows.SelectedIndex = 0;
+            } else {
+                this.lblEditShowslabel.Visible = true;
+                this.cboEditShows.SelectedIndex = 0;
+                this.cboEditShows.Visible = true;
+            }
+        }
+
         private void BtnEditShowsSave_Click(object sender, EventArgs e) {
             string questionStr = string.Empty;
             if (FunctionFlag == "add") {
-                questionStr = $"{Multilingual.GetWord("message_save_profile_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_profile_suffix")}";
+                questionStr = this.UseLinkedProfiles ?
+                              $"{Multilingual.GetWord("message_save_data_linked_profiles")}{Environment.NewLine}{Multilingual.GetWord("message_save_data_linked_profiles_info_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_data_linked_profiles_info_suffix")}" :
+                              $"{Multilingual.GetWord("message_save_profile_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_profile_suffix")}";
             } else if (FunctionFlag == "move") {
                 questionStr = $"{Multilingual.GetWord("profile_move_select_question_prefix")} ({this.SelectedCount}) {Multilingual.GetWord("profile_move_select_question_infix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("profile_move_select_question_suffix")}";
             }
             if (MessageBox.Show(this,
-                    questionStr,
-                    Multilingual.GetWord("message_save_profile_caption"), MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.OK) {
+                questionStr,
+                this.UseLinkedProfiles ? $"{Multilingual.GetWord("message_save_data_caption")}" : Multilingual.GetWord("message_save_profile_caption"),
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -153,6 +179,7 @@ namespace FallGuysStats {
             if (this.FunctionFlag == "add") {
                 this.Text = Multilingual.GetWord("profile_add_select_title");
                 this.lblEditShowsQuestion.Text = $"{Multilingual.GetWord("profile_add_select_question_prefix")}{Environment.NewLine}{Multilingual.GetWord("profile_add_select_question_suffix")}";
+                this.chkUseLinkedProfiles.Text = Multilingual.GetWord("profile_add_select_use_linked_profiles");
             } else if (this.FunctionFlag == "move") {
                 this.Text = Multilingual.GetWord("profile_move_select_title");
                 this.lblEditShowsQuestion.Text = $"{Multilingual.GetWord("profile_move_select_description_prefix")}{Environment.NewLine}{Multilingual.GetWord("profile_move_select_description_suffix")} : {SelectedCount}{Multilingual.GetWord("numeric_suffix")}";
@@ -168,12 +195,12 @@ namespace FallGuysStats {
                 this.btnEditShowsSave.Location = new Point(240, 206);
                 this.btnEditShowsCancel.Location = new Point(339, 206);
             } else if (Stats.CurrentLanguage == 1) { // French
-                this.ClientSize = new Size(465, 244);
-                this.cboEditShows.Location = new Point(185, 135);
+                this.ClientSize = new Size(515, 244);
+                this.cboEditShows.Location = new Point(155, 135);
                 //this.cboEditShows.Size = new Size(198, 29);
-                this.lblEditShowsBackColor.Size = new Size(465, 53);
-                this.btnEditShowsSave.Location = new Point(260, 206);
-                this.btnEditShowsCancel.Location = new Point(359, 206);
+                this.lblEditShowsBackColor.Size = new Size(515, 53);
+                this.btnEditShowsSave.Location = new Point(309, 206);
+                this.btnEditShowsCancel.Location = new Point(408, 206);
             } else if (Stats.CurrentLanguage == 2) { // Korean
                 this.ClientSize = new Size(445, 244);
                 this.cboEditShows.Location = new Point(185, 135);

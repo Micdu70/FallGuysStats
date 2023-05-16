@@ -1,8 +1,8 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.171 du 13/05/2023 [compatible S10 (SS4)!] ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.172 du 16/05/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
-INFO: Il y a 0 bug génant connu dans la v1.171 de la "FE" (Frenchy Edition)
+INFO: Il y a 0 bug génant connu dans la v1.172 de la "FE" (Frenchy Edition)
 
 ## Différences entre la "FE" et la Version Officielle
 
@@ -58,16 +58,31 @@ Cliquer une fois sur l'overlay pour le sélectionner puis :
 
 Permet de changer de profil automatiquement au moment où l'émission spécifiée commence.
 
-  - Menu "Profil" > "Config. des profils" pour configurer un ou pluiseurs profils.
+  - Dans la fenêtre principal > Menu "Profil" > "Gestion des profils" pour configurer un ou plusieurs profils.
 
-  - Menu "Configuration" -> Option "Passer automatiquement sur le profil lié" pour activer le changement automatique.
+  - Dans la fenêtre principal > Menu "Configuration" -> Option "Passer automatiquement sur le profil lié" pour activer le changement automatique.
 
 
 ## Supprimer des émissions ou déplacer des émissions vers un autre profil
 
-  - Cliquer sur "Émissions: X" en haut de la fenêtre principale pour voir les stats des émissions.
+  - En haut de la fenêtre principale, cliquer sur le premier nombre à droite du nom du profil pour voir la liste des stats des émissions.
 
   - Sélectionner une ou plusieurs émissions avec la touche 'Ctrl' ou avec la combinaison de touches 'Ctrl + Maj'.
 
   - Faire un clique-droit sur la sélection pour pouvoir déplacer ou supprimer celle-ci.
+
+
+## Copier le code de partage d'une map que vous avez précédemment jouée
+
+- Méthode 1:
+
+  - Dans la fenêtre principale, cliquer sur le nom de la manche dont vous voulez copier le code.
+
+  - Double-cliquer sur le code de partage présent dans le tableau, dans la colonne "Nom de l'émission".
+
+- Méthode 2:
+
+  - En haut de la fenêtre principale, cliquer sur le deuxième ou troisième nombre à droite du nom du profil pour voir une liste des stats des manches.
+
+  - Double-cliquer sur le code partage souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
 
