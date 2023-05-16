@@ -16,7 +16,7 @@
   - [**Profil**](#profil)
     - [**Lier un profil à une émission spécifique**](#lier-un-profil-à-une-émission-spécifique)
     - [**Supprimer des émissions ou déplacer des émissions vers un autre profil**](#supprimer-des-émissions-ou-déplacer-des-émissions-vers-un-autre-profil)
-  - [**Copier le code de partage d'une map que vous avez précédemment jouée**](#copier-le-code-de-partage-d-une-map-que-vous-avez-précédemment-jouée)
+  - [**Copier le code de partage d'une map que vous avez précédemment jouée**](#copier-le-code-de-partage-dune-map-que-vous-avez-précédemment-jouée)
   - [**Changelog complet de la "FE" (Frenchy Edition)**](#changelog-complet-de-la-fe-frenchy-edition)
   - [**Changelog récent de la Version Officielle**](#changelog-récent-de-la-version-officielle)
 
