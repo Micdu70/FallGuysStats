@@ -262,6 +262,10 @@ namespace FallGuysStats {
 
             this.InitializeComponent();
 
+            this.menu.Renderer = new CustomArrowRenderer();
+            this.infoStrip.Renderer = new CustomToolStripSystemRenderer();
+            this.infoStrip2.Renderer = new CustomToolStripSystemRenderer();
+
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
             this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
@@ -350,10 +354,6 @@ namespace FallGuysStats {
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
-
-            this.menu.Renderer = new CustomArrowRenderer();
-            this.infoStrip.Renderer = new CustomToolStripSystemRenderer();
-            this.infoStrip2.Renderer = new CustomToolStripSystemRenderer();
         }
 
         public class CustomToolStripSystemRenderer : ToolStripSystemRenderer {
@@ -2405,7 +2405,8 @@ namespace FallGuysStats {
                                 Qualified = won,
                                 Round = roundCount,
                                 ShowID = info.ShowID,
-                                Tier = won ? 1 : 0
+                                Tier = won ? 1 : 0,
+                                PrivateLobby = info.PrivateLobby
                             });
                         roundCount = 0;
                         kudosTotal = 0;
@@ -2464,7 +2465,7 @@ namespace FallGuysStats {
 
             using (StatsDisplay display = new StatsDisplay {
                 StatsForm = this,
-                Text = $"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}",
+                Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfile()}",
                 BackImage = Properties.Resources.crown_icon,
                 BackMaxSize = 32,
                 BackImagePadding = new Padding(20, 20, 0, 0)
@@ -2481,10 +2482,7 @@ namespace FallGuysStats {
                     bool incrementedShows = false;
                     bool incrementedFinals = false;
                     bool incrementedWins = false;
-                    for (int i = 0; i < rounds.Count; i++) {
-                        RoundInfo info = rounds[i];
-                        if (info.PrivateLobby) { continue; }
-
+                    foreach (RoundInfo info in rounds.Where(info => !info.PrivateLobby)) {
                         if (info.Round == 1) {
                             currentShows++;
                             incrementedShows = true;
