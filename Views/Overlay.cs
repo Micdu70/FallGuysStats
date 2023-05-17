@@ -1381,7 +1381,7 @@ namespace FallGuysStats {
             if (height.HasValue) {
                 this.Height = height.Value;
             }
-            
+
             this.picPositionLock.Image = this.isPositionLock ? this.positionLockBlur : this.positionUnlockBlur;
             this.SetBlurPositionMenu();
             this.SetLocationPositionMenu(showTabs, flipDisplay);
