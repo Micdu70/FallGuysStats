@@ -6,7 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,8 +20,8 @@ namespace FallGuysStats {
         public ToolStripMenuItem DeleteShows, MoveShows;
         private bool IsEditOnEnter, readOnly;
         private bool? allowUpdate, allowNew, allowDelete;
-        private Dictionary<string, SortOrder> Orders = new Dictionary<string, SortOrder>(StringComparer.OrdinalIgnoreCase);
-        private Stats.DWM_WINDOW_CORNER_PREFERENCE conerPreference = Stats.DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
+        private readonly Dictionary<string, SortOrder> Orders = new Dictionary<string, SortOrder>(StringComparer.OrdinalIgnoreCase);
+        private readonly Stats.DWM_WINDOW_CORNER_PREFERENCE conerPreference = Stats.DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
         private class CustomColorTable : ProfessionalColorTable {
             public CustomColorTable() { UseSystemColors = false; }
             public override Color MenuBorder {

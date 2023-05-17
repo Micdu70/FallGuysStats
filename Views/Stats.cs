@@ -21,6 +21,38 @@ using System.Text.RegularExpressions;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
+        [DllImport("user32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        //[DllImport("user32.dll")]
+        //private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+        //[DllImport("user32.dll")]
+        //public static extern IntPtr GetForegroundWindow();
+        //[DllImport("user32.dll")]
+        //private static extern IntPtr GetActiveWindow();
+
+        public enum DWMWINDOWATTRIBUTE {
+            DWMWA_WINDOW_CORNER_PREFERENCE = 33
+        }
+
+        // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
+        // what value of the enum to set.
+        public enum DWM_WINDOW_CORNER_PREFERENCE {
+            DWMWCP_DEFAULT = 0,
+            DWMWCP_DONOTROUND = 1,
+            DWMWCP_ROUND = 2,
+            DWMWCP_ROUNDSMALL = 3
+        }
+
+        // Import dwmapi.dll and define DwmSetWindowAttribute in C# corresponding to the native function.
+        [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern long DwmSetWindowAttribute(IntPtr hWnd,
+            DWMWINDOWATTRIBUTE attribute,
+            ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute,
+            uint cbAttribute);
+
         [STAThread]
         private static void Main() {
             try {
