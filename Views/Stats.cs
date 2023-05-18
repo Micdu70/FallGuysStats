@@ -632,9 +632,9 @@ namespace FallGuysStats {
             tsmi.ForeColor = this.Theme == MetroThemeStyle.Dark ? Color.DarkGray : Color.Black;
         }
         private void InfoStrip_MouseEnter(object sender, EventArgs e) {
-            this.Cursor = Cursors.Hand;
             if (sender is ToolStripLabel lblInfo) {
                 //this.infoStripForeColor = lblInfo.ForeColor;
+                this.Cursor = Cursors.Hand;
                 this.infoStripForeColor = lblInfo.Name.Equals("lblCurrentProfile")
                                           ? this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192)
                                           : this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
@@ -2731,6 +2731,7 @@ namespace FallGuysStats {
                 if (tsi is ToolStripLabel tsl) {
                     tsl.Enabled = enable;
                     if (enable) {
+                        this.Cursor = Cursors.Default;
                         tsl.ForeColor = tsl.Name.Equals("lblCurrentProfile")
                                         ? this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192)
                                         : this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
