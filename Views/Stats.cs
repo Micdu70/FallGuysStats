@@ -380,7 +380,7 @@ namespace FallGuysStats {
             this.overlay.StartTimer();
 
             this.UpdateGameExeLocation();
-            this.UpdateMenuLaunchFallGuysImage();
+            this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
 
             this.RemoveUpdateFiles();
             this.ReloadProfileMenuItems();
@@ -2454,7 +2454,8 @@ namespace FallGuysStats {
                                 Round = roundCount,
                                 ShowID = info.ShowID,
                                 Tier = won ? 1 : 0,
-                                PrivateLobby = info.PrivateLobby
+                                PrivateLobby = info.PrivateLobby,
+                                AbandonShow = info.AbandonShow
                             });
                         roundCount = 0;
                         kudosTotal = 0;
@@ -2671,11 +2672,6 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void UpdateMenuLaunchFallGuysImage() {
-            this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0
-                                            ? Properties.Resources.epic_main_icon
-                                            : Properties.Resources.steam_main_icon;
-        }
         public void UpdateGameExeLocation() {
             if (!string.IsNullOrEmpty(this.CurrentSettings.GameExeLocation) ||
                 !string.IsNullOrEmpty(this.CurrentSettings.GameShortcutLocation)) { return; }
@@ -2698,9 +2694,9 @@ namespace FallGuysStats {
                     steamPath = Path.Combine("/", "home", userName, ".local", "share", "Steam");
                 }
 
-                string fallGuys = Path.Combine(steamPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
+                string fallGuysSteamPath = Path.Combine(steamPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
 
-                if (File.Exists(fallGuys)) { return fallGuys; }
+                if (File.Exists(fallGuysSteamPath)) { return fallGuysSteamPath; }
                 // read libraryfolders.vdf from install folder to get games installation folder
                 // note: this parsing is terrible, but does technically work fine. There's a better way by specifying a schema and
                 // fully parsing the file or something like that. This is quick and dirty, for sure.
@@ -2712,9 +2708,9 @@ namespace FallGuysStats {
                             string libraryPath = library["path"].AsString();
                             if (!string.IsNullOrEmpty(libraryPath)) {
                                 // look for exe in standard location under library
-                                fallGuys = Path.Combine(libraryPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
+                                fallGuysSteamPath = Path.Combine(libraryPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
 
-                                if (File.Exists(fallGuys)) { return fallGuys; }
+                                if (File.Exists(fallGuysSteamPath)) { return fallGuysSteamPath; }
                             }
                         }
                     }
@@ -2998,6 +2994,7 @@ namespace FallGuysStats {
                             this.UpdateGridRoundName();
                             this.overlay.ChangeLanguage();
                         }
+                        this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
                         this.UpdateHoopsieLegends();
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
                         this.overlay.SetBackgroundResourcesName(this.CurrentSettings.OverlayBackgroundResourceName, this.CurrentSettings.OverlayTabResourceName);
@@ -3141,6 +3138,11 @@ namespace FallGuysStats {
             }
             return screen;
         }
+        private void ChangeLaunchPlatformImage(int launchPlatform) {
+            this.menuLaunchFallGuys.Image = launchPlatform == 0
+                                            ? Properties.Resources.epic_main_icon
+                                            : Properties.Resources.steam_main_icon;
+        }
         private void ChangeMainLanguage() {
             this.currentLanguage = CurrentLanguage;
             this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
@@ -3162,8 +3164,8 @@ namespace FallGuysStats {
             this.dataGridViewCellStyle2.Font = Overlay.GetMainFont(12);
             this.SetMainDataGridView();
 
-            this.menuSettings.Text = $"{Multilingual.GetWord("main_settings")}";
-            this.menuFilters.Text = $"{Multilingual.GetWord("main_filters")}";
+            this.menuSettings.Text = Multilingual.GetWord("main_settings");
+            this.menuFilters.Text = Multilingual.GetWord("main_filters");
             this.menuStatsFilter.Text = Multilingual.GetWord("main_stats");
             this.menuAllStats.Text = Multilingual.GetWord("main_all");
             this.menuSeasonStats.Text = Multilingual.GetWord("main_season");
@@ -3174,14 +3176,14 @@ namespace FallGuysStats {
             this.menuAllPartyStats.Text = Multilingual.GetWord("main_all");
             this.menuSoloStats.Text = Multilingual.GetWord("main_solo");
             this.menuPartyStats.Text = Multilingual.GetWord("main_party");
-            this.menuProfile.Text = $"{Multilingual.GetWord("main_profile")}";
-            this.menuEditProfiles.Text = $"{Multilingual.GetWord("main_profile_setting")}";
+            this.menuProfile.Text = Multilingual.GetWord("main_profile");
+            this.menuEditProfiles.Text = Multilingual.GetWord("main_profile_setting");
             this.menuOverlay.Text = !CurrentSettings.OverlayVisible
-                ? $"{Multilingual.GetWord("main_show_overlay")}"
-                : $"{Multilingual.GetWord("main_hide_overlay")}";
-            this.menuUpdate.Text = $"{Multilingual.GetWord("main_update")}";
-            this.menuHelp.Text = $"{Multilingual.GetWord("main_help")}";
-            this.menuLaunchFallGuys.Text = $"{Multilingual.GetWord("main_launch_fall_guys")}";
+                                    ? Multilingual.GetWord("main_show_overlay")
+                                    : Multilingual.GetWord("main_hide_overlay");
+            this.menuUpdate.Text = Multilingual.GetWord("main_update");
+            this.menuHelp.Text = Multilingual.GetWord("main_help");
+            this.menuLaunchFallGuys.Text = Multilingual.GetWord("main_launch_fall_guys");
         }
     }
 }

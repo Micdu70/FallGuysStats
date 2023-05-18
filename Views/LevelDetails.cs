@@ -727,7 +727,7 @@ namespace FallGuysStats {
                 Clipboard.SetText(shareCode, TextDataFormat.Text);
                 Point cursorPosition = this.PointToClient(Cursor.Position);
                 Point position = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
-                this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 5000);
+                this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 3000);
             }
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
                 string roundName = (string)this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
@@ -735,7 +735,7 @@ namespace FallGuysStats {
                     Clipboard.SetText(roundName, TextDataFormat.Text);
                     Point cursorPosition = this.PointToClient(Cursor.Position);
                     Point position = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
-                    this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 5000);
+                    this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 3000);
                 }
             }
         }

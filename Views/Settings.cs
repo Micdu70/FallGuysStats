@@ -546,8 +546,6 @@ namespace FallGuysStats {
 
             this.CurrentSettings.OverlayBackgroundOpacity = this.trkOverlayOpacity.Value;
 
-            this.StatsForm.UpdateMenuLaunchFallGuysImage();
-
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
