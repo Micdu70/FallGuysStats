@@ -1573,11 +1573,11 @@ namespace FallGuysStats {
                                     }
                                 }
 
-                                
+
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 2) {
                                     continue;
                                 }
-                                
+
                                 if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
                                     profile = this.GetLinkedProfile(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
                                     this.CurrentSettings.SelectedProfile = profile;
