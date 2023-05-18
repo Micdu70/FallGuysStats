@@ -310,6 +310,7 @@ namespace FallGuysStats {
             if (this.Profiles.Count() == 0) {
                 using (SelectLanguage initLanguageForm = new SelectLanguage(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
                     initLanguageForm.Icon = this.Icon;
+                    this.EnableInfoStrip(false);
                     if (initLanguageForm.ShowDialog(this) == DialogResult.OK) {
                         CurrentLanguage = initLanguageForm.selectedLanguage;
                         Overlay.SetDefaultFont(CurrentLanguage, 18);
@@ -327,6 +328,7 @@ namespace FallGuysStats {
                             this.Profiles.Insert(new Profiles { ProfileId = 0, ProfileName = Multilingual.GetWord("main_profile_solo"), ProfileOrder = 1, LinkedShowId = "main_show" });
                         }
                     }
+                    this.EnableInfoStrip(true);
                 }
             }
 
@@ -365,12 +367,12 @@ namespace FallGuysStats {
 
             string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
             this.overlay.SetFixedPosition(
-                    !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("ne"),
-                    !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("nw"),
-                    !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("se"),
-                    !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("sw"),
-                    !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("free")
-                );
+                !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("ne"),
+                !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("nw"),
+                !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("se"),
+                !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("sw"),
+                !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("free")
+            );
             if (this.overlay.IsFixed()) this.overlay.Cursor = Cursors.Default;
             this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
             this.overlay.Show();
@@ -632,10 +634,14 @@ namespace FallGuysStats {
         private void InfoStrip_MouseEnter(object sender, EventArgs e) {
             this.Cursor = Cursors.Hand;
             if (sender is ToolStripLabel lblInfo) {
-                this.infoStripForeColor = lblInfo.ForeColor;
-                lblInfo.ForeColor = lblInfo.Name == "lblCurrentProfile"
-                    ? this.Theme == MetroThemeStyle.Light ? Color.FromArgb(245, 154, 168) : Color.FromArgb(231, 251, 255)
-                    : this.Theme == MetroThemeStyle.Light ? Color.FromArgb(147, 174, 248) : Color.FromArgb(255, 250, 244);
+                //this.infoStripForeColor = lblInfo.ForeColor;
+                this.infoStripForeColor = lblInfo.Name.Equals("lblCurrentProfile")
+                                          ? this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192)
+                                          : this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
+
+                lblInfo.ForeColor = lblInfo.Name.Equals("lblCurrentProfile")
+                                    ? this.Theme == MetroThemeStyle.Light ? Color.FromArgb(245, 154, 168) : Color.FromArgb(231, 251, 255)
+                                    : this.Theme == MetroThemeStyle.Light ? Color.FromArgb(147, 174, 248) : Color.FromArgb(255, 250, 244);
             }
         }
         private void InfoStrip_MouseLeave(object sender, EventArgs e) {
@@ -1550,6 +1556,7 @@ namespace FallGuysStats {
                                         editShows.Icon = this.Icon;
                                         editShows.Profiles = this.AllProfiles;
                                         editShows.StatsForm = this;
+                                        this.EnableInfoStrip(false);
                                         if (editShows.ShowDialog(this) == DialogResult.OK) {
                                             this.askedPreviousShows = 1;
                                             if (editShows.UseLinkedProfiles) {
@@ -1562,6 +1569,7 @@ namespace FallGuysStats {
                                         } else {
                                             this.askedPreviousShows = 2;
                                         }
+                                        this.EnableInfoStrip(true);
                                     }
                                 }
 
@@ -2336,7 +2344,9 @@ namespace FallGuysStats {
                         List<RoundInfo> rounds = stats.Stats;
                         rounds.Sort();
                         levelDetails.RoundDetails = rounds;
+                        this.EnableInfoStrip(false);
                         levelDetails.ShowDialog(this);
+                        this.EnableInfoStrip(true);
                     }
                 } else {
                     this.ToggleWinPercentageDisplay();
@@ -2344,6 +2354,7 @@ namespace FallGuysStats {
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.EnableInfoStrip(true);
             }
         }
         private void SortGridDetails(int columnIndex, bool isInitialize) {
@@ -2452,7 +2463,9 @@ namespace FallGuysStats {
 
                 levelDetails.RoundDetails = shows;
                 levelDetails.StatsForm = this;
+                this.EnableInfoStrip(false);
                 levelDetails.ShowDialog(this);
+                this.EnableInfoStrip(true);
             }
         }
         private void ShowRounds() {
@@ -2465,7 +2478,9 @@ namespace FallGuysStats {
                 rounds.Sort();
                 levelDetails.RoundDetails = rounds;
                 levelDetails.StatsForm = this;
+                this.EnableInfoStrip(false);
                 levelDetails.ShowDialog(this);
+                this.EnableInfoStrip(true);
             }
         }
         private void ShowFinals() {
@@ -2490,7 +2505,9 @@ namespace FallGuysStats {
 
                 levelDetails.RoundDetails = rounds;
                 levelDetails.StatsForm = this;
+                this.EnableInfoStrip(false);
                 levelDetails.ShowDialog(this);
+                this.EnableInfoStrip(true);
             }
         }
         private void ShowWinGraph() {
@@ -2584,7 +2601,9 @@ namespace FallGuysStats {
                     display.wins = (double[])wins.ToArray(typeof(double));
                 }
 
+                this.EnableInfoStrip(false);
                 display.ShowDialog(this);
+                this.EnableInfoStrip(true);
             }
         }
         private void LaunchHelpInBrowser() {
@@ -2707,6 +2726,18 @@ namespace FallGuysStats {
 
             return string.Empty;
         }
+        private void EnableInfoStrip(bool enable) {
+            foreach (var tsi in this.infoStrip.Items) {
+                if (tsi is ToolStripLabel tsl) {
+                    tsl.Enabled = enable;
+                    if (enable) {
+                        tsl.ForeColor = tsl.Name.Equals("lblCurrentProfile")
+                                        ? this.Theme == MetroThemeStyle.Light ? Color.Red : Color.FromArgb(0, 192, 192)
+                                        : this.Theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
+                    }
+                }
+            }
+        }
         private void Stats_KeyUp(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.ShiftKey:
@@ -2717,7 +2748,6 @@ namespace FallGuysStats {
                     break;
             }
         }
-
         private void Stats_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.ShiftKey:
@@ -2800,6 +2830,7 @@ namespace FallGuysStats {
         }
         private void MenuStats_Click(object sender, EventArgs e) {
             try {
+                this.EnableInfoStrip(false);
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
                 if (button == this.menuAllStats || button == this.menuSeasonStats || button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats) {
                     if (!this.menuAllStats.Checked && !this.menuSeasonStats.Checked && !this.menuWeekStats.Checked && !this.menuDayStats.Checked && !this.menuSessionStats.Checked) {
@@ -2872,9 +2903,11 @@ namespace FallGuysStats {
                 this.loadingExisting = true;
                 this.LogFile_OnParsedLogLines(rounds);
                 this.loadingExisting = false;
+                this.EnableInfoStrip(true);
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.EnableInfoStrip(true);
             }
         }
         private void MenuUpdate_Click(object sender, EventArgs e) {
@@ -2951,6 +2984,7 @@ namespace FallGuysStats {
                     settings.StatsForm = this;
                     settings.Overlay = this.overlay;
                     string lastLogPath = this.CurrentSettings.LogPath;
+                    this.EnableInfoStrip(false);
                     if (settings.ShowDialog(this) == DialogResult.OK) {
                         this.CurrentSettings = settings.CurrentSettings;
                         this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
@@ -2988,10 +3022,12 @@ namespace FallGuysStats {
                     } else {
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
                     }
+                    this.EnableInfoStrip(true);
                 }
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.EnableInfoStrip(true);
             }
         }
         private void MenuOverlay_Click(object sender, EventArgs e) {
@@ -3055,7 +3091,9 @@ namespace FallGuysStats {
                     editProfiles.StatsForm = this;
                     editProfiles.Profiles = this.AllProfiles;
                     editProfiles.AllStats = this.RoundDetails.FindAll().ToList();
+                    this.EnableInfoStrip(false);
                     editProfiles.ShowDialog(this);
+                    this.EnableInfoStrip(true);
                     lock (this.StatsDB) {
                         this.StatsDB.BeginTrans();
                         this.AllProfiles = editProfiles.Profiles;
@@ -3071,6 +3109,7 @@ namespace FallGuysStats {
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.EnableInfoStrip(true);
             }
         }
         private void MenuLaunchFallGuys_Click(object sender, EventArgs e) {
