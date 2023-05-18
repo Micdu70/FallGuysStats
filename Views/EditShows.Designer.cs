@@ -30,9 +30,9 @@
             this.lblEditShowslabel = new MetroFramework.Controls.MetroLabel();
             this.cboEditShows = new MetroFramework.Controls.MetroComboBox();
             this.lblEditShowsBackColor = new System.Windows.Forms.Label();
+            this.chkUseLinkedProfiles = new MetroFramework.Controls.MetroCheckBox();
             this.btnEditShowsSave = new MetroFramework.Controls.MetroButton();
             this.btnEditShowsCancel = new MetroFramework.Controls.MetroButton();
-            this.chkUseLinkedProfiles = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picEditShowsIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +86,22 @@
             this.lblEditShowsBackColor.Size = new System.Drawing.Size(515, 53);
             this.lblEditShowsBackColor.TabIndex = 3;
             // 
+            // chkUseLinkedProfiles
+            // 
+            this.chkUseLinkedProfiles.AutoSize = true;
+            this.chkUseLinkedProfiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(182)))), ((int)(((byte)(254)))));
+            this.chkUseLinkedProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkUseLinkedProfiles.ForeColor = System.Drawing.Color.Teal;
+            this.chkUseLinkedProfiles.Location = new System.Drawing.Point(16, 211);
+            this.chkUseLinkedProfiles.Name = "chkUseLinkedProfiles";
+            this.chkUseLinkedProfiles.Size = new System.Drawing.Size(119, 15);
+            this.chkUseLinkedProfiles.TabIndex = 1;
+            this.chkUseLinkedProfiles.Text = "Use linked profiles";
+            this.chkUseLinkedProfiles.UseCustomBackColor = true;
+            this.chkUseLinkedProfiles.UseCustomForeColor = true;
+            this.chkUseLinkedProfiles.UseSelectable = true;
+            this.chkUseLinkedProfiles.CheckedChanged += new System.EventHandler(this.ChkUseLinkedProfiles_CheckedChanged);
+            // 
             // btnEditShowsSave
             // 
             this.btnEditShowsSave.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -108,33 +124,17 @@
             this.btnEditShowsCancel.UseSelectable = true;
             this.btnEditShowsCancel.Click += new System.EventHandler(this.BtnEditShowsCancel_Click);
             // 
-            // chkUseLinkedProfiles
-            // 
-            this.chkUseLinkedProfiles.AutoSize = true;
-            this.chkUseLinkedProfiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(182)))), ((int)(((byte)(254)))));
-            this.chkUseLinkedProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkUseLinkedProfiles.ForeColor = System.Drawing.Color.Teal;
-            this.chkUseLinkedProfiles.Location = new System.Drawing.Point(16, 211);
-            this.chkUseLinkedProfiles.Name = "chkUseLinkedProfiles";
-            this.chkUseLinkedProfiles.Size = new System.Drawing.Size(119, 15);
-            this.chkUseLinkedProfiles.TabIndex = 1;
-            this.chkUseLinkedProfiles.Text = "Use linked profiles";
-            this.chkUseLinkedProfiles.UseCustomBackColor = true;
-            this.chkUseLinkedProfiles.UseCustomForeColor = true;
-            this.chkUseLinkedProfiles.UseSelectable = true;
-            this.chkUseLinkedProfiles.CheckedChanged += new System.EventHandler(this.ChkUseLinkedProfiles_CheckedChanged);
-            // 
             // EditShows
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(515, 244);
-            this.Controls.Add(this.chkUseLinkedProfiles);
             this.Controls.Add(this.picEditShowsIcon);
             this.Controls.Add(this.lblEditShowsQuestion);
             this.Controls.Add(this.lblEditShowslabel);
             this.Controls.Add(this.cboEditShows);
             this.Controls.Add(this.btnEditShowsSave);
             this.Controls.Add(this.btnEditShowsCancel);
+            this.Controls.Add(this.chkUseLinkedProfiles);
             this.Controls.Add(this.lblEditShowsBackColor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -160,8 +160,8 @@
         private MetroFramework.Controls.MetroLabel lblEditShowslabel;
         private MetroFramework.Controls.MetroComboBox cboEditShows;
         private System.Windows.Forms.Label lblEditShowsBackColor;
+        private MetroFramework.Controls.MetroCheckBox chkUseLinkedProfiles;
         private MetroFramework.Controls.MetroButton btnEditShowsSave;
         private MetroFramework.Controls.MetroButton btnEditShowsCancel;
-        private MetroFramework.Controls.MetroCheckBox chkUseLinkedProfiles;
     }
 }

@@ -43,7 +43,7 @@ namespace FallGuysStats {
                 this.cboEditShows.Items.Insert(0, this.Profiles[i].ProfileName);
             }
             this.cboEditShows.SelectedIndex = 0;
-
+            
             if (this.FunctionFlag == "move") {
                 this.chkUseLinkedProfiles.Visible = false;
             } else if (this.FunctionFlag == "add" && this.StatsForm.CurrentSettings.AutoChangeProfile) {
@@ -51,7 +51,7 @@ namespace FallGuysStats {
                 this.chkUseLinkedProfiles.Checked = true;
             }
         }
-
+        
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
             foreach (Control c1 in Controls) {
@@ -128,6 +128,20 @@ namespace FallGuysStats {
         private void CboEditShows_Changed(object sender, EventArgs e) {
             this.SelectedProfileId = this.Profiles.Find(p => p.ProfileName == (string)this.cboEditShows.SelectedItem).ProfileId;
         }
+        
+        private void chkUseLinkedProfiles_CheckedChanged(object sender, EventArgs e) {
+            this.UseLinkedProfiles = ((CheckBox)sender).Checked;
+            this.lblEditShowsQuestion.Text = $"{Multilingual.GetWord("profile_add_select_question_prefix")}{Environment.NewLine}{(this.UseLinkedProfiles ? Multilingual.GetWord("profile_add_select_question_suffix_linked_profiles") : Multilingual.GetWord("profile_add_select_question_suffix"))}";
+            if (this.UseLinkedProfiles) {
+                this.lblEditShowslabel.Visible = false;
+                this.cboEditShows.Visible = false;
+                this.cboEditShows.SelectedIndex = 0;
+            } else {
+                this.lblEditShowslabel.Visible = true;
+                this.cboEditShows.SelectedIndex = 0;
+                this.cboEditShows.Visible = true;
+            }
+        }
 
         private void ChkUseLinkedProfiles_CheckedChanged(object sender, EventArgs e) {
             this.UseLinkedProfiles = ((CheckBox)sender).Checked;
@@ -154,9 +168,9 @@ namespace FallGuysStats {
                 questionStr = $"{Multilingual.GetWord("profile_move_select_question_prefix")} ({this.SelectedCount}) {Multilingual.GetWord("profile_move_select_question_infix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("profile_move_select_question_suffix")}";
             }
             if (MessageBox.Show(this,
-                questionStr,
-                this.UseLinkedProfiles ? $"{Multilingual.GetWord("message_save_data_caption")}" : Multilingual.GetWord("message_save_profile_caption"),
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
+                                questionStr,
+                                this.UseLinkedProfiles ? $"{Multilingual.GetWord("message_save_data_caption")}" : Multilingual.GetWord("message_save_profile_caption"),
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

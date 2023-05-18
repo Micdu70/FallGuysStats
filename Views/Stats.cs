@@ -180,7 +180,7 @@ namespace FallGuysStats {
         private bool loadingExisting;
         private bool updateFilterType;
         private bool updateSelectedProfile;
-        private bool getLinkedProfilesId;
+        private bool useLinkedProfiles;
         public LiteDatabase StatsDB;
         public ILiteCollection<RoundInfo> RoundDetails;
         public ILiteCollection<UserSettings> UserSettings;
@@ -1560,11 +1560,11 @@ namespace FallGuysStats {
                                         if (editShows.ShowDialog(this) == DialogResult.OK) {
                                             this.askedPreviousShows = 1;
                                             if (editShows.UseLinkedProfiles) {
-                                                this.getLinkedProfilesId = true;
+                                                this.useLinkedProfiles = true;
                                             } else {
                                                 profile = editShows.SelectedProfileId;
                                                 this.CurrentSettings.SelectedProfile = profile;
-                                                this.ReloadProfileMenuItems();
+                                                //this.ReloadProfileMenuItems();
                                             }
                                         } else {
                                             this.askedPreviousShows = 2;
@@ -1573,14 +1573,15 @@ namespace FallGuysStats {
                                     }
                                 }
 
+                                
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 2) {
                                     continue;
                                 }
-
-                                if (stat.ShowEnd < this.startupTime && this.getLinkedProfilesId) {
-                                    profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10_"));
+                                
+                                if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
+                                    profile = this.GetLinkedProfile(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
                                     this.CurrentSettings.SelectedProfile = profile;
-                                    this.ReloadProfileMenuItems();
+                                    //this.ReloadProfileMenuItems();
                                 }
 
                                 if (stat.Round == 1) {
@@ -1755,13 +1756,14 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
-        public int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
+        private string GetCurrentProfileLinkedShowId() {
+            return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+        }
+        private int GetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) return 0;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
-                        return this.AllProfiles.Count - 1 - i;
-                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
                         return this.AllProfiles.Count - 1 - i;
                     }
                 } else {
@@ -1777,10 +1779,6 @@ namespace FallGuysStats {
                 }
             }
             return 0;
-        }
-        public string GetCurrentProfileLinkedShowId() {
-            string currentProfileLinkedShowId = this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
-            return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
         public void SetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
