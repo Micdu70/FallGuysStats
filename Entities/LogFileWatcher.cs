@@ -61,6 +61,7 @@ namespace FallGuysStats {
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
+        private bool isCreativeWeeklyShow;
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -243,7 +244,9 @@ namespace FallGuysStats {
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" } };
 
         private bool GetIsRealFinalRound(string roundId, string showId) {
-            if (showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) { return true; }
+            if (showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) { this.isCreativeWeeklyShow = true; return true; }
+
+            this.isCreativeWeeklyShow = false;
 
             return (roundId.IndexOf("round_jinxed", StringComparison.OrdinalIgnoreCase) != -1
                         && roundId.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1)
@@ -653,7 +656,9 @@ namespace FallGuysStats {
                 }
 
                 if (logRound.Info.Qualified) {
-                    logRound.Info.Position = 1;
+                    if (!logRound.Info.UseShareCode && !this.isCreativeWeeklyShow) {
+                        logRound.Info.Position = 1;
+                    }
                     logRound.Info.Crown = true;
                     logRound.CountingPlayers = false;
                     logRound.GetCurrentPlayerID = false;

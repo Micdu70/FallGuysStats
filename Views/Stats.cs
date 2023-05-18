@@ -210,6 +210,8 @@ namespace FallGuysStats {
 
         private bool shiftKeyToggle;//, ctrlKeyToggle;
 
+        private readonly ToolTip tt = new ToolTip();
+
         public readonly string[] publicShowIdList = {
             "main_show",
             "squads_2player_template",
@@ -2033,6 +2035,9 @@ namespace FallGuysStats {
                                                      toolTipIcon == ToolTipIcon.Error ? MessageBoxIcon.Error :
                                                      toolTipIcon == ToolTipIcon.Info ? MessageBoxIcon.Information :
                                                      toolTipIcon == ToolTipIcon.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.None);
+        }
+        public void ShowTooltip(string message, IWin32Window window, Point position, int duration) {
+            tt.Show(message, window, position, duration);
         }
         private void GridDetails_DataSourceChanged(object sender, EventArgs e) {
             this.SetMainDataGridView();

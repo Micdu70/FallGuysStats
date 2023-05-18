@@ -23,6 +23,8 @@
 
 # [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Micdu70/FallGuysStats/blob/master/LICENSE) Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70
 
+**IMPORTANT: Cette application n'a aucune affiliation avec MediaTonic. Les images de Fall Guys sont la propriété de Mediatonic Limited.**
+
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats

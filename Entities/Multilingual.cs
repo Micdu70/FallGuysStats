@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace FallGuysStats {
     public static class Multilingual {
@@ -115,7 +114,7 @@ namespace FallGuysStats {
                             {"level_date_format", "MMM d, yyyy (ddd)"},
                             {"level_detail_no_data", "The data does not exist."},
                             {"level_detail_no_data_caption", "No data"},
-                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied_tooltip", "Double-click on share code to copy it"},
                             {"level_detail_share_code_copied", "Share code copied!"},
 
                             {"profile_change_tooltiptext", "Click to change your current profile."},
@@ -438,7 +437,7 @@ namespace FallGuysStats {
                             {"level_date_format", "dd/MM/yyyy (ddd)"},
                             {"level_detail_no_data", "Pas de données disponibles."},
                             {"level_detail_no_data_caption", "Aucune donnée"},
-                            {"level_detail_copy_share_code", "Double-cliquer sur le code de partage pour le copier"},
+                            {"level_detail_share_code_copied_tooltip", "Double-cliquer sur le code de partage pour le copier"},
                             {"level_detail_share_code_copied", "Code de partage copié !"},
 
                             {"profile_change_tooltiptext", "Cliquer pour changer de profil"},
@@ -762,7 +761,7 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy년 M월 d일 (ddd)"},
                             {"level_detail_no_data", "데이터가 존재하지 않습니다."},
                             {"level_detail_no_data_caption", "데이터 없음"},
-                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied_tooltip", "더블클릭해서 공유 코드를 복사하세요"},
                             {"level_detail_share_code_copied", "공유 코드가 복사되었습니다!"},
 
                             {"profile_change_tooltiptext", "현재 프로필을 변경하려면 클릭하세요."},
@@ -1086,7 +1085,7 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy/M/d (ddd)"},
                             {"level_detail_no_data", "データが存在しません。"},
                             {"level_detail_no_data_caption", "データなし"},
-                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied_tooltip", "ダブルクリックして共有コードをコピーしてください"},
                             {"level_detail_share_code_copied", "シェアコードをコピーした！"},
 
                             {"profile_change_tooltiptext", "クリックして現在のプロファイルを変更"},
@@ -1410,7 +1409,7 @@ namespace FallGuysStats {
                             {"level_date_format", "yyyy年 M月 d日 (ddd)"},
                             {"level_detail_no_data", "数据不存在。"},
                             {"level_detail_no_data_caption", "没有数据"},
-                            {"level_detail_copy_share_code", "Double-click on share code to copy it"},
+                            {"level_detail_share_code_copied_tooltip", "双击来复制共享代码"},
                             {"level_detail_share_code_copied", "分享代码已复制!"},
 
                             {"profile_change_tooltiptext", "点击更换当前的个人资料。"},
@@ -4175,9 +4174,6 @@ namespace FallGuysStats {
             return name;
         }*/
         public static string GetShowName(string keyWord) {
-            if (Regex.IsMatch(keyWord, @"^\d{4}-\d{4}-\d{4}$")) {
-                return keyWord;
-            }
             string name = string.Empty;
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);
             showsDictionary?.TryGetValue(keyWord, out name);

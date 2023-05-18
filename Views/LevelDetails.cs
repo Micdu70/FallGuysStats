@@ -440,16 +440,18 @@ namespace FallGuysStats {
                     e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light || info.PrivateLobby || info.AbandonShow ? c1 : ControlPaint.LightLight(c1);
                     e.Value = level.Name;
                     if (Regex.IsMatch((string)e.Value, @"^\d{4}-\d{4}-\d{4}$")) {
-                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_copy_share_code");
+                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
                     }
                     //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId") {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
-                    e.Value = Multilingual.GetShowName((string)e.Value);
-                }
-                if (this._showStats != 2 && Regex.IsMatch((string)e.Value, @"^\d{4}-\d{4}-\d{4}$")) {
-                    this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_copy_share_code");
+                    string showNameId = (string)e.Value;
+                    string showName = Multilingual.GetShowName(showNameId);
+                    e.Value = !string.IsNullOrEmpty(showName) ? showName : showNameId;
+                    if (this._showStats != 2 && info.UseShareCode) {
+                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
+                    }
                 }
                 //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Position") {
@@ -720,21 +722,20 @@ namespace FallGuysStats {
 
         private void GridDetails_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.RowIndex >= this.gridDetails.Rows.Count) { return; }
-            ToolTip tip = new ToolTip();
-            Point cursorPosition = this.PointToClient(Cursor.Position);
-            Point tipPosition = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
                 string shareCode = (string)this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 Clipboard.SetText(shareCode, TextDataFormat.Text);
-                tip.Show(Multilingual.GetWord("level_detail_share_code_copied"), this, tipPosition, 5000);
-                //this.StatsForm.ShowNotification(Multilingual.GetWord("level_detail_share_code_copied"), shareCode, ToolTipIcon.Info);
+                Point cursorPosition = this.PointToClient(Cursor.Position);
+                Point position = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
+                this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 5000);
             }
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
                 string roundName = (string)this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 if (Regex.IsMatch(roundName, @"^\d{4}-\d{4}-\d{4}$")) {
                     Clipboard.SetText(roundName, TextDataFormat.Text);
-                    tip.Show(Multilingual.GetWord("level_detail_share_code_copied"), this, tipPosition, 5000);
-                    //this.StatsForm.ShowNotification(Multilingual.GetWord("level_detail_share_code_copied"), shareCode, ToolTipIcon.Info);
+                    Point cursorPosition = this.PointToClient(Cursor.Position);
+                    Point position = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
+                    this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 5000);
                 }
             }
         }

@@ -582,7 +582,7 @@ namespace FallGuysStats {
                     break;
                 case 1:
                     this.lblFastest.Text = $"{Multilingual.GetWord("overlay_fastest")} :";
-                    if (type == LevelType.Survival || type == LevelType.Logic) {
+                    if ((type == LevelType.Survival || type == LevelType.Logic) && this.levelException != 1) {
                         this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                     } else {
                         this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
@@ -675,7 +675,8 @@ namespace FallGuysStats {
                     string roundName = this.lastRound.VerifiedName();
 
                     this.levelException = 0;
-                    if (roundName == "round_hoverboardsurvival_s4_show" || roundName == "round_hoverboardsurvival2_almond" || roundName == "round_snowy_scrap" || roundName == "round_jinxed" || roundName == "round_rocknroll" || roundName == "round_conveyor_arena") {
+                    if (roundName == "round_pixelperfect_almond" || roundName == "round_hoverboardsurvival_s4_show" || roundName == "round_hoverboardsurvival2_almond" ||
+                        roundName == "round_snowy_scrap" || roundName == "round_jinxed" || roundName == "round_rocknroll" || roundName == "round_conveyor_arena") {
                         this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
                     } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
                         this.levelException = 2; // Level is like a "Team" level type (score info is most important)
