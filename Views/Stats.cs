@@ -1766,8 +1766,6 @@ namespace FallGuysStats {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         return this.AllProfiles.Count - 1 - i;
-                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
-                        return this.AllProfiles.Count - 1 - i;
                     }
                 } else {
                     if (isCreativeShow) {
@@ -1781,45 +1779,57 @@ namespace FallGuysStats {
                     }
                 }
             }
+            if (isPrivateLobbies) { // return corresponding linked profile when possible if no linked "private_lobbies" profile was found
+                for (int j = 0; j < this.AllProfiles.Count; j++) {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[j].LinkedShowId) && showId.IndexOf(this.AllProfiles[j].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                        return this.AllProfiles.Count - 1 - j;
+                    }
+                }
+            }
+            // return ProfileId 0 if no linked profile was found/matched
             return 0;
         }
         public void SetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
-            bool linkedProfileFound = false;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
-                        linkedProfileFound = true;
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                         if (!item.Checked) { item.PerformClick(); }
-                        break;
-                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
-                        linkedProfileFound = true;
-                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { item.PerformClick(); }
-                        break;
+                        return;
                     }
                 } else {
                     if (isCreativeShow) {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
-                            linkedProfileFound = true;
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                             if (!item.Checked) { item.PerformClick(); }
-                            break;
+                            return;
                         }
                     } else {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
-                            linkedProfileFound = true;
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
                             if (!item.Checked) { item.PerformClick(); }
-                            break;
+                            return;
                         }
                     }
                 }
             }
-            if (!linkedProfileFound) {
-                ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1];
-                if (!item.Checked) { item.PerformClick(); }
+            if (isPrivateLobbies) { // select corresponding linked profile when possible if no linked "private_lobbies" profile was found
+                for (int j = 0; j < this.AllProfiles.Count; j++) {
+                    if (!string.IsNullOrEmpty(this.AllProfiles[j].LinkedShowId) && showId.IndexOf(this.AllProfiles[j].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
+                        ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - j];
+                        if (!item.Checked) { item.PerformClick(); }
+                        return;
+                    }
+                }
+            }
+            // select ProfileId 0 if no linked profile was found/matched
+            for (int k = 0; k < this.AllProfiles.Count; k++) {
+                if (this.AllProfiles[k].ProfileId == 0) {
+                    ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - k];
+                    if (!item.Checked) { item.PerformClick(); }
+                    return;
+                }
             }
         }
         public void SetCurrentProfileIcon(bool linked) {

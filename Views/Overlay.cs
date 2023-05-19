@@ -681,13 +681,10 @@ namespace FallGuysStats {
                     } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
                         this.levelException = 2; // Level is like a "Team" level type (score info is most important)
                     } else if (this.lastRound.UseShareCode) {
-                        this.levelException = 3; // Level is a creative map made by a player and played in Custom
-                    } else {
-                        MatchCollection matches = Regex.Matches(roundName, @"^(?:ugc-)?(\d{4}-\d{4}-\d{4})$");
-                        if (matches.Count > 0) {
-                            this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
-                            roundName = matches[0].Groups[1].Value;
-                        }
+                        this.levelException = 3; // Level is a creative map and played in Custom
+                    } else if (Regex.IsMatch(roundName, @"^ugc-\d{4}-\d{4}-\d{4}$")) {
+                        this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
+                        roundName = roundName.Substring(4);
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {

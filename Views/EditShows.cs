@@ -146,9 +146,18 @@ namespace FallGuysStats {
         private void BtnEditShowsSave_Click(object sender, EventArgs e) {
             string questionStr = string.Empty;
             if (FunctionFlag == "add") {
-                questionStr = this.UseLinkedProfiles ?
-                              $"{Multilingual.GetWord("message_save_data_linked_profiles")}{Environment.NewLine}{Multilingual.GetWord("message_save_data_linked_profiles_info_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_data_linked_profiles_info_suffix")}" :
-                              $"{Multilingual.GetWord("message_save_profile_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_profile_suffix")}";
+                if (this.UseLinkedProfiles) {
+                    int id = 0;
+                    for (int i = 0; i < this.StatsForm.AllProfiles.Count; i++) {
+                        if (this.StatsForm.AllProfiles[i].ProfileId == 0) {
+                            id = i;
+                            break;
+                        }
+                    }
+                    questionStr = $"{Multilingual.GetWord("message_save_data_linked_profiles")}{Environment.NewLine}{Multilingual.GetWord("message_save_data_linked_profiles_info_prefix")} ({this.StatsForm.AllProfiles[id].ProfileName}) {Multilingual.GetWord("message_save_data_linked_profiles_info_suffix")}";
+                } else {
+                    questionStr = $"{Multilingual.GetWord("message_save_profile_prefix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("message_save_profile_suffix")}";
+                }
             } else if (FunctionFlag == "move") {
                 questionStr = $"{Multilingual.GetWord("profile_move_select_question_prefix")} ({this.SelectedCount}) {Multilingual.GetWord("profile_move_select_question_infix")} ({this.cboEditShows.SelectedItem}) {Multilingual.GetWord("profile_move_select_question_suffix")}";
             }

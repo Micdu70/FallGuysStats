@@ -601,17 +601,11 @@ namespace FallGuysStats {
                             if (i < (round.Count - 1)) {
                                 round[i].AbandonShow = true;
                                 round[i].Qualified = true;
-                                if (round[i].Position == 0) {
-                                    round[i].Position = round[i + 1].Players;
-                                }
                             } else if (round[i].UseShareCode && round[i].Finish.HasValue) {
                                 round[i].Qualified = true;
                                 round[i].Crown = true;
                             } else {
                                 round[i].AbandonShow = true;
-                                if (!round[i].Finish.HasValue) {
-                                    round[i].Position = 0;
-                                }
                             }
                             round[i].ShowEnd = showEnd;
                         }
