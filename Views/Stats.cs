@@ -2740,6 +2740,7 @@ namespace FallGuysStats {
             return string.Empty;
         }
         private void EnableInfoStrip(bool enable) {
+            this.infoStrip.Enabled = enable;
             foreach (var tsi in this.infoStrip.Items) {
                 if (tsi is ToolStripLabel tsl) {
                     tsl.Enabled = enable;
@@ -2844,7 +2845,6 @@ namespace FallGuysStats {
         }
         private void MenuStats_Click(object sender, EventArgs e) {
             try {
-                this.EnableInfoStrip(false);
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
                 if (button == this.menuAllStats || button == this.menuSeasonStats || button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats) {
                     if (!this.menuAllStats.Checked && !this.menuSeasonStats.Checked && !this.menuWeekStats.Checked && !this.menuDayStats.Checked && !this.menuSessionStats.Checked) {
@@ -2917,11 +2917,9 @@ namespace FallGuysStats {
                 this.loadingExisting = true;
                 this.LogFile_OnParsedLogLines(rounds);
                 this.loadingExisting = false;
-                this.EnableInfoStrip(true);
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.EnableInfoStrip(true);
             }
         }
         private void MenuUpdate_Click(object sender, EventArgs e) {
