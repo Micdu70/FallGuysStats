@@ -243,6 +243,72 @@ namespace FallGuysStats {
 
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" } };
 
+        private string GetRoundNameFromShareCode(string shareCode) {
+            switch (shareCode) {
+                case "1127-0302-4545": return "wle_s10_orig_round_001";
+                case "2416-3885-2780": return "wle_s10_orig_round_002";
+                case "6212-4520-8328": return "wle_s10_orig_round_003";
+                case "2777-8402-7007": return "wle_s10_orig_round_004";
+                case "2384-0516-9077": return "wle_s10_orig_round_005";
+                case "0128-0546-8951": return "wle_s10_orig_round_006";
+                case "9189-7523-8901": return "wle_s10_orig_round_007";
+                case "0653-2576-5236": return "wle_s10_orig_round_008";
+                case "7750-7786-5732": return "wle_s10_orig_round_009";
+                case "1794-4080-7040": return "wle_s10_orig_round_012";
+                case "4446-4876-4968": return "wle_s10_orig_round_013";
+                case "7274-6756-2481": return "wle_s10_orig_round_014";
+                case "9426-4640-3293": return "wle_s10_orig_round_015";
+                case "7387-6177-4493": return "wle_s10_orig_round_016";
+                case "8685-7305-6864": return "wle_s10_orig_round_019";
+                case "4582-3265-6150": return "wle_s10_orig_round_020";
+                case "8300-9964-4945": return "wle_s10_orig_round_021";
+                case "9525-6213-8767": return "wle_s10_orig_round_022";
+                case "9078-2884-2372": return "wle_s10_orig_round_023";
+                case "1335-7488-1452": return "wle_s10_orig_round_026";
+                case "8145-6018-5093": return "wle_s10_orig_round_027";
+                case "0633-3680-7102": return "wle_s10_orig_round_028";
+                case "3207-5100-4977": return "wle_s10_orig_round_029";
+                case "0324-4730-9285": return "wle_s10_orig_round_032";
+                case "7488-7333-3120": return "wle_s10_orig_round_033";
+                case "0942-4996-5802": return "wle_s10_orig_round_034";
+                case "5673-8789-9890": return "wle_s10_orig_round_035";
+                case "1521-1552-6833": return "wle_s10_orig_round_036";
+                case "5608-1711-5644": return "wle_s10_orig_round_037";
+                case "6401-4333-5888": return "wle_s10_orig_round_038";
+                case "1920-3797-9890": return "wle_s10_orig_round_039";
+                case "1595-7489-8714": return "wle_s10_orig_round_040";
+                case "2019-5582-0500": return "wle_s10_orig_round_041";
+                case "0567-6834-7490": return "wle_s10_orig_round_042";
+                case "8398-4477-7834": return "wle_s10_orig_round_043";
+                case "2767-1753-8429": return "wle_s10_orig_round_044";
+                case "6748-6192-9739": return "wle_s10_orig_round_045";
+                case "9641-5398-7416": return "wle_s10_orig_round_046";
+                case "7895-4812-3429": return "wle_s10_orig_round_047";
+                case "1468-0990-4257": return "wle_s10_orig_round_048";
+                case "8058-9910-7007": return "wle_s10_round_001";
+                case "6546-9859-4336": return "wle_s10_round_002";
+                case "9366-4809-0021": return "wle_s10_round_003";
+                case "8895-2034-3061": return "wle_s10_round_005";
+                case "6970-1344-9780": return "wle_s10_round_006";
+                case "3541-3776-9131": return "wle_s10_round_007";
+                case "9335-2112-8890": return "wle_s10_round_008";
+                case "9014-0444-9613": return "wle_s10_round_010";
+                case "4409-6583-6207": return "wle_s10_round_011";
+                case "8113-7002-5798": return "wle_s10_round_012";
+                case "0733-6671-4871": return "wle_s10_orig_round_010";
+                case "6498-0353-5009": return "wle_s10_orig_round_011";
+                case "7774-2277-5742": return "wle_s10_orig_round_017";
+                case "2228-9895-3526": return "wle_s10_orig_round_018";
+                case "7652-0829-4538": return "wle_s10_orig_round_024";
+                case "1976-1259-2690": return "wle_s10_orig_round_025";
+                case "4694-8620-4972": return "wle_s10_orig_round_030";
+                case "6464-4069-3540": return "wle_s10_orig_round_031";
+                case "8993-4568-6925": return "wle_s10_round_004";
+                case "7495-5141-5265": return "wle_s10_round_009";
+            }
+            return shareCode;
+        }
+
         private bool GetIsRealFinalRound(string roundId, string showId) {
             if (showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) { this.isCreativeWeeklyShow = true; return true; }
 
@@ -386,7 +452,7 @@ namespace FallGuysStats {
                 if (index2 < 0) { index2 = line.Line.Length; }
 
                 if (logRound.Info.UseShareCode) {
-                    logRound.Info.Name = line.Line.Substring(index + 66, index2 - index - 66);
+                    logRound.Info.Name = this.GetRoundNameFromShareCode(line.Line.Substring(index + 66, index2 - index - 66));
                 } else {
                     logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
                 }
@@ -396,7 +462,7 @@ namespace FallGuysStats {
                 //bool isFinalException = this.GetIsFinalException(logRound.Info.Name);
                 //bool isTeamException = this.GetIsTeamException(logRound.Info.Name);
 
-                if (logRound.Info.UseShareCode || this.GetIsRealFinalRound(logRound.Info.Name, this.selectedShowId)) {
+                if (this.GetIsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
                     logRound.Info.IsFinal = true;
                 } else if (logRound.Info.Name.StartsWith("wle_s10_")) {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats levelStats) && levelStats.IsFinal);
@@ -459,8 +525,8 @@ namespace FallGuysStats {
                         Stats.succeededPlayerIds.Add(logRound.CurrentPlayerID);
                         Stats.NumPlayersSucceeded++;
                     }
+                    logRound.FindingPosition = true;
                 }
-                logRound.FindingPosition = true;
             } else if (logRound.Info != null && !Stats.EndedShow && logRound.FindingPosition && (index = line.Line.IndexOf("[ClientGameSession] NumPlayersAchievingObjective=")) > 0) {
                 int position = int.Parse(line.Line.Substring(index + 49));
                 if (position > 0) {

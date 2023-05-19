@@ -1564,7 +1564,7 @@ namespace FallGuysStats {
                                             } else {
                                                 profile = editShows.SelectedProfileId;
                                                 this.CurrentSettings.SelectedProfile = profile;
-                                                //this.ReloadProfileMenuItems();
+                                                this.ReloadProfileMenuItems();
                                             }
                                         } else {
                                             this.askedPreviousShows = 2;
@@ -1581,7 +1581,7 @@ namespace FallGuysStats {
                                 if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
                                     profile = this.GetLinkedProfile(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
                                     this.CurrentSettings.SelectedProfile = profile;
-                                    //this.ReloadProfileMenuItems();
+                                    this.ReloadProfileMenuItems();
                                 }
 
                                 if (stat.Round == 1) {
