@@ -550,7 +550,7 @@ namespace FallGuysStats {
                             {"settings_green", "Vert"},
                             {"settings_blue", "Bleu"},
                             {"settings_black", "Noir"},
-                            {"settings_white", "blanc"},
+                            {"settings_white", "Blanc"},
                             {"settings_cycle_qualify__gold", "Cycle *Qualification / Or*"},
                             {"settings_qualify_only", "Qualif. seul."},
                             {"settings_gold_only", "Or seul."},
