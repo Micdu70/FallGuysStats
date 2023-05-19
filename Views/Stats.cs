@@ -1757,13 +1757,16 @@ namespace FallGuysStats {
             return this.currentProfile;
         }
         private string GetCurrentProfileLinkedShowId() {
-            return this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+            string currentProfileLinkedShowId = this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
+            return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
         private int GetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) return 0;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
+                        return this.AllProfiles.Count - 1 - i;
+                    } else if (isCreativeShow && !string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
                         return this.AllProfiles.Count - 1 - i;
                     }
                 } else {
