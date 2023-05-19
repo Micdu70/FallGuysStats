@@ -243,7 +243,7 @@ namespace FallGuysStats {
 
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" } };
 
-        private string GetRoundNameFromShareCode(string shareCode) {
+        private string GetRoundId(string shareCode) {
             switch (shareCode) {
                 case "1127-0302-4545": return "wle_s10_orig_round_001";
                 case "2416-3885-2780": return "wle_s10_orig_round_002";
@@ -452,7 +452,7 @@ namespace FallGuysStats {
                 if (index2 < 0) { index2 = line.Line.Length; }
 
                 if (logRound.Info.UseShareCode) {
-                    logRound.Info.Name = this.GetRoundNameFromShareCode(line.Line.Substring(index + 66, index2 - index - 66));
+                    logRound.Info.Name = this.GetRoundId(line.Line.Substring(index + 66, index2 - index - 66));
                 } else {
                     logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
                 }
