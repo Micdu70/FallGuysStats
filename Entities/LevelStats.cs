@@ -406,7 +406,7 @@ namespace FallGuysStats {
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
 
-            if (!stat.PrivateLobby || stat.UseShareCode) {
+            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_"))) {
                 this.Played++;
                 this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {
@@ -425,7 +425,7 @@ namespace FallGuysStats {
                 this.Qualified += stat.Qualified ? 1 : 0;
             }
 
-            TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.End) - stat.Start;
+            TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.Start) - stat.Start;
             if (stat.Finish.HasValue && finishTime.TotalSeconds > 1.1) {
                 this.FinishedCount++;
                 this.FinishTime += finishTime;

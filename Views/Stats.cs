@@ -689,7 +689,7 @@ namespace FallGuysStats {
                 this.ProfileMenuItems.Add(menuItem);
                 if (this.CurrentSettings.SelectedProfile == profile.ProfileId) {
                     this.SetCurrentProfileIcon(!string.IsNullOrEmpty(profile.LinkedShowId));
-                    menuItem.PerformClick();
+                    this.MenuStats_Click(menuItem, null);
                 }
             }
         }
@@ -1285,7 +1285,7 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
-                Version = 31,
+                Version = 32,
                 FrenchyEditionDB = 7
             };
         }
@@ -1434,7 +1434,7 @@ namespace FallGuysStats {
                     this.LaunchGame(true);
                 }
 
-                this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"].PerformClick();
+                this.MenuStats_Click(this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"], null);
 
                 this.UpdateDates();
             } catch (Exception ex) {
@@ -1444,12 +1444,6 @@ namespace FallGuysStats {
         }
         private void Stats_Shown(object sender, EventArgs e) {
             try {
-                if (this.WindowState != FormWindowState.Minimized) {
-                    this.WindowState = this.CurrentSettings.MaximizedWindowState ? FormWindowState.Maximized : FormWindowState.Normal;
-                }
-                if (this.CurrentSettings.StartMinimized) {
-                    this.WindowState = FormWindowState.Minimized;
-                }
                 if (this.CurrentSettings.FormWidth.HasValue) {
                     this.Size = new Size(this.CurrentSettings.FormWidth.Value, this.CurrentSettings.FormHeight.Value);
                 }
@@ -1490,6 +1484,13 @@ namespace FallGuysStats {
                         this.menuSessionStats.Checked = true;
                         this.MenuStats_Click(this.menuSessionStats, null);
                         break;
+                }
+
+                if (this.WindowState != FormWindowState.Minimized) {
+                    this.WindowState = this.CurrentSettings.MaximizedWindowState ? FormWindowState.Maximized : FormWindowState.Normal;
+                }
+                if (this.CurrentSettings.StartMinimized) {
+                    this.WindowState = FormWindowState.Minimized;
                 }
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
@@ -1801,20 +1802,20 @@ namespace FallGuysStats {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { item.PerformClick(); }
+                        if (!item.Checked) { this.MenuStats_Click(item, null); }
                         return;
                     }
                 } else {
                     if (isCreativeShow) {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                            if (!item.Checked) { item.PerformClick(); }
+                            if (!item.Checked) { this.MenuStats_Click(item, null); }
                             return;
                         }
                     } else {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                            if (!item.Checked) { item.PerformClick(); }
+                            if (!item.Checked) { this.MenuStats_Click(item, null); }
                             return;
                         }
                     }
@@ -1824,7 +1825,7 @@ namespace FallGuysStats {
                 for (int j = 0; j < this.AllProfiles.Count; j++) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[j].LinkedShowId) && showId.IndexOf(this.AllProfiles[j].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - j];
-                        if (!item.Checked) { item.PerformClick(); }
+                        if (!item.Checked) { this.MenuStats_Click(item, null); }
                         return;
                     }
                 }
@@ -1833,7 +1834,7 @@ namespace FallGuysStats {
             for (int k = 0; k < this.AllProfiles.Count; k++) {
                 if (this.AllProfiles[k].ProfileId == 0) {
                     ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - k];
-                    if (!item.Checked) { item.PerformClick(); }
+                    if (!item.Checked) { this.MenuStats_Click(item, null); }
                     return;
                 }
             }
@@ -1892,7 +1893,7 @@ namespace FallGuysStats {
                                       (this.CurrentSettings.WinsFilter == 3 && endRound.Start > WeekStart) ||
                                       (this.CurrentSettings.WinsFilter == 4 && endRound.Start > DayStart) ||
                                       (this.CurrentSettings.WinsFilter == 5 && endRound.Start > SessionStart));
-                bool isInQualifyFilter = (!endRound.PrivateLobby || endRound.UseShareCode) &&
+                bool isInQualifyFilter = (!endRound.PrivateLobby || (endRound.UseShareCode && !endRound.Name.StartsWith("wle_s10_"))) &&
                                          (this.CurrentSettings.QualifyFilter == 0 ||
                                          (this.CurrentSettings.QualifyFilter == 1 && this.IsInStatsFilter(endRound.Start) && this.IsInPartyFilter(info)) ||
                                          (this.CurrentSettings.QualifyFilter == 2 && endRound.Start > SeasonStart) ||
@@ -2779,20 +2780,20 @@ namespace FallGuysStats {
                     if (!(this.ProfileMenuItems[i] is ToolStripMenuItem menuItem)) { continue; }
                     if (this.shiftKeyToggle) {
                         if (menuItem.Checked && i - 1 >= 0) {
-                            this.ProfileMenuItems[i - 1].PerformClick();
+                            this.MenuStats_Click(this.ProfileMenuItems[i - 1], null);
                             break;
                         }
                         if (menuItem.Checked && i - 1 < 0) {
-                            this.ProfileMenuItems[this.ProfileMenuItems.Count - 1].PerformClick();
+                            this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], null);
                             break;
                         }
                     } else {
                         if (menuItem.Checked && i + 1 < this.ProfileMenuItems.Count) {
-                            this.ProfileMenuItems[i + 1].PerformClick();
+                            this.MenuStats_Click(this.ProfileMenuItems[i + 1], null);
                             break;
                         }
                         if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
-                            this.ProfileMenuItems[0].PerformClick();
+                            this.MenuStats_Click(this.ProfileMenuItems[0], null);
                             break;
                         }
                     }
@@ -2801,11 +2802,11 @@ namespace FallGuysStats {
                 for (int i = 0; i < this.ProfileMenuItems.Count; i++) {
                     if (!(this.ProfileMenuItems[i] is ToolStripMenuItem menuItem)) { continue; }
                     if (menuItem.Checked && i - 1 >= 0) {
-                        this.ProfileMenuItems[i - 1].PerformClick();
+                        this.MenuStats_Click(this.ProfileMenuItems[i - 1], null);
                         break;
                     }
                     if (menuItem.Checked && i - 1 < 0) {
-                        this.ProfileMenuItems[this.ProfileMenuItems.Count - 1].PerformClick();
+                        this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], null);
                         break;
                     }
                 }

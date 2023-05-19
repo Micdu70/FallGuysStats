@@ -1,12 +1,16 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.174 ~ 20/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.173 ~ 19/05/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.168) datant du 18/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Ajouté: Pour les stats => Correspondance entre le code de partage d'une map créée par la "Team Fall Guys" et le nom de celle-ci (en PP)
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.172 ~ 16/05/2023
   { Correction de bugs de la "FE" }

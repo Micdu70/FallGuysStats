@@ -457,17 +457,12 @@ namespace FallGuysStats {
                     logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
                 }
 
-                //bool isRealFinalRound = this.GetIsRealFinalRound(logRound.Info.Name);
-                //bool isModeException = this.GetIsModeException(logRound.Info.Name);
-                //bool isFinalException = this.GetIsFinalException(logRound.Info.Name);
-                //bool isTeamException = this.GetIsTeamException(logRound.Info.Name);
-
                 if (this.GetIsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
                     logRound.Info.IsFinal = true;
-                } else if (logRound.Info.Name.StartsWith("wle_s10_")) {
-                    logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats levelStats) && levelStats.IsFinal);
                 } else if (this.GetIsModeException(logRound.Info.Name)) {
                     logRound.Info.IsFinal = this.GetIsFinalException(logRound.Info.Name);
+                } else if (logRound.Info.Name.StartsWith("wle_s10_")) {
+                    logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats levelStats) && levelStats.IsFinal);
                 } else {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.SceneToRound.TryGetValue(logRound.Info.SceneName, out string roundName) && LevelStats.ALL.TryGetValue(roundName, out LevelStats levelStats) && levelStats.IsFinal);
                 }
@@ -599,8 +594,8 @@ namespace FallGuysStats {
                                 round[i].Start = round[i].End;
                             }
                             if (i < (round.Count - 1)) {
-                                round[i].AbandonShow = true;
                                 round[i].Qualified = true;
+                                round[i].AbandonShow = true;
                             } else if (round[i].UseShareCode && round[i].Finish.HasValue) {
                                 round[i].Qualified = true;
                                 round[i].Crown = true;

@@ -42,7 +42,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.173` ~ 19/05/2023
+**Dernière version:** `v1.174` ~ 20/05/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -53,11 +53,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.168) datant du 18/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Ajouté: Pour les stats => Correspondance entre le code de partage d'une map créée par la "Team Fall Guys" et le nom de celle-ci (en PP)
+{ Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
 
-### Il y a 0 bug génant connu dans la v1.173 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.174 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -205,6 +204,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.174` ~ 20/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
   - `v1.173` ~ 19/05/2023
   { Correction de bugs de la "FE" }
@@ -421,6 +424,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.169`
+    - Bugfix and program optimization
   - `1.168`
     - Bugfix and program optimization
   - `1.167`
