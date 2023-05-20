@@ -12,6 +12,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Threading;
 using System.Windows.Forms;
 using LiteDB;
@@ -210,10 +211,15 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
+        //private Point screenCenter;
+
         private bool shiftKeyToggle;//, ctrlKeyToggle;
 
-        private readonly ToolTip tt = new ToolTip();
+        private MetroToolTip mtt = new MetroToolTip();
+        private MetroToolTip cmtt = new MetroToolTip();
 
+        private readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/";
+        
         public readonly string[] publicShowIdList = {
             "main_show",
             "squads_2player_template",
@@ -359,7 +365,12 @@ namespace FallGuysStats {
             this.CurrentRound = new List<RoundInfo>();
 
             this.overlay = new Overlay { Text = @"Fall Guys Stats Overlay", StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName, TabResourceName = this.CurrentSettings.OverlayTabResourceName };
-
+            
+            Screen screen = this.GetCurrentScreen(this.overlay.Location);
+            Point screenLocation = screen != null ? screen.Bounds.Location : Screen.PrimaryScreen.Bounds.Location;
+            Size screenSize = screen != null ? screen.Bounds.Size : Screen.PrimaryScreen.Bounds.Size;
+            //this.screenCenter = new Point(screenLocation.X + (screenSize.Width / 2), screenLocation.Y + (screenSize.Height / 2));
+            
             this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
             this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
             this.logFile.OnError += this.LogFile_OnError;
@@ -392,8 +403,62 @@ namespace FallGuysStats {
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
+            
+            this.cmtt.OwnerDraw = true;
+            this.cmtt.Draw += this.cmtt_Draw;
+            
+            if (this.CurrentSettings.SystemTrayIcon) {
+                this.trayIcon.Visible = true;
+            } else {
+                this.Show();
+            }
         }
-
+        
+        [DllImport("User32.dll")]
+        static extern bool MoveWindow(IntPtr h, int x, int y, int width, int height, bool redraw);
+        private void cmtt_Draw(object sender, DrawToolTipEventArgs e) {
+            // Draw the standard background.
+            //e.DrawBackground();
+            // Draw the custom background.
+            e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
+            
+            // Draw the standard border.
+            e.DrawBorder();
+            // Draw the custom border to appear 3-dimensional.
+            //e.Graphics.DrawLines(SystemPens.ControlLightLight, new[] {
+            //    new Point (0, e.Bounds.Height - 1), 
+            //    new Point (0, 0), 
+            //    new Point (e.Bounds.Width - 1, 0)
+            //});
+            //e.Graphics.DrawLines(SystemPens.ControlDarkDark, new[] {
+            //    new Point (0, e.Bounds.Height - 1), 
+            //    new Point (e.Bounds.Width - 1, e.Bounds.Height - 1), 
+            //    new Point (e.Bounds.Width - 1, 0)
+            //});
+            
+            // Draw the standard text with customized formatting options.
+            e.DrawText(TextFormatFlags.TextBoxControl | TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak | TextFormatFlags.LeftAndRightPadding);
+            // Draw the custom text.
+            // The using block will dispose the StringFormat automatically.
+            //using (StringFormat sf = new StringFormat()) {
+            //    sf.Alignment = StringAlignment.Near;
+            //    sf.LineAlignment = StringAlignment.Near;
+            //    sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+            //    sf.FormatFlags = StringFormatFlags.NoWrap;
+            //    e.Graphics.DrawString(e.ToolTipText, Overlay.GetMainFont(12), SystemBrushes.ActiveCaptionText, e.Bounds, sf);
+            //    //using (Font f = new Font("Tahoma", 9)) {
+            //    //    e.Graphics.DrawString(e.ToolTipText, f, SystemBrushes.ActiveCaptionText, e.Bounds, sf);
+            //    //}
+            //}
+            
+            MetroToolTip t = (MetroToolTip)sender;
+            PropertyInfo h = t.GetType().GetProperty("Handle", BindingFlags.NonPublic | BindingFlags.Instance);
+            IntPtr handle = (IntPtr)h.GetValue(t);
+            Control c = e.AssociatedControl;
+            Point location = c.Parent.PointToScreen(new Point(c.Right - e.Bounds.Width, c.Bottom));
+            MoveWindow(handle, location.X, location.Y, e.Bounds.Width, e.Bounds.Height, false);
+        }
+        
         public class CustomToolStripSystemRenderer : ToolStripSystemRenderer {
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
                 //base.OnRenderToolStripBorder(e);
@@ -457,7 +522,7 @@ namespace FallGuysStats {
         private void SetTheme(MetroThemeStyle theme) {
             if (this.Theme == theme) return;
             this.Theme = theme;
-
+            this.mtt.Theme = theme;
             foreach (Control c1 in Controls) {
                 if (c1 is MenuStrip ms1) {
                     foreach (ToolStripMenuItem tsmi1 in ms1.Items) {
@@ -691,7 +756,7 @@ namespace FallGuysStats {
                 this.ProfileMenuItems.Add(menuItem);
                 if (this.CurrentSettings.SelectedProfile == profile.ProfileId) {
                     this.SetCurrentProfileIcon(!string.IsNullOrEmpty(profile.LinkedShowId));
-                    this.MenuStats_Click(menuItem, null);
+                    this.MenuStats_Click(menuItem, EventArgs.Empty);
                 }
             }
         }
@@ -1217,6 +1282,8 @@ namespace FallGuysStats {
                 this.CurrentSettings.Version = 32;
                 this.SaveUserSettings();
             }
+
+            //this.Update_CreativeRoundInfo();
         }
 
         private UserSettings GetDefaultSettings() {
@@ -1435,14 +1502,68 @@ namespace FallGuysStats {
                 if (this.CurrentSettings.AutoLaunchGameOnStartup) {
                     this.LaunchGame(true);
                 }
-
-                this.MenuStats_Click(this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"], null);
+                
+                this.MenuStats_Click(this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"], EventArgs.Empty);
 
                 this.UpdateDates();
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void Update_CreativeRoundInfo() {
+            this.AllStats.AddRange(this.RoundDetails.FindAll());
+            this.StatsDB.BeginTrans();
+            string sa = string.Empty,
+                    sb = string.Empty,
+                    sc = string.Empty,
+                    se = string.Empty,
+                    sf = string.Empty,
+                    sh = string.Empty;
+            int id = 0, ig = 0, ij = 0;
+            DateTime di = DateTime.MinValue;
+            for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                RoundInfo info = this.AllStats[i];
+                if (info.UseShareCode && info.CreativeLastModifiedDate == DateTime.MinValue) {
+                    try {
+                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{info.ShowNameId}.json");
+                        sa = info.ShowNameId;
+                        sb = resData.GetProperty("share_code").GetString();
+                        sc = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
+                        id = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
+                        se = resData.GetProperty("version_metadata").GetProperty("title").GetString();
+                        sf = resData.GetProperty("version_metadata").GetProperty("description").GetString();
+                        ig = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
+                        sh = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
+                        di = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                        ij = resData.GetProperty("play_count").GetInt32();
+                        break;
+                    } catch (Exception e) {
+                        // ignore
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sa)) {
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (sa.Equals(info.ShowNameId) && info.UseShareCode && info.CreativeLastModifiedDate == DateTime.MinValue) {
+                        info.CreativeShareCode = sb;
+                        info.CreativeAuthor = sc;
+                        info.CreativeVersion = id;
+                        info.CreativeTitle = se;
+                        info.CreativeDescription = sf;
+                        info.CreativeMaxPlayer = ig;
+                        info.CreativePlatformId = sh;
+                        info.CreativeLastModifiedDate = di;
+                        info.CreativePlayCount = ij;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+            }
+            
+            this.StatsDB.Commit();
+            this.AllStats.Clear();
         }
         private void Stats_Shown(object sender, EventArgs e) {
             try {
@@ -1465,26 +1586,27 @@ namespace FallGuysStats {
                     this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
                 if (this.CurrentSettings.OverlayVisible) { this.ToggleOverlay(this.overlay); }
 
+                this.menuAllStats.Checked = false;
                 switch (this.CurrentSettings.FilterType) {
                     case 0:
                         this.menuAllStats.Checked = true;
-                        this.MenuStats_Click(this.menuAllStats, null);
+                        this.MenuStats_Click(this.menuAllStats, EventArgs.Empty);
                         break;
                     case 1:
                         this.menuSeasonStats.Checked = true;
-                        this.MenuStats_Click(this.menuSeasonStats, null);
+                        this.MenuStats_Click(this.menuSeasonStats, EventArgs.Empty);
                         break;
                     case 2:
                         this.menuWeekStats.Checked = true;
-                        this.MenuStats_Click(this.menuWeekStats, null);
+                        this.MenuStats_Click(this.menuWeekStats, EventArgs.Empty);
                         break;
                     case 3:
                         this.menuDayStats.Checked = true;
-                        this.MenuStats_Click(this.menuDayStats, null);
+                        this.MenuStats_Click(this.menuDayStats, EventArgs.Empty);
                         break;
                     case 4:
                         this.menuSessionStats.Checked = true;
-                        this.MenuStats_Click(this.menuSessionStats, null);
+                        this.MenuStats_Click(this.menuSessionStats, EventArgs.Empty);
                         break;
                 }
 
@@ -1515,7 +1637,7 @@ namespace FallGuysStats {
             if (SessionStart != newDate) {
                 SessionStart = newDate;
                 if (this.menuSessionStats.Checked) {
-                    MenuStats_Click(this.menuSessionStats, null);
+                    this.MenuStats_Click(this.menuSessionStats, EventArgs.Empty);
                 }
             }
         }
@@ -1588,7 +1710,7 @@ namespace FallGuysStats {
                                 }
 
                                 if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
-                                    profile = this.GetLinkedProfile(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
+                                    profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
                                     this.CurrentSettings.SelectedProfile = profile;
                                     this.ReloadProfileMenuItems();
                                 }
@@ -1599,15 +1721,33 @@ namespace FallGuysStats {
                                 }
                                 stat.ShowID = nextShowID;
                                 stat.Profile = profile;
+
+                                if (stat.UseShareCode) {
+                                    try {
+                                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json");
+                                        stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
+                                        stat.CreativeAuthor = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
+                                        stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
+                                        stat.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
+                                        stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
+                                        stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
+                                        stat.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
+                                        stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                                        stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
+                                    } catch (Exception e) {
+                                        // ignore
+                                    }
+                                }
+
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
-
+                                
                                 //Below is where reporting to fallaytics happen
                                 //Must have enabled the setting to enable tracking
                                 //Must not be a private lobby
                                 //Must be a game that is played after FallGuysStats started
-                                if (CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
-                                    FallalyticsReporter.Report(stat, CurrentSettings.FallalyticsAPIKey);
+                                if (this.CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
+                                    FallalyticsReporter.Report(stat, this.CurrentSettings.FallalyticsAPIKey);
                                 }
                             } else {
                                 continue;
@@ -1769,21 +1909,21 @@ namespace FallGuysStats {
             string currentProfileLinkedShowId = this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
             return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
-        private int GetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
+        private int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) return 0;
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
-                        return this.AllProfiles.Count - 1 - i;
+                        return this.AllProfiles[i].ProfileId;
                     }
                 } else {
                     if (isCreativeShow) {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
-                            return this.AllProfiles.Count - 1 - i;
+                            return this.AllProfiles[i].ProfileId;
                         }
                     } else {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
-                            return this.AllProfiles.Count - 1 - i;
+                            return this.AllProfiles[i].ProfileId;
                         }
                     }
                 }
@@ -1791,7 +1931,7 @@ namespace FallGuysStats {
             if (isPrivateLobbies) { // return corresponding linked profile when possible if no linked "private_lobbies" profile was found
                 for (int j = 0; j < this.AllProfiles.Count; j++) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[j].LinkedShowId) && showId.IndexOf(this.AllProfiles[j].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
-                        return this.AllProfiles.Count - 1 - j;
+                        return this.AllProfiles[j].ProfileId;
                     }
                 }
             }
@@ -1804,20 +1944,20 @@ namespace FallGuysStats {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                        if (!item.Checked) { this.MenuStats_Click(item, null); }
+                        if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
                         return;
                     }
                 } else {
                     if (isCreativeShow) {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("fall_guys_creative_mode")) {
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                            if (!item.Checked) { this.MenuStats_Click(item, null); }
+                            if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
                             return;
                         }
                     } else {
                         if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && showId.IndexOf(this.AllProfiles[i].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                             ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
-                            if (!item.Checked) { this.MenuStats_Click(item, null); }
+                            if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
                             return;
                         }
                     }
@@ -1827,7 +1967,7 @@ namespace FallGuysStats {
                 for (int j = 0; j < this.AllProfiles.Count; j++) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[j].LinkedShowId) && showId.IndexOf(this.AllProfiles[j].LinkedShowId, StringComparison.OrdinalIgnoreCase) != -1) {
                         ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - j];
-                        if (!item.Checked) { this.MenuStats_Click(item, null); }
+                        if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
                         return;
                     }
                 }
@@ -1836,7 +1976,7 @@ namespace FallGuysStats {
             for (int k = 0; k < this.AllProfiles.Count; k++) {
                 if (this.AllProfiles[k].ProfileId == 0) {
                     ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - k];
-                    if (!item.Checked) { this.MenuStats_Click(item, null); }
+                    if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
                     return;
                 }
             }
@@ -1861,7 +2001,9 @@ namespace FallGuysStats {
                 TotalWins = 0,
                 TotalFinals = 0
             };
+
             int lastShow = -1;
+
             if (!this.StatLookup.TryGetValue(name, out LevelStats currentLevel)) {
                 if (levelException >= 3) {
                     currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon);
@@ -2064,8 +2206,25 @@ namespace FallGuysStats {
                                                      toolTipIcon == ToolTipIcon.Info ? MessageBoxIcon.Information :
                                                      toolTipIcon == ToolTipIcon.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.None);
         }
-        public void ShowTooltip(string message, IWin32Window window, Point position, int duration) {
-            tt.Show(message, window, position, duration);
+        public void ShowCustomTooltip(string message, IWin32Window window, Point position, int duration = -1) {
+            if (duration == -1) {
+                this.cmtt.Show(message, window, position);
+            } else {
+                this.cmtt.Show(message, window, position, duration);
+            }
+        }
+        public void HideCustomTooltip(IWin32Window window) {
+            this.cmtt.Hide(window);
+        }
+        public void ShowTooltip(string message, IWin32Window window, Point position, int duration = -1) {
+            if (duration == -1) {
+                this.mtt.Show(message, window, position);
+            } else {
+                this.mtt.Show(message, window, position, duration);
+            }
+        }
+        public void HideTooltip(IWin32Window window) {
+            this.mtt.Hide(window);
         }
         private void GridDetails_DataSourceChanged(object sender, EventArgs e) {
             this.SetMainDataGridView();
@@ -2782,20 +2941,20 @@ namespace FallGuysStats {
                     if (!(this.ProfileMenuItems[i] is ToolStripMenuItem menuItem)) { continue; }
                     if (this.shiftKeyToggle) {
                         if (menuItem.Checked && i - 1 >= 0) {
-                            this.MenuStats_Click(this.ProfileMenuItems[i - 1], null);
+                            this.MenuStats_Click(this.ProfileMenuItems[i - 1], EventArgs.Empty);
                             break;
                         }
                         if (menuItem.Checked && i - 1 < 0) {
-                            this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], null);
+                            this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], EventArgs.Empty);
                             break;
                         }
                     } else {
                         if (menuItem.Checked && i + 1 < this.ProfileMenuItems.Count) {
-                            this.MenuStats_Click(this.ProfileMenuItems[i + 1], null);
+                            this.MenuStats_Click(this.ProfileMenuItems[i + 1], EventArgs.Empty);
                             break;
                         }
                         if (menuItem.Checked && i + 1 >= this.ProfileMenuItems.Count) {
-                            this.MenuStats_Click(this.ProfileMenuItems[0], null);
+                            this.MenuStats_Click(this.ProfileMenuItems[0], EventArgs.Empty);
                             break;
                         }
                     }
@@ -2804,11 +2963,11 @@ namespace FallGuysStats {
                 for (int i = 0; i < this.ProfileMenuItems.Count; i++) {
                     if (!(this.ProfileMenuItems[i] is ToolStripMenuItem menuItem)) { continue; }
                     if (menuItem.Checked && i - 1 >= 0) {
-                        this.MenuStats_Click(this.ProfileMenuItems[i - 1], null);
+                        this.MenuStats_Click(this.ProfileMenuItems[i - 1], EventArgs.Empty);
                         break;
                     }
                     if (menuItem.Checked && i - 1 < 0) {
-                        this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], null);
+                        this.MenuStats_Click(this.ProfileMenuItems[this.ProfileMenuItems.Count - 1], EventArgs.Empty);
                         break;
                     }
                 }
@@ -2937,8 +3096,18 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private JsonElement GetApiData(string apiUrl, string apiEndPoint) {
+            JsonElement resData;
+            using (ApiWebClient web = new ApiWebClient()) {
+                string responseJsonString = web.DownloadString($"{apiUrl}{apiEndPoint}");
+                JsonDocument jdom = JsonDocument.Parse(responseJsonString);
+                JsonElement jroot = jdom.RootElement;
+                resData = jroot.GetProperty("data").GetProperty("snapshot");
+            }
+            return resData;
+        }
 #if AllowUpdate
-        public bool CheckForUpdate(bool silent) {
+        private bool CheckForUpdate(bool silent) {
             using (ZipWebClient web = new ZipWebClient()) {
                 string assemblyInfo = web.DownloadString(@"https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/AssemblyInfo.cs");
                 int index = assemblyInfo.IndexOf("AssemblyVersion(");

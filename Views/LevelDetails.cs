@@ -277,8 +277,6 @@ namespace FallGuysStats {
             if (this.gridDetails.Columns.Count == 0) { return; }
 
             int pos = 0;
-            this.gridDetails.Columns["SessionId"].Visible = false;
-            this.gridDetails.Columns["UseShareCode"].Visible = false;
             this.gridDetails.Columns["Tier"].Visible = false;
             this.gridDetails.Columns["ID"].Visible = false;
             this.gridDetails.Columns["Crown"].Visible = false;
@@ -286,9 +284,23 @@ namespace FallGuysStats {
             this.gridDetails.Columns["InParty"].Visible = false;
             this.gridDetails.Columns["PrivateLobby"].Visible = false;
             this.gridDetails.Columns["Qualified"].Visible = false;
+            this.gridDetails.Columns["AbandonShow"].Visible = false;
             this.gridDetails.Columns["IsFinal"].Visible = false;
             this.gridDetails.Columns["IsTeam"].Visible = false;
-            this.gridDetails.Columns["AbandonShow"].Visible = false;
+            this.gridDetails.Columns["SessionId"].Visible = false;
+            this.gridDetails.Columns["UseShareCode"].Visible = false;
+            this.gridDetails.Columns["CreativeShareCode"].Visible = false;
+            this.gridDetails.Columns["CreativeAuthor"].Visible = false;
+            //this.gridDetails.Columns["CreativeNicknameContentId"].Visible = false;
+            //this.gridDetails.Columns["CreativeNameplateContentId"].Visible = false;
+            this.gridDetails.Columns["CreativeVersion"].Visible = false;
+            //this.gridDetails.Columns["CreativeStatus"].Visible = false;
+            this.gridDetails.Columns["CreativeTitle"].Visible = false;
+            this.gridDetails.Columns["CreativeDescription"].Visible = false;
+            this.gridDetails.Columns["CreativeMaxPlayer"].Visible = false;
+            this.gridDetails.Columns["CreativePlatformId"].Visible = false;
+            this.gridDetails.Columns["CreativeLastModifiedDate"].Visible = false;
+            this.gridDetails.Columns["CreativePlayCount"].Visible = false;
             if (this._showStats == 0) {
                 this.gridDetails.Columns.Add(new DataGridViewImageColumn { Name = "RoundIcon", ImageLayout = DataGridViewImageCellLayout.Zoom });
                 this.gridDetails.Setup("RoundIcon", pos++, this.GetDataGridViewColumnWidth("RoundIcon", ""), "", DataGridViewContentAlignment.MiddleCenter);
@@ -446,12 +458,16 @@ namespace FallGuysStats {
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId") {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
-                    string showNameId = (string)e.Value;
-                    string showName = Multilingual.GetShowName(showNameId);
-                    e.Value = !string.IsNullOrEmpty(showName) ? showName : showNameId;
-                    if (this._showStats != 2 && info.UseShareCode) {
-                        this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
+                    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue) {
+                        e.Value = info.CreativeTitle.
+                    } else {
+                        string showNameId = (string)e.Value;
+                        string showName = Multilingual.GetShowName(showNameId);
+                        e.Value = !string.IsNullOrEmpty(showName ? showName : showNameId;
                     }
+                    //if (this._showStats != 2 && info.UseShareCode) {
+                    //    this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
+                    //}
                 }
                 //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Position") {
@@ -738,6 +754,46 @@ namespace FallGuysStats {
                     this.StatsForm.ShowTooltip(Multilingual.GetWord("level_detail_share_code_copied"), this, position, 3000);
                 }
             }
+        }
+
+        private void gridDetails_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= this.gridDetails.Rows.Count) { return; }
+            if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
+                RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
+                if (info.CreativeLastModifiedDate == DateTime.MinValue) return;
+                StringBuilder strbuilder = new StringBuilder();
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(info.CreativeTitle);
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(info.CreativeDescription);
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_author")} : {info.CreativeAuthor}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_share_code")} : {info.CreativeShareCode}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_version")} : {info.CreativeVersion}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_max_players")} : {info.CreativeMaxPlayer}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_platform")} : {info.CreativePlatformId}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_last_modified")} : {info.CreativeLastModifiedDate.ToString(Multilingual.GetWord("level_date_format"))}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_play_count")} : {info.CreativePlayCount}");
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(Environment.NewLine);
+                strbuilder.Append($"# {Multilingual.GetWord("level_detail_share_code_copied_tooltip")}");
+                
+                Point cursorPosition = this.PointToClient(Cursor.Position);
+                Point position = new Point(cursorPosition.X, cursorPosition.Y);
+                this.StatsForm.ShowCustomTooltip(strbuilder.ToString(), this, position);
+            }
+        }
+
+        private void gridDetails_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
+            this.StatsForm.HideCustomTooltip(this);
         }
     }
 }
