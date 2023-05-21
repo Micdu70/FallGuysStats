@@ -20,7 +20,6 @@ using Microsoft.Win32;
 using MetroFramework;
 using System.Text.RegularExpressions;
 using MetroFramework.Components;
-using FallGuysStats.Entities;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
