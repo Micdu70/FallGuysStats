@@ -235,6 +235,9 @@ namespace FallGuysStats {
             // 
             // RenamePageTextbox
             // 
+            // 
+            // 
+            // 
             this.RenamePageTextbox.CustomButton.Image = null;
             this.RenamePageTextbox.CustomButton.Location = new System.Drawing.Point(154, 1);
             this.RenamePageTextbox.CustomButton.Name = "";

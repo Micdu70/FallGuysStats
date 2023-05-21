@@ -21,6 +21,7 @@ namespace FallGuysStats {
                             {"main_week", "Week"},
                             {"main_day", "Day"},
                             {"main_session", "Session"},
+                            {"main_custom_range", "Custom Range"},
                             {"main_party_type", "Party"},
                             {"main_party", "Party"},
                             {"main_solo", "Solo"},
@@ -336,6 +337,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_infix", "selected shows to the"},
                             {"profile_move_select_question_suffix", "profile?"},
                             {"profile_move_select_button", "Move"},
+
+                            {"custom_range_range", "Range"},
+                            {"custom_range_templates", "Templates"},
+                            {"custom_range_season", "Season"},
+                            {"custom_range_legacy", "Legacy"},
+                            {"custom_range_ffa", "FFA"},
+                            {"custom_not_set", "Not Set"},
                         }
             },
             { "fre", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -355,6 +363,7 @@ namespace FallGuysStats {
                             {"main_week", "Semaine"},
                             {"main_day", "Jour"},
                             {"main_session", "Session"},
+                            {"main_custom_range", "Gamme personnalisée"},
                             {"main_party_type", "Parties"},
                             {"main_party", "en Groupe"},
                             {"main_solo", "en Solo"},
@@ -670,6 +679,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_infix", "d'émissions vers le profil"},
                             {"profile_move_select_question_suffix", " ?"},
                             {"profile_move_select_button", "Déplacer"},
+
+                            {"custom_range_range", "Gamme"},
+                            {"custom_range_templates", "Modèle"},
+                            {"custom_range_season", "Saison"},
+                            {"custom_range_legacy", "Héritage"},
+                            {"custom_range_ffa", "FFA"},
+                            {"custom_not_set", "pas de réglage"},
                         }
             },
             { "kor", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -689,6 +705,7 @@ namespace FallGuysStats {
                             {"main_week", "주간"},
                             {"main_day", "일일"},
                             {"main_session", "세션"},
+                            {"main_custom_range", "맞춤 범위"},
                             {"main_party_type", "파티 유형"},
                             {"main_party", "파티"},
                             {"main_solo", "솔로"},
@@ -1005,6 +1022,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_infix", "개의 쇼를"},
                             {"profile_move_select_question_suffix", "프로필로 이동하시겠습니까?"},
                             {"profile_move_select_button", "이동"},
+
+                            {"custom_range_range", "범위"},
+                            {"custom_range_templates", "템플릿"},
+                            {"custom_range_season", "계절"},
+                            {"custom_range_legacy", "유산"},
+                            {"custom_range_ffa", "FFA"},
+                            {"custom_not_set", "설정 없음"},
                         }
             },
             { "jpn", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -1024,6 +1048,7 @@ namespace FallGuysStats {
                             {"main_week", "1週間"},
                             {"main_day", "1日間"},
                             {"main_session", "セッション"},
+                            {"main_custom_range", "カスタム範囲"},
                             {"main_party_type", "パーティータイプ"},
                             {"main_party", "パーティー"},
                             {"main_solo", "ソロ"},
@@ -1340,6 +1365,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_infix", "つのショーをプロファイル"},
                             {"profile_move_select_question_suffix", "に移動しますか？"},
                             {"profile_move_select_button", "移動"},
+
+                            {"custom_range_range", "範囲"},
+                            {"custom_range_templates", "テンプレート"},
+                            {"custom_range_season", "シーズン"},
+                            {"custom_range_legacy", "旧"},
+                            {"custom_range_ffa", "FFA"},
+                            {"custom_range_not_set", "設定しない"},
                         }
             },
             { "chs", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -1359,6 +1391,7 @@ namespace FallGuysStats {
                             {"main_week", "周"},
                             {"main_day", "天"},
                             {"main_session", "次"},
+                            {"main_custom_range", "自定义范围"},
                             {"main_party_type", "组队"},
                             {"main_party", "组队"},
                             {"main_solo", "单人"},
@@ -1675,6 +1708,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_infix", " 游玩数据到 "},
                             {"profile_move_select_question_suffix", "个人资料？"},
                             {"profile_move_select_button", "移动"},
+
+                            {"custom_range_range", "范围"},
+                            {"custom_range_templates", "模板"},
+                            {"custom_range_season", "季节"},
+                            {"custom_range_legacy", "季节"},
+                            {"custom_range_ffa", "FFA"},
+                            {"custom_not_set", "没有设置"},
                         }
             },
         };

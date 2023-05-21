@@ -40,6 +40,7 @@ namespace FallGuysStats {
             this.menuWeekStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDayStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSessionStats = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCustomRangeStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPartyFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAllPartyStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSoloStats = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,10 +121,11 @@ namespace FallGuysStats {
             this.menuSeasonStats,
             this.menuWeekStats,
             this.menuDayStats,
-            this.menuSessionStats});
+            this.menuSessionStats,
+            this.menuCustomRangeStats});
             this.menuStatsFilter.Image = global::FallGuysStats.Properties.Resources.stat_icon;
             this.menuStatsFilter.Name = "menuStatsFilter";
-            this.menuStatsFilter.Size = new System.Drawing.Size(101, 22);
+            this.menuStatsFilter.Size = new System.Drawing.Size(180, 22);
             this.menuStatsFilter.Text = "Stats";
             // 
             // menuAllStats
@@ -134,7 +136,7 @@ namespace FallGuysStats {
             this.menuAllStats.Name = "menuAllStats";
             this.menuAllStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.menuAllStats.Size = new System.Drawing.Size(187, 22);
+            this.menuAllStats.Size = new System.Drawing.Size(186, 22);
             this.menuAllStats.Text = "All";
             this.menuAllStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -144,7 +146,7 @@ namespace FallGuysStats {
             this.menuSeasonStats.Name = "menuSeasonStats";
             this.menuSeasonStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.menuSeasonStats.Size = new System.Drawing.Size(187, 22);
+            this.menuSeasonStats.Size = new System.Drawing.Size(186, 22);
             this.menuSeasonStats.Text = "Season";
             this.menuSeasonStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -154,7 +156,7 @@ namespace FallGuysStats {
             this.menuWeekStats.Name = "menuWeekStats";
             this.menuWeekStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.W)));
-            this.menuWeekStats.Size = new System.Drawing.Size(187, 22);
+            this.menuWeekStats.Size = new System.Drawing.Size(186, 22);
             this.menuWeekStats.Text = "Week";
             this.menuWeekStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -164,7 +166,7 @@ namespace FallGuysStats {
             this.menuDayStats.Name = "menuDayStats";
             this.menuDayStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.menuDayStats.Size = new System.Drawing.Size(187, 22);
+            this.menuDayStats.Size = new System.Drawing.Size(186, 22);
             this.menuDayStats.Text = "Day";
             this.menuDayStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -174,9 +176,16 @@ namespace FallGuysStats {
             this.menuSessionStats.Name = "menuSessionStats";
             this.menuSessionStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.G)));
-            this.menuSessionStats.Size = new System.Drawing.Size(187, 22);
+            this.menuSessionStats.Size = new System.Drawing.Size(186, 22);
             this.menuSessionStats.Text = "Session";
             this.menuSessionStats.Click += new System.EventHandler(this.MenuStats_Click);
+            // 
+            // menuCustomRangeStats
+            // 
+            this.menuCustomRangeStats.Name = "menuCustomRangeStats";
+            this.menuCustomRangeStats.Size = new System.Drawing.Size(186, 22);
+            this.menuCustomRangeStats.Text = "Custom Range";
+            this.menuCustomRangeStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
             // menuPartyFilter
             // 
@@ -186,7 +195,7 @@ namespace FallGuysStats {
             this.menuPartyStats});
             this.menuPartyFilter.Image = global::FallGuysStats.Properties.Resources.player_icon;
             this.menuPartyFilter.Name = "menuPartyFilter";
-            this.menuPartyFilter.Size = new System.Drawing.Size(101, 22);
+            this.menuPartyFilter.Size = new System.Drawing.Size(180, 22);
             this.menuPartyFilter.Text = "Party";
             // 
             // menuAllPartyStats
@@ -197,7 +206,7 @@ namespace FallGuysStats {
             this.menuAllPartyStats.Name = "menuAllPartyStats";
             this.menuAllPartyStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.F)));
-            this.menuAllPartyStats.Size = new System.Drawing.Size(174, 22);
+            this.menuAllPartyStats.Size = new System.Drawing.Size(173, 22);
             this.menuAllPartyStats.Text = "All";
             this.menuAllPartyStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -207,7 +216,7 @@ namespace FallGuysStats {
             this.menuSoloStats.Name = "menuSoloStats";
             this.menuSoloStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.menuSoloStats.Size = new System.Drawing.Size(174, 22);
+            this.menuSoloStats.Size = new System.Drawing.Size(173, 22);
             this.menuSoloStats.Text = "Solo";
             this.menuSoloStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -217,7 +226,7 @@ namespace FallGuysStats {
             this.menuPartyStats.Name = "menuPartyStats";
             this.menuPartyStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
-            this.menuPartyStats.Size = new System.Drawing.Size(174, 22);
+            this.menuPartyStats.Size = new System.Drawing.Size(173, 22);
             this.menuPartyStats.Text = "Party";
             this.menuPartyStats.Click += new System.EventHandler(this.MenuStats_Click);
             // 
@@ -227,7 +236,7 @@ namespace FallGuysStats {
             this.menuEditProfiles});
             this.menuProfile.Image = global::FallGuysStats.Properties.Resources.profile_icon;
             this.menuProfile.Name = "menuProfile";
-            this.menuProfile.Size = new System.Drawing.Size(69, 20);
+            this.menuProfile.Size = new System.Drawing.Size(68, 20);
             this.menuProfile.Text = "Profile";
             // 
             // menuEditProfiles
@@ -235,7 +244,7 @@ namespace FallGuysStats {
             this.menuEditProfiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.menuEditProfiles.Image = global::FallGuysStats.Properties.Resources.setting_icon;
             this.menuEditProfiles.Name = "menuEditProfiles";
-            this.menuEditProfiles.Size = new System.Drawing.Size(153, 22);
+            this.menuEditProfiles.Size = new System.Drawing.Size(180, 22);
             this.menuEditProfiles.Text = "Profile Settings";
             this.menuEditProfiles.Click += new System.EventHandler(this.MenuEditProfiles_Click);
             // 
@@ -270,7 +279,7 @@ namespace FallGuysStats {
             // 
             this.menuLaunchFallGuys.Image = global::FallGuysStats.Properties.Resources.fallguys_icon;
             this.menuLaunchFallGuys.Name = "menuLaunchFallGuys";
-            this.menuLaunchFallGuys.Size = new System.Drawing.Size(124, 20);
+            this.menuLaunchFallGuys.Size = new System.Drawing.Size(123, 20);
             this.menuLaunchFallGuys.Text = "Launch Fall Guys";
             this.menuLaunchFallGuys.Click += new System.EventHandler(this.MenuLaunchFallGuys_Click);
             // 
@@ -555,5 +564,6 @@ namespace FallGuysStats {
         private System.Windows.Forms.ToolStripLabel lblKudos;
         private System.Windows.Forms.ToolStripMenuItem menuLaunchFallGuys;
         private System.Windows.Forms.ToolStripMenuItem menuEditProfiles;
+        private System.Windows.Forms.ToolStripMenuItem menuCustomRangeStats;
     }
 }

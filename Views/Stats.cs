@@ -20,6 +20,7 @@ using Microsoft.Win32;
 using MetroFramework;
 using System.Text.RegularExpressions;
 using MetroFramework.Components;
+using FallGuysStats.Entities;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -116,7 +117,7 @@ namespace FallGuysStats {
             }
         }
         private static readonly string LOGNAME = "Player.log";
-        private static readonly List<DateTime> Seasons = new List<DateTime> {
+        public static readonly List<DateTime> Seasons = new List<DateTime> {
             new DateTime(2020, 8, 4, 0, 0, 0, DateTimeKind.Utc),
             new DateTime(2020, 10, 8, 0, 0, 0, DateTimeKind.Utc),
             new DateTime(2020, 12, 15, 0, 0, 0, DateTimeKind.Utc),
@@ -182,6 +183,9 @@ namespace FallGuysStats {
         private bool minimizeAfterGameLaunch;
         private bool loadingExisting;
         private bool updateFilterType;
+        private bool updateFilterRange;
+        private DateTime rangeFilterStart;
+        private DateTime rangeFilterEnd;
         private bool updateSelectedProfile;
         private bool useLinkedProfiles;
         public LiteDatabase StatsDB;
@@ -3122,12 +3126,45 @@ namespace FallGuysStats {
         private void MenuStats_Click(object sender, EventArgs e) {
             try {
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
+                
+                if (button == this.menuCustomRangeStats) {
+                    try {
+                        using (FilterCustomRange filterCustomRange = new FilterCustomRange()) {
+                            filterCustomRange.Icon = this.Icon;
+                            this.EnableInfoStrip(false);
+                            this.EnableMainMenu(false);
+                            filterCustomRange.ShowDialog(this);
+                            this.EnableInfoStrip(true);
+                            this.EnableMainMenu(true);
+                            if (filterCustomRange.startTime == DateTime.MinValue && filterCustomRange.endTime == DateTime.MaxValue) {
+                                return;
+                            } else {
+                                this.menuAllStats.Checked = false;
+                                this.menuSeasonStats.Checked = false;
+                                this.menuWeekStats.Checked = false;
+                                this.menuDayStats.Checked = false;
+                                this.menuSessionStats.Checked = false;
+                                this.menuCustomRangeStats.Checked = true;
+                                this.rangeFilterStart = filterCustomRange.startTime;
+                                this.rangeFilterEnd = filterCustomRange.endTime;
+                                this.updateFilterRange = true;
+                            }
+                        }
+                    } catch (Exception ex) {
+                        MetroMessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.EnableInfoStrip(true);
+                        this.EnableMainMenu(true);
+                    }
+                }
+
                 if (button == this.menuAllStats || button == this.menuSeasonStats || button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats) {
                     if (!this.menuAllStats.Checked && !this.menuSeasonStats.Checked && !this.menuWeekStats.Checked && !this.menuDayStats.Checked && !this.menuSessionStats.Checked) {
                         button.Checked = true;
                         return;
                     }
                     this.updateFilterType = true;
+                    this.updateFilterRange = false;
 
                     foreach (ToolStripItem item in this.menuStatsFilter.DropDownItems) {
                         if (item is ToolStripMenuItem menuItem && menuItem.Checked && menuItem != button) {
@@ -3167,13 +3204,20 @@ namespace FallGuysStats {
 
                 int profile = this.currentProfile;
 
-                DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
+                List<RoundInfo> rounds;
+                if (this.updateFilterRange) {
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start >= rangeFilterStart && roundInfo.Start < (rangeFilterEnd == DateTime.MaxValue ? rangeFilterEnd : rangeFilterEnd.AddDays(1)) && roundInfo.Profile == profile && IsInPartyFilter(roundInfo);
+                    }).ToList();
+                } else {
+                    DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
                     this.menuSeasonStats.Checked ? SeasonStart :
                     this.menuWeekStats.Checked ? WeekStart :
                     this.menuDayStats.Checked ? DayStart : SessionStart;
-                List<RoundInfo> rounds = this.AllStats.Where(roundInfo => {
-                    return roundInfo.Start > compareDate && roundInfo.Profile == profile && IsInPartyFilter(roundInfo);
-                }).ToList();
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start > compareDate && roundInfo.Profile == profile && IsInPartyFilter(roundInfo);
+                    }).ToList();
+                }
 
                 rounds.Sort();
 
@@ -3479,6 +3523,7 @@ namespace FallGuysStats {
             this.menuWeekStats.Text = Multilingual.GetWord("main_week");
             this.menuDayStats.Text = Multilingual.GetWord("main_day");
             this.menuSessionStats.Text = Multilingual.GetWord("main_session");
+            this.menuCustomRangeStats.Text = Multilingual.GetWord("main_custom_range");
             this.menuPartyFilter.Text = Multilingual.GetWord("main_party_type");
             this.menuAllPartyStats.Text = Multilingual.GetWord("main_all");
             this.menuSoloStats.Text = Multilingual.GetWord("main_solo");
