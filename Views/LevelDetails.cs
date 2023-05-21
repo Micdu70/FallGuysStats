@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MetroFramework;
@@ -459,11 +460,11 @@ namespace FallGuysStats {
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId") {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
                     if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue) {
-                        e.Value = info.CreativeTitle.
+                        e.Value = info.CreativeTitle;
                     } else {
                         string showNameId = (string)e.Value;
                         string showName = Multilingual.GetShowName(showNameId);
-                        e.Value = !string.IsNullOrEmpty(showName ? showName : showNameId;
+                        e.Value = !string.IsNullOrEmpty(showName) ? showName : showNameId;
                     }
                     //if (this._showStats != 2 && info.UseShareCode) {
                     //    this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
@@ -756,7 +757,7 @@ namespace FallGuysStats {
             }
         }
 
-        private void gridDetails_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
+        private void GridDetails_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.RowIndex >= this.gridDetails.Rows.Count) { return; }
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
                 RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
@@ -792,7 +793,7 @@ namespace FallGuysStats {
             }
         }
 
-        private void gridDetails_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
+        private void GridDetails_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
             this.StatsForm.HideCustomTooltip(this);
         }
     }

@@ -19,6 +19,7 @@ using LiteDB;
 using Microsoft.Win32;
 using MetroFramework;
 using System.Text.RegularExpressions;
+using MetroFramework.Components;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -403,17 +404,13 @@ namespace FallGuysStats {
             this.SuspendLayout();
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
-            
+
             this.cmtt.OwnerDraw = true;
             this.cmtt.Draw += this.cmtt_Draw;
-            
-            if (this.CurrentSettings.SystemTrayIcon) {
-                this.trayIcon.Visible = true;
-            } else {
-                this.Show();
-            }
+
+            this.Show();
         }
-        
+
         [DllImport("User32.dll")]
         static extern bool MoveWindow(IntPtr h, int x, int y, int width, int height, bool redraw);
         private void cmtt_Draw(object sender, DrawToolTipEventArgs e) {
