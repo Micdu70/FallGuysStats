@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if Debug
 using System.Diagnostics;
-#endif
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -46,6 +44,7 @@ namespace FallGuysStats {
         public RoundInfo Info;
     }
     public class LogFileWatcher {
+        private const int GameCheckDelay = 2000;
         private const int UpdateDelay = 500;
 
         private string filePath;
@@ -53,9 +52,12 @@ namespace FallGuysStats {
         private List<LogLine> lines = new List<LogLine>();
         private bool running;
         private bool stop;
-        private Thread watcher, parser;
+        private Thread gameWatcher, watcher, parser;
 
         public Stats StatsForm { get; set; }
+
+        private bool isGameHasBeenLaunched;
+        private bool isGameCurrentlyRunning;
 
         private bool autoChangeProfile;
         private string selectedShowId;
@@ -81,6 +83,8 @@ namespace FallGuysStats {
             this.filePath = Path.Combine(logDirectory, fileName);
             this.prevFilePath = Path.Combine(logDirectory, Path.GetFileNameWithoutExtension(fileName) + "-prev.log");
             this.stop = false;
+            this.gameWatcher = new Thread(this.GameWatcher) { IsBackground = true };
+            this.gameWatcher.Start();
             this.watcher = new Thread(this.ReadLogFile) { IsBackground = true };
             this.watcher.Start();
             this.parser = new Thread(this.ParseLines) { IsBackground = true };
@@ -89,16 +93,38 @@ namespace FallGuysStats {
 
         public async Task Stop() {
             this.stop = true;
-#if Debug
             while (this.running || this.watcher == null || this.watcher.ThreadState == System.Threading.ThreadState.Unstarted) {
-#else
-            while (this.running || this.watcher == null || this.watcher.ThreadState == ThreadState.Unstarted) {
-#endif
                 await Task.Delay(50);
             }
             this.lines = new List<LogLine>();
+            await Task.Factory.StartNew(() => this.gameWatcher?.Join());
             await Task.Factory.StartNew(() => this.watcher?.Join());
             await Task.Factory.StartNew(() => this.parser?.Join());
+        }
+
+        private void GameWatcher() {
+            while (!this.stop) {
+                try {
+                    this.isGameCurrentlyRunning = false;
+                    Process[] processes = Process.GetProcesses();
+                    string fallGuysProcessName = "FallGuys_client_game";
+                    for (int i = 0; i < processes.Length; i++) {
+                        string name = processes[i].ProcessName;
+                        if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
+                            this.isGameHasBeenLaunched = true;
+                            this.isGameCurrentlyRunning = true;
+                            Stats.IsGameClosed = false;
+                            break;
+                        }
+                    }
+                    if (this.isGameHasBeenLaunched && !this.isGameCurrentlyRunning) {
+                        Stats.IsGameClosed = true;
+                    }
+                } catch (Exception ex) {
+                    this.OnError?.Invoke(ex.Message);
+                }
+                Thread.Sleep(GameCheckDelay);
+            }
         }
 
         private void ReadLogFile() {
@@ -186,7 +212,8 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateConnectToGame", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                                       || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
+                                       || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                                       || (Stats.IsGameClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
@@ -422,7 +449,7 @@ namespace FallGuysStats {
                     int msIndex = line.Line.IndexOf("ms", index);
                     Stats.LastServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
                 }
-            } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0 && line.Line.IndexOf("at path", StringComparison.OrdinalIgnoreCase) == -1) {
+            } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
                 if (line.Date > Stats.LastRoundStart) {
                     Stats.LastRoundStart = line.Date;
                     Stats.InShow = true;
@@ -549,9 +576,10 @@ namespace FallGuysStats {
                     }
                     logRound.Info.Playing = false;
                 }
-            } else if (line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                       || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                       || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                       || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                       || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
+                       || (Stats.IsGameClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;
                 }
@@ -572,10 +600,11 @@ namespace FallGuysStats {
                         DateTime showEnd = logRound.Info.End;
                         for (int i = 0; i < round.Count; i++) {
                             if (string.IsNullOrEmpty(round[i].Name)) {
+                                round.RemoveAt(i);
                                 logRound.Info = null;
                                 Stats.InShow = false;
                                 Stats.EndedShow = true;
-                                return false;
+                                return true;
                             }
                             if (round[i].Name.StartsWith("ugc-")) {
                                 round[i].Name = round[i].Name.Substring(4);
@@ -711,7 +740,7 @@ namespace FallGuysStats {
                 }
 
                 if (logRound.Info.Qualified) {
-                    if (!logRound.Info.UseShareCode && !this.isCreativeWeeklyShow) {
+                    if (!this.isCreativeWeeklyShow) {
                         logRound.Info.Position = 1;
                     }
                     logRound.Info.Crown = true;

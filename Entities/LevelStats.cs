@@ -426,7 +426,7 @@ namespace FallGuysStats {
             }
 
             TimeSpan finishTime = stat.Finish.GetValueOrDefault(stat.Start) - stat.Start;
-            if (stat.Finish.HasValue && finishTime.TotalSeconds > 1.1) {
+            if (finishTime.TotalSeconds > 1.1) {
                 this.FinishedCount++;
                 this.FinishTime += finishTime;
                 if (this.Fastest == TimeSpan.Zero || this.Fastest > finishTime) {

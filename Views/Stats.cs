@@ -129,6 +129,8 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
 
+        public static bool IsGameClosed = false;
+
         public static bool InShow = false;
         public static bool EndedShow = false;
         public static int LastServerPing = 0;
@@ -2981,7 +2983,7 @@ namespace FallGuysStats {
                         if (entry.Name.IndexOf(".exe", StringComparison.OrdinalIgnoreCase) > 0) {
                             exeName = entry.Name;
                         }
-                        if (File.Exists(entry.Name)) File.Move(entry.Name, $"{entry.Name}.bak");
+                        if (File.Exists(entry.Name)) { File.Move(entry.Name, $"{entry.Name}.bak"); }
                         entry.ExtractToFile(entry.Name, true);
                     }
                 }
