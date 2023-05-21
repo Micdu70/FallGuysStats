@@ -216,11 +216,11 @@ namespace FallGuysStats {
 
         private bool shiftKeyToggle;//, ctrlKeyToggle;
 
-        private MetroToolTip mtt = new MetroToolTip();
-        private MetroToolTip cmtt = new MetroToolTip();
+        private readonly MetroToolTip mtt = new MetroToolTip();
+        private readonly MetroToolTip cmtt = new MetroToolTip();
 
         private readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/";
-        
+
         public readonly string[] publicShowIdList = {
             "main_show",
             "squads_2player_template",
@@ -368,12 +368,12 @@ namespace FallGuysStats {
             this.CurrentRound = new List<RoundInfo>();
 
             this.overlay = new Overlay { Text = @"Fall Guys Stats Overlay", StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName, TabResourceName = this.CurrentSettings.OverlayTabResourceName };
-            
+
             Screen screen = this.GetCurrentScreen(this.overlay.Location);
             Point screenLocation = screen != null ? screen.Bounds.Location : Screen.PrimaryScreen.Bounds.Location;
             Size screenSize = screen != null ? screen.Bounds.Size : Screen.PrimaryScreen.Bounds.Size;
             //this.screenCenter = new Point(screenLocation.X + (screenSize.Width / 2), screenLocation.Y + (screenSize.Height / 2));
-            
+
             this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
             this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
             this.logFile.OnError += this.LogFile_OnError;
@@ -408,19 +408,19 @@ namespace FallGuysStats {
             this.ResumeLayout(false);
 
             this.cmtt.OwnerDraw = true;
-            this.cmtt.Draw += this.cmtt_Draw;
+            this.cmtt.Draw += this.Cmtt_Draw;
 
             this.Show();
         }
 
         [DllImport("User32.dll")]
         static extern bool MoveWindow(IntPtr h, int x, int y, int width, int height, bool redraw);
-        private void cmtt_Draw(object sender, DrawToolTipEventArgs e) {
+        private void Cmtt_Draw(object sender, DrawToolTipEventArgs e) {
             // Draw the standard background.
             //e.DrawBackground();
             // Draw the custom background.
             e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
-            
+
             // Draw the standard border.
             e.DrawBorder();
             // Draw the custom border to appear 3-dimensional.
@@ -434,7 +434,7 @@ namespace FallGuysStats {
             //    new Point (e.Bounds.Width - 1, e.Bounds.Height - 1), 
             //    new Point (e.Bounds.Width - 1, 0)
             //});
-            
+
             // Draw the standard text with customized formatting options.
             e.DrawText(TextFormatFlags.TextBoxControl | TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak | TextFormatFlags.LeftAndRightPadding);
             // Draw the custom text.
@@ -449,7 +449,7 @@ namespace FallGuysStats {
             //    //    e.Graphics.DrawString(e.ToolTipText, f, SystemBrushes.ActiveCaptionText, e.Bounds, sf);
             //    //}
             //}
-            
+
             MetroToolTip t = (MetroToolTip)sender;
             PropertyInfo h = t.GetType().GetProperty("Handle", BindingFlags.NonPublic | BindingFlags.Instance);
             IntPtr handle = (IntPtr)h.GetValue(t);
@@ -457,7 +457,7 @@ namespace FallGuysStats {
             Point location = c.Parent.PointToScreen(new Point(c.Right - e.Bounds.Width, c.Bottom));
             MoveWindow(handle, location.X, location.Y, e.Bounds.Width, e.Bounds.Height, false);
         }
-        
+
         public class CustomToolStripSystemRenderer : ToolStripSystemRenderer {
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
                 //base.OnRenderToolStripBorder(e);
@@ -1501,7 +1501,7 @@ namespace FallGuysStats {
                 if (this.CurrentSettings.AutoLaunchGameOnStartup) {
                     this.LaunchGame(true);
                 }
-                
+
                 this.MenuStats_Click(this.menuProfile.DropDownItems[$@"menuProfile{this.CurrentSettings.SelectedProfile}"], EventArgs.Empty);
 
                 this.UpdateDates();
@@ -1560,7 +1560,7 @@ namespace FallGuysStats {
                     }
                 }
             }
-            
+
             this.StatsDB.Commit();
             this.AllStats.Clear();
         }
@@ -1742,7 +1742,7 @@ namespace FallGuysStats {
 
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
-                                
+
                                 //Below is where reporting to fallaytics happen
                                 //Must have enabled the setting to enable tracking
                                 //Must not be a private lobby
