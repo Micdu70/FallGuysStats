@@ -959,8 +959,8 @@ namespace FallGuysStats {
             this.chkOnlyShowQualify.Text = Multilingual.GetWord("settings_qualify_only");
             this.chkCycleQualifyGold.Text = Multilingual.GetWord("settings_cycle_qualify__gold");
             this.chkOnlyShowLongest.Text = Multilingual.GetWord("settings_longest_only");
-            this.chkOnlyShowFastest.Text = Multilingual.GetWord("settings_fastest_only");
-            this.chkCycleFastestLongest.Text = Multilingual.GetWord("settings_cycle_fastest__longest");
+            this.chkOnlyShowFastest.Text = Multilingual.GetWord("settings_best_only");
+            this.chkCycleFastestLongest.Text = Multilingual.GetWord("settings_cycle_best__longest");
             this.chkHidePercentages.Text = Multilingual.GetWord("settings_hide_percentages");
             this.chkHideWinsInfo.Text = Multilingual.GetWord("settings_hide_wins_info");
 
@@ -1011,7 +1011,7 @@ namespace FallGuysStats {
                 case 5: this.cboFastestFilter.SelectedItem = Multilingual.GetWord("settings_session_stats"); break;
             }
 
-            this.lblFastestFilter.Text = Multilingual.GetWord("settings_fastest__longest_filter");
+            this.lblFastestFilter.Text = Multilingual.GetWord("settings_best__longest_filter");
 
             this.cboQualifyFilter.Items.Clear();
             this.cboQualifyFilter.Items.AddRange(new object[] {

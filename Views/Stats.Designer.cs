@@ -89,7 +89,7 @@ namespace FallGuysStats {
             this.menu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menu.Location = new System.Drawing.Point(0, 65);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(828, 24);
+            this.menu.Size = new System.Drawing.Size(868, 24);
             this.menu.TabIndex = 0;
             this.menu.TabStop = true;
             this.menu.Text = "menuStrip1";
@@ -294,7 +294,7 @@ namespace FallGuysStats {
             this.infoStrip.Name = "infoStrip";
             this.infoStrip.Padding = new System.Windows.Forms.Padding(20, 6, 20, 1);
             this.infoStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.infoStrip.Size = new System.Drawing.Size(790, 26);
+            this.infoStrip.Size = new System.Drawing.Size(830, 26);
             this.infoStrip.Stretch = true;
             this.infoStrip.TabIndex = 1;
             // 
@@ -304,7 +304,7 @@ namespace FallGuysStats {
             this.lblCurrentProfile.Image = global::FallGuysStats.Properties.Resources.profile2_icon;
             this.lblCurrentProfile.Margin = new System.Windows.Forms.Padding(4, 1, 20, 2);
             this.lblCurrentProfile.Name = "lblCurrentProfile";
-            this.lblCurrentProfile.Size = new System.Drawing.Size(47, 16);
+            this.lblCurrentProfile.Size = new System.Drawing.Size(46, 16);
             this.lblCurrentProfile.Text = "Solo";
             this.lblCurrentProfile.ToolTipText = "Click to change your current profile.";
             this.lblCurrentProfile.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LblCurrentProfile_MouseDown);
@@ -317,7 +317,7 @@ namespace FallGuysStats {
             this.lblTotalShows.Image = global::FallGuysStats.Properties.Resources.show_icon;
             this.lblTotalShows.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblTotalShows.Name = "lblTotalShows";
-            this.lblTotalShows.Size = new System.Drawing.Size(30, 16);
+            this.lblTotalShows.Size = new System.Drawing.Size(29, 16);
             this.lblTotalShows.Text = "0";
             this.lblTotalShows.ToolTipText = "Click to view shows stats.";
             this.lblTotalShows.Click += new System.EventHandler(this.LblTotalShows_Click);
@@ -330,7 +330,7 @@ namespace FallGuysStats {
             this.lblTotalRounds.Image = global::FallGuysStats.Properties.Resources.round_icon;
             this.lblTotalRounds.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblTotalRounds.Name = "lblTotalRounds";
-            this.lblTotalRounds.Size = new System.Drawing.Size(30, 16);
+            this.lblTotalRounds.Size = new System.Drawing.Size(29, 16);
             this.lblTotalRounds.Text = "0";
             this.lblTotalRounds.ToolTipText = "Click to view rounds stats.";
             this.lblTotalRounds.Click += new System.EventHandler(this.LblTotalRounds_Click);
@@ -343,7 +343,7 @@ namespace FallGuysStats {
             this.lblTotalFinals.Image = global::FallGuysStats.Properties.Resources.final_icon;
             this.lblTotalFinals.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblTotalFinals.Name = "lblTotalFinals";
-            this.lblTotalFinals.Size = new System.Drawing.Size(69, 16);
+            this.lblTotalFinals.Size = new System.Drawing.Size(65, 16);
             this.lblTotalFinals.Text = "0 (0.0%)";
             this.lblTotalFinals.ToolTipText = "Click to view finals stats.";
             this.lblTotalFinals.Click += new System.EventHandler(this.LblTotalFinals_Click);
@@ -356,7 +356,7 @@ namespace FallGuysStats {
             this.lblTotalWins.Image = global::FallGuysStats.Properties.Resources.crown_icon;
             this.lblTotalWins.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.lblTotalWins.Name = "lblTotalWins";
-            this.lblTotalWins.Size = new System.Drawing.Size(69, 16);
+            this.lblTotalWins.Size = new System.Drawing.Size(65, 16);
             this.lblTotalWins.Text = "0 (0.0%)";
             this.lblTotalWins.ToolTipText = "Click to view wins stats.";
             this.lblTotalWins.Click += new System.EventHandler(this.LblTotalWins_Click);
@@ -385,7 +385,7 @@ namespace FallGuysStats {
             this.infoStrip2.Name = "infoStrip2";
             this.infoStrip2.Padding = new System.Windows.Forms.Padding(14, 6, 14, 1);
             this.infoStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.infoStrip2.Size = new System.Drawing.Size(828, 27);
+            this.infoStrip2.Size = new System.Drawing.Size(868, 27);
             this.infoStrip2.TabIndex = 2;
             // 
             // lblTotalTime
@@ -394,7 +394,7 @@ namespace FallGuysStats {
             this.lblTotalTime.Image = global::FallGuysStats.Properties.Resources.clock_icon;
             this.lblTotalTime.Margin = new System.Windows.Forms.Padding(10, 1, 20, 2);
             this.lblTotalTime.Name = "lblTotalTime";
-            this.lblTotalTime.Size = new System.Drawing.Size(64, 16);
+            this.lblTotalTime.Size = new System.Drawing.Size(59, 16);
             this.lblTotalTime.Text = "0:00:00";
             // 
             // lblGoldMedal
@@ -403,7 +403,7 @@ namespace FallGuysStats {
             this.lblGoldMedal.Image = global::FallGuysStats.Properties.Resources.medal_gold;
             this.lblGoldMedal.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblGoldMedal.Name = "lblGoldMedal";
-            this.lblGoldMedal.Size = new System.Drawing.Size(30, 16);
+            this.lblGoldMedal.Size = new System.Drawing.Size(29, 16);
             this.lblGoldMedal.Text = "0";
             // 
             // lblSilverMedal
@@ -412,7 +412,7 @@ namespace FallGuysStats {
             this.lblSilverMedal.Image = global::FallGuysStats.Properties.Resources.medal_silver;
             this.lblSilverMedal.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblSilverMedal.Name = "lblSilverMedal";
-            this.lblSilverMedal.Size = new System.Drawing.Size(30, 16);
+            this.lblSilverMedal.Size = new System.Drawing.Size(29, 16);
             this.lblSilverMedal.Text = "0";
             // 
             // lblBronzeMedal
@@ -421,7 +421,7 @@ namespace FallGuysStats {
             this.lblBronzeMedal.Image = global::FallGuysStats.Properties.Resources.medal_bronze;
             this.lblBronzeMedal.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblBronzeMedal.Name = "lblBronzeMedal";
-            this.lblBronzeMedal.Size = new System.Drawing.Size(30, 16);
+            this.lblBronzeMedal.Size = new System.Drawing.Size(29, 16);
             this.lblBronzeMedal.Text = "0";
             // 
             // lblPinkMedal
@@ -430,7 +430,7 @@ namespace FallGuysStats {
             this.lblPinkMedal.Image = global::FallGuysStats.Properties.Resources.medal_pink;
             this.lblPinkMedal.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblPinkMedal.Name = "lblPinkMedal";
-            this.lblPinkMedal.Size = new System.Drawing.Size(30, 16);
+            this.lblPinkMedal.Size = new System.Drawing.Size(29, 16);
             this.lblPinkMedal.Text = "0";
             // 
             // lblEliminatedMedal
@@ -439,7 +439,7 @@ namespace FallGuysStats {
             this.lblEliminatedMedal.Image = global::FallGuysStats.Properties.Resources.medal_eliminated;
             this.lblEliminatedMedal.Margin = new System.Windows.Forms.Padding(10, 1, 5, 2);
             this.lblEliminatedMedal.Name = "lblEliminatedMedal";
-            this.lblEliminatedMedal.Size = new System.Drawing.Size(30, 16);
+            this.lblEliminatedMedal.Size = new System.Drawing.Size(29, 16);
             this.lblEliminatedMedal.Text = "0";
             // 
             // lblKudos
@@ -448,7 +448,7 @@ namespace FallGuysStats {
             this.lblKudos.Image = global::FallGuysStats.Properties.Resources.kudos_icon;
             this.lblKudos.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.lblKudos.Name = "lblKudos";
-            this.lblKudos.Size = new System.Drawing.Size(30, 16);
+            this.lblKudos.Size = new System.Drawing.Size(29, 16);
             this.lblKudos.Text = "0";
             // 
             // gridDetails
@@ -470,12 +470,12 @@ namespace FallGuysStats {
             this.gridDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridDetails.EnableHeadersVisualStyles = false;
             this.gridDetails.GridColor = System.Drawing.Color.Gray;
-            this.gridDetails.Location = new System.Drawing.Point(12, 158);
+            this.gridDetails.Location = new System.Drawing.Point(20, 158);
             this.gridDetails.Margin = new System.Windows.Forms.Padding(0);
             this.gridDetails.Name = "gridDetails";
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
-            this.gridDetails.Size = new System.Drawing.Size(808, 352);
+            this.gridDetails.Size = new System.Drawing.Size(830, 345);
             this.gridDetails.TabIndex = 3;
             this.gridDetails.TabStop = false;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
@@ -489,7 +489,7 @@ namespace FallGuysStats {
             // Stats
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(830, 510);
+            this.ClientSize = new System.Drawing.Size(870, 510);
             this.Controls.Add(this.infoStrip);
             this.Controls.Add(this.infoStrip2);
             this.Controls.Add(this.gridDetails);
@@ -497,7 +497,7 @@ namespace FallGuysStats {
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(15, 15);
-            this.MinimumSize = new System.Drawing.Size(830, 350);
+            this.MinimumSize = new System.Drawing.Size(870, 360);
             this.Name = "Stats";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

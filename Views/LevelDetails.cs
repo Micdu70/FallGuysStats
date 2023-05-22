@@ -456,16 +456,21 @@ namespace FallGuysStats {
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId") {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
-                    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue) {
-                        e.Value = info.CreativeTitle;
+                    if (info.UseShareCode) {
+                        if (info.CreativeLastModifiedDate != DateTime.MinValue) {
+                            e.Value = info.CreativeTitle;
+                        } else {
+                            string showName = this.StatsForm.GetRoundId((string)e.Value);
+                            if (this.StatsForm.StatLookup.TryGetValue(showName, out LevelStats level)) {
+                                e.Value = level.Name;
+                            }
+                            this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_creative_copy_share_code");
+                        }
                     } else {
                         string showNameId = (string)e.Value;
                         string showName = Multilingual.GetShowName(showNameId);
                         e.Value = !string.IsNullOrEmpty(showName) ? showName : showNameId;
                     }
-                    //if (this._showStats != 2 && info.UseShareCode) {
-                    //    this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");
-                    //}
                 }
                 //gridDetails.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Position") {
@@ -782,7 +787,7 @@ namespace FallGuysStats {
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_play_count")} : {info.CreativePlayCount}{Multilingual.GetWord("level_detail_creative_inning")}");
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(Environment.NewLine);
-                strbuilder.Append($"# {Multilingual.GetWord("level_detail_share_code_copied_tooltip")}");
+                strbuilder.Append($"# {Multilingual.GetWord("level_detail_creative_copy_share_code")}");
 
                 Point cursorPosition = this.PointToClient(Cursor.Position);
                 Point position = new Point(cursorPosition.X, cursorPosition.Y);

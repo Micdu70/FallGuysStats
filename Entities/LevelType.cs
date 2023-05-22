@@ -15,21 +15,6 @@ namespace FallGuysStats {
     }
 
     internal static class LevelTypeBehavior {
-        public static int FastestLabel(this LevelType type) {
-            switch (type) {
-                case LevelType.Creative:
-                case LevelType.Race:
-                case LevelType.Hunt:
-                case LevelType.Invisibeans:
-                    return 1; // FASTEST
-                case LevelType.Survival:
-                case LevelType.Logic:
-                    return 0; // LONGEST
-                case LevelType.Team:
-                    return 2; // HIGH_SCORE
-            }
-            return 1;
-        }
         public static Color LevelBackColor(this LevelType type, bool isFinal, bool isTeam, int alpha) {
             if (isFinal) {
                 return Color.FromArgb(alpha, 250, 195, 0);

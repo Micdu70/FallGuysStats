@@ -572,16 +572,15 @@ namespace FallGuysStats {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
                 fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 :
-                                     this.levelException == 1 || this.levelException >= 3 ? 1 :
-                                     this.levelException == 2 ? 2 : type.FastestLabel();
+                                     type == LevelType.Team || this.levelException == 2 ? 2 : 1;
             }
             switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && this.levelException != 1) ? 3 : 2)) {
                 case 0:
-                    this.lblFastest.Text = $"{Multilingual.GetWord("overlay_longest")} :";
+                    this.lblFastest.Text = $"{Multilingual.GetWord("overlay_longest_time")} :";
                     this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                     break;
                 case 1:
-                    this.lblFastest.Text = $"{Multilingual.GetWord("overlay_fastest")} :";
+                    this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
                     if ((type == LevelType.Survival || type == LevelType.Logic) && this.levelException != 1) {
                         this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                     } else {
@@ -1599,7 +1598,7 @@ namespace FallGuysStats {
             this.lblFinals.Text = $"{Multilingual.GetWord("overlay_finals")} :";
             this.lblFinals.TextRight = $"0{Multilingual.GetWord("overlay_inning")} - 0.0%";
             this.lblQualifyChance.Text = $"{Multilingual.GetWord("overlay_qualify_chance")} :";
-            this.lblFastest.Text = $"{Multilingual.GetWord("overlay_fastest")} :";
+            this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
             this.lblDuration.Text = $"{Multilingual.GetWord("overlay_duration")} :";
             this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_prefix")}1{Multilingual.GetWord("overlay_round_suffix")} :";
             this.lblWins.Text = $"{Multilingual.GetWord("overlay_wins")} :";

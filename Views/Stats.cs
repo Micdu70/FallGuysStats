@@ -131,8 +131,6 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
 
-        public static bool IsGameClosed = false;
-
         public static bool InShow = false;
         public static bool EndedShow = false;
         public static int LastServerPing = 0;
@@ -181,6 +179,7 @@ namespace FallGuysStats {
         private int GoldMedals, SilverMedals, BronzeMedals, PinkMedals, EliminatedMedals;
         private int CustomGoldMedals, CustomSilverMedals, CustomBronzeMedals, CustomPinkMedals, CustomEliminatedMedals;
         private int nextShowID;
+        private bool minimizeAfterGameLaunch;
         private bool loadingExisting;
         private bool updateFilterType;
         private bool updateSelectedProfile;
@@ -1510,6 +1509,82 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public string GetRoundId(string shareCode) {
+            switch (shareCode) {
+                case "1127-0302-4545": return "wle_s10_orig_round_001";
+                case "2416-3885-2780": return "wle_s10_orig_round_002";
+                case "6212-4520-8328": return "wle_s10_orig_round_003";
+                case "2777-8402-7007": return "wle_s10_orig_round_004";
+                case "2384-0516-9077": return "wle_s10_orig_round_005";
+                case "0128-0546-8951": return "wle_s10_orig_round_006";
+                case "9189-7523-8901": return "wle_s10_orig_round_007";
+                case "0653-2576-5236": return "wle_s10_orig_round_008";
+                case "7750-7786-5732": return "wle_s10_orig_round_009";
+                case "1794-4080-7040": return "wle_s10_orig_round_012";
+                case "4446-4876-4968": return "wle_s10_orig_round_013";
+                case "7274-6756-2481": return "wle_s10_orig_round_014";
+                case "9426-4640-3293": return "wle_s10_orig_round_015";
+                case "7387-6177-4493": return "wle_s10_orig_round_016";
+                case "8685-7305-6864": return "wle_s10_orig_round_019";
+                case "4582-3265-6150": return "wle_s10_orig_round_020";
+                case "8300-9964-4945": return "wle_s10_orig_round_021";
+                case "9525-6213-8767": return "wle_s10_orig_round_022";
+                case "9078-2884-2372": return "wle_s10_orig_round_023";
+                case "1335-7488-1452": return "wle_s10_orig_round_026";
+                case "8145-6018-5093": return "wle_s10_orig_round_027";
+                case "0633-3680-7102": return "wle_s10_orig_round_028";
+                case "3207-5100-4977": return "wle_s10_orig_round_029";
+                case "0324-4730-9285": return "wle_s10_orig_round_032";
+                case "7488-7333-3120": return "wle_s10_orig_round_033";
+                case "0942-4996-5802": return "wle_s10_orig_round_034";
+                case "5673-8789-9890": return "wle_s10_orig_round_035";
+                case "1521-1552-6833": return "wle_s10_orig_round_036";
+                case "5608-1711-5644": return "wle_s10_orig_round_037";
+                case "6401-4333-5888": return "wle_s10_orig_round_038";
+                case "1920-3797-9890": return "wle_s10_orig_round_039";
+                case "1595-7489-8714": return "wle_s10_orig_round_040";
+                case "2019-5582-0500": return "wle_s10_orig_round_041";
+                case "0567-6834-7490": return "wle_s10_orig_round_042";
+                case "8398-4477-7834": return "wle_s10_orig_round_043";
+                case "2767-1753-8429": return "wle_s10_orig_round_044";
+                case "6748-6192-9739": return "wle_s10_orig_round_045";
+                case "9641-5398-7416": return "wle_s10_orig_round_046";
+                case "7895-4812-3429": return "wle_s10_orig_round_047";
+                case "1468-0990-4257": return "wle_s10_orig_round_048";
+                case "8058-9910-7007": return "wle_s10_round_001";
+                case "6546-9859-4336": return "wle_s10_round_002";
+                case "9366-4809-0021": return "wle_s10_round_003";
+                case "8895-2034-3061": return "wle_s10_round_005";
+                case "6970-1344-9780": return "wle_s10_round_006";
+                case "3541-3776-9131": return "wle_s10_round_007";
+                case "9335-2112-8890": return "wle_s10_round_008";
+                case "9014-0444-9613": return "wle_s10_round_010";
+                case "4409-6583-6207": return "wle_s10_round_011";
+                case "8113-7002-5798": return "wle_s10_round_012";
+                case "0733-6671-4871": return "wle_s10_orig_round_010";
+                case "6498-0353-5009": return "wle_s10_orig_round_011";
+                case "7774-2277-5742": return "wle_s10_orig_round_017";
+                case "2228-9895-3526": return "wle_s10_orig_round_018";
+                case "7652-0829-4538": return "wle_s10_orig_round_024";
+                case "1976-1259-2690": return "wle_s10_orig_round_025";
+                case "4694-8620-4972": return "wle_s10_orig_round_030";
+                case "6464-4069-3540": return "wle_s10_orig_round_031";
+                case "8993-4568-6925": return "wle_s10_round_004";
+                case "7495-5141-5265": return "wle_s10_round_009";
+            }
+            return shareCode;
+        }
+        private string RenameCreativePlatformId(string platform) {
+            switch (platform) {
+                case "ps4": return Multilingual.GetWord("level_detail_playersPs4_desc");
+                case "ps5": return Multilingual.GetWord("level_detail_playersPs5_desc");
+                case "xb1": return Multilingual.GetWord("level_detail_playersXb1_desc");
+                case "xsx": return Multilingual.GetWord("level_detail_playersXsx_desc");
+                case "switch": return Multilingual.GetWord("level_detail_playersSw_desc");
+                case "win": return Multilingual.GetWord("level_detail_playersPc_desc");
+            }
+            return platform;
+        }
         private void Update_CreativeRoundInfo() {
             this.AllStats.AddRange(this.RoundDetails.FindAll());
             this.StatsDB.BeginTrans();
@@ -1530,10 +1605,10 @@ namespace FallGuysStats {
                         sb = resData.GetProperty("share_code").GetString();
                         sc = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
                         id = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                        se = resData.GetProperty("version_metadata").GetProperty("title").GetString();
+                        se = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
                         sf = resData.GetProperty("version_metadata").GetProperty("description").GetString();
                         ig = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                        sh = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
+                        sh = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
                         di = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
                         ij = resData.GetProperty("play_count").GetInt32();
                         break;
@@ -1612,7 +1687,7 @@ namespace FallGuysStats {
                 if (this.WindowState != FormWindowState.Minimized) {
                     this.WindowState = this.CurrentSettings.MaximizedWindowState ? FormWindowState.Maximized : FormWindowState.Normal;
                 }
-                if (this.CurrentSettings.StartMinimized) {
+                if (this.CurrentSettings.StartMinimized || this.minimizeAfterGameLaunch) {
                     this.WindowState = FormWindowState.Minimized;
                 }
             } catch (Exception ex) {
@@ -1723,16 +1798,16 @@ namespace FallGuysStats {
                                 stat.ShowID = nextShowID;
                                 stat.Profile = profile;
 
-                                if (stat.UseShareCode) {
+                                if (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json");
                                         stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
                                         stat.CreativeAuthor = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
                                         stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                                        stat.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
+                                        stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
                                         stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
                                         stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                        stat.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
+                                        stat.CreativePlatformId = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
                                         stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
                                         stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     } catch {
@@ -2318,7 +2393,7 @@ namespace FallGuysStats {
                 this.gridDetails.Setup("Silver", pos++, this.GetDataGridViewColumnWidth("Silver", Multilingual.GetWord("main_silver")), Multilingual.GetWord("main_silver"), DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("Bronze", pos++, this.GetDataGridViewColumnWidth("Bronze", Multilingual.GetWord("main_bronze")), Multilingual.GetWord("main_bronze"), DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("Kudos", pos++, this.GetDataGridViewColumnWidth("Kudos", Multilingual.GetWord("main_kudos")), Multilingual.GetWord("main_kudos"), DataGridViewContentAlignment.MiddleRight);
-                this.gridDetails.Setup("Fastest", pos++, this.GetDataGridViewColumnWidth("Fastest", Multilingual.GetWord("main_fastest")), Multilingual.GetWord("main_fastest"), DataGridViewContentAlignment.MiddleRight);
+                this.gridDetails.Setup("Fastest", pos++, this.GetDataGridViewColumnWidth("Fastest", Multilingual.GetWord("main_best")), Multilingual.GetWord("main_best"), DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("Longest", pos++, this.GetDataGridViewColumnWidth("Longest", Multilingual.GetWord("main_longest")), Multilingual.GetWord("main_longest"), DataGridViewContentAlignment.MiddleRight);
                 this.gridDetails.Setup("AveFinish", pos, this.GetDataGridViewColumnWidth("AveFinish", Multilingual.GetWord("main_ave_finish")), Multilingual.GetWord("main_ave_finish"), DataGridViewContentAlignment.MiddleRight);
             } catch (Exception ex) {
@@ -2836,7 +2911,11 @@ namespace FallGuysStats {
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}", Multilingual.GetWord("message_execution_caption"),
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             Process.Start(this.CurrentSettings.GameShortcutLocation);
-                            this.WindowState = FormWindowState.Minimized;
+                            if (!ignoreExisting) {
+                                this.WindowState = FormWindowState.Minimized;
+                            } else {
+                                this.minimizeAfterGameLaunch = true;
+                            }
                         }
                     } else {
                         MessageBox.Show(this, Multilingual.GetWord("message_register_shortcut"), Multilingual.GetWord("message_register_shortcut_caption"),
@@ -2861,7 +2940,11 @@ namespace FallGuysStats {
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}", Multilingual.GetWord("message_execution_caption"),
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             Process.Start(this.CurrentSettings.GameExeLocation);
-                            this.WindowState = FormWindowState.Minimized;
+                            if (!ignoreExisting) {
+                                this.WindowState = FormWindowState.Minimized;
+                            } else {
+                                this.minimizeAfterGameLaunch = true;
+                            }
                         }
                     } else {
                         MessageBox.Show(this, Multilingual.GetWord("message_register_exe"), Multilingual.GetWord("message_register_exe_caption"),

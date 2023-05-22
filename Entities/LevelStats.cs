@@ -29,6 +29,7 @@ namespace FallGuysStats {
         public int? Score { get; set; }
         public int Tier { get; set; }
         public bool Qualified { get; set; }
+        public bool AbandonShow { get; set; }
         public int Kudos { get; set; }
         public int Players { get; set; }
         public int PlayersPs4 { get; set; }
@@ -47,7 +48,6 @@ namespace FallGuysStats {
         public DateTime End { get; set; } = DateTime.MinValue;
         public DateTime? Finish { get; set; } = null;
         public bool Crown { get; set; }
-        public bool AbandonShow { get; set; }
 
         public DateTime StartLocal;
         public DateTime EndLocal;
@@ -101,6 +101,7 @@ namespace FallGuysStats {
                    && info.PlayersEtc == this.PlayersEtc
                    && info.Position == this.Position
                    && info.Qualified == this.Qualified
+                   && info.AbandonShow == this.AbandonShow
                    && info.Round == this.Round
                    && info.Score == this.Score
                    && info.ShowID == this.ShowID
