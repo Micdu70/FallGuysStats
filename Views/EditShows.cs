@@ -21,7 +21,10 @@ namespace FallGuysStats {
         public string FunctionFlag = string.Empty;
         public int SelectedCount = 0;
         public bool UseLinkedProfiles;
-        public EditShows() => this.InitializeComponent();
+
+        public EditShows() {
+            this.InitializeComponent();
+        }
 
         private void EditShows_Load(object sender, EventArgs e) {
             this.SuspendLayout();

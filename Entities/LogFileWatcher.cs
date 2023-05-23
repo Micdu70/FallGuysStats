@@ -196,7 +196,7 @@ namespace FallGuysStats {
                                 lastDate = line.Date;
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
                                 if (this.autoChangeProfile && Stats.InShow && !Stats.EndedShow) {
-                                    this.StatsForm.SetLinkedProfile(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_"));
+                                    this.StatsForm.SetLinkedProfileMenu(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_"));
                                 }
                             }
                         }
