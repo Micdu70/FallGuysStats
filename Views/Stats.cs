@@ -3248,35 +3248,37 @@ namespace FallGuysStats {
             try {
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
 
-                if (this.isStartUp && (button == this.menuCustomRangeStats)) {
-                    this.updateFilterRange = true;
-                } else if (!this.isStartUp && button == this.menuCustomRangeStats) {
-                    using (FilterCustomRange filterCustomRange = new FilterCustomRange()) {
-                        //filterCustomRange.Icon = this.Icon;
-                        filterCustomRange.StatsForm = this;
-                        filterCustomRange.startDate = this.customfilterRangeStart;
-                        filterCustomRange.endDate = this.customfilterRangeEnd;
-                        filterCustomRange.selectedCustomTemplateSeason = this.selectedCustomTemplateSeason;
-                        this.EnableInfoStrip(false);
-                        this.EnableMainMenu(false);
-                        if (filterCustomRange.ShowDialog(this) == DialogResult.OK) {
-                            this.menuCustomRangeStats.Checked = true;
-                            this.menuAllStats.Checked = false;
-                            this.menuSeasonStats.Checked = false;
-                            this.menuWeekStats.Checked = false;
-                            this.menuDayStats.Checked = false;
-                            this.menuSessionStats.Checked = false;
-                            this.selectedCustomTemplateSeason = filterCustomRange.selectedCustomTemplateSeason;
-                            this.customfilterRangeStart = filterCustomRange.startDate;
-                            this.customfilterRangeEnd = filterCustomRange.endDate;
-                            this.updateFilterRange = true;
-                        } else {
+                if (button == this.menuCustomRangeStats) {
+                    if (this.isStartUp) {
+                        this.updateFilterRange = true;
+                    } else {
+                        using (FilterCustomRange filterCustomRange = new FilterCustomRange()) {
+                            //filterCustomRange.Icon = this.Icon;
+                            filterCustomRange.StatsForm = this;
+                            filterCustomRange.startDate = this.customfilterRangeStart;
+                            filterCustomRange.endDate = this.customfilterRangeEnd;
+                            filterCustomRange.selectedCustomTemplateSeason = this.selectedCustomTemplateSeason;
+                            this.EnableInfoStrip(false);
+                            this.EnableMainMenu(false);
+                            if (filterCustomRange.ShowDialog(this) == DialogResult.OK) {
+                                this.menuCustomRangeStats.Checked = true;
+                                this.menuAllStats.Checked = false;
+                                this.menuSeasonStats.Checked = false;
+                                this.menuWeekStats.Checked = false;
+                                this.menuDayStats.Checked = false;
+                                this.menuSessionStats.Checked = false;
+                                this.selectedCustomTemplateSeason = filterCustomRange.selectedCustomTemplateSeason;
+                                this.customfilterRangeStart = filterCustomRange.startDate;
+                                this.customfilterRangeEnd = filterCustomRange.endDate;
+                                this.updateFilterRange = true;
+                            } else {
+                                this.EnableInfoStrip(true);
+                                this.EnableMainMenu(true);
+                                return;
+                            }
                             this.EnableInfoStrip(true);
                             this.EnableMainMenu(true);
-                            return;
                         }
-                        this.EnableInfoStrip(true);
-                        this.EnableMainMenu(true);
                     }
                 } else if (button == this.menuAllStats || button == this.menuSeasonStats || button == this.menuWeekStats || button == this.menuDayStats || button == this.menuSessionStats) {
                     if (!this.menuAllStats.Checked && !this.menuSeasonStats.Checked && !this.menuWeekStats.Checked && !this.menuDayStats.Checked && !this.menuSessionStats.Checked) {
@@ -3326,7 +3328,7 @@ namespace FallGuysStats {
                 int profile = this.currentProfile;
 
                 List<RoundInfo> rounds;
-                if (this.updateFilterRange) {
+                if (this.menuCustomRangeStats.Checked) {
                     rounds = this.AllStats.Where(roundInfo => {
                         return roundInfo.Start >= this.customfilterRangeStart &&
                                roundInfo.Start <= this.customfilterRangeEnd &&
