@@ -219,6 +219,7 @@
     </Compile>
     <Compile Include="Entities\CustomRangeTemplates.cs" />
     <Compile Include="Entities\FallalyticsReporter.cs" />
+    <Compile Include="Entities\GameStateWatcher.cs" />
     <Compile Include="Entities\ImageItem.cs" />
     <Compile Include="Entities\Json.cs" />
     <Compile Include="Entities\LevelType.cs" />

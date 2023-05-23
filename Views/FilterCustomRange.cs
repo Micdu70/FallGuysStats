@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LiteDB;
+using MetroFramework;
+using MetroFramework.Controls;
 
 namespace FallGuysStats {
     public partial class FilterCustomRange : MetroFramework.Forms.MetroForm {
         public DateTime startTime = DateTime.MinValue;
         public DateTime endTime = DateTime.MaxValue;
-        private List<DateTime[]> templates = new List<DateTime[]>();
-        public FilterCustomRange() {
-            InitializeComponent();
+        public Stats StatsForm { get; set; }
+        private readonly List<DateTime[]> templates = new List<DateTime[]>();
+
+        public FilterCustomRange() => this.InitializeComponent();
+
+        private void FilterCustomRange_Load(object sender, EventArgs e) {
+            this.SuspendLayout();
+            this.SetTheme(this.StatsForm.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.StatsForm.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
+            this.ResumeLayout(false);
 
             //this.Font = Overlay.GetMainFont(12);
             this.Text = Multilingual.GetWord("main_custom_range");
@@ -37,7 +39,29 @@ namespace FallGuysStats {
             }
         }
 
-        private void templatesListBox_SelectedValueChanged(object sender, EventArgs e) {
+        private void SetTheme(MetroThemeStyle theme) {
+            this.Theme = theme;
+            foreach (Control c1 in Controls) {
+                if (c1 is MetroLabel ml1) {
+                    ml1.Theme = theme;
+                } else if (c1 is MetroTextBox mtb1) {
+                    mtb1.Theme = theme;
+                } else if (c1 is MetroButton mb1) {
+                    mb1.Theme = theme;
+                } else if (c1 is MetroCheckBox mcb1) {
+                    mcb1.Theme = theme;
+                } else if (c1 is MetroDateTime mdt1) {
+                    mdt1.Theme = theme;
+                } else if (c1 is ListBox lb1) {
+                    lb1.BackColor = this.Theme == MetroThemeStyle.Light ? Color.WhiteSmoke : Color.FromArgb(2, 2, 2);
+                    lb1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                }
+            }
+        }
+
+        private void TemplatesListBox_SelectedValueChanged(object sender, EventArgs e) {
+            if (this.templatesListBox.SelectedIndex < 0) { return; }
+
             if (templates[this.templatesListBox.SelectedIndex][0] == DateTime.MinValue) {
                 this.dtStart.Visible = false;
                 this.chkStartNotSet.Checked = true;
@@ -56,21 +80,21 @@ namespace FallGuysStats {
             }
         }
 
-        private void chkStartNotSet_CheckedChanged(object sender, EventArgs e) {
+        private void ChkStartNotSet_CheckedChanged(object sender, EventArgs e) {
             this.dtStart.Visible = !this.chkStartNotSet.Checked;
             if (this.chkStartNotSet.Checked && this.chkEndNotSet.Checked) {
                 this.chkEndNotSet.Checked = false;
             }
         }
 
-        private void chkEndNotSet_CheckedChanged(object sender, EventArgs e) {
+        private void ChkEndNotSet_CheckedChanged(object sender, EventArgs e) {
             this.dtEnd.Visible = !this.chkEndNotSet.Checked;
             if (this.chkEndNotSet.Checked && this.chkStartNotSet.Checked) {
                 this.chkStartNotSet.Checked = false;
             }
         }
 
-        private void btnFilter_Click(object sender, EventArgs e) {
+        private void BtnFilter_Click(object sender, EventArgs e) {
             this.startTime = this.chkStartNotSet.Checked ? DateTime.MinValue : this.dtStart.Value;
             this.endTime = this.chkEndNotSet.Checked ? DateTime.MaxValue : this.dtEnd.Value;
             this.DialogResult = DialogResult.OK;

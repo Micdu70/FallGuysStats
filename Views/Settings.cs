@@ -732,7 +732,8 @@ namespace FallGuysStats {
             this.overlayFontSerialized = string.Empty;
         }
         private void CboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
-            if (this.DisplayLang == ((ComboBox)sender).SelectedIndex) return;
+            if (this.DisplayLang == ((ComboBox)sender).SelectedIndex) { return; }
+
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
         private void TrkOverlayOpacity_ValueChanged(object sender, EventArgs e) {

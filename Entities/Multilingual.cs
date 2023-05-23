@@ -364,7 +364,7 @@ namespace FallGuysStats {
                             {"main_week", "Semaine"},
                             {"main_day", "Jour"},
                             {"main_session", "Session"},
-                            {"main_custom_range", "Gamme personnalisée"},
+                            {"main_custom_range", "Période personnalisée"},
                             {"main_party_type", "Parties"},
                             {"main_party", "en Groupe"},
                             {"main_solo", "en Solo"},
@@ -681,13 +681,13 @@ namespace FallGuysStats {
                             {"profile_move_select_question_suffix", " ?"},
                             {"profile_move_select_button", "Déplacer"},
 
-                            {"custom_range_range", "Gamme"},
-                            {"custom_range_templates", "Modèle"},
+                            {"custom_range_range", "Période"},
+                            {"custom_range_templates", "Modèles"},
                             {"custom_range_season", "Saison"},
-                            {"custom_range_legacy", "Héritage"},
+                            {"custom_range_legacy", "Legacy"},
                             {"custom_range_ffa", "FFA"},
-                            {"custom_range_not_set", "pas de réglage"},
-                            {"custom_range_filter", "Filtre"},
+                            {"custom_range_not_set", "Ne pas régler"},
+                            {"custom_range_filter", "Filtrer"},
                         }
             },
             { "kor", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {

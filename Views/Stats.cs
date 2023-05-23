@@ -131,6 +131,8 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
 
+        public static bool IsGameHasBeenClosed = false;
+
         public static bool InShow = false;
         public static bool EndedShow = false;
         public static int LastServerPing = 0;
@@ -196,8 +198,8 @@ namespace FallGuysStats {
         public UserSettings CurrentSettings;
         public Overlay overlay;
         public bool isUpdate;
+        public readonly DateTime startupTime = DateTime.UtcNow;
         private DateTime lastAddedShow = DateTime.MinValue;
-        private readonly DateTime startupTime = DateTime.UtcNow;
         private int askedPreviousShows = 0;
         private readonly TextInfo textInfo;
         private int currentProfile;
@@ -521,7 +523,8 @@ namespace FallGuysStats {
         }
 
         private void SetTheme(MetroThemeStyle theme) {
-            if (this.Theme == theme) return;
+            if (this.Theme == theme) { return; }
+
             this.Theme = theme;
             this.mtt.Theme = theme;
             foreach (Control c1 in Controls) {
@@ -1989,7 +1992,8 @@ namespace FallGuysStats {
             return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
         private int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
-            if (string.IsNullOrEmpty(showId)) return 0;
+            if (string.IsNullOrEmpty(showId)) { return 0; }
+
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
@@ -2018,7 +2022,8 @@ namespace FallGuysStats {
             return 0;
         }
         public void SetLinkedProfile(string showId, bool isPrivateLobbies, bool isCreativeShow) {
-            if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) return;
+            if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) { return; }
+
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
@@ -2150,7 +2155,7 @@ namespace FallGuysStats {
                     }
                 }
 
-                if (info == endRound && (levelDetails.IsFinal || info.Crown) && !endRound.PrivateLobby) {
+                if (info == endRound && ((hasLevelDetails && levelDetails.IsFinal) || info.Crown) && !endRound.PrivateLobby) {
                     if (info.IsFinal) {
                         summary.CurrentFinalStreak++;
                         if (summary.BestFinalStreak < summary.CurrentFinalStreak) {
@@ -3125,11 +3130,12 @@ namespace FallGuysStats {
         private void MenuStats_Click(object sender, EventArgs e) {
             try {
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
-                
+
                 if (button == this.menuCustomRangeStats) {
                     try {
                         using (FilterCustomRange filterCustomRange = new FilterCustomRange()) {
                             filterCustomRange.Icon = this.Icon;
+                            filterCustomRange.StatsForm = this;
                             this.EnableInfoStrip(false);
                             this.EnableMainMenu(false);
                             filterCustomRange.ShowDialog(this);
@@ -3150,7 +3156,7 @@ namespace FallGuysStats {
                             }
                         }
                     } catch (Exception ex) {
-                        MetroMessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
+                        MessageBox.Show(this, ex.Message, $"{Multilingual.GetWord("message_program_error_caption")}",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.EnableInfoStrip(true);
                         this.EnableMainMenu(true);

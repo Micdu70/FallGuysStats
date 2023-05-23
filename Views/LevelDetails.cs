@@ -761,9 +761,10 @@ namespace FallGuysStats {
 
         private void GridDetails_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.RowIndex >= this.gridDetails.Rows.Count) { return; }
+
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
                 RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
-                if (info.CreativeLastModifiedDate == DateTime.MinValue) return;
+                if (info.CreativeLastModifiedDate == DateTime.MinValue) { return; }
                 StringBuilder strbuilder = new StringBuilder();
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(info.CreativeTitle);

@@ -70,7 +70,7 @@
             this.templatesListBox.Name = "templatesListBox";
             this.templatesListBox.Size = new System.Drawing.Size(268, 256);
             this.templatesListBox.TabIndex = 3;
-            this.templatesListBox.SelectedValueChanged += new System.EventHandler(this.templatesListBox_SelectedValueChanged);
+            this.templatesListBox.SelectedValueChanged += new System.EventHandler(this.TemplatesListBox_SelectedValueChanged);
             // 
             // lblCustomRange
             // 
@@ -98,7 +98,7 @@
             this.btnFilter.TabIndex = 6;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseSelectable = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.btnFilter.Click += new System.EventHandler(this.BtnFilter_Click);
             // 
             // btnSaveTemplate
             // 
@@ -160,7 +160,7 @@
             this.chkEndNotSet.TabIndex = 11;
             this.chkEndNotSet.Text = "Not Set";
             this.chkEndNotSet.UseSelectable = true;
-            this.chkEndNotSet.CheckedChanged += new System.EventHandler(this.chkEndNotSet_CheckedChanged);
+            this.chkEndNotSet.CheckedChanged += new System.EventHandler(this.ChkEndNotSet_CheckedChanged);
             // 
             // chkStartNotSet
             // 
@@ -171,7 +171,7 @@
             this.chkStartNotSet.TabIndex = 12;
             this.chkStartNotSet.Text = "Not Set";
             this.chkStartNotSet.UseSelectable = true;
-            this.chkStartNotSet.CheckedChanged += new System.EventHandler(this.chkStartNotSet_CheckedChanged);
+            this.chkStartNotSet.CheckedChanged += new System.EventHandler(this.ChkStartNotSet_CheckedChanged);
             // 
             // FilterCustomRange
             // 
@@ -194,6 +194,7 @@
             this.MinimizeBox = false;
             this.Name = "FilterCustomRange";
             this.Text = "Custom Range";
+            this.Load += new System.EventHandler(this.FilterCustomRange_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

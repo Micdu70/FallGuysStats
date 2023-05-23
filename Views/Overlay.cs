@@ -401,7 +401,8 @@ namespace FallGuysStats {
             }
         }
         private void Position_MouseEnter(object sender, EventArgs e) {
-            if (this.isPositionButtonMouseEnter) return;
+            if (this.isPositionButtonMouseEnter) { return; }
+
             if (this.IsFixed()) {
                 if (this.isPositionLock) {
                     this.picPositionLock.Image = this.isPositionLock ? this.positionLockFocus : this.positionUnlockFocus;
@@ -415,7 +416,8 @@ namespace FallGuysStats {
             this.isPositionButtonMouseEnter = true;
         }
         private void Position_MouseLeave(object sender, EventArgs e) {
-            if (!this.isPositionButtonMouseEnter) return;
+            if (!this.isPositionButtonMouseEnter) { return; }
+
             if (this.IsFixed()) {
                 if (this.isPositionLock) {
                     this.picPositionLock.Image = this.isPositionLock ? this.positionLockBlur : this.positionUnlockBlur;
@@ -479,7 +481,8 @@ namespace FallGuysStats {
             if (this.isAlreadyClicked) {
                 this.isAlreadyClicked = false;
                 if (this.picPositionLock.Visible) { this.picPositionLock.Hide(); }
-                if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible) return;
+                if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible) { return; }
+
                 this.SetVisiblePositionMenu(false);
                 return;
             } else {
@@ -494,14 +497,16 @@ namespace FallGuysStats {
                     this.SetVisiblePositionMenu(true);
                 }
             } else {
-                if (this.picPositionNE.Visible && this.picPositionNW.Visible && this.picPositionSE.Visible && this.picPositionSW.Visible && this.picPositionLock.Visible) return;
+                if (this.picPositionNE.Visible && this.picPositionNW.Visible && this.picPositionSE.Visible && this.picPositionSW.Visible && this.picPositionLock.Visible) { return; }
+
                 this.SetVisiblePositionMenu(true);
                 this.picPositionLock.Show();
             }
         }
         private void Overlay_LostFocus(object sender, EventArgs e) {
             this.isAlreadyClicked = false;
-            if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) return;
+            if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) { return; }
+
             this.SetVisiblePositionMenu(false);
             this.picPositionLock.Hide();
         }
@@ -509,7 +514,7 @@ namespace FallGuysStats {
             this.SetLocationPositionMenu(this.drawHeight > 99, this.StatsForm.CurrentSettings.FlippedDisplay);
         }
         private void Overlay_MouseDown(object sender, MouseEventArgs e) {
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button != MouseButtons.Left) { return; }
 
             if (!this.IsFixed() && !this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) {
                 this.isAlreadyClicked = true;
@@ -521,9 +526,10 @@ namespace FallGuysStats {
                 (sender.GetType() == this.picPositionNW.GetType()) ||
                 (sender.GetType() == this.picPositionSE.GetType()) ||
                 (sender.GetType() == this.picPositionSW.GetType()) ||
-                (sender.GetType() == this.picPositionLock.GetType())) return;
+                (sender.GetType() == this.picPositionLock.GetType())) { return; }
 
-            if (this.IsFixed()) return;
+            if (this.IsFixed()) { return; }
+
             ReleaseCapture();
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }

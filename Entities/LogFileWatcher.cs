@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if Debug
 using System.Diagnostics;
+#endif
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -44,7 +46,6 @@ namespace FallGuysStats {
         public RoundInfo Info;
     }
     public class LogFileWatcher {
-        private const int GameCheckDelay = 2000;
         private const int UpdateDelay = 500;
 
         private string filePath;
@@ -52,13 +53,9 @@ namespace FallGuysStats {
         private List<LogLine> lines = new List<LogLine>();
         private bool running;
         private bool stop;
-        private Thread gameWatcher, watcher, parser;
+        private Thread watcher, parser;
 
         public Stats StatsForm { get; set; }
-
-        private bool isGameHasBeenLaunched;
-        private bool isGameCurrentlyRunning;
-        private bool isGameJustClosed;
 
         private bool autoChangeProfile;
         private string selectedShowId;
@@ -71,6 +68,8 @@ namespace FallGuysStats {
         public event Action<DateTime> OnNewLogFileDate;
         public event Action<string> OnError;
 
+        private readonly GameStateWatcher gameState = new GameStateWatcher();
+
         public void SetAutoChangeProfile(bool isEnabled) {
             this.autoChangeProfile = isEnabled;
         }
@@ -79,13 +78,12 @@ namespace FallGuysStats {
             if (this.running) { return; }
 
 #if Debug
-            Debug.WriteLine("LogFileWatcher is running!");
+            Debug.WriteLine("LogFileWatcher is starting!");
 #endif
+
             this.filePath = Path.Combine(logDirectory, fileName);
             this.prevFilePath = Path.Combine(logDirectory, Path.GetFileNameWithoutExtension(fileName) + "-prev.log");
             this.stop = false;
-            this.gameWatcher = new Thread(this.GameWatcher) { IsBackground = true };
-            this.gameWatcher.Start();
             this.watcher = new Thread(this.ReadLogFile) { IsBackground = true };
             this.watcher.Start();
             this.parser = new Thread(this.ParseLines) { IsBackground = true };
@@ -94,39 +92,16 @@ namespace FallGuysStats {
 
         public async Task Stop() {
             this.stop = true;
+#if Debug
             while (this.running || this.watcher == null || this.watcher.ThreadState == System.Threading.ThreadState.Unstarted) {
+#else
+            while (this.running || this.watcher == null || this.watcher.ThreadState == ThreadState.Unstarted) {
+#endif
                 await Task.Delay(50);
             }
             this.lines = new List<LogLine>();
-            await Task.Factory.StartNew(() => this.gameWatcher?.Join());
             await Task.Factory.StartNew(() => this.watcher?.Join());
             await Task.Factory.StartNew(() => this.parser?.Join());
-        }
-
-        private void GameWatcher() {
-            while (!this.stop) {
-                try {
-                    this.isGameCurrentlyRunning = false;
-                    this.isGameJustClosed = false;
-                    Process[] processes = Process.GetProcesses();
-                    string fallGuysProcessName = "FallGuys_client_game";
-                    for (int i = 0; i < processes.Length; i++) {
-                        string name = processes[i].ProcessName;
-                        if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
-                            this.isGameHasBeenLaunched = true;
-                            this.isGameCurrentlyRunning = true;
-                            break;
-                        }
-                    }
-                    if (this.isGameHasBeenLaunched && !this.isGameCurrentlyRunning) {
-                        this.isGameHasBeenLaunched = false;
-                        this.isGameJustClosed = true;
-                    }
-                } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.Message);
-                }
-                Thread.Sleep(GameCheckDelay);
-            }
         }
 
         private void ReadLogFile() {
@@ -215,7 +190,8 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                                       || this.isGameJustClosed) {
+                                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
+                                       || (Stats.IsGameHasBeenClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
@@ -398,6 +374,7 @@ namespace FallGuysStats {
                     Stats.IsLastPlayedRoundStillPlaying = false;
                     Stats.LastPlayedRoundStart = null;
                     Stats.LastPlayedRoundEnd = null;
+                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); }
                 }
 
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId, UseShareCode = this.useShareCode };
@@ -518,7 +495,8 @@ namespace FallGuysStats {
             } else if (line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                       || this.isGameJustClosed) {
+                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
+                       || (Stats.IsGameHasBeenClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;
                 }
