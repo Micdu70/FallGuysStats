@@ -1941,23 +1941,17 @@ namespace FallGuysStats {
 
                                 if (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_")) {
                                     try {
-                                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json");
-                                        if (resData.TryGetProperty("data", out JsonElement resDataFound)) {
-                                            resData = resDataFound.GetProperty("snapshot");
-                                            stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                            stat.CreativeAuthor = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
-                                            stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                                            stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                            stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
-                                            stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
-                                            stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                            stat.CreativePlatformId = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
-                                            stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
-                                            stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
-                                        } else {
-                                            MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_creative_show_error_caption")}",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
+                                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
+                                        stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
+                                        stat.CreativeAuthor = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
+                                        stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
+                                        stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
+                                        stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
+                                        stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
+                                        stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
+                                        stat.CreativePlatformId = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
+                                        stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                                        stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     } catch {
                                         // ignore
                                     }
