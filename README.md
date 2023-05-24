@@ -42,7 +42,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.174` ~ 20/05/2023
+**Dernière version:** `v1.175` ~ 24/05/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -53,10 +53,16 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+{ Cette version, bien que basée sur la Version Officielle (v1.174) datant du 24/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- +Corrigé: Détection de la manche finale "Basketfall" dans l'émission de Groupe [Version Officielle]
+- ++Ajouté: Nom des récentes émissions de la nouvelle saison pour la liste des stats [Version Officielle + Ajout "FE"]
+- ++Ajouté: Un système de surveillance de l'état (en cours d'exécution ou non) du jeu durant vos parties pour essayer d'enregistrer vos stats en cas de crash du jeu
+- ++Ajouté: Renommage du nom des émissions - pour les maps créatives créées par d'autre joueur - par le nom des maps (via l'API de FallGuysDB) [Version Officielle + Modifications "FE"]
+- ++Ajouté: Option pour mettre à jour le nom des émissions pour les maps créatives créées par d'autre joueur (via un clique droit sur la manche) [Version Officielle + Modifications "FE"]
+- ++Ajouté: Filtre "Période" dans le sous-menu "Stats" pour configurer une période de temps que vous voulez [Version Officielle + Modifications "FE"]
 
 
-### Il y a 0 bug génant connu dans la v1.174 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.175 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -208,6 +214,16 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.175` ~ 24/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.174) datant du 24/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Détection de la manche finale "Basketfall" dans l'émission de Groupe [Version Officielle]
+    - ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
+    - ++Ajouté: Un système de surveillance de l'état (en cours d'exécution ou non) du jeu durant vos parties pour essayer d'enregistrer vos stats en cas de crash
+    - ++Ajouté: Renommage du nom des émissions - pour les maps créatives créées par d'autre joueur - par le nom des maps (via l'API de FallGuysDB) [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Option pour mettre à jour le nom des émissions pour les maps créatives créées par d'autre joueur (via un clique droit sur la manche) [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Filtre "Période" dans le sous-menu "Stats" pour configurer une période de temps que vous voulez [Version Officielle + Modifications "FE"]
 
   - `v1.174` ~ 20/05/2023
   { Correction de bugs de la "FE" }
@@ -428,6 +444,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.174`
+    - Bugfix and program optimization
+  - `1.173`
+    - Bug fixes
+  - `1.172`
+    - Add manual update menu for creative show information
+    - Fix round id (Bean Hill Zone)
+    - Bugfix and program optimization
   - `1.171`
     - Add custom range filter, seasonal stats
     - Add a new show id

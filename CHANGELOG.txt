@@ -1,11 +1,21 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.174 ~ 20/05/2023
+  - v1.175 ~ 24/05/2023
   { Correction de bugs de la "FE" }
-  { Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+  { Cette version, bien que basée sur la Version Officielle (v1.174) datant du 24/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - +Corrigé: Détection de la manche finale "Basketfall" dans l'émission de Groupe [Version Officielle]
+    - ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
+    - ++Ajouté: Un système de surveillance de l'état (en cours d'exécution ou non) du jeu durant vos parties pour essayer d'enregistrer vos stats en cas de crash
+    - ++Ajouté: Renommage du nom des émissions - pour les maps créatives créées par d'autre joueur - par le nom des maps (via l'API de FallGuysDB) [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Option pour mettre à jour le nom des émissions pour les maps créatives créées par d'autre joueur (via un clique droit sur la manche) [Version Officielle + Modifications "FE"]
+    - ++Ajouté: Filtre "Période" dans le sous-menu "Stats" pour configurer une période de temps que vous voulez [Version Officielle + Modifications "FE"]
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
+  - v1.174 ~ 20/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.169) datant du 19/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
   - v1.173 ~ 19/05/2023
   { Correction de bugs de la "FE" }

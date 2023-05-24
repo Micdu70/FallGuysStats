@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace FallGuysStats {
     public class GameStateWatcher {
-        private const int UpdateDelay = 3000;
+        private const int UpdateDelay = 2000;
 
         private bool running;
         private bool stop;
