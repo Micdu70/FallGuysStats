@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -763,41 +764,37 @@ namespace FallGuysStats {
                 if (ri.UseShareCode && !ri.Name.StartsWith("wle_s10_") && ri.CreativeLastModifiedDate == DateTime.MinValue) {
                     if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_prefix")}{ri.ShowNameId}{Multilingual.GetWord("message_update_creative_show_suffix")}", Multilingual.GetWord("message_update_creative_show_caption"),
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
-                        //try {
-                        JsonElement resData = this.StatsForm.GetApiData(this.StatsForm.FALLGUYSDB_API_URL, $"creative/{ri.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
-                        List<RoundInfo> rows = this.RoundDetails.FindAll(r => ri.ShowNameId.Equals(r.ShowNameId) && r.CreativeLastModifiedDate == DateTime.MinValue);
-                        int minIndex = this.gridDetails.FirstDisplayedScrollingRowIndex;
-                        this.gridDetails.DataSource = null;
-                        lock (this.StatsForm.StatsDB) {
-                            this.StatsForm.StatsDB.BeginTrans();
-                            for (int i = rows.Count - 1; i >= 0; i--) {
-                                RoundInfo temp = rows[i];
-                                temp.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                temp.CreativeAuthor = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
-                                temp.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                                temp.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                temp.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
-                                temp.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
-                                temp.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                temp.CreativePlatformId = this.StatsForm.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
-                                temp.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
-                                temp.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
-                                this.StatsForm.RoundDetails.Update(temp);
+                        try {
+                            JsonElement resData = this.StatsForm.GetApiData(this.StatsForm.FALLGUYSDB_API_URL, $"creative/{ri.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
+                            List<RoundInfo> rows = this.RoundDetails.FindAll(r => ri.ShowNameId.Equals(r.ShowNameId) && r.CreativeLastModifiedDate == DateTime.MinValue);
+                            int minIndex = this.gridDetails.FirstDisplayedScrollingRowIndex;
+                            this.gridDetails.DataSource = null;
+                            lock (this.StatsForm.StatsDB) {
+                                this.StatsForm.StatsDB.BeginTrans();
+                                for (int i = rows.Count - 1; i >= 0; i--) {
+                                    RoundInfo temp = rows[i];
+                                    temp.CreativeShareCode = resData.GetProperty("share_code").GetString();
+                                    temp.CreativeAuthor = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
+                                    temp.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
+                                    temp.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
+                                    temp.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
+                                    temp.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
+                                    temp.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
+                                    temp.CreativePlatformId = this.StatsForm.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
+                                    temp.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                                    temp.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
+                                    this.StatsForm.RoundDetails.Update(temp);
+                                }
+                                this.StatsForm.StatsDB.Commit();
                             }
-                            this.StatsForm.StatsDB.Commit();
-                        }
 
-                        this.gridDetails.DataSource = this.RoundDetails;
-                        if (minIndex < this.RoundDetails.Count) {
-                            this.gridDetails.FirstDisplayedScrollingRowIndex = minIndex;
-                        } else if (this.RoundDetails.Count > 0) {
-                            this.gridDetails.FirstDisplayedScrollingRowIndex = this.RoundDetails.Count - 1;
-                        }
-                        //} else {
-                        //    MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_creative_show_error_caption")}",
-                        //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //}
-                        /*} catch (WebException wex) {
+                            this.gridDetails.DataSource = this.RoundDetails;
+                            if (minIndex < this.RoundDetails.Count) {
+                                this.gridDetails.FirstDisplayedScrollingRowIndex = minIndex;
+                            } else if (this.RoundDetails.Count > 0) {
+                                this.gridDetails.FirstDisplayedScrollingRowIndex = this.RoundDetails.Count - 1;
+                            }
+                        } catch (WebException wex) {
                             if (wex.Status == WebExceptionStatus.ProtocolError) {
                                 int statusCode = (int)((HttpWebResponse)wex.Response).StatusCode;
                                 switch (statusCode) {
@@ -814,7 +811,7 @@ namespace FallGuysStats {
                         } catch (Exception ex) {
                             MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }*/
+                        }
                     }
                 }
             }

@@ -1945,7 +1945,7 @@ namespace FallGuysStats {
                                         if (resData.TryGetProperty("data", out JsonElement resDataFound)) {
                                             resData = resDataFound.GetProperty("snapshot");
                                             stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                            stat.CreativeAuthor = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
+                                            stat.CreativeAuthor = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
                                             stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                             stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
                                             stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
