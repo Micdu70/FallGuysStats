@@ -466,8 +466,10 @@ namespace FallGuysStats {
             PropertyInfo h = t.GetType().GetProperty("Handle", BindingFlags.NonPublic | BindingFlags.Instance);
             IntPtr handle = (IntPtr)h.GetValue(t);
             Control c = e.AssociatedControl;
-            Point location = c.Parent.PointToScreen(new Point(c.Right - e.Bounds.Width, c.Bottom));
-            MoveWindow(handle, location.X, location.Y, e.Bounds.Width, e.Bounds.Height, false);
+            if (c != null && c.Parent != null) {
+                Point location = c.Parent.PointToScreen(new Point(c.Right - e.Bounds.Width, c.Bottom));
+                MoveWindow(handle, location.X, location.Y, e.Bounds.Width, e.Bounds.Height, false);
+            }
         }
         //private void mtt_Draw(object sender, DrawToolTipEventArgs e) {
         //    e.DrawBackground();
@@ -1681,14 +1683,14 @@ namespace FallGuysStats {
             }
             return shareCode;
         }
-        private string RenameCreativePlatformId(string platform) {
+        public string RenameCreativePlatformId(string platform) {
             switch (platform) {
-                case "ps4": return Multilingual.GetWord("level_detail_playersPs4_desc");
-                case "ps5": return Multilingual.GetWord("level_detail_playersPs5_desc");
-                case "xb1": return Multilingual.GetWord("level_detail_playersXb1_desc");
-                case "xsx": return Multilingual.GetWord("level_detail_playersXsx_desc");
-                case "switch": return Multilingual.GetWord("level_detail_playersSw_desc");
-                case "win": return Multilingual.GetWord("level_detail_playersPc_desc");
+                case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
+                case "ps5": return Multilingual.GetWord("level_detail_playersPs5");
+                case "xb1": return Multilingual.GetWord("level_detail_playersXb1");
+                case "xsx": return Multilingual.GetWord("level_detail_playersXsx");
+                case "switch": return Multilingual.GetWord("level_detail_playersSw");
+                case "win": return Multilingual.GetWord("level_detail_playersPc");
             }
             return platform;
         }
@@ -1701,6 +1703,7 @@ namespace FallGuysStats {
         //            se = string.Empty,
         //            sf = string.Empty,
         //            sh = string.Empty;
+        //            sk = string.Empty;
         //    int id = 0, ig = 0, ij = 0;
         //    DateTime di = DateTime.MinValue;
         //    for (int i = this.AllStats.Count - 1; i >= 0; i--) {
@@ -1718,6 +1721,7 @@ namespace FallGuysStats {
         //                sh = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
         //                di = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
         //                ij = resData.GetProperty("play_count").GetInt32();
+        //                sk = resData.GetProperty("version_metadata").GetProperty("status").GetString();
         //                break;
         //            } catch {
         // ignore
@@ -1738,6 +1742,7 @@ namespace FallGuysStats {
         //                info.CreativePlatformId = sh;
         //                info.CreativeLastModifiedDate = di;
         //                info.CreativePlayCount = ij;
+        //                info.CreativeStatus = sk;
         //                this.RoundDetails.Update(info);
         //            }
         //        }
@@ -1919,17 +1924,23 @@ namespace FallGuysStats {
 
                                 if (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_")) {
                                     try {
-                                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
-                                        stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                        stat.CreativeAuthor = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
-                                        stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                                        stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                        stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
-                                        stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
-                                        stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                        stat.CreativePlatformId = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
-                                        stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
-                                        stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
+                                        JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json");
+                                        if (resData.TryGetProperty("data", out JsonElement resDataFound)) {
+                                            resData = resDataFound.GetProperty("snapshot");
+                                            stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
+                                            stat.CreativeAuthor = resData.GetProperty("author").GetProperty("name_per_platform").GetProperty("eos").GetString();
+                                            stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
+                                            stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
+                                            stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
+                                            stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
+                                            stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
+                                            stat.CreativePlatformId = this.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
+                                            stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                                            stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
+                                        } else {
+                                            MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_creative_show_error_caption")}",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
                                     } catch {
                                         // ignore
                                     }

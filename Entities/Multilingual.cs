@@ -372,7 +372,7 @@ namespace FallGuysStats {
                             {"main_week", "Semaine"},
                             {"main_day", "Jour"},
                             {"main_session", "Session"},
-                            {"main_custom_range", "Période perso."},
+                            {"main_custom_range", "Période"},
                             {"main_party_type", "Parties"},
                             {"main_party", "en Groupe"},
                             {"main_solo", "en Solo"},

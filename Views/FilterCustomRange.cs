@@ -31,14 +31,26 @@ namespace FallGuysStats {
                 }
             }
 
-            if (this.selectedCustomTemplateSeason > -1) {
+            if (this.startDate == DateTime.MinValue && this.endDate == DateTime.MaxValue) {
+                this.mdtpStart.Value = DateTime.Now;
+                this.mdtpEnd.Value = DateTime.Now;
+            } else if (this.selectedCustomTemplateSeason > -1) {
                 this.lbTemplatesList.SetSelected(this.selectedCustomTemplateSeason, true);
             } else {
-                if (this.startDate == DateTime.MinValue) {
-                    this.PicStartDate_MouseClick(this.picStartDate, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
-                }
-                if (this.endDate == DateTime.MaxValue) {
-                    this.PicEndDate_MouseClick(this.picEndDate, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                try {
+                    if (this.startDate != DateTime.MinValue) {
+                        this.mdtpStart.Value = this.startDate.ToLocalTime();
+                    } else {
+                        this.PicStartDate_MouseClick(this.picStartDate, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                    if (this.endDate != DateTime.MaxValue) {
+                        this.mdtpEnd.Value = this.endDate.ToLocalTime();
+                    } else {
+                        this.PicEndDate_MouseClick(this.picEndDate, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                } catch {
+                    this.mdtpStart.Value = DateTime.Now;
+                    this.mdtpEnd.Value = DateTime.Now;
                 }
             }
 
