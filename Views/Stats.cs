@@ -1683,6 +1683,23 @@ namespace FallGuysStats {
             }
             return shareCode;
         }
+        public string FindCreativeAuthor(JsonElement authorData) {
+            List<string> validKeys = new List<string> { "eos", "steam", "psn", "xbl", "nso" };
+            foreach (string validKey in validKeys) {
+                if (authorData.TryGetProperty(validKey, out JsonElement authorInfo)) {
+                    string onlinePlatformInfo = string.Empty;
+                    switch (validKey) {
+                        case "eos": onlinePlatformInfo = " (Epic)"; break;
+                        case "steam": onlinePlatformInfo = " (Steam)"; break;
+                        case "psn": onlinePlatformInfo = " (PSN)"; break;
+                        case "xbl": onlinePlatformInfo = " (Xbox Live)"; break;
+                        case "nso": onlinePlatformInfo = " (Nintendo)"; break;
+                    }
+                    return authorInfo.GetString() + onlinePlatformInfo;
+                }
+            }
+            return string.Empty;
+        }
         public string RenameCreativePlatformId(string platform) {
             switch (platform) {
                 case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
