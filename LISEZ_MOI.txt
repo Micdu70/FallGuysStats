@@ -78,15 +78,23 @@ Permet de changer de profil automatiquement au moment où l'émission spécifié
 
 ## Copier le code de partage d'une map que vous avez précédemment jouée
 
-- Méthode 1:
+- Méthode 1 :
+
+  - En haut de la fenêtre principale, cliquer sur le premier nombre à droite du nom du profil pour voir la liste des stats des émissions.
+
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) souhaité présent dans le tableau, dans la colonne "Nom de l'émission".
+
+
+- Méthode 2 :
 
   - Dans la fenêtre principale, cliquer sur le nom de la manche dont vous voulez copier le code.
 
-  - Double-cliquer sur le code de partage présent dans le tableau, dans la colonne "Nom de l'émission".
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) présent dans le tableau, dans la colonne "Nom de l'émission".
 
-- Méthode 2:
+
+- Méthode 3 :
 
   - En haut de la fenêtre principale, cliquer sur le deuxième ou troisième nombre à droite du nom du profil pour voir une liste des stats des manches.
 
-  - Double-cliquer sur le code partage souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
 

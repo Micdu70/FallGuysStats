@@ -106,8 +106,8 @@
             this.chkOnlyShowQualify = new MetroFramework.Controls.MetroRadioButton();
             this.chkCycleQualifyGold = new MetroFramework.Controls.MetroRadioButton();
             this.grpOverlay = new System.Windows.Forms.GroupBox();
-            this.panelSettings = new MetroFramework.Controls.MetroPanel();
             this.cboOverlayBackground = new FallGuysStats.ImageComboBox();
+            this.panelSettings = new MetroFramework.Controls.MetroPanel();
             this.grpFallalytics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSteam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEpicGames)).BeginInit();
@@ -1006,11 +1006,11 @@
             this.lblFastestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFastestFilter.AutoSize = true;
             this.lblFastestFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblFastestFilter.Location = new System.Drawing.Point(456, 88);
+            this.lblFastestFilter.Location = new System.Drawing.Point(473, 88);
             this.lblFastestFilter.Name = "lblFastestFilter";
-            this.lblFastestFilter.Size = new System.Drawing.Size(148, 19);
+            this.lblFastestFilter.Size = new System.Drawing.Size(131, 19);
             this.lblFastestFilter.TabIndex = 0;
-            this.lblFastestFilter.Text = "Fastest / Longest Filter";
+            this.lblFastestFilter.Text = "Best / Longest Filter";
             // 
             // cboFastestFilter
             // 
@@ -1303,6 +1303,24 @@
             this.grpOverlay.TabStop = false;
             this.grpOverlay.Text = "Overlay";
             // 
+            // cboOverlayBackground
+            // 
+            this.cboOverlayBackground.BorderColor = System.Drawing.Color.Gray;
+            this.cboOverlayBackground.ButtonColor = System.Drawing.Color.DarkGray;
+            this.cboOverlayBackground.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cboOverlayBackground.DropDownHeight = 414;
+            this.cboOverlayBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOverlayBackground.FormattingEnabled = true;
+            this.cboOverlayBackground.IntegralHeight = false;
+            this.cboOverlayBackground.Location = new System.Drawing.Point(617, 123);
+            this.cboOverlayBackground.Name = "cboOverlayBackground";
+            this.cboOverlayBackground.Size = new System.Drawing.Size(226, 21);
+            this.cboOverlayBackground.TabIndex = 13;
+            this.cboOverlayBackground.GotFocus += new System.EventHandler(this.CboOverlayBackground_GotFocus);
+            this.cboOverlayBackground.LostFocus += new System.EventHandler(this.CboOverlayBackground_LostFocus);
+            this.cboOverlayBackground.MouseEnter += new System.EventHandler(this.CboOverlayBackground_MouseEnter);
+            this.cboOverlayBackground.MouseLeave += new System.EventHandler(this.CboOverlayBackground_MouseLeave);
+            // 
             // panelSettings
             // 
             this.panelSettings.AutoScroll = true;
@@ -1324,24 +1342,6 @@
             this.panelSettings.VerticalScrollbarBarColor = true;
             this.panelSettings.VerticalScrollbarHighlightOnWheel = true;
             this.panelSettings.VerticalScrollbarSize = 10;
-            // 
-            // cboOverlayBackground
-            // 
-            this.cboOverlayBackground.BorderColor = System.Drawing.Color.Gray;
-            this.cboOverlayBackground.ButtonColor = System.Drawing.Color.DarkGray;
-            this.cboOverlayBackground.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cboOverlayBackground.DropDownHeight = 414;
-            this.cboOverlayBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboOverlayBackground.FormattingEnabled = true;
-            this.cboOverlayBackground.IntegralHeight = false;
-            this.cboOverlayBackground.Location = new System.Drawing.Point(617, 123);
-            this.cboOverlayBackground.Name = "cboOverlayBackground";
-            this.cboOverlayBackground.Size = new System.Drawing.Size(226, 21);
-            this.cboOverlayBackground.TabIndex = 13;
-            this.cboOverlayBackground.GotFocus += new System.EventHandler(this.CboOverlayBackground_GotFocus);
-            this.cboOverlayBackground.LostFocus += new System.EventHandler(this.CboOverlayBackground_LostFocus);
-            this.cboOverlayBackground.MouseEnter += new System.EventHandler(this.CboOverlayBackground_MouseEnter);
-            this.cboOverlayBackground.MouseLeave += new System.EventHandler(this.CboOverlayBackground_MouseLeave);
             // 
             // Settings
             // 

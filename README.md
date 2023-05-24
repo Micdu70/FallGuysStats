@@ -195,12 +195,16 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Copier le code de partage d'une map que vous avez précédemment jouée
 
 - Méthode 1:
-  - Dans la fenêtre principale, cliquer sur le nom de la manche dont vous voulez copier le code.
-  - Double-cliquer sur le code de partage présent dans le tableau, dans la colonne "Nom de l'émission".
+  - En haut de la fenêtre principale, cliquer sur le premier nombre à droite du nom du profil pour voir la liste des stats des émissions.
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) souhaité présent dans le tableau, dans la colonne "Nom de l'émission".
 
 - Méthode 2:
+  - Dans la fenêtre principale, cliquer sur le nom de la manche dont vous voulez copier le code.
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) présent dans le tableau, dans la colonne "Nom de l'émission".
+
+- Méthode 3:
   - En haut de la fenêtre principale, cliquer sur le deuxième ou troisième nombre à droite du nom du profil pour voir une liste des stats des manches.
-  - Double-cliquer sur le code partage souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
+  - Double-cliquer sur le code de partage (ou le nom de l'émission) souhaité présent dans le tableau, dans la colonne "Nom de l'émission" ou "Nom de la manche".
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
@@ -424,6 +428,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.171`
+    - Add custom range filter, seasonal stats
+    - Add a new show id
+    - Bugfix and program optimization
+  - `1.170`
+    - Add information about rounds played with shared code via fallguysdb
+    - Add final exception (basketfall)
+    - Bugfix and program optimization
   - `1.169`
     - Bugfix and program optimization
   - `1.168`

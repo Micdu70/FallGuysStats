@@ -46,7 +46,7 @@
             this.mdtpStart.Location = new System.Drawing.Point(64, 78);
             this.mdtpStart.MinimumSize = new System.Drawing.Size(0, 29);
             this.mdtpStart.Name = "mdtpStart";
-            this.mdtpStart.Size = new System.Drawing.Size(200, 29);
+            this.mdtpStart.Size = new System.Drawing.Size(230, 29);
             this.mdtpStart.TabIndex = 0;
             this.mdtpStart.CloseUp += new System.EventHandler(this.DtStart_CloseUp);
             // 
@@ -55,7 +55,7 @@
             this.lblTilde.AutoSize = true;
             this.lblTilde.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTilde.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblTilde.Location = new System.Drawing.Point(268, 80);
+            this.lblTilde.Location = new System.Drawing.Point(297, 80);
             this.lblTilde.Name = "lblTilde";
             this.lblTilde.Size = new System.Drawing.Size(25, 25);
             this.lblTilde.Style = MetroFramework.MetroColorStyle.Teal;
@@ -65,10 +65,10 @@
             // mdtpEnd
             // 
             this.mdtpEnd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.mdtpEnd.Location = new System.Drawing.Point(339, 78);
+            this.mdtpEnd.Location = new System.Drawing.Point(366, 78);
             this.mdtpEnd.MinimumSize = new System.Drawing.Size(0, 29);
             this.mdtpEnd.Name = "mdtpEnd";
-            this.mdtpEnd.Size = new System.Drawing.Size(200, 29);
+            this.mdtpEnd.Size = new System.Drawing.Size(230, 29);
             this.mdtpEnd.TabIndex = 2;
             this.mdtpEnd.CloseUp += new System.EventHandler(this.DtEnd_CloseUp);
             // 
@@ -77,7 +77,7 @@
             this.grpTemplates.Controls.Add(this.lbTemplatesList);
             this.grpTemplates.Location = new System.Drawing.Point(25, 130);
             this.grpTemplates.Name = "grpTemplates";
-            this.grpTemplates.Size = new System.Drawing.Size(514, 227);
+            this.grpTemplates.Size = new System.Drawing.Size(571, 218);
             this.grpTemplates.TabIndex = 5;
             this.grpTemplates.TabStop = false;
             this.grpTemplates.Text = "Templates List";
@@ -86,17 +86,16 @@
             // 
             this.lbTemplatesList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbTemplatesList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbTemplatesList.ItemHeight = 12;
             this.lbTemplatesList.Location = new System.Drawing.Point(7, 17);
             this.lbTemplatesList.Name = "lbTemplatesList";
-            this.lbTemplatesList.Size = new System.Drawing.Size(501, 218);
+            this.lbTemplatesList.Size = new System.Drawing.Size(558, 197);
             this.lbTemplatesList.TabIndex = 3;
             this.lbTemplatesList.SelectedValueChanged += new System.EventHandler(this.LbTemplatesList_SelectedValueChanged);
             // 
             // btnFilter
             // 
             this.btnFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFilter.Location = new System.Drawing.Point(464, 367);
+            this.btnFilter.Location = new System.Drawing.Point(521, 354);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
             this.btnFilter.TabIndex = 6;
@@ -106,7 +105,7 @@
             // 
             // btnSaveTemplate
             // 
-            this.btnSaveTemplate.Location = new System.Drawing.Point(321, 61);
+            this.btnSaveTemplate.Location = new System.Drawing.Point(494, 49);
             this.btnSaveTemplate.Name = "btnSaveTemplate";
             this.btnSaveTemplate.Size = new System.Drawing.Size(102, 23);
             this.btnSaveTemplate.TabIndex = 7;
@@ -120,7 +119,7 @@
             // 
             // 
             this.txtTemplateName.CustomButton.Image = null;
-            this.txtTemplateName.CustomButton.Location = new System.Drawing.Point(138, 1);
+            this.txtTemplateName.CustomButton.Location = new System.Drawing.Point(141, 1);
             this.txtTemplateName.CustomButton.Name = "";
             this.txtTemplateName.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtTemplateName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -129,7 +128,7 @@
             this.txtTemplateName.CustomButton.UseSelectable = true;
             this.txtTemplateName.CustomButton.Visible = false;
             this.txtTemplateName.Lines = new string[0];
-            this.txtTemplateName.Location = new System.Drawing.Point(321, 29);
+            this.txtTemplateName.Location = new System.Drawing.Point(325, 49);
             this.txtTemplateName.MaxLength = 32767;
             this.txtTemplateName.Name = "txtTemplateName";
             this.txtTemplateName.PasswordChar = '\0';
@@ -138,7 +137,7 @@
             this.txtTemplateName.SelectionLength = 0;
             this.txtTemplateName.SelectionStart = 0;
             this.txtTemplateName.ShortcutsEnabled = true;
-            this.txtTemplateName.Size = new System.Drawing.Size(160, 23);
+            this.txtTemplateName.Size = new System.Drawing.Size(163, 23);
             this.txtTemplateName.TabIndex = 8;
             this.txtTemplateName.UseSelectable = true;
             this.txtTemplateName.Visible = false;
@@ -148,7 +147,7 @@
             // lblTemplateName
             // 
             this.lblTemplateName.AutoSize = true;
-            this.lblTemplateName.Location = new System.Drawing.Point(210, 31);
+            this.lblTemplateName.Location = new System.Drawing.Point(217, 51);
             this.lblTemplateName.Name = "lblTemplateName";
             this.lblTemplateName.Size = new System.Drawing.Size(105, 19);
             this.lblTemplateName.TabIndex = 9;
@@ -171,7 +170,7 @@
             // 
             this.picEndDate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picEndDate.Image = global::FallGuysStats.Properties.Resources.calendar_on_icon;
-            this.picEndDate.Location = new System.Drawing.Point(299, 78);
+            this.picEndDate.Location = new System.Drawing.Point(326, 78);
             this.picEndDate.Name = "picEndDate";
             this.picEndDate.Size = new System.Drawing.Size(29, 29);
             this.picEndDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -182,11 +181,11 @@
             // FilterCustomRange
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(565, 402);
+            this.ClientSize = new System.Drawing.Size(620, 385);
+            this.Controls.Add(this.txtTemplateName);
             this.Controls.Add(this.picStartDate);
             this.Controls.Add(this.picEndDate);
             this.Controls.Add(this.lblTemplateName);
-            this.Controls.Add(this.txtTemplateName);
             this.Controls.Add(this.btnSaveTemplate);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.grpTemplates);
@@ -210,6 +209,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picEndDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

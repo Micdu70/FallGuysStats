@@ -597,6 +597,8 @@ namespace FallGuysStats {
             this.Theme = theme;
             this.mtt.Theme = theme;
             this.menu.Renderer = this.Theme == MetroThemeStyle.Light ? (ToolStripRenderer)new CustomLightArrowRenderer() : new CustomDarkArrowRenderer();
+            this.BackMaxSize = 56;
+            this.BackImage = this.Icon.ToBitmap();
             foreach (Control c1 in Controls) {
                 if (c1 is MenuStrip ms1) {
                     foreach (ToolStripMenuItem tsmi1 in ms1.Items) {
@@ -1756,11 +1758,11 @@ namespace FallGuysStats {
                     this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
                 if (this.CurrentSettings.OverlayVisible) { this.ToggleOverlay(this.overlay); }
 
-                this.menuAllStats.Checked = false;
                 this.selectedCustomTemplateSeason = this.CurrentSettings.SelectedCustomTemplateSeason;
                 this.customfilterRangeStart = this.CurrentSettings.CustomFilterRangeStart;
                 this.customfilterRangeEnd = this.CurrentSettings.CustomFilterRangeEnd;
 
+                this.menuAllStats.Checked = false;
                 switch (this.CurrentSettings.FilterType) {
                     case 0:
                         this.menuCustomRangeStats.Checked = true;
@@ -3285,6 +3287,7 @@ namespace FallGuysStats {
                         button.Checked = true;
                         return;
                     }
+
                     this.updateFilterType = true;
                     this.updateFilterRange = false;
 
@@ -3352,9 +3355,6 @@ namespace FallGuysStats {
                                                         this.menuWeekStats.Checked ? 3 :
                                                         this.menuDayStats.Checked ? 4 :
                                                         this.menuSessionStats.Checked ? 5 : 1;
-                    this.CurrentSettings.SelectedCustomTemplateSeason = -1;
-                    this.CurrentSettings.CustomFilterRangeStart = DateTime.MinValue;
-                    this.CurrentSettings.CustomFilterRangeEnd = DateTime.MaxValue;
                     this.SaveUserSettings();
                 } else if (!this.isStartUp && this.updateFilterRange) {
                     this.updateFilterRange = false;
@@ -3632,8 +3632,6 @@ namespace FallGuysStats {
             this.currentLanguage = CurrentLanguage;
             this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
 
-            this.BackImage = this.Icon.ToBitmap();
-            this.BackMaxSize = 56;
             int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 20)).Width;
 #if AllowUpdate
             this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 40 : CurrentLanguage == 4 ? 14 : 8), 8, 0, 0);

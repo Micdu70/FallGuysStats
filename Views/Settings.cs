@@ -780,9 +780,9 @@ namespace FallGuysStats {
                 this.lnkAboutFallalytics.Location = new Point(70, 0);
                 this.txtFallalyticsAPIKey.Location = new Point(235, 55);
 
-                this.lblWinsFilter.Location = new Point(500, 23);
-                this.lblQualifyFilter.Location = new Point(486, 58);
-                this.lblFastestFilter.Location = new Point(466, 93);
+                this.lblWinsFilter.Location = new Point(499, 23);
+                this.lblQualifyFilter.Location = new Point(485, 58);
+                this.lblFastestFilter.Location = new Point(482, 93);
                 this.lblOverlayBackground.Location = new Point(489, 126);
                 this.lblOverlayColor.Location = new Point(531, 168);
                 this.lblOverlayOpacity.Location = new Point(481, 195);
