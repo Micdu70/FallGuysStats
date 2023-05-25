@@ -491,7 +491,7 @@ namespace FallGuysStats {
                 if (!string.IsNullOrEmpty((string)e.Value)) {
                     if (info.UseShareCode) {
                         if (info.CreativeLastModifiedDate != DateTime.MinValue) {
-                            e.Value = info.CreativeTitle;
+                            e.Value = this.textInfo.ToTitleCase(info.CreativeTitle);
                         } else {
                             string showName = this.StatsForm.GetRoundIdFromShareCode((string)e.Value);
                             if (this.StatsForm.StatLookup.TryGetValue(showName, out LevelStats level)) {
@@ -639,7 +639,7 @@ namespace FallGuysStats {
             if (this._showStats != 2 && this.gridDetails.SelectedCells.Count > 0) {
                 if (((DataGridView)sender).SelectedRows.Count == 1) {
                     RoundInfo info = this.gridDetails.Rows[((DataGridView)sender).SelectedRows[0].Index].DataBoundItem as RoundInfo;
-                    if (info.UseShareCode && info.CreativeLastModifiedDate == DateTime.MinValue) {
+                    if (info.UseShareCode && !info.Name.StartsWith("wle_s10_") && info.CreativeLastModifiedDate == DateTime.MinValue) {
                         if (this.gridDetails.MenuSeparator != null && !this.gridDetails.CMenu.Items.Contains(this.gridDetails.MenuSeparator)) {
                             this.gridDetails.CMenu.Items.Add(this.gridDetails.MenuSeparator);
                         }
@@ -775,7 +775,7 @@ namespace FallGuysStats {
                                     temp.CreativeOnlinePlatformId = onlinePlatformInfo[1];
                                     temp.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                     temp.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                    temp.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
+                                    temp.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
                                     temp.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
                                     temp.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
                                     temp.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
@@ -879,7 +879,7 @@ namespace FallGuysStats {
                 if (info.CreativeLastModifiedDate == DateTime.MinValue) { return; }
                 StringBuilder strbuilder = new StringBuilder();
                 strbuilder.Append(Environment.NewLine);
-                strbuilder.Append(info.CreativeTitle);
+                strbuilder.Append(this.textInfo.ToTitleCase(info.CreativeTitle));
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(info.CreativeDescription);

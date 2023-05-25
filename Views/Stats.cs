@@ -1780,8 +1780,8 @@ namespace FallGuysStats {
                                             } else {
                                                 profile = editShows.SelectedProfileId;
                                                 this.CurrentSettings.SelectedProfile = profile;
-                                                //this.ReloadProfileMenuItems();
-                                                this.SetProfileMenu(profile);
+                                                this.ReloadProfileMenuItems();
+                                                //this.SetProfileMenu(profile);
                                             }
                                         } else {
                                             this.askedPreviousShows = 2;
@@ -1799,8 +1799,8 @@ namespace FallGuysStats {
                                 if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
                                     profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
                                     this.CurrentSettings.SelectedProfile = profile;
-                                    //this.ReloadProfileMenuItems();
-                                    this.SetProfileMenu(profile);
+                                    this.ReloadProfileMenuItems();
+                                    //this.SetProfileMenu(profile);
                                 }
 
                                 if (stat.Round == 1) {
@@ -1819,7 +1819,7 @@ namespace FallGuysStats {
                                         stat.CreativeOnlinePlatformId = onlinePlatformInfo[1];
                                         stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                         stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                        stat.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
+                                        stat.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
                                         stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
                                         stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
                                         stat.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
@@ -3360,19 +3360,8 @@ namespace FallGuysStats {
             }
             return shareCode;
         }
-        public string RenameCreativePlatformId(string platform) {
-            switch (platform) {
-                case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
-                case "ps5": return Multilingual.GetWord("level_detail_playersPs5");
-                case "xb1": return Multilingual.GetWord("level_detail_playersXb1");
-                case "xsx": return Multilingual.GetWord("level_detail_playersXsx");
-                case "switch": return Multilingual.GetWord("level_detail_playersSw");
-                case "win": return Multilingual.GetWord("level_detail_playersPc");
-            }
-            return platform;
-        }
         public string[] FindCreativeAuthor(JsonElement authorData) {
-            string[] validKeys = { "eos", "steam", "psn", "xbl", "nso" };
+            string[] validKeys = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "steam" and "nso" are not verified keys!
             string[] onlinePlatformInfo = { "N/A", "" };
             foreach (string validKey in validKeys) {
                 if (authorData.TryGetProperty(validKey, out JsonElement authorInfo)) {

@@ -65,7 +65,7 @@ namespace FallGuysStats {
                             {"main_export_markdown", "Export MarkDown"},
                             {"main_delete_shows", "Delete"},
                             {"main_move_shows", "Move show data"},
-                            {"main_update_shows", "Update info"},
+                            {"main_update_shows", "Update information"},
 
                             {"level_detail_medal", "Medal"},
                             {"level_detail_is_final", "Final"},
