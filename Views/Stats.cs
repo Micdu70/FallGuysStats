@@ -3373,22 +3373,15 @@ namespace FallGuysStats {
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
             string[] validKeys = { "eos", "steam", "psn", "xbl", "nso" };
-            string[] creativeAuthorInfo = new string[2];
+            string[] onlinePlatformInfo = { "N/A", "" };
             foreach (string validKey in validKeys) {
                 if (authorData.TryGetProperty(validKey, out JsonElement authorInfo)) {
-                    creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = validKey;
-                    //switch (validKey) {
-                    //    case "eos": creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = "Epic"; break;
-                    //    case "steam": creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = "Steam"; break;
-                    //    case "psn": creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = "PSN"; break;
-                    //    case "xbl": creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = "Xbox Live"; break;
-                    //    case "nso": creativeAuthorInfo[0] = authorInfo.GetString(); creativeAuthorInfo[1] = "Nintendo"; break;
-                    //}
-                    return creativeAuthorInfo;
+                    onlinePlatformInfo[0] = authorInfo.GetString();
+                    onlinePlatformInfo[1] = validKey;
+                    return onlinePlatformInfo;
                 }
             }
-            creativeAuthorInfo[0] = "N/A"; creativeAuthorInfo[1] = string.Empty;
-            return creativeAuthorInfo;
+            return onlinePlatformInfo;
         }
         public JsonElement GetApiData(string apiUrl, string apiEndPoint) {
             JsonElement resJroot;
