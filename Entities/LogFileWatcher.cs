@@ -61,7 +61,7 @@ namespace FallGuysStats {
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
-        private bool isCreativeWeeklyShow;
+        private bool isCreatorMadeRoundsShow;
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -249,9 +249,9 @@ namespace FallGuysStats {
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" } };
 
         private bool GetIsRealFinalRound(string roundId, string showId) {
-            if (showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) { this.isCreativeWeeklyShow = true; return true; }
+            if (showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) { this.isCreatorMadeRoundsShow = true; return true; }
 
-            this.isCreativeWeeklyShow = false;
+            this.isCreatorMadeRoundsShow = false;
 
             return (roundId.IndexOf("round_jinxed", StringComparison.OrdinalIgnoreCase) != -1
                         && roundId.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1)
@@ -395,7 +395,7 @@ namespace FallGuysStats {
                 if (index2 < 0) { index2 = line.Line.Length; }
 
                 if (logRound.Info.UseShareCode) {
-                    logRound.Info.Name = this.StatsForm.GetRoundId(line.Line.Substring(index + 66, index2 - index - 66));
+                    logRound.Info.Name = this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66));
                 } else {
                     logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
                 }
@@ -657,7 +657,7 @@ namespace FallGuysStats {
                 }
 
                 if (logRound.Info.Qualified) {
-                    if (!this.isCreativeWeeklyShow) {
+                    if (!this.isCreatorMadeRoundsShow) {
                         logRound.Info.Position = 1;
                     }
                     logRound.Info.Crown = true;

@@ -497,7 +497,7 @@ namespace FallGuysStats {
                         if (info.CreativeLastModifiedDate != DateTime.MinValue) {
                             e.Value = info.CreativeTitle;
                         } else {
-                            string showName = this.StatsForm.GetRoundId((string)e.Value);
+                            string showName = this.StatsForm.GetRoundIdFromShareCode((string)e.Value);
                             if (this.StatsForm.StatLookup.TryGetValue(showName, out LevelStats level)) {
                                 e.Value = level.Name;
                             }
@@ -773,14 +773,16 @@ namespace FallGuysStats {
                                 this.StatsForm.StatsDB.BeginTrans();
                                 for (int i = rows.Count - 1; i >= 0; i--) {
                                     RoundInfo temp = rows[i];
+                                    string[] onlinePlatformInfo = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
                                     temp.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                    temp.CreativeAuthor = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
+                                    temp.CreativeAuthor = onlinePlatformInfo[0];
+                                    temp.CreativeOnlinePlatformId = onlinePlatformInfo[1];
                                     temp.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                     temp.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
                                     temp.CreativeTitle = this.textInfo.ToTitleCase(resData.GetProperty("version_metadata").GetProperty("title").GetString());
                                     temp.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
                                     temp.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                    temp.CreativePlatformId = this.StatsForm.RenameCreativePlatformId(resData.GetProperty("version_metadata").GetProperty("platform_id").GetString());
+                                    temp.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
                                     temp.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
                                     temp.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     this.StatsForm.RoundDetails.Update(temp);
@@ -887,7 +889,7 @@ namespace FallGuysStats {
                 strbuilder.Append(info.CreativeDescription);
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(Environment.NewLine);
-                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_author")} : {info.CreativeAuthor}");
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_author")} : {info.CreativeAuthor}{this.GetCreativeOnlinePlatformName(info.CreativeOnlinePlatformId)}");
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_share_code")} : {info.CreativeShareCode}");
                 strbuilder.Append(Environment.NewLine);
@@ -895,7 +897,7 @@ namespace FallGuysStats {
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_max_players")} : {info.CreativeMaxPlayer}{Multilingual.GetWord("level_detail_creative_player_suffix")}");
                 strbuilder.Append(Environment.NewLine);
-                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_platform")} : {info.CreativePlatformId}");
+                strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_platform")} : {this.GetCreativePlatformName(info.CreativePlatformId)}");
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_last_modified")} : {info.CreativeLastModifiedDate.ToString(Multilingual.GetWord("level_date_format"))}");
                 strbuilder.Append(Environment.NewLine);
@@ -912,6 +914,29 @@ namespace FallGuysStats {
 
         private void GridDetails_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
             this.StatsForm.HideCustomTooltip(this);
+        }
+
+        private string GetCreativeOnlinePlatformName(string platform) {
+            switch (platform) {
+                case "eos": return $" ({Multilingual.GetWord("level_detail_online_platform_eos")})";
+                case "steam": return $" ({Multilingual.GetWord("level_detail_online_platform_steam")})";
+                case "psn": return $" ({Multilingual.GetWord("level_detail_online_platform_psn")})";
+                case "xbl": return $" ({Multilingual.GetWord("level_detail_online_platform_xbl")})";
+                case "nso": return $" ({Multilingual.GetWord("level_detail_online_platform_nso")})";
+            }
+            return platform;
+        }
+
+        private string GetCreativePlatformName(string platform) {
+            switch (platform) {
+                case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
+                case "ps5": return Multilingual.GetWord("level_detail_playersPs5");
+                case "xb1": return Multilingual.GetWord("level_detail_playersXb1");
+                case "xsx": return Multilingual.GetWord("level_detail_playersXsx");
+                case "switch": return Multilingual.GetWord("level_detail_playersSw");
+                case "win": return Multilingual.GetWord("level_detail_playersPc");
+            }
+            return platform;
         }
     }
 }

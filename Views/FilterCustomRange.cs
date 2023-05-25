@@ -62,7 +62,7 @@ namespace FallGuysStats {
             this.Theme = theme;
             this.BackMaxSize = 32;
             this.BackImagePadding = new Padding(20, 17, 0, 0);
-            this.BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.calendar_icon : Properties.Resources.calendar_gray_icon;
+            this.BackImage = theme == MetroThemeStyle.Light ? Properties.Resources.calendar_icon : Properties.Resources.calendar_gray_icon;
             foreach (Control c1 in Controls) {
                 if (c1 is MetroLabel ml1) {
                     ml1.Theme = theme;
@@ -79,10 +79,10 @@ namespace FallGuysStats {
                 } else if (c1 is MetroDateTime mdt1) {
                     mdt1.Theme = theme;
                 } else if (c1 is GroupBox gb1) {
-                    gb1.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                    gb1.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                     foreach (Control c2 in gb1.Controls) {
                         if (c2 is ListBox lb1) {
-                            if (this.Theme == MetroThemeStyle.Dark) {
+                            if (theme == MetroThemeStyle.Dark) {
                                 lb1.BackColor = Color.FromArgb(21, 21, 21);
                                 lb1.ForeColor = Color.DarkGray;
                             }
