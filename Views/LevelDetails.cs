@@ -414,17 +414,14 @@ namespace FallGuysStats {
 
             RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
 
-            if (info.PrivateLobby) { // Custom Show
+            if (info.UseShareCode) {
+                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightYellow : Color.FromArgb(24, 24, 0);
+            } else if (info.PrivateLobby) { // Custom Show
                 e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(8, 8, 8);
-                e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             } else if (info.AbandonShow) {
-                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightPink : Color.FromArgb(24, 0, 24);
-                e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(255, 235, 240) : Color.FromArgb(24, 0, 24);
             }
-            //if ((bool)this.gridDetails.Rows[e.RowIndex].Cells["PrivateLobby"].Value) {
-            //    e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(8, 8, 8);
-            //    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-            //}
+            e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
 
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "End") {
                 e.Value = (info.End - info.Start).ToString("m\\:ss");
@@ -478,12 +475,12 @@ namespace FallGuysStats {
                 if (this._showStats == 1 && this.StatsForm.StatLookup.TryGetValue(info.Name, out LevelStats level)) {
                     Color c1 = level.Type.LevelForeColor(info.IsFinal, info.IsTeam, this.Theme);
                     //e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : Color.FromArgb(c1.A, (int)(c1.R * 0.5), (int)(c1.G * 0.5), (int)(c1.B * 0.5));
-                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light || info.PrivateLobby || info.AbandonShow ? c1 : ControlPaint.LightLight(c1);
+                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : ControlPaint.LightLight(c1);
                 }
             } else if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name") {
                 if (this.StatsForm.StatLookup.TryGetValue((string)e.Value, out LevelStats level)) {
                     Color c1 = level.Type.LevelForeColor(info.IsFinal, info.IsTeam, this.Theme);
-                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light || info.PrivateLobby || info.AbandonShow ? c1 : ControlPaint.LightLight(c1);
+                    e.CellStyle.ForeColor = this.Theme == MetroThemeStyle.Light ? c1 : ControlPaint.LightLight(c1);
                     e.Value = level.Name;
                     if (Regex.IsMatch((string)e.Value, @"^\d{4}-\d{4}-\d{4}$")) {
                         this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_share_code_copied_tooltip");

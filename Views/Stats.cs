@@ -1438,7 +1438,7 @@ namespace FallGuysStats {
                 OverlayFixedHeight = null,
                 FlippedDisplay = false,
                 FixedFlippedDisplay = false,
-                SwitchBetweenLongest = true,
+                SwitchBetweenLongest = false,
                 SwitchBetweenQualify = true,
                 SwitchBetweenPlayers = false,
                 SwitchBetweenStreaks = true,
