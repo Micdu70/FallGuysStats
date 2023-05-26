@@ -3460,6 +3460,8 @@ namespace FallGuysStats {
                 using (Settings settings = new Settings()) {
                     //settings.Icon = this.Icon;
                     settings.CurrentSettings = this.CurrentSettings;
+                    settings.BackMaxSize = 32;
+                    settings.BackImagePadding = new Padding(20, 19, 0, 0);
                     settings.StatsForm = this;
                     settings.Overlay = this.overlay;
                     string lastLogPath = this.CurrentSettings.LogPath;
@@ -3609,7 +3611,7 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void menuTodaysShow_Click(object sender, EventArgs e) {
+        private void MenuTodaysShow_Click(object sender, EventArgs e) {
             try {
                 Process.Start(@"https://fallguys-db.pages.dev/upcoming_shows");
             } catch (Exception ex) {

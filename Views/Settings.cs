@@ -247,10 +247,7 @@ namespace FallGuysStats {
         }
 
         private void SetTheme(MetroThemeStyle theme) {
-            this.Theme = theme;
-            this.BackMaxSize = 32;
-            this.BackImagePadding = new Padding(20, 19, 0, 0);
-            this.BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
+            this.BackImage = theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
             this.overlayOpacityToolTip.Theme = theme;
             this.cboOverlayBackground.mtt.Theme = theme;
             this.CboOverlayBackground_blur();
@@ -265,7 +262,7 @@ namespace FallGuysStats {
                     mp1.Theme = theme;
                     foreach (Control c2 in mp1.Controls) {
                         if (c2 is GroupBox gb2) {
-                            gb2.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                            gb2.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                             foreach (Control c3 in gb2.Controls) {
                                 if (c3 is MetroLabel ml3) {
                                     ml3.Theme = theme;
@@ -282,7 +279,7 @@ namespace FallGuysStats {
                                 } else if (c3 is MetroTrackBar mtrb3) {
                                     mtrb3.Theme = theme;
                                 } else if (c3 is GroupBox gb3) {
-                                    gb3.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                    gb3.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                                     foreach (Control c4 in gb3.Controls) {
                                         if (c4 is MetroRadioButton mrb4) {
                                             mrb4.Theme = theme;
@@ -291,7 +288,7 @@ namespace FallGuysStats {
                                                 ColorConverter colorConverter = new ColorConverter();
                                                 lb4.ForeColor = (Color)colorConverter.ConvertFromString(this.overlayFontColorSerialized);
                                             } else {
-                                                lb4.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                                lb4.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                                             }
                                         }
                                     }
@@ -952,10 +949,14 @@ namespace FallGuysStats {
                 Multilingual.GetWord("settings_theme_light"),
                 Multilingual.GetWord("settings_theme_dark"),
             });
-            switch (this.CurrentSettings.Theme) {
-                case 0: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_light"); break;
-                case 1: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_dark"); break;
-            }
+            //switch (this.CurrentSettings.Theme) {
+            //    case 0: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_light"); break;
+            //    case 1: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_dark"); break;
+            //}
+            this.cboTheme.SelectedItem = this.Theme == MetroThemeStyle.Light
+                ? Multilingual.GetWord("settings_theme_light")
+                : Multilingual.GetWord("settings_theme_dark");
+
             this.lblLogPath.Text = Multilingual.GetWord("settings_log_path");
             this.lblLogPathNote.Text = Multilingual.GetWord("settings_log_path_description");
             this.btnSave.Text = Multilingual.GetWord("settings_save");
