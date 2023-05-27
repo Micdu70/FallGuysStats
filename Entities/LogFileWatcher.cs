@@ -370,7 +370,12 @@ namespace FallGuysStats {
                     Stats.IsLastPlayedRoundStillPlaying = false;
                     Stats.LastPlayedRoundStart = null;
                     Stats.LastPlayedRoundEnd = null;
-                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); this.serverPing.Start(); }
+                    if (line.Date > this.StatsForm.startupTime) {
+                        this.gameState.Start();
+                        if (this.StatsForm.CurrentSettings.SwitchBetweenPlayers || this.StatsForm.CurrentSettings.OnlyShowPing) {
+                            this.serverPing.Start();
+                        }
+                    }
                 }
 
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId, UseShareCode = this.useShareCode };
