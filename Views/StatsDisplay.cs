@@ -81,6 +81,25 @@ namespace FallGuysStats {
             }
         }
 
+        private void SetTheme(MetroThemeStyle theme) {
+            this.Theme = theme;
+            this.picSwitchGraphStyle.Image = this.switchGraphStyle == 1 ? Properties.Resources.bar_plot_teal_icon : Properties.Resources.scatter_plot_teal_icon;
+            this.chkWins.Theme = theme;
+            this.chkFinals.Theme = theme;
+            this.chkShows.Theme = theme;
+
+            this.chkWins.ForeColor = theme == MetroThemeStyle.Light ? Color.Goldenrod : Color.Gold;
+            this.chkFinals.ForeColor = theme == MetroThemeStyle.Light ? Color.DeepPink : Color.DeepPink;
+            this.chkShows.ForeColor = theme == MetroThemeStyle.Light ? Color.RoyalBlue : Color.DodgerBlue;
+
+            if (theme == MetroThemeStyle.Dark) {
+                this.formsPlot.Plot.Style(ScottPlot.Style.Black);
+                this.formsPlot.Plot.Style(figureBackground: Color.FromArgb(17, 17, 17));
+                this.formsPlot.Plot.Style(dataBackground: Color.FromArgb(17, 17, 17));
+                this.formsPlot.Plot.Style(tick: Color.WhiteSmoke);
+            }
+        }
+
         private void ChangeFormsPlotStyle(int style) {
             if (style == 1) { // BarPlot
                 this.StatsForm.CurrentSettings.WinPerDayGraphStyle = 1;
@@ -248,27 +267,6 @@ namespace FallGuysStats {
             this.formsPlot.Refresh();
         }
 
-        private void SetTheme(MetroThemeStyle theme) {
-            this.Theme = theme;
-            this.picSwitchGraphStyle.Image = this.switchGraphStyle == 1 ? Properties.Resources.bar_plot_teal_icon : Properties.Resources.scatter_plot_teal_icon;
-            this.chkWins.Theme = theme;
-            this.chkFinals.Theme = theme;
-            this.chkShows.Theme = theme;
-            if (theme == MetroThemeStyle.Light) {
-                this.chkWins.ForeColor = Color.Goldenrod;
-                this.chkFinals.ForeColor = Color.DeepPink;
-                this.chkShows.ForeColor = Color.RoyalBlue;
-            } else if (theme == MetroThemeStyle.Dark) {
-                this.chkWins.ForeColor = Color.Gold;
-                this.chkFinals.ForeColor = Color.DeepPink;
-                this.chkShows.ForeColor = Color.DodgerBlue;
-
-                this.formsPlot.Plot.Style(ScottPlot.Style.Black);
-                this.formsPlot.Plot.Style(figureBackground: Color.FromArgb(17, 17, 17));
-                this.formsPlot.Plot.Style(dataBackground: Color.FromArgb(17, 17, 17));
-                this.formsPlot.Plot.Style(tick: Color.WhiteSmoke);
-            }
-        }
         private void StatsDisplay_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.Close();

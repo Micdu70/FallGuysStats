@@ -25,31 +25,6 @@ namespace FallGuysStats {
             this.InitializeComponent();
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
         }
-        private void SetTheme(MetroThemeStyle theme) {
-            this.Theme = theme;
-            if (this.Theme == MetroThemeStyle.Light) {
-                this.dataGridViewCellStyle1.BackColor = Color.LightGray;
-                this.dataGridViewCellStyle1.ForeColor = Color.Black;
-                this.dataGridViewCellStyle1.SelectionBackColor = Color.Cyan;
-                //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-
-                this.dataGridViewCellStyle2.BackColor = Color.White;
-                this.dataGridViewCellStyle2.ForeColor = Color.Black;
-                this.dataGridViewCellStyle2.SelectionBackColor = Color.DeepSkyBlue;
-                this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            } else if (this.Theme == MetroThemeStyle.Dark) {
-                this.dataGridViewCellStyle1.BackColor = Color.FromArgb(2, 2, 2);
-                this.dataGridViewCellStyle1.ForeColor = Color.DarkGray;
-                //this.dataGridViewCellStyle1.SelectionBackColor = Color.DarkSlateBlue;
-                this.dataGridViewCellStyle1.SelectionBackColor = Color.DarkMagenta;
-                this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-
-                this.dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 51, 56);
-                this.dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
-                this.dataGridViewCellStyle2.SelectionBackColor = Color.SpringGreen;
-                this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            }
-        }
         private int GetClientWidth(string level) {
             int lang = Stats.CurrentLanguage;
             switch (level) {
@@ -268,6 +243,18 @@ namespace FallGuysStats {
                     tss.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                 }
             }
+        }
+        private void SetTheme(MetroThemeStyle theme) {
+            this.Theme = theme;
+
+            this.dataGridViewCellStyle1.BackColor = theme == MetroThemeStyle.Light ? Color.LightGray : Color.FromArgb(2, 2, 2);
+            this.dataGridViewCellStyle1.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+            this.dataGridViewCellStyle1.SelectionBackColor = theme == MetroThemeStyle.Light ? Color.Cyan : Color.DarkSlateBlue;
+            //this.dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            this.dataGridViewCellStyle2.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(49, 51, 56);
+            this.dataGridViewCellStyle2.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.WhiteSmoke;
+            this.dataGridViewCellStyle2.SelectionBackColor = theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
+            this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
         }
         private void MnuToolStripSeparator_Custom_Paint(object sender, PaintEventArgs e) {
             ToolStripSeparator sep = (ToolStripSeparator)sender;

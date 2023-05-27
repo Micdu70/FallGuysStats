@@ -34,7 +34,6 @@ namespace FallGuysStats {
     public class LogRound {
         public bool CurrentlyInParty;
         public bool PrivateLobby;
-        public bool GetServerPing;
         public bool CountingPlayers;
         public bool GetCurrentPlayerID;
         public bool FindingPosition;
@@ -68,6 +67,7 @@ namespace FallGuysStats {
         public event Action<DateTime> OnNewLogFileDate;
         public event Action<string> OnError;
 
+        private readonly ServerPingWatcher serverPing = new ServerPingWatcher();
         private readonly GameStateWatcher gameState = new GameStateWatcher();
 
         public void SetAutoChangeProfile(bool isEnabled) {
@@ -210,7 +210,7 @@ namespace FallGuysStats {
                         currentFilePath = filePath;
                     }
                 } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.Message);
+                    this.OnError?.Invoke(ex.ToString());
                 }
                 Thread.Sleep(UpdateDelay);
             }
@@ -240,7 +240,7 @@ namespace FallGuysStats {
                         this.lines.Clear();
                     }
                 } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.Message);
+                    this.OnError?.Invoke(ex.ToString());
                 }
                 Thread.Sleep(UpdateDelay);
             }
@@ -337,15 +337,18 @@ namespace FallGuysStats {
                 logRound.Info = null;
 
                 Stats.EndedShow = false;
+                Stats.CurrentServerIp = string.Empty;              
 
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0;
                 logRound.CurrentlyInParty = !logRound.PrivateLobby && (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) == -1);
-                logRound.GetServerPing = true;
                 logRound.CountingPlayers = false;
                 logRound.GetCurrentPlayerID = false;
                 logRound.FindingPosition = false;
 
                 round.Clear();
+            } else if (logRound.Info == null && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+                int ipIndex = line.Line.IndexOf("IP:");
+                Stats.CurrentServerIp = line.Line.Substring(ipIndex + 3);
             } else if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.selectedShowId.StartsWith("ugc-")) {
@@ -357,13 +360,6 @@ namespace FallGuysStats {
             } else if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) > 0) {
                 //Store SessionID to prevent duplicates (for fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
-            } else if (logRound.GetServerPing && line.Line.IndexOf("Client address: ", StringComparison.OrdinalIgnoreCase) > 0) {
-                index = line.Line.IndexOf("RTT: ");
-                if (index > 0) {
-                    logRound.GetServerPing = false;
-                    int msIndex = line.Line.IndexOf("ms", index);
-                    Stats.LastServerPing = int.Parse(line.Line.Substring(index + 5, msIndex - index - 5));
-                }
             } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
                 if (line.Date > Stats.LastRoundStart) {
                     Stats.LastRoundStart = line.Date;
@@ -374,7 +370,7 @@ namespace FallGuysStats {
                     Stats.IsLastPlayedRoundStillPlaying = false;
                     Stats.LastPlayedRoundStart = null;
                     Stats.LastPlayedRoundEnd = null;
-                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); }
+                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); this.serverPing.Start(); }
                 }
 
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId, UseShareCode = this.useShareCode };

@@ -586,11 +586,16 @@ namespace FallGuysStats {
                     this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                     break;
                 case 1:
-                    this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
-                    if ((type == LevelType.Survival || type == LevelType.Logic) && this.levelException != 1) {
-                        this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
-                    } else {
+                    if (this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
+                        this.lblFastest.Text = $"{Multilingual.GetWord("overlay_fastest_time")} :";
                         this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
+                    } else {
+                        this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
+                        if ((type == LevelType.Survival || type == LevelType.Logic) && this.levelException != 1) {
+                            this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
+                        } else {
+                            this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
+                        }
                     }
                     break;
                 case 2:
@@ -634,6 +639,7 @@ namespace FallGuysStats {
                         this.lblPlayersSwitch.DrawVisible = false;
                         this.lblPlayersPc.DrawVisible = false;
                     }
+                    this.lblPlayers.ForeColor = Color.White;
                     break;
                 case 1:
                     this.lblPlayers.Image = null;
@@ -642,7 +648,12 @@ namespace FallGuysStats {
                     this.lblPlayersSwitch.DrawVisible = false;
                     this.lblPlayersPc.DrawVisible = false;
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
-                    this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
+                    this.lblPlayers.TextRight = Stats.LastGoodServerPing > 0 ? $"{Stats.LastGoodServerPing} ms" : "-";
+                    this.lblPlayers.ForeColor = Stats.LastGoodServerPing == 0 ? Color.White :
+                                                !Stats.InShow || string.IsNullOrEmpty(Stats.CurrentServerIp) || Stats.IsLastServerPingFailed ? Color.Silver :
+                                                Stats.LastGoodServerPing < 100 ? Color.Lime :
+                                                Stats.LastGoodServerPing < 200 ? Color.DarkOrange :
+                                                Color.Red;
                     break;
             }
         }
@@ -683,13 +694,19 @@ namespace FallGuysStats {
                     if (roundName == "round_pixelperfect_almond" || roundName == "round_hoverboardsurvival_s4_show" || roundName == "round_hoverboardsurvival2_almond" ||
                         roundName == "round_snowy_scrap" || roundName == "round_jinxed" || roundName == "round_rocknroll" || roundName == "round_conveyor_arena") {
                         this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
+                        this.lblRound.IsShareCodeFormat = false;
                     } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
                         this.levelException = 2; // Level is like a "Team" level type (score info is most important)
+                        this.lblRound.IsShareCodeFormat = false;
                     } else if (this.lastRound.UseShareCode) {
                         this.levelException = 3; // Level is a creative map and played in Custom
+                        this.lblRound.IsShareCodeFormat = true;
                     } else if (Regex.IsMatch(roundName, @"^ugc-\d{4}-\d{4}-\d{4}$")) {
                         this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
                         roundName = roundName.Substring(4);
+                        this.lblRound.IsShareCodeFormat = true;
+                    } else {
+                        this.lblRound.IsShareCodeFormat = false;
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {
@@ -707,11 +724,11 @@ namespace FallGuysStats {
                     //} else {
                     //    if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
                     //}
-                    if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
+                    if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
 
                     this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException >= 3 ? true : false;
 
-                    LevelType levelType = (level?.Type).GetValueOrDefault();
+                    LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
                         this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
@@ -778,7 +795,7 @@ namespace FallGuysStats {
 
                     this.lblFinish.Text = $"{Multilingual.GetWord("overlay_finish")} :";
                     if (Finish.HasValue) {
-                        TimeSpan Time = Finish.GetValueOrDefault(End) - Start;
+                        TimeSpan Time = Finish.GetValueOrDefault(Start) - Start;
 
                         if (Time.ToString("m\\:ss\\.ff") == "0:00.00") {
                             File.Create(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt"));
@@ -1520,7 +1537,7 @@ namespace FallGuysStats {
                 offset = 22 - (int)(this.GetCountBigSignCharacter(s) * 0.1F) -
                          (int)(this.GetCountSmallSignCharacter(s) * 0.2F);
             } else if (this.lblProfile.Font.FontFamily.Name.Equals(DefaultFontCollection.Families[1].Name)) { // sc
-                offset = 22 - (this.GetCountKorAlphabet(s) * 2) -
+                offset = 22 - (int)(this.GetCountKorAlphabet(s) * 2.0F) -
                          (int)(this.GetCountBigSignCharacter(s) * 0.1F) -
                          (int)(this.GetCountSmallSignCharacter(s) * 0.2F);
             } else {
@@ -1529,7 +1546,7 @@ namespace FallGuysStats {
                          (int)(this.GetCountJpnAlphabet(s) * 1.8F) -
                          (int)(this.GetCountBigSignCharacter(s) * 0.1F) -
                          (int)(this.GetCountSmallSignCharacter(s) * 0.2F) -
-                         (int)(this.GetCountNumeric(s) * (-0.1F));
+                         (int)(this.GetCountNumeric(s) * -0.1F);
             }
             return sizeOfText - offset;
         }

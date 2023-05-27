@@ -226,6 +226,7 @@
     <Compile Include="Entities\LineReader.cs" />
     <Compile Include="Entities\Multilingual.cs" />
     <Compile Include="Entities\Profiles.cs" />
+    <Compile Include="Entities\ServerPingWatcher.cs" />
     <Compile Include="Entities\StatSummary.cs" />
     <Compile Include="Entities\UserSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

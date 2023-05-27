@@ -1006,11 +1006,11 @@
             this.lblFastestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFastestFilter.AutoSize = true;
             this.lblFastestFilter.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblFastestFilter.Location = new System.Drawing.Point(473, 88);
+            this.lblFastestFilter.Location = new System.Drawing.Point(532, 88);
             this.lblFastestFilter.Name = "lblFastestFilter";
-            this.lblFastestFilter.Size = new System.Drawing.Size(131, 19);
+            this.lblFastestFilter.Size = new System.Drawing.Size(72, 19);
             this.lblFastestFilter.TabIndex = 0;
-            this.lblFastestFilter.Text = "Best / Longest Filter";
+            this.lblFastestFilter.Text = "Time Filter";
             // 
             // cboFastestFilter
             // 
@@ -1187,9 +1187,9 @@
             this.chkOnlyShowFastest.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.chkOnlyShowFastest.Location = new System.Drawing.Point(238, 14);
             this.chkOnlyShowFastest.Name = "chkOnlyShowFastest";
-            this.chkOnlyShowFastest.Size = new System.Drawing.Size(101, 19);
+            this.chkOnlyShowFastest.Size = new System.Drawing.Size(84, 19);
             this.chkOnlyShowFastest.TabIndex = 1;
-            this.chkOnlyShowFastest.Text = "Fastest Only";
+            this.chkOnlyShowFastest.Text = "Best Only";
             this.chkOnlyShowFastest.UseSelectable = true;
             // 
             // chkCycleFastestLongest

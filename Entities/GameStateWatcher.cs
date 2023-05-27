@@ -10,6 +10,8 @@ namespace FallGuysStats {
         private bool stop;
         private Thread watcher;
 
+        private readonly Process[] fallGuysProcessName = Process.GetProcessesByName("FallGuys_client_game");
+
         public event Action<string> OnError;
 
         public void Start() {
@@ -34,14 +36,13 @@ namespace FallGuysStats {
                         this.running = false;
                         return;
                     }
-                    Process[] fallGuysProcessName = Process.GetProcessesByName("FallGuys_client_game");
-                    if (fallGuysProcessName.Length == 0) {
+                    if (this.fallGuysProcessName.Length == 0) {
                         Stats.IsGameHasBeenClosed = true;
                         this.stop = true;
                         this.running = false;
                     }
                 } catch (Exception ex) {
-                    this.OnError?.Invoke(ex.Message);
+                    this.OnError?.Invoke(ex.ToString());
                 }
                 Thread.Sleep(UpdateDelay);
             }

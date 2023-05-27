@@ -30,6 +30,7 @@ namespace FallGuysStats {
         public Color LevelColor { get; set; }
         public Image RoundIcon { get; set; }
         public bool IsCreativeRound { get; set; }
+        public bool IsShareCodeFormat { get; set; }
         public void Draw(Graphics g) {
             if (!this.DrawVisible) { return; }
             if (this.PlatformIcon != null) {
@@ -110,13 +111,12 @@ namespace FallGuysStats {
                                 Font fontForLongText = this.GetFontForLongText(this.TextRight);
                                 if (!this.LevelColor.IsEmpty) {
                                     //float sizeOfText = g.MeasureString(this.TextRight, fontForLongText).Width;
-                                    float widthOfText = TextRenderer.MeasureText(this.TextRight, fontForLongText).Width;
+                                    float widthOfText = this.GetNewSizeOfText(this.TextRight, fontForLongText);
                                     this.FillRoundedRectangle(g, null, new SolidBrush(this.LevelColor), (int)(this.ClientRectangle.Width - widthOfText), this.ClientRectangle.Y, (int)widthOfText, 22, 10);
                                     if (this.RoundIcon != null) {
                                         g.DrawImage(this.RoundIcon, this.ClientRectangle.Width - widthOfText - this.ImageWidth - 5, this.ClientRectangle.Y, this.ImageWidth, this.ImageHeight);
                                     }
                                 }
-
                                 brFore.Color = this.LevelColor.IsEmpty ? this.ForeColor : Color.White;
                                 this.DrawOutlineText(g, this.ClientRectangle, null, brFore, fontForLongText.FontFamily, fontForLongText.Style, fontForLongText.Size, this.TextRight, stringFormat);
                                 //g.DrawString(this.TextRight, this.GetFontForLongText(this.TextRight), brFore, this.ClientRectangle, stringFormat);
@@ -145,114 +145,85 @@ namespace FallGuysStats {
             }
         }
         private Font GetFontForLongText(string text) {
-            return ((Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) && text.Length > 12) || (Stats.CurrentLanguage == 2 && text.Length > 12) || (Stats.CurrentLanguage == 3 && text.Length > 9)
-                ? new Font(this.Font.FontFamily, this.GetRoundNameFontSize(text.Length, 21), this.Font.Style, GraphicsUnit.Pixel)
-                : this.Font;
+            return Stats.CurrentLanguage <= 3 && text.Length > 9
+                   ? new Font(this.Font.FontFamily, this.GetRoundNameFontSize(text.Length), this.Font.Style, GraphicsUnit.Pixel)
+                   : this.Font;
         }
-        private float GetRoundNameFontSize(int textLength, int offset) {
-            float weight = 1.0F;
-            if (this.IsCreativeRound) {
-                offset += 9;
-                if (textLength == 13) {
-                    weight = 0.95F;
-                } else if (textLength == 14) {
-                    weight = 1.05F;
-                } else if (textLength == 15) {
-                    weight = 1.05F;
-                } else if (textLength == 16) {
-                    weight = 1.05F;
-                } else if (textLength == 17) {
-                    weight = 1.05F;
-                } else if (textLength == 18) {
-                    weight = 1.05F;
-                } else if (textLength == 19) {
-                    weight = 1.05F;
-                } else if (textLength == 20) {
-                    weight = 1.1F;
-                } else if (textLength == 21) {
-                    weight = 1.2F;
-                } else if (textLength == 22) {
-                    weight = 1.4F;
-                } else if (textLength == 23) {
-                    weight = 1.6F;
-                } else if (textLength == 24) {
-                    weight = 1.8F;
-                } else if (textLength == 25) {
-                    weight = 2.0F;
-                } else if (textLength == 26) {
-                    weight = 2.2F;
-                } else if (textLength == 27) {
-                    weight = 3.4F;
-                } else if (textLength == 28) {
-                    weight = 4.7F;
-                } else if (textLength == 29) {
-                    weight = 9.7F;
-                }
+        private float GetRoundNameFontSize(int textLength) {
+            float defaultFontSize = 18.0F;
+            float fontSize = this.Font.Size;
+            if (fontSize < 18) {
+                fontSize += defaultFontSize - fontSize;
             } else {
-                if (Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French
-                    offset += 9;
-                    if (textLength == 13) {
-                        weight = 0.95F;
+                fontSize -= fontSize - defaultFontSize;
+            }
+
+            if (this.IsShareCodeFormat) {
+                fontSize -= 0.0F;
+            } else {
+                if (this.IsCreativeRound || Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French (or an Official Creative Round)
+                    if (textLength == 10) {
+                        fontSize -= 2.0F;
+                    } else if (textLength == 11) {
+                        fontSize -= 2.5F;
+                    } else if (textLength == 12) {
+                        fontSize -= 3.0F;
+                    } else if (textLength == 13) {
+                        fontSize -= 3.5F;
                     } else if (textLength == 14) {
-                        weight = 1.05F;
+                        fontSize -= 4.0F;
                     } else if (textLength == 15) {
-                        weight = 1.05F;
+                        fontSize -= 4.5F;
                     } else if (textLength == 16) {
-                        weight = 1.05F;
+                        fontSize -= 5.0F;
                     } else if (textLength == 17) {
-                        weight = 1.05F;
+                        fontSize -= 5.5F;
                     } else if (textLength == 18) {
-                        weight = 1.05F;
+                        fontSize -= 6.0F;
                     } else if (textLength == 19) {
-                        weight = 1.05F;
+                        fontSize -= 6.5F;
                     } else if (textLength == 20) {
-                        weight = 1.1F;
+                        fontSize -= 7.0F; ;
                     } else if (textLength == 21) {
-                        weight = 1.2F;
+                        fontSize -= 7.5F;
                     } else if (textLength == 22) {
-                        weight = 1.4F;
+                        fontSize -= 8.0F;
                     } else if (textLength == 23) {
-                        weight = 1.6F;
+                        fontSize -= 8.5F;
                     } else if (textLength == 24) {
-                        weight = 1.8F;
+                        fontSize -= 9.0F;
                     } else if (textLength == 25) {
-                        weight = 2.0F;
-                    } else if (textLength == 26) {
-                        weight = 2.2F;
-                    } else if (textLength == 27) {
-                        weight = 3.4F;
-                    } else if (textLength == 28) {
-                        weight = 4.7F;
-                    } else if (textLength == 29) {
-                        weight = 9.7F;
+                        fontSize -= 9.5F;
+                    } else if (textLength >= 26) {
+                        fontSize -= 10.0F;
                     }
                 } else if (Stats.CurrentLanguage == 2) { // Korean
-                    offset += 3;
-                    if (textLength == 13) {
-                        weight = 1.15F;
-                    } else if (textLength == 14) {
-                        weight = 1.2F;
-                    } else if (textLength == 15) {
-                        weight = 1.225F;
+                    if (textLength == 10) {
+                        fontSize -= 1.0F;
+                    } else if (textLength == 11) {
+                        fontSize -= 1.5F;
+                    } else if (textLength == 12) {
+                        fontSize -= 2.0F;
+                    } else if (textLength == 13) {
+                        fontSize -= 2.5F;
+                    } else if (textLength >= 14) {
+                        fontSize -= 3.0F;
                     }
                 } else if (Stats.CurrentLanguage == 3) { // Japanese
                     if (textLength == 10) {
-                        weight = 1.075F;
+                        fontSize -= 4.0F;
                     } else if (textLength == 11) {
-                        weight = 1.1F;
+                        fontSize -= 4.5F;
                     } else if (textLength == 12) {
-                        weight = 1.15F;
+                        fontSize -= 5.0F;
                     } else if (textLength == 13) {
-                        weight = 1.2F;
-                    } else if (textLength == 14) {
-                        weight = 1.25F;
-                    } else if (textLength == 15) {
-                        weight = 1.35F;
+                        fontSize -= 5.5F;
+                    } else if (textLength >= 14) {
+                        fontSize -= 6.0F;
                     }
                 }
             }
-
-            return (offset - textLength) * weight;
+            return fontSize;
         }
         private void FillRoundedRectangle(Graphics g, Pen pen, Brush brush, int x, int y, int width, int height, int radius) {
             using (GraphicsPath path = new GraphicsPath()) {
@@ -278,6 +249,17 @@ namespace FallGuysStats {
                 g.FillPath(fillBrush, path);
                 if (outlinePen != null) g.DrawPath(outlinePen, path);
             }
+        }
+        private float GetNewSizeOfText(string s, Font font) {
+            float sizeOfText = TextRenderer.MeasureText(s, font).Width;
+            float defaultFontSize = 18.0F;
+            float fontSize = font.Size;
+            if (fontSize < 18) {
+                fontSize += defaultFontSize - fontSize;
+            } else {
+                fontSize -= fontSize - defaultFontSize;
+            }
+            return sizeOfText + fontSize;
         }
     }
 }

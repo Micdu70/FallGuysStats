@@ -247,6 +247,7 @@ namespace FallGuysStats {
         }
 
         private void SetTheme(MetroThemeStyle theme) {
+            this.Theme = theme;
             this.BackImage = theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
             this.overlayOpacityToolTip.Theme = theme;
             this.cboOverlayBackground.mtt.Theme = theme;
@@ -779,7 +780,7 @@ namespace FallGuysStats {
 
                 this.lblWinsFilter.Location = new Point(499, 23);
                 this.lblQualifyFilter.Location = new Point(485, 58);
-                this.lblFastestFilter.Location = new Point(482, 93);
+                this.lblFastestFilter.Location = new Point(540, 93);
                 this.lblOverlayBackground.Location = new Point(489, 126);
                 this.lblOverlayColor.Location = new Point(531, 168);
                 this.lblOverlayOpacity.Location = new Point(481, 195);
@@ -814,7 +815,7 @@ namespace FallGuysStats {
 
                 this.lblWinsFilter.Location = new Point(473, 23);
                 this.lblQualifyFilter.Location = new Point(489, 58);
-                this.lblFastestFilter.Location = new Point(439, 93);
+                this.lblFastestFilter.Location = new Point(505, 93);
                 this.lblOverlayBackground.Location = new Point(481, 126);
                 this.lblOverlayColor.Location = new Point(515, 168);
                 this.lblOverlayOpacity.Location = new Point(534, 195);
@@ -966,7 +967,7 @@ namespace FallGuysStats {
             this.chkCycleQualifyGold.Text = Multilingual.GetWord("settings_cycle_qualify__gold");
             this.chkOnlyShowLongest.Text = Multilingual.GetWord("settings_longest_only");
             this.chkOnlyShowFastest.Text = Multilingual.GetWord("settings_best_only");
-            this.chkCycleFastestLongest.Text = Multilingual.GetWord("settings_cycle_best__longest");
+            this.chkCycleFastestLongest.Text = Multilingual.GetWord("settings_cycle_fastest__longest");
             this.chkHidePercentages.Text = Multilingual.GetWord("settings_hide_percentages");
             this.chkHideWinsInfo.Text = Multilingual.GetWord("settings_hide_wins_info");
 
@@ -1017,7 +1018,7 @@ namespace FallGuysStats {
                 case 5: this.cboFastestFilter.SelectedItem = Multilingual.GetWord("settings_session_stats"); break;
             }
 
-            this.lblFastestFilter.Text = Multilingual.GetWord("settings_best__longest_filter");
+            this.lblFastestFilter.Text = Multilingual.GetWord("settings_fastest__longest_filter");
 
             this.cboQualifyFilter.Items.Clear();
             this.cboQualifyFilter.Items.AddRange(new object[] {
