@@ -1335,7 +1335,7 @@ namespace FallGuysStats {
             }
 
             if (this.CurrentSettings.Version == 27) {
-                //this.CurrentSettings.PreventOverlayMouseClicks = false;
+                this.CurrentSettings.PreventOverlayMouseClicks = false;
                 this.CurrentSettings.Version = 28;
                 this.SaveUserSettings();
             }
@@ -1348,7 +1348,7 @@ namespace FallGuysStats {
             }
 
             if (this.CurrentSettings.Version == 29) {
-                this.CurrentSettings.SystemTrayIcon = true;
+                this.CurrentSettings.SystemTrayIcon = false;
                 this.CurrentSettings.Version = 30;
                 this.SaveUserSettings();
             }
@@ -1399,15 +1399,15 @@ namespace FallGuysStats {
             }
 
             if (this.CurrentSettings.Version == 34) {
-                /*this.AllStats.AddRange(this.RoundDetails.FindAll());
-                this.StatsDB.BeginTrans();
-                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
-                    RoundInfo info = this.AllStats[i];
-                    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue && string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
-                        info.CreativeOnlinePlatformId = "eos";
-                        this.RoundDetails.Update(info);
-                    }
-                }*/
+                //this.AllStats.AddRange(this.RoundDetails.FindAll());
+                //this.StatsDB.BeginTrans();
+                //for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                //    RoundInfo info = this.AllStats[i];
+                //    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue && string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
+                //        info.CreativeOnlinePlatformId = "eos";
+                //        this.RoundDetails.Update(info);
+                //    }
+                //}
                 this.CurrentSettings.Version = 35;
                 this.SaveUserSettings();
             }
