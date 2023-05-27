@@ -1,8 +1,8 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.175 du 24/05/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.179 du 27/05/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
-INFO: Il y a 0 bug génant connu dans la v1.175 de la "FE" (Frenchy Edition)
+INFO: Il y a 0 bug génant connu dans la v1.179 de la "FE" (Frenchy Edition)
 
 ## Différences entre la "FE" et la Version Officielle
 
@@ -16,11 +16,15 @@ INFO: Il y a 0 bug génant connu dans la v1.175 de la "FE" (Frenchy Edition)
 
 ## FAQ
 
-Q.1) Que signifie une ligne de couleur gris claire (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?
+Q.1) Que signifie une ligne de couleur jaune claire (thème clair) ou jaune sombre (thème sombre) dans la liste des stats des manches ?
 
-------> Cela signifie que c'est une manche jouée dans une Partie Personnalisée.
+------> Cela signifie que c'est une manche - AVEC code de partage utilisé - jouée dans une Partie Personnalisée.
 
-Q.2) Que signifie une ligne de couleur rose claire (thème clair) ou violette sombre (thème sombre) dans la liste des stats des manches ?
+Q.2) Que signifie une ligne de couleur gris claire (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?
+
+------> Cela signifie que c'est une manche - SANS code de partage utilisé - jouée dans une Partie Personnalisée.
+
+Q.3) Que signifie une ligne de couleur rose claire (thème clair) ou violette sombre (thème sombre) dans la liste des stats des manches ?
 
 ------> Cela signifie que c'est une manche jouée dans une émission abandonnée (quittée prématurément).
 

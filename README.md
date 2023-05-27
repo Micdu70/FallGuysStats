@@ -42,7 +42,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.175` ~ 24/05/2023
+**Dernière version:** `v1.179` ~ 27/05/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -53,16 +53,15 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.174) datant du 24/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- +Corrigé: Détection de la manche finale "Basketfall" dans l'émission de Groupe [Version Officielle]
-- ++Ajouté: Nom des récentes émissions de la nouvelle saison pour la liste des stats [Version Officielle + Ajout "FE"]
-- ++Ajouté: Un système de surveillance de l'état (en cours d'exécution ou non) du jeu durant vos parties pour essayer d'enregistrer vos stats en cas de crash du jeu
-- ++Ajouté: Renommage du nom des émissions - pour les maps créatives créées par d'autre joueur - par le nom des maps (via l'API de FallGuysDB) [Version Officielle + Modifications "FE"]
-- ++Ajouté: Option pour mettre à jour le nom des émissions pour les maps créatives créées par d'autre joueur (via un clique droit sur la manche) [Version Officielle + Modifications "FE"]
-- ++Ajouté: Filtre "Période" dans le sous-menu "Stats" pour configurer une période de temps que vous voulez [Version Officielle + Modifications "FE"]
+{ Cette version, bien que basée sur la Version Officielle (v1.179) datant du 27/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 à 3 secondes environ)
+- ++Changé: Les maps créatives jouées en PP (donc avec un code de partage) auront maintenant une couleur spécifique - jaune sombre - dans la liste des stats des manches
+- +Corrigé: Overlay => Amélioration concernant l'affichage du contour colorié du nom des manches
+- ++Ajouté: Overlay => Couleur de l'état du ping en fonction de la valeur actuelle ("Vert" si inférieur à 100 ms / "Orange" de 100 à 199 ms / "Rouge" si supérieur ou égal à 200 ms)
+- ++Ajouté: Nouveau bouton dans la barre de menu de la fenêtre principale pour aller directement sur cette page web (pour connaître les émissions du moment) => https://fallguys-db.pages.dev/upcoming_shows
 
 
-### Il y a 0 bug génant connu dans la v1.175 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.179 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -92,11 +91,15 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## FAQ
 
-**Q.1) Que signifie une ligne de couleur grise (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?**
+**Q.1) Que signifie une ligne de couleur jaune claire (thème clair) ou jaune sombre (thème sombre) dans la liste des stats des manches ?**
 
-------> Cela signifie que c'est une manche jouée dans une Partie Personnalisée.
+------> Cela signifie que c'est une manche - AVEC code de partage utilisé - jouée dans une Partie Personnalisée.
 
-**Q.2) Que signifie une ligne de couleur rose claire (thème clair) ou violette sombre (thème sombre) dans la liste des stats des manches ?**
+**Q.2) Que signifie une ligne de couleur gris claire (thème clair) ou noire (thème sombre) dans la liste des stats des manches ?**
+
+------> Cela signifie que c'est une manche - SANS code de partage utilisé - jouée dans une Partie Personnalisée.
+
+**Q.3) Que signifie une ligne de couleur rose claire (thème clair) ou violette sombre (thème sombre) dans la liste des stats des manches ?**
 
 ------> Cela signifie que c'est une manche jouée dans une émission abandonnée (quittée prématurément).
 
@@ -214,6 +217,15 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.179` ~ 27/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.179) datant du 27/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 à 3 secondes environ)
+    - ++Changé: Les maps créatives jouées en PP (donc avec un code de partage) auront maintenant une couleur spécifique - jaune sombre - dans la liste des stats des manches
+    - +Corrigé: Overlay => Amélioration concernant l'affichage du contour colorié du nom des manches
+    - ++Ajouté: Overlay => Couleur du ping en fonction de la valeur actuelle ("Vert" si inférieur à 100 ms / "Orange" de 100 à 199 ms / "Rouge" si supérieur ou égal à 200 ms)
+    - ++Ajouté: Nouveau bouton dans la barre de menu de la fenêtre principale pour aller directement sur cette page web (pour connaître les émissions du moment) => https://fallguys-db.pages.dev/upcoming_shows
 
   - `v1.175` ~ 24/05/2023
   { Correction de bugs de la "FE" }
@@ -444,6 +456,19 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.179`
+    - Improved ping display
+    - Added anti-overlay click option
+    - Bugfix and program optimization
+  - `1.178`
+    - Bug fixes
+  - `1.177`
+    - Changed the way pings are received
+    - Bugfix and program optimization
+  - `1.176`
+    - Bugfix and program optimization
+  - `1.175`
+    - Bugfix and program optimization
   - `1.174`
     - Bugfix and program optimization
   - `1.173`
