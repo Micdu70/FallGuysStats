@@ -756,10 +756,10 @@ namespace FallGuysStats {
                                 this.StatsForm.StatsDB.BeginTrans();
                                 for (int i = rows.Count - 1; i >= 0; i--) {
                                     RoundInfo temp = rows[i];
-                                    string[] onlinePlatformInfo = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
+                                    string[] creativeAuthorInfo = this.StatsForm.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
                                     temp.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                    temp.CreativeOnlinePlatformId = onlinePlatformInfo[0];
-                                    temp.CreativeAuthor = onlinePlatformInfo[1];
+                                    temp.CreativeOnlinePlatformId = creativeAuthorInfo[0];
+                                    temp.CreativeAuthor = creativeAuthorInfo[1];
                                     temp.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                     temp.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
                                     temp.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
@@ -899,18 +899,22 @@ namespace FallGuysStats {
             this.StatsForm.HideCustomTooltip(this);
         }
 
-        private string GetCreativeOnlinePlatformName(string platform) {
-            switch (platform) {
+        private string GetCreativeOnlinePlatformName(string onlinePlatform) {
+            if (string.IsNullOrEmpty(onlinePlatform)) { return string.Empty; }
+
+            switch (onlinePlatform) {
                 case "eos": return $" ({Multilingual.GetWord("level_detail_online_platform_eos")})";
                 case "steam": return $" ({Multilingual.GetWord("level_detail_online_platform_steam")})";
                 case "psn": return $" ({Multilingual.GetWord("level_detail_online_platform_psn")})";
                 case "xbl": return $" ({Multilingual.GetWord("level_detail_online_platform_xbl")})";
                 case "nso": return $" ({Multilingual.GetWord("level_detail_online_platform_nso")})";
             }
-            return platform;
+            return $" ({onlinePlatform})";
         }
 
         private string GetCreativePlatformName(string platform) {
+            if (string.IsNullOrEmpty(platform)) { return "N/A"; }
+
             switch (platform) {
                 case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
                 case "ps5": return Multilingual.GetWord("level_detail_playersPs5");

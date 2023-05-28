@@ -133,12 +133,13 @@ namespace FallGuysStats {
 
         public static bool IsGameHasBeenClosed = false;
 
+        public static bool ConnectedToServer = false;
         public static bool InShow = false;
         public static bool EndedShow = false;
 
         public static string CurrentServerIp = null;
         public static bool IsLastServerPingFailed = false;
-        public static long LastGoodServerPing = 0;
+        public static long LastServerPing = 0;
 
         public static List<string> succeededPlayerIds = new List<string>();
 
@@ -1835,10 +1836,10 @@ namespace FallGuysStats {
                                 if (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
-                                        string[] onlinePlatformInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
+                                        string[] creativeAuthorInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
                                         stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
-                                        stat.CreativeOnlinePlatformId = onlinePlatformInfo[0];
-                                        stat.CreativeAuthor = onlinePlatformInfo[1];
+                                        stat.CreativeOnlinePlatformId = creativeAuthorInfo[0];
+                                        stat.CreativeAuthor = creativeAuthorInfo[1];
                                         stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
                                         stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
                                         stat.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
@@ -3386,15 +3387,16 @@ namespace FallGuysStats {
             return shareCode;
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
-            string[] onlinePlatformInfo = { "", "N/A" };
-            using (JsonElement.ObjectEnumerator objectEnumerator = authorData.EnumerateObject()) {
-                while (objectEnumerator.MoveNext()) {
-                    JsonProperty current = objectEnumerator.Current;
-                    onlinePlatformInfo[0] = current.Name;
-                    onlinePlatformInfo[1] = current.Value.GetString();
+            string[] creativeAuthorInfo = { "", "N/A" };
+            string[] validKeys = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "nso" may not be used
+            foreach (string validKey in validKeys) {
+                if (authorData.TryGetProperty(validKey, out JsonElement authorInfo)) {
+                    creativeAuthorInfo[0] = validKey;
+                    creativeAuthorInfo[1] = authorInfo.GetString();
+                    break;
                 }
             }
-            return onlinePlatformInfo;
+            return creativeAuthorInfo;
         }
         public JsonElement GetApiData(string apiUrl, string apiEndPoint) {
             JsonElement resJroot;

@@ -14,12 +14,14 @@ namespace FallGuysStats {
         private Thread watcher;
 
         private readonly Ping pingSender = new Ping();
-        private PingReply reply;
+        private PingReply pingReply;
 
         private readonly Random random = new Random();
         private int randomElement;
-        private readonly int[] moreDelayValues = { 100, 200, 300, 400, 500 };
+        private readonly int[] moreDelayValues = { 0, 100, 200, 300, 400, 500 };
         private int addMoreRandomDelay;
+
+        public Stats StatsForm { get; set; }
 
         public void Start() {
             if (this.running) { return; }
@@ -37,15 +39,17 @@ namespace FallGuysStats {
             this.running = true;
             while (!stop) {
                 try {
-                    if (!Stats.InShow || string.IsNullOrEmpty(Stats.CurrentServerIp)) {
+                    if ((!this.StatsForm.CurrentSettings.SwitchBetweenPlayers && !this.StatsForm.CurrentSettings.OnlyShowPing) || !Stats.ConnectedToServer) {
+                        Stats.CurrentServerIp = string.Empty;
+                        Stats.IsLastServerPingFailed = true;
                         this.stop = true;
                         this.running = false;
                         return;
                     }
-                    this.reply = this.pingSender.Send(Stats.CurrentServerIp, 1000, new byte[32]);
-                    if (this.reply.Status == IPStatus.Success) {
+                    this.pingReply = this.pingSender.Send(Stats.CurrentServerIp, 1000, new byte[32]);
+                    if (this.pingReply.Status == IPStatus.Success) {
                         Stats.IsLastServerPingFailed = false;
-                        Stats.LastGoodServerPing = this.reply.RoundtripTime;
+                        Stats.LastServerPing = this.pingReply.RoundtripTime;
                     } else {
                         Stats.IsLastServerPingFailed = true;
                     }

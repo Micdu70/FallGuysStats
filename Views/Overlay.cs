@@ -648,12 +648,12 @@ namespace FallGuysStats {
                     this.lblPlayersSwitch.DrawVisible = false;
                     this.lblPlayersPc.DrawVisible = false;
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
-                    this.lblPlayers.TextRight = Stats.LastGoodServerPing > 0 ? $"{Stats.LastGoodServerPing} ms" : "-";
-                    this.lblPlayers.ForeColor = Stats.LastGoodServerPing == 0 ? Color.White :
-                                                !Stats.InShow || string.IsNullOrEmpty(Stats.CurrentServerIp) || Stats.IsLastServerPingFailed ? Color.Silver :
-                                                Stats.LastGoodServerPing < 100 ? Color.Lime :
-                                                Stats.LastGoodServerPing < 200 ? Color.DarkOrange :
-                                                Color.Red;
+                    this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
+                    this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :
+                                                Stats.IsLastServerPingFailed ? Color.Silver :
+                                                Stats.LastServerPing >= 200 ? Color.Red :
+                                                Stats.LastServerPing >= 100 ? Color.Orange :
+                                                Color.Lime;
                     break;
             }
         }

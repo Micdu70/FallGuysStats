@@ -336,8 +336,10 @@ namespace FallGuysStats {
                 }
                 logRound.Info = null;
 
+                Stats.ConnectedToServer = false;
                 Stats.EndedShow = false;
-                Stats.CurrentServerIp = string.Empty;              
+                Stats.CurrentServerIp = string.Empty;
+                Stats.LastServerPing = 0;
 
                 logRound.PrivateLobby = line.Line.IndexOf("StatePrivateLobby", StringComparison.OrdinalIgnoreCase) > 0;
                 logRound.CurrentlyInParty = !logRound.PrivateLobby && (line.Line.IndexOf("solo", StringComparison.OrdinalIgnoreCase) == -1);
@@ -346,9 +348,11 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (logRound.Info == null && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (string.IsNullOrEmpty(Stats.CurrentServerIp) && (this.StatsForm.CurrentSettings.SwitchBetweenPlayers || this.StatsForm.CurrentSettings.OnlyShowPing) && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
                 int ipIndex = line.Line.IndexOf("IP:");
                 Stats.CurrentServerIp = line.Line.Substring(ipIndex + 3);
+                Stats.ConnectedToServer = true;
+                this.serverPing.Start();
             } else if (logRound.Info == null && (index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.selectedShowId.StartsWith("ugc-")) {
@@ -370,12 +374,7 @@ namespace FallGuysStats {
                     Stats.IsLastPlayedRoundStillPlaying = false;
                     Stats.LastPlayedRoundStart = null;
                     Stats.LastPlayedRoundEnd = null;
-                    if (line.Date > this.StatsForm.startupTime) {
-                        this.gameState.Start();
-                        if (this.StatsForm.CurrentSettings.SwitchBetweenPlayers || this.StatsForm.CurrentSettings.OnlyShowPing) {
-                            this.serverPing.Start();
-                        }
-                    }
+                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); }
                 }
 
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId, UseShareCode = this.useShareCode };
@@ -498,6 +497,8 @@ namespace FallGuysStats {
                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
                        || (Stats.IsGameHasBeenClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
+                Stats.ConnectedToServer = false;
+                Stats.CurrentServerIp = string.Empty;
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;
                 }
