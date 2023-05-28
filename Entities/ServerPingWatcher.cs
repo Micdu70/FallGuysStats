@@ -39,24 +39,23 @@ namespace FallGuysStats {
             this.running = true;
             while (!stop) {
                 try {
-                    if ((!this.StatsForm.CurrentSettings.SwitchBetweenPlayers && !this.StatsForm.CurrentSettings.OnlyShowPing) || !Stats.ConnectedToServer) {
-                        Stats.CurrentServerIp = string.Empty;
-                        Stats.IsLastServerPingFailed = true;
+                    if ((!this.StatsForm.CurrentSettings.SwitchBetweenPlayers && !this.StatsForm.CurrentSettings.OnlyShowPing) || !Stats.EnableServerPing) {
+                        Stats.EnableServerPing = false;
                         this.stop = true;
                         this.running = false;
                         return;
                     }
-                    this.pingReply = this.pingSender.Send(Stats.CurrentServerIp, 1000, new byte[32]);
+                    this.pingReply = this.pingSender.Send(Stats.LastServerIp, 1000, new byte[32]);
                     if (this.pingReply.Status == IPStatus.Success) {
-                        Stats.IsLastServerPingFailed = false;
                         Stats.LastServerPing = this.pingReply.RoundtripTime;
+                        Stats.FailedLastServerPing = false;
                     } else {
-                        Stats.IsLastServerPingFailed = true;
+                        Stats.FailedLastServerPing = true;
                     }
                     this.randomElement = this.random.Next(0, this.moreDelayValues.Length);
                     this.addMoreRandomDelay = this.moreDelayValues[this.randomElement];
                 } catch {
-                    Stats.IsLastServerPingFailed = true;
+                    Stats.FailedLastServerPing = true;
                     this.randomElement = this.random.Next(0, this.moreDelayValues.Length);
                     this.addMoreRandomDelay = this.moreDelayValues[this.randomElement];
                 }

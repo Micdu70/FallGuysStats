@@ -650,7 +650,7 @@ namespace FallGuysStats {
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
                     this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :
-                                                Stats.IsLastServerPingFailed ? Color.Silver :
+                                                !Stats.EnableServerPing || Stats.FailedLastServerPing ? Color.Silver :
                                                 Stats.LastServerPing >= 200 ? Color.Red :
                                                 Stats.LastServerPing >= 100 ? Color.Orange :
                                                 Color.Lime;

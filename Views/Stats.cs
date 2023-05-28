@@ -133,13 +133,13 @@ namespace FallGuysStats {
 
         public static bool IsGameHasBeenClosed = false;
 
-        public static bool ConnectedToServer = false;
         public static bool InShow = false;
         public static bool EndedShow = false;
 
-        public static string CurrentServerIp = null;
-        public static bool IsLastServerPingFailed = false;
+        public static bool EnableServerPing = false;
+        public static string LastServerIp = null;
         public static long LastServerPing = 0;
+        public static bool FailedLastServerPing = false;
 
         public static List<string> succeededPlayerIds = new List<string>();
 
