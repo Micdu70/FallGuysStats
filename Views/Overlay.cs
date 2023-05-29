@@ -650,7 +650,7 @@ namespace FallGuysStats {
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
                     this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :
-                                                !Stats.EnableServerPing || Stats.FailedLastServerPing ? Color.Silver :
+                                                !Stats.ConnectedToServer || Stats.FailedLastServerPing ? Color.Silver :
                                                 Stats.LastServerPing >= 200 ? Color.Red :
                                                 Stats.LastServerPing >= 100 ? Color.Orange :
                                                 Color.Lime;
@@ -794,7 +794,10 @@ namespace FallGuysStats {
                     }
 
                     this.lblFinish.Text = $"{Multilingual.GetWord("overlay_finish")} :";
-                    if (Finish.HasValue) {
+                    if (Stats.HideOverlayTime) {
+                        this.lblFinish.TextRight = "-";
+                        this.lblFinish.ForeColor = Color.White;
+                    } else if (Finish.HasValue) {
                         TimeSpan Time = Finish.GetValueOrDefault(Start) - Start;
 
                         if (Time.ToString("m\\:ss\\.ff") == "0:00.00") {
@@ -863,7 +866,9 @@ namespace FallGuysStats {
                     //    : $"{Multilingual.GetWord("overlay_duration")} :";
                     this.lblDuration.Text = $"{Multilingual.GetWord("overlay_duration")} :";
 
-                    if (Stats.LastPlayedRoundEnd.HasValue && Stats.LastPlayedRoundEnd > Stats.LastPlayedRoundStart) {
+                    if (Stats.HideOverlayTime) {
+                        this.lblDuration.TextRight = "-";
+                    } else if (Stats.LastPlayedRoundEnd.HasValue && Stats.LastPlayedRoundEnd > Stats.LastPlayedRoundStart) {
                         this.lblDuration.TextRight = $"{Stats.LastPlayedRoundEnd - Stats.LastPlayedRoundStart:m\\:ss\\.ff}";
                     } else if (Stats.IsLastPlayedRoundStillPlaying) {
                         this.lblDuration.TextRight = $"{DateTime.UtcNow - Stats.LastPlayedRoundStart:m\\:ss}";

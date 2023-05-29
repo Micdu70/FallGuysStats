@@ -25,7 +25,7 @@ namespace FallGuysStats {
 
         public void Start() {
             if (this.running) { return; }
-
+            Console.WriteLine("ServerPingWatcher is starting!");
 #if Debug
             Debug.WriteLine("ServerPingWatcher is starting!");
 #endif
@@ -39,8 +39,9 @@ namespace FallGuysStats {
             this.running = true;
             while (!stop) {
                 try {
-                    if ((!this.StatsForm.CurrentSettings.SwitchBetweenPlayers && !this.StatsForm.CurrentSettings.OnlyShowPing) || !Stats.EnableServerPing) {
-                        Stats.EnableServerPing = false;
+                    if (!Stats.ConnectedToServer) {
+                        Console.WriteLine("ServerPingWatcher is stopped!");
+                        Stats.FailedLastServerPing = true;
                         this.stop = true;
                         this.running = false;
                         return;

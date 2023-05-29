@@ -131,12 +131,14 @@ namespace FallGuysStats {
         private static DateTime SeasonStart, WeekStart, DayStart;
         private static DateTime SessionStart = DateTime.UtcNow;
 
+        public static bool HideOverlayTime = false;
+
         public static bool IsGameHasBeenClosed = false;
 
         public static bool InShow = false;
         public static bool EndedShow = false;
 
-        public static bool EnableServerPing = false;
+        public static bool ConnectedToServer = false;
         public static string LastServerIp = null;
         public static long LastServerPing = 0;
         public static bool FailedLastServerPing = false;
@@ -148,7 +150,8 @@ namespace FallGuysStats {
         public static bool IsLastRoundRunning { get; set; }
         public static bool IsLastPlayedRoundStillPlaying { get; set; }
 
-        public static DateTime LastRoundStart { get; set; } = DateTime.MinValue;
+        public static DateTime LastGameStart { get; set; } = DateTime.MinValue;
+        public static DateTime LastRoundLoad { get; set; } = DateTime.MinValue;
         public static DateTime? LastPlayedRoundStart { get; set; } = null;
         public static DateTime? LastPlayedRoundEnd { get; set; } = null;
 
@@ -1789,6 +1792,7 @@ namespace FallGuysStats {
 
                             if (info == null && stat.Start > this.lastAddedShow) {
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 0) {
+                                    Stats.HideOverlayTime = true;
                                     using (EditShows editShows = new EditShows()) {
                                         editShows.FunctionFlag = "add";
                                         //editShows.Icon = this.Icon;
@@ -1816,6 +1820,7 @@ namespace FallGuysStats {
 
 
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 2) {
+                                    Stats.HideOverlayTime = false;
                                     continue;
                                 }
 
@@ -1863,6 +1868,8 @@ namespace FallGuysStats {
                                 if (this.CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
                                     FallalyticsReporter.Report(stat, this.CurrentSettings.FallalyticsAPIKey);
                                 }
+
+                                Stats.HideOverlayTime = false;
                             } else {
                                 continue;
                             }
