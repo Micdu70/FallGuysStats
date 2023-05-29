@@ -1815,12 +1815,12 @@ namespace FallGuysStats {
                                         }
                                         this.EnableInfoStrip(true);
                                         this.EnableMainMenu(true);
+                                        Stats.HideOverlayTime = false;
                                     }
                                 }
 
 
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 2) {
-                                    Stats.HideOverlayTime = false;
                                     continue;
                                 }
 
@@ -1868,8 +1868,6 @@ namespace FallGuysStats {
                                 if (this.CurrentSettings.EnableFallalyticsReporting && !stat.PrivateLobby && stat.ShowEnd > this.startupTime) {
                                     FallalyticsReporter.Report(stat, this.CurrentSettings.FallalyticsAPIKey);
                                 }
-
-                                Stats.HideOverlayTime = false;
                             } else {
                                 continue;
                             }
