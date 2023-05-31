@@ -286,7 +286,6 @@ namespace FallGuysStats {
                         this.CurrentSettings.FastestFilter = 0;
                         this.CurrentSettings.OverlayColor = 0;
                         this.CurrentSettings.OverlayVisible = true;
-                        this.CurrentSettings.SwitchBetweenPlayers = false;
                         this.CurrentSettings.PlayerByConsoleType = true;
                         this.CurrentSettings.ColorByRoundType = true;
                         this.CurrentSettings.AutoChangeProfile = false;
@@ -316,6 +315,12 @@ namespace FallGuysStats {
                         this.CurrentSettings.SwitchBetweenLongest = false;
                         this.CurrentSettings.OnlyShowLongest = false;
                         this.CurrentSettings.FrenchyEditionDB = 8;
+                        this.UserSettings.Upsert(this.CurrentSettings);
+                    }
+                    if (this.CurrentSettings.FrenchyEditionDB == 8) {
+                        this.CurrentSettings.SwitchBetweenPlayers = true;
+                        this.CurrentSettings.OnlyShowPing = false;
+                        this.CurrentSettings.FrenchyEditionDB = 9;
                         this.UserSettings.Upsert(this.CurrentSettings);
                     }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
@@ -1451,7 +1456,7 @@ namespace FallGuysStats {
                 FixedFlippedDisplay = false,
                 SwitchBetweenLongest = false,
                 SwitchBetweenQualify = true,
-                SwitchBetweenPlayers = false,
+                SwitchBetweenPlayers = true,
                 SwitchBetweenStreaks = true,
                 OnlyShowLongest = false,
                 OnlyShowGold = false,
@@ -1494,7 +1499,7 @@ namespace FallGuysStats {
                 WinPerDayGraphStyle = 1,
                 Visible = true,
                 Version = 35,
-                FrenchyEditionDB = 8
+                FrenchyEditionDB = 9
             };
         }
         private void UpdateHoopsieLegends() {

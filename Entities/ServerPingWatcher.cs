@@ -30,6 +30,8 @@ namespace FallGuysStats {
             Debug.WriteLine("ServerPingWatcher is starting!");
 #endif
 
+            Stats.LastCountryCode = this.StatsForm.GetCountryCode(Stats.LastServerIp).ToLower();
+
             this.stop = false;
             this.watcher = new Thread(CheckServerPing) { IsBackground = true };
             this.watcher.Start();

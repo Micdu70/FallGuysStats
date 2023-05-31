@@ -38,8 +38,8 @@ namespace FallGuysStats {
         private bool isAlreadyClicked;
         private bool shiftKeyToggle, ctrlKeyToggle;
         private new Size DefaultSize;
-        private Bitmap customizedBackground;
-        private string backgroundResourceNameCache;
+        //private Bitmap customizedBackground;
+        //private string backgroundResourceNameCache;
 
         private bool isPositionButtonMouseEnter;
         private readonly Image positionNeOffBlur = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.4F);
@@ -653,7 +653,7 @@ namespace FallGuysStats {
                     this.lblPlayersPc.DrawVisible = false;
                     this.lblCountryIcon.DrawVisible = true;
                     this.lblCountryIcon.ImageY = 1;
-                    this.lblCountryIcon.ImageX = 0;
+                    this.lblCountryIcon.ImageX = -30;
                     this.lblCountryIcon.Image = (Image)(Stats.LastServerPing > 0 ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastCountryCode}_icon") : null);
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
