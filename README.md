@@ -42,7 +42,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.179` ~ 27/05/2023
+**Dernière version:** `v1.184` ~ 31/05/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -53,15 +53,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.179) datant du 27/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 à 3 secondes environ)
-- ++Changé: Les maps créatives jouées en PP (donc avec un code de partage) auront maintenant une couleur spécifique - jaune sombre - dans la liste des stats des manches
-- +Corrigé: Overlay => Amélioration concernant l'affichage du contour colorié du nom des manches
-- ++Ajouté: Overlay => Couleur de l'état du ping en fonction de la valeur actuelle ("Vert" si inférieur à 100 ms / "Orange" de 100 à 199 ms / "Rouge" si supérieur ou égal à 200 ms)
-- ++Ajouté: Nouveau bouton dans la barre de menu de la fenêtre principale pour aller directement sur cette page web (pour connaître les émissions du moment) => https://fallguys-db.pages.dev/upcoming_shows
+{ Cette version, bien que basée sur la Version Officielle (v1.184) datant du 31/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
+- ++Ajouté: Overlay => Drapeau du pays du serveur auquel vous êtes connecté (au niveau de l'info du ping) [Version Officielle + Modifications "FE"]
+- ++Changé: L'option "Cycle \*Joueurs / Ping\*" est maintenant l'option par défaut (au lieu de "Joueurs seul.")
 
 
-### Il y a 0 bug génant connu dans la v1.179 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.184 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -218,10 +216,17 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
+  - `v1.184` ~ 31/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.184) datant du 31/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
+    - ++Ajouté: Overlay => Drapeau du pays du serveur auquel vous êtes connecté (au niveau de l'info du ping) [Version Officielle + Modifications "FE"]
+    - ++Changé: L'option "Cycle \*Joueurs / Ping\*" est maintenant l'option par défaut (au lieu de "Joueurs seul.")
+
   - `v1.179` ~ 27/05/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.179) datant du 27/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 à 3 secondes environ)
+    - ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 secondes environ)
     - ++Changé: Les maps créatives jouées en PP (donc avec un code de partage) auront maintenant une couleur spécifique - jaune sombre - dans la liste des stats des manches
     - +Corrigé: Overlay => Amélioration concernant l'affichage du contour colorié du nom des manches
     - ++Ajouté: Overlay => Couleur du ping en fonction de la valeur actuelle ("Vert" si inférieur à 100 ms / "Orange" de 100 à 199 ms / "Rouge" si supérieur ou égal à 200 ms)
@@ -456,6 +461,18 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.184`
+    - Displays the icon of the country where the server is located.
+    - Bugfix and program optimization
+  - `1.183`
+    - Add a new show id
+    - Bugfix and program optimization
+  - `1.182`
+    - Bugfix and program optimization
+  - `1.181`
+    - Bugfix and program optimization
+  - `1.180`
+    - Bugfix and program optimization
   - `1.179`
     - Improved ping display
     - Added anti-overlay click option

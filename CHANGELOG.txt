@@ -1,16 +1,23 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.184 ~ 31/05/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.184) datant du 31/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
+    - ++Ajouté: Overlay => Drapeau du pays du serveur auquel vous êtes connecté (au niveau de l'info du ping) [Version Officielle + Modifications "FE"]
+    - ++Changé: L'option "Cycle \*Joueurs / Ping\*" est maintenant l'option par défaut (au lieu de "Joueurs seul.")
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.179 ~ 27/05/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.179) datant du 27/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-    - ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 à 3 secondes environ)
+    - ++Changé: Nouveau système pour obtenir le ping du serveur sur lequel vous jouez ! (ping actualisé toutes les 2 secondes environ)
     - ++Changé: Les maps créatives jouées en PP (donc avec un code de partage) auront maintenant une couleur spécifique - jaune sombre - dans la liste des stats des manches
     - +Corrigé: Overlay => Amélioration concernant l'affichage du contour colorié du nom des manches
     - ++Ajouté: Overlay => Couleur de l'état du ping en fonction de la valeur actuelle ("Vert" si inférieur à 100 ms / "Orange" de 100 à 199 ms / "Rouge" si supérieur ou égal à 200 ms)
     - ++Ajouté: Nouveau bouton dans la barre de menu de la fenêtre principale pour aller directement sur cette page web (pour connaître les émissions du moment) => https://fallguys-db.pages.dev/upcoming_shows
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.175 ~ 24/05/2023
   { Correction de bugs de la "FE" }
