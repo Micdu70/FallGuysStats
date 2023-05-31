@@ -13,8 +13,6 @@ namespace FallGuysStats {
         private bool stop;
         private Thread watcher;
 
-        public Stats StatsForm { get; set; }
-
         private readonly Ping pingSender = new Ping();
         private PingReply pingReply;
 
