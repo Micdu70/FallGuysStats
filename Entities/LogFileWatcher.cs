@@ -181,7 +181,7 @@ namespace FallGuysStats {
                                 offset = line.Offset;
                                 lock (this.lines) {
                                     this.lines.AddRange(currentLines);
-                                    if (lastDate > this.StatsForm.startupTime) { currentLines.Clear(); }
+                                    currentLines.Clear();
                                 }
                             } else if (line.Line.IndexOf("[StateMatchmaking] Begin", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateConnectToGame", StringComparison.OrdinalIgnoreCase) > 0
