@@ -140,6 +140,7 @@ namespace FallGuysStats {
 
         public static bool ConnectedToServer = false;
         public static string LastServerIp = string.Empty;
+        public static string LastCountryCode = string.Empty;
         public static long LastServerPing = 0;
         public static bool FailedLastServerPing = false;
 
@@ -238,6 +239,8 @@ namespace FallGuysStats {
         private bool onlyRefreshFilter;
 
         public readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/";
+        public readonly string IP2C_ORG_URL = "https://ip2c.org/";
+
         public readonly string[] publicShowIdList = {
             "main_show",
             "squads_2player_template",
@@ -3435,6 +3438,17 @@ namespace FallGuysStats {
                 }
             }
             return creativeAuthorInfo;
+        }
+        public string GetCountryCode(string ip) {
+            string code = string.Empty;
+            using (ApiWebClient web = new ApiWebClient()) {
+                string resStr = web.DownloadString($"{this.IP2C_ORG_URL}{ip}");
+                string[] resArr = resStr.Split(';');
+                if ("1".Equals(resArr[0])) {
+                    code = resArr[2];
+                }
+            }
+            return code;
         }
         public JsonElement GetApiData(string apiUrl, string apiEndPoint) {
             JsonElement resJroot;

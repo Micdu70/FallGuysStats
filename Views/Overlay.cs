@@ -16,7 +16,7 @@ namespace FallGuysStats {
         private const int HT_CAPTION = 0x2;
 
         [DllImport("user32.dll")]
-        private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
         [DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
 
@@ -38,6 +38,8 @@ namespace FallGuysStats {
         private bool isAlreadyClicked;
         private bool shiftKeyToggle, ctrlKeyToggle;
         private new Size DefaultSize;
+        private Bitmap customizedBackground;
+        private string backgroundResourceNameCache;
 
         private bool isPositionButtonMouseEnter;
         private readonly Image positionNeOffBlur = Stats.ImageOpacity(Properties.Resources.position_ne_off_icon, 0.4F);
@@ -631,6 +633,7 @@ namespace FallGuysStats {
                         this.lblPlayersPc.TextRight = pcCount == 0 ? "-" : $"{pcCount}";
                         this.lblPlayersPc.Size = new Size(pcCount > 9 ? 32 : 26, 16);
                         this.lblPlayersPc.DrawVisible = true;
+                        this.lblCountryIcon.DrawVisible = false;
                     } else {
                         this.lblPlayers.Image = null;
                         this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_players")} :";
@@ -638,6 +641,7 @@ namespace FallGuysStats {
                         this.lblPlayersXbox.DrawVisible = false;
                         this.lblPlayersSwitch.DrawVisible = false;
                         this.lblPlayersPc.DrawVisible = false;
+                        this.lblCountryIcon.DrawVisible = false;
                     }
                     this.lblPlayers.ForeColor = Color.White;
                     break;
@@ -647,6 +651,10 @@ namespace FallGuysStats {
                     this.lblPlayersXbox.DrawVisible = false;
                     this.lblPlayersSwitch.DrawVisible = false;
                     this.lblPlayersPc.DrawVisible = false;
+                    this.lblCountryIcon.DrawVisible = true;
+                    this.lblCountryIcon.ImageY = 1;
+                    this.lblCountryIcon.ImageX = 0;
+                    this.lblCountryIcon.Image = (Image)(Stats.LastServerPing > 0 ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastCountryCode}_icon") : null);
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
                     this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :
@@ -1118,6 +1126,8 @@ namespace FallGuysStats {
                     this.lblPlayers.Location = new Point(thirdColumnX, 10 + heightOffset);
                     this.lblPlayers.Size = new Size(thirdColumnWidth, 22);
                     this.lblPlayers.DrawVisible = true;
+                    this.lblCountryIcon.Location = new Point(thirdColumnX + 104, 13 + heightOffset);
+                    this.lblCountryIcon.DrawVisible = true;
 
                     if (this.StatsForm.CurrentSettings.PlayerByConsoleType) {
                         this.lblPlayersPs.Location = new Point(thirdColumnX + 52, 13 + heightOffset);
@@ -1173,6 +1183,8 @@ namespace FallGuysStats {
                     this.lblPlayers.Location = new Point(secondColumnX, 32 + heightOffset);
                     this.lblPlayers.Size = new Size(secondColumnWidth, 22);
                     this.lblPlayers.DrawVisible = true;
+                    this.lblCountryIcon.Location = new Point(secondColumnX + 161, 35 + heightOffset);
+                    this.lblCountryIcon.DrawVisible = true;
 
                     if (this.StatsForm.CurrentSettings.PlayerByConsoleType) {
                         this.lblPlayersPs.Location = new Point(secondColumnX + 49, 35 + heightOffset);
@@ -1219,6 +1231,7 @@ namespace FallGuysStats {
                     this.lblRound.DrawVisible = false;
                     this.lblQualifyChance.DrawVisible = false;
                     this.lblPlayers.DrawVisible = false;
+                    this.lblCountryIcon.DrawVisible = false;
                     this.lblPlayersPs.DrawVisible = false;
                     this.lblPlayersXbox.DrawVisible = false;
                     this.lblPlayersSwitch.DrawVisible = false;
@@ -1248,6 +1261,7 @@ namespace FallGuysStats {
                     this.lblRound.DrawVisible = false;
                     this.lblQualifyChance.DrawVisible = false;
                     this.lblPlayers.DrawVisible = false;
+                    this.lblCountryIcon.DrawVisible = false;
                     this.lblPlayersPs.DrawVisible = false;
                     this.lblPlayersXbox.DrawVisible = false;
                     this.lblPlayersSwitch.DrawVisible = false;
@@ -1278,6 +1292,8 @@ namespace FallGuysStats {
                     this.lblPlayers.Location = new Point(firstColumnX + secondColumnWidth + 6, 9 + heightOffset);
                     this.lblPlayers.Size = new Size(thirdColumnWidth, 22);
                     this.lblPlayers.DrawVisible = true;
+                    this.lblCountryIcon.Location = new Point(firstColumnX + secondColumnWidth + 6 + 104, 12 + heightOffset);
+                    this.lblCountryIcon.DrawVisible = true;
 
                     if (this.StatsForm.CurrentSettings.PlayerByConsoleType) {
                         this.lblPlayersPs.Location = new Point(firstColumnX + secondColumnWidth + 6 + 49, 12 + heightOffset);
@@ -1326,6 +1342,8 @@ namespace FallGuysStats {
                     this.lblPlayers.Location = new Point(firstColumnX, 32 + heightOffset);
                     this.lblPlayers.Size = new Size(secondColumnWidth, 22);
                     this.lblPlayers.DrawVisible = true;
+                    this.lblCountryIcon.Location = new Point(firstColumnX + 161, 35 + heightOffset);
+                    this.lblCountryIcon.DrawVisible = true;
 
                     if (this.StatsForm.CurrentSettings.PlayerByConsoleType) {
                         this.lblPlayersPs.Location = new Point(firstColumnX + 49, 35 + heightOffset);
@@ -1373,6 +1391,7 @@ namespace FallGuysStats {
                     this.lblRound.DrawVisible = false;
                     this.lblQualifyChance.DrawVisible = false;
                     this.lblPlayers.DrawVisible = false;
+                    this.lblCountryIcon.DrawVisible = false;
                     this.lblPlayersPs.DrawVisible = false;
                     this.lblPlayersXbox.DrawVisible = false;
                     this.lblPlayersSwitch.DrawVisible = false;
