@@ -57,6 +57,7 @@ namespace FallGuysStats {
         public Stats StatsForm { get; set; }
 
         private bool autoChangeProfile;
+        private bool hasLastServerCountryInfo;
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
@@ -349,6 +350,10 @@ namespace FallGuysStats {
                 Stats.ConnectedToServer = true;
                 int ipIndex = line.Line.IndexOf("IP:");
                 Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
+                if (!this.hasLastServerCountryInfo) {
+                    this.hasLastServerCountryInfo = true;
+                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(Stats.LastServerIp).ToLower();
+                }
                 this.serverPing.Start();
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
@@ -495,6 +500,7 @@ namespace FallGuysStats {
                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
                        || (Stats.IsGameHasBeenClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
+                this.hasLastServerCountryInfo = false;
                 Stats.ConnectedToServer = false;
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;

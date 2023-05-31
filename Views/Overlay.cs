@@ -654,7 +654,7 @@ namespace FallGuysStats {
                     this.lblCountryIcon.DrawVisible = true;
                     this.lblCountryIcon.ImageY = 1;
                     this.lblCountryIcon.ImageX = -30;
-                    this.lblCountryIcon.Image = (Image)(Stats.LastServerPing > 0 ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastCountryCode}_icon") : null);
+                    this.lblCountryIcon.Image = (Image)(Stats.LastServerPing > 0 ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastServerCountryCode}_icon") : null);
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
                     this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :

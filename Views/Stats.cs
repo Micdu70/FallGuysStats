@@ -140,7 +140,7 @@ namespace FallGuysStats {
 
         public static bool ConnectedToServer = false;
         public static string LastServerIp = string.Empty;
-        public static string LastCountryCode = string.Empty;
+        public static string LastServerCountryCode = string.Empty;
         public static long LastServerPing = 0;
         public static bool FailedLastServerPing = false;
 

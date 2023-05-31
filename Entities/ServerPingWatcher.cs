@@ -13,6 +13,8 @@ namespace FallGuysStats {
         private bool stop;
         private Thread watcher;
 
+        public Stats StatsForm { get; set; }
+
         private readonly Ping pingSender = new Ping();
         private PingReply pingReply;
 
@@ -21,16 +23,12 @@ namespace FallGuysStats {
         private readonly int[] moreDelayValues = { 0, 100, 200, 300, 400, 500 };
         private int addMoreRandomDelay;
 
-        public Stats StatsForm { get; set; }
-
         public void Start() {
             if (this.running) { return; }
 
 #if Debug
             Debug.WriteLine("ServerPingWatcher is starting!");
 #endif
-
-            Stats.LastCountryCode = this.StatsForm.GetCountryCode(Stats.LastServerIp).ToLower();
 
             this.stop = false;
             this.watcher = new Thread(CheckServerPing) { IsBackground = true };
