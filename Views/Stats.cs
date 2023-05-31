@@ -1806,9 +1806,6 @@ namespace FallGuysStats {
                                                 this.useLinkedProfiles = true;
                                             } else {
                                                 profile = editShows.SelectedProfileId;
-                                                this.CurrentSettings.SelectedProfile = profile;
-                                                this.ReloadProfileMenuItems();
-                                                //this.SetProfileMenu(profile);
                                             }
                                         } else {
                                             this.askedPreviousShows = 2;
@@ -1826,9 +1823,22 @@ namespace FallGuysStats {
 
                                 if (stat.ShowEnd < this.startupTime && this.useLinkedProfiles) {
                                     profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
-                                    this.CurrentSettings.SelectedProfile = profile;
-                                    this.ReloadProfileMenuItems();
-                                    //this.SetProfileMenu(profile);
+                                }
+
+                                this.SetProfileMenu(profile);
+
+                                if (this.menuCustomRangeStats.Checked) {
+                                    MenuStats_Click(this.menuCustomRangeStats, EventArgs.Empty);
+                                } else if (this.menuAllStats.Checked) {
+                                    MenuStats_Click(this.menuAllStats, EventArgs.Empty);
+                                } else if (this.menuSeasonStats.Checked) {
+                                    MenuStats_Click(this.menuSeasonStats, EventArgs.Empty);
+                                } else if (this.menuWeekStats.Checked) {
+                                    MenuStats_Click(this.menuWeekStats, EventArgs.Empty);
+                                } else if (this.menuDayStats.Checked) {
+                                    MenuStats_Click(this.menuDayStats, EventArgs.Empty);
+                                } else if (this.menuSessionStats.Checked) {
+                                    MenuStats_Click(this.menuSessionStats, EventArgs.Empty);
                                 }
 
                                 if (stat.Round == 1) {
@@ -1965,9 +1975,9 @@ namespace FallGuysStats {
 
                         if (stat.Round == round.Count && !this.loadingExisting) {
                             if (this.menuSoloStats.Checked && stat.InParty) {
-                                MenuStats_Click(this.menuSoloStats, null);
+                                MenuStats_Click(this.menuSoloStats, EventArgs.Empty);
                             } else if (this.menuPartyStats.Checked && !stat.InParty) {
-                                MenuStats_Click(this.menuPartyStats, null);
+                                MenuStats_Click(this.menuPartyStats, EventArgs.Empty);
                             }
                         }
                     }
@@ -2114,11 +2124,13 @@ namespace FallGuysStats {
             }
         }
         private void SetProfileMenu(int profile) {
-            Profiles currentP = this.AllProfiles.Find(p => p.ProfileId == profile);
-            ToolStripMenuItem tsmi = this.menuProfile.DropDownItems[currentP.ProfileOrder - 1] as ToolStripMenuItem;
-            if (tsmi.Checked) return;
-            this.SetCurrentProfileIcon(!string.IsNullOrEmpty(currentP.LinkedShowId));
-            this.MenuStats_Click(tsmi, EventArgs.Empty);
+            for (int i = 0; i < this.AllProfiles.Count; i++) {
+                if (this.AllProfiles[i].ProfileId == profile) {
+                    ToolStripMenuItem item = this.ProfileMenuItems[this.AllProfiles.Count - 1 - i];
+                    if (!item.Checked) { this.MenuStats_Click(item, EventArgs.Empty); }
+                    return;
+                }
+            }
         }
         private void SetCurrentProfileIcon(bool linked) {
             if (this.CurrentSettings.AutoChangeProfile) {
