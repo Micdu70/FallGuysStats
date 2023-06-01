@@ -139,6 +139,7 @@ namespace FallGuysStats {
         public static bool EndedShow = false;
 
         public static bool ConnectedToServer = false;
+        public static DateTime ConnectedToServerDate = DateTime.MinValue;
         public static string LastServerIp = string.Empty;
         public static string LastServerCountryCode = string.Empty;
         public static long LastServerPing = 0;
@@ -239,7 +240,6 @@ namespace FallGuysStats {
         private bool onlyRefreshFilter;
 
         public readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/";
-        public readonly string IP2C_ORG_URL = "https://ip2c.org/";
 
         public readonly string[] publicShowIdList = {
             "main_show",
@@ -1843,7 +1843,7 @@ namespace FallGuysStats {
                                 stat.ShowID = nextShowID;
                                 stat.Profile = profile;
 
-                                if (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_")) {
+                                if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
                                         string[] creativeAuthorInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
@@ -3444,16 +3444,17 @@ namespace FallGuysStats {
             }
             return creativeAuthorInfo;
         }
-        public string GetCountryCode(string ip) {
-            string code = string.Empty;
-            using (ApiWebClient web = new ApiWebClient()) {
-                string resStr = web.DownloadString($"{this.IP2C_ORG_URL}{ip}");
-                string[] resArr = resStr.Split(';');
-                if ("1".Equals(resArr[0])) {
-                    code = resArr[2];
-                }
+        public string GetCountryCode(string dbFile, string ip) {
+            if (!File.Exists(dbFile)) { return string.Empty; }
+
+            try {
+                MaxMind.GeoIP2.DatabaseReader reader = new MaxMind.GeoIP2.DatabaseReader(dbFile);
+
+                var country = reader.Country(ip);
+                return country.Country.IsoCode;
+            } catch (Exception) {
+                return string.Empty;
             }
-            return code;
         }
         public JsonElement GetApiData(string apiUrl, string apiEndPoint) {
             JsonElement resJroot;

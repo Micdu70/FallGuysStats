@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 #endif
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,11 +58,13 @@ namespace FallGuysStats {
         public Stats StatsForm { get; set; }
 
         private bool autoChangeProfile;
-        private bool hasLastServerCountryInfo;
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
         private bool isCreatorMadeRoundsShow;
+
+        private bool toggleServerInfo;
+        private readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2", "GeoLite2-Country.mmdb");
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -253,20 +256,19 @@ namespace FallGuysStats {
             this.isCreatorMadeRoundsShow = false;
 
             return (roundId.IndexOf("round_jinxed", StringComparison.OrdinalIgnoreCase) != -1
-                        && roundId.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1)
+                    && roundId.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1)
 
                     || (roundId.IndexOf("round_fall_ball", StringComparison.OrdinalIgnoreCase) != -1
                         && roundId.IndexOf("_non_final", StringComparison.OrdinalIgnoreCase) == -1
                         && roundId.IndexOf("_cup_only", StringComparison.OrdinalIgnoreCase) == -1)
 
-                   || (roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1
-                       && roundId.IndexOf("_final", StringComparison.OrdinalIgnoreCase) != -1)
+                    || ((roundId.IndexOf("round_basketfall", StringComparison.OrdinalIgnoreCase) != -1
+                         || roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1)
+                            && roundId.IndexOf("_final", StringComparison.OrdinalIgnoreCase) != -1)
 
-                   || (roundId.IndexOf("round_basketfall", StringComparison.OrdinalIgnoreCase) != -1
-                       && roundId.IndexOf("_final", StringComparison.OrdinalIgnoreCase) != -1)
-
-                   || (roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
-                       && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
+                    || ((roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
+                         || roundId.IndexOf("round_robotrampage", StringComparison.OrdinalIgnoreCase) != -1)
+                            && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
 
                     || roundId.EndsWith("_timeattack_final", StringComparison.OrdinalIgnoreCase)
 
@@ -309,7 +311,7 @@ namespace FallGuysStats {
                      || roundId.IndexOf("round_floor_fall_event_walnut", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_hexaring_event_walnut", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_hexsnake_event_walnut", StringComparison.OrdinalIgnoreCase) != -1)
-                         && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
+                        && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
 
                      || (roundId.IndexOf("round_blastball_arenasurvival_blast_ball_trials", StringComparison.OrdinalIgnoreCase) != -1
                          && roundId.Substring(roundId.Length - 3).ToLower() == "_fn")
@@ -321,7 +323,7 @@ namespace FallGuysStats {
         private bool GetIsTeamException(string roundId) {
             return roundId.IndexOf("ound_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1
                    && (roundId.IndexOf("_duos", StringComparison.OrdinalIgnoreCase) != -1
-                   || roundId.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) != -1);
+                       || roundId.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) != -1);
         }
 
         private bool ParseLine(LogLine line, List<RoundInfo> round, LogRound logRound) {
@@ -346,14 +348,13 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (!this.toggleServerInfo && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+                this.toggleServerInfo = true;
                 Stats.ConnectedToServer = true;
+                Stats.ConnectedToServerDate = line.Date;
                 int ipIndex = line.Line.IndexOf("IP:");
                 Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
-                if (!this.hasLastServerCountryInfo) {
-                    this.hasLastServerCountryInfo = true;
-                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(Stats.LastServerIp).ToLower();
-                }
+                Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(pathToGeoLite2Db, Stats.LastServerIp).ToLower();
                 this.serverPing.Start();
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
@@ -499,8 +500,8 @@ namespace FallGuysStats {
                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
                        || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
-                       || (Stats.IsGameHasBeenClosed && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
-                this.hasLastServerCountryInfo = false;
+                       || ((Stats.IsGameHasBeenClosed || !Stats.ConnectedToServer) && line.Line.IndexOf("The remote sent a disconnect request", StringComparison.OrdinalIgnoreCase) > 0)) {
+                this.toggleServerInfo = false;
                 Stats.ConnectedToServer = false;
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;

@@ -204,6 +204,9 @@
     <EmbeddedResource Include="Views\StatsDisplay.resx">
       <DependentUpon>StatsDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="GeoLite2\GeoLite2-Country.mmdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -440,255 +443,6 @@
     <None Include="Resources\overlay\tab_unselected_wallpaper_02.png" />
     <None Include="Resources\overlay\tab_unselected_wallpaper_03.png" />
     <None Include="Resources\overlay\tab_unselected_watermelon.png" />
-    <None Include="Resources\country_icon\ABW.png" />
-    <None Include="Resources\country_icon\AFG.png" />
-    <None Include="Resources\country_icon\AGO.png" />
-    <None Include="Resources\country_icon\AIA.png" />
-    <None Include="Resources\country_icon\ALA.png" />
-    <None Include="Resources\country_icon\ALB.png" />
-    <None Include="Resources\country_icon\AND.png" />
-    <None Include="Resources\country_icon\ARE.png" />
-    <None Include="Resources\country_icon\ARG.png" />
-    <None Include="Resources\country_icon\ARM.png" />
-    <None Include="Resources\country_icon\ASM.png" />
-    <None Include="Resources\country_icon\ATA.png" />
-    <None Include="Resources\country_icon\ATF.png" />
-    <None Include="Resources\country_icon\ATG.png" />
-    <None Include="Resources\country_icon\AUS.png" />
-    <None Include="Resources\country_icon\AUT.png" />
-    <None Include="Resources\country_icon\AZE.png" />
-    <None Include="Resources\country_icon\BDI.png" />
-    <None Include="Resources\country_icon\BEL.png" />
-    <None Include="Resources\country_icon\BEN.png" />
-    <None Include="Resources\country_icon\BES.png" />
-    <None Include="Resources\country_icon\BFA.png" />
-    <None Include="Resources\country_icon\BGD.png" />
-    <None Include="Resources\country_icon\BGR.png" />
-    <None Include="Resources\country_icon\BHR.png" />
-    <None Include="Resources\country_icon\BHS.png" />
-    <None Include="Resources\country_icon\BIH.png" />
-    <None Include="Resources\country_icon\BLM.png" />
-    <None Include="Resources\country_icon\BLR.png" />
-    <None Include="Resources\country_icon\BLZ.png" />
-    <None Include="Resources\country_icon\BMU.png" />
-    <None Include="Resources\country_icon\BOL.png" />
-    <None Include="Resources\country_icon\BRA.png" />
-    <None Include="Resources\country_icon\BRB.png" />
-    <None Include="Resources\country_icon\BRN.png" />
-    <None Include="Resources\country_icon\BTN.png" />
-    <None Include="Resources\country_icon\BVT.png" />
-    <None Include="Resources\country_icon\BWA.png" />
-    <None Include="Resources\country_icon\CAF.png" />
-    <None Include="Resources\country_icon\CAN.png" />
-    <None Include="Resources\country_icon\CCK.png" />
-    <None Include="Resources\country_icon\CHE.png" />
-    <None Include="Resources\country_icon\CHL.png" />
-    <None Include="Resources\country_icon\CHN.png" />
-    <None Include="Resources\country_icon\CIV.png" />
-    <None Include="Resources\country_icon\CMR.png" />
-    <None Include="Resources\country_icon\COD.png" />
-    <None Include="Resources\country_icon\COG.png" />
-    <None Include="Resources\country_icon\COK.png" />
-    <None Include="Resources\country_icon\COL.png" />
-    <None Include="Resources\country_icon\COM.png" />
-    <None Include="Resources\country_icon\CPV.png" />
-    <None Include="Resources\country_icon\CRI.png" />
-    <None Include="Resources\country_icon\CUB.png" />
-    <None Include="Resources\country_icon\CUW.png" />
-    <None Include="Resources\country_icon\CXR.png" />
-    <None Include="Resources\country_icon\CYM.png" />
-    <None Include="Resources\country_icon\CYP.png" />
-    <None Include="Resources\country_icon\CZE.png" />
-    <None Include="Resources\country_icon\DEU.png" />
-    <None Include="Resources\country_icon\DJI.png" />
-    <None Include="Resources\country_icon\DMA.png" />
-    <None Include="Resources\country_icon\DNK.png" />
-    <None Include="Resources\country_icon\DOM.png" />
-    <None Include="Resources\country_icon\DZA.png" />
-    <None Include="Resources\country_icon\ECU.png" />
-    <None Include="Resources\country_icon\EGY.png" />
-    <None Include="Resources\country_icon\ERI.png" />
-    <None Include="Resources\country_icon\ESH.png" />
-    <None Include="Resources\country_icon\ESP.png" />
-    <None Include="Resources\country_icon\EST.png" />
-    <None Include="Resources\country_icon\ETH.png" />
-    <None Include="Resources\country_icon\FIN.png" />
-    <None Include="Resources\country_icon\FJI.png" />
-    <None Include="Resources\country_icon\FLK.png" />
-    <None Include="Resources\country_icon\FRA.png" />
-    <None Include="Resources\country_icon\FRO.png" />
-    <None Include="Resources\country_icon\FSM.png" />
-    <None Include="Resources\country_icon\GAB.png" />
-    <None Include="Resources\country_icon\GBR.png" />
-    <None Include="Resources\country_icon\GEO.png" />
-    <None Include="Resources\country_icon\GGY.png" />
-    <None Include="Resources\country_icon\GHA.png" />
-    <None Include="Resources\country_icon\GIB.png" />
-    <None Include="Resources\country_icon\GIN.png" />
-    <None Include="Resources\country_icon\GLP.png" />
-    <None Include="Resources\country_icon\GMB.png" />
-    <None Include="Resources\country_icon\GNB.png" />
-    <None Include="Resources\country_icon\GNQ.png" />
-    <None Include="Resources\country_icon\GRC.png" />
-    <None Include="Resources\country_icon\GRD.png" />
-    <None Include="Resources\country_icon\GRL.png" />
-    <None Include="Resources\country_icon\GTM.png" />
-    <None Include="Resources\country_icon\GUF.png" />
-    <None Include="Resources\country_icon\GUM.png" />
-    <None Include="Resources\country_icon\GUY.png" />
-    <None Include="Resources\country_icon\HKG.png" />
-    <None Include="Resources\country_icon\HMD.png" />
-    <None Include="Resources\country_icon\HND.png" />
-    <None Include="Resources\country_icon\HRV.png" />
-    <None Include="Resources\country_icon\HTI.png" />
-    <None Include="Resources\country_icon\HUN.png" />
-    <None Include="Resources\country_icon\IDN.png" />
-    <None Include="Resources\country_icon\IMN.png" />
-    <None Include="Resources\country_icon\IND.png" />
-    <None Include="Resources\country_icon\IOT.png" />
-    <None Include="Resources\country_icon\IRL.png" />
-    <None Include="Resources\country_icon\IRN.png" />
-    <None Include="Resources\country_icon\IRQ.png" />
-    <None Include="Resources\country_icon\ISL.png" />
-    <None Include="Resources\country_icon\ISR.png" />
-    <None Include="Resources\country_icon\ITA.png" />
-    <None Include="Resources\country_icon\JAM.png" />
-    <None Include="Resources\country_icon\JEY.png" />
-    <None Include="Resources\country_icon\JOR.png" />
-    <None Include="Resources\country_icon\JPN.png" />
-    <None Include="Resources\country_icon\KAZ.png" />
-    <None Include="Resources\country_icon\KEN.png" />
-    <None Include="Resources\country_icon\KGZ.png" />
-    <None Include="Resources\country_icon\KHM.png" />
-    <None Include="Resources\country_icon\KIR.png" />
-    <None Include="Resources\country_icon\KNA.png" />
-    <None Include="Resources\country_icon\KOR.png" />
-    <None Include="Resources\country_icon\KWT.png" />
-    <None Include="Resources\country_icon\LAO.png" />
-    <None Include="Resources\country_icon\LBN.png" />
-    <None Include="Resources\country_icon\LBR.png" />
-    <None Include="Resources\country_icon\LBY.png" />
-    <None Include="Resources\country_icon\LCA.png" />
-    <None Include="Resources\country_icon\LIE.png" />
-    <None Include="Resources\country_icon\LKA.png" />
-    <None Include="Resources\country_icon\LSO.png" />
-    <None Include="Resources\country_icon\LTU.png" />
-    <None Include="Resources\country_icon\LUX.png" />
-    <None Include="Resources\country_icon\LVA.png" />
-    <None Include="Resources\country_icon\MAC.png" />
-    <None Include="Resources\country_icon\MAF.png" />
-    <None Include="Resources\country_icon\MAR.png" />
-    <None Include="Resources\country_icon\MCO.png" />
-    <None Include="Resources\country_icon\MDA.png" />
-    <None Include="Resources\country_icon\MDG.png" />
-    <None Include="Resources\country_icon\MDV.png" />
-    <None Include="Resources\country_icon\MEX.png" />
-    <None Include="Resources\country_icon\MHL.png" />
-    <None Include="Resources\country_icon\MKD.png" />
-    <None Include="Resources\country_icon\MLI.png" />
-    <None Include="Resources\country_icon\MLT.png" />
-    <None Include="Resources\country_icon\MMR.png" />
-    <None Include="Resources\country_icon\MNE.png" />
-    <None Include="Resources\country_icon\MNG.png" />
-    <None Include="Resources\country_icon\MNP.png" />
-    <None Include="Resources\country_icon\MOZ.png" />
-    <None Include="Resources\country_icon\MRT.png" />
-    <None Include="Resources\country_icon\MSR.png" />
-    <None Include="Resources\country_icon\MTQ.png" />
-    <None Include="Resources\country_icon\MUS.png" />
-    <None Include="Resources\country_icon\MWI.png" />
-    <None Include="Resources\country_icon\MYS.png" />
-    <None Include="Resources\country_icon\MYT.png" />
-    <None Include="Resources\country_icon\NAM.png" />
-    <None Include="Resources\country_icon\NCL.png" />
-    <None Include="Resources\country_icon\NER.png" />
-    <None Include="Resources\country_icon\NFK.png" />
-    <None Include="Resources\country_icon\NGA.png" />
-    <None Include="Resources\country_icon\NIC.png" />
-    <None Include="Resources\country_icon\NIU.png" />
-    <None Include="Resources\country_icon\NLD.png" />
-    <None Include="Resources\country_icon\NOR.png" />
-    <None Include="Resources\country_icon\NPL.png" />
-    <None Include="Resources\country_icon\NRU.png" />
-    <None Include="Resources\country_icon\NZL.png" />
-    <None Include="Resources\country_icon\OMN.png" />
-    <None Include="Resources\country_icon\PAK.png" />
-    <None Include="Resources\country_icon\PAN.png" />
-    <None Include="Resources\country_icon\PCN.png" />
-    <None Include="Resources\country_icon\PER.png" />
-    <None Include="Resources\country_icon\PHL.png" />
-    <None Include="Resources\country_icon\PLW.png" />
-    <None Include="Resources\country_icon\PNG.png" />
-    <None Include="Resources\country_icon\POL.png" />
-    <None Include="Resources\country_icon\PRI.png" />
-    <None Include="Resources\country_icon\PRK.png" />
-    <None Include="Resources\country_icon\PRT.png" />
-    <None Include="Resources\country_icon\PRY.png" />
-    <None Include="Resources\country_icon\PSE.png" />
-    <None Include="Resources\country_icon\PYF.png" />
-    <None Include="Resources\country_icon\QAT.png" />
-    <None Include="Resources\country_icon\REU.png" />
-    <None Include="Resources\country_icon\ROU.png" />
-    <None Include="Resources\country_icon\RUS.png" />
-    <None Include="Resources\country_icon\RWA.png" />
-    <None Include="Resources\country_icon\SAU.png" />
-    <None Include="Resources\country_icon\SDN.png" />
-    <None Include="Resources\country_icon\SEN.png" />
-    <None Include="Resources\country_icon\SGP.png" />
-    <None Include="Resources\country_icon\SGS.png" />
-    <None Include="Resources\country_icon\SHN.png" />
-    <None Include="Resources\country_icon\SJM.png" />
-    <None Include="Resources\country_icon\SLB.png" />
-    <None Include="Resources\country_icon\SLE.png" />
-    <None Include="Resources\country_icon\SLV.png" />
-    <None Include="Resources\country_icon\SMR.png" />
-    <None Include="Resources\country_icon\SOM.png" />
-    <None Include="Resources\country_icon\SPM.png" />
-    <None Include="Resources\country_icon\SRB.png" />
-    <None Include="Resources\country_icon\SSD.png" />
-    <None Include="Resources\country_icon\STP.png" />
-    <None Include="Resources\country_icon\SUR.png" />
-    <None Include="Resources\country_icon\SVK.png" />
-    <None Include="Resources\country_icon\SVN.png" />
-    <None Include="Resources\country_icon\SWE.png" />
-    <None Include="Resources\country_icon\SWZ.png" />
-    <None Include="Resources\country_icon\SXM.png" />
-    <None Include="Resources\country_icon\SYC.png" />
-    <None Include="Resources\country_icon\SYR.png" />
-    <None Include="Resources\country_icon\TCA.png" />
-    <None Include="Resources\country_icon\TCD.png" />
-    <None Include="Resources\country_icon\TGO.png" />
-    <None Include="Resources\country_icon\THA.png" />
-    <None Include="Resources\country_icon\TJK.png" />
-    <None Include="Resources\country_icon\TKL.png" />
-    <None Include="Resources\country_icon\TKM.png" />
-    <None Include="Resources\country_icon\TLS.png" />
-    <None Include="Resources\country_icon\TON.png" />
-    <None Include="Resources\country_icon\TTO.png" />
-    <None Include="Resources\country_icon\TUN.png" />
-    <None Include="Resources\country_icon\TUR.png" />
-    <None Include="Resources\country_icon\TUV.png" />
-    <None Include="Resources\country_icon\TWN.png" />
-    <None Include="Resources\country_icon\TZA.png" />
-    <None Include="Resources\country_icon\UGA.png" />
-    <None Include="Resources\country_icon\UKR.png" />
-    <None Include="Resources\country_icon\UMI.png" />
-    <None Include="Resources\country_icon\URY.png" />
-    <None Include="Resources\country_icon\USA.png" />
-    <None Include="Resources\country_icon\UZB.png" />
-    <None Include="Resources\country_icon\VAT.png" />
-    <None Include="Resources\country_icon\VCT.png" />
-    <None Include="Resources\country_icon\VEN.png" />
-    <None Include="Resources\country_icon\VGB.png" />
-    <None Include="Resources\country_icon\VIR.png" />
-    <None Include="Resources\country_icon\VNM.png" />
-    <None Include="Resources\country_icon\VUT.png" />
-    <None Include="Resources\country_icon\WLF.png" />
-    <None Include="Resources\country_icon\WSM.png" />
-    <None Include="Resources\country_icon\YEM.png" />
-    <None Include="Resources\country_icon\ZAF.png" />
-    <None Include="Resources\country_icon\ZMB.png" />
-    <None Include="Resources\country_icon\ZWE.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.7.0">
@@ -696,6 +450,9 @@
     </PackageReference>
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MaxMind.GeoIP2">
+      <Version>5.1.0</Version>
     </PackageReference>
     <PackageReference Include="MetroModernUI" Version="1.4.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
@@ -757,6 +514,764 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\AZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\BZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\CZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\DZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\EC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\EE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\EG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\EH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ER.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ES.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ET.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\FR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\GY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\HU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ID.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\IT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\JE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\JM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\JO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\JP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\KZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\LY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ME.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ML.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\MZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\NZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\OM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\PY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\QA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\RE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\RO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\RS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\RU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\RW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ST.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\SZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\TZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\UA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\UG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\UM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\US.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\UY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\UZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\VU.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\WF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\WS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\XK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\YE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\YT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ZA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ZM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\country_icon\ZW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GeoLite2\COPYRIGHT.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GeoLite2\LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

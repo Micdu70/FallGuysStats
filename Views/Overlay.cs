@@ -246,7 +246,7 @@ namespace FallGuysStats {
                         this.StatsForm.CurrentSettings.OverlayFixedPositionX = null;
                         this.StatsForm.CurrentSettings.OverlayFixedPositionY = null;
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Show();
+                        this.SetVisiblePositionLockButton(true);
                     } else {
                         if (!this.IsFixed()) {
                             this.StatsForm.CurrentSettings.OverlayLocationX = this.Location.X;
@@ -264,7 +264,7 @@ namespace FallGuysStats {
                         //this.StatsForm.CurrentSettings.FlippedDisplay = true;
                         this.StatsForm.CurrentSettings.OverlayFixedPosition = "ne";
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = true;
-                        this.picPositionLock.Hide();
+                        this.SetVisiblePositionLockButton(false);
                     }
                 } else if (iconName.Equals("picPositionNW")) {
                     if (this.isFixedPositionNw) {
@@ -279,7 +279,7 @@ namespace FallGuysStats {
                         this.StatsForm.CurrentSettings.OverlayFixedPositionX = null;
                         this.StatsForm.CurrentSettings.OverlayFixedPositionY = null;
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Show();
+                        this.SetVisiblePositionLockButton(true);
                     } else {
                         if (!this.IsFixed()) {
                             this.StatsForm.CurrentSettings.OverlayLocationX = this.Location.X;
@@ -297,7 +297,7 @@ namespace FallGuysStats {
                         //this.StatsForm.CurrentSettings.FlippedDisplay = false;
                         this.StatsForm.CurrentSettings.OverlayFixedPosition = "nw";
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Hide();
+                        this.SetVisiblePositionLockButton(false);
                     }
                 } else if (iconName.Equals("picPositionSE")) {
                     if (this.isFixedPositionSe) {
@@ -312,7 +312,7 @@ namespace FallGuysStats {
                         this.StatsForm.CurrentSettings.OverlayFixedPositionX = null;
                         this.StatsForm.CurrentSettings.OverlayFixedPositionY = null;
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Show();
+                        this.SetVisiblePositionLockButton(true);
                     } else {
                         if (!this.IsFixed()) {
                             this.StatsForm.CurrentSettings.OverlayLocationX = this.Location.X;
@@ -330,7 +330,7 @@ namespace FallGuysStats {
                         //this.StatsForm.CurrentSettings.FlippedDisplay = true;
                         this.StatsForm.CurrentSettings.OverlayFixedPosition = "se";
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = true;
-                        this.picPositionLock.Hide();
+                        this.SetVisiblePositionLockButton(false);
                     }
                 } else if (iconName.Equals("picPositionSW")) {
                     if (this.isFixedPositionSw) {
@@ -345,7 +345,7 @@ namespace FallGuysStats {
                         this.StatsForm.CurrentSettings.OverlayFixedPositionX = null;
                         this.StatsForm.CurrentSettings.OverlayFixedPositionY = null;
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Show();
+                        this.SetVisiblePositionLockButton(true);
                     } else {
                         if (!this.IsFixed()) {
                             this.StatsForm.CurrentSettings.OverlayLocationX = this.Location.X;
@@ -363,7 +363,7 @@ namespace FallGuysStats {
                         //this.StatsForm.CurrentSettings.FlippedDisplay = false;
                         this.StatsForm.CurrentSettings.OverlayFixedPosition = "sw";
                         this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
-                        this.picPositionLock.Hide();
+                        this.SetVisiblePositionLockButton(false);
                     }
                 } else if (iconName.Equals("picPositionLock")) {
                     if (this.isPositionLock) {
@@ -463,15 +463,22 @@ namespace FallGuysStats {
                 this.picPositionSW.Hide();
             }
         }
+        private void SetVisiblePositionLockButton(bool visible) {
+            if (visible) {
+                this.picPositionLock.Show();
+            } else {
+                this.picPositionLock.Hide();
+            }
+        }
         private void Overlay_MouseUp(object sender, MouseEventArgs e) {
             if (this.IsFixed() && this.isPositionLock && e.Button == MouseButtons.Left) {
                 if (!this.isAlreadyClicked) { this.isAlreadyClicked = true; }
-                if (!this.picPositionLock.Visible) { this.picPositionLock.Show(); }
+                if (!this.picPositionLock.Visible) { this.SetVisiblePositionLockButton(true); }
                 return;
             }
             if (this.isAlreadyClicked) {
                 this.isAlreadyClicked = false;
-                if (this.picPositionLock.Visible) { this.picPositionLock.Hide(); }
+                if (this.picPositionLock.Visible) { this.SetVisiblePositionLockButton(false); }
                 if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible) { return; }
 
                 this.SetVisiblePositionMenu(false);
@@ -481,17 +488,17 @@ namespace FallGuysStats {
             }
             if (this.IsFixed()) {
                 if (this.isPositionLock) {
-                    this.picPositionLock.Show();
+                    this.SetVisiblePositionLockButton(true);
                     this.SetVisiblePositionMenu(false);
                 } else {
-                    this.picPositionLock.Hide();
+                    this.SetVisiblePositionLockButton(false);
                     this.SetVisiblePositionMenu(true);
                 }
             } else {
                 if (this.picPositionNE.Visible && this.picPositionNW.Visible && this.picPositionSE.Visible && this.picPositionSW.Visible && this.picPositionLock.Visible) { return; }
 
                 this.SetVisiblePositionMenu(true);
-                this.picPositionLock.Show();
+                this.SetVisiblePositionLockButton(true);
             }
         }
         private void Overlay_LostFocus(object sender, EventArgs e) {
@@ -499,7 +506,7 @@ namespace FallGuysStats {
             if (!this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) { return; }
 
             this.SetVisiblePositionMenu(false);
-            this.picPositionLock.Hide();
+            this.SetVisiblePositionLockButton(false);
         }
         private void Overlay_Resize(object sender, EventArgs e) {
             this.SetLocationPositionMenu(this.drawHeight > 99, this.StatsForm.CurrentSettings.FlippedDisplay);
@@ -510,7 +517,7 @@ namespace FallGuysStats {
             if (!this.IsFixed() && !this.picPositionNE.Visible && !this.picPositionNW.Visible && !this.picPositionSE.Visible && !this.picPositionSW.Visible && !this.picPositionLock.Visible) {
                 this.isAlreadyClicked = true;
                 this.SetVisiblePositionMenu(true);
-                this.picPositionLock.Show();
+                this.SetVisiblePositionLockButton(true);
             }
 
             if ((sender.GetType() == this.picPositionNE.GetType()) ||
@@ -602,6 +609,7 @@ namespace FallGuysStats {
             }
             switch (playersSwitchCount % 2) {
                 case 0:
+                    this.lblCountryIcon.DrawVisible = false;
                     this.lblPlayers.TextRight = $"{this.lastRound?.Players}";
                     if (this.StatsForm.CurrentSettings.PlayerByConsoleType) {
                         this.lblPlayers.Image = Properties.Resources.player_icon;
@@ -622,7 +630,6 @@ namespace FallGuysStats {
                         this.lblPlayersPc.TextRight = pcCount == 0 ? "-" : $"{pcCount}";
                         this.lblPlayersPc.Size = new Size(pcCount > 9 ? 32 : 26, 16);
                         this.lblPlayersPc.DrawVisible = true;
-                        this.lblCountryIcon.DrawVisible = false;
                     } else {
                         this.lblPlayers.Image = null;
                         this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_players")} :";
@@ -630,7 +637,6 @@ namespace FallGuysStats {
                         this.lblPlayersXbox.DrawVisible = false;
                         this.lblPlayersSwitch.DrawVisible = false;
                         this.lblPlayersPc.DrawVisible = false;
-                        this.lblCountryIcon.DrawVisible = false;
                     }
                     this.lblPlayers.ForeColor = Color.White;
                     break;
@@ -643,7 +649,7 @@ namespace FallGuysStats {
                     this.lblCountryIcon.DrawVisible = true;
                     this.lblCountryIcon.ImageY = 1;
                     this.lblCountryIcon.ImageX = -30;
-                    this.lblCountryIcon.Image = (Image)(Stats.LastServerPing > 0 ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastServerCountryCode}_icon") : null);
+                    this.lblCountryIcon.Image = (Image)(!string.IsNullOrEmpty(Stats.LastServerCountryCode) ? Properties.Resources.ResourceManager.GetObject($"country_{Stats.LastServerCountryCode}_icon") : null);
                     this.lblPlayers.Text = $"{Multilingual.GetWord("overlay_ping")} :";
                     this.lblPlayers.TextRight = Stats.LastServerPing > 0 ? $"{Stats.LastServerPing} ms" : "-";
                     this.lblPlayers.ForeColor = Stats.LastServerPing == 0 ? Color.White :

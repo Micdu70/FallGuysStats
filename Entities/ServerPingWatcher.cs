@@ -37,11 +37,11 @@ namespace FallGuysStats {
             this.running = true;
             while (!stop) {
                 try {
-                    if (!Stats.ConnectedToServer) {
-                        Stats.FailedLastServerPing = true;
+                    TimeSpan timeDiff = DateTime.UtcNow - Stats.ConnectedToServerDate;
+                    if (!Stats.ConnectedToServer || timeDiff.TotalMinutes >= 45) {
+                        Stats.ConnectedToServer = false;
                         this.stop = true;
                         this.running = false;
-                        return;
                     }
                     this.pingReply = this.pingSender.Send(Stats.LastServerIp, 1000, new byte[32]);
                     if (this.pingReply.Status == IPStatus.Success) {
