@@ -27,6 +27,11 @@
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
+Ce programme utilise les données GeoLite2 créées par MaxMind pour la géolocalisation des serveurs de Fall Guys.
+
+-> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
+
+
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 
@@ -42,7 +47,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.184` ~ 31/05/2023
+**Dernière version:** `v1.186` ~ 02/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -53,13 +58,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.184) datant du 31/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
-- ++Ajouté: Overlay => Drapeau du pays du serveur auquel vous êtes connecté (au niveau de l'info du ping) [Version Officielle + Modifications "FE"]
-- ++Changé: L'option "Cycle \*Joueurs / Ping\*" est maintenant l'option par défaut (au lieu de "Joueurs seul.")
+{ Cette version, bien que basée sur la Version Officielle (v1.186) datant du 02/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )
+- ++Ajouté: Détection de la manche finale "C'est du lourd" pour l'émission "Le plus fort survivra"
 
-
-### Il y a 0 bug génant connu dans la v1.184 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.186 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -71,8 +74,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - Lancer Fall Guys
 
   - Mise à jour (depuis une Version Officielle ou d'une ancienne version "FE"):
-    - Extraire le contenu du fichier zip téléchargé vers le dossier contenant l'ancienne version du tracker à remplacer
-	- Lancer la nouvelle version du tracker
+    - Extraire le contenu du fichier zip téléchargé vers le dossier contenant l'ancienne version du tracker à remplacer (accepter le remplacement des fichiers existants)
+	- Dans le dossier contenant maintenant la nouvelle version du tracker, lancer le tracker
     - Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
     - Lancer Fall Guys
 
@@ -215,6 +218,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.186` ~ 02/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.186) datant du 02/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )
+    - ++Ajouté: Détection de la manche finale "C'est du lourd" pour l'émission "Le plus fort survivra"
 
   - `v1.184` ~ 31/05/2023
   { Correction de bugs de la "FE" }
@@ -461,8 +470,14 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.186`
+    - Bugfix and program optimization
+  - `1.185`
+    - When the country icon is visible, click the overlay to show the country's full name
+    - Optimized for country and ping display
+    - Bugfix and program optimization
   - `1.184`
-    - Displays the icon of the country where the server is located.
+    - Displays the icon of the country where the server is located
     - Bugfix and program optimization
   - `1.183`
     - Add a new show id

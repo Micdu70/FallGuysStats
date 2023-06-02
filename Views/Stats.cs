@@ -133,6 +133,7 @@ namespace FallGuysStats {
 
         public static bool HideOverlayTime = false;
 
+        public static bool IsGameRunning = false;
         public static bool IsGameHasBeenClosed = false;
 
         public static bool InShow = false;
@@ -153,7 +154,7 @@ namespace FallGuysStats {
         public static bool IsLastPlayedRoundStillPlaying { get; set; }
 
         public static DateTime LastGameStart { get; set; } = DateTime.MinValue;
-        public static DateTime LastRoundLoad { get; set; } = DateTime.MinValue;
+        public static DateTime LastLoadedRound { get; set; } = DateTime.MinValue;
         public static DateTime? LastPlayedRoundStart { get; set; } = null;
         public static DateTime? LastPlayedRoundEnd { get; set; } = null;
 
@@ -3434,14 +3435,21 @@ namespace FallGuysStats {
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
             string[] creativeAuthorInfo = { "", "N/A" };
-            string[] validKeys = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "nso" may not be used
-            foreach (string validKey in validKeys) {
-                if (authorData.TryGetProperty(validKey, out JsonElement authorInfo)) {
-                    creativeAuthorInfo[0] = validKey;
-                    creativeAuthorInfo[1] = authorInfo.GetString();
-                    break;
+            string onlinePlatformId = string.Empty;
+            string onlinePlatformNickname = string.Empty;
+            string[] onlinePlatformIds = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "nso" may not be used
+            foreach (string onlinePlatformIdInfo in onlinePlatformIds) {
+                if (authorData.TryGetProperty(onlinePlatformIdInfo, out JsonElement onlinePlatformNicknameInfo)) {
+                    if (!string.IsNullOrEmpty(onlinePlatformId)) { onlinePlatformId += ";"; }
+                    onlinePlatformId += onlinePlatformIdInfo;
+                    if (!string.IsNullOrEmpty(onlinePlatformNickname)) { onlinePlatformNickname += ";"; }
+                    onlinePlatformNickname += onlinePlatformNicknameInfo.GetString();
                 }
             }
+            if (string.IsNullOrEmpty(onlinePlatformId)) { return creativeAuthorInfo; }
+
+            creativeAuthorInfo[0] = onlinePlatformId;
+            creativeAuthorInfo[1] = onlinePlatformNickname;
             return creativeAuthorInfo;
         }
         public string GetCountryCode(string dbFile, string ip) {

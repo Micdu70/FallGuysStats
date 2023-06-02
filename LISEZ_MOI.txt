@@ -1,8 +1,14 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.184 du 31/05/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.186 du 31/05/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
+Ce programme utilise les données GeoLite2 créées par MaxMind pour la géolocalisation des serveurs de Fall Guys.
+
+-> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
+
+
 INFO: Il y a 0 bug génant connu dans la v1.184 de la "FE" (Frenchy Edition)
+
 
 ## Différences entre la "FE" et la Version Officielle
 
@@ -12,6 +18,24 @@ INFO: Il y a 0 bug génant connu dans la v1.184 de la "FE" (Frenchy Edition)
 
 - La "FE" ne possède pas d'icône de notification (systray) contrairement à la Version Officielle qui l'a rajoutée
 - La "FE" utilise toujours l'ancienne fenêtre de "Configuration" contrairement à la Version Officielle qui possède maintenant des "tuiles"
+
+
+## Utilisation
+
+- Première fois :
+
+  1) Extraire le contenu du fichier zip téléchargé vers un nouveau dossier vide
+  2) Dans ce nouveau dossier, lancer le tracker
+  3) Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
+  4) Lancer Fall Guys
+
+
+- Mise à jour (depuis une Version Officielle ou d'une ancienne version "FE") :
+
+  1) Extraire le contenu du fichier zip téléchargé vers le dossier contenant l'ancienne version du tracker à remplacer (accepter le remplacement des fichiers existants)
+  2) Dans le dossier contenant maintenant la nouvelle version du tracker, lancer le tracker
+  3) Configurer le tracker comme bon vous semble (afficher l'overlay/modifier des options/etc.)
+  4) Lancer Fall Guys
 
 
 ## FAQ

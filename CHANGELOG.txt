@@ -1,14 +1,19 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.186 ~ 02/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.186) datant du 02/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )
+    - ++Ajouté: Détection de la manche finale "C'est du lourd" pour l'émission "Le plus fort survivra"
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.184 ~ 31/05/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.184) datant du 31/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Ajouté: Nom des récentes émissions de la nouvelle saison dans la liste des stats [Version Officielle + Ajout "FE"]
     - ++Ajouté: Overlay => Drapeau du pays du serveur auquel vous êtes connecté (au niveau de l'info du ping) [Version Officielle + Modifications "FE"]
     - ++Changé: L'option "Cycle \*Joueurs / Ping\*" est maintenant l'option par défaut (au lieu de "Joueurs seul.")
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.179 ~ 27/05/2023
   { Correction de bugs de la "FE" }

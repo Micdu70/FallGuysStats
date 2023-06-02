@@ -10,7 +10,7 @@ namespace FallGuysStats {
         private bool stop;
         private Thread watcher;
 
-        private readonly Process[] fallGuysProcessName = Process.GetProcessesByName("FallGuys_client_game");
+        private bool fallGuysProcessFound;
 
         public event Action<string> OnError;
 
@@ -21,7 +21,6 @@ namespace FallGuysStats {
             Debug.WriteLine("GameStateWatcher is starting!");
 #endif
 
-            Stats.IsGameHasBeenClosed = false;
             this.stop = false;
             this.watcher = new Thread(CheckGameState) { IsBackground = true };
             this.watcher.Start();
@@ -36,7 +35,16 @@ namespace FallGuysStats {
                         this.running = false;
                         return;
                     }
-                    if (this.fallGuysProcessName.Length == 0) {
+                    this.fallGuysProcessFound = false;
+                    foreach (Process process in Process.GetProcesses()) {
+                        if (process.ProcessName == "FallGuys_client_game") {
+                            Stats.IsGameRunning = true;
+                            this.fallGuysProcessFound = true;
+                            break;
+                        }
+                    }
+                    if (!this.fallGuysProcessFound) {
+                        Stats.IsGameRunning = false;
                         Stats.IsGameHasBeenClosed = true;
                         this.stop = true;
                         this.running = false;
