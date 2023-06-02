@@ -39,6 +39,7 @@ namespace FallGuysStats {
                 try {
                     TimeSpan timeDiff = DateTime.UtcNow - Stats.ConnectedToServerDate;
                     if (!Stats.ConnectedToServer || timeDiff.TotalMinutes >= 45) {
+                        Stats.IsBadServerPing = true;
                         this.stop = true;
                         this.running = false;
                         return;
@@ -46,14 +47,14 @@ namespace FallGuysStats {
                     this.pingReply = this.pingSender.Send(Stats.LastServerIp, 1000, new byte[32]);
                     if (this.pingReply.Status == IPStatus.Success) {
                         Stats.LastServerPing = this.pingReply.RoundtripTime;
-                        Stats.FailedLastServerPing = false;
+                        Stats.IsBadServerPing = false;
                     } else {
-                        Stats.FailedLastServerPing = true;
+                        Stats.IsBadServerPing = true;
                     }
                     this.randomElement = this.random.Next(0, this.moreDelayValues.Length);
                     this.addMoreRandomDelay = this.moreDelayValues[this.randomElement];
                 } catch {
-                    Stats.FailedLastServerPing = true;
+                    Stats.IsBadServerPing = true;
                     this.randomElement = this.random.Next(0, this.moreDelayValues.Length);
                     this.addMoreRandomDelay = this.moreDelayValues[this.randomElement];
                 }

@@ -47,7 +47,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.186` ~ 02/06/2023
+**Dernière version:** `v1.187` ~ 02/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -62,7 +62,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 - ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )
 - ++Ajouté: Détection de la manche finale "C'est du lourd" pour l'émission "Le plus fort survivra"
 
-### Il y a 0 bug génant connu dans la v1.186 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.187 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -219,7 +219,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - `v1.186` ~ 02/06/2023
+  - `v1.187` ~ 02/06/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.186) datant du 02/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )

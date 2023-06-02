@@ -144,7 +144,7 @@ namespace FallGuysStats {
         public static string LastServerIp = string.Empty;
         public static string LastServerCountryCode = string.Empty;
         public static long LastServerPing = 0;
-        public static bool FailedLastServerPing = false;
+        public static bool IsBadServerPing = false;
 
         public static List<string> succeededPlayerIds = new List<string>();
 
@@ -154,7 +154,7 @@ namespace FallGuysStats {
         public static bool IsLastPlayedRoundStillPlaying { get; set; }
 
         public static DateTime LastGameStart { get; set; } = DateTime.MinValue;
-        public static DateTime LastLoadedRound { get; set; } = DateTime.MinValue;
+        public static DateTime LastRoundLoad { get; set; } = DateTime.MinValue;
         public static DateTime? LastPlayedRoundStart { get; set; } = null;
         public static DateTime? LastPlayedRoundEnd { get; set; } = null;
 

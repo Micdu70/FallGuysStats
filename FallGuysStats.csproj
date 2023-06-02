@@ -204,15 +204,15 @@
     <EmbeddedResource Include="Views\StatsDisplay.resx">
       <DependentUpon>StatsDisplay.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="GeoLite2\COPYRIGHT.txt">
+	<None Include="COPYRIGHT-GEOLITE2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GeoLite2\GeoLite2-Country.mmdb">
+    </None>
+    <None Include="GeoLite2-Country.mmdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GeoLite2\LICENSE.txt">
+    </None>
+	<None Include="LICENSE-GEOLITE2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

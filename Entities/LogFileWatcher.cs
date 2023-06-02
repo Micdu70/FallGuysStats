@@ -65,7 +65,7 @@ namespace FallGuysStats {
         private bool isCreatorMadeRoundsShow;
 
         private bool toggleServerInfo;
-        private readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2", "GeoLite2-Country.mmdb");
+        private readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2-Country.mmdb");
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -177,8 +177,6 @@ namespace FallGuysStats {
                         LogRound logRound = new LogRound();
                         List<LogLine> currentLines = new List<LogLine>();
 
-                        DateTime currentUTC = DateTime.UtcNow;
-
                         for (int i = 0; i < tempLines.Count; i++) {
                             LogLine line = tempLines[i];
                             currentLines.Add(line);
@@ -201,16 +199,6 @@ namespace FallGuysStats {
                                 this.updateLastLine = false;
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
-                            } else if (line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
-                                if (!this.toggleServerInfo) {
-                                    this.toggleServerInfo = true;
-                                    Stats.ConnectedToServer = true;
-                                    Stats.ConnectedToServerDate = line.Date;
-                                    int ipIndex = line.Line.IndexOf("IP:");
-                                    Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
-                                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(pathToGeoLite2Db, Stats.LastServerIp).ToLower();
-                                    this.serverPing.Start();
-                                }
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
                                 if (this.autoChangeProfile && Stats.IsGameRunning && Stats.InShow && !Stats.EndedShow) {
                                     this.StatsForm.SetLinkedProfileMenu(this.selectedShowId, logRound.PrivateLobby, this.selectedShowId.StartsWith("show_wle_s10_"));
@@ -363,6 +351,16 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
+            } else if (line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+                if (!this.toggleServerInfo) {
+                    this.toggleServerInfo = true;
+                    Stats.ConnectedToServer = true;
+                    Stats.ConnectedToServerDate = line.Date;
+                    int ipIndex = line.Line.IndexOf("IP:");
+                    Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
+                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(pathToGeoLite2Db, Stats.LastServerIp).ToLower();
+                    this.serverPing.Start();
+                }
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.selectedShowId.StartsWith("ugc-")) {
@@ -375,8 +373,8 @@ namespace FallGuysStats {
                 //Store SessionID to prevent duplicates (for fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
             } else if ((index = line.Line.IndexOf("[StateGameLoading] Loading game level scene", StringComparison.OrdinalIgnoreCase)) > 0) {
-                if (line.Date > Stats.LastLoadedRound) {
-                    Stats.LastLoadedRound = line.Date;
+                if (line.Date > Stats.LastRoundLoad) {
+                    Stats.LastRoundLoad = line.Date;
                     Stats.InShow = true;
                     Stats.succeededPlayerIds.Clear();
                     Stats.NumPlayersSucceeded = 0;
@@ -470,7 +468,7 @@ namespace FallGuysStats {
                 index = line.Line.IndexOf("succeeded=True", StringComparison.OrdinalIgnoreCase);
                 if (index > 0) {
                     logRound.Info.Finish = logRound.Info.End == DateTime.MinValue ? line.Date : logRound.Info.End;
-                    if (line.Date > Stats.LastLoadedRound && !Stats.succeededPlayerIds.Contains(logRound.CurrentPlayerID)) {
+                    if (line.Date > Stats.LastRoundLoad && !Stats.succeededPlayerIds.Contains(logRound.CurrentPlayerID)) {
                         Stats.succeededPlayerIds.Add(logRound.CurrentPlayerID);
                         Stats.NumPlayersSucceeded++;
                     }
@@ -482,7 +480,7 @@ namespace FallGuysStats {
                     logRound.FindingPosition = false;
                     logRound.Info.Position = position;
                 }
-            } else if (line.Date > Stats.LastLoadedRound && (index = line.Line.IndexOf($"HandleServerPlayerProgress PlayerId=", StringComparison.OrdinalIgnoreCase)) > 0 && line.Line.IndexOf("succeeded=True", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (line.Date > Stats.LastRoundLoad && (index = line.Line.IndexOf($"HandleServerPlayerProgress PlayerId=", StringComparison.OrdinalIgnoreCase)) > 0 && line.Line.IndexOf("succeeded=True", StringComparison.OrdinalIgnoreCase) > 0) {
                 int prevIndex = line.Line.IndexOf(" ", index + 36);
                 string playerId = line.Line.Substring(index + 36, prevIndex - index - 36);
                 if (!Stats.succeededPlayerIds.Contains(playerId)) {
@@ -490,7 +488,7 @@ namespace FallGuysStats {
                     Stats.NumPlayersSucceeded++;
                 }
             } else if (line.Line.IndexOf("[GameSession] Changing state from Playing to GameOver", StringComparison.OrdinalIgnoreCase) > 0) {
-                if (line.Date > Stats.LastLoadedRound) {
+                if (line.Date > Stats.LastRoundLoad) {
                     if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                         Stats.LastPlayedRoundEnd = line.Date;
                     }
