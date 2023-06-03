@@ -204,13 +204,13 @@
     <EmbeddedResource Include="Views\StatsDisplay.resx">
       <DependentUpon>StatsDisplay.cs</DependentUpon>
     </EmbeddedResource>
-	<None Include="COPYRIGHT-GEOLITE2.txt">
+    <None Include="COPYRIGHT-GEOLITE2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="GeoLite2-Country.mmdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	<None Include="LICENSE-GEOLITE2.txt">
+    <None Include="LICENSE-GEOLITE2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -770,6 +770,12 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\overlay\background_snorlax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\overlay\tab_unselected_snorlax.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

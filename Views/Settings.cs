@@ -144,6 +144,7 @@ namespace FallGuysStats {
                 new ImageItem(Properties.Resources.background_party_pegwin, new[] { "background_party_pegwin", "tab_unselected_party_pegwin" }, "Party Pegwin", this.Font, false),
                 new ImageItem(Properties.Resources.background_penguin, new[] { "background_penguin", "tab_unselected_penguin" }, "Penguin", this.Font, false),
                 new ImageItem(Properties.Resources.background_popcorn, new[] { "background_popcorn", "tab_unselected_popcorn" }, "Pop-corn", this.Font, false),
+                new ImageItem(Properties.Resources.background_snorlax, new[] { "background_snorlax", "tab_unselected_snorlax" }, "Snorlax", this.Font, false),
                 new ImageItem(Properties.Resources.background_suits_you, new[] { "background_suits_you", "tab_unselected_suits_you" }, "Suits You", this.Font, false),
                 new ImageItem(Properties.Resources.background_sunny_guys, new[] { "background_sunny_guys", "tab_unselected_sunny_guys" }, "Sunny Guys", this.Font, false),
                 new ImageItem(Properties.Resources.background_super_mario_bros, new[] { "background_super_mario_bros", "tab_unselected_super_mario_bros" }, "Super Mario Bros.", this.Font, false),
