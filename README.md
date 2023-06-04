@@ -31,6 +31,8 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 
 -> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
 
+INFO: Date des données GeoLite2 utilisées => 30/05/2023
+
 
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
 
@@ -47,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.187` ~ 02/06/2023
+**Dernière version:** `v1.188` ~ 04/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -58,11 +60,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.186) datant du 02/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Changé: La géolocalisation des serveurs de Fall Guys se fait maintenant via les données GeoLite2 - datant du 30/05/2023 - créées par MaxMind ( https://www.maxmind.com )
-- ++Ajouté: Détection de la manche finale "C'est du lourd" pour l'émission "Le plus fort survivra"
+- ++Ajouté: Arrière-plan "Snorlax" (= Ronflex) pour l'overlay
 
-### Il y a 0 bug génant connu dans la v1.187 de la "FE" (Frenchy Edition)
+
+### Il y a 0 bug génant connu dans la v1.188 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -157,25 +158,31 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ![Overlay Modifié](https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Properties/customizedOverlay.png)
 
-  - **Prérequis** Lancer au moins une fois le tracker Fall Guys pour obtenir un dossier nommé "Overlay".
+  - **Prérequis** Lancer au moins une fois le tracker Fall Guys.
 
 
-  - **Étape 1.** Modifier l'image **background.png** et **tab.png** qui sont dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+  - **Étape 1.** Télécharger cette archive: <a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Overlay_transparent_background.zip">Overlay_transparent_background.zip</a>
 
 
-  - **Étape 2.** Nommer les images modifiées comme ci-dessous.
+  - **Étape 2.** Ouvrir l'archive téléchargée et extraire les deux images (**background.png** et **tab.png**) sur votre bureau.
+
+
+  - **Étape 3.** Modifier les deux images avec le logiciel GIMP (gratuit) ou PhotoShop (payant).
+
+
+  - **Étape 4.** Nommer les images modifiées comme ci-dessous.
     - **{Nom de mon image}** doit être le même pour les deux fichiers
       - background_**{Nom de mon image}**.png
       - tab_**{Nom de mon image}**.png
 
 
-  - **Étape 3.** Si pas déjà fait, placer les deux images dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+  - **Étape 5.** Placer les deux images modifiées dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
 
 
-  - **Étape 4.** Vous verrez maintenant dans le menu "Configuration" du tracker vos propres arrière-plans en haut de la liste "Arrière-plan (image)" pour l'overlay.
+  - **Étape 6.** Vous verrez maintenant dans le menu "Configuration" du tracker vos propres arrière-plans en haut de la liste "Arrière-plan (image)" pour l'overlay.
 
 
-  - **Étape 5.** Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
+  - **Étape 7.** Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
 
 
 ## Profil
@@ -218,6 +225,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.188` ~ 04/06/2023
+  { Correction de bugs de la "FE" }
+    - ++Ajouté: Arrière-plan "Snorlax" (= Ronflex) pour l'overlay
 
   - `v1.187` ~ 02/06/2023
   { Correction de bugs de la "FE" }

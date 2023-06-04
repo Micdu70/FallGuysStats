@@ -1,4 +1,4 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.187 du 02/06/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.188 du 04/06/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
@@ -6,8 +6,10 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 
 -> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
 
+INFO: Date des données GeoLite2 utilisées => 30/05/2023
 
-INFO: Il y a 0 bug génant connu dans la v1.187 de la "FE" (Frenchy Edition)
+
+### Il y a 0 bug génant connu dans la v1.188 de la "FE" (Frenchy Edition)
 
 
 ## Différences entre la "FE" et la Version Officielle
@@ -70,20 +72,24 @@ Cliquer une fois sur l'overlay pour le sélectionner puis :
 
 ## Créer vos propres arrière-plans
 
-- Prérequis : Lancer au moins une fois le tracker Fall Guys pour obtenir un dossier nommé "Overlay".
+- Prérequis: Lancer au moins une fois le tracker Fall Guys.
 
-  - Étape 1 : Modifier l'image "background.png" et "tab.png" qui sont dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+  - Étape 1: Télécharger cette archive : <a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Overlay_transparent_background.zip">Overlay_transparent_background.zip</a>
 
-  - Étape 2 : Nommer les images modifiées comme ci-dessous.
+  - Étape 2: Ouvrir l'archive téléchargée et extraire les deux images ("background.png" et "tab.png") sur votre bureau.
+
+  - Étape 3: Modifier les deux images avec le logiciel GIMP (gratuit) ou PhotoShop (payant).
+
+  - Étape 4: Nommer les images modifiées comme ci-dessous.
     - {Nom de mon image} doit être le même pour les deux fichiers
       - background_{Nom de mon image}.png
       - tab_{Nom de mon image}.png
 
-  - Étape 3 : Si pas déjà fait, placer les deux images dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
+  - Étape 5: Placer les deux images modifiées dans le dossier "Overlay" (où se trouve le fichier d'exécution du tracker).
 
-  - Étape 4 : Vous verrez maintenant dans le menu "Configuration" du tracker vos propres arrière-plans en haut de la liste "Arrière-plan (image)" pour l'overlay.
+  - Étape 6: Vous verrez maintenant dans le menu "Configuration" du tracker vos propres arrière-plans en haut de la liste "Arrière-plan (image)" pour l'overlay.
 
-  - Étape 5 : Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
+  - Étape 7: Sélectionner l'arrière-plan souhaité puis 'Enregistrer' pour l'appliquer.
 
 
 ## Lier un profil à une émission spécifique
