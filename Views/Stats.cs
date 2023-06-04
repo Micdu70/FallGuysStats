@@ -139,7 +139,6 @@ namespace FallGuysStats {
         public static bool InShow = false;
         public static bool EndedShow = false;
 
-        public static bool ConnectedToServer = false;
         public static DateTime ConnectedToServerDate = DateTime.MinValue;
         public static string LastServerIp = string.Empty;
         public static string LastServerCountryCode = string.Empty;

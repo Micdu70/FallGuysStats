@@ -38,7 +38,7 @@ namespace FallGuysStats {
             while (!stop) {
                 try {
                     TimeSpan timeDiff = DateTime.UtcNow - Stats.ConnectedToServerDate;
-                    if (!Stats.ConnectedToServer || timeDiff.TotalMinutes >= 45) {
+                    if (!Stats.InShow || timeDiff.TotalMinutes >= 40) {
                         Stats.IsBadServerPing = true;
                         this.stop = true;
                         this.running = false;
