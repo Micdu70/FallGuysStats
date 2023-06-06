@@ -74,7 +74,7 @@ Cliquer une fois sur l'overlay pour le sélectionner puis :
 
 - Prérequis: Lancer au moins une fois le tracker Fall Guys.
 
-  - Étape 1: Télécharger cette archive : <a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Overlay_transparent_background.zip">Overlay_transparent_background.zip</a>
+  - Étape 1: Télécharger cette archive : https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/Overlay_transparent_background.zip
 
   - Étape 2: Ouvrir l'archive téléchargée et extraire les deux images ("background.png" et "tab.png") sur votre bureau.
 

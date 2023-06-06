@@ -1511,7 +1511,7 @@ namespace FallGuysStats {
         }
         private void UpdateGridRoundName() {
             foreach (KeyValuePair<string, string> item in Multilingual.GetRoundsDictionary()) {
-                LevelStats level = StatLookup[item.Key];
+                LevelStats level = this.StatLookup[item.Key];
                 level.Name = item.Value;
             }
             this.SortGridDetails(0, true);
@@ -2196,7 +2196,7 @@ namespace FallGuysStats {
 
                 TimeSpan finishTime = info.Finish.GetValueOrDefault(info.Start) - info.Start;
                 bool hasFinishTime = finishTime.TotalSeconds > 1.1 ? true : false;
-                bool hasLevelDetails = StatLookup.TryGetValue(info.Name, out LevelStats levelDetails);
+                bool hasLevelDetails = this.StatLookup.TryGetValue(info.Name, out LevelStats levelDetails);
                 bool isCurrentLevel = currentLevel.Name.Equals(hasLevelDetails ? levelDetails.Name : info.Name, StringComparison.OrdinalIgnoreCase);
 
                 int startRoundShowId = info.ShowID;

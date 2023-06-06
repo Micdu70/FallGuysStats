@@ -22,7 +22,7 @@ namespace FallGuysStats {
         private int addMoreRandomDelay;
 
         public void Start() {
-            if (this.running) { return; }
+            if (this.running || string.IsNullOrEmpty(Stats.LastServerIp)) { return; }
 
 #if Debug
             Debug.WriteLine("ServerPingWatcher is starting!");
