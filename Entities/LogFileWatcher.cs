@@ -344,15 +344,15 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (Stats.IsOverlayPingVisible && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (!Stats.ToggleServerInfo) {
                     Stats.ToggleServerInfo = true;
                     Stats.ConnectedToServerDate = line.Date;
                     int ipIndex = line.Line.IndexOf("IP:");
                     Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
                     Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(this.StatsForm.pathToGeoLite2Db, Stats.LastServerIp).ToLower();
-                    if (Stats.IsOverlayPingVisible && line.Date > this.StatsForm.startupTime) { this.serverPing.Start(); }
                 }
+                if (line.Date > this.StatsForm.startupTime) { this.serverPing.Start(); }
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
                 if (this.selectedShowId.StartsWith("ugc-")) {

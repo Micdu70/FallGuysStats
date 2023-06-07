@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.189` ~ 07/06/2023
+**Dernière version:** `v1.190` ~ 07/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -59,11 +59,13 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog de la dernière version
 
+v1.189/1.190:
 { Correction de bugs de la "FE" }
+{ Cette version, bien que basée sur la Version Officielle (v1.188) datant du 06/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
 
 
-### Il y a 0 bug génant connu dans la v1.189 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.190 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -226,8 +228,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - `v1.189` ~ 07/06/2023
+  - `v1.189` et `v1.190` ~ 07/06/2023
   { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.188) datant du 06/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
 
   - `v1.188` ~ 04/06/2023
@@ -300,7 +303,6 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
     - ++Ajouté: Support de la S10 (SS4) de Fall Guys !
 
   - `v1.167` et `v1.168` ~ 06/05/2023
-
   { Cette version, bien que basée sur la Version Officielle (v1.157) datant du 05/05/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - +Corrigé: **FIX** Aucun temps "Finish" ne sera enregistré quand vous serez "hors-jeu pour cette manche" mais que votre équipe arrive tout de même à se qualifier
     - ++Changé: Les émissions abandonnées (quittées prématurément) seront maintenant traitées comme des émissions normales (N.B.: Aucune info sur les médailles obtenues ne sera enregistrée)
