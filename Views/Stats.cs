@@ -132,6 +132,7 @@ namespace FallGuysStats {
         private static DateTime SessionStart = DateTime.UtcNow;
 
         public static bool HideOverlayTime = false;
+        public static bool IsOverlayPingVisible = false;
 
         public static bool IsGameRunning = false;
         public static bool IsGameHasBeenClosed = false;
@@ -139,6 +140,7 @@ namespace FallGuysStats {
         public static bool InShow = false;
         public static bool EndedShow = false;
 
+        public static bool ToggleServerInfo = false;
         public static DateTime ConnectedToServerDate = DateTime.MinValue;
         public static string LastServerIp = string.Empty;
         public static string LastServerCountryCode = string.Empty;
@@ -208,6 +210,7 @@ namespace FallGuysStats {
         public UserSettings CurrentSettings;
         public Overlay overlay;
         public bool isUpdate;
+        public readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2-Country.mmdb");
         public readonly DateTime startupTime = DateTime.UtcNow;
         private DateTime lastAddedShow = DateTime.MinValue;
         private int askedPreviousShows = 0;
@@ -406,7 +409,10 @@ namespace FallGuysStats {
             this.logFile.OnError += this.LogFile_OnError;
             this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
             this.logFile.StatsForm = this;
-            this.logFile.SetAutoChangeProfile(this.CurrentSettings.AutoChangeProfile);
+            this.logFile.autoChangeProfile = this.CurrentSettings.AutoChangeProfile;
+            this.logFile.preventOverlayMouseClicks = this.CurrentSettings.PreventOverlayMouseClicks;
+
+            Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
 
             string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
             this.overlay.SetFixedPosition(
@@ -3459,7 +3465,7 @@ namespace FallGuysStats {
 
                 var country = reader.Country(ip);
                 return country.Country.IsoCode;
-            } catch (Exception) {
+            } catch {
                 return string.Empty;
             }
         }
@@ -3556,7 +3562,10 @@ namespace FallGuysStats {
                         this.overlay.SetBackgroundResourcesName(this.CurrentSettings.OverlayBackgroundResourceName, this.CurrentSettings.OverlayTabResourceName);
                         this.SetCurrentProfileIcon(this.AllProfiles.FindIndex(p => p.ProfileId == this.GetCurrentProfileId() && !string.IsNullOrEmpty(p.LinkedShowId)) != -1);
                         this.Refresh();
-                        this.logFile.SetAutoChangeProfile(this.CurrentSettings.AutoChangeProfile);
+                        this.logFile.autoChangeProfile = this.CurrentSettings.AutoChangeProfile;
+                        this.logFile.preventOverlayMouseClicks = this.CurrentSettings.PreventOverlayMouseClicks;
+
+                        Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
                             (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {

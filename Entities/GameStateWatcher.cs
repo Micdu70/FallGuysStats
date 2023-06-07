@@ -22,7 +22,7 @@ namespace FallGuysStats {
 #endif
 
             this.stop = false;
-            this.watcher = new Thread(CheckGameState) { IsBackground = true };
+            this.watcher = new Thread(this.CheckGameState) { IsBackground = true };
             this.watcher.Start();
         }
 

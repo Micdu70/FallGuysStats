@@ -22,14 +22,14 @@ namespace FallGuysStats {
         private int addMoreRandomDelay;
 
         public void Start() {
-            if (this.running || string.IsNullOrEmpty(Stats.LastServerIp)) { return; }
+            if (this.running) { return; }
 
 #if Debug
             Debug.WriteLine("ServerPingWatcher is starting!");
 #endif
 
             this.stop = false;
-            this.watcher = new Thread(CheckServerPing) { IsBackground = true };
+            this.watcher = new Thread(this.CheckServerPing) { IsBackground = true };
             this.watcher.Start();
         }
 
@@ -38,7 +38,7 @@ namespace FallGuysStats {
             while (!stop) {
                 try {
                     TimeSpan timeDiff = DateTime.UtcNow - Stats.ConnectedToServerDate;
-                    if (!Stats.InShow || timeDiff.TotalMinutes >= 40) {
+                    if (!Stats.IsOverlayPingVisible || !Stats.ToggleServerInfo || timeDiff.TotalMinutes >= 40) {
                         Stats.IsBadServerPing = true;
                         this.stop = true;
                         this.running = false;

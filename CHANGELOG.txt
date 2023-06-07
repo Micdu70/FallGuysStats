@@ -1,11 +1,15 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.188 ~ 04/06/2023
+  - v1.189 ~ 07/06/2023
   { Correction de bugs de la "FE" }
-    - ++Ajouté: Arrière-plan "Snorlax" (= Ronflex) pour l'overlay
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
+  - v1.188 ~ 04/06/2023
+  { Correction de bugs de la "FE" }
+    - ++Ajouté: Arrière-plan "Snorlax" (= Ronflex) pour l'overlay
 
   - v1.187 ~ 02/06/2023
   { Correction de bugs de la "FE" }

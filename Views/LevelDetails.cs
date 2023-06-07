@@ -880,6 +880,7 @@ namespace FallGuysStats {
                                       $" / {createAuthorArr[i]}{this.GetCreativeOnlinePlatformName(creativeOnlinePlatformIdArr[i])}");
                 }
                 strbuilder.Append(Environment.NewLine);
+                strbuilder.Append(Environment.NewLine);
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_share_code")} : {info.CreativeShareCode}");
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_version")} : v{info.CreativeVersion}");

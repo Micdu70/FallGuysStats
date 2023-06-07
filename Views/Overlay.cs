@@ -799,7 +799,7 @@ namespace FallGuysStats {
                     }
 
                     TimeSpan runningTime = start > currentUTC ? currentUTC - startTime : currentUTC - start;
-                    int maxRunningTime = 10; // in minutes
+                    int maxRunningTime = 12; // in minutes
 
                     this.lblFinish.Text = $"{Multilingual.GetWord("overlay_finish")} :";
                     if (Stats.HideOverlayTime) {
@@ -1419,7 +1419,8 @@ namespace FallGuysStats {
                 this.SetDefaultFontColor();
             }
 
-            //this.Background = this.RecreateBackground();
+            this.Background = this.RecreateBackground();
+
             if (width.HasValue) {
                 this.Width = width.Value;
             }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 #endif
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,15 +56,13 @@ namespace FallGuysStats {
 
         public Stats StatsForm { get; set; }
 
+        public bool autoChangeProfile;
+        public bool preventOverlayMouseClicks;
         private bool updateLastLine;
-        private bool autoChangeProfile;
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
         private bool isCreatorMadeRoundsShow;
-
-        private bool toggleServerInfo;
-        private readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2-Country.mmdb");
 
         public event Action<List<RoundInfo>> OnParsedLogLines;
         public event Action<List<RoundInfo>> OnParsedLogLinesCurrent;
@@ -74,10 +71,6 @@ namespace FallGuysStats {
 
         private readonly ServerPingWatcher serverPing = new ServerPingWatcher();
         private readonly GameStateWatcher gameState = new GameStateWatcher();
-
-        public void SetAutoChangeProfile(bool isEnabled) {
-            this.autoChangeProfile = isEnabled;
-        }
 
         public void Start(string logDirectory, string fileName) {
             if (this.running) { return; }
@@ -352,12 +345,13 @@ namespace FallGuysStats {
 
                 round.Clear();
             } else if (line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
-                if (!this.toggleServerInfo) {
-                    this.toggleServerInfo = true;
+                if (!Stats.ToggleServerInfo) {
+                    Stats.ToggleServerInfo = true;
                     Stats.ConnectedToServerDate = line.Date;
                     int ipIndex = line.Line.IndexOf("IP:");
                     Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
-                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(pathToGeoLite2Db, Stats.LastServerIp).ToLower();
+                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(this.StatsForm.pathToGeoLite2Db, Stats.LastServerIp).ToLower();
+                    if (Stats.IsOverlayPingVisible && line.Date > this.StatsForm.startupTime) { this.serverPing.Start(); }
                 }
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) > 0) {
                 this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
@@ -380,7 +374,7 @@ namespace FallGuysStats {
                     Stats.IsLastPlayedRoundStillPlaying = false;
                     Stats.LastPlayedRoundStart = null;
                     Stats.LastPlayedRoundEnd = null;
-                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); this.serverPing.Start(); }
+                    if (line.Date > this.StatsForm.startupTime) { this.gameState.Start(); }
                 }
 
                 logRound.Info = new RoundInfo { ShowNameId = this.selectedShowId, SessionId = this.sessionId, UseShareCode = this.useShareCode };
@@ -509,7 +503,7 @@ namespace FallGuysStats {
                     this.updateLastLine = true;
                 }
 
-                this.toggleServerInfo = false;
+                Stats.ToggleServerInfo = false;
 
                 if (Stats.InShow && Stats.LastPlayedRoundStart.HasValue && !Stats.LastPlayedRoundEnd.HasValue) {
                     Stats.LastPlayedRoundEnd = line.Date;
