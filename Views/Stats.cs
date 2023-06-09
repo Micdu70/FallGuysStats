@@ -280,52 +280,6 @@ namespace FallGuysStats {
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
-                    if (this.CurrentSettings.FrenchyEditionDB <= 3) {
-                        this.CurrentSettings.Theme = 1;
-                        this.CurrentSettings.OverlayBackgroundOpacity = 100;
-                        this.CurrentSettings.HideOverlayPercentages = true;
-                        this.CurrentSettings.WinsFilter = 1;
-                        this.CurrentSettings.QualifyFilter = 1;
-                        this.CurrentSettings.FastestFilter = 0;
-                        this.CurrentSettings.OverlayColor = 0;
-                        this.CurrentSettings.OverlayVisible = true;
-                        this.CurrentSettings.PlayerByConsoleType = true;
-                        this.CurrentSettings.ColorByRoundType = true;
-                        this.CurrentSettings.AutoChangeProfile = false;
-                        this.CurrentSettings.AutoUpdate = true;
-                        this.CurrentSettings.Version = 28;
-                        this.CurrentSettings.FrenchyEditionDB = 4;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
-                    if (this.CurrentSettings.FrenchyEditionDB == 4) {
-                        this.CurrentSettings.WinPerDayGraphStyle = 1;
-                        this.CurrentSettings.FrenchyEditionDB = 5;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
-                    if (this.CurrentSettings.FrenchyEditionDB == 5) {
-                        this.CurrentSettings.EnableFallalyticsReporting = true;
-                        this.CurrentSettings.Version = 29;
-                        this.CurrentSettings.FrenchyEditionDB = 6;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
-                    if (this.CurrentSettings.FrenchyEditionDB == 6) {
-                        this.CurrentSettings.SystemTrayIcon = false;
-                        this.CurrentSettings.Version = 30;
-                        this.CurrentSettings.FrenchyEditionDB = 7;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
-                    if (this.CurrentSettings.FrenchyEditionDB == 7) {
-                        this.CurrentSettings.SwitchBetweenLongest = false;
-                        this.CurrentSettings.OnlyShowLongest = false;
-                        this.CurrentSettings.FrenchyEditionDB = 8;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
-                    if (this.CurrentSettings.FrenchyEditionDB == 8) {
-                        this.CurrentSettings.SwitchBetweenPlayers = true;
-                        this.CurrentSettings.OnlyShowPing = false;
-                        this.CurrentSettings.FrenchyEditionDB = 9;
-                        this.UserSettings.Upsert(this.CurrentSettings);
-                    }
                     CurrentLanguage = this.CurrentSettings.Multilingual;
                     CurrentTheme = this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
                         this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
@@ -1333,7 +1287,7 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 24) {
                 this.CurrentSettings.WinsFilter = 1;
                 this.CurrentSettings.QualifyFilter = 1;
-                this.CurrentSettings.FastestFilter = 0;
+                this.CurrentSettings.FastestFilter = 1;
                 this.CurrentSettings.Version = 25;
                 this.SaveUserSettings();
             }
@@ -1361,14 +1315,13 @@ namespace FallGuysStats {
             }
 
             if (this.CurrentSettings.Version == 28) {
-                this.CurrentSettings.EnableFallalyticsReporting = true;
-                this.CurrentSettings.FallalyticsAPIKey = string.Empty;
+                this.CurrentSettings.Visible = true;
                 this.CurrentSettings.Version = 29;
                 this.SaveUserSettings();
             }
 
             if (this.CurrentSettings.Version == 29) {
-                this.CurrentSettings.SystemTrayIcon = false;
+                this.CurrentSettings.SystemTrayIcon = true;
                 this.CurrentSettings.Version = 30;
                 this.SaveUserSettings();
             }
@@ -1429,6 +1382,81 @@ namespace FallGuysStats {
                 //    }
                 //}
                 this.CurrentSettings.Version = 35;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.Version == 35) {
+                this.CurrentSettings.AutoUpdate = true;
+                this.CurrentSettings.Version = 36;
+                this.SaveUserSettings();
+            }
+
+            //
+            // "Frenchy Edition" mods
+            //
+            if (this.CurrentSettings.FrenchyEditionDB <= 3) {
+                this.CurrentSettings.Theme = 1;
+                this.CurrentSettings.OverlayBackgroundOpacity = 100;
+                this.CurrentSettings.HideOverlayPercentages = true;
+                this.CurrentSettings.WinsFilter = 1;
+                this.CurrentSettings.QualifyFilter = 1;
+                this.CurrentSettings.FastestFilter = 0;
+                this.CurrentSettings.OverlayColor = 0;
+                this.CurrentSettings.OverlayVisible = true;
+                this.CurrentSettings.PlayerByConsoleType = true;
+                this.CurrentSettings.ColorByRoundType = true;
+                this.CurrentSettings.AutoChangeProfile = false;
+                this.CurrentSettings.AutoUpdate = true;
+                this.CurrentSettings.FrenchyEditionDB = 4;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 4) {
+                this.CurrentSettings.WinPerDayGraphStyle = 1;
+                this.CurrentSettings.FrenchyEditionDB = 5;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 5) {
+                this.CurrentSettings.EnableFallalyticsReporting = true;
+                this.CurrentSettings.FrenchyEditionDB = 6;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 6) {
+                this.CurrentSettings.SystemTrayIcon = false;
+                this.CurrentSettings.FrenchyEditionDB = 7;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 7) {
+                this.CurrentSettings.SwitchBetweenLongest = false;
+                this.CurrentSettings.OnlyShowLongest = false;
+                this.CurrentSettings.FrenchyEditionDB = 8;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 8) {
+                this.CurrentSettings.SwitchBetweenPlayers = true;
+                this.CurrentSettings.OnlyShowPing = false;
+                this.CurrentSettings.FrenchyEditionDB = 9;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 9) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.Name.Equals("wle_s10_orig_round_045")) {
+                        info.Name = "wle_s10_orig_round_045_long";
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.OverlayNotOnTop = false;
+                this.CurrentSettings.FrenchyEditionDB = 10;
                 this.SaveUserSettings();
             }
         }
@@ -1504,8 +1532,8 @@ namespace FallGuysStats {
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
                 Visible = true,
-                Version = 35,
-                FrenchyEditionDB = 9
+                Version = 36,
+                FrenchyEditionDB = 10
             };
         }
         private void UpdateHoopsieLegends() {
@@ -3411,10 +3439,14 @@ namespace FallGuysStats {
                 case "0567-6834-7490": return "wle_s10_orig_round_042";
                 case "8398-4477-7834": return "wle_s10_orig_round_043";
                 case "2767-1753-8429": return "wle_s10_orig_round_044";
-                case "6748-6192-9739": return "wle_s10_orig_round_045";
+                // case "6748-6192-9739": return "wle_s10_orig_round_045";
                 case "9641-5398-7416": return "wle_s10_orig_round_046";
                 case "7895-4812-3429": return "wle_s10_orig_round_047";
                 case "1468-0990-4257": return "wle_s10_orig_round_048";
+                case "6748-6192-9739": return "wle_s10_orig_round_045_long";
+                case "3145-1396-6644": return "wle_s10_long_round_003";
+                case "9194-9593-3605": return "wle_s10_long_round_004";
+                case "1226-0563-3570": return "wle_s10_long_round_005";
                 case "8058-9910-7007": return "wle_s10_round_001";
                 case "6546-9859-4336": return "wle_s10_round_002";
                 case "9366-4809-0021": return "wle_s10_round_003";
