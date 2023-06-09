@@ -3025,6 +3025,24 @@ namespace FallGuysStats {
             }
         }
         private void ShowRoundGraph() {
+            List<RoundInfo> rounds;
+            if (this.menuCustomRangeStats.Checked) {
+                rounds = this.AllStats.Where(roundInfo => {
+                    return roundInfo.Start >= this.customfilterRangeStart &&
+                           roundInfo.Start <= this.customfilterRangeEnd &&
+                           roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                }).OrderBy(r => r.Name).ToList();
+            } else {
+                DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
+                    this.menuSeasonStats.Checked ? SeasonStart :
+                    this.menuWeekStats.Checked ? WeekStart :
+                    this.menuDayStats.Checked ? DayStart : SessionStart;
+                rounds = this.AllStats.Where(roundInfo => {
+                    return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                }).OrderBy(r => r.Name).ToList();
+            }
+            if (rounds.Count == 0) { return; }
+
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
                 StatsForm = this,
                 Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
@@ -3035,22 +3053,6 @@ namespace FallGuysStats {
                 Dictionary<string, double[]> roundGraphData = new Dictionary<string, double[]>();
                 Dictionary<string, TimeSpan> roundDurationData = new Dictionary<string, TimeSpan>();
                 BindingList<object> roundList = new BindingList<object>();
-                List<RoundInfo> rounds;
-                if (this.menuCustomRangeStats.Checked) {
-                    rounds = this.AllStats.Where(roundInfo => {
-                        return roundInfo.Start >= this.customfilterRangeStart &&
-                               roundInfo.Start <= this.customfilterRangeEnd &&
-                               roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
-                    }).OrderBy(r => r.Name).ToList();
-                } else {
-                    DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
-                        this.menuSeasonStats.Checked ? SeasonStart :
-                        this.menuWeekStats.Checked ? WeekStart :
-                        this.menuDayStats.Checked ? DayStart : SessionStart;
-                    rounds = this.AllStats.Where(roundInfo => {
-                        return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
-                    }).OrderBy(r => r.Name).ToList();
-                }
 
                 double p = 0, gm = 0, sm = 0, bm = 0, pm = 0, em = 0;
                 TimeSpan d = TimeSpan.Zero;
