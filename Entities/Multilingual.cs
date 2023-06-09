@@ -4452,12 +4452,12 @@ namespace FallGuysStats {
             wordsDictionary?.TryGetValue(keyword, out word);
             return word;
         }
-        /*public static string GetRoundName (string keyword) {
+        public static string GetRoundName(string keyword) {
             string name = string.Empty;
             MultilingualRoundsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> roundDictionary);
             roundDictionary?.TryGetValue(keyword, out name);
             return name;
-        }*/
+        }
         public static string GetShowName(string keyword) {
             string name = string.Empty;
             MultilingualShowsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> showsDictionary);

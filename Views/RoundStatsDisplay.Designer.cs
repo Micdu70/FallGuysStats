@@ -77,7 +77,7 @@
             this.cboRoundList.Size = new System.Drawing.Size(220, 29);
             this.cboRoundList.TabIndex = 4;
             this.cboRoundList.UseSelectable = true;
-            this.cboRoundList.SelectedIndexChanged += new System.EventHandler(this.cboRoundList_SelectedIndexChanged);
+            this.cboRoundList.SelectedIndexChanged += new System.EventHandler(this.CboRoundList_SelectedIndexChanged);
             // 
             // lblRoundTime
             // 

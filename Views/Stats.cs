@@ -390,9 +390,9 @@ namespace FallGuysStats {
             this.ReloadProfileMenuItems();
 
             this.SortGridDetails(0, true);
-            
+
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
-            
+
             this.cmtt.OwnerDraw = true;
             this.cmtt.Draw += this.Cmtt_Draw;
             //this.mtt.OwnerDraw = true;
@@ -2729,10 +2729,10 @@ namespace FallGuysStats {
                 if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name" || this.gridDetails.Columns[e.ColumnIndex].Name == "RoundIcon") {
                     LevelStats stats = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
                     using (LevelDetails levelDetails = new LevelDetails {
-                               LevelName = stats.Name,
-                               RoundIcon = stats.RoundBigIcon,
-                               StatsForm = this
-                           }) {
+                        LevelName = stats.Name,
+                        RoundIcon = stats.RoundBigIcon,
+                        StatsForm = this
+                    }) {
                         List<RoundInfo> rounds = stats.Stats;
                         rounds.Sort();
                         levelDetails.RoundDetails = rounds;
@@ -2931,12 +2931,12 @@ namespace FallGuysStats {
             rounds.Sort();
 
             using (StatsDisplay display = new StatsDisplay {
-                       StatsForm = this,
-                       Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
-                       BackImage = Properties.Resources.crown_icon,
-                       BackMaxSize = 32,
-                       BackImagePadding = new Padding(20, 20, 0, 0)
-                   }) {
+                StatsForm = this,
+                Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                BackImage = Properties.Resources.crown_icon,
+                BackMaxSize = 32,
+                BackImagePadding = new Padding(20, 20, 0, 0)
+            }) {
                 ArrayList dates = new ArrayList();
                 ArrayList shows = new ArrayList();
                 ArrayList finals = new ArrayList();
@@ -3023,13 +3023,12 @@ namespace FallGuysStats {
         }
         private void ShowRoundGraph() {
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
-                       StatsForm = this,
-                       Text = $@"     {Multilingual.GetWord("level_detail_ststs_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
-                       BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
-                       BackMaxSize = 32,
-                       BackImagePadding = new Padding(20, 20, 0, 0)
-                   })
-            {
+                StatsForm = this,
+                Text = $@"     {Multilingual.GetWord("level_detail_ststs_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
+                BackMaxSize = 32,
+                BackImagePadding = new Padding(20, 20, 0, 0)
+            }) {
                 Dictionary<string, double[]> roundGraphData = new Dictionary<string, double[]>();
                 Dictionary<string, TimeSpan> roundDurationData = new Dictionary<string, TimeSpan>();
                 BindingList<object> roundList = new BindingList<object>();
@@ -3055,12 +3054,12 @@ namespace FallGuysStats {
                 for (int i = 0; i < rounds.Count; i++) {
                     if (i > 0 && !rounds[i].Name.Equals(rounds[i - 1].Name)) {
                         roundDurationData.Add(rounds[i - 1].Name, d);
-                        roundGraphData.Add(rounds[i - 1].Name, new []{p, gm, sm, bm, pm, em});
+                        roundGraphData.Add(rounds[i - 1].Name, new[] { p, gm, sm, bm, pm, em });
                         roundList.Add(new { Key = rounds[i - 1].Name, Value = Multilingual.GetRoundName(rounds[i - 1].Name).Replace("&", "&&") });
                         d = TimeSpan.Zero;
                         p = 0; gm = 0; sm = 0; bm = 0; pm = 0; em = 0;
                     }
-                    
+
                     d += rounds[i].End - rounds[i].Start;
                     p++;
                     if (rounds[i].Qualified) {
@@ -3080,7 +3079,7 @@ namespace FallGuysStats {
 
                     if (i == rounds.Count - 1) {
                         roundDurationData.Add(rounds[i].Name, d);
-                        roundGraphData.Add(rounds[i].Name, new []{p, gm, sm, bm, pm, em});
+                        roundGraphData.Add(rounds[i].Name, new[] { p, gm, sm, bm, pm, em });
                         roundList.Add(new { Key = rounds[i].Name, Value = Multilingual.GetRoundName(rounds[i].Name) });
                     }
                 }
@@ -3412,7 +3411,7 @@ namespace FallGuysStats {
                         }
                         this.ProfileMenuItems[i].Checked = this.ProfileMenuItems[i].Name == button.Name;
                     }
-                    
+
                     this.currentProfile = this.GetProfileIdFromName(button.Text);
                     this.updateSelectedProfile = true;
                 }

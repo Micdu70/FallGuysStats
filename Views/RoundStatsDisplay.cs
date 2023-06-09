@@ -14,7 +14,7 @@ namespace FallGuysStats {
         public Dictionary<string, double[]> roundGraphData;
         public Dictionary<string, TimeSpan> roundDurationData;
         public BindingList<object> roundList;
-        private string[] titleList = {
+        private readonly string[] titleList = {
             Multilingual.GetWord("main_played"), Multilingual.GetWord("level_detail_gold"),
             Multilingual.GetWord("level_detail_silver"), Multilingual.GetWord("level_detail_bronze"),
             Multilingual.GetWord("level_detail_pink"), Multilingual.GetWord("level_detail_eliminated")
@@ -23,7 +23,7 @@ namespace FallGuysStats {
         public RoundStatsDisplay() {
             this.InitializeComponent();
         }
-        
+
         private class CustomPalette : IPalette {
             public string Name { get; } = "Custom Palette";
 
@@ -44,7 +44,7 @@ namespace FallGuysStats {
             this.SetTheme(this.StatsForm.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.StatsForm.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
             this.ResumeLayout(false);
             this.ChangeLanguage();
-            
+
             this.isStartingUp = true;
             this.cboRoundList.DataSource = roundList;
             this.cboRoundList.DisplayMember = "Value";
@@ -53,11 +53,11 @@ namespace FallGuysStats {
             this.SetGraph();
             this.isStartingUp = false;
         }
-        
+
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
             if (theme == MetroThemeStyle.Light) {
-                
+
             } else if (theme == MetroThemeStyle.Dark) {
                 this.formsPlot.Plot.Style(ScottPlot.Style.Black);
                 this.formsPlot.Plot.Style(figureBackground: Color.FromArgb(17, 17, 17));
@@ -85,11 +85,11 @@ namespace FallGuysStats {
                 this.picRoundIcon.Image = level.RoundBigIcon;
                 this.formsPlot.Plot.Title(level.Name);
             }
-            
+
             TimeSpan duration = this.roundDurationData[roundId];
             this.lblRoundTime.Text = $"{(int)duration.TotalHours}{Multilingual.GetWord("main_hour")}{duration:mm}{Multilingual.GetWord("main_min")}{duration:ss}{Multilingual.GetWord("main_sec")}";
             double[] values = this.roundGraphData[roundId];
-            
+
             this.formsPlot.Plot.Palette = new CustomPalette();
 
             this.lblCountGoldMedal.Text = values[1].ToString();
@@ -97,7 +97,7 @@ namespace FallGuysStats {
             this.lblCountBronzeMedal.Text = values[3].ToString();
             this.lblCountPinkMedal.Text = values[4].ToString();
             this.lblCountEliminatedMedal.Text = values[5].ToString();
-            
+
             RadialGaugePlot gauges = this.formsPlot.Plot.AddRadialGauge(values);
             gauges.OrderInsideOut = false;
             gauges.Clockwise = false;
@@ -111,14 +111,14 @@ namespace FallGuysStats {
             this.formsPlot.Plot.AxisZoom(.9, .9);
             this.formsPlot.Refresh();
         }
-        
-        private void cboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
+
+        private void CboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
             if (!this.isStartingUp) {
                 this.formsPlot.Plot.Clear();
                 this.SetGraph();
             }
         }
-        
+
         private void RoundStatsDisplay_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.DialogResult = DialogResult.Cancel;
