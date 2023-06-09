@@ -109,7 +109,7 @@ namespace FallGuysStats {
                             {"level_detail_final_stats", "Rounds (reached finals only) Stats List"},
                             {"level_detail_level_stats", "Level Stats List"},
                             {"level_detail_wins_per_day", "Wins Per Day"},
-                            {"level_detail_ststs_by_round", "Statistics Graph by Round"},
+                            {"level_detail_stats_by_round", "Statistics Graph by Round"},
                             {"level_detail_success_reaching_finals", "success in reaching the finals"},
                             {"level_detail_failure_reaching_finals", "failure in reaching the finals"},
                             {"level_detail_shows", "Shows"},
@@ -143,6 +143,7 @@ namespace FallGuysStats {
                             {"rounds_detail_tooltiptext", "Click to view rounds stats"},
                             {"wins_detail_tooltiptext", "Click to view wins stats"},
                             {"finals_detail_tooltiptext", "Click to view rounds (reached finals only) stats"},
+                            {"stats_detail_tooltiptext", "Click to view statistics graph by round"},
 
                             {"message_already_running_caption", "Launching Error"},
                             {"message_fall_guys_already_running", "Fall Guys is already running."},
@@ -470,7 +471,7 @@ namespace FallGuysStats {
                             {"level_detail_final_stats", "Liste des stats des manches (finale atteinte seulement)"},
                             {"level_detail_level_stats", "Liste des stats pour la manche"},
                             {"level_detail_wins_per_day", "Nombre de victoires par jour"},
-                            {"level_detail_ststs_by_round", "Graphique statistique par manche"},
+                            {"level_detail_stats_by_round", "Graphique des statistiques par manche"},
                             {"level_detail_success_reaching_finals", "la manche finale a été atteinte"},
                             {"level_detail_failure_reaching_finals", "la manche finale n'a pas été atteinte"},
                             {"level_detail_shows", "Émissions"},
@@ -504,6 +505,7 @@ namespace FallGuysStats {
                             {"rounds_detail_tooltiptext", "Cliquer pour voir les stats des manches"},
                             {"wins_detail_tooltiptext", "Cliquer pour voir les stats des victoires"},
                             {"finals_detail_tooltiptext", "Cliquer pour voir les stats des manches (finale atteinte seulement)"},
+                            {"stats_detail_tooltiptext", "Cliquer pour voir le graphique des statistiques par manche"},
 
                             {"message_already_running_caption", "Erreur de lancement"},
                             {"message_fall_guys_already_running", "Fall Guys est déjà en cours d'exécution."},
@@ -832,7 +834,7 @@ namespace FallGuysStats {
                             {"level_detail_final_stats", "결승전 통계 목록"},
                             {"level_detail_level_stats", "라운드 통계 목록"},
                             {"level_detail_wins_per_day", "일일 승리 통계 그래프"},
-                            {"level_detail_ststs_by_round", "라운드별 통계 그래프"},
+                            {"level_detail_stats_by_round", "라운드별 통계 그래프"},
                             {"level_detail_success_reaching_finals", "결승 진출 성공"},
                             {"level_detail_failure_reaching_finals", "결승 진출 실패"},
                             {"level_detail_shows", "쇼"},
@@ -866,6 +868,7 @@ namespace FallGuysStats {
                             {"rounds_detail_tooltiptext", "라운드 통계를 보려면 클릭하세요"},
                             {"wins_detail_tooltiptext", "우승 통계를 보려면 클릭하세요"},
                             {"finals_detail_tooltiptext", "결승전 통계를 보려면 클릭하세요"},
+                            {"stats_detail_tooltiptext", "라운드별 통계 그래프 보려면 클릭하세요"},
 
                             {"message_already_running_caption", "이미 실행 중"},
                             {"message_fall_guys_already_running", "폴 가이즈 클라이언트가 이미 실행 중입니다."},
@@ -1194,7 +1197,7 @@ namespace FallGuysStats {
                             {"level_detail_final_stats", "決勝戦の記録"},
                             {"level_detail_level_stats", "ラウンドの記録"},
                             {"level_detail_wins_per_day", "日ごとの勝利数推移"},
-                            {"level_detail_ststs_by_round", "ラウンド別統計グラフ"},
+                            {"level_detail_stats_by_round", "ラウンド別統計グラフ"},
                             {"level_detail_success_reaching_finals", "決勝進出成功"},
                             {"level_detail_failure_reaching_finals", "決勝進出失敗"},
                             {"level_detail_shows", "ショー"},
@@ -1228,6 +1231,7 @@ namespace FallGuysStats {
                             {"rounds_detail_tooltiptext", "クリックして全てのラウンドの記録を見る"},
                             {"wins_detail_tooltiptext", "クリックして勝利の記録を見る"},
                             {"finals_detail_tooltiptext", "クリックして決勝戦の記録を見る"},
+                            {"stats_detail_tooltiptext", "クリックすとラウンドごとの統計グラフが表示されます"},
 
                             {"message_already_running_caption", "既に実行中"},
                             {"message_fall_guys_already_running", "Fall Guysは既に実行中です。"},
@@ -1556,7 +1560,7 @@ namespace FallGuysStats {
                             {"level_detail_final_stats", "决赛统计列表"},
                             {"level_detail_level_stats", "关卡统计列表"},
                             {"level_detail_wins_per_day", "每日获胜数"},
-                            {"level_detail_ststs_by_round", "回合统计图"},
+                            {"level_detail_stats_by_round", "回合统计图"},
                             {"level_detail_success_reaching_finals", "成功进入决赛"},
                             {"level_detail_failure_reaching_finals", "未进入决赛"},
                             {"level_detail_shows", "场"},
@@ -1590,6 +1594,7 @@ namespace FallGuysStats {
                             {"rounds_detail_tooltiptext", "点击查看每轮统计信息"},
                             {"wins_detail_tooltiptext", "点击查看获胜统计信息"},
                             {"finals_detail_tooltiptext", "点击查看决赛统计信息"},
+                            {"stats_detail_tooltiptext", "点击查看各轮的统计图"},
 
                             {"message_already_running_caption", "已在运行"},
                             {"message_fall_guys_already_running", "糖豆人已在运行。"},
@@ -4456,6 +4461,7 @@ namespace FallGuysStats {
             string name = string.Empty;
             MultilingualRoundsDictionary.TryGetValue(GetCurrentLanguage(), out Dictionary<string, string> roundDictionary);
             roundDictionary?.TryGetValue(keyword, out name);
+            if (string.IsNullOrEmpty(name)) { name = keyword; }
             return name;
         }
         public static string GetShowName(string keyword) {

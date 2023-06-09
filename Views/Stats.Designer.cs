@@ -451,6 +451,7 @@ namespace FallGuysStats {
             this.lblTotalTime.Name = "lblTotalTime";
             this.lblTotalTime.Size = new System.Drawing.Size(59, 16);
             this.lblTotalTime.Text = "0:00:00";
+            this.lblTotalTime.ToolTipText = "Click to view statistics graph by round";
             this.lblTotalTime.Click += new System.EventHandler(this.LblTotalTime_Click);
             this.lblTotalTime.MouseEnter += new System.EventHandler(this.InfoStrip_MouseEnter);
             this.lblTotalTime.MouseLeave += new System.EventHandler(this.InfoStrip_MouseLeave);

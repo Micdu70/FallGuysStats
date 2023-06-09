@@ -718,9 +718,6 @@
   <data name="round_sweet_thieves_big_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\round_icon\invisibeans\icon_Sweet_Thieves_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="round_treat_thieves_big_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\round_icon\invisibeans\icon_Treat_Thieves_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="round_pixel_painters_big_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\round_icon\logic\icon_Pixel_Painters_big.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

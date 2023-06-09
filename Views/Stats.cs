@@ -683,6 +683,8 @@ namespace FallGuysStats {
             this.dataGridViewCellStyle2.SelectionBackColor = theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
             this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
 
+            this.Theme = theme;
+            this.ResumeLayout(false);
             this.Refresh();
         }
         private void CMenu_MouseEnter(object sender, EventArgs e) {
@@ -2381,6 +2383,7 @@ namespace FallGuysStats {
                 if (this.CustomRounds > 0) this.lblTotalRounds.Text += $" ({Multilingual.GetWord("main_profile_custom")} : {this.CustomRounds}{Multilingual.GetWord("main_round")})";
                 this.lblTotalRounds.ToolTipText = $"{Multilingual.GetWord("rounds_detail_tooltiptext")}";
                 this.lblTotalTime.Text = $"{(int)this.Duration.TotalHours}{Multilingual.GetWord("main_hour")}{this.Duration:mm}{Multilingual.GetWord("main_min")}{this.Duration:ss}{Multilingual.GetWord("main_sec")}";
+                this.lblTotalTime.ToolTipText = $"{Multilingual.GetWord("stats_detail_tooltiptext")}";
                 float winChance = (float)this.Wins * 100 / (this.Shows == 0 ? 1 : this.Shows);
                 this.lblTotalWins.Text = $"{this.Wins}{Multilingual.GetWord("main_win")} ({winChance:0.0} %)";
                 this.lblTotalWins.ToolTipText = $"{Multilingual.GetWord("wins_detail_tooltiptext")}";
@@ -3024,7 +3027,7 @@ namespace FallGuysStats {
         private void ShowRoundGraph() {
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
                 StatsForm = this,
-                Text = $@"     {Multilingual.GetWord("level_detail_ststs_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
                 BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
                 BackMaxSize = 32,
                 BackImagePadding = new Padding(20, 20, 0, 0)
