@@ -1,4 +1,4 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.190 du 07/06/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.191 du 09/06/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
@@ -6,10 +6,10 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 
 -> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
 
-INFO: Date des données GeoLite2 utilisées => 30/05/2023
+INFO: Date des données GeoLite2 utilisées => 09/06/2023
 
 
-### Il y a 0 bug génant connu dans la v1.190 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.191 de la "FE" (Frenchy Edition)
 
 
 ## Différences entre la "FE" et la Version Officielle
