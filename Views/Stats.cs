@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -389,11 +390,9 @@ namespace FallGuysStats {
             this.ReloadProfileMenuItems();
 
             this.SortGridDetails(0, true);
-
-            this.SuspendLayout();
+            
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
-            this.ResumeLayout(false);
-
+            
             this.cmtt.OwnerDraw = true;
             this.cmtt.Draw += this.Cmtt_Draw;
             //this.mtt.OwnerDraw = true;
@@ -578,7 +577,7 @@ namespace FallGuysStats {
         private void SetTheme(MetroThemeStyle theme) {
             if (this.Theme == theme) { return; }
 
-            this.Theme = theme;
+            this.SuspendLayout();
             this.mtt.Theme = theme;
             this.menu.Renderer = theme == MetroThemeStyle.Light ? (ToolStripRenderer)new CustomLightArrowRenderer() : new CustomDarkArrowRenderer();
             this.BackMaxSize = 56;
@@ -630,7 +629,8 @@ namespace FallGuysStats {
                                 break;
                             case "lblTotalTime":
                                 tsl1.Image = theme == MetroThemeStyle.Light ? Properties.Resources.clock_icon : Properties.Resources.clock_gray_icon;
-                                tsl1.ForeColor = theme == MetroThemeStyle.Light ? Color.DarkSlateGray : Color.DarkGray;
+                                tsl1.ForeColor = theme == MetroThemeStyle.Light ? Color.Blue : Color.Orange;
+                                //tsl1.ForeColor = theme == MetroThemeStyle.Light ? Color.DarkSlateGray : Color.DarkGray;
                                 break;
                             case "lblTotalShows":
                             case "lblTotalWins":
@@ -1980,8 +1980,8 @@ namespace FallGuysStats {
                             }
 
                             LevelStats newLevel = stat.UseShareCode || isCreative
-                                                  ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon)
-                                                  : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null);
+                                                  ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon)
+                                                  : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null, null);
 
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
@@ -2106,7 +2106,7 @@ namespace FallGuysStats {
         public int GetCurrentProfileId() {
             return this.currentProfile;
         }
-        private int GetCurrentProfileId(string profileName) {
+        private int GetProfileIdFromName(string profileName) {
             return this.AllProfiles.Find(p => p.ProfileName.Equals(profileName)).ProfileId;
         }
         private string GetCurrentProfileLinkedShowId() {
@@ -2218,9 +2218,9 @@ namespace FallGuysStats {
 
             if (!this.StatLookup.TryGetValue(name, out LevelStats currentLevel)) {
                 if (levelException >= 3) {
-                    currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon);
+                    currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
                 } else {
-                    currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null);
+                    currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null, null);
                 }
             }
 
@@ -2518,6 +2518,7 @@ namespace FallGuysStats {
                 if (this.gridDetails.Columns.Count == 0) { return; }
 
                 int pos = 0;
+                this.gridDetails.Columns["RoundBigIcon"].Visible = false;
                 this.gridDetails.Columns["AveKudos"].Visible = false;
                 this.gridDetails.Columns["AveDuration"].Visible = false;
                 this.gridDetails.Setup("RoundIcon", pos++, this.GetDataGridViewColumnWidth("RoundIcon", ""), "", DataGridViewContentAlignment.MiddleCenter);
@@ -2728,10 +2729,10 @@ namespace FallGuysStats {
                 if (this.gridDetails.Columns[e.ColumnIndex].Name == "Name" || this.gridDetails.Columns[e.ColumnIndex].Name == "RoundIcon") {
                     LevelStats stats = this.gridDetails.Rows[e.RowIndex].DataBoundItem as LevelStats;
                     using (LevelDetails levelDetails = new LevelDetails {
-                        LevelName = stats.Name,
-                        RoundIcon = stats.RoundIcon,
-                        StatsForm = this
-                    }) {
+                               LevelName = stats.Name,
+                               RoundIcon = stats.RoundBigIcon,
+                               StatsForm = this
+                           }) {
                         List<RoundInfo> rounds = stats.Stats;
                         rounds.Sort();
                         levelDetails.RoundDetails = rounds;
@@ -2930,12 +2931,12 @@ namespace FallGuysStats {
             rounds.Sort();
 
             using (StatsDisplay display = new StatsDisplay {
-                StatsForm = this,
-                Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()}",
-                BackImage = Properties.Resources.crown_icon,
-                BackMaxSize = 32,
-                BackImagePadding = new Padding(20, 20, 0, 0)
-            }) {
+                       StatsForm = this,
+                       Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                       BackImage = Properties.Resources.crown_icon,
+                       BackMaxSize = 32,
+                       BackImagePadding = new Padding(20, 20, 0, 0)
+                   }) {
                 ArrayList dates = new ArrayList();
                 ArrayList shows = new ArrayList();
                 ArrayList finals = new ArrayList();
@@ -3016,6 +3017,81 @@ namespace FallGuysStats {
                 this.EnableInfoStrip(false);
                 this.EnableMainMenu(false);
                 display.ShowDialog(this);
+                this.EnableInfoStrip(true);
+                this.EnableMainMenu(true);
+            }
+        }
+        private void ShowRoundGraph() {
+            using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
+                       StatsForm = this,
+                       Text = $@"     {Multilingual.GetWord("level_detail_ststs_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                       BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
+                       BackMaxSize = 32,
+                       BackImagePadding = new Padding(20, 20, 0, 0)
+                   })
+            {
+                Dictionary<string, double[]> roundGraphData = new Dictionary<string, double[]>();
+                Dictionary<string, TimeSpan> roundDurationData = new Dictionary<string, TimeSpan>();
+                BindingList<object> roundList = new BindingList<object>();
+                List<RoundInfo> rounds;
+                if (this.menuCustomRangeStats.Checked) {
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start >= this.customfilterRangeStart &&
+                               roundInfo.Start <= this.customfilterRangeEnd &&
+                               roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                    }).OrderBy(r => r.Name).ToList();
+                } else {
+                    DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
+                        this.menuSeasonStats.Checked ? SeasonStart :
+                        this.menuWeekStats.Checked ? WeekStart :
+                        this.menuDayStats.Checked ? DayStart : SessionStart;
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                    }).OrderBy(r => r.Name).ToList();
+                }
+
+                double p = 0, gm = 0, sm = 0, bm = 0, pm = 0, em = 0;
+                TimeSpan d = TimeSpan.Zero;
+                for (int i = 0; i < rounds.Count; i++) {
+                    if (i > 0 && !rounds[i].Name.Equals(rounds[i - 1].Name)) {
+                        roundDurationData.Add(rounds[i - 1].Name, d);
+                        roundGraphData.Add(rounds[i - 1].Name, new []{p, gm, sm, bm, pm, em});
+                        roundList.Add(new { Key = rounds[i - 1].Name, Value = Multilingual.GetRoundName(rounds[i - 1].Name).Replace("&", "&&") });
+                        d = TimeSpan.Zero;
+                        p = 0; gm = 0; sm = 0; bm = 0; pm = 0; em = 0;
+                    }
+                    
+                    d += rounds[i].End - rounds[i].Start;
+                    p++;
+                    if (rounds[i].Qualified) {
+                        switch (rounds[i].Tier) {
+                            case (int)QualifyTier.Pink:
+                                pm++; break;
+                            case (int)QualifyTier.Gold:
+                                gm++; break;
+                            case (int)QualifyTier.Silver:
+                                sm++; break;
+                            case (int)QualifyTier.Bronze:
+                                bm++; break;
+                        }
+                    } else {
+                        em++;
+                    }
+
+                    if (i == rounds.Count - 1) {
+                        roundDurationData.Add(rounds[i].Name, d);
+                        roundGraphData.Add(rounds[i].Name, new []{p, gm, sm, bm, pm, em});
+                        roundList.Add(new { Key = rounds[i].Name, Value = Multilingual.GetRoundName(rounds[i].Name) });
+                    }
+                }
+
+                roundStatsDisplay.roundList = roundList;
+                roundStatsDisplay.roundDurationData = roundDurationData;
+                roundStatsDisplay.roundGraphData = roundGraphData;
+
+                this.EnableInfoStrip(false);
+                this.EnableMainMenu(false);
+                roundStatsDisplay.ShowDialog(this);
                 this.EnableInfoStrip(true);
                 this.EnableMainMenu(true);
             }
@@ -3224,6 +3300,14 @@ namespace FallGuysStats {
                 }
             }
         }
+        private void LblTotalTime_Click(object sender, EventArgs e) {
+            try {
+                this.ShowRoundGraph();
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void LblTotalFinals_Click(object sender, EventArgs e) {
             try {
                 this.ShowFinals();
@@ -3328,8 +3412,8 @@ namespace FallGuysStats {
                         }
                         this.ProfileMenuItems[i].Checked = this.ProfileMenuItems[i].Name == button.Name;
                     }
-
-                    this.currentProfile = this.GetCurrentProfileId(button.Text);
+                    
+                    this.currentProfile = this.GetProfileIdFromName(button.Text);
                     this.updateSelectedProfile = true;
                 }
 
@@ -3579,7 +3663,8 @@ namespace FallGuysStats {
                     if (settings.ShowDialog(this) == DialogResult.OK) {
                         this.CurrentSettings = settings.CurrentSettings;
                         this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
-                            this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
+                                      this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark :
+                                      MetroThemeStyle.Default);
                         this.SaveUserSettings();
                         if (this.currentLanguage != CurrentLanguage) {
                             this.ChangeMainLanguage();
@@ -3768,7 +3853,7 @@ namespace FallGuysStats {
 #endif
             this.menu.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);
-            this.infoStrip2.Font = Overlay.GetMainFont(13, FontStyle.Bold);
+            this.infoStrip2.Font = Overlay.GetMainFont(13);
 
             this.dataGridViewCellStyle1.Font = Overlay.GetMainFont(10);
             this.dataGridViewCellStyle2.Font = Overlay.GetMainFont(12);
