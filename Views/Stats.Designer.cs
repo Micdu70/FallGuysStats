@@ -136,9 +136,8 @@ namespace FallGuysStats {
             // 
             this.menuCustomRangeStats.Image = global::FallGuysStats.Properties.Resources.calendar_icon;
             this.menuCustomRangeStats.Name = "menuCustomRangeStats";
-            this.menuCustomRangeStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.menuCustomRangeStats.Size = new System.Drawing.Size(226, 25);
+            this.menuCustomRangeStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) | System.Windows.Forms.Keys.Q)));
+            this.menuCustomRangeStats.Size = new System.Drawing.Size(228, 25);
             this.menuCustomRangeStats.Text = "Custom Range";
             this.menuCustomRangeStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuCustomRangeStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);

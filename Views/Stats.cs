@@ -229,12 +229,12 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
-        //private Point screenCenter;
-
-        private bool shiftKeyToggle;//, ctrlKeyToggle;
+        private bool shiftKeyToggle, ctrlKeyToggle;
 
         private readonly MetroToolTip mtt = new MetroToolTip();
         private readonly MetroToolTip cmtt = new MetroToolTip();
+        private readonly MetroToolTip omtt = new MetroToolTip();
+        //private readonly MetroToolTip ocmtt = new MetroToolTip();
 
         private readonly DWM_WINDOW_CORNER_PREFERENCE windowConerPreference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
 
@@ -242,6 +242,7 @@ namespace FallGuysStats {
 
         private bool onlyRefreshFilter;
 
+        public Point screenCenter;
         public readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/";
 
         public readonly string[] publicShowIdList = {
@@ -3267,7 +3268,7 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = false;
                     break;
                 case Keys.ControlKey:
-                    //this.ctrlKeyToggle = false;
+                    this.ctrlKeyToggle = false;
                     break;
             }
         }
@@ -3277,7 +3278,15 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = true;
                     break;
                 case Keys.ControlKey:
-                    //this.ctrlKeyToggle = true;
+                    this.ctrlKeyToggle = true;
+                    break;
+                case Keys.C:
+                    if (this.shiftKeyToggle && this.ctrlKeyToggle) {
+                        this.overlay.Location = this.screenCenter;
+                        this.CurrentSettings.OverlayLocationX = this.overlay.Location.X;
+                        this.CurrentSettings.OverlayLocationY = this.overlay.Location.Y;
+                        this.SaveUserSettings();
+                    }
                     break;
             }
         }
@@ -3359,7 +3368,7 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void MenuStats_Click(object sender, EventArgs e) {
+        public void MenuStats_Click(object sender, EventArgs e) {
             try {
                 ToolStripMenuItem button = sender as ToolStripMenuItem;
 
