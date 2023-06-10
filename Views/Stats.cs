@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -2932,8 +2931,8 @@ namespace FallGuysStats {
                 rounds.AddRange(StatDetails[i].Stats);
             }
             rounds.Sort();
-
-            using (StatsDisplay display = new StatsDisplay {
+            
+            using (WinStatsDisplay display = new WinStatsDisplay {
                 StatsForm = this,
                 Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
                 BackImage = Properties.Resources.crown_icon,
@@ -3025,46 +3024,59 @@ namespace FallGuysStats {
             }
         }
         private void ShowRoundGraph() {
-            List<RoundInfo> rounds;
-            if (this.menuCustomRangeStats.Checked) {
-                rounds = this.AllStats.Where(roundInfo => {
-                    return roundInfo.Start >= this.customfilterRangeStart &&
-                           roundInfo.Start <= this.customfilterRangeEnd &&
-                           roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
-                }).OrderBy(r => r.Name).ToList();
-            } else {
-                DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
-                    this.menuSeasonStats.Checked ? SeasonStart :
-                    this.menuWeekStats.Checked ? WeekStart :
-                    this.menuDayStats.Checked ? DayStart : SessionStart;
-                rounds = this.AllStats.Where(roundInfo => {
-                    return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
-                }).OrderBy(r => r.Name).ToList();
-            }
-            if (rounds.Count == 0) { return; }
-
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
-                StatsForm = this,
-                Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
-                BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
-                BackMaxSize = 32,
-                BackImagePadding = new Padding(20, 20, 0, 0)
-            }) {
+                       StatsForm = this,
+                       Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                       BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
+                       BackMaxSize = 32,
+                       BackImagePadding = new Padding(20, 20, 0, 0)
+                   })
+            {
+                List<RoundInfo> rounds;
+                if (this.menuCustomRangeStats.Checked) {
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start >= this.customfilterRangeStart &&
+                               roundInfo.Start <= this.customfilterRangeEnd &&
+                               roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                    }).OrderBy(r => r.Name).ToList();
+                } else {
+                    DateTime compareDate = this.menuAllStats.Checked ? DateTime.MinValue :
+                        this.menuSeasonStats.Checked ? SeasonStart :
+                        this.menuWeekStats.Checked ? WeekStart :
+                        this.menuDayStats.Checked ? DayStart : SessionStart;
+                    rounds = this.AllStats.Where(roundInfo => {
+                        return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
+                    }).OrderBy(r => r.Name).ToList();
+                }
+                if (rounds.Count == 0) { return; }
+                
                 Dictionary<string, double[]> roundGraphData = new Dictionary<string, double[]>();
                 Dictionary<string, TimeSpan> roundDurationData = new Dictionary<string, TimeSpan>();
-                BindingList<object> roundList = new BindingList<object>();
-
+                //Dictionary<string, double[]> roundRecordData = new Dictionary<string, double[]>();
+                Dictionary<string, int[]> roundScoreData = new Dictionary<string, int[]>();
+                Dictionary<string, string> roundList = new Dictionary<string, string>();
                 double p = 0, gm = 0, sm = 0, bm = 0, pm = 0, em = 0;
+                //TimeSpan ft = TimeSpan.Zero, lt = TimeSpan.Zero;
+                int hs = 0;
+                int ls = 0;
                 TimeSpan d = TimeSpan.Zero;
                 for (int i = 0; i < rounds.Count; i++) {
                     if (i > 0 && !rounds[i].Name.Equals(rounds[i - 1].Name)) {
                         roundDurationData.Add(rounds[i - 1].Name, d);
                         roundGraphData.Add(rounds[i - 1].Name, new[] { p, gm, sm, bm, pm, em });
-                        roundList.Add(new { Key = rounds[i - 1].Name, Value = Multilingual.GetRoundName(rounds[i - 1].Name).Replace("&", "&&") });
+                        //roundRecordData.Add(rounds[i - 1].Name, new[] { ft.TotalSeconds, lt.TotalSeconds });
+                        roundScoreData.Add(rounds[i - 1].Name, new[] { hs, ls });
+                        roundList.Add(rounds[i - 1].Name, Multilingual.GetRoundName(rounds[i - 1].Name).Replace("&", "&&"));
                         d = TimeSpan.Zero;
+                        //ft = TimeSpan.Zero; lt = TimeSpan.Zero;
+                        hs = 0; ls = 0;
                         p = 0; gm = 0; sm = 0; bm = 0; pm = 0; em = 0;
                     }
-
+                    //ft = (rounds[i].End - rounds[i].Start) < ft ? (rounds[i].End - rounds[i].Start) : ft;
+                    //lt = (rounds[i].End - rounds[i].Start) > lt ? (rounds[i].End - rounds[i].Start) : lt;
+                    hs = (int)(rounds[i].Score > hs ? rounds[i].Score : hs);
+                    ls = (int)(rounds[i].Score < ls ? rounds[i].Score : ls);
+                    
                     d += rounds[i].End - rounds[i].Start;
                     p++;
                     if (rounds[i].Qualified) {
@@ -3085,12 +3097,16 @@ namespace FallGuysStats {
                     if (i == rounds.Count - 1) {
                         roundDurationData.Add(rounds[i].Name, d);
                         roundGraphData.Add(rounds[i].Name, new[] { p, gm, sm, bm, pm, em });
-                        roundList.Add(new { Key = rounds[i].Name, Value = Multilingual.GetRoundName(rounds[i].Name) });
+                        //roundRecordData.Add(rounds[i].Name, new[] { ft.TotalSeconds, lt.TotalSeconds });
+                        roundScoreData.Add(rounds[i].Name, new[] { hs, ls });
+                        roundList.Add(rounds[i].Name, Multilingual.GetRoundName(rounds[i].Name));
                     }
                 }
-
-                roundStatsDisplay.roundList = roundList;
+                
+                roundStatsDisplay.roundList = from pair in roundList orderby pair.Value ascending select pair;
                 roundStatsDisplay.roundDurationData = roundDurationData;
+                //roundStatsDisplay.roundRecordData = roundRecordData;
+                roundStatsDisplay.roundScoreData = roundScoreData;
                 roundStatsDisplay.roundGraphData = roundGraphData;
 
                 this.EnableInfoStrip(false);

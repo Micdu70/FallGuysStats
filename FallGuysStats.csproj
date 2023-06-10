@@ -87,6 +87,9 @@
     <Compile Include="Controls\Grid.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\RoundLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TransparentLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -170,11 +173,11 @@
     <Compile Include="Entities\ZipWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\StatsDisplay.cs">
+    <Compile Include="Views\WinStatsDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\StatsDisplay.Designer.cs">
-      <DependentUpon>StatsDisplay.cs</DependentUpon>
+    <Compile Include="Views\WinStatsDisplay.Designer.cs">
+      <DependentUpon>WinStatsDisplay.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Views\EditShows.resx">
       <DependentUpon>EditShows.cs</DependentUpon>
@@ -207,21 +210,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\StatsDisplay.resx">
-      <DependentUpon>StatsDisplay.cs</DependentUpon>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\WinStatsDisplay.resx">
+      <DependentUpon>WinStatsDisplay.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="COPYRIGHT-GEOLITE2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="GeoLite2-Country.mmdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="LICENSE-GEOLITE2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -231,6 +230,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="COPYRIGHT-GEOLITE2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GeoLite2-Country.mmdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LICENSE-GEOLITE2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="Resources\font\NotoSans-Regular.ttf" />
     <EmbeddedResource Include="Resources\font\TitanOne-Regular.ttf" />
     <EmbeddedResource Include="Resources\font\NotoSansSC-Regular.otf" />
