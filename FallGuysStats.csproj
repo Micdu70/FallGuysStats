@@ -108,11 +108,6 @@
     <Compile Include="Entities\ServerPingWatcher.cs" />
     <Compile Include="Entities\StatSummary.cs" />
     <Compile Include="Entities\UserSettings.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\EditShows.cs">
       <SubType>Form</SubType>
     </Compile>

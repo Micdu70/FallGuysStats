@@ -46,7 +46,7 @@ namespace FallGuysStats {
                 this.formsPlot.Plot.XAxis.DateTimeFormat(true);
 
                 this.formsPlot.Plot.XAxis.ManualTickSpacing((this.manualSpacing <= 0 ? 1 : this.manualSpacing), ScottPlot.Ticks.DateTimeUnit.Day);
-                this.formsPlot.Plot.XAxis.TickLabelStyle(rotation: 50);
+                this.formsPlot.Plot.XAxis.TickLabelStyle(rotation: 45);
                 //this.formsPlot.Plot.XAxis.SetSizeLimit(min: 50);
 
                 this.formsPlot.Plot.YAxis.ManualTickSpacing(this.manualSpacing <= 0 ? 1 : this.manualSpacing);

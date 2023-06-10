@@ -2931,7 +2931,7 @@ namespace FallGuysStats {
                 rounds.AddRange(StatDetails[i].Stats);
             }
             rounds.Sort();
-            
+
             using (WinStatsDisplay display = new WinStatsDisplay {
                 StatsForm = this,
                 Text = $@"     {Multilingual.GetWord("level_detail_wins_per_day")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
@@ -3025,13 +3025,12 @@ namespace FallGuysStats {
         }
         private void ShowRoundGraph() {
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
-                       StatsForm = this,
-                       Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
-                       BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
-                       BackMaxSize = 32,
-                       BackImagePadding = new Padding(20, 20, 0, 0)
-                   })
-            {
+                StatsForm = this,
+                Text = $@"     {Multilingual.GetWord("level_detail_stats_by_round")} - {this.GetCurrentProfileName()} ({this.GetCurrentFilterName()})",
+                BackImage = this.Theme == MetroThemeStyle.Light ? Properties.Resources.round_icon : Properties.Resources.round_gray_icon,
+                BackMaxSize = 32,
+                BackImagePadding = new Padding(20, 20, 0, 0)
+            }) {
                 List<RoundInfo> rounds;
                 if (this.menuCustomRangeStats.Checked) {
                     rounds = this.AllStats.Where(roundInfo => {
@@ -3049,7 +3048,7 @@ namespace FallGuysStats {
                     }).OrderBy(r => r.Name).ToList();
                 }
                 if (rounds.Count == 0) { return; }
-                
+
                 Dictionary<string, double[]> roundGraphData = new Dictionary<string, double[]>();
                 Dictionary<string, TimeSpan> roundDurationData = new Dictionary<string, TimeSpan>();
                 //Dictionary<string, double[]> roundRecordData = new Dictionary<string, double[]>();
@@ -3076,7 +3075,7 @@ namespace FallGuysStats {
                     //lt = (rounds[i].End - rounds[i].Start) > lt ? (rounds[i].End - rounds[i].Start) : lt;
                     hs = (int)(rounds[i].Score > hs ? rounds[i].Score : hs);
                     ls = (int)(rounds[i].Score < ls ? rounds[i].Score : ls);
-                    
+
                     d += rounds[i].End - rounds[i].Start;
                     p++;
                     if (rounds[i].Qualified) {
@@ -3102,7 +3101,7 @@ namespace FallGuysStats {
                         roundList.Add(rounds[i].Name, Multilingual.GetRoundName(rounds[i].Name));
                     }
                 }
-                
+
                 roundStatsDisplay.roundList = from pair in roundList orderby pair.Value ascending select pair;
                 roundStatsDisplay.roundDurationData = roundDurationData;
                 //roundStatsDisplay.roundRecordData = roundRecordData;
