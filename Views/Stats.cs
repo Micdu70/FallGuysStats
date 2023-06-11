@@ -3292,10 +3292,7 @@ namespace FallGuysStats {
                     break;
                 case Keys.C:
                     if (this.shiftKeyToggle && this.ctrlKeyToggle) {
-                        this.overlay.Location = this.screenCenter;
-                        this.CurrentSettings.OverlayLocationX = this.overlay.Location.X;
-                        this.CurrentSettings.OverlayLocationY = this.overlay.Location.Y;
-                        this.SaveUserSettings();
+                        this.overlay.ResetOverlayLocation(false);
                     }
                     break;
             }
