@@ -229,11 +229,11 @@ namespace FallGuysStats {
         private readonly Image numberEight = ImageOpacity(Properties.Resources.number_8, 0.5F);
         private readonly Image numberNine = ImageOpacity(Properties.Resources.number_9, 0.5F);
 
-        private bool shiftKeyToggle, ctrlKeyToggle;
+        private bool shiftKeyToggle; //, ctrlKeyToggle;
 
-        private readonly MetroToolTip mtt = new MetroToolTip();
+        private MetroToolTip mtt = new MetroToolTip();
         private readonly MetroToolTip cmtt = new MetroToolTip();
-        private readonly MetroToolTip omtt = new MetroToolTip();
+        //private readonly MetroToolTip omtt = new MetroToolTip();
         //private readonly MetroToolTip ocmtt = new MetroToolTip();
 
         private readonly DWM_WINDOW_CORNER_PREFERENCE windowConerPreference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
@@ -395,8 +395,6 @@ namespace FallGuysStats {
 
             this.cmtt.OwnerDraw = true;
             this.cmtt.Draw += this.Cmtt_Draw;
-            //this.mtt.OwnerDraw = true;
-            //this.mtt.Draw += this.mtt_Draw;
 
             this.infoStrip.Renderer = new CustomToolStripSystemRenderer();
             this.infoStrip2.Renderer = new CustomToolStripSystemRenderer();
@@ -2429,6 +2427,21 @@ namespace FallGuysStats {
                                                      toolTipIcon == ToolTipIcon.Info ? MessageBoxIcon.Information :
                                                      toolTipIcon == ToolTipIcon.Warning ? MessageBoxIcon.Warning : MessageBoxIcon.None);
         }
+        // public void AllocOverlayCustomTooltip() {
+        //     this.ocmtt = new MetroToolTip();
+        //     this.ocmtt.OwnerDraw = true;
+        //     this.ocmtt.Draw += this.ocmtt_Draw;
+        // }
+        // public void ShowOverlayCustomTooltip(string message, IWin32Window window, Point position, int duration = -1) {
+        //     if (duration == -1) {
+        //         this.ocmtt.Show(message, window, position);
+        //     } else {
+        //         this.ocmtt.Show(message, window, position, duration);
+        //     }
+        // }
+        // public void HideOverlayCustomTooltip(IWin32Window window) {
+        //     this.ocmtt.Hide(window);
+        // }
         public void ShowCustomTooltip(string message, IWin32Window window, Point position, int duration = -1) {
             if (duration == -1) {
                 this.cmtt.Show(message, window, position);
@@ -2440,6 +2453,11 @@ namespace FallGuysStats {
             this.cmtt.Hide(window);
         }
 
+        public void AllocTooltip() {
+            this.mtt = new MetroToolTip {
+                Theme = MetroThemeStyle.Dark
+            };
+        }
         public void ShowTooltip(string message, IWin32Window window, Point position, int duration = -1) {
             if (duration == -1) {
                 this.mtt.Show(message, window, position);
@@ -3278,7 +3296,7 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = false;
                     break;
                 case Keys.ControlKey:
-                    this.ctrlKeyToggle = false;
+                    // this.ctrlKeyToggle = false;
                     break;
             }
         }
@@ -3288,12 +3306,7 @@ namespace FallGuysStats {
                     this.shiftKeyToggle = true;
                     break;
                 case Keys.ControlKey:
-                    this.ctrlKeyToggle = true;
-                    break;
-                case Keys.C:
-                    if (this.shiftKeyToggle && this.ctrlKeyToggle) {
-                        this.overlay.ResetOverlayLocation(false);
-                    }
+                    // this.ctrlKeyToggle = true;
                     break;
             }
         }
@@ -3905,6 +3918,7 @@ namespace FallGuysStats {
             this.menuOverlay.Text = !CurrentSettings.OverlayVisible
                                     ? Multilingual.GetWord("main_show_overlay")
                                     : Multilingual.GetWord("main_hide_overlay");
+            // this.menuOverlay.ToolTipText = $"{Multilingual.GetWord("main_overlay_tooltip")}";
             this.menuUpdate.Text = Multilingual.GetWord("main_update");
             this.menuHelp.Text = Multilingual.GetWord("main_help");
             this.menuLaunchFallGuys.Text = Multilingual.GetWord("main_launch_fall_guys");

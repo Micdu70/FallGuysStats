@@ -281,6 +281,7 @@ namespace FallGuysStats {
             this.menuOverlay.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.menuOverlay.Size = new System.Drawing.Size(107, 25);
             this.menuOverlay.Text = "Show Overlay";
+            // this.menuOverlay.ToolTipText = "Press (Ctrl+Shift+C) to reset overlay's position";
             this.menuOverlay.Click += new System.EventHandler(this.MenuOverlay_Click);
             this.menuOverlay.MouseEnter += new System.EventHandler(this.MenuOverlay_MouseEnter);
             this.menuOverlay.MouseLeave += new System.EventHandler(this.MenuOverlay_MouseLeave);

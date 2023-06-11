@@ -392,6 +392,14 @@ namespace FallGuysStats {
             }
         }
         private void Position_MouseEnter(object sender, EventArgs e) {
+
+            if (!this.IsFixed()) {
+                Rectangle rectangle = ((PictureBox)sender).Bounds;
+                Point position = new Point(rectangle.Right + 5, rectangle.Top);
+                this.StatsForm.AllocTooltip();
+                this.StatsForm.ShowTooltip(Multilingual.GetWord($"overlay_{((PictureBox)sender).Name}_tooltip"), this, position);
+            }
+
             if (this.isPositionButtonMouseEnter) { return; }
 
             if (this.IsFixed()) {
@@ -407,6 +415,9 @@ namespace FallGuysStats {
             this.isPositionButtonMouseEnter = true;
         }
         private void Position_MouseLeave(object sender, EventArgs e) {
+
+            this.StatsForm.HideTooltip(this);
+
             if (!this.isPositionButtonMouseEnter) { return; }
 
             if (this.IsFixed()) {
@@ -1093,7 +1104,7 @@ namespace FallGuysStats {
                     }
             }
         }
-        public void ResetOverlayLocation(bool visible) {
+        private void ResetOverlayLocation(bool visible) {
             this.Location = this.StatsForm.screenCenter;
             this.StatsForm.CurrentSettings.OverlayLocationX = this.Location.X;
             this.StatsForm.CurrentSettings.OverlayLocationY = this.Location.Y;
@@ -1109,7 +1120,7 @@ namespace FallGuysStats {
             this.SetVisiblePositionMenu(visible);
             this.SetVisiblePositionLockButton(visible);
         }
-        public void SetBackgroundColor(int colorOption) {
+        private void SetBackgroundColor(int colorOption) {
             switch (colorOption) {
                 case 0: this.BackColor = Color.FromArgb(224, 224, 224); break;
                 case 1: this.BackColor = Color.White; break;
