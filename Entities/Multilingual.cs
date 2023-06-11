@@ -147,6 +147,8 @@ namespace FallGuysStats {
                             {"level_detail_final", "Final"},
                             {"level_detail_invisibeans", "Invisibeans"},
                             {"level_detail_creative", "Creative"},
+                            {"level_played_prefix", "Played for"},
+                            {"level_played_suffix", ""},
 
                             {"profile_change_tooltiptext", "Click to change your current profile"},
                             {"shows_detail_tooltiptext", "Click to view shows stats"},
@@ -520,6 +522,8 @@ namespace FallGuysStats {
                             {"level_detail_final", "Finale"},
                             {"level_detail_invisibeans", "Invisibiricots"},
                             {"level_detail_creative", "Créatif"},
+                            {"level_played_prefix", "Jouée pendant"},
+                            {"level_played_suffix", ""},
 
                             {"profile_change_tooltiptext", "Cliquer pour changer de profil"},
                             {"shows_detail_tooltiptext", "Cliquer pour voir les stats des émissions"},
@@ -894,6 +898,8 @@ namespace FallGuysStats {
                             {"level_detail_final", "최종"},
                             {"level_detail_invisibeans", "투명젤리빈"},
                             {"level_detail_creative", "폴크리"},
+                            {"level_played_prefix", ""},
+                            {"level_played_suffix", "플레이함"},
 
                             {"profile_change_tooltiptext", "현재 프로필을 변경하려면 클릭하세요"},
                             {"shows_detail_tooltiptext", "쇼 통계를 보려면 클릭하세요"},
@@ -1268,6 +1274,8 @@ namespace FallGuysStats {
                             {"level_detail_final", "ファイナル"},
                             {"level_detail_invisibeans", "かくれんビーンズ"},
                             {"level_detail_creative", "クリエイティブ"},
+                            {"level_played_prefix", ""},
+                            {"level_played_suffix", "プレイする。"},
 
                             {"profile_change_tooltiptext", "クリックして現在のプロファイルを変更"},
                             {"shows_detail_tooltiptext", "クリックして全てのショーの記録を見る"},
@@ -1642,6 +1650,8 @@ namespace FallGuysStats {
                             {"level_detail_final", "Final"},
                             {"level_detail_invisibeans", "Invisibeans"},
                             {"level_detail_creative", "Creative"},
+                            {"level_played_prefix", "播放了"},
+                            {"level_played_suffix", ""},
 
                             {"profile_change_tooltiptext", "点击更换当前的个人资料"},
                             {"shows_detail_tooltiptext", "点击查看每场统计信息"},
