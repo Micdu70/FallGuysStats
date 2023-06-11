@@ -1102,6 +1102,7 @@ namespace FallGuysStats {
             this.StatsForm.CurrentSettings.OverlayFixedPositionY = null;
             this.StatsForm.CurrentSettings.FixedFlippedDisplay = false;
             this.StatsForm.SaveUserSettings();
+            this.Cursor = Cursors.SizeAll;
             this.SetFixedPosition(false, false, false, false, false);
             this.SetBlurPositionMenu();
             this.picPositionLock.Image = this.positionUnlockBlur;
