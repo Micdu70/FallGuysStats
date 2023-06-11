@@ -392,7 +392,7 @@ namespace FallGuysStats {
             }
         }
         private void Position_MouseEnter(object sender, EventArgs e) {
-
+            this.StatsForm.HideTooltip(this);
             if (!this.IsFixed()) {
                 Rectangle rectangle = ((PictureBox)sender).Bounds;
                 Point position = new Point(rectangle.Right + 5, rectangle.Top);
