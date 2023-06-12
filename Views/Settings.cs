@@ -139,6 +139,7 @@ namespace FallGuysStats {
                 new ImageItem(Properties.Resources.background_hex_a_thon, new[] { "background_hex_a_thon", "tab_unselected_hex_a_thon" }, "Hex A Thon", this.Font, false),
                 new ImageItem(Properties.Resources.background_ill_be_slime, new[] { "background_ill_be_slime", "tab_unselected_ill_be_slime" }, "I'll Be Slime", this.Font, false),
                 new ImageItem(Properties.Resources.background_mockingbird, new[] { "background_mockingbird", "tab_unselected_mockingbird" }, "Mocking Bird", this.Font, false),
+                new ImageItem(Properties.Resources.background_monarch, new[] { "background_monarch", "tab_unselected_monarch" }, "Monarch", this.Font, false),
                 new ImageItem(Properties.Resources.background_newlove, new[] { "background_newlove", "tab_unselected_newlove" }, "New Love", this.Font, false),
                 new ImageItem(Properties.Resources.background_parade_guy, new[] { "background_parade_guy", "tab_unselected_parade_guy" }, "Parade Guy", this.Font, false),
                 new ImageItem(Properties.Resources.background_party_pegwin, new[] { "background_party_pegwin", "tab_unselected_party_pegwin" }, "Party Pegwin", this.Font, false),
