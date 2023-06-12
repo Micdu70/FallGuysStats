@@ -3853,7 +3853,7 @@ namespace FallGuysStats {
             try {
                 Process.Start(@"https://fallguys-db.pages.dev/upcoming_shows");
             } catch (Exception ex) {
-                MetroMessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

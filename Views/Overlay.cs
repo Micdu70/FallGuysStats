@@ -1071,7 +1071,7 @@ namespace FallGuysStats {
                 case Keys.Down:
                 case Keys.Right:
                     if (!this.shiftKeyToggle) { break; }
-                    for (var i = 0; i < this.StatsForm.ProfileMenuItems.Count; i++) {
+                    for (int i = 0; i < this.StatsForm.ProfileMenuItems.Count; i++) {
                         ToolStripItem item = this.StatsForm.ProfileMenuItems[i];
                         if (!(item is ToolStripMenuItem menuItem)) { continue; }
                         if (menuItem.Checked && i + 1 < this.StatsForm.ProfileMenuItems.Count) {
