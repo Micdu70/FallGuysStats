@@ -693,22 +693,34 @@ namespace FallGuysStats {
                     string roundName = this.lastRound.VerifiedName();
 
                     this.levelException = 0;
-                    if (roundName == "round_pixelperfect_almond" || roundName == "round_hoverboardsurvival_s4_show" || roundName == "round_hoverboardsurvival2_almond" ||
-                        roundName == "round_snowy_scrap" || roundName == "round_jinxed" || roundName == "round_rocknroll" || roundName == "round_conveyor_arena") {
-                        this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
-                        this.lblRound.IsShareCodeFormat = false;
-                    } else if (roundName == "round_1v1_button_basher" || roundName == "round_1v1_volleyfall_symphony_launch_show") {
-                        this.levelException = 2; // Level is like a "Team" level type (score info is most important)
-                        this.lblRound.IsShareCodeFormat = false;
-                    } else if (this.lastRound.UseShareCode) {
-                        this.levelException = 3; // Level is a creative map and played in Custom
-                        this.lblRound.IsShareCodeFormat = true;
-                    } else if (Regex.IsMatch(roundName, @"^ugc-\d{4}-\d{4}-\d{4}$")) {
-                        this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
-                        roundName = roundName.Substring(4);
-                        this.lblRound.IsShareCodeFormat = true;
-                    } else {
-                        this.lblRound.IsShareCodeFormat = false;
+                    switch (roundName) {
+                        case "round_pixelperfect_almond":
+                        case "round_hoverboardsurvival_s4_show":
+                        case "round_hoverboardsurvival2_almond":
+                        case "round_snowy_scrap":
+                        case "round_jinxed":
+                        case "round_rocknroll":
+                        case "round_conveyor_arena":
+                            this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
+                            this.lblRound.IsShareCodeFormat = false;
+                            break;
+                        case "round_1v1_button_basher":
+                        case "round_1v1_volleyfall_symphony_launch_show":
+                            this.levelException = 2; // Level is like a "Team" level type (score info is most important)
+                            this.lblRound.IsShareCodeFormat = false;
+                            break;
+                        default:
+                            if (this.lastRound.UseShareCode) {
+                                this.levelException = 3; // Level is a creative map and played in Custom
+                                this.lblRound.IsShareCodeFormat = true;
+                            } else if (Regex.IsMatch(roundName, @"^ugc-\d{4}-\d{4}-\d{4}$")) {
+                                this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
+                                roundName = roundName.Substring(4);
+                                this.lblRound.IsShareCodeFormat = true;
+                            } else {
+                                this.lblRound.IsShareCodeFormat = false;
+                            }
+                            break;
                     }
 
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {
