@@ -29,13 +29,13 @@ namespace FallGuysStats {
             int lang = Stats.CurrentLanguage;
             switch (level) {
                 case "Shows":
-                    return this.Width + (lang == 0 ? 109 : lang == 1 ? 140 : lang == 2 ? 86 : lang == 3 ? 90 : 50);
+                    return this.Width + (lang == 0 ? 109 : lang == 1 ? 142 : lang == 2 ? 68 : lang == 3 ? 119 : 50);
                 case "Rounds":
-                    return this.Width + (lang == 0 ? 909 : lang == 1 ? 948 : lang == 2 ? 848 : lang == 3 ? 858 : 836);
+                    return this.Width + (lang == 0 ? 912 : lang == 1 ? 954 : lang == 2 ? 829 : lang == 3 ? 896 : 835);
                 case "Finals":
-                    return this.Width + (lang == 0 ? 909 : lang == 1 ? 948 : lang == 2 ? 848 : lang == 3 ? 858 : 836);
+                    return this.Width + (lang == 0 ? 912 : lang == 1 ? 954 : lang == 2 ? 829 : lang == 3 ? 896 : 835);
                 default:
-                    return this.Width + (lang == 0 ? 759 : lang == 1 ? 798 : lang == 2 ? 698 : lang == 3 ? 708 : 685);
+                    return this.Width + (lang == 0 ? 762 : lang == 1 ? 804 : lang == 2 ? 679 : lang == 3 ? 746 : 685);
             }
         }
         private int GetDataGridViewColumnWidth(string columnName, string columnText) {
@@ -126,7 +126,8 @@ namespace FallGuysStats {
 
             this.gridDetails.CurrentCell = null;
             this.gridDetails.ClearSelection();
-            this.ClientSize = new Size(this.GetClientWidth(this.LevelName), this.Height + 86);
+            this.ClientSize = new Size(this.GetClientWidth(this.LevelName), this.Height);
+            this.MinimumSize = this.ClientSize;
             this.BackMaxSize = 32;
             this.BackImagePadding = new Padding(20, 20, 0, 0);
             if (this.LevelName == "Shows") {

@@ -92,7 +92,7 @@ namespace FallGuysStats {
             this.menu.Location = new System.Drawing.Point(0, 65);
             this.menu.Name = "menu";
             this.menu.ShowItemToolTips = true;
-            this.menu.Size = new System.Drawing.Size(868, 27);
+            this.menu.Size = new System.Drawing.Size(880, 27);
             this.menu.TabIndex = 0;
             this.menu.TabStop = true;
             this.menu.Text = "menuStrip1";
@@ -136,8 +136,9 @@ namespace FallGuysStats {
             // 
             this.menuCustomRangeStats.Image = global::FallGuysStats.Properties.Resources.calendar_icon;
             this.menuCustomRangeStats.Name = "menuCustomRangeStats";
-            this.menuCustomRangeStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) | System.Windows.Forms.Keys.Q)));
-            this.menuCustomRangeStats.Size = new System.Drawing.Size(228, 25);
+            this.menuCustomRangeStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Q)));
+            this.menuCustomRangeStats.Size = new System.Drawing.Size(227, 25);
             this.menuCustomRangeStats.Text = "Custom Range";
             this.menuCustomRangeStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuCustomRangeStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -151,7 +152,7 @@ namespace FallGuysStats {
             this.menuAllStats.Name = "menuAllStats";
             this.menuAllStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.menuAllStats.Size = new System.Drawing.Size(226, 25);
+            this.menuAllStats.Size = new System.Drawing.Size(227, 25);
             this.menuAllStats.Text = "All";
             this.menuAllStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuAllStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -163,7 +164,7 @@ namespace FallGuysStats {
             this.menuSeasonStats.Name = "menuSeasonStats";
             this.menuSeasonStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.menuSeasonStats.Size = new System.Drawing.Size(226, 25);
+            this.menuSeasonStats.Size = new System.Drawing.Size(227, 25);
             this.menuSeasonStats.Text = "Season";
             this.menuSeasonStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuSeasonStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -175,7 +176,7 @@ namespace FallGuysStats {
             this.menuWeekStats.Name = "menuWeekStats";
             this.menuWeekStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.W)));
-            this.menuWeekStats.Size = new System.Drawing.Size(226, 25);
+            this.menuWeekStats.Size = new System.Drawing.Size(227, 25);
             this.menuWeekStats.Text = "Week";
             this.menuWeekStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuWeekStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -187,7 +188,7 @@ namespace FallGuysStats {
             this.menuDayStats.Name = "menuDayStats";
             this.menuDayStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.menuDayStats.Size = new System.Drawing.Size(226, 25);
+            this.menuDayStats.Size = new System.Drawing.Size(227, 25);
             this.menuDayStats.Text = "Day";
             this.menuDayStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuDayStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -199,7 +200,7 @@ namespace FallGuysStats {
             this.menuSessionStats.Name = "menuSessionStats";
             this.menuSessionStats.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.G)));
-            this.menuSessionStats.Size = new System.Drawing.Size(226, 25);
+            this.menuSessionStats.Size = new System.Drawing.Size(227, 25);
             this.menuSessionStats.Text = "Session";
             this.menuSessionStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuSessionStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
@@ -281,7 +282,6 @@ namespace FallGuysStats {
             this.menuOverlay.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.menuOverlay.Size = new System.Drawing.Size(107, 25);
             this.menuOverlay.Text = "Show Overlay";
-            // this.menuOverlay.ToolTipText = "Press (Ctrl+Shift+C) to reset overlay's position";
             this.menuOverlay.Click += new System.EventHandler(this.MenuOverlay_Click);
             this.menuOverlay.MouseEnter += new System.EventHandler(this.MenuOverlay_MouseEnter);
             this.menuOverlay.MouseLeave += new System.EventHandler(this.MenuOverlay_MouseLeave);
@@ -350,7 +350,7 @@ namespace FallGuysStats {
             this.infoStrip.Name = "infoStrip";
             this.infoStrip.Padding = new System.Windows.Forms.Padding(20, 6, 20, 1);
             this.infoStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.infoStrip.Size = new System.Drawing.Size(868, 26);
+            this.infoStrip.Size = new System.Drawing.Size(880, 26);
             this.infoStrip.Stretch = true;
             this.infoStrip.TabIndex = 1;
             // 
@@ -441,7 +441,7 @@ namespace FallGuysStats {
             this.infoStrip2.Name = "infoStrip2";
             this.infoStrip2.Padding = new System.Windows.Forms.Padding(14, 6, 14, 1);
             this.infoStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.infoStrip2.Size = new System.Drawing.Size(868, 27);
+            this.infoStrip2.Size = new System.Drawing.Size(880, 27);
             this.infoStrip2.TabIndex = 2;
             // 
             // lblTotalTime
@@ -535,7 +535,7 @@ namespace FallGuysStats {
             this.gridDetails.Name = "gridDetails";
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
-            this.gridDetails.Size = new System.Drawing.Size(830, 345);
+            this.gridDetails.Size = new System.Drawing.Size(860, 345);
             this.gridDetails.TabIndex = 3;
             this.gridDetails.TabStop = false;
             this.gridDetails.DataSourceChanged += new System.EventHandler(this.GridDetails_DataSourceChanged);
@@ -549,7 +549,7 @@ namespace FallGuysStats {
             // Stats
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(870, 510);
+            this.ClientSize = new System.Drawing.Size(900, 510);
             this.Controls.Add(this.infoStrip);
             this.Controls.Add(this.infoStrip2);
             this.Controls.Add(this.gridDetails);
@@ -557,7 +557,7 @@ namespace FallGuysStats {
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(15, 15);
-            this.MinimumSize = new System.Drawing.Size(870, 360);
+            this.MinimumSize = new System.Drawing.Size(900, 360);
             this.Name = "Stats";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
