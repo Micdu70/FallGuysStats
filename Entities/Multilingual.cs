@@ -309,6 +309,9 @@ namespace FallGuysStats {
                             {"settings_auto_generate_profiles", "Generate a profile for each show"},
                             {"settings_select_language_button", "Confirm"},
 
+                            {"settings_font_need_to_be_installed_caption", "Fonts need to be installed"},
+                            {"settings_font_need_to_be_installed_message", "Please install the font files found in the Fall Guys Stats folder then relaunch the program to not get this message."},
+
                             {"overlay_streak", "WIN STREAK"},
                             {"overlay_streak_suffix", ""},
                             {"overlay_streak_finals", "FINAL STREAK"},
@@ -689,6 +692,9 @@ namespace FallGuysStats {
                             {"settings_select_language_title", "Sélectionnez votre langue"},
                             {"settings_auto_generate_profiles", "Créer un profil pour chaque émission"},
                             {"settings_select_language_button", "Confirmer"},
+
+                            {"settings_font_need_to_be_installed_caption", "Les polices d'écriture ont besoin d'être installées"},
+                            {"settings_font_need_to_be_installed_message", "Veuillez installer les polices d'écriture présentes dans le dossier où se trouve le tracker puis relancer le programme pour ne plus avoir ce message."},
 
                             {"overlay_streak", "WIN STREAK"},
                             {"overlay_streak_suffix", ""},
@@ -1073,6 +1079,9 @@ namespace FallGuysStats {
                             {"settings_auto_generate_profiles", "프로필 자동 생성"},
                             {"settings_select_language_button", "확인"},
 
+                            {"settings_font_need_to_be_installed_caption", "폰트 설치 필요함"},
+                            {"settings_font_need_to_be_installed_message", "폴 가이즈 스탯츠 폴더의 폰트 파일을 설치해 주세요."},
+
                             {"overlay_streak", "연승"},
                             {"overlay_streak_suffix", "연승"},
                             {"overlay_streak_finals", "연속결승"},
@@ -1453,6 +1462,9 @@ namespace FallGuysStats {
                             {"settings_select_language_title", "言語を選択"},
                             {"settings_auto_generate_profiles", "プロファイルの自動生成"},
                             {"settings_select_language_button", "保存"},
+
+                            {"settings_font_need_to_be_installed_caption", "フォントのインストールが必要です"},
+                            {"settings_font_need_to_be_installed_message", "Fall Guys Stats フォルダのフォントファイルをインストールしてください。"},
 
                             {"overlay_streak", "連勝"},
                             {"overlay_streak_suffix", "勝"},
@@ -1835,6 +1847,9 @@ namespace FallGuysStats {
                             {"settings_select_language_title", "选择你的语言"},
                             {"settings_auto_generate_profiles", "自动生成配置文件"},
                             {"settings_select_language_button", "选择"},
+
+                            {"settings_font_need_to_be_installed_caption", "需要安装字体"},
+                            {"settings_font_need_to_be_installed_message", "安装 Fall Guys Stats 文件夹中的字体文件。"},
 
                             {"overlay_streak", "连胜"},
                             {"overlay_streak_suffix", ""},

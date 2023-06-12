@@ -590,7 +590,7 @@ namespace FallGuysStats {
                 while ((detail = sr.ReadLine()) != null) {
                     if (detail.IndexOf("[Round ", StringComparison.OrdinalIgnoreCase) == 0) {
                         foundRound = true;
-                        int roundNum = (int)detail[7] - 0x30 + 1;
+                        int roundNum = detail[7] - 0x30 + 1;
                         string roundName = detail.Substring(11, detail.Length - 12);
 
                         if (roundName.StartsWith("ugc-")) {
@@ -642,7 +642,7 @@ namespace FallGuysStats {
                             roundInfo.Kudos += int.Parse(detail.Substring(9));
                         } else if (detail.IndexOf("> Bonus Tier: ", StringComparison.OrdinalIgnoreCase) == 0 && detail.Length == 15) {
                             char tier = detail[14];
-                            roundInfo.Tier = (int)tier - 0x30 + 1;
+                            roundInfo.Tier = tier - 0x30 + 1;
                         } else if (detail.IndexOf("> Bonus Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             roundInfo.Kudos += int.Parse(detail.Substring(15));
                         }
