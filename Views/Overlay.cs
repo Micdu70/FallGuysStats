@@ -724,10 +724,6 @@ namespace FallGuysStats {
                             if (this.lastRound.UseShareCode) {
                                 this.levelException = 3; // Level is a creative map and played in Custom
                                 this.lblRound.IsShareCodeFormat = true;
-                            } else if (Regex.IsMatch(roundName, @"^ugc-\d{4}-\d{4}-\d{4}$")) {
-                                this.levelException = 4; // Level is a creative map made by a player and played in a Special Show
-                                roundName = roundName.Substring(4);
-                                this.lblRound.IsShareCodeFormat = true;
                             } else {
                                 this.lblRound.IsShareCodeFormat = false;
                             }
@@ -751,7 +747,7 @@ namespace FallGuysStats {
                     //}
                     if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
 
-                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException >= 3 ? true : false;
+                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException == 3 ? true : false;
 
                     LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
 
@@ -760,7 +756,7 @@ namespace FallGuysStats {
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundBigIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = this.levelException >= 3 ? Properties.Resources.round_creative_icon : null;
+                            this.lblRound.RoundIcon = this.levelException == 3 ? Properties.Resources.round_creative_icon : null;
                         }
                         if (this.lblRound.RoundIcon != null) {
                             if (this.lblRound.RoundIcon.Height != 23) {
