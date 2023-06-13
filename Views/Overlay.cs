@@ -587,7 +587,7 @@ namespace FallGuysStats {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
                 fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 :
-                                     type == LevelType.Team || this.levelException == 2 ? 2 : 1;
+                                     (type == LevelType.Team && this.levelException != 1) || this.levelException == 2 ? 2 : 1;
             }
             switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && this.levelException != 1) ? 3 : 2)) {
                 case 0:
