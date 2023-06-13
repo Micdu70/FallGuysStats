@@ -1,4 +1,4 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.191 du 09/06/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.195 du 13/06/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
@@ -9,12 +9,12 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 INFO: Date des données GeoLite2 utilisées => 09/06/2023
 
 
-### Il y a 0 bug génant connu dans la v1.191 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.195 de la "FE" (Frenchy Edition)
 
 
 ## Différences entre la "FE" et la Version Officielle
 
-- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) contrairement à la Version Officielle
+- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) ou lors d'un crash du jeu contrairement à la Version Officielle
 - L'overlay de la "FE" fonctionne aussi en mode spectateur contrairement à la Version Officielle
 - L'overlay de la "FE" indique le nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale) contrairement à la Version Officielle
 
@@ -59,7 +59,8 @@ Q.3) Que signifie une ligne de couleur rose claire (thème clair) ou violette so
 
 Cliquer une fois sur l'overlay pour le sélectionner puis :
 
-    - Appuyer sur 'Ctrl + Maj + D' pour remettre les dimensions par défaut de l'overlay.
+    - Appuyer sur 'Ctrl + Maj + C' pour réinitialiser la position de l'overlay.
+    - Appuyer sur 'Ctrl + Maj + D' pour réinitialiser les dimensions de l'overlay.
     - Appuyer sur la touche 'T' pour changer la couleur de l'arrière-plan.
     - Appuyer sur la touche 'F' pour inverser horizontalement l'affichage.
     - Appuyer sur la touche 'P' pour passer au profil suivant.

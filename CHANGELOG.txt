@@ -1,13 +1,19 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.195 ~ 13/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.195) datant du 13/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+    - ++Ajouté: Arrière-plan "Monarch" pour l'overlay [Version Officielle]
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.191 ~ 09/06/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.189) datant du 09/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Ajouté: Graphique des statistiques par manche (via un clique sur le temps total joué) [Version Officielle]
     - ++Changé: Base de données GeoLite2 datant du 09/06/2023
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.189 et v1.190 ~ 07/06/2023
   { Correction de bugs de la "FE" }

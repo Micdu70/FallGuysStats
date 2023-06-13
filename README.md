@@ -39,7 +39,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Différences entre la "FE" et la Version Officielle
 
-- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) contrairement à la Version Officielle
+- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) ou lors d'un crash du jeu contrairement à la Version Officielle
 - L'overlay de la "FE" fonctionne aussi en mode spectateur contrairement à la Version Officielle
 - L'overlay de la "FE" indique le nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale) contrairement à la Version Officielle
 
@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.191` ~ 09/06/2023
+**Dernière version:** `v1.195` ~ 13/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -60,12 +60,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.189) datant du 09/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Ajouté: Graphique des statistiques par manche (via un clique sur le temps total joué) [Version Officielle]
-- ++Changé: Base de données GeoLite2 datant du 09/06/2023
+{ Cette version, bien que basée sur la Version Officielle (v1.195) datant du 13/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+- ++Ajouté: Arrière-plan "Monarch" pour l'overlay [Version Officielle]
 
 
-### Il y a 0 bug génant connu dans la v1.191 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.195 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -145,7 +145,8 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ### Raccourcis
 
   - Cliquer une fois sur l'overlay pour le sélectionner puis:
-    - Appuyer sur **'Ctrl + Maj + D'** pour remettre les dimensions par défaut de l'overlay.
+    - Appuyer sur **'Ctrl + Maj + C'** pour réinitialiser la position de l'overlay.
+    - Appuyer sur **'Ctrl + Maj + D'** pour réinitialiser les dimensions de l'overlay.
     - Appuyer sur la touche **'T'** pour changer la couleur de l'arrière-plan.
     - Appuyer sur la touche **'F'** pour inverser horizontalement l'affichage.
     - Appuyer sur la touche **'P'** pour passer au profil suivant.
@@ -227,6 +228,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.195` ~ 13/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.195) datant du 13/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+    - ++Ajouté: Arrière-plan "Monarch" pour l'overlay [Version Officielle]
 
   - `v1.191` ~ 09/06/2023
   { Correction de bugs de la "FE" }
