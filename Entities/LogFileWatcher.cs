@@ -58,7 +58,6 @@ namespace FallGuysStats {
 
         public bool autoChangeProfile;
         public bool preventOverlayMouseClicks;
-        private bool updateLastLine;
         private string selectedShowId;
         private bool useShareCode;
         private string sessionId;
@@ -177,7 +176,6 @@ namespace FallGuysStats {
                                 Stats.SavedRoundCount = 0;
                                 lastDate = line.Date;
                                 offset = line.Offset;
-                                this.updateLastLine = false;
                                 lock (this.lines) {
                                     this.lines.AddRange(currentLines);
                                     currentLines.Clear();
@@ -187,9 +185,7 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StatePrivateLobby with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[GameStateMachine] Replacing FGClient.StateReloadingToMainMenu with FGClient.StateMainMenu", StringComparison.OrdinalIgnoreCase) > 0
                                        || line.Line.IndexOf("[StateMainMenu] Loading scene MainMenu", StringComparison.OrdinalIgnoreCase) > 0
-                                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0
-                                       || this.updateLastLine) {
-                                this.updateLastLine = false;
+                                       || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) > 0) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
@@ -241,6 +237,28 @@ namespace FallGuysStats {
                     this.OnError?.Invoke(ex.ToString());
                 }
                 Thread.Sleep(UpdateDelay);
+            }
+        }
+
+        private void AddLineAfterGameShutdown() {
+            try {
+                bool isValidSemiColon, isValidDot, isValid;
+                string lastTime = DateTime.UtcNow.ToString("hh:mm:ss.fff");
+                foreach (string line in File.ReadAllLines(filePath)) {
+                    isValidSemiColon = line.IndexOf(":") == 2 && line.IndexOf(":", 3) == 5 && line.IndexOf(":", 6) == 12;
+                    isValidDot = line.IndexOf(".") == 2 && line.IndexOf(".", 3) == 5 && line.IndexOf(":", 6) == 12;
+                    isValid = isValidSemiColon || isValidDot;
+                    if (isValid) {
+                        lastTime = line.Substring(0, 12);
+                    }
+                }
+                TextWriter tw = new StreamWriter(filePath, true);
+                tw.WriteLine();
+                tw.WriteLine($"{lastTime}: [EOSPartyPlatformService.Base] Reset, reason: Shutdown");
+                tw.WriteLine();
+                tw.Close();
+            } catch {
+                // ignored
             }
         }
 
@@ -500,7 +518,8 @@ namespace FallGuysStats {
                        || Stats.IsGameHasBeenClosed) {
                 if (Stats.IsGameHasBeenClosed) {
                     Stats.IsGameHasBeenClosed = false;
-                    this.updateLastLine = true;
+                    this.AddLineAfterGameShutdown();
+                    return false;
                 }
 
                 Stats.ToggleServerInfo = false;
@@ -517,7 +536,7 @@ namespace FallGuysStats {
 
                 if (logRound.Info != null) {
                     if (logRound.Info.End == DateTime.MinValue) {
-                        logRound.Info.End = !this.updateLastLine ? line.Date : logRound.Info.Finish.GetValueOrDefault(line.Date);
+                        logRound.Info.End = line.Date;
                     }
                     logRound.Info.Playing = false;
                     if (!Stats.EndedShow) {

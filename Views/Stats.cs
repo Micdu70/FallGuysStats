@@ -1917,7 +1917,7 @@ namespace FallGuysStats {
                                         stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
                                         stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     } catch {
-                                        // ignore
+                                        // ignored
                                     }
                                 }
 
