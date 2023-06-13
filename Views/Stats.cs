@@ -1391,6 +1391,22 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
 
+            if (this.CurrentSettings.Version == 36) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.Name.Equals("round_follow-the-leader_ss2_launch") || info.Name.Equals("round_follow-the-leader_ss2_parrot")) {
+                        info.Name = "round_follow_the_line";
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.Version = 37;
+                this.SaveUserSettings();
+            }
+
             //
             // "Frenchy Edition" mods
             //
@@ -1532,7 +1548,7 @@ namespace FallGuysStats {
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
                 Visible = true,
-                Version = 36,
+                Version = 37,
                 FrenchyEditionDB = 10
             };
         }
@@ -1873,7 +1889,7 @@ namespace FallGuysStats {
 
                                 if (stat.ShowEnd < this.startupTime) {
                                     if (this.useLinkedProfiles) {
-                                        profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10"));
+                                        profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10") || stat.ShowNameId.StartsWith("wle_s10_player_round"));
                                     }
                                     this.SetProfileMenu(profile);
                                 }
