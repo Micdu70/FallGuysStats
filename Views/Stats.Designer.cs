@@ -91,7 +91,6 @@ namespace FallGuysStats {
             this.menuTodaysShow});
             this.menu.Location = new System.Drawing.Point(0, 65);
             this.menu.Name = "menu";
-            this.menu.ShowItemToolTips = true;
             this.menu.Size = new System.Drawing.Size(880, 27);
             this.menu.TabIndex = 0;
             this.menu.TabStop = true;

@@ -367,8 +367,6 @@ namespace FallGuysStats {
             this.logFile.autoChangeProfile = this.CurrentSettings.AutoChangeProfile;
             this.logFile.preventOverlayMouseClicks = this.CurrentSettings.PreventOverlayMouseClicks;
 
-            Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
-
             string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
             this.overlay.SetFixedPosition(
                 !string.IsNullOrEmpty(fixedPosition) && fixedPosition.Equals("ne"),
@@ -576,7 +574,6 @@ namespace FallGuysStats {
             if (this.Theme == theme) { return; }
 
             this.SuspendLayout();
-            this.mtt.Theme = theme;
             this.menu.Renderer = theme == MetroThemeStyle.Light ? (ToolStripRenderer)new CustomLightArrowRenderer() : new CustomDarkArrowRenderer();
             this.BackMaxSize = 56;
             this.BackImage = this.Icon.ToBitmap();
@@ -1668,8 +1665,13 @@ namespace FallGuysStats {
 
         private void MenuTodaysShow_MouseEnter(object sender, EventArgs e) {
             this.Cursor = Cursors.Hand;
+            //Point cursorPosition = this.PointToClient(Cursor.Position);
+            //Point position = new Point(cursorPosition.X + 20, cursorPosition.Y);
+            Rectangle rectangle = this.menuTodaysShow.Bounds;
+            Point position = new Point(rectangle.Left, rectangle.Bottom + 85);
+            this.AllocTooltip();
+            this.ShowTooltip(Multilingual.GetWord("main_todays_show_tooltip"), this, position);
         }
-
         private void MenuTodaysShow_MouseLeave(object sender, EventArgs e) {
             this.HideTooltip(this);
             this.Cursor = Cursors.Default;
@@ -3763,7 +3765,7 @@ namespace FallGuysStats {
                         this.logFile.autoChangeProfile = this.CurrentSettings.AutoChangeProfile;
                         this.logFile.preventOverlayMouseClicks = this.CurrentSettings.PreventOverlayMouseClicks;
 
-                        Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
+                        Stats.IsOverlayPingVisible = this.CurrentSettings.OverlayVisible && !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
                             (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {
@@ -3798,6 +3800,7 @@ namespace FallGuysStats {
         }
         private void ToggleOverlay(Overlay overlay) {
             if (overlay.Visible) {
+                Stats.IsOverlayPingVisible = false;
                 overlay.Hide();
                 this.menuOverlay.Image = Properties.Resources.stat_gray_icon;
                 this.menuOverlay.Text = $"{Multilingual.GetWord("main_show_overlay")}";
@@ -3810,6 +3813,7 @@ namespace FallGuysStats {
                 this.CurrentSettings.OverlayVisible = false;
                 this.SaveUserSettings();
             } else {
+                Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
                 overlay.TopMost = !this.CurrentSettings.OverlayNotOnTop;
                 overlay.Show();
                 this.menuOverlay.Image = Properties.Resources.stat_icon;
@@ -3956,7 +3960,6 @@ namespace FallGuysStats {
             this.menuHelp.Text = Multilingual.GetWord("main_help");
             this.menuLaunchFallGuys.Text = Multilingual.GetWord("main_launch_fall_guys");
             this.menuTodaysShow.Text = $"{Multilingual.GetWord("main_todays_show")}";
-            this.menuTodaysShow.ToolTipText = $"{Multilingual.GetWord("main_todays_show_tooltip")}";
         }
     }
 }
