@@ -227,7 +227,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog complet de la "FE" (Frenchy Edition)
 
-  - `v1.197` ~ 13/06/2023
+  - `v1.197` ~ 15/06/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 

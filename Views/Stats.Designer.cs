@@ -554,7 +554,6 @@ namespace FallGuysStats {
             this.lblManualUpdateVersion.Location = new System.Drawing.Point(26, 50);
             this.lblManualUpdateVersion.Name = "lblManualUpdateVersion";
             this.lblManualUpdateVersion.Size = new System.Drawing.Size(135, 15);
-            this.lblManualUpdateVersion.TabIndex = 4;
             this.lblManualUpdateVersion.Text = "Manual Update Version";
             // 
             // Stats
