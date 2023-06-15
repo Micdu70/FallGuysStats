@@ -262,7 +262,9 @@ namespace FallGuysStats {
             }
         }
 
-        private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" } };
+        private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+            { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
+        };
 
         private bool GetIsRealFinalRound(string roundId, string showId) {
             if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) || showId.StartsWith("wle_s10_player_round")) { this.isCreatorMadeRoundsShow = true; return true; }
@@ -280,9 +282,9 @@ namespace FallGuysStats {
                          || roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1)
                             && roundId.IndexOf("_final", StringComparison.OrdinalIgnoreCase) != -1)
 
-                    || ((roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
-                         || roundId.IndexOf("round_robotrampage", StringComparison.OrdinalIgnoreCase) != -1)
-                            && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
+                   || ((roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
+                        || roundId.IndexOf("round_robotrampage", StringComparison.OrdinalIgnoreCase) != -1)
+                            && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase))
 
                     || roundId.EndsWith("_timeattack_final", StringComparison.OrdinalIgnoreCase)
 
@@ -325,17 +327,17 @@ namespace FallGuysStats {
                      || roundId.IndexOf("round_floor_fall_event_walnut", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_hexaring_event_walnut", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_hexsnake_event_walnut", StringComparison.OrdinalIgnoreCase) != -1)
-                        && roundId.Substring(roundId.Length - 6).ToLower() == "_final")
+                         && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase))
 
                      || (roundId.IndexOf("round_blastball_arenasurvival_blast_ball_trials", StringComparison.OrdinalIgnoreCase) != -1
-                         && roundId.Substring(roundId.Length - 3).ToLower() == "_fn")
+                         && roundId.EndsWith("_fn", StringComparison.OrdinalIgnoreCase))
 
                      || (roundId.IndexOf("round_robotrampage_arena_2_ss2_show1", StringComparison.OrdinalIgnoreCase) != -1
-                         && roundId.Substring(roundId.Length - 3) == "_03");
+                         && roundId.EndsWith("_03", StringComparison.OrdinalIgnoreCase));
         }
 
         private bool GetIsTeamException(string roundId) {
-            return roundId.IndexOf("ound_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1
+            return roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1
                    && (roundId.IndexOf("_duos", StringComparison.OrdinalIgnoreCase) != -1
                        || roundId.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) != -1);
         }

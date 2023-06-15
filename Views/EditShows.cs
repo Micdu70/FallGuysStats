@@ -218,7 +218,7 @@ namespace FallGuysStats {
                 this.lblEditShowsBackColor.Size = new Size(535, 53);
                 this.btnEditShowsSave.Location = new Point(328, 206);
                 this.btnEditShowsCancel.Location = new Point(427, 206);
-            } else if (Stats.CurrentLanguage == 4) {  // Simplified Chinese
+            } else if (Stats.CurrentLanguage == 4) { // Simplified Chinese
                 this.ClientSize = new Size(445, 244);
                 this.cboEditShows.Location = new Point(185, 135);
                 //this.cboEditShows.Size = new Size(198, 29);
