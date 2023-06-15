@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using LiteDB;
 using Microsoft.Win32;
 using MetroFramework;
+using MetroFramework.Controls;
 using System.Text.RegularExpressions;
 using MetroFramework.Components;
 
@@ -578,6 +579,9 @@ namespace FallGuysStats {
             this.BackMaxSize = 56;
             this.BackImage = this.Icon.ToBitmap();
             foreach (Control c1 in Controls) {
+                if (c1 is MetroLabel ml1) {
+                    ml1.Theme = theme;
+                }
                 if (c1 is MenuStrip ms1) {
                     foreach (ToolStripMenuItem tsmi1 in ms1.Items) {
                         switch (tsmi1.Name) {
@@ -3921,14 +3925,12 @@ namespace FallGuysStats {
         }
         private void ChangeMainLanguage() {
             this.currentLanguage = CurrentLanguage;
-            this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} {Multilingual.GetWord("main_title_suffix")}";
+            this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 18)).Width;
+            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 70 : 45), 8, 0, 0);
 
-            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 20)).Width;
-#if AllowUpdate
-            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 40 : CurrentLanguage == 4 ? 14 : 8), 8, 0, 0);
-#else
-            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 185 : CurrentLanguage == 3 ? 130 : CurrentLanguage == 4 ? 50 : 0), 8, 0, 0);
-#endif
+            this.lblManualUpdateVersion.Text = Multilingual.GetWord("main_subtitle");
+
             this.menu.Font = Overlay.GetMainFont(12);
             this.infoStrip.Font = Overlay.GetMainFont(13);
             this.infoStrip2.Font = Overlay.GetMainFont(13);

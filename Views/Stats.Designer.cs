@@ -67,6 +67,7 @@ namespace FallGuysStats {
             this.lblEliminatedMedal = new System.Windows.Forms.ToolStripLabel();
             this.lblKudos = new System.Windows.Forms.ToolStripLabel();
             this.gridDetails = new FallGuysStats.Grid();
+            this.lblManualUpdateVersion = new MetroFramework.Controls.MetroLabel();
             this.menu.SuspendLayout();
             this.infoStrip.SuspendLayout();
             this.infoStrip2.SuspendLayout();
@@ -545,10 +546,22 @@ namespace FallGuysStats {
             this.gridDetails.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridDetails_ColumnHeaderMouseClick);
             this.gridDetails.SelectionChanged += new System.EventHandler(this.GridDetails_SelectionChanged);
             // 
+            // lblManualUpdateVersion
+            // 
+            this.lblManualUpdateVersion.AutoSize = true;
+            this.lblManualUpdateVersion.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblManualUpdateVersion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblManualUpdateVersion.Location = new System.Drawing.Point(26, 50);
+            this.lblManualUpdateVersion.Name = "lblManualUpdateVersion";
+            this.lblManualUpdateVersion.Size = new System.Drawing.Size(135, 15);
+            this.lblManualUpdateVersion.TabIndex = 4;
+            this.lblManualUpdateVersion.Text = "Manual Update Version";
+            // 
             // Stats
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(900, 510);
+            this.Controls.Add(this.lblManualUpdateVersion);
             this.Controls.Add(this.infoStrip);
             this.Controls.Add(this.infoStrip2);
             this.Controls.Add(this.gridDetails);
@@ -575,6 +588,7 @@ namespace FallGuysStats {
             this.infoStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetails)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         
@@ -616,5 +630,6 @@ namespace FallGuysStats {
         private System.Windows.Forms.ToolStripMenuItem menuTodaysShow;
         private System.Windows.Forms.ToolStripMenuItem menuEditProfiles;
         private System.Windows.Forms.ToolStripMenuItem menuCustomRangeStats;
+        private MetroFramework.Controls.MetroLabel lblManualUpdateVersion;
     }
 }

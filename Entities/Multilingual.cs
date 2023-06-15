@@ -9,9 +9,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "Multilingual"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", ""},
+                            {"main_subtitle", ""},
 #else
-                            {"main_title_suffix", "(Manual Update Version)"},
+                            {"main_subtitle", "Manual Update Version"},
 #endif
                             {"main_settings", "Settings"},
                             {"main_filters", "Filters"},
@@ -393,9 +393,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "Multilingue"},
                             {"main_fall_guys_stats", "Tracker Fall Guys \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", ""},
+                            {"main_subtitle", ""},
 #else
-                            {"main_title_suffix", "(version sans MAJ auto)"},
+                            {"main_subtitle", "Version sans MAJ auto"},
 #endif
                             {"main_settings", "Configuration"},
                             {"main_filters", "Filtres"},
@@ -777,9 +777,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "다국어"},
                             {"main_fall_guys_stats", "폴 가이즈 스탯츠 \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", ""},
+                            {"main_subtitle", ""},
 #else
-                            {"main_title_suffix", "(수동 업데이트 버전)"},
+                            {"main_subtitle", "수동 업데이트 버전"},
 #endif
                             {"main_settings", "설정"},
                             {"main_filters", "필터링"},
@@ -1162,9 +1162,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "多言語"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", ""},
+                            {"main_subtitle", ""},
 #else
-                            {"main_title_suffix", "(手動更新版)"},
+                            {"main_subtitle", "手動更新版"},
 #endif
                             {"main_settings", "設定"},
                             {"main_filters", "フィルタ"},
@@ -1547,9 +1547,9 @@ namespace FallGuysStats {
                             {"main_multilingual", "多语言"},
                             {"main_fall_guys_stats", "Fall Guys Stats \"FE\""},
 #if AllowUpdate
-                            {"main_title_suffix", ""},
+                            {"main_subtitle", ""},
 #else
-                            {"main_title_suffix", "（手动更新版本）"},
+                            {"main_subtitle", "手动更新版本"},
 #endif
                             {"main_settings", "设置"},
                             {"main_filters", "筛选"},
