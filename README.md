@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.195` ~ 13/06/2023
+**Dernière version:** `v1.197` ~ 15/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -60,12 +60,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.195) datant du 13/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
-- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
-- ++Ajouté: Arrière-plan "Monarch" pour l'overlay [Version Officielle]
+{ Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
 
-### Il y a 0 bug génant connu dans la v1.195 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.197 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -228,6 +226,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.197` ~ 13/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
   - `v1.195` ~ 13/06/2023
   { Correction de bugs de la "FE" }
@@ -500,6 +502,24 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog récent de la Version Officielle
 
+  - `1.197`
+    - Bugfix and program optimization
+  - `1.196`
+    - Bugfix and program optimization
+  - `1.195`
+    - Bugfix and program optimization
+  - `1.194`
+    - Updated new show and round names
+    - Bugfix and program optimization
+  - `1.193`
+    - Bugfix and program optimization
+  - `1.192`
+    - Bugfix and program optimization
+  - `1.191`
+    - Bugfix and program optimization
+  - `1.190`
+    - Add information to graph of grades by round
+    - Bugfix and program optimization
   - `1.189`
     - Add a graph of grades by round (Click Playtime)
     - Bugfix and program optimization
