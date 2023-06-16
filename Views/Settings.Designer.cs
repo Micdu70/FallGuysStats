@@ -322,10 +322,9 @@
             // 
             // overlayOpacityToolTip
             // 
-            //this.overlayOpacityToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.overlayOpacityToolTip.Style = MetroFramework.MetroColorStyle.Blue;
             this.overlayOpacityToolTip.StyleManager = null;
-            // this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // trkOverlayOpacity
             // 

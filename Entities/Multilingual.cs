@@ -2233,7 +2233,7 @@ namespace FallGuysStats {
                             {"wle_s10_round_011", "Cyber Circuit"},
                             {"wle_s10_round_012", "Boom Blaster Trial"},
                             {"wle_s10_player_round_wk3_06", "Spiral Upheaval"},
-                            {"wle_s10_player_round_wk3_07", "Creative Descent"},
+                            {"wle_s10_player_round_wk3_07", "Descente Créative"},
                             {"wle_s10_player_round_wk3_11", "Rainbow dash"},
                             {"wle_fp2_wk6_01", "Broken Course"},
                             {"wle_s10_player_round_wk3_15", "Parkour Party"},

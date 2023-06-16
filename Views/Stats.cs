@@ -3644,6 +3644,12 @@ namespace FallGuysStats {
                 case "9014-0444-9613": return "wle_s10_round_010";
                 case "4409-6583-6207": return "wle_s10_round_011";
                 case "8113-7002-5798": return "wle_s10_round_012";
+                case "1998-0819-8328": return "wle_s10_player_round_wk3_06";
+                case "2087-8833-2659": return "wle_s10_player_round_wk3_07";
+                case "4928-7457-4026": return "wle_s10_player_round_wk3_11";
+                case "8700-2575-3311": return "wle_s10_player_round_wk3_15";
+                case "8872-5222-3800": return "wle_s10_player_round_wk3_17";
+                case "5320-7960-5930": return "wle_fp2_wk6_01";
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
                 case "7774-2277-5742": return "wle_s10_orig_round_017";
@@ -3659,8 +3665,8 @@ namespace FallGuysStats {
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
             string[] creativeAuthorInfo = { "N/A", "N/A" };
-            string onlinePlatformId = "";
-            string onlinePlatformNickname = "";
+            string onlinePlatformId = string.Empty;
+            string onlinePlatformNickname = string.Empty;
             string[] onlinePlatformIds = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "nso" may not be used
             foreach (string onlinePlatformIdInfo in onlinePlatformIds) {
                 if (authorData.TryGetProperty(onlinePlatformIdInfo, out JsonElement onlinePlatformNicknameInfo)) {

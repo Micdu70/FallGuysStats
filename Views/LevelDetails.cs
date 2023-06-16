@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework;
-using Microsoft.Extensions.Primitives;
 
 namespace FallGuysStats {
     public partial class LevelDetails : MetroFramework.Forms.MetroForm {
@@ -866,10 +865,7 @@ namespace FallGuysStats {
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
                 RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
                 if (info.CreativeLastModifiedDate == DateTime.MinValue) { return; }
-                if (string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
-                    info.CreativeLastModifiedDate = DateTime.MinValue;
-                    return;
-                }
+
                 StringBuilder strbuilder = new StringBuilder();
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(this.textInfo.ToTitleCase(info.CreativeTitle));
