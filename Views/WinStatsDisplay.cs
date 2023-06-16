@@ -45,7 +45,7 @@ namespace FallGuysStats {
                 this.formsPlot.Plot.Legend(location: Alignment.UpperRight);
                 this.formsPlot.Plot.XAxis.DateTimeFormat(true);
 
-                this.formsPlot.Plot.XAxis.ManualTickSpacing((this.manualSpacing <= 0 ? 1 : this.manualSpacing), ScottPlot.Ticks.DateTimeUnit.Day);
+                this.formsPlot.Plot.XAxis.ManualTickSpacing(this.manualSpacing <= 0 ? 1 : this.manualSpacing, ScottPlot.Ticks.DateTimeUnit.Day);
                 this.formsPlot.Plot.XAxis.TickLabelStyle(rotation: 45);
                 //this.formsPlot.Plot.XAxis.SetSizeLimit(min: 50);
 
@@ -241,7 +241,7 @@ namespace FallGuysStats {
                     break;
             }
 
-            this.tooltip = this.formsPlot.Plot.AddTooltip(label: ($"{DateTime.FromOADate(this.MyScatterPlot1.Xs[currentIndex]).ToString(Multilingual.GetWord("level_date_format"))}{Environment.NewLine}") +
+            this.tooltip = this.formsPlot.Plot.AddTooltip(label: $"{DateTime.FromOADate(this.MyScatterPlot1.Xs[currentIndex]).ToString(Multilingual.GetWord("level_date_format"))}{Environment.NewLine}" +
                                                                  (this.MyScatterPlot1.IsVisible ? $"{Multilingual.GetWord("level_detail_shows")} : {this.MyScatterPlot1.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot2.IsVisible ? $"{Multilingual.GetWord("level_detail_finals")} : {this.MyScatterPlot2.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot3.IsVisible ? $"{Multilingual.GetWord("level_detail_wins")} : {this.MyScatterPlot3.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}" : ""),

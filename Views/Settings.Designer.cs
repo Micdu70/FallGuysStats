@@ -290,7 +290,7 @@
             // 
             this.platformToolTip.Style = MetroFramework.MetroColorStyle.Blue;
             this.platformToolTip.StyleManager = null;
-            this.platformToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.platformToolTip.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // picSteam
             // 
@@ -322,9 +322,10 @@
             // 
             // overlayOpacityToolTip
             // 
+            //this.overlayOpacityToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.overlayOpacityToolTip.Style = MetroFramework.MetroColorStyle.Blue;
             this.overlayOpacityToolTip.StyleManager = null;
-            this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // trkOverlayOpacity
             // 
@@ -337,6 +338,7 @@
             this.trkOverlayOpacity.TabIndex = 15;
             this.overlayOpacityToolTip.SetToolTip(this.trkOverlayOpacity, "100");
             this.trkOverlayOpacity.Value = 100;
+            this.trkOverlayOpacity.Minimum = 5;
             this.trkOverlayOpacity.ValueChanged += new System.EventHandler(this.TrkOverlayOpacity_ValueChanged);
             // 
             // grpLaunchPlatform

@@ -23,6 +23,7 @@ namespace FallGuysStats {
         private int LaunchPlatform;
         private int DisplayLang;
         private bool CboOverlayBackgroundIsFocus;
+        private bool OverlayOpacityTooltipIsFirstTime = true;
 
         private Bitmap ResizeImage(Bitmap source, int scale) {
             return new Bitmap(source, new Size(source.Width / scale, source.Height / scale));
@@ -251,8 +252,7 @@ namespace FallGuysStats {
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
             this.BackImage = theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon;
-            this.overlayOpacityToolTip.Theme = theme;
-            this.cboOverlayBackground.mtt.Theme = theme;
+            this.cboOverlayBackground.mtt.Theme = MetroThemeStyle.Dark;
             this.CboOverlayBackground_blur();
             foreach (Control c1 in Controls) {
                 if (c1 is MetroLabel ml1) {
@@ -745,9 +745,17 @@ namespace FallGuysStats {
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
         private void TrkOverlayOpacity_ValueChanged(object sender, EventArgs e) {
-            this.overlayOpacityToolTip.ToolTipIcon = ToolTipIcon.Info;
-            this.overlayOpacityToolTip.SetToolTip(((MetroTrackBar)sender), ((MetroTrackBar)sender).Value.ToString());
-            this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
+            if (this.OverlayOpacityTooltipIsFirstTime) {
+                this.OverlayOpacityTooltipIsFirstTime = false;
+                this.overlayOpacityToolTip.SetToolTip((MetroTrackBar)sender, ((MetroTrackBar)sender).Value.ToString());
+            } else {
+                if (((MetroTrackBar)sender).Value != 5 && ((MetroTrackBar)sender).Value / 100D == this.Overlay.Opacity) { return; }
+
+                this.overlayOpacityToolTip.SetToolTip((MetroTrackBar)sender, ((MetroTrackBar)sender).Value.ToString());
+                if (((MetroTrackBar)sender).Value / 100D != this.Overlay.Opacity) {
+                    this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
+                }
+            }
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             if (keyData == Keys.Tab) {
@@ -957,10 +965,7 @@ namespace FallGuysStats {
                 Multilingual.GetWord("settings_theme_light"),
                 Multilingual.GetWord("settings_theme_dark"),
             });
-            //switch (this.CurrentSettings.Theme) {
-            //    case 0: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_light"); break;
-            //    case 1: this.cboTheme.SelectedItem = Multilingual.GetWord("settings_theme_dark"); break;
-            //}
+
             this.cboTheme.SelectedItem = this.Theme == MetroThemeStyle.Light
                 ? Multilingual.GetWord("settings_theme_light")
                 : Multilingual.GetWord("settings_theme_dark");

@@ -295,6 +295,9 @@ namespace FallGuysStats {
 
             this.InitializeComponent();
 
+            this.BackMaxSize = 56;
+            this.BackImage = this.Icon.ToBitmap();
+
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
             this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
@@ -575,9 +578,8 @@ namespace FallGuysStats {
             if (this.Theme == theme) { return; }
 
             this.SuspendLayout();
+            this.Theme = theme;
             this.menu.Renderer = theme == MetroThemeStyle.Light ? (ToolStripRenderer)new CustomLightArrowRenderer() : new CustomDarkArrowRenderer();
-            this.BackMaxSize = 56;
-            this.BackImage = this.Icon.ToBitmap();
             foreach (Control c1 in Controls) {
                 if (c1 is MetroLabel ml1) {
                     ml1.Theme = theme;
@@ -682,7 +684,6 @@ namespace FallGuysStats {
             this.dataGridViewCellStyle2.SelectionBackColor = theme == MetroThemeStyle.Light ? Color.DeepSkyBlue : Color.PaleGreen;
             this.dataGridViewCellStyle2.SelectionForeColor = Color.Black;
 
-            this.Theme = theme;
             this.ResumeLayout(false);
             this.Refresh();
         }
@@ -791,7 +792,6 @@ namespace FallGuysStats {
             this.menuProfile.DropDownItems.Clear();
             this.menuProfile.DropDownItems.Add(this.menuEditProfiles);
             this.AllProfiles.Clear();
-            //this.AllProfiles = this.Profiles.FindAll().ToList();
             this.AllProfiles.AddRange(this.Profiles.FindAll());
             int profileNumber = 0;
             for (int i = this.AllProfiles.Count - 1; i >= 0; i--) {
@@ -1368,20 +1368,24 @@ namespace FallGuysStats {
                         this.RoundDetails.Update(info);
                     }
                 }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
                 this.CurrentSettings.Version = 34;
                 this.SaveUserSettings();
             }
 
             if (this.CurrentSettings.Version == 34) {
-                //this.AllStats.AddRange(this.RoundDetails.FindAll());
-                //this.StatsDB.BeginTrans();
-                //for (int i = this.AllStats.Count - 1; i >= 0; i--) {
-                //    RoundInfo info = this.AllStats[i];
-                //    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue && string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
-                //        info.CreativeOnlinePlatformId = "eos";
-                //        this.RoundDetails.Update(info);
-                //    }
-                //}
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue && string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
+                        info.CreativeLastModifiedDate = DateTime.MinValue;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
                 this.CurrentSettings.Version = 35;
                 this.SaveUserSettings();
             }
@@ -1409,12 +1413,12 @@ namespace FallGuysStats {
             }
 
             if (this.CurrentSettings.Version == 37) {
-                this.StatsDB.BeginTrans();
                 this.AllProfiles.AddRange(this.Profiles.FindAll());
+                this.StatsDB.BeginTrans();
                 for (int i = this.AllProfiles.Count - 1; i >= 0; i--) {
-                    Profiles profiles = this.AllProfiles[i];
-                    if (!string.IsNullOrEmpty(profiles.LinkedShowId) && profiles.LinkedShowId.Equals("event_only_survival_ss2_3009_0210_2022")) {
-                        profiles.LinkedShowId = "survival_of_the_fittest";
+                    Profiles profile = this.AllProfiles[i];
+                    if (!string.IsNullOrEmpty(profile.LinkedShowId) && profile.LinkedShowId.Equals("event_only_survival_ss2_3009_0210_2022")) {
+                        profile.LinkedShowId = "survival_of_the_fittest";
                     }
                 }
                 this.Profiles.DeleteAll();
@@ -1493,6 +1497,25 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 10;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 10) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.UseShareCode && info.CreativeLastModifiedDate != DateTime.MinValue && string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
+                        info.CreativeLastModifiedDate = DateTime.MinValue;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                if (this.CurrentSettings.OverlayBackgroundOpacity < 5) {
+                    this.CurrentSettings.OverlayBackgroundOpacity = 5;
+                }
+                this.CurrentSettings.FrenchyEditionDB = 11;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1567,7 +1590,7 @@ namespace FallGuysStats {
                 WinPerDayGraphStyle = 1,
                 Visible = true,
                 Version = 38,
-                FrenchyEditionDB = 10
+                FrenchyEditionDB = 11
             };
         }
         private void UpdateHoopsieLegends() {
@@ -1669,15 +1692,8 @@ namespace FallGuysStats {
 
         private void MenuTodaysShow_MouseEnter(object sender, EventArgs e) {
             this.Cursor = Cursors.Hand;
-            //Point cursorPosition = this.PointToClient(Cursor.Position);
-            //Point position = new Point(cursorPosition.X + 20, cursorPosition.Y);
-            Rectangle rectangle = this.menuTodaysShow.Bounds;
-            Point position = new Point(rectangle.Left, rectangle.Bottom + 85);
-            this.AllocTooltip();
-            this.ShowTooltip(Multilingual.GetWord("main_todays_show_tooltip"), this, position);
         }
         private void MenuTodaysShow_MouseLeave(object sender, EventArgs e) {
-            this.HideTooltip(this);
             this.Cursor = Cursors.Default;
         }
 
@@ -1685,17 +1701,16 @@ namespace FallGuysStats {
             this.Cursor = Cursors.Hand;
         }
         private void MenuOverlay_MouseLeave(object sender, EventArgs e) {
-            this.HideTooltip(this);
             this.Cursor = Cursors.Default;
         }
 
         private void SetCursor_MouseMove(object sender, MouseEventArgs e) {
             this.Cursor = Cursors.Hand;
         }
-
         private void SetCursor_MouseLeave(object sender, EventArgs e) {
             this.Cursor = Cursors.Default;
         }
+
         private void SaveWindowState() {
             if (this.overlay.Visible) {
                 if (!this.overlay.IsFixed()) {
@@ -1924,7 +1939,7 @@ namespace FallGuysStats {
                                 stat.ShowID = nextShowID;
                                 stat.Profile = profile;
 
-                                if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_")) {
+                                if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
                                         string[] creativeAuthorInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
@@ -2296,7 +2311,7 @@ namespace FallGuysStats {
                                       (this.CurrentSettings.WinsFilter == 3 && endRound.Start > WeekStart) ||
                                       (this.CurrentSettings.WinsFilter == 4 && endRound.Start > DayStart) ||
                                       (this.CurrentSettings.WinsFilter == 5 && endRound.Start > SessionStart));
-                bool isInQualifyFilter = (!endRound.PrivateLobby || (endRound.UseShareCode && !endRound.Name.StartsWith("wle_s10_"))) &&
+                bool isInQualifyFilter = (!endRound.PrivateLobby || (endRound.UseShareCode && !endRound.Name.StartsWith("wle_s10_") && !endRound.Name.StartsWith("wle_fp2_"))) &&
                                          (this.CurrentSettings.QualifyFilter == 0 ||
                                          (this.CurrentSettings.QualifyFilter == 1 && this.IsInStatsFilter(endRound) && this.IsInPartyFilter(info)) ||
                                          (this.CurrentSettings.QualifyFilter == 2 && endRound.Start > SeasonStart) ||
@@ -2493,6 +2508,7 @@ namespace FallGuysStats {
         }
 
         public void AllocTooltip() {
+            this.mtt?.Dispose();
             this.mtt = new MetroToolTip {
                 Theme = MetroThemeStyle.Dark
             };
@@ -3642,9 +3658,9 @@ namespace FallGuysStats {
             return shareCode;
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
-            string[] creativeAuthorInfo = { "", "N/A" };
-            string onlinePlatformId = string.Empty;
-            string onlinePlatformNickname = string.Empty;
+            string[] creativeAuthorInfo = { "N/A", "N/A" };
+            string onlinePlatformId = "";
+            string onlinePlatformNickname = "";
             string[] onlinePlatformIds = { "eos", "steam", "psn", "xbl", "nso" }; // NOTE: "nso" may not be used
             foreach (string onlinePlatformIdInfo in onlinePlatformIds) {
                 if (authorData.TryGetProperty(onlinePlatformIdInfo, out JsonElement onlinePlatformNicknameInfo)) {
@@ -3962,6 +3978,7 @@ namespace FallGuysStats {
             this.menuHelp.Text = Multilingual.GetWord("main_help");
             this.menuLaunchFallGuys.Text = Multilingual.GetWord("main_launch_fall_guys");
             this.menuTodaysShow.Text = $"{Multilingual.GetWord("main_todays_show")}";
+            this.menuTodaysShow.ToolTipText = $"{Multilingual.GetWord("main_todays_show_tooltip")}";
         }
     }
 }

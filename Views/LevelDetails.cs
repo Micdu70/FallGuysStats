@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework;
+using Microsoft.Extensions.Primitives;
 
 namespace FallGuysStats {
     public partial class LevelDetails : MetroFramework.Forms.MetroForm {
@@ -627,7 +628,7 @@ namespace FallGuysStats {
             if (this._showStats != 2 && this.gridDetails.SelectedCells.Count > 0) {
                 if (((DataGridView)sender).SelectedRows.Count == 1) {
                     RoundInfo info = this.gridDetails.Rows[((DataGridView)sender).SelectedRows[0].Index].DataBoundItem as RoundInfo;
-                    if (info.UseShareCode && !info.Name.StartsWith("wle_s10_") && info.CreativeLastModifiedDate == DateTime.MinValue) {
+                    if (info.UseShareCode && !info.Name.StartsWith("wle_s10_") && !info.Name.StartsWith("wle_fp2_") && info.CreativeLastModifiedDate == DateTime.MinValue) {
                         if (this.gridDetails.MenuSeparator != null && !this.gridDetails.CMenu.Items.Contains(this.gridDetails.MenuSeparator)) {
                             this.gridDetails.CMenu.Items.Add(this.gridDetails.MenuSeparator);
                         }
@@ -745,7 +746,7 @@ namespace FallGuysStats {
         private void UpdateShows_Click(object sender, EventArgs e) {
             if (this._showStats != 2 && this.gridDetails.SelectedCells.Count > 0 && this.gridDetails.SelectedRows.Count == 1) {
                 RoundInfo ri = this.gridDetails.Rows[this.gridDetails.SelectedCells[0].RowIndex].DataBoundItem as RoundInfo;
-                if (ri.UseShareCode && !ri.Name.StartsWith("wle_s10_") && ri.CreativeLastModifiedDate == DateTime.MinValue) {
+                if (ri.UseShareCode && !ri.Name.StartsWith("wle_s10_") && !ri.Name.StartsWith("wle_fp2_") && ri.CreativeLastModifiedDate == DateTime.MinValue) {
                     if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_prefix")}{ri.ShowNameId}{Multilingual.GetWord("message_update_creative_show_suffix")}", Multilingual.GetWord("message_update_creative_show_caption"),
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                         try {
@@ -865,6 +866,10 @@ namespace FallGuysStats {
             if (this.gridDetails.Columns[e.ColumnIndex].Name == "ShowNameId" && (bool)this.gridDetails.Rows[e.RowIndex].Cells["UseShareCode"].Value) {
                 RoundInfo info = this.gridDetails.Rows[e.RowIndex].DataBoundItem as RoundInfo;
                 if (info.CreativeLastModifiedDate == DateTime.MinValue) { return; }
+                if (string.IsNullOrEmpty(info.CreativeOnlinePlatformId)) {
+                    info.CreativeLastModifiedDate = DateTime.MinValue;
+                    return;
+                }
                 StringBuilder strbuilder = new StringBuilder();
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(this.textInfo.ToTitleCase(info.CreativeTitle));
@@ -876,9 +881,14 @@ namespace FallGuysStats {
                 string[] createAuthorArr = info.CreativeAuthor.Split(';');
                 string[] creativeOnlinePlatformIdArr = info.CreativeOnlinePlatformId.Split(';');
                 for (int i = 0; i < creativeOnlinePlatformIdArr.Length; i++) {
-                    strbuilder.Append(i == 0 ?
-                                      $"{Multilingual.GetWord("level_detail_creative_author")} : {createAuthorArr[i]}{this.GetCreativeOnlinePlatformName(creativeOnlinePlatformIdArr[i])}" :
-                                      $" / {createAuthorArr[i]}{this.GetCreativeOnlinePlatformName(creativeOnlinePlatformIdArr[i])}");
+                    if (i == 0 && creativeOnlinePlatformIdArr[0] == "N/A") {
+                        strbuilder.Append($"{Multilingual.GetWord("level_detail_creative_author")} : N/A");
+                        break;
+                    } else {
+                        strbuilder.Append(i == 0 ?
+                                          $"{Multilingual.GetWord("level_detail_creative_author")} : {createAuthorArr[i]}{this.GetCreativeOnlinePlatformName(creativeOnlinePlatformIdArr[i])}" :
+                                          $" / {createAuthorArr[i]}{this.GetCreativeOnlinePlatformName(creativeOnlinePlatformIdArr[i])}");
+                    }
                 }
                 strbuilder.Append(Environment.NewLine);
                 strbuilder.Append(Environment.NewLine);
@@ -908,8 +918,6 @@ namespace FallGuysStats {
         }
 
         private string GetCreativeOnlinePlatformName(string onlinePlatform) {
-            if (string.IsNullOrEmpty(onlinePlatform)) { return string.Empty; }
-
             switch (onlinePlatform) {
                 case "eos": return $" ({Multilingual.GetWord("level_detail_online_platform_eos")})";
                 case "steam": return $" ({Multilingual.GetWord("level_detail_online_platform_steam")})";
@@ -921,8 +929,6 @@ namespace FallGuysStats {
         }
 
         private string GetCreativePlatformName(string platform) {
-            if (string.IsNullOrEmpty(platform)) { return "N/A"; }
-
             switch (platform) {
                 case "ps4": return Multilingual.GetWord("level_detail_playersPs4");
                 case "ps5": return Multilingual.GetWord("level_detail_playersPs5");

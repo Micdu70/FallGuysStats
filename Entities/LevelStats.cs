@@ -436,7 +436,7 @@ namespace FallGuysStats {
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
 
-            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_"))) {
+            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_"))) {
                 this.Played++;
                 this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {
