@@ -2508,7 +2508,6 @@ namespace FallGuysStats {
         }
 
         public void AllocTooltip() {
-            this.mtt?.Dispose();
             this.mtt = new MetroToolTip {
                 Theme = MetroThemeStyle.Dark
             };
