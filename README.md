@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.197` ~ 15/06/2023
+**Dernière version:** `v1.198` ~ 16/06/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -60,10 +60,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-{ Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
 
-### Il y a 0 bug génant connu dans la v1.197 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.198 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -226,6 +225,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.198` ~ 16/06/2023
+  { Correction de bugs de la "FE" }
 
   - `v1.197` ~ 15/06/2023
   { Correction de bugs de la "FE" }

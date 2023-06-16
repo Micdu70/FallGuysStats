@@ -1,11 +1,14 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.197 ~ 15/06/2023
+  - v1.198 ~ 16/06/2023
   { Correction de bugs de la "FE" }
-  { Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
+  - v1.197 ~ 15/06/2023
+  { Correction de bugs de la "FE" }
+  { Cette version, bien que basée sur la Version Officielle (v1.197) datant du 15/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
 
   - v1.195 ~ 13/06/2023
   { Correction de bugs de la "FE" }
