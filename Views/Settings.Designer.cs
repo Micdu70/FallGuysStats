@@ -38,7 +38,6 @@
             this.platformToolTip = new MetroFramework.Components.MetroToolTip();
             this.picSteam = new System.Windows.Forms.PictureBox();
             this.picEpicGames = new System.Windows.Forms.PictureBox();
-            this.overlayOpacityToolTip = new MetroFramework.Components.MetroToolTip();
             this.trkOverlayOpacity = new MetroFramework.Controls.MetroTrackBar();
             this.grpLaunchPlatform = new System.Windows.Forms.GroupBox();
             this.picPlatformCheck = new System.Windows.Forms.PictureBox();
@@ -320,12 +319,6 @@
             this.platformToolTip.SetToolTip(this.picEpicGames, "Epic Games");
             this.picEpicGames.Click += new System.EventHandler(this.LaunchPlatform_Click);
             // 
-            // overlayOpacityToolTip
-            // 
-            this.overlayOpacityToolTip.Style = MetroFramework.MetroColorStyle.Blue;
-            this.overlayOpacityToolTip.StyleManager = null;
-            this.overlayOpacityToolTip.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
             // trkOverlayOpacity
             // 
             this.trkOverlayOpacity.BackColor = System.Drawing.Color.Transparent;
@@ -335,9 +328,9 @@
             this.trkOverlayOpacity.Name = "trkOverlayOpacity";
             this.trkOverlayOpacity.Size = new System.Drawing.Size(219, 29);
             this.trkOverlayOpacity.TabIndex = 15;
-            this.overlayOpacityToolTip.SetToolTip(this.trkOverlayOpacity, "100");
             this.trkOverlayOpacity.Value = 100;
             this.trkOverlayOpacity.Minimum = 5;
+            this.trkOverlayOpacity.MouseLeave += new System.EventHandler(this.TrkOverlayOpacity_MouseLeave);
             this.trkOverlayOpacity.ValueChanged += new System.EventHandler(this.TrkOverlayOpacity_ValueChanged);
             // 
             // grpLaunchPlatform
@@ -1410,7 +1403,6 @@
         private MetroFramework.Controls.MetroButton btnCancel;
         private System.Windows.Forms.FontDialog dlgOverlayFont;
         private MetroFramework.Components.MetroToolTip platformToolTip;
-        private MetroFramework.Components.MetroToolTip overlayOpacityToolTip;
         private System.Windows.Forms.GroupBox grpLaunchPlatform;
         private System.Windows.Forms.PictureBox picPlatformCheck;
         private System.Windows.Forms.PictureBox picEpicGames;

@@ -24,7 +24,6 @@ namespace FallGuysStats {
         private int LaunchPlatform;
         private int DisplayLang;
         private bool CboOverlayBackgroundIsFocus;
-        private bool OverlayOpacityTooltipIsFirstTime = true;
 
         private Bitmap ResizeImage(Bitmap source, int scale) {
             return new Bitmap(source, new Size(source.Width / scale, source.Height / scale));
@@ -739,10 +738,8 @@ namespace FallGuysStats {
         }
         private void BtnResetOverlayFont_Click(object sender, EventArgs e) {
             this.lblOverlayFontExample.Font = Overlay.GetDefaultFont(this.DisplayLang, 18);
-
             this.lblOverlayFontExample.ForeColor = this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
             this.overlayFontColorSerialized = string.Empty;
-
             this.overlayFontSerialized = string.Empty;
         }
         private void CboMultilingual_SelectedIndexChanged(object sender, EventArgs e) {
@@ -751,22 +748,17 @@ namespace FallGuysStats {
             this.ChangeLanguage(((ComboBox)sender).SelectedIndex);
         }
         private void TrkOverlayOpacity_ValueChanged(object sender, EventArgs e) {
-            if (this.OverlayOpacityTooltipIsFirstTime) {
-                this.OverlayOpacityTooltipIsFirstTime = false;
-                this.overlayOpacityToolTip.SetToolTip((MetroTrackBar)sender, ((MetroTrackBar)sender).Value.ToString());
-            } else {
-                if (((MetroTrackBar)sender).Value != 5 && ((MetroTrackBar)sender).Value / 100D == this.Overlay.Opacity) { return; }
-
-                this.overlayOpacityToolTip.SetToolTip((MetroTrackBar)sender, ((MetroTrackBar)sender).Value.ToString());
-                if (((MetroTrackBar)sender).Value / 100D != this.Overlay.Opacity) {
-                    this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
-                }
-            }
+            if (((MetroTrackBar)sender).Value == this.Overlay.Opacity * 100D) { return; }
+            Point cursorPosition = this.PointToClient(Cursor.Position);
+            Point position = new Point(cursorPosition.X + 4, cursorPosition.Y - 20);
+            this.StatsForm.ShowTooltip(((MetroTrackBar)sender).Value.ToString(), this, position);
+            this.Overlay.Opacity = ((MetroTrackBar)sender).Value / 100D;
+        }
+        private void TrkOverlayOpacity_MouseLeave(object sender, EventArgs e) {
+            this.StatsForm.HideTooltip(this);
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            if (keyData == Keys.Tab) {
-                SendKeys.Send("%");
-            }
+            if (keyData == Keys.Tab) { SendKeys.Send("%"); }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
