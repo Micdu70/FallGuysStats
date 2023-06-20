@@ -1,6 +1,6 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.199 ~ 20/06/2023
+  - v1.199 et v1.200 ~ 20/06/2023
   { Correction de bugs de la "FE" }
   { Cette version, bien que basée sur la Version Officielle (v1.199) datant du 20/06/2023, n'applique pas - par choix personnel - toutes les modifications de celle-ci }
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
