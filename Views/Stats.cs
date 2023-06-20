@@ -3652,11 +3652,17 @@ namespace FallGuysStats {
                 case "9014-0444-9613": return "wle_s10_round_010";
                 case "4409-6583-6207": return "wle_s10_round_011";
                 case "8113-7002-5798": return "wle_s10_round_012";
+                case "1600-7003-9946": return "wle_s10_player_round_wk3_03";
+                case "1689-7568-3407": return "wle_s10_player_round_wk3_04";
                 case "1998-0819-8328": return "wle_s10_player_round_wk3_06";
                 case "2087-8833-2659": return "wle_s10_player_round_wk3_07";
                 case "4928-7457-4026": return "wle_s10_player_round_wk3_11";
+                case "6771-8467-2061": return "wle_s10_player_round_wk3_14";
                 case "8700-2575-3311": return "wle_s10_player_round_wk3_15";
+                case "8766-7319-7097": return "wle_s10_player_round_wk3_16";
                 case "8872-5222-3800": return "wle_s10_player_round_wk3_17";
+                case "8453-2843-0803": return "wle_s10_player_round_wk4_13";
+                case "6444-4459-5271": return "wle_s10_player_round_wk4_19";
                 case "5320-7960-5930": return "wle_fp2_wk6_01";
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
