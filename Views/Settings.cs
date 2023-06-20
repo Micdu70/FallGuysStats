@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -699,7 +700,12 @@ namespace FallGuysStats {
             this.picPlatformCheck.Location = this.LaunchPlatform == 0 ? new Point(10, 14) : new Point(14, 14);
         }
         private void AboutFallalytics_Click(object sender, EventArgs e) {
-            System.Diagnostics.Process.Start("https://fallalytics.com/about");
+            try {
+                Process.Start("https://fallalytics.com/about");
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void BtnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;

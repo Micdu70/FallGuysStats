@@ -780,20 +780,9 @@ namespace FallGuysStats {
                             } else if (this.RoundDetails.Count > 0) {
                                 this.gridDetails.FirstDisplayedScrollingRowIndex = this.RoundDetails.Count - 1;
                             }
-                        } catch (WebException wex) {
-                            if (wex.Status == WebExceptionStatus.ProtocolError) {
-                                int statusCode = (int)((HttpWebResponse)wex.Response).StatusCode;
-                                switch (statusCode) {
-                                    case 500:
-                                        MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_creative_show_error_caption")}",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        break;
-                                    default:
-                                        MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_creative_show_error_caption")}",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        break;
-                                }
-                            }
+                        } catch (WebException) {
+                            MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_error")}", $"{Multilingual.GetWord("message_update_error_caption")}",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         } catch (Exception ex) {
                             MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);

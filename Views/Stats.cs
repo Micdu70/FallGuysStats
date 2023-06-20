@@ -1752,8 +1752,12 @@ namespace FallGuysStats {
         private void Stats_Load(object sender, EventArgs e) {
             try {
 #if AllowUpdate
-                if (this.CurrentSettings.AutoUpdate && this.CheckForUpdate(true)) {
-                    return;
+                try {
+                    if (this.CurrentSettings.AutoUpdate && this.CheckForUpdate(true)) {
+                        return;
+                    }
+                } catch {
+                    // ignored
                 }
 #endif
                 if (this.CurrentSettings.AutoLaunchGameOnStartup) {
@@ -1896,7 +1900,7 @@ namespace FallGuysStats {
 
                             if (info == null && stat.Start > this.lastAddedShow) {
                                 if (stat.ShowEnd < this.startupTime && this.askedPreviousShows == 0) {
-                                    Stats.HideOverlayTime = true;
+                                    HideOverlayTime = true;
                                     using (EditShows editShows = new EditShows()) {
                                         editShows.FunctionFlag = "add";
                                         //editShows.Icon = this.Icon;
@@ -1916,7 +1920,7 @@ namespace FallGuysStats {
                                         }
                                         this.EnableInfoStrip(true);
                                         this.EnableMainMenu(true);
-                                        Stats.HideOverlayTime = false;
+                                        HideOverlayTime = false;
                                     }
                                 }
 
@@ -3576,16 +3580,21 @@ namespace FallGuysStats {
             }
         }
         private void MenuUpdate_Click(object sender, EventArgs e) {
-            try {
 #if AllowUpdate
+            try {
                 this.CheckForUpdate(false);
-#else
-                Process.Start(@"https://github.com/Micdu70/FallGuysStats#t%C3%A9l%C3%A9chargement");
-#endif
-            } catch (Exception ex) {
-                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_update_error_caption")}",
+            } catch {
+                MessageBox.Show(this, $"{Multilingual.GetWord("message_update_error")}", $"{Multilingual.GetWord("message_update_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+#else
+            try {
+                Process.Start(@"https://github.com/Micdu70/FallGuysStats#t%C3%A9l%C3%A9chargement");
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+#endif
         }
         public string GetRoundIdFromShareCode(string shareCode) {
             switch (shareCode) {
@@ -3790,7 +3799,7 @@ namespace FallGuysStats {
                         this.logFile.autoChangeProfile = this.CurrentSettings.AutoChangeProfile;
                         this.logFile.preventOverlayMouseClicks = this.CurrentSettings.PreventOverlayMouseClicks;
 
-                        Stats.IsOverlayPingVisible = this.CurrentSettings.OverlayVisible && !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
+                        IsOverlayPingVisible = this.CurrentSettings.OverlayVisible && !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
 
                         if (string.IsNullOrEmpty(lastLogPath) != string.IsNullOrEmpty(this.CurrentSettings.LogPath) ||
                             (!string.IsNullOrEmpty(lastLogPath) && lastLogPath.Equals(this.CurrentSettings.LogPath, StringComparison.OrdinalIgnoreCase))) {
@@ -3825,7 +3834,7 @@ namespace FallGuysStats {
         }
         private void ToggleOverlay(Overlay overlay) {
             if (overlay.Visible) {
-                Stats.IsOverlayPingVisible = false;
+                IsOverlayPingVisible = false;
                 overlay.Hide();
                 this.menuOverlay.Image = Properties.Resources.stat_gray_icon;
                 this.menuOverlay.Text = $"{Multilingual.GetWord("main_show_overlay")}";
@@ -3838,7 +3847,7 @@ namespace FallGuysStats {
                 this.CurrentSettings.OverlayVisible = false;
                 this.SaveUserSettings();
             } else {
-                Stats.IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
+                IsOverlayPingVisible = !this.CurrentSettings.HideRoundInfo && (this.CurrentSettings.SwitchBetweenPlayers || this.CurrentSettings.OnlyShowPing);
                 overlay.TopMost = !this.CurrentSettings.OverlayNotOnTop;
                 overlay.Show();
                 this.menuOverlay.Image = Properties.Resources.stat_icon;
