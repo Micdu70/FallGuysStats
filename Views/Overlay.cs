@@ -578,7 +578,7 @@ namespace FallGuysStats {
                     qualifyChance = levelInfo.TotalGolds * 100f / (levelInfo.TotalPlays == 0 ? 1 : levelInfo.TotalPlays);
                     qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {qualifyChance:0.0}%";
                     qualifyDisplay = $"{levelInfo.TotalGolds}{(levelInfo.TotalPlays < 1000 ? " / " + levelInfo.TotalPlays : Multilingual.GetWord("overlay_inning"))}";
-                    this.lblQualifyChance.TextRight = this.levelException != 3 ? $"{qualifyDisplay}{qualifyChanceDisplay}" : "0 / 0";
+                    this.lblQualifyChance.TextRight = !this.lastRound.UseShareCode ? $"{qualifyDisplay}{qualifyChanceDisplay}" : "0 / 0";
                     break;
             }
         }
@@ -720,12 +720,7 @@ namespace FallGuysStats {
                             this.lblRound.IsShareCodeFormat = false;
                             break;
                         default:
-                            if (this.lastRound.UseShareCode) {
-                                this.levelException = 3; // Level is a creative map and played in Custom
-                                this.lblRound.IsShareCodeFormat = true;
-                            } else {
-                                this.lblRound.IsShareCodeFormat = false;
-                            }
+                            this.lblRound.IsShareCodeFormat = this.lastRound.UseShareCode ? true : false;
                             break;
                     }
 
@@ -746,7 +741,8 @@ namespace FallGuysStats {
                     //}
                     if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
 
-                    this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException == 3 ? true : false;
+                    //this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException == 3 ? true : false;
+                    this.lblRound.IsCreativeRound = level == null || (level != null && level.isCreative) || this.lastRound.UseShareCode ? true : false;
 
                     LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
 
@@ -755,7 +751,7 @@ namespace FallGuysStats {
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundBigIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = this.levelException == 3 ? Properties.Resources.round_creative_icon : null;
+                            this.lblRound.RoundIcon = this.lastRound.UseShareCode ? Properties.Resources.round_creative_icon : null;
                         }
                         if (this.lblRound.RoundIcon != null) {
                             if (this.lblRound.RoundIcon.Height != 23) {
@@ -783,8 +779,8 @@ namespace FallGuysStats {
                         this.lblWins.TextRight = $"{levelInfo.TotalWins} ({levelInfo.AllWins + this.StatsForm.CurrentSettings.PreviousWins}){winChanceDisplay}";
                     } else {
                         this.lblWins.TextRight = this.StatsForm.CurrentSettings.FilterType != 1
-                            ? $"{levelInfo.TotalWins} ({levelInfo.AllWins}){winChanceDisplay}"
-                            : $"{levelInfo.TotalWins}{winChanceDisplay}";
+                                                 ? $"{levelInfo.TotalWins} ({levelInfo.AllWins}){winChanceDisplay}"
+                                                 : $"{levelInfo.TotalWins}{winChanceDisplay}";
                     }
 
                     this.lblFinals.Text = $"{Multilingual.GetWord("overlay_finals")} :";
