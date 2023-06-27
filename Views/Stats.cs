@@ -1622,6 +1622,27 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 11;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 11) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                this.CurrentSettings.NotifyServerConnected = false;
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.Name.StartsWith("ugc-", StringComparison.OrdinalIgnoreCase)) {
+                        info.Name = info.Name.Substring(4);
+                        info.ShowNameId = info.ShowNameId.Substring(4);
+                        info.UseShareCode = true;
+                        info.AbandonShow = true;
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 12;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1696,7 +1717,7 @@ namespace FallGuysStats {
                 WinPerDayGraphStyle = 1,
                 Visible = true,
                 Version = 40,
-                FrenchyEditionDB = 11
+                FrenchyEditionDB = 12
             };
         }
         private void UpdateHoopsieLegends() {
@@ -2037,7 +2058,7 @@ namespace FallGuysStats {
 
                                 if (stat.ShowEnd < this.startupTime) {
                                     if (this.useLinkedProfiles) {
-                                        profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10") || stat.ShowNameId.StartsWith("wle_s10_player_round"));
+                                        profile = this.GetLinkedProfileId(stat.ShowNameId, stat.PrivateLobby, stat.ShowNameId.StartsWith("show_wle_s10") || stat.ShowNameId.StartsWith("wle_s10_player_round") || stat.ShowNameId.StartsWith("wle_mrs"));
                                     }
                                     this.SetProfileMenu(profile);
                                 }
@@ -2049,7 +2070,7 @@ namespace FallGuysStats {
                                 stat.ShowID = nextShowID;
                                 stat.Profile = profile;
 
-                                if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_")) {
+                                if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_") && !stat.Name.StartsWith("wle_mrs_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
                                         string[] creativeAuthorInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
@@ -2421,7 +2442,7 @@ namespace FallGuysStats {
                                       (this.CurrentSettings.WinsFilter == 3 && endRound.Start > WeekStart) ||
                                       (this.CurrentSettings.WinsFilter == 4 && endRound.Start > DayStart) ||
                                       (this.CurrentSettings.WinsFilter == 5 && endRound.Start > SessionStart));
-                bool isInQualifyFilter = (!endRound.PrivateLobby || (endRound.UseShareCode && !endRound.Name.StartsWith("wle_s10_") && !endRound.Name.StartsWith("wle_fp2_"))) &&
+                bool isInQualifyFilter = (!endRound.PrivateLobby || (endRound.UseShareCode && !endRound.Name.StartsWith("wle_s10_") && !endRound.Name.StartsWith("wle_fp2_"))) && !endRound.Name.StartsWith("wle_mrs_") &&
                                          (this.CurrentSettings.QualifyFilter == 0 ||
                                          (this.CurrentSettings.QualifyFilter == 1 && this.IsInStatsFilter(endRound) && this.IsInPartyFilter(info)) ||
                                          (this.CurrentSettings.QualifyFilter == 2 && endRound.Start > SeasonStart) ||
@@ -3782,6 +3803,16 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
+                case "9100-1195-6052": return "wle_mrs_bagel_opener_1";
+                case "9299-0471-0746": return "wle_mrs_bagel_opener_2";
+                case "4805-7882-8305": return "wle_mrs_bagel_opener_3";
+                case "9840-2154-6787": return "wle_mrs_bagel_opener_4";
+                case "8176-1884-5016": return "wle_mrs_bagel_filler_1";
+                case "1008-8179-1628": return "wle_mrs_bagel_filler_2";
+                case "3947-7683-6106": return "wle_mrs_bagel_filler_3";
+                case "8489-4249-0438": return "wle_mrs_bagel_filler_4";
+                case "7476-9346-3120": return "wle_mrs_bagel_final_1";
+                case "9201-4959-0276": return "wle_mrs_bagel_final_2";
             }
             return shareCode;
         }

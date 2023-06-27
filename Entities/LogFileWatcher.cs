@@ -425,7 +425,7 @@ namespace FallGuysStats {
                     logRound.Info.IsFinal = true;
                 } else if (this.GetIsModeException(logRound.Info.Name)) {
                     logRound.Info.IsFinal = this.GetIsFinalException(logRound.Info.Name);
-                } else if (logRound.Info.Name.StartsWith("wle_s10_")) {
+                } else if (logRound.Info.Name.StartsWith("wle_s10_") || logRound.Info.Name.StartsWith("wle_mrs_")) {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats levelStats) && levelStats.IsFinal);
                 } else {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.SceneToRound.TryGetValue(logRound.Info.SceneName, out string roundName) && LevelStats.ALL.TryGetValue(roundName, out LevelStats levelStats) && levelStats.IsFinal);

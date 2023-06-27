@@ -343,6 +343,17 @@ namespace FallGuysStats {
             { "wle_s10_orig_round_031",           new LevelStats("Transfer Turnpike", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_round_004",                new LevelStats("Parkour Panic", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_round_009",                new LevelStats("Firewall Finale", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+
+            { "wle_mrs_bagel_opener_1",           new LevelStats("Tunnel of Love", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_opener_2",           new LevelStats("Pink Parade", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_opener_3",           new LevelStats("Prideful Path", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_opener_4",           new LevelStats("Coming Together", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_filler_1",           new LevelStats("Clifftop Capers", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_filler_2",           new LevelStats("Waveway Splits", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_filler_3",           new LevelStats("In the Groove", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_filler_4",           new LevelStats("Heartfall Heat", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_final_1",            new LevelStats("Rainbow Rise", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_mrs_bagel_final_2",            new LevelStats("Out and About", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
         };
         public static Dictionary<string, string> SceneToRound = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             { "FallGuy_DoorDash",                  "round_door_dash" },
@@ -486,7 +497,7 @@ namespace FallGuysStats {
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
 
-            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_"))) {
+            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_") && !stat.Name.StartsWith("wle_mrs_"))) {
                 this.Played++;
                 this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {

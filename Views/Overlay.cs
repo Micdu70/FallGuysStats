@@ -578,7 +578,7 @@ namespace FallGuysStats {
                     qualifyChance = levelInfo.TotalGolds * 100f / (levelInfo.TotalPlays == 0 ? 1 : levelInfo.TotalPlays);
                     qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {qualifyChance:0.0}%";
                     qualifyDisplay = $"{levelInfo.TotalGolds}{(levelInfo.TotalPlays < 1000 ? " / " + levelInfo.TotalPlays : Multilingual.GetWord("overlay_inning"))}";
-                    this.lblQualifyChance.TextRight = !this.lastRound.UseShareCode ? $"{qualifyDisplay}{qualifyChanceDisplay}" : "0 / 0";
+                    this.lblQualifyChance.TextRight = $"{qualifyDisplay}{qualifyChanceDisplay}";
                     break;
             }
         }
@@ -1630,7 +1630,7 @@ namespace FallGuysStats {
                         background = Properties.Resources.background;
                     } else {
                         if (overlayCustomized) {
-                            if (!this.BackgroundResourceName.Equals(this.backgroundResourceNameCache)) {
+                            if (File.Exists($"Overlay/{this.BackgroundResourceName}.png") && !this.BackgroundResourceName.Equals(this.backgroundResourceNameCache)) {
                                 this.customizedBackground = new Bitmap($"Overlay/{this.BackgroundResourceName}.png");
                                 this.backgroundResourceNameCache = this.BackgroundResourceName;
                             }
