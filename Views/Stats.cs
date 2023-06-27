@@ -1480,7 +1480,6 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 39) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                this.CurrentSettings.NotifyServerConnected = false;
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if ("wle_s10_player_round_wk3_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
@@ -1532,6 +1531,22 @@ namespace FallGuysStats {
                 this.StatsDB.Commit();
                 this.AllStats.Clear();
                 this.CurrentSettings.Version = 40;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.Version == 40) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if ("wle_mrs_bagel".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) && info.Name.StartsWith("wle_mrs_bagel_final")) {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.Version = 41;
                 this.SaveUserSettings();
             }
 
@@ -1626,7 +1641,6 @@ namespace FallGuysStats {
             if (this.CurrentSettings.FrenchyEditionDB == 11) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                this.CurrentSettings.NotifyServerConnected = false;
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if (info.Name.StartsWith("ugc-", StringComparison.OrdinalIgnoreCase)) {
@@ -1662,6 +1676,7 @@ namespace FallGuysStats {
                 OverlayTabResourceName = string.Empty,
                 OverlayBackgroundOpacity = 100,
                 IsOverlayBackgroundCustomized = false,
+                NotifyServerConnected = false,
                 OverlayColor = 0,
                 OverlayLocationX = null,
                 OverlayLocationY = null,
@@ -1716,7 +1731,7 @@ namespace FallGuysStats {
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
                 Visible = true,
-                Version = 40,
+                Version = 41,
                 FrenchyEditionDB = 12
             };
         }

@@ -333,17 +333,6 @@ namespace FallGuysStats {
             { "wle_s10_player_round_wk5_17",      new LevelStats("Big Bookcase", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_18",      new LevelStats("Digital Doom", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
 
-            { "wle_s10_orig_round_010",           new LevelStats("Square Up", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_011",           new LevelStats("Slide Showdown", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_017",           new LevelStats("Bellyflop Battlers", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_018",           new LevelStats("Apples & Oranges", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_024",           new LevelStats("Wooseleum", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_025",           new LevelStats("Mount Boom", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_030",           new LevelStats("Mega Monument", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_orig_round_031",           new LevelStats("Transfer Turnpike", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_round_004",                new LevelStats("Parkour Panic", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_round_009",                new LevelStats("Firewall Finale", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-
             { "wle_mrs_bagel_opener_1",           new LevelStats("Tunnel of Love", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_mrs_bagel_opener_2",           new LevelStats("Pink Parade", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_mrs_bagel_opener_3",           new LevelStats("Prideful Path", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
@@ -354,6 +343,17 @@ namespace FallGuysStats {
             { "wle_mrs_bagel_filler_4",           new LevelStats("Heartfall Heat", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_mrs_bagel_final_1",            new LevelStats("Rainbow Rise", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_mrs_bagel_final_2",            new LevelStats("Out and About", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+
+            { "wle_s10_orig_round_010",           new LevelStats("Square Up", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_011",           new LevelStats("Slide Showdown", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_017",           new LevelStats("Bellyflop Battlers", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_018",           new LevelStats("Apples & Oranges", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_024",           new LevelStats("Wooseleum", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_025",           new LevelStats("Mount Boom", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_030",           new LevelStats("Mega Monument", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_orig_round_031",           new LevelStats("Transfer Turnpike", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_round_004",                new LevelStats("Parkour Panic", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_round_009",                new LevelStats("Firewall Finale", LevelType.Race, true, true, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
         };
         public static Dictionary<string, string> SceneToRound = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             { "FallGuy_DoorDash",                  "round_door_dash" },
