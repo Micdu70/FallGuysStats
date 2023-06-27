@@ -364,7 +364,7 @@ namespace FallGuysStats {
                 logRound.FindingPosition = false;
 
                 round.Clear();
-            } else if (Stats.IsOverlayPingVisible && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
+            } else if (Stats.IsOverlayPingVisible && !Stats.EndedShow && line.Line.IndexOf("[FG_UnityInternetNetworkManager] Client connected to Server", StringComparison.OrdinalIgnoreCase) > 0) {
                 if (!Stats.ToggleServerInfo) {
                     Stats.ToggleServerInfo = true;
                     Stats.ConnectedToServerDate = line.Date;
@@ -546,6 +546,9 @@ namespace FallGuysStats {
                         DateTime showEnd = logRound.Info.End;
                         for (int i = 0; i < round.Count; i++) {
                             if (string.IsNullOrEmpty(round[i].Name)) {
+                                if (i != 0) {
+                                    round[i - 1].Qualified = false;
+                                }
                                 round.RemoveAt(i);
                                 logRound.Info = null;
                                 Stats.InShow = false;

@@ -3947,11 +3947,10 @@ namespace FallGuysStats {
         }
         public Screen GetCurrentScreen(Point location) {
             Screen[] scr = Screen.AllScreens;
-            Screen screen = null;
-            for (int i = 0; i < scr.Length; i++) {
-                if (scr[i].WorkingArea.Contains(location)) {
-                    screen = scr[i];
-                    break;
+            Screen screen = Screen.PrimaryScreen;
+            foreach (Screen s in scr) {
+                if (s.WorkingArea.Contains(location)) {
+                    screen = s;
                 }
             }
             return screen;
