@@ -1630,7 +1630,7 @@ namespace FallGuysStats {
                         background = Properties.Resources.background;
                     } else {
                         if (overlayCustomized) {
-                            if (File.Exists($"Overlay/{this.BackgroundResourceName}.png") && !this.BackgroundResourceName.Equals(this.backgroundResourceNameCache)) {
+                            if (!this.BackgroundResourceName.Equals(this.backgroundResourceNameCache) && File.Exists($"Overlay/{this.BackgroundResourceName}.png")) {
                                 this.customizedBackground = new Bitmap($"Overlay/{this.BackgroundResourceName}.png");
                                 this.backgroundResourceNameCache = this.BackgroundResourceName;
                             }
