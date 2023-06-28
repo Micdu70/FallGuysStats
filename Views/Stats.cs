@@ -1550,6 +1550,29 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
 
+            if (this.CurrentSettings.Version == 41)
+            {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                this.CurrentSettings.NotifyServerConnected = false;
+                for (int i = this.AllStats.Count - 1; i >= 0; i--)
+                {
+                    RoundInfo info = this.AllStats[i];
+                    if ("show_wle_s10_wk08_srs_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_wk08_srs_02".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_wk08_srs_03".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_wk08_srs_04".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.Version = 42;
+                this.SaveUserSettings();
+            }
+
             //
             // "Frenchy Edition" mods
             //
@@ -1731,7 +1754,7 @@ namespace FallGuysStats {
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
                 Visible = true,
-                Version = 41,
+                Version = 42,
                 FrenchyEditionDB = 12
             };
         }

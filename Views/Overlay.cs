@@ -1647,7 +1647,7 @@ namespace FallGuysStats {
                             tab = Properties.Resources.tab_unselected;
                         } else {
                             if (overlayCustomized) {
-                                if (!this.TabResourceName.Equals(this.tabResourceNameCache)) {
+                                if (!this.TabResourceName.Equals(this.tabResourceNameCache) && File.Exists($"Overlay/{this.TabResourceName}.png")) {
                                     this.customizedTab = new Bitmap($"Overlay/{this.TabResourceName}.png");
                                     this.tabResourceNameCache = this.TabResourceName;
                                 }
