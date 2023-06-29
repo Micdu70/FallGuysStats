@@ -19,7 +19,6 @@ using LiteDB;
 using Microsoft.Win32;
 using MetroFramework;
 using MetroFramework.Controls;
-using System.Text.RegularExpressions;
 using MetroFramework.Components;
 
 namespace FallGuysStats {
@@ -1553,7 +1552,6 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 41) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                this.CurrentSettings.NotifyServerConnected = false;
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if ("show_wle_s10_wk08_srs_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
@@ -1573,7 +1571,6 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 42) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                this.CurrentSettings.NotifyServerConnected = false;
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if ("show_wle_s10_wk08_srs_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
@@ -2217,17 +2214,14 @@ namespace FallGuysStats {
 
                         // add new type of round to the rounds lookup
                         if (!this.StatLookup.ContainsKey(stat.Name)) {
-                            bool isCreative = false;
                             string roundName = stat.Name;
-                            if (Regex.IsMatch(roundName, @"^\d{4}-\d{4}-\d{4}$")) {
-                                isCreative = true;
-                            } else if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
+                            if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
                                 roundName = roundName.Substring(6).Replace('_', ' ');
                             } else {
                                 roundName = roundName.Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = stat.UseShareCode || isCreative
+                            LevelStats newLevel = stat.UseShareCode
                                                   ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon)
                                                   : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null, null);
 
