@@ -2125,17 +2125,18 @@ namespace FallGuysStats {
                                 if (stat.UseShareCode && string.IsNullOrEmpty(stat.CreativeShareCode) && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_") && !stat.Name.StartsWith("wle_mrs_")) {
                                     try {
                                         JsonElement resData = this.GetApiData(this.FALLGUYSDB_API_URL, $"creative/{stat.ShowNameId}.json").GetProperty("data").GetProperty("snapshot");
+                                        JsonElement versionMetadata = resData.GetProperty("version_metadata");
                                         string[] creativeAuthorInfo = this.FindCreativeAuthor(resData.GetProperty("author").GetProperty("name_per_platform"));
                                         stat.CreativeShareCode = resData.GetProperty("share_code").GetString();
                                         stat.CreativeOnlinePlatformId = creativeAuthorInfo[0];
                                         stat.CreativeAuthor = creativeAuthorInfo[1];
-                                        stat.CreativeVersion = resData.GetProperty("version_metadata").GetProperty("version").GetInt32();
-                                        stat.CreativeStatus = resData.GetProperty("version_metadata").GetProperty("status").GetString();
-                                        stat.CreativeTitle = resData.GetProperty("version_metadata").GetProperty("title").GetString();
-                                        stat.CreativeDescription = resData.GetProperty("version_metadata").GetProperty("description").GetString();
-                                        stat.CreativeMaxPlayer = resData.GetProperty("version_metadata").GetProperty("max_player_count").GetInt32();
-                                        stat.CreativePlatformId = resData.GetProperty("version_metadata").GetProperty("platform_id").GetString();
-                                        stat.CreativeLastModifiedDate = resData.GetProperty("version_metadata").GetProperty("last_modified_date").GetDateTime();
+                                        stat.CreativeVersion = versionMetadata.GetProperty("version").GetInt32();
+                                        stat.CreativeStatus = versionMetadata.GetProperty("status").GetString();
+                                        stat.CreativeTitle = versionMetadata.GetProperty("title").GetString();
+                                        stat.CreativeDescription = versionMetadata.GetProperty("description").GetString();
+                                        stat.CreativeMaxPlayer = versionMetadata.GetProperty("max_player_count").GetInt32();
+                                        stat.CreativePlatformId = versionMetadata.GetProperty("platform_id").GetString();
+                                        stat.CreativeLastModifiedDate = versionMetadata.GetProperty("last_modified_date").GetDateTime();
                                         stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     } catch {
                                         // ignored
