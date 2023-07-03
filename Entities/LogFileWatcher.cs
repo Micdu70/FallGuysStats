@@ -282,13 +282,16 @@ namespace FallGuysStats {
                          || roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1)
                             && roundId.IndexOf("_final", StringComparison.OrdinalIgnoreCase) != -1)
 
-                   || ((roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
-                        || roundId.IndexOf("round_robotrampage", StringComparison.OrdinalIgnoreCase) != -1)
+                    || ((roundId.IndexOf("round_pixelperfect", StringComparison.OrdinalIgnoreCase) != -1
+                         || roundId.IndexOf("round_robotrampage", StringComparison.OrdinalIgnoreCase) != -1)
                             && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase))
 
                     || roundId.EndsWith("_timeattack_final", StringComparison.OrdinalIgnoreCase)
 
-                    || roundId.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase);
+                    || roundId.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase)
+
+                    || (roundId.IndexOf("_squads_squadcelebration", StringComparison.OrdinalIgnoreCase) != -1
+                        && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase));
         }
 
         private bool IsModeException(string roundId) {
