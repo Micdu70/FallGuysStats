@@ -266,7 +266,7 @@ namespace FallGuysStats {
             { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
         };
 
-        private bool GetIsRealFinalRound(string roundId, string showId) {
+        private bool IsRealFinalRound(string roundId, string showId) {
             if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) || showId.StartsWith("wle_s10_player_round")) { this.isCreatorMadeRoundsShow = true; return true; }
 
             this.isCreatorMadeRoundsShow = false;
@@ -291,7 +291,7 @@ namespace FallGuysStats {
                     || roundId.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase);
         }
 
-        private bool GetIsModeException(string roundId) {
+        private bool IsModeException(string roundId) {
             return roundId.IndexOf("round_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) != -1
                    || roundId.IndexOf("round_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) != -1
                    || roundId.IndexOf("round_blastball_only_finals", StringComparison.OrdinalIgnoreCase) != -1
@@ -311,7 +311,7 @@ namespace FallGuysStats {
                    || roundId.IndexOf("round_robotrampage_arena_2_ss2_show1", StringComparison.OrdinalIgnoreCase) != -1;
         }
 
-        private bool GetIsFinalException(string roundId) {
+        private bool IsFinalException(string roundId) {
             return ((roundId.IndexOf("round_lava_event_only_slime_climb", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_kraken_attack_only_finals", StringComparison.OrdinalIgnoreCase) != -1
                      || roundId.IndexOf("round_blastball_only_finals", StringComparison.OrdinalIgnoreCase) != -1
@@ -336,7 +336,7 @@ namespace FallGuysStats {
                          && roundId.EndsWith("_03", StringComparison.OrdinalIgnoreCase));
         }
 
-        private bool GetIsTeamException(string roundId) {
+        private bool IsTeamException(string roundId) {
             return roundId.IndexOf("round_1v1_volleyfall", StringComparison.OrdinalIgnoreCase) != -1
                    && (roundId.IndexOf("_duos", StringComparison.OrdinalIgnoreCase) != -1
                        || roundId.IndexOf("_squads", StringComparison.OrdinalIgnoreCase) != -1);
@@ -421,16 +421,16 @@ namespace FallGuysStats {
                     logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
                 }
 
-                if (this.GetIsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
+                if (this.IsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
                     logRound.Info.IsFinal = true;
-                } else if (this.GetIsModeException(logRound.Info.Name)) {
-                    logRound.Info.IsFinal = this.GetIsFinalException(logRound.Info.Name);
+                } else if (this.IsModeException(logRound.Info.Name)) {
+                    logRound.Info.IsFinal = this.IsFinalException(logRound.Info.Name);
                 } else if (logRound.Info.Name.StartsWith("wle_s10_") || logRound.Info.Name.StartsWith("wle_mrs_")) {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.ALL.TryGetValue(logRound.Info.Name, out LevelStats levelStats) && levelStats.IsFinal);
                 } else {
                     logRound.Info.IsFinal = logRound.IsFinal || (!logRound.HasIsFinal && LevelStats.SceneToRound.TryGetValue(logRound.Info.SceneName, out string roundName) && LevelStats.ALL.TryGetValue(roundName, out LevelStats levelStats) && levelStats.IsFinal);
                 }
-                logRound.Info.IsTeam = this.GetIsTeamException(logRound.Info.Name);
+                logRound.Info.IsTeam = this.IsTeamException(logRound.Info.Name);
 
                 logRound.Info.Round = !Stats.EndedShow ? round.Count : Stats.SavedRoundCount + round.Count;
                 logRound.Info.Start = line.Date;
