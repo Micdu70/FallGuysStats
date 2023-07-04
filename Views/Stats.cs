@@ -331,11 +331,6 @@ namespace FallGuysStats {
                 }
             }
 
-            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
-                this.StatLookup.Add(entry.Key, entry.Value);
-                this.StatDetails.Add(entry.Value);
-            }
-
             this.RoundDetails.EnsureIndex(x => x.Name);
             this.RoundDetails.EnsureIndex(x => x.ShowID);
             this.RoundDetails.EnsureIndex(x => x.Round);
@@ -345,10 +340,13 @@ namespace FallGuysStats {
 
             this.UpdateDatabaseVersion();
 
-            this.InitMainDataGridView();
+            foreach (KeyValuePair<string, LevelStats> entry in LevelStats.ALL) {
+                this.StatLookup.Add(entry.Key, entry.Value);
+                this.StatDetails.Add(entry.Value);
+            }
 
             this.ChangeMainLanguage();
-
+            this.InitMainDataGridView();
             this.UpdateGridRoundName();
 
             this.UpdateHoopsieLegends();
@@ -389,8 +387,6 @@ namespace FallGuysStats {
 
             this.RemoveUpdateFiles();
             this.ReloadProfileMenuItems();
-
-            this.SortGridDetails(0, true);
 
             this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
 
@@ -1953,6 +1949,8 @@ namespace FallGuysStats {
         }
         private void Stats_Shown(object sender, EventArgs e) {
             try {
+                this.SetMainDataGridViewOrder();
+
                 if (this.CurrentSettings.FormWidth.HasValue) {
                     this.Size = new Size(this.CurrentSettings.FormWidth.Value, this.CurrentSettings.FormHeight.Value);
                 }
@@ -2803,6 +2801,20 @@ namespace FallGuysStats {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void SetMainDataGridViewOrder() {
+            int pos = 0;
+            this.gridDetails.Columns["RoundIcon"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Name"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Played"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Qualified"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Gold"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Silver"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Bronze"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Kudos"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Fastest"].DisplayIndex = pos++;
+            this.gridDetails.Columns["Longest"].DisplayIndex = pos++;
+            this.gridDetails.Columns["AveFinish"].DisplayIndex = pos;
         }
         private void GridDetails_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
             try {
@@ -4161,7 +4173,7 @@ namespace FallGuysStats {
 
             this.dataGridViewCellStyle1.Font = Overlay.GetMainFont(10);
             this.dataGridViewCellStyle2.Font = Overlay.GetMainFont(12);
-            this.SetMainDataGridView();
+            //this.SetMainDataGridView();
 
             this.menuSettings.Text = Multilingual.GetWord("main_settings");
             this.menuFilters.Text = Multilingual.GetWord("main_filters");
