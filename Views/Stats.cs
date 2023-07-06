@@ -2357,6 +2357,8 @@ namespace FallGuysStats {
         private int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) { return 0; }
 
+            if ("squadcelebration".Equals(showId)) { showId = "squads_4player"; }
+
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
                     if (!string.IsNullOrEmpty(this.AllProfiles[i].LinkedShowId) && this.AllProfiles[i].LinkedShowId.Equals("private_lobbies")) {
@@ -2385,7 +2387,10 @@ namespace FallGuysStats {
             return 0;
         }
         public void SetLinkedProfileMenu(string showId, bool isPrivateLobbies, bool isCreativeShow) {
-            if (string.IsNullOrEmpty(showId) || this.GetCurrentProfileLinkedShowId().Equals(showId)) { return; }
+            if (string.IsNullOrEmpty(showId)) { return; }
+
+            if ("squadcelebration".Equals(showId)) { showId = "squads_4player"; }
+            if (this.GetCurrentProfileLinkedShowId().Equals(showId)) { return; }
 
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
