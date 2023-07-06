@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.211` ~ 04/07/2023
+**Dernière version:** `v1.212` ~ 06/07/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -60,11 +60,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 ## Changelog de la dernière version
 
 { Correction de bugs de la "FE" }
-- +Corrigé: Détection des manches finales pour la nouvelle émission du 04/07/2023 [Version Officielle]
-- ++Changé: Base de données GeoLite2 datant du 04/07/2023
 
 
-### Il y a 0 bug génant connu dans la v1.211 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.212 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -227,6 +225,9 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.212` ~ 06/07/2023
+  { Correction de bugs de la "FE" }
 
   - `v1.211` ~ 04/07/2023
   { Correction de bugs de la "FE" }
