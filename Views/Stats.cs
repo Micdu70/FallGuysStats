@@ -3309,6 +3309,9 @@ namespace FallGuysStats {
             this.EnableMainMenu(true);
         }
         private void ShowRoundGraph() {
+            this.EnableInfoStrip(false);
+            this.EnableMainMenu(false);
+
             List<RoundInfo> rounds = new List<RoundInfo>();
             if (this.menuCustomRangeStats.Checked) {
                 rounds = this.AllStats.Where(roundInfo => {
@@ -3325,10 +3328,11 @@ namespace FallGuysStats {
                     return roundInfo.Start > compareDate && roundInfo.Profile == this.GetCurrentProfileId() && this.IsInPartyFilter(roundInfo);
                 }).OrderBy(r => r.Name).ToList();
             }
-            if (rounds.Count == 0) { return; }
-
-            this.EnableInfoStrip(false);
-            this.EnableMainMenu(false);
+            if (rounds.Count == 0) {
+                this.EnableInfoStrip(true);
+                this.EnableMainMenu(true);
+                return;
+            }
 
             using (RoundStatsDisplay roundStatsDisplay = new RoundStatsDisplay {
                 StatsForm = this,
