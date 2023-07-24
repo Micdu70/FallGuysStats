@@ -2601,7 +2601,7 @@ namespace FallGuysStats {
                     }
                 }
 
-                if (info == endRound && ((hasLevelDetails && levelDetails.IsFinal) || info.Crown) && !endRound.PrivateLobby) {
+                if (ReferenceEquals(info, endRound) && ((hasLevelDetails && levelDetails.IsFinal) || info.Crown) && !endRound.PrivateLobby) {
                     if (info.IsFinal) {
                         summary.CurrentFinalStreak++;
                         if (summary.BestFinalStreak < summary.CurrentFinalStreak) {
