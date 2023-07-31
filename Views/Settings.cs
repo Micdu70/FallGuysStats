@@ -48,7 +48,7 @@ namespace FallGuysStats {
             this.ActiveControl = focusOutLabel;
 
             this.SuspendLayout();
-            this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
+            this.SetTheme(Stats.CurrentTheme);
             this.ResumeLayout(false);
 
             this.LaunchPlatform = this.CurrentSettings.LaunchPlatform;
@@ -360,10 +360,9 @@ namespace FallGuysStats {
 
             Stats.CurrentLanguage = this.cboMultilingual.SelectedIndex;
             this.CurrentSettings.Multilingual = this.cboMultilingual.SelectedIndex;
-
+            this.CurrentSettings.Theme = this.cboTheme.SelectedIndex;
             Stats.CurrentTheme = this.cboTheme.SelectedIndex == 0 ? MetroThemeStyle.Light :
                 this.cboTheme.SelectedIndex == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
-            this.CurrentSettings.Theme = this.cboTheme.SelectedIndex;
 
             if (string.IsNullOrEmpty(this.txtCycleTimeSeconds.Text)) {
                 this.CurrentSettings.CycleTimeSeconds = 5;
@@ -635,7 +634,7 @@ namespace FallGuysStats {
             }
         }
         private void LaunchPlatform_Click(object sender, EventArgs e) {
-            //this.StatsForm.UpdateGameExeLocation();
+            this.StatsForm.UpdateGameExeLocation();
             if ((bool)((PictureBox)sender)?.Name.Equals("picEpicGames")) { // Epic Games
                 this.picPlatformCheck.Parent = this.picEpicGames;
                 this.platformToolTip.SetToolTip(this.picPlatformCheck, "Epic Games");

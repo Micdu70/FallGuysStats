@@ -284,7 +284,7 @@ namespace FallGuysStats {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
                     CurrentLanguage = this.CurrentSettings.Multilingual;
                     CurrentTheme = this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
-                        this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
+                                   this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default;
                 } catch {
                     this.UserSettings.DeleteAll();
                     this.CurrentSettings = GetDefaultSettings();
@@ -384,12 +384,16 @@ namespace FallGuysStats {
             this.overlay.StartTimer();
 
             this.UpdateGameExeLocation();
-            this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
+
+            this.SaveUserSettings();
 
             this.RemoveUpdateFiles();
+
+            this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
+
             this.ReloadProfileMenuItems();
 
-            this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark : MetroThemeStyle.Default);
+            this.SetTheme(CurrentTheme);
 
             this.cmtt.OwnerDraw = true;
             this.cmtt.Draw += this.Cmtt_Draw;
@@ -3528,7 +3532,7 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void UpdateGameExeLocation() {
+        public void UpdateGameExeLocation() {
             string fallGuysShortcutLocation = this.FindEpicGamesShortcutLocation();
             string fallGuysExeLocation = this.FindSteamExeLocation();
 
@@ -3545,11 +3549,13 @@ namespace FallGuysStats {
 
             this.CurrentSettings.GameShortcutLocation = fallGuysShortcutLocation;
             this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
-            this.SaveUserSettings();
         }
         private string FindEpicGamesShortcutLocation() {
             try {
                 object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher", "AppDataPath", null);
+                if (regValue == null) {
+                    return string.Empty;
+                }
                 string epicGamesPath = Path.Combine((string)regValue, "Manifests");
                 
                 if (Directory.Exists(epicGamesPath)) {
@@ -3574,6 +3580,9 @@ namespace FallGuysStats {
             try {
                 // get steam install folder
                 object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam", "InstallPath", null);
+                if (regValue == null) {
+                    return string.Empty;
+                }
                 string steamPath = (string)regValue;
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
@@ -4111,9 +4120,7 @@ namespace FallGuysStats {
                     this.EnableMainMenu(false);
                     if (settings.ShowDialog(this) == DialogResult.OK) {
                         this.CurrentSettings = settings.CurrentSettings;
-                        this.SetTheme(this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light :
-                                      this.CurrentSettings.Theme == 1 ? MetroThemeStyle.Dark :
-                                      MetroThemeStyle.Default);
+                        this.SetTheme(CurrentTheme);
                         this.SaveUserSettings();
                         if (this.currentLanguage != CurrentLanguage) {
                             this.ChangeMainLanguage();
