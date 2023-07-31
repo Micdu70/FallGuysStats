@@ -3461,8 +3461,8 @@ namespace FallGuysStats {
         }
         private void LaunchGame(bool ignoreExisting) {
             try {
-                this.UpdateGameExeLocation();
-                if (CurrentSettings.LaunchPlatform == 0) {
+                //this.UpdateGameExeLocation();
+                if (this.CurrentSettings.LaunchPlatform == 0) {
                     if (!string.IsNullOrEmpty(this.CurrentSettings.GameShortcutLocation)) {
                         Process[] processes = Process.GetProcesses();
                         string fallGuysProcessName = "FallGuys_client_game";
@@ -3477,8 +3477,10 @@ namespace FallGuysStats {
                             }
                         }
 
-                        if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}", Multilingual.GetWord("message_execution_caption"),
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
+                        if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}",
+                                $"[{Multilingual.GetWord("level_detail_online_platform_eos")}] {Multilingual.GetWord("message_execution_caption")}",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        {
                             Process.Start(this.CurrentSettings.GameShortcutLocation);
                             if (!ignoreExisting) {
                                 this.WindowState = FormWindowState.Minimized;
@@ -3491,9 +3493,9 @@ namespace FallGuysStats {
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } else {
-                    if (!string.IsNullOrEmpty(CurrentSettings.GameExeLocation) && File.Exists(CurrentSettings.GameExeLocation)) {
+                    if (!string.IsNullOrEmpty(this.CurrentSettings.GameExeLocation) && File.Exists(this.CurrentSettings.GameExeLocation)) {
                         Process[] processes = Process.GetProcesses();
-                        string fallGuysProcessName = Path.GetFileNameWithoutExtension(CurrentSettings.GameExeLocation);
+                        string fallGuysProcessName = Path.GetFileNameWithoutExtension(this.CurrentSettings.GameExeLocation);
                         for (int i = 0; i < processes.Length; i++) {
                             string name = processes[i].ProcessName;
                             if (name.IndexOf(fallGuysProcessName, StringComparison.OrdinalIgnoreCase) >= 0) {
@@ -3505,8 +3507,10 @@ namespace FallGuysStats {
                             }
                         }
 
-                        if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}", Multilingual.GetWord("message_execution_caption"),
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
+                        if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}",
+                                $"[{Multilingual.GetWord("level_detail_online_platform_steam")}] {Multilingual.GetWord("message_execution_caption")}",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        {
                             Process.Start(this.CurrentSettings.GameExeLocation);
                             if (!ignoreExisting) {
                                 this.WindowState = FormWindowState.Minimized;
@@ -3524,18 +3528,21 @@ namespace FallGuysStats {
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void UpdateGameExeLocation() {
+        private void UpdateGameExeLocation() {
             string fallGuysShortcutLocation = this.FindEpicGamesShortcutLocation();
             string fallGuysExeLocation = this.FindSteamExeLocation();
 
             if (string.IsNullOrEmpty(fallGuysShortcutLocation) && !string.IsNullOrEmpty(fallGuysExeLocation)) {
                 this.menuLaunchFallGuys.Image = Properties.Resources.steam_main_icon;
                 this.CurrentSettings.LaunchPlatform = 1;
+            } else if (!string.IsNullOrEmpty(fallGuysShortcutLocation) && !string.IsNullOrEmpty(fallGuysExeLocation)) {
+                this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0 ? Properties.Resources.epic_main_icon : Properties.Resources.steam_main_icon;
+                this.trayLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0 ? Properties.Resources.epic_main_icon : Properties.Resources.steam_main_icon;
             } else {
                 this.menuLaunchFallGuys.Image = Properties.Resources.epic_main_icon;
                 this.CurrentSettings.LaunchPlatform = 0;
             }
-            
+
             this.CurrentSettings.GameShortcutLocation = fallGuysShortcutLocation;
             this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
             this.SaveUserSettings();
@@ -4115,7 +4122,7 @@ namespace FallGuysStats {
                             this.UpdateGridRoundName();
                             this.overlay.ChangeLanguage();
                         }
-                        this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
+                        this.ChangeLaunchPlatformLogo(this.CurrentSettings.LaunchPlatform);
                         this.UpdateHoopsieLegends();
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
                         this.overlay.SetBackgroundResourcesName(this.CurrentSettings.OverlayBackgroundResourceName, this.CurrentSettings.OverlayTabResourceName);
@@ -4272,7 +4279,7 @@ namespace FallGuysStats {
             }
             return screen;
         }
-        private void ChangeLaunchPlatformImage(int launchPlatform) {
+        private void ChangeLaunchPlatformLogo(int launchPlatform) {
             this.menuLaunchFallGuys.Image = launchPlatform == 0
                                             ? Properties.Resources.epic_main_icon
                                             : Properties.Resources.steam_main_icon;
