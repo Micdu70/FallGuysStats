@@ -293,6 +293,8 @@ namespace FallGuysStats {
             }
             this.StatsDB.Commit();
 
+            this.RemoveUpdateFiles();
+
             this.InitializeComponent();
 
             this.BackMaxSize = 56;
@@ -386,10 +388,6 @@ namespace FallGuysStats {
             this.UpdateGameExeLocation();
 
             this.SaveUserSettings();
-
-            this.RemoveUpdateFiles();
-
-            this.ChangeLaunchPlatformImage(this.CurrentSettings.LaunchPlatform);
 
             this.ReloadProfileMenuItems();
 
@@ -2025,6 +2023,8 @@ namespace FallGuysStats {
         }
         private void Stats_Shown(object sender, EventArgs e) {
             try {
+                this.RemoveUpdateFiles();
+
                 this.SetMainDataGridViewOrder();
 
                 if (this.CurrentSettings.FormWidth.HasValue) {
@@ -3483,8 +3483,7 @@ namespace FallGuysStats {
 
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}",
                                 $"[{Multilingual.GetWord("level_detail_online_platform_eos")}] {Multilingual.GetWord("message_execution_caption")}",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                        {
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             Process.Start(this.CurrentSettings.GameShortcutLocation);
                             if (!ignoreExisting) {
                                 this.WindowState = FormWindowState.Minimized;
@@ -3513,8 +3512,7 @@ namespace FallGuysStats {
 
                         if (MessageBox.Show(this, $"{Multilingual.GetWord("message_execution_question")}",
                                 $"[{Multilingual.GetWord("level_detail_online_platform_steam")}] {Multilingual.GetWord("message_execution_caption")}",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                        {
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                             Process.Start(this.CurrentSettings.GameExeLocation);
                             if (!ignoreExisting) {
                                 this.WindowState = FormWindowState.Minimized;
@@ -3541,7 +3539,6 @@ namespace FallGuysStats {
                 this.CurrentSettings.LaunchPlatform = 1;
             } else if (!string.IsNullOrEmpty(fallGuysShortcutLocation) && !string.IsNullOrEmpty(fallGuysExeLocation)) {
                 this.menuLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0 ? Properties.Resources.epic_main_icon : Properties.Resources.steam_main_icon;
-                this.trayLaunchFallGuys.Image = this.CurrentSettings.LaunchPlatform == 0 ? Properties.Resources.epic_main_icon : Properties.Resources.steam_main_icon;
             } else {
                 this.menuLaunchFallGuys.Image = Properties.Resources.epic_main_icon;
                 this.CurrentSettings.LaunchPlatform = 0;
@@ -3557,7 +3554,7 @@ namespace FallGuysStats {
                     return string.Empty;
                 }
                 string epicGamesPath = Path.Combine((string)regValue, "Manifests");
-                
+
                 if (Directory.Exists(epicGamesPath)) {
                     DirectoryInfo di = new DirectoryInfo(epicGamesPath);
                     foreach (FileInfo file in di.GetFiles()) {
