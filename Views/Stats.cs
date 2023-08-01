@@ -1969,10 +1969,10 @@ namespace FallGuysStats {
             }
 
             if (this.WindowState != FormWindowState.Normal) {
-                this.CurrentSettings.FormLocationX = RestoreBounds.Location.X;
-                this.CurrentSettings.FormLocationY = RestoreBounds.Location.Y;
-                this.CurrentSettings.FormWidth = RestoreBounds.Size.Width;
-                this.CurrentSettings.FormHeight = RestoreBounds.Size.Height;
+                this.CurrentSettings.FormLocationX = this.RestoreBounds.Location.X;
+                this.CurrentSettings.FormLocationY = this.RestoreBounds.Location.Y;
+                this.CurrentSettings.FormWidth = this.RestoreBounds.Size.Width;
+                this.CurrentSettings.FormHeight = this.RestoreBounds.Size.Height;
                 this.CurrentSettings.MaximizedWindowState = this.WindowState == FormWindowState.Maximized;
             } else {
                 this.CurrentSettings.FormLocationX = this.Location.X;
