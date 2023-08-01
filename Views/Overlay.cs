@@ -6,6 +6,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -720,7 +721,7 @@ namespace FallGuysStats {
                             this.lblRound.IsShareCodeFormat = false;
                             break;
                         default:
-                            this.lblRound.IsShareCodeFormat = this.lastRound.UseShareCode ? true : false;
+                            this.lblRound.IsShareCodeFormat = this.lastRound.UseShareCode ? (Regex.IsMatch(this.lastRound.Name, @"^[0-9]{4}-[0-9]{4}-[0-9]{4}$") ? true : false) : false;
                             break;
                     }
 
