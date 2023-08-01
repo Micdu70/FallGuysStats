@@ -1583,6 +1583,80 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
 
+            if (this.CurrentSettings.Version == 44)
+            {
+                this.CurrentSettings.ShowChangelog = true;
+                this.CurrentSettings.Version = 45;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.Version == 45)
+            {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--)
+                {
+                    RoundInfo info = this.AllStats[i];
+                    if ("current_wle_fp4_10_08".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp4_10_11".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp4_10_12".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp4_10_20".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_02".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_03".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_04".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_05".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_06".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_08".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_09".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_10".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_12".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_13".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_14".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_15".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_17".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_18".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "show_wle_s10_player_round_wk6_19".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_01".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_02".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_03".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_04".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_05".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_06".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_07".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_08".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_09".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_10".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_11".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_12".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_13".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_14".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_15".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_16".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_17".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_18".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_19".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_20".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_21".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_22".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_23".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_24".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_25".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_26".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_27".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_28".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
+                        "current_wle_fp3_10_29".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.Version = 46;
+                this.SaveUserSettings();
+            }
+
             //
             // "Frenchy Edition" mods
             //
@@ -1763,8 +1837,9 @@ namespace FallGuysStats {
                 IgnoreLevelTypeWhenSorting = false,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
+                ShowChangelog = true,
                 Visible = true,
-                Version = 43,
+                Version = 46,
                 FrenchyEditionDB = 12
             };
         }

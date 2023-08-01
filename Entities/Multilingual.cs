@@ -2185,10 +2185,10 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
-                            {"current_wle_current_fp4_10_08", "Wall Breaker"},
-                            {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
-                            {"current_wle_current_fp4_10_12", "Chickens run away"},
-                            {"current_wle_current_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
+                            {"current_wle_fp4_10_12", "Chickens run away"},
+                            {"current_wle_fp4_10_20", "Co-op and CO"},
 
                             {"wle_s10_bt_round_001", "Push Ups"},
                             {"wle_s10_bt_round_002", "Heave & Haul"},
@@ -2458,10 +2458,10 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
-                            {"current_wle_current_fp4_10_08", "Wall Breaker"},
-                            {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
-                            {"current_wle_current_fp4_10_12", "Chickens run away"},
-                            {"current_wle_current_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
+                            {"current_wle_fp4_10_12", "Chickens run away"},
+                            {"current_wle_fp4_10_20", "Co-op and CO"},
 
                             {"wle_s10_bt_round_001", "Push Ups"},
                             {"wle_s10_bt_round_002", "Heave & Haul"},
@@ -2731,10 +2731,10 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
-                            {"current_wle_current_fp4_10_08", "Wall Breaker"},
-                            {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
-                            {"current_wle_current_fp4_10_12", "Chickens run away"},
-                            {"current_wle_current_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
+                            {"current_wle_fp4_10_12", "Chickens run away"},
+                            {"current_wle_fp4_10_20", "Co-op and CO"},
 
                             {"wle_s10_bt_round_001", "Push Ups"},
                             {"wle_s10_bt_round_002", "Heave & Haul"},
@@ -3004,10 +3004,10 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
-                            {"current_wle_current_fp4_10_08", "Wall Breaker"},
-                            {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
-                            {"current_wle_current_fp4_10_12", "Chickens run away"},
-                            {"current_wle_current_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
+                            {"current_wle_fp4_10_12", "Chickens run away"},
+                            {"current_wle_fp4_10_20", "Co-op and CO"},
 
                             {"wle_s10_bt_round_001", "Push Ups"},
                             {"wle_s10_bt_round_002", "Heave & Haul"},
@@ -3154,9 +3154,9 @@ namespace FallGuysStats {
                             {"wle_s10_orig_round_043", "Trouble Tower"},
                             {"wle_s10_orig_round_044", "Serpent Slalom"},
                             // {"wle_s10_orig_round_045", "Floorless"},
-                            {"wle_s10_orig_round_046", "In The Cloud"},
-                            {"wle_s10_orig_round_047", "Downstream Duel"},
-                            {"wle_s10_orig_round_048", "Lost Palace"},
+                            // {"wle_s10_orig_round_046", "In The Cloud"},
+                            // {"wle_s10_orig_round_047", "Downstream Duel"},
+                            // {"wle_s10_orig_round_048", "Lost Palace"},
                             {"wle_s10_orig_round_045_long", "Floorless"},
                             {"wle_s10_long_round_003", "Fall Speedway"},
                             {"wle_s10_long_round_004", "Zig Zag Zoomies"},
@@ -3276,7 +3276,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_27", "Bean Voyage"},
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
-
+                            
                             {"current_wle_current_fp4_10_08", "Wall Breaker"},
                             {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -3732,7 +3732,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-
+                    
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -4220,7 +4220,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-
+                    
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -4708,7 +4708,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-
+                    
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5196,7 +5196,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-
+                    
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5684,7 +5684,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-
+                    
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5742,9 +5742,9 @@ namespace FallGuysStats {
                     {"fall_guys_creative_mode", "Fall Guys Creative"},
                 }
             },
-        };
-
-        public static string GetCurrentLanguage() {
+            { "cht", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+                    {"collectables_ss2_batch_01", "Collectables Batch 01"},
+                    {"collectables_ss2_batch_01_model1", "Collectables Batch 01"},
             string lang = string.Empty;
             switch (Stats.CurrentLanguage) {
                 case 0: lang = "eng"; break;
