@@ -266,8 +266,7 @@ namespace FallGuysStats {
             { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
         };
 
-        private bool IsCreativeShow(string showId)
-        {
+        private bool IsCreativeShow(string showId) {
             return showId.StartsWith("show_wle_s10_") ||
                    showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1 ||
                    showId.Equals("wle_mrs_bagel") ||

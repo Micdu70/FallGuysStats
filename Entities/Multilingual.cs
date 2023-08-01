@@ -3276,7 +3276,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_27", "Bean Voyage"},
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
-                            
+
                             {"current_wle_current_fp4_10_08", "Wall Breaker"},
                             {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -3732,7 +3732,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-                    
+
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -4220,7 +4220,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-                    
+
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -4708,7 +4708,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-                    
+
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5196,7 +5196,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-                    
+
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5684,7 +5684,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_wk07_srs_04", "Catastrophe Climb"},
                     {"show_wle_s10_wk07_srs_05", "Sky High Run"},
                     {"show_wle_s10_wk07_srs_06", "Full Speed Sliding (FSS) - Jelly Road"},
-                    
+
                     {"current_wle_current_fp4_10_08", "Wall Breaker"},
                     {"current_wle_current_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_current_fp4_10_12", "Chickens run away"},
@@ -5742,9 +5742,9 @@ namespace FallGuysStats {
                     {"fall_guys_creative_mode", "Fall Guys Creative"},
                 }
             },
-            { "cht", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-                    {"collectables_ss2_batch_01", "Collectables Batch 01"},
-                    {"collectables_ss2_batch_01_model1", "Collectables Batch 01"},
+        };
+
+        public static string GetCurrentLanguage() {
             string lang = string.Empty;
             switch (Stats.CurrentLanguage) {
                 case 0: lang = "eng"; break;

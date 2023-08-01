@@ -1583,19 +1583,16 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
 
-            if (this.CurrentSettings.Version == 44)
-            {
+            if (this.CurrentSettings.Version == 44) {
                 this.CurrentSettings.ShowChangelog = true;
                 this.CurrentSettings.Version = 45;
                 this.SaveUserSettings();
             }
 
-            if (this.CurrentSettings.Version == 45)
-            {
+            if (this.CurrentSettings.Version == 45) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                for (int i = this.AllStats.Count - 1; i >= 0; i--)
-                {
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if ("current_wle_fp4_10_08".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
                         "current_wle_fp4_10_11".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
@@ -1645,8 +1642,7 @@ namespace FallGuysStats {
                         "current_wle_fp3_10_26".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
                         "current_wle_fp3_10_27".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
                         "current_wle_fp3_10_28".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase) ||
-                        "current_wle_fp3_10_29".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase))
-                    {
+                        "current_wle_fp3_10_29".Equals(info.ShowNameId, StringComparison.OrdinalIgnoreCase)) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
