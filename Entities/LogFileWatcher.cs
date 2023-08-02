@@ -669,7 +669,7 @@ namespace FallGuysStats {
                             roundInfo.Kudos += int.Parse(detail.Substring(9));
                         } else if (detail.IndexOf("> Bonus Tier: ", StringComparison.OrdinalIgnoreCase) == 0 && detail.Length == 15) {
                             char tier = detail[14];
-                            roundInfo.Tier = tier - 0x30 + 1;
+                            roundInfo.Tier = roundInfo.Qualified ? tier - 0x30 + 1 : 0;
                         } else if (detail.IndexOf("> Bonus Kudos: ", StringComparison.OrdinalIgnoreCase) == 0) {
                             roundInfo.Kudos += int.Parse(detail.Substring(15));
                         }
@@ -680,11 +680,12 @@ namespace FallGuysStats {
                         }
                     }
                 }
-                roundInfo.Kudos += questKudos;
 
                 if (round.Count > maxRound) {
                     return false;
                 }
+
+                roundInfo.Kudos += questKudos;
 
                 DateTime showEnd = logRound.Info.End;
                 for (int i = 0; i < round.Count; i++) {
