@@ -628,7 +628,7 @@ namespace FallGuysStats {
             if (this._showStats != 2 && this.gridDetails.SelectedCells.Count > 0) {
                 if (((DataGridView)sender).SelectedRows.Count == 1) {
                     RoundInfo info = this.gridDetails.Rows[((DataGridView)sender).SelectedRows[0].Index].DataBoundItem as RoundInfo;
-                    if (info.UseShareCode && !info.Name.StartsWith("wle_s10_") && !info.Name.StartsWith("wle_fp2_") && info.CreativeLastModifiedDate == DateTime.MinValue) {
+                    if (info.UseShareCode && !LevelStats.ALL.ContainsKey(info.Name) && info.CreativeLastModifiedDate == DateTime.MinValue) {
                         if (this.gridDetails.MenuSeparator != null && !this.gridDetails.CMenu.Items.Contains(this.gridDetails.MenuSeparator)) {
                             this.gridDetails.CMenu.Items.Add(this.gridDetails.MenuSeparator);
                         }
@@ -746,7 +746,7 @@ namespace FallGuysStats {
         private void UpdateShows_Click(object sender, EventArgs e) {
             if (this._showStats != 2 && this.gridDetails.SelectedCells.Count > 0 && this.gridDetails.SelectedRows.Count == 1) {
                 RoundInfo ri = this.gridDetails.Rows[this.gridDetails.SelectedCells[0].RowIndex].DataBoundItem as RoundInfo;
-                if (ri.UseShareCode && !ri.Name.StartsWith("wle_s10_") && !ri.Name.StartsWith("wle_fp2_") && ri.CreativeLastModifiedDate == DateTime.MinValue) {
+                if (ri.UseShareCode && !LevelStats.ALL.ContainsKey(ri.Name) && ri.CreativeLastModifiedDate == DateTime.MinValue) {
                     if (MessageBox.Show(this, $"{Multilingual.GetWord("message_update_creative_show_prefix")}{ri.ShowNameId}{Multilingual.GetWord("message_update_creative_show_suffix")}", Multilingual.GetWord("message_update_creative_show_caption"),
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
                         try {

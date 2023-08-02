@@ -190,7 +190,7 @@ namespace FallGuysStats {
                                 lastDate = line.Date;
                             } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) > 0) {
                                 if (this.autoChangeProfile && Stats.IsGameRunning && Stats.InShow && !Stats.EndedShow) {
-                                    this.StatsForm.SetLinkedProfileMenu(this.selectedShowId, logRound.PrivateLobby, this.IsCreativeShow(this.selectedShowId));
+                                    this.StatsForm.SetLinkedProfileMenu(this.selectedShowId, logRound.PrivateLobby, this.StatsForm.IsCreativeShow(this.selectedShowId));
                                 }
                             }
                         }
@@ -265,13 +265,6 @@ namespace FallGuysStats {
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
         };
-
-        private bool IsCreativeShow(string showId) {
-            return showId.StartsWith("show_wle_s10_") ||
-                   showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1 ||
-                   showId.Equals("wle_mrs_bagel") ||
-                   showId.StartsWith("current_wle_");
-        }
 
         private bool IsRealFinalRound(string roundId, string showId) {
             if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) || showId.StartsWith("wle_s10_player_round_") || showId.StartsWith("current_wle_")) { this.isCreatorMadeRoundsShow = true; return true; }

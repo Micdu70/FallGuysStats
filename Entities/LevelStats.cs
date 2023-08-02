@@ -323,13 +323,13 @@ namespace FallGuysStats {
             { "wle_s10_player_round_wk5_06",      new LevelStats("Gpu Gauntlet", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_07",      new LevelStats("Looooping", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_08",      new LevelStats("Rad Bean Skatepark", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_player_round_wk5_10",      new LevelStats("Siank Arena", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_player_round_wk5_10",      new LevelStats("SiankArene", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_11",      new LevelStats("Pro Players Only", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_12",      new LevelStats("Extreme Tower", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_13",      new LevelStats("Dessert Village", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_14",      new LevelStats("Extreme Trampoline Jumping", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_15",      new LevelStats("Beast Route", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "wle_s10_player_round_wk5_16",      new LevelStats("Metroplis", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "wle_s10_player_round_wk5_16",      new LevelStats("METRÓPOLIS", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_17",      new LevelStats("Big Bookcase", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "wle_s10_player_round_wk5_18",      new LevelStats("Digital Doom", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
 
@@ -518,7 +518,7 @@ namespace FallGuysStats {
         public TimeSpan AveDuration { get { return TimeSpan.FromSeconds((int)this.Duration.TotalSeconds / (this.Played == 0 ? 1 : this.Played)); } }
         public TimeSpan AveFinish { get { return TimeSpan.FromSeconds((double)this.FinishTime.TotalSeconds / (this.FinishedCount == 0 ? 1 : this.FinishedCount)); } }
         public LevelType Type;
-        public bool isCreative;
+        public bool IsCreative;
         public bool IsFinal;
 
         public TimeSpan Duration;
@@ -533,7 +533,7 @@ namespace FallGuysStats {
             this.Name = levelName;
             this.Type = type;
             this.Season = season;
-            this.isCreative = isCreative;
+            this.IsCreative = isCreative;
             this.IsFinal = isFinal;
             this.Stats = new List<RoundInfo>();
             this.Clear();
@@ -555,7 +555,7 @@ namespace FallGuysStats {
         public void Add(RoundInfo stat) {
             this.Stats.Add(stat);
 
-            if (!stat.PrivateLobby || (stat.UseShareCode && !stat.Name.StartsWith("wle_s10_") && !stat.Name.StartsWith("wle_fp2_") && !stat.Name.StartsWith("wle_mrs_"))) {
+            if (!stat.PrivateLobby || (stat.UseShareCode && !ALL.ContainsKey(stat.Name))) {
                 this.Played++;
                 this.Duration += stat.End - stat.Start;
                 switch (stat.Tier) {
