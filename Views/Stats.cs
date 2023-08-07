@@ -1437,8 +1437,7 @@ namespace FallGuysStats {
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1458,8 +1457,7 @@ namespace FallGuysStats {
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1495,8 +1493,7 @@ namespace FallGuysStats {
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1516,8 +1513,7 @@ namespace FallGuysStats {
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1543,8 +1539,7 @@ namespace FallGuysStats {
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1555,20 +1550,17 @@ namespace FallGuysStats {
                 this.SaveUserSettings();
             }
 
-            if (this.CurrentSettings.Version == 46)
-            {
+            if (this.CurrentSettings.Version == 46) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
                 Console.WriteLine(this.AllStats.Count);
-                for (int i = this.AllStats.Count - 1; i >= 0; i--)
-                {
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if (!string.IsNullOrEmpty(info.ShowNameId) && !info.IsFinal &&
                         (info.ShowNameId.StartsWith("show_wle_s10_wk") ||
                          info.ShowNameId.StartsWith("wle_s10_player_round_wk") ||
                          info.ShowNameId.StartsWith("show_wle_s10_player_round_wk") ||
-                         info.ShowNameId.StartsWith("current_wle_fp")))
-                    {
+                         info.ShowNameId.StartsWith("current_wle_fp"))) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1890,6 +1882,11 @@ namespace FallGuysStats {
                     this.CurrentSettings.OverlayLocationY = this.overlay.Location.Y;
                     this.CurrentSettings.OverlayWidth = this.overlay.Width;
                     this.CurrentSettings.OverlayHeight = this.overlay.Height;
+                } else {
+                    this.CurrentSettings.OverlayFixedPositionX = this.overlay.Location.X;
+                    this.CurrentSettings.OverlayFixedPositionY = this.overlay.Location.Y;
+                    this.CurrentSettings.OverlayFixedWidth = this.overlay.Width;
+                    this.CurrentSettings.OverlayFixedHeight = this.overlay.Height;
                 }
             }
 
@@ -1957,6 +1954,18 @@ namespace FallGuysStats {
                     this.Location = new Point(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value);
                 }
 
+                string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low", "Mediatonic", "FallGuys_client");
+                if (!string.IsNullOrEmpty(this.CurrentSettings.LogPath)) {
+                    logPath = this.CurrentSettings.LogPath;
+                }
+                this.logFile.Start(logPath, LOGNAME);
+
+                this.overlay.ArrangeDisplay(string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.FlippedDisplay : this.CurrentSettings.FixedFlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
+                    this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo,
+                    this.CurrentSettings.OverlayColor, string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.OverlayWidth : this.CurrentSettings.OverlayFixedWidth, string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.OverlayHeight : this.CurrentSettings.OverlayFixedHeight,
+                    this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
+                if (this.CurrentSettings.OverlayVisible) { this.ToggleOverlay(this.overlay); }
+
                 this.selectedCustomTemplateSeason = this.CurrentSettings.SelectedCustomTemplateSeason;
                 this.customfilterRangeStart = this.CurrentSettings.CustomFilterRangeStart;
                 this.customfilterRangeEnd = this.CurrentSettings.CustomFilterRangeEnd;
@@ -1988,18 +1997,6 @@ namespace FallGuysStats {
                         this.MenuStats_Click(this.menuSessionStats, EventArgs.Empty);
                         break;
                 }
-
-                string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low", "Mediatonic", "FallGuys_client");
-                if (!string.IsNullOrEmpty(this.CurrentSettings.LogPath)) {
-                    logPath = this.CurrentSettings.LogPath;
-                }
-                this.logFile.Start(logPath, LOGNAME);
-
-                this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
-                    this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo,
-                    this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight,
-                    this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
-                if (this.CurrentSettings.OverlayVisible) { this.ToggleOverlay(this.overlay); }
 
                 this.WindowState = this.CurrentSettings.MaximizedWindowState ? FormWindowState.Maximized : FormWindowState.Normal;
 
@@ -4173,9 +4170,9 @@ namespace FallGuysStats {
                             this.logFile.Start(logPath, LOGNAME);
                         }
 
-                        this.overlay.ArrangeDisplay(this.CurrentSettings.FlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
+                        this.overlay.ArrangeDisplay(string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.FlippedDisplay : this.CurrentSettings.FixedFlippedDisplay, this.CurrentSettings.ShowOverlayTabs,
                             this.CurrentSettings.HideWinsInfo, this.CurrentSettings.HideRoundInfo, this.CurrentSettings.HideTimeInfo,
-                            this.CurrentSettings.OverlayColor, this.CurrentSettings.OverlayWidth, this.CurrentSettings.OverlayHeight,
+                            this.CurrentSettings.OverlayColor, string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.OverlayWidth : this.CurrentSettings.OverlayFixedWidth, string.IsNullOrEmpty(this.CurrentSettings.OverlayFixedPosition) ? this.CurrentSettings.OverlayHeight : this.CurrentSettings.OverlayFixedHeight,
                             this.CurrentSettings.OverlayFontSerialized, this.CurrentSettings.OverlayFontColorSerialized);
                     } else {
                         this.overlay.Opacity = this.CurrentSettings.OverlayBackgroundOpacity / 100D;
