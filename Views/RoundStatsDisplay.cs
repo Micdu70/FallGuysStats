@@ -35,7 +35,7 @@ namespace FallGuysStats {
                 Color.FromArgb(31, 119, 180), Color.FromArgb(255, 215, 0), Color.FromArgb(192, 192, 192), Color.FromArgb(205, 127, 50), Color.FromArgb(255, 20, 147),
                 Color.FromArgb(128, 0, 128), Color.FromArgb(227, 119, 194), Color.FromArgb(127, 127, 127), Color.FromArgb(188, 189, 34), Color.FromArgb(23, 190, 207)
             };
-            
+
             //public SharedColor[] Colors { get; } = SharedColor.FromHex(HexColors);
 
             // private static readonly string[] HexColors = {
