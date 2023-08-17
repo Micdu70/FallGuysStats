@@ -2383,7 +2383,7 @@ namespace FallGuysStats {
             return 0;
         }
         public void SetLinkedProfileMenu(string showId, bool isPrivateLobbies, bool isCreativeShow) {
-            if (string.IsNullOrEmpty(showId)) { return; }
+            if ((this.AllProfiles.Count <= 1) || string.IsNullOrEmpty(showId)) { return; }
 
             if ("squadcelebration".Equals(showId)) { showId = "squads_4player"; }
             if (this.GetCurrentProfileLinkedShowId().Equals(showId)) { return; }
