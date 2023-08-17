@@ -69,6 +69,7 @@ namespace FallGuysStats {
         public int Version { get; set; }
         public int FrenchyEditionDB { get; set; }
         public bool IgnoreLevelTypeWhenSorting { get; set; }
+        public bool GroupingCreativeRoundLevels { get; set; }
         public int LaunchPlatform { get; set; }
         public string GameExeLocation { get; set; }
         public string GameShortcutLocation { get; set; }

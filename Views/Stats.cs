@@ -1553,7 +1553,6 @@ namespace FallGuysStats {
             if (this.CurrentSettings.Version == 46) {
                 this.AllStats.AddRange(this.RoundDetails.FindAll());
                 this.StatsDB.BeginTrans();
-                Console.WriteLine(this.AllStats.Count);
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if (!string.IsNullOrEmpty(info.ShowNameId) && !info.IsFinal &&
@@ -1568,6 +1567,50 @@ namespace FallGuysStats {
                 this.StatsDB.Commit();
                 this.AllStats.Clear();
                 this.CurrentSettings.Version = 47;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.Version == 47)
+            {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--)
+                {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        ((info.ShowNameId.StartsWith("show_wle_s10_wk") || info.ShowNameId.StartsWith("event_wle_s10_wk")) && info.ShowNameId.EndsWith("_mrs")) &&
+                        !this.IsFinalWithCreativeLevel(info.Name))
+                    {
+                        info.IsFinal = false;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.GroupingCreativeRoundLevels = true;
+                this.CurrentSettings.Version = 48;
+                this.SaveUserSettings();
+            }
+
+            if (this.CurrentSettings.Version == 48)
+            {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--)
+                {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        info.ShowNameId.Equals("main_show") &&
+                        this.IsFinalWithCreativeLevel(info.Name))
+                    {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.GroupingCreativeRoundLevels = true;
+                this.CurrentSettings.Version = 49;
                 this.SaveUserSettings();
             }
 
@@ -1749,13 +1792,26 @@ namespace FallGuysStats {
                 GameShortcutLocation = string.Empty,
                 AutoLaunchGameOnStartup = false,
                 IgnoreLevelTypeWhenSorting = false,
+                GroupingCreativeRoundLevels = true,
                 UpdatedDateFormat = true,
                 WinPerDayGraphStyle = 1,
                 ShowChangelog = true,
                 Visible = true,
-                Version = 47,
+                Version = 50,
                 FrenchyEditionDB = 12
             };
+        }
+        private bool IsFinalWithCreativeLevel(string levelId) {
+            return levelId.Equals("wle_s10_orig_round_010") ||
+                   levelId.Equals("wle_s10_orig_round_011") ||
+                   levelId.Equals("wle_s10_orig_round_017") ||
+                   levelId.Equals("wle_s10_orig_round_018") ||
+                   levelId.Equals("wle_s10_orig_round_024") ||
+                   levelId.Equals("wle_s10_orig_round_025") ||
+                   levelId.Equals("wle_s10_orig_round_030") ||
+                   levelId.Equals("wle_s10_orig_round_031") ||
+                   levelId.Equals("wle_s10_round_004") ||
+                   levelId.Equals("wle_s10_round_009");
         }
         private void UpdateHoopsieLegends() {
             LevelStats level = this.StatLookup["round_hoops_blockade_solo"];
@@ -3843,7 +3899,8 @@ namespace FallGuysStats {
                    showId.StartsWith("event_wle_s10_") ||
                    showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1 ||
                    showId.Equals("wle_mrs_bagel") ||
-                   showId.StartsWith("current_wle_");
+                   showId.StartsWith("current_wle_fp") ||
+                   showId.StartsWith("wle_s10_cf_round_");
         }
         public string GetRoundIdFromShareCode(string shareCode) {
             switch (shareCode) {
@@ -4004,6 +4061,18 @@ namespace FallGuysStats {
                 case "1632-2850-0932": return "current_wle_fp4_10_11";
                 case "9536-3101-2748": return "current_wle_fp4_10_12";
                 case "6242-6736-1505": return "current_wle_fp4_10_20";
+                case "8870-4742-9307": return "current_wle_fp3_07_01";
+                case "8808-3436-4387": return "current_wle_fp3_07_02";
+                case "6362-1646-7291": return "current_wle_fp3_07_03";
+                case "5440-8703-2155": return "current_wle_fp3_07_04";
+                case "3748-0695-7721": return "current_wle_fp3_07_05";
+                case "9499-5510-3164": return "current_wle_fp3_07_0_01";
+                case "9388-0404-7294": return "current_wle_fp3_07_0_02";
+                case "8664-7885-4449": return "current_wle_fp3_07_0_03";
+                case "5065-6325-4646": return "wle_s10_cf_round_001";
+                case "6581-1890-6801": return "wle_s10_cf_round_002";
+                case "6656-2033-4324": return "wle_s10_cf_round_003";
+                case "7277-7302-9886": return "wle_s10_cf_round_004";
                 case "9381-5029-9669": return "current_wle_fp3_08_01";
                 case "7363-9687-8489": return "current_wle_fp3_08_02";
                 case "9586-9081-9196": return "current_wle_fp3_08_03";
