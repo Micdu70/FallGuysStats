@@ -169,7 +169,7 @@ namespace FallGuysStats {
             this.lblCountEliminatedMedal.Text = this.eliminatedMedalCount;
         }
 
-        private void cboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
+        private void CboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
             if (!this.isStartingUp) {
                 this.formsPlot.Plot.Clear();
                 this.SetGraph();
