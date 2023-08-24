@@ -1733,6 +1733,25 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 12;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 12) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.Name.Equals("current_wle_fp4_10_08") && !info.PrivateLobby) {
+                        info.PrivateLobby = true;
+                        info.Name = "1654-1285-7119";
+                        info.ShowNameId = "1654-1285-7119";
+                        info.UseShareCode = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 13;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1810,7 +1829,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 12
+                FrenchyEditionDB = 13
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -4110,7 +4129,7 @@ namespace FallGuysStats {
                 case "0841-8832-8969": return "current_wle_fp3_09_0_0_01";
                 case "9687-4558-9242": return "current_wle_fp4_09_01";
                 case "8824-3354-1460": return "current_wle_fp4_09_02";
-                case "1654-1285-7119": return "current_wle_fp4_10_08";
+                // case "1654-1285-7119": return "current_wle_fp4_10_08";
                 case "1632-2850-0932": return "current_wle_fp4_10_11";
                 case "9536-3101-2748": return "current_wle_fp4_10_12";
                 case "6242-6736-1505": return "current_wle_fp4_10_20";
@@ -4121,7 +4140,7 @@ namespace FallGuysStats {
                 case "9803-3074-8419": return "current_wle_fp4_10_05";
                 case "1503-2277-4955": return "current_wle_fp4_10_06";
                 case "6929-6036-1695": return "current_wle_fp4_10_07";
-                // case "9420-4455-9184": return "current_wle_fp4_10_08";
+                case "9420-4455-9184": return "current_wle_fp4_10_08";
                 case "6377-3695-4327": return "current_wle_fp4_10_0_01";
                 case "7833-7019-9317": return "current_wle_fp4_10_0_02";
                 case "9334-9348-1212": return "wle_s10_bt_round_001";

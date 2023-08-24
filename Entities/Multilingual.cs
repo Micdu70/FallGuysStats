@@ -2234,7 +2234,7 @@ namespace FallGuysStats {
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            // {"current_wle_fp4_10_08", "Wall Breaker"},
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -2246,7 +2246,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_05", "Slime race"},
                             {"current_wle_fp4_10_06", "Moving Day"},
                             {"current_wle_fp4_10_07", "Birthday Dash"},
-                            // {"current_wle_fp4_10_08", "Chess History"},
+                            {"current_wle_fp4_10_08", "Chess History"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -2567,7 +2567,7 @@ namespace FallGuysStats {
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            // {"current_wle_fp4_10_08", "Wall Breaker"},
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -2579,7 +2579,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_05", "Slime race"},
                             {"current_wle_fp4_10_06", "Moving Day"},
                             {"current_wle_fp4_10_07", "Birthday Dash"},
-                            // {"current_wle_fp4_10_08", "Chess History"},
+                            {"current_wle_fp4_10_08", "Chess History"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -2900,7 +2900,7 @@ namespace FallGuysStats {
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            // {"current_wle_fp4_10_08", "Wall Breaker"},
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -2912,7 +2912,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_05", "Slime race"},
                             {"current_wle_fp4_10_06", "Moving Day"},
                             {"current_wle_fp4_10_07", "Birthday Dash"},
-                            // {"current_wle_fp4_10_08", "Chess History"},
+                            {"current_wle_fp4_10_08", "Chess History"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -3233,7 +3233,7 @@ namespace FallGuysStats {
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            // {"current_wle_fp4_10_08", "Wall Breaker"},
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -3245,7 +3245,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_05", "Slime race"},
                             {"current_wle_fp4_10_06", "Moving Day"},
                             {"current_wle_fp4_10_07", "Birthday Dash"},
-                            // {"current_wle_fp4_10_08", "Chess History"},
+                            {"current_wle_fp4_10_08", "Chess History"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -3566,7 +3566,7 @@ namespace FallGuysStats {
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                            {"current_wle_fp4_10_08", "Wall Breaker"},
+                            // {"current_wle_fp4_10_08", "Wall Breaker"},
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -3578,7 +3578,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_05", "Slime race"},
                             {"current_wle_fp4_10_06", "Moving Day"},
                             {"current_wle_fp4_10_07", "Birthday Dash"},
-                            // {"current_wle_fp4_10_08", "Chess History"},
+                            {"current_wle_fp4_10_08", "Chess History"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -4081,7 +4081,7 @@ namespace FallGuysStats {
                     {"wle_s10_cf_round_003", "Drop n' Drag"},
                     {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                    {"current_wle_fp4_10_08", "Wall Breaker"},
+                    // {"current_wle_fp4_10_08", "Wall Breaker"},
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -4093,7 +4093,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_05", "Slime race"},
                     {"current_wle_fp4_10_06", "Moving Day"},
                     {"current_wle_fp4_10_07", "Birthday Dash"},
-                    // {"current_wle_fp4_10_08", "Chess History"},
+                    {"current_wle_fp4_10_08", "Chess History"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -4628,7 +4628,7 @@ namespace FallGuysStats {
                     {"wle_s10_cf_round_003", "Drop n' Drag"},
                     {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                    {"current_wle_fp4_10_08", "Wall Breaker"},
+                    // {"current_wle_fp4_10_08", "Wall Breaker"},
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -4640,7 +4640,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_05", "Slime race"},
                     {"current_wle_fp4_10_06", "Moving Day"},
                     {"current_wle_fp4_10_07", "Birthday Dash"},
-                    // {"current_wle_fp4_10_08", "Chess History"},
+                    {"current_wle_fp4_10_08", "Chess History"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -5175,7 +5175,7 @@ namespace FallGuysStats {
                     {"wle_s10_cf_round_003", "Drop n' Drag"},
                     {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                    {"current_wle_fp4_10_08", "Wall Breaker"},
+                    // {"current_wle_fp4_10_08", "Wall Breaker"},
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -5187,7 +5187,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_05", "Slime race"},
                     {"current_wle_fp4_10_06", "Moving Day"},
                     {"current_wle_fp4_10_07", "Birthday Dash"},
-                    // {"current_wle_fp4_10_08", "Chess History"},
+                    {"current_wle_fp4_10_08", "Chess History"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -5722,7 +5722,7 @@ namespace FallGuysStats {
                     {"wle_s10_cf_round_003", "Drop n' Drag"},
                     {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                    {"current_wle_fp4_10_08", "Wall Breaker"},
+                    // {"current_wle_fp4_10_08", "Wall Breaker"},
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -5734,7 +5734,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_05", "Slime race"},
                     {"current_wle_fp4_10_06", "Moving Day"},
                     {"current_wle_fp4_10_07", "Birthday Dash"},
-                    // {"current_wle_fp4_10_08", "Chess History"},
+                    {"current_wle_fp4_10_08", "Chess History"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -6269,7 +6269,7 @@ namespace FallGuysStats {
                     {"wle_s10_cf_round_003", "Drop n' Drag"},
                     {"wle_s10_cf_round_004", "Fun with Fans"},
 
-                    {"current_wle_fp4_10_08", "Wall Breaker"},
+                    // {"current_wle_fp4_10_08", "Wall Breaker"},
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
@@ -6281,7 +6281,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_05", "Slime race"},
                     {"current_wle_fp4_10_06", "Moving Day"},
                     {"current_wle_fp4_10_07", "Birthday Dash"},
-                    // {"current_wle_fp4_10_08", "Chess History"},
+                    {"current_wle_fp4_10_08", "Chess History"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
