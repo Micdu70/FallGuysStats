@@ -340,8 +340,8 @@ ASALocalRun/
 healthchecksdb
 
 # Binary files
-FallGuysStats.zip
-FallGuysStatsManualUpdate.zip
+#FallGuysStats.zip
+#FallGuysStatsManualUpdate.zip
 
 # Unwanted files
-Overlay_transparent_background.zip
+#Overlay_transparent_background.zip
