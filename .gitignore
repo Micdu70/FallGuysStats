@@ -338,3 +338,10 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Binary files
+FallGuysStats.zip
+FallGuysStatsManualUpdate.zip
+
+# Unwanted files
+Overlay_transparent_background.zip
