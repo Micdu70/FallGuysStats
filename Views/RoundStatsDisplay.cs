@@ -121,11 +121,11 @@ namespace FallGuysStats {
 
             this.formsPlot.Plot.Palette = new CustomPalette();
 
-            this.goldMedalPercent = $@"{Math.Round((values[1] / values[0]) * 100, 2)}%";
-            this.silverMedalPercent = $@"{Math.Round((values[2] / values[0]) * 100, 2)}%";
-            this.bronzeMedalPercent = $@"{Math.Round((values[3] / values[0]) * 100, 2)}%";
-            this.pinkMedalPercent = $@"{Math.Round((values[4] / values[0]) * 100, 2)}%";
-            this.eliminatedMedalPercent = $@"{Math.Round((values[5] / values[0]) * 100, 2)}%";
+            this.goldMedalPercent = $@"{Math.Round(values[1] / values[0] * 100, 2)}%";
+            this.silverMedalPercent = $@"{Math.Round(values[2] / values[0] * 100, 2)}%";
+            this.bronzeMedalPercent = $@"{Math.Round(values[3] / values[0] * 100, 2)}%";
+            this.pinkMedalPercent = $@"{Math.Round(values[4] / values[0] * 100, 2)}%";
+            this.eliminatedMedalPercent = $@"{Math.Round(values[5] / values[0] * 100, 2)}%";
 
             this.goldMedalCount = $@"{values[1]}";
             this.silverMedalCount = $@"{values[2]}";

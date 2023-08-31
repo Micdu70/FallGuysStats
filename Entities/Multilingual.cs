@@ -2219,6 +2219,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                             {"current_wle_fp4_09_01", "Crate Collector"},
                             {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -2552,6 +2553,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                             {"current_wle_fp4_09_01", "Crate Collector"},
                             {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -2885,6 +2887,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                             {"current_wle_fp4_09_01", "Crate Collector"},
                             {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -3218,6 +3221,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                             {"current_wle_fp4_09_01", "Crate Collector"},
                             {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -3551,6 +3555,7 @@ namespace FallGuysStats {
                             {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                             {"current_wle_fp4_09_01", "Crate Collector"},
                             {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -4066,6 +4071,7 @@ namespace FallGuysStats {
                     {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                     {"current_wle_fp4_09_01", "Crate Collector"},
                     {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                     {"current_wle_fp3_07_01", "Block Sledding"},
                     {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -4613,6 +4619,7 @@ namespace FallGuysStats {
                     {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                     {"current_wle_fp4_09_01", "Crate Collector"},
                     {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                     {"current_wle_fp3_07_01", "Block Sledding"},
                     {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -5160,6 +5167,7 @@ namespace FallGuysStats {
                     {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                     {"current_wle_fp4_09_01", "Crate Collector"},
                     {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                     {"current_wle_fp3_07_01", "Block Sledding"},
                     {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -5707,6 +5715,7 @@ namespace FallGuysStats {
                     {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                     {"current_wle_fp4_09_01", "Crate Collector"},
                     {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                     {"current_wle_fp3_07_01", "Block Sledding"},
                     {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -6254,6 +6263,7 @@ namespace FallGuysStats {
                     {"current_wle_fp3_09_0_0_01", "Pastel Paradise"},
                     {"current_wle_fp4_09_01", "Crate Collector"},
                     {"current_wle_fp4_09_02", "Dribble Drills"},
+                            {"current_wle_fp4_09_0_01", "ICY PEAKS"},
 
                     {"current_wle_fp3_07_01", "Block Sledding"},
                     {"current_wle_fp3_07_02", "Layup Wallop"},

@@ -1473,7 +1473,7 @@ namespace FallGuysStats {
                 this.StatsDB.BeginTrans();
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
-                    if ((!string.IsNullOrEmpty(info.ShowNameId) && info.ShowNameId.StartsWith("wle_mrs_bagel")) && info.Name.StartsWith("wle_mrs_bagel_final")) {
+                    if (!string.IsNullOrEmpty(info.ShowNameId) && info.ShowNameId.StartsWith("wle_mrs_bagel") && info.Name.StartsWith("wle_mrs_bagel_final")) {
                         info.IsFinal = true;
                         this.RoundDetails.Update(info);
                     }
@@ -1576,7 +1576,7 @@ namespace FallGuysStats {
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if (!string.IsNullOrEmpty(info.ShowNameId) &&
-                        ((info.ShowNameId.StartsWith("show_wle_s10_wk") || info.ShowNameId.StartsWith("event_wle_s10_wk")) && info.ShowNameId.EndsWith("_mrs")) &&
+                        (info.ShowNameId.StartsWith("show_wle_s10_wk") || info.ShowNameId.StartsWith("event_wle_s10_wk")) && info.ShowNameId.EndsWith("_mrs") &&
                         !this.IsFinalWithCreativeLevel(info.Name)) {
                         info.IsFinal = false;
                         this.RoundDetails.Update(info);
@@ -1752,6 +1752,23 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 13;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 13) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) && !info.IsFinal &&
+                        info.ShowNameId.StartsWith("show_wle_s10_player_round_wk")) {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 14;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1829,7 +1846,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 13
+                FrenchyEditionDB = 14
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -4129,6 +4146,7 @@ namespace FallGuysStats {
                 case "0841-8832-8969": return "current_wle_fp3_09_0_0_01";
                 case "9687-4558-9242": return "current_wle_fp4_09_01";
                 case "8824-3354-1460": return "current_wle_fp4_09_02";
+                case "0796-0036-7637": return "current_wle_fp4_09_0_01";
                 // case "1654-1285-7119": return "current_wle_fp4_10_08";
                 case "1632-2850-0932": return "current_wle_fp4_10_11";
                 case "9536-3101-2748": return "current_wle_fp4_10_12";
