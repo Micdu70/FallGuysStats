@@ -1,12 +1,17 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.217 ~ 31/08/2023
+  { Correction de bugs de la "FE" }
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+    - ++Changé: Base de données GeoLite2 datant du 29/08/2023
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.216 ~ 24/08/2023
   { Correction de bugs de la "FE" }
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
     - ++Changé: Base de données GeoLite2 datant du 22/08/2023
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.215 ~ 17/08/2023
   { Correction de bugs de la "FE" }
