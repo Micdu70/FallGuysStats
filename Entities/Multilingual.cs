@@ -3690,17 +3690,17 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_20", "Co-op and CO"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
-                            
+
                             {"wle_s10_cf_round_001", "Blocky Bridges"},
                             {"wle_s10_cf_round_002", "Gappy-go-Lucky"},
                             {"wle_s10_cf_round_003", "Drop n' Drag"},
                             {"wle_s10_cf_round_004", "Fun with Fans"},
-                            
+
                             {"wle_s10_bt_round_001", "Push Ups"},
                             {"wle_s10_bt_round_002", "Heave & Haul"},
                             {"wle_s10_bt_round_003", "Stepping Stones"},
                             {"wle_s10_bt_round_004", "Double Trouble"},
-                            
+
                             {"wle_mrs_bagel_opener_1", "Tunnel of Love"},
                             {"wle_mrs_bagel_opener_2", "Pink Parade"},
                             {"wle_mrs_bagel_opener_3", "Prideful Path"},
@@ -5928,7 +5928,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_09_1_01", "Push-Box Chaos"},
                     {"current_wle_fp4_09_1_02", "Haute voltige"},
                     {"current_wle_fp4_09_2_01", "DNA Test"},
-                    
+
                     {"current_wle_fp4_10_01", "Bouncy Box Boulevard 3 Extreme Delivery"},
                     {"current_wle_fp4_10_02", "Hot Blast"},
                     {"current_wle_fp4_10_03", "Box Fan Blitz"},
