@@ -446,7 +446,6 @@ namespace FallGuysStats {
             { "current_wle_fp4_09_1_01",          new LevelStats("Push-Box Chaos", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_09_1_02",          new LevelStats("Haute voltige", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_09_2_01",          new LevelStats("DNA Test", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
-            { "current_wle_fp4_09_0_01",          new LevelStats("ICY PEAKS", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
 
             { "current_wle_fp4_10_01",            new LevelStats("Bouncy Box Boulevard 3 Extreme Delivery", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_10_02",            new LevelStats("Hot Blast", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
