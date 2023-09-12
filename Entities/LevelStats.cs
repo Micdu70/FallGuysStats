@@ -421,6 +421,15 @@ namespace FallGuysStats {
             { "current_wle_fp3_09_0_06",          new LevelStats("Savour Your Happiness", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp3_09_0_0_01",        new LevelStats("Pastel Paradise", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
 
+            { "current_wle_fp4_07_01",            new LevelStats("Rotational Runner", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_02",            new LevelStats("SPIRAL DASH ROAD", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_03",            new LevelStats("simple stage", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_04",            new LevelStats("Slip Slide Jump and Run", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_05",            new LevelStats("Factory Valley", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_06",            new LevelStats("Jumpy Beans", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_07",            new LevelStats("Slimetastic Stumble", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_07_0_01",          new LevelStats("Camino Ninja", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+
             { "current_wle_fp4_08_01",            new LevelStats("co-op guys", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_08_0_01",          new LevelStats("The big slide", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_08_0_02",          new LevelStats("Freefall Mountain", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
@@ -459,6 +468,7 @@ namespace FallGuysStats {
             { "current_wle_fp4_10_11",            new LevelStats("HOARDER BLOCKS", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_10_12",            new LevelStats("Chickens run away", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_10_20",            new LevelStats("Co-op and CO", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp4_10_21",            new LevelStats("Construction Site", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_10_0_01",          new LevelStats("Cheese Canyon", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp4_10_0_02",          new LevelStats("Molehills", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
 

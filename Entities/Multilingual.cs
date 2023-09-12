@@ -2237,6 +2237,15 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                            {"current_wle_fp4_07_01", "Rotational Runner"},
+                            {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                            {"current_wle_fp4_07_03", "simple stage"},
+                            {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                            {"current_wle_fp4_07_05", "Factory Valley"},
+                            {"current_wle_fp4_07_06", "Jumpy Beans"},
+                            {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                            {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                             {"current_wle_fp4_08_01", "co-op guys"},
                             {"current_wle_fp4_08_0_01", "The big slide"},
                             {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -2275,6 +2284,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_21", "Construction Site"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -2593,6 +2603,15 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                            {"current_wle_fp4_07_01", "Rotational Runner"},
+                            {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                            {"current_wle_fp4_07_03", "simple stage"},
+                            {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                            {"current_wle_fp4_07_05", "Factory Valley"},
+                            {"current_wle_fp4_07_06", "Jumpy Beans"},
+                            {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                            {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                             {"current_wle_fp4_08_01", "co-op guys"},
                             {"current_wle_fp4_08_0_01", "The big slide"},
                             {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -2631,6 +2650,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_21", "Construction Site"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -2948,6 +2968,15 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                            {"current_wle_fp4_07_01", "Rotational Runner"},
+                            {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                            {"current_wle_fp4_07_03", "simple stage"},
+                            {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                            {"current_wle_fp4_07_05", "Factory Valley"},
+                            {"current_wle_fp4_07_06", "Jumpy Beans"},
+                            {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                            {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                             {"current_wle_fp4_08_01", "co-op guys"},
                             {"current_wle_fp4_08_0_01", "The big slide"},
                             {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -2986,6 +3015,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_21", "Construction Site"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -3304,6 +3334,15 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                            {"current_wle_fp4_07_01", "Rotational Runner"},
+                            {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                            {"current_wle_fp4_07_03", "simple stage"},
+                            {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                            {"current_wle_fp4_07_05", "Factory Valley"},
+                            {"current_wle_fp4_07_06", "Jumpy Beans"},
+                            {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                            {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                             {"current_wle_fp4_08_01", "co-op guys"},
                             {"current_wle_fp4_08_0_01", "The big slide"},
                             {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -3342,6 +3381,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_21", "Construction Site"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -3660,6 +3700,15 @@ namespace FallGuysStats {
                             {"current_wle_fp3_10_28", "SLIP-SAW"},
                             {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                            {"current_wle_fp4_07_01", "Rotational Runner"},
+                            {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                            {"current_wle_fp4_07_03", "simple stage"},
+                            {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                            {"current_wle_fp4_07_05", "Factory Valley"},
+                            {"current_wle_fp4_07_06", "Jumpy Beans"},
+                            {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                            {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                             {"current_wle_fp4_08_01", "co-op guys"},
                             {"current_wle_fp4_08_0_01", "The big slide"},
                             {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -3698,6 +3747,7 @@ namespace FallGuysStats {
                             {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                             {"current_wle_fp4_10_12", "Chickens run away"},
                             {"current_wle_fp4_10_20", "Co-op and CO"},
+                            {"current_wle_fp4_10_21", "Construction Site"},
                             {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                             {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -4203,6 +4253,15 @@ namespace FallGuysStats {
                     {"current_wle_fp3_10_28", "SLIP-SAW"},
                     {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                    {"current_wle_fp4_07_01", "Rotational Runner"},
+                    {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                    {"current_wle_fp4_07_03", "simple stage"},
+                    {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                    {"current_wle_fp4_07_05", "Factory Valley"},
+                    {"current_wle_fp4_07_06", "Jumpy Beans"},
+                    {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                    {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                     {"current_wle_fp4_08_01", "co-op guys"},
                     {"current_wle_fp4_08_0_01", "The big slide"},
                     {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -4241,6 +4300,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
+                    {"current_wle_fp4_10_21", "Construction Site"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -4773,6 +4833,15 @@ namespace FallGuysStats {
                     {"current_wle_fp3_10_28", "SLIP-SAW"},
                     {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                    {"current_wle_fp4_07_01", "Rotational Runner"},
+                    {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                    {"current_wle_fp4_07_03", "simple stage"},
+                    {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                    {"current_wle_fp4_07_05", "Factory Valley"},
+                    {"current_wle_fp4_07_06", "Jumpy Beans"},
+                    {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                    {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                     {"current_wle_fp4_08_01", "co-op guys"},
                     {"current_wle_fp4_08_0_01", "The big slide"},
                     {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -4811,6 +4880,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
+                    {"current_wle_fp4_10_21", "Construction Site"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -5343,6 +5413,15 @@ namespace FallGuysStats {
                     {"current_wle_fp3_10_28", "SLIP-SAW"},
                     {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                    {"current_wle_fp4_07_01", "Rotational Runner"},
+                    {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                    {"current_wle_fp4_07_03", "simple stage"},
+                    {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                    {"current_wle_fp4_07_05", "Factory Valley"},
+                    {"current_wle_fp4_07_06", "Jumpy Beans"},
+                    {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                    {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                     {"current_wle_fp4_08_01", "co-op guys"},
                     {"current_wle_fp4_08_0_01", "The big slide"},
                     {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -5381,6 +5460,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
+                    {"current_wle_fp4_10_21", "Construction Site"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -5913,6 +5993,15 @@ namespace FallGuysStats {
                     {"current_wle_fp3_10_28", "SLIP-SAW"},
                     {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                    {"current_wle_fp4_07_01", "Rotational Runner"},
+                    {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                    {"current_wle_fp4_07_03", "simple stage"},
+                    {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                    {"current_wle_fp4_07_05", "Factory Valley"},
+                    {"current_wle_fp4_07_06", "Jumpy Beans"},
+                    {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                    {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                     {"current_wle_fp4_08_01", "co-op guys"},
                     {"current_wle_fp4_08_0_01", "The big slide"},
                     {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -5951,6 +6040,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
+                    {"current_wle_fp4_10_21", "Construction Site"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
@@ -6483,6 +6573,15 @@ namespace FallGuysStats {
                     {"current_wle_fp3_10_28", "SLIP-SAW"},
                     {"current_wle_fp3_10_29", "Bbq bacon burger"},
 
+                    {"current_wle_fp4_07_01", "Rotational Runner"},
+                    {"current_wle_fp4_07_02", "SPIRAL DASH ROAD"},
+                    {"current_wle_fp4_07_03", "simple stage"},
+                    {"current_wle_fp4_07_04", "Slip Slide Jump and Run"},
+                    {"current_wle_fp4_07_05", "Factory Valley"},
+                    {"current_wle_fp4_07_06", "Jumpy Beans"},
+                    {"current_wle_fp4_07_07", "Slimetastic Stumble"},
+                    {"current_wle_fp4_07_0_01", "Camino Ninja"},
+
                     {"current_wle_fp4_08_01", "co-op guys"},
                     {"current_wle_fp4_08_0_01", "The big slide"},
                     {"current_wle_fp4_08_0_02", "Freefall Mountain"},
@@ -6521,6 +6620,7 @@ namespace FallGuysStats {
                     {"current_wle_fp4_10_11", "HOARDER BLOCKS"},
                     {"current_wle_fp4_10_12", "Chickens run away"},
                     {"current_wle_fp4_10_20", "Co-op and CO"},
+                    {"current_wle_fp4_10_21", "Construction Site"},
                     {"current_wle_fp4_10_0_01", "Cheese Canyon"},
                     {"current_wle_fp4_10_0_02", "Molehills"},
 
