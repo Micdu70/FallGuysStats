@@ -3571,7 +3571,7 @@ namespace FallGuysStats {
             this.CurrentSettings.GameShortcutLocation = fallGuysShortcutLocation;
             this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
         }
-        private string FindEpicGamesShortcutLocation() {
+        public string FindEpicGamesShortcutLocation() {
             try {
                 object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher", "AppDataPath", null);
                 if (regValue == null) {
@@ -3597,7 +3597,7 @@ namespace FallGuysStats {
 
             return string.Empty;
         }
-        private string FindSteamExeLocation() {
+        public string FindSteamExeLocation() {
             try {
                 // get steam install folder
                 object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam", "InstallPath", null);
