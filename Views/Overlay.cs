@@ -1148,7 +1148,6 @@ namespace FallGuysStats {
             int overlaySetting = (hideWins ? 4 : 0) + (hideRound ? 2 : 0) + (hideTime ? 1 : 0);
             switch (overlaySetting) {
                 case 0:
-                    //this.MinimumSize = new Size(786, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(786, showTabs ? 134 : 99);
 
                     this.lblWins.Location = new Point(firstColumnX, 9 + heightOffset);
@@ -1204,7 +1203,6 @@ namespace FallGuysStats {
                     this.lblFinish.DrawVisible = true;
                     break;
                 case 1:
-                    //this.MinimumSize = new Size(538, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(555, showTabs ? 134 : 99);
 
                     this.drawWidth -= thirdColumnWidth + spacerWidth;
@@ -1259,7 +1257,6 @@ namespace FallGuysStats {
                     this.lblQualifyChance.DrawVisible = true;
                     break;
                 case 2:
-                    //this.MinimumSize = new Size(538, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(499, showTabs ? 134 : 99);
 
                     this.drawWidth -= secondColumnWidth + spacerWidth;
@@ -1289,7 +1286,6 @@ namespace FallGuysStats {
                     this.lblFinish.DrawVisible = true;
                     break;
                 case 3:
-                    //this.MinimumSize = new Size(251, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(268, showTabs ? 134 : 99);
 
                     this.drawWidth -= secondColumnWidth + thirdColumnWidth + (spacerWidth * 2);
@@ -1315,7 +1311,6 @@ namespace FallGuysStats {
                     this.lblFinish.DrawVisible = false;
                     break;
                 case 4:
-                    //this.MinimumSize = new Size(251, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(538, showTabs ? 134 : 99);
 
                     this.drawWidth -= firstColumnWidth + spacerWidth;
@@ -1370,7 +1365,6 @@ namespace FallGuysStats {
                     this.lblFinish.DrawVisible = true;
                     break;
                 case 5:
-                    //this.MinimumSize = new Size(251, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(307, showTabs ? 134 : 99);
 
                     this.drawWidth -= firstColumnWidth + thirdColumnWidth + (spacerWidth * 2);
@@ -1422,7 +1416,6 @@ namespace FallGuysStats {
                     this.lblFinish.DrawVisible = false;
                     break;
                 case 6:
-                    //this.MinimumSize = new Size(251, showTabs ? 134 : 99);
                     this.DefaultSize = new Size(251, showTabs ? 134 : 99);
 
                     this.drawWidth -= firstColumnWidth + secondColumnWidth + (spacerWidth * 2);
