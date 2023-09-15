@@ -429,7 +429,7 @@ namespace FallGuysStats {
             this.Padding = new System.Windows.Forms.Padding(23, 60, 23, 20);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.ShowInTaskbar = false;
+            this.ShowInTaskbar = true;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Profile Settings";
             this.Load += new System.EventHandler(this.EditProfiles_Load);

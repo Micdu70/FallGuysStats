@@ -1,4 +1,6 @@
-﻿namespace FallGuysStats {
+﻿using FallGuysStats.Properties;
+
+namespace FallGuysStats {
     partial class Settings {
         /// <summary>
         /// Required designer variable.
@@ -24,6 +26,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.lblLogPath = new MetroFramework.Controls.MetroLabel();
             this.lblLogPathNote = new MetroFramework.Controls.MetroLabel();
             this.txtLogPath = new MetroFramework.Controls.MetroTextBox();
@@ -1350,13 +1353,13 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.panelSettings);
             this.ForeColor = System.Drawing.Color.Black;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Settings";
             this.Padding = new System.Windows.Forms.Padding(23, 60, 23, 18);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
