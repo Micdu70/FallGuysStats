@@ -79,7 +79,7 @@ namespace FallGuysStats {
 #endif
 
             this.filePath = Path.Combine(logDirectory, fileName);
-            this.prevFilePath = Path.Combine(logDirectory, Path.GetFileNameWithoutExtension(fileName) + "-prev.log");
+            this.prevFilePath = Path.Combine(logDirectory, $"{Path.GetFileNameWithoutExtension(fileName)}-prev.log");
             this.stop = false;
             this.watcher = new Thread(this.ReadLogFile) { IsBackground = true };
             this.watcher.Start();
@@ -106,7 +106,7 @@ namespace FallGuysStats {
             List<LogLine> tempLines = new List<LogLine>();
             DateTime lastDate = DateTime.MinValue;
             bool completed = false;
-            string currentFilePath = prevFilePath;
+            string currentFilePath = this.prevFilePath;
             long offset = 0;
             while (!this.stop) {
                 try {
@@ -122,6 +122,15 @@ namespace FallGuysStats {
                                 DateTime currentDate = lastDate;
                                 while ((line = sr.ReadLine()) != null) {
                                     LogLine logLine = new LogLine(line, sr.Position);
+
+                                    // if (line.IndexOf("Discovering subsystems at path", StringComparison.OrdinalIgnoreCase) > 0) {
+                                    //     string subsystemsPath = line.Substring(44);
+                                    //     if (subsystemsPath.IndexOf("steamapps", StringComparison.OrdinalIgnoreCase) > 0) {
+                                    //         // Steam
+                                    //     } else {
+                                    //         // Epic Games
+                                    //     }
+                                    // }
 
                                     if (logLine.IsValid) {
                                         int index;
