@@ -570,14 +570,14 @@ namespace FallGuysStats {
                 case 0:
                     this.lblQualifyChance.Text = $"{Multilingual.GetWord("overlay_qualify_chance")} :";
                     qualifyChance = levelInfo.TotalQualify * 100f / (levelInfo.TotalPlays == 0 ? 1 : levelInfo.TotalPlays);
-                    qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {qualifyChance:0.0}%";
+                    qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {Math.Truncate(qualifyChance * 10) / 10}%";
                     qualifyDisplay = $"{levelInfo.TotalQualify}{(levelInfo.TotalPlays < 1000 ? " / " + levelInfo.TotalPlays : Multilingual.GetWord("overlay_inning"))}";
                     this.lblQualifyChance.TextRight = $"{qualifyDisplay}{qualifyChanceDisplay}";
                     break;
                 case 1:
                     this.lblQualifyChance.Text = $"{Multilingual.GetWord("overlay_qualify_gold")} :";
                     qualifyChance = levelInfo.TotalGolds * 100f / (levelInfo.TotalPlays == 0 ? 1 : levelInfo.TotalPlays);
-                    qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {qualifyChance:0.0}%";
+                    qualifyChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {Math.Truncate(qualifyChance * 10) / 10}%";
                     qualifyDisplay = $"{levelInfo.TotalGolds}{(levelInfo.TotalPlays < 1000 ? " / " + levelInfo.TotalPlays : Multilingual.GetWord("overlay_inning"))}";
                     this.lblQualifyChance.TextRight = $"{qualifyDisplay}{qualifyChanceDisplay}";
                     break;
@@ -775,7 +775,7 @@ namespace FallGuysStats {
 
                     this.lblWins.Text = $"{Multilingual.GetWord("overlay_wins")} :";
                     float winChance = levelInfo.TotalWins * 100f / (levelInfo.TotalShows == 0 ? 1 : levelInfo.TotalShows);
-                    string winChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $"{Multilingual.GetWord("overlay_win")} - {winChance:0.0}%";
+                    string winChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $"{Multilingual.GetWord("overlay_win")} - {Math.Truncate(winChance * 10) / 10}%";
                     if (this.StatsForm.CurrentSettings.PreviousWins > 0) {
                         this.lblWins.TextRight = $"{levelInfo.TotalWins} ({levelInfo.AllWins + this.StatsForm.CurrentSettings.PreviousWins}){winChanceDisplay}";
                     } else {
@@ -787,7 +787,7 @@ namespace FallGuysStats {
                     this.lblFinals.Text = $"{Multilingual.GetWord("overlay_finals")} :";
                     string finalText = $"{levelInfo.TotalFinals}{(levelInfo.TotalShows < 1000 ? " / " + levelInfo.TotalShows : Multilingual.GetWord("overlay_inning"))}";
                     float finalChance = levelInfo.TotalFinals * 100f / (levelInfo.TotalShows == 0 ? 1 : levelInfo.TotalShows);
-                    string finalChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : finalText.Length > 9 ? $" - {finalChance:0}%" : $" - {finalChance:0.0}%";
+                    string finalChanceDisplay = this.StatsForm.CurrentSettings.HideOverlayPercentages ? string.Empty : $" - {Math.Truncate(finalChance * 10) / 10}%";
                     this.lblFinals.TextRight = $"{finalText}{finalChanceDisplay}";
 
                     this.SetQualifyChanceLabel(levelInfo);
