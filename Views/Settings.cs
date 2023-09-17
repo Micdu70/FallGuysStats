@@ -583,7 +583,7 @@ namespace FallGuysStats {
                 using (OpenFileDialog openFile = new OpenFileDialog()) {
                     if (this.LaunchPlatform == 0) { // Epic Games
                         if (string.IsNullOrEmpty(this.StatsForm.FindEpicGamesShortcutLocation())) {
-                            MessageBox.Show(Multilingual.GetWordWithLang("message_not_installed_epicGames", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_epicGames_caption", this.DisplayLang),
+                            MessageBox.Show(this, Multilingual.GetWordWithLang("message_not_installed_epicGames", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_epicGames_caption", this.DisplayLang),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
@@ -614,13 +614,13 @@ namespace FallGuysStats {
                             if (url.ToLower().StartsWith("com.epicgames.launcher://apps/") && url.IndexOf(epicGamesFallGuysApp) > 0) {
                                 this.txtGameShortcutLocation.Text = url;
                             } else {
-                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_epicgames", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
+                                MessageBox.Show(this, Multilingual.GetWordWithLang("message_wrong_selected_file_epicgames", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     } else { // Steam
                         if (string.IsNullOrEmpty(this.StatsForm.FindSteamExeLocation())) {
-                            MessageBox.Show(Multilingual.GetWordWithLang("message_not_installed_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_steam_caption", this.DisplayLang),
+                            MessageBox.Show(this, Multilingual.GetWordWithLang("message_not_installed_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_not_installed_steam_caption", this.DisplayLang),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
@@ -637,7 +637,7 @@ namespace FallGuysStats {
                             if (openFile.FileName.IndexOf("FallGuys_client", StringComparison.OrdinalIgnoreCase) >= 0) {
                                 txtGameExeLocation.Text = openFile.FileName;
                             } else {
-                                MessageBox.Show(Multilingual.GetWordWithLang("message_wrong_selected_file_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
+                                MessageBox.Show(this, Multilingual.GetWordWithLang("message_wrong_selected_file_steam", this.DisplayLang), Multilingual.GetWordWithLang("message_wrong_selected_file_caption", this.DisplayLang),
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
