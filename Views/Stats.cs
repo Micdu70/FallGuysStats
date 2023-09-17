@@ -2236,7 +2236,17 @@ namespace FallGuysStats {
                                         stat.CreativeLastModifiedDate = versionMetadata.GetProperty("last_modified_date").GetDateTime();
                                         stat.CreativePlayCount = resData.GetProperty("play_count").GetInt32();
                                     } catch {
-                                        // ignored
+                                        stat.CreativeShareCode = null;
+                                        stat.CreativeOnlinePlatformId = null;
+                                        stat.CreativeAuthor = null;
+                                        stat.CreativeVersion = 0;
+                                        stat.CreativeStatus = null;
+                                        stat.CreativeTitle = null;
+                                        stat.CreativeDescription = null;
+                                        stat.CreativeMaxPlayer = 0;
+                                        stat.CreativePlatformId = null;
+                                        stat.CreativeLastModifiedDate = DateTime.MinValue;
+                                        stat.CreativePlayCount = 0;
                                     }
                                 }
 
