@@ -1769,6 +1769,25 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 14;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 14) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) && info.IsFinal &&
+                        info.ShowNameId.Equals("survival_of_the_fittest") &&
+                        info.Name.Equals("round_kraken_attack") &&
+                        info.Round != 4) {
+                        info.IsFinal = false;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 15;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1846,7 +1865,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 14
+                FrenchyEditionDB = 15
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
