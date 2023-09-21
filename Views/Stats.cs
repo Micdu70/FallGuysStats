@@ -2057,7 +2057,7 @@ namespace FallGuysStats {
                 if (this.CurrentSettings.FormLocationX.HasValue && IsOnScreen(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value, this.Width, this.Height)) {
                     this.Location = new Point(this.CurrentSettings.FormLocationX.Value, this.CurrentSettings.FormLocationY.Value);
                 }
-                
+
                 string logFilePath = Path.Combine($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}Low", "Mediatonic", "FallGuys_client");
                 if (!string.IsNullOrEmpty(this.CurrentSettings.LogPath)) {
                     logFilePath = this.CurrentSettings.LogPath;
@@ -4084,7 +4084,7 @@ namespace FallGuysStats {
                 case "3009-9034-1901": return "wle_s10_player_round_wk6_08";
                 case "3256-6219-9927": return "wle_s10_player_round_wk6_09";
                 case "4815-5486-6368": return "wle_s10_player_round_wk6_10";
-                case "6594-9005-1010": return "wle_s10_player_round_wk6_12";
+                // case "6594-9005-1010": return "wle_s10_player_round_wk6_12";
                 case "1467-7300-1979": return "wle_s10_player_round_wk6_13";
                 case "2734-5123-1618": return "wle_s10_player_round_wk6_14";
                 case "2998-8626-6987": return "wle_s10_player_round_wk6_15";
@@ -4163,6 +4163,21 @@ namespace FallGuysStats {
                 case "0209-4801-4109": return "current_wle_fp3_10_27";
                 case "0147-5332-8225": return "current_wle_fp3_10_28";
                 case "0026-7621-3553": return "current_wle_fp3_10_29";
+
+                case "7421-3397-8915": return "current_wle_fp4_06_01";
+                case "0897-2632-3022": return "current_wle_fp4_06_02";
+                case "4837-5178-6772": return "current_wle_fp4_06_0_01";
+                case "9883-1664-6105": return "current_wle_fp4_06_0_02";
+                case "1587-8887-3763": return "current_wle_fp4_06_0_03";
+                case "0581-9229-6109": return "current_wle_fp4_06_0_04";
+                case "7710-6656-7617": return "current_wle_fp4_06_0_05";
+                case "6594-9005-1010": return "current_wle_fp4_06_0_10_01";
+                case "8549-0392-8062": return "current_wle_fp4_06_1_01";
+                case "8929-4807-4981": return "current_wle_fp4_06_1_02";
+                case "8598-1284-1406": return "current_wle_fp4_06_1_03";
+                case "0226-5184-6884": return "current_wle_fp4_06_1_04";
+                case "9410-7962-1207": return "current_wle_fp4_06_1_05";
+                case "6002-7812-7859": return "current_wle_fp4_06_1_06";
 
                 case "9414-6564-4192": return "current_wle_fp4_07_01";
                 case "7909-3465-4598": return "current_wle_fp4_07_02";
