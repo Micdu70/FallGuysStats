@@ -31,7 +31,7 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 
 -> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
 
-INFO: Date des données GeoLite2 utilisées => 22/09/2023
+INFO: Date des données GeoLite2 utilisées => 26/09/2023
 
 
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.221` ~ 21/09/2023
+**Dernière version:** `v1.222` ~ 28/09/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -59,10 +59,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog de la dernière version
 
-- +Corrigé: Détection des manches non finales de "Valse du Kraken" pour l'émission "Le plus fort survivra"
+{ Correction de bugs de la "FE" }
+- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+- ++Changé: Base de données GeoLite2 datant du 26/09/2023
 
 
-### Il y a 0 bug génant connu dans la v1.221 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.222 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -225,6 +227,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.222` ~ 28/09/2023
+  { Correction de bugs de la "FE" }
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+    - ++Changé: Base de données GeoLite2 datant du 26/09/2023
 
   - `v1.221` ~ 21/09/2023
     - +Corrigé: Détection des manches non finales de "Valse du Kraken" pour l'émission "Le plus fort survivra"
