@@ -2483,10 +2483,17 @@ namespace FallGuysStats {
             string currentProfileLinkedShowId = this.AllProfiles.Find(p => p.ProfileId == this.GetCurrentProfileId()).LinkedShowId;
             return !string.IsNullOrEmpty(currentProfileLinkedShowId) ? currentProfileLinkedShowId : string.Empty;
         }
+        private string GetLinkedShowId(string showId) {
+            switch (showId) {
+                case "squadcelebration": return "squads_4player";
+                case "turbo_show": return "main_show";
+            }
+            return showId;
+        }
         private int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) { return 0; }
 
-            if ("squadcelebration".Equals(showId)) { showId = "squads_4player"; }
+            showId = this.GetLinkedShowId(showId);
 
             for (int i = 0; i < this.AllProfiles.Count; i++) {
                 if (isPrivateLobbies) {
@@ -2518,7 +2525,8 @@ namespace FallGuysStats {
         public void SetLinkedProfileMenu(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if ((this.AllProfiles.Count <= 1) || string.IsNullOrEmpty(showId)) { return; }
 
-            if ("squadcelebration".Equals(showId)) { showId = "squads_4player"; }
+            showId = this.GetLinkedShowId(showId);
+
             if (this.GetCurrentProfileLinkedShowId().Equals(showId)) { return; }
 
             for (int i = 0; i < this.AllProfiles.Count; i++) {

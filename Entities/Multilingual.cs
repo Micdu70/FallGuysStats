@@ -4431,6 +4431,7 @@ namespace FallGuysStats {
                     {"teams_show", "Connection Error"},
                     {"toms_main_show_5_2", "Main Show"},
                     {"toms_show2", "Toms Show 2"},
+                    {"turbo_show", "Solos"},
                     {"wallguys_test", "WALL <br>GUYS"},
                     {"wle_lobby_template", "Show Name"},
                     {"wle_lobby_template_validation", "Show Name"},
@@ -4442,7 +4443,9 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_final", "placeholder"},
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "X-treme Party"},
+
                     {"private_lobbies", "Custom Show"},
+
                     {"fall_guys_creative_mode", "Fall Guys Creative"},
                 }
             },
@@ -5026,6 +5029,7 @@ namespace FallGuysStats {
                     {"teams_show", "Erreur de connexion"},
                     {"toms_main_show_5_2", "Émission principale"},
                     {"toms_show2", "Toms Show 2"},
+                    {"turbo_show", "Solo"},
                     {"wallguys_test", "MURS <br>SANS FRONTIÈRES"},
                     {"wle_lobby_template", "Show Name"},
                     {"wle_lobby_template_validation", "Show Name"},
@@ -5037,7 +5041,9 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_final", "placeholder"},
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "Fête Xtrême"},
+
                     {"private_lobbies", "Partie Personnalisée"},
+
                     {"fall_guys_creative_mode", "Créatif de Fall Guys"},
                 }
             },
@@ -5621,6 +5627,7 @@ namespace FallGuysStats {
                     {"teams_show", "접속 오류"},
                     {"toms_main_show_5_2", "메인 쇼"},
                     {"toms_show2", "Toms Show 2"},
+                    {"turbo_show", "솔로"},
                     {"wallguys_test", "벽 <br>가이즈"},
                     {"wle_lobby_template", "Show Name"},
                     {"wle_lobby_template_validation", "Show Name"},
@@ -5632,7 +5639,9 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_final", "placeholder"},
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "X-익스트림 파티"},
+
                     {"private_lobbies", "커스텀 쇼"},
+
                     {"fall_guys_creative_mode", "폴크리"},
                 }
             },
@@ -6216,6 +6225,7 @@ namespace FallGuysStats {
                     {"teams_show", "接続エラー"},
                     {"toms_main_show_5_2", "メインショー"},
                     {"toms_show2", "Toms Show 2"},
+                    {"turbo_show", "ソロ"},
                     {"wallguys_test", "ウォール  <br>ガイズ"},
                     {"wle_lobby_template", "Show Name"},
                     {"wle_lobby_template_validation", "Show Name"},
@@ -6227,7 +6237,9 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_final", "placeholder"},
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "エクストリームパーティー"},
+
                     {"private_lobbies", "カスタムショー"},
+
                     {"fall_guys_creative_mode", "フォールガイズ クリエイティブ"},
                 }
             },
@@ -6811,6 +6823,7 @@ namespace FallGuysStats {
                     {"teams_show", "网络故障"},
                     {"toms_main_show_5_2", "主要专题"},
                     {"toms_show2", "Toms Show 2"},
+                    {"turbo_show", "单人"},
                     {"wallguys_test", "攀墙 <br>豆士"},
                     {"wle_lobby_template", "Show Name"},
                     {"wle_lobby_template_validation", "Show Name"},
@@ -6822,7 +6835,9 @@ namespace FallGuysStats {
                     {"wle_srs_single_winner_template_final", "placeholder"},
                     {"wle_srs_single_winner_template_opener", "placeholder"},
                     {"xtreme_party", "极限糖豆人派对"},
+
                     {"private_lobbies", "自定义节目"},
+
                     {"fall_guys_creative_mode", "Fall Guys Creative"},
                 }
             },
