@@ -59,30 +59,14 @@ namespace FallGuysStats {
         [STAThread]
         private static void Main() {
             try {
-                string bugFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt");
 #if AllowUpdate
-                bool isAppUpdatedOrRestarted = false;
-                if (File.Exists(Path.GetFileName(Assembly.GetEntryAssembly().Location) + ".bak")
-                    || File.Exists(bugFile)) {
-                    isAppUpdatedOrRestarted = true;
-                    if (File.Exists(bugFile)) {
-                        try {
-                            File.SetAttributes(bugFile, FileAttributes.Normal);
-                            File.Delete(bugFile);
-                        } catch { }
-                    }
+                bool isAppUpdated = false;
+                if (File.Exists(Path.GetFileName(Assembly.GetEntryAssembly().Location) + ".bak")) {
+                    isAppUpdated = true;
                 }
-                if (isAppUpdatedOrRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
+                if (isAppUpdated || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
 #else
-                bool isAppRestarted = false;
-                if (File.Exists(bugFile)) {
-                    isAppRestarted = true;
-                    try {
-                        File.SetAttributes(bugFile, FileAttributes.Normal);
-                        File.Delete(bugFile);
-                    } catch { }
-                }
-                if (isAppRestarted || !IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
+                if (!IsAlreadyRunning(CultureInfo.CurrentUICulture.Name.Substring(0, 2))) {
 #endif
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);

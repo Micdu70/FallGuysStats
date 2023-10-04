@@ -4,7 +4,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -823,13 +822,6 @@ namespace FallGuysStats {
                     } else if (finish.HasValue) {
                         TimeSpan time = finish.GetValueOrDefault(start) - start;
 
-                        if (time.ToString("m\\:ss\\.ff") == "0:00.00") {
-                            File.Create(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt"));
-                            Application.Restart();
-                            Environment.Exit(0);
-                            return;
-                        }
-
                         if (this.lastRound.Position > 0 && numPlayersSucceeded == 0) {
                             numPlayersSucceeded = -1;
                         }
@@ -852,13 +844,6 @@ namespace FallGuysStats {
                         }
                     } else if (end != DateTime.MinValue) {
                         TimeSpan time = end - start;
-
-                        if (time.ToString("m\\:ss\\.ff") == "0:00.00") {
-                            File.Create(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bug.txt"));
-                            Application.Restart();
-                            Environment.Exit(0);
-                            return;
-                        }
 
                         if (this.lastRound.Position > 0 && numPlayersSucceeded == 0) {
                             numPlayersSucceeded = -1;
