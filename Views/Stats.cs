@@ -2350,9 +2350,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = stat.UseShareCode
-                                                  ? new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon)
-                                                  : new LevelStats(this.textInfo.ToTitleCase(roundName), LevelType.Unknown, false, false, 0, null, null);
+                            LevelStats newLevel = new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
 
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
@@ -2590,7 +2588,7 @@ namespace FallGuysStats {
                     : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
             }
         }
-        public StatSummary GetLevelInfo(string name, int levelException) {
+        public StatSummary GetLevelInfo(string roundName, int levelException) {
             StatSummary summary = new StatSummary {
                 AllWins = 0,
                 TotalShows = 0,
@@ -2601,12 +2599,8 @@ namespace FallGuysStats {
 
             int lastShow = -1;
 
-            if (!this.StatLookup.TryGetValue(name, out LevelStats currentLevel)) {
-                if (levelException >= 3) {
-                    currentLevel = new LevelStats(name, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
-                } else {
-                    currentLevel = new LevelStats(name, LevelType.Unknown, false, false, 0, null, null);
-                }
+            if (!this.StatLookup.TryGetValue(roundName, out LevelStats currentLevel)) {
+                currentLevel = new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
             }
 
             for (int i = 0; i < this.AllStats.Count; i++) {

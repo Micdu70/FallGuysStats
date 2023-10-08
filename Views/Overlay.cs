@@ -734,14 +734,8 @@ namespace FallGuysStats {
 
                     StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, this.levelException);
 
-                    //if (Stats.CurrentLanguage == 0 || Stats.CurrentLanguage == 1) { // English, French
-                    //    if (roundName.Length > 29) { roundName = roundName.Substring(0, 29); }
-                    //} else {
-                    //    if (roundName.Length > 15) { roundName = roundName.Substring(0, 15); }
-                    //}
                     if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
 
-                    //this.lblRound.IsCreativeRound = (level != null && level.isCreative) || this.levelException == 3 ? true : false;
                     this.lblRound.IsCreativeRound = level == null || level.IsCreative || this.lastRound.UseShareCode;
 
                     LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
@@ -831,7 +825,7 @@ namespace FallGuysStats {
                                                    : this.lastRound.Position > 0 ? $"# {Multilingual.GetWord("overlay_position_prefix")}{this.lastRound.Position}{Multilingual.GetWord("overlay_position_suffix")} | {time:m\\:ss\\.ff}" : $"{time:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = (Stats.InShow && !Stats.EndedShow) || this.lastRound.Crown ? this.ForeColor : Color.Pink;
 
-                        if (levelType == LevelType.Creative || levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans || this.levelException == 1) {
+                        if ((this.levelException == 0 && (levelType == LevelType.Creative || levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans)) || this.levelException == 1) {
                             if (time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
