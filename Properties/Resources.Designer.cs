@@ -3133,6 +3133,36 @@ namespace FallGuysStats.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lollipop_plot_gray_icon {
+            get {
+                object obj = ResourceManager.GetObject("lollipop_plot_gray_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lollipop_plot_icon {
+            get {
+                object obj = ResourceManager.GetObject("lollipop_plot_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lollipop_plot_teal_icon {
+            get {
+                object obj = ResourceManager.GetObject("lollipop_plot_teal_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap medal_bronze {
             get {
                 object obj = ResourceManager.GetObject("medal_bronze", resourceCulture);

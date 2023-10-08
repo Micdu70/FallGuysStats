@@ -394,6 +394,7 @@ namespace FallGuysStats {
                 this.MyScatterPlot2.IsVisible = this.chkFinals.Checked;
                 this.MyBarPlot2.IsVisible = this.chkFinals.Checked;
                 this.MyLollipopPlot2.IsVisible = false;
+                this.MyLollipopPlot2.IsVisible = false;
             } else {
                 this.MyScatterPlot2.IsVisible = this.chkFinals.Checked;
             }
