@@ -243,6 +243,7 @@ namespace FallGuysStats {
             "event_only_floor_fall_template",
             "event_only_floor_fall_low_grav",
             "event_only_blast_ball_trials_template",
+            "event_only_thin_ice_template",
             "event_only_slime_climb",
             "event_only_jump_club_template",
             "event_walnut_template",
@@ -1790,6 +1791,24 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 16;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 16) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) && info.IsFinal &&
+                        info.ShowNameId.Equals("event_only_thin_ice_template") &&
+                        info.Round < 3) {
+                        info.IsFinal = false;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 17;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1867,7 +1886,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 16
+                FrenchyEditionDB = 17
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
