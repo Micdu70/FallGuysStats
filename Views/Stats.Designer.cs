@@ -536,6 +536,7 @@ namespace FallGuysStats {
             this.gridDetails.Name = "gridDetails";
             this.gridDetails.ReadOnly = true;
             this.gridDetails.RowHeadersVisible = false;
+            this.gridDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridDetails.Size = new System.Drawing.Size(860, 345);
             this.gridDetails.TabIndex = 3;
             this.gridDetails.TabStop = false;
