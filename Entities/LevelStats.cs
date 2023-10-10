@@ -525,6 +525,8 @@ namespace FallGuysStats {
             { "current_wle_fp5_2_04",             new LevelStats("Big WaterFall Planet（巨大な滝の惑星）", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp5_2_05_01",          new LevelStats("Cave Hide 'n' Seek", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp5_2_05_02",          new LevelStats("Ricochet Raceway", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp5_2_05_03",          new LevelStats("L' Rumorosa", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
+            { "current_wle_fp5_2_05_04",          new LevelStats("rainow rode", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp5_2_05",             new LevelStats("The tension Parkour", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp5_2_06",             new LevelStats("Stairing Contest", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },
             { "current_wle_fp5_2_07",             new LevelStats("Vibrant Ascension", LevelType.Race, true, false, 10, Properties.Resources.round_gauntlet_icon, Properties.Resources.round_gauntlet_big_icon) },

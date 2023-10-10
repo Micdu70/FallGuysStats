@@ -276,7 +276,14 @@ namespace FallGuysStats {
         };
 
         private bool IsRealFinalRound(string roundId, string showId) {
-            if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1) || showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1 || showId.StartsWith("current_wle_") || showId.StartsWith("wle_s10_cf_round_")) { this.isCreatorMadeRoundsShow = true; return true; }
+            if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1)
+                 || showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1
+                 || showId.Equals("wle_mrs_shuffle_show")
+                 || showId.StartsWith("current_wle_fp")
+                 || showId.StartsWith("wle_s10_cf_round_")) {
+                this.isCreatorMadeRoundsShow = true;
+                return true;
+            }
 
             this.isCreatorMadeRoundsShow = false;
 
