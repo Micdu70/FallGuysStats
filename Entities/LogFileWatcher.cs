@@ -275,6 +275,10 @@ namespace FallGuysStats {
             { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
         };
 
+        private string GetCorrectRoundId(string roundId) { // Shuffle Show
+            return roundId.StartsWith("mrs_wle_fp") ? $"current_{roundId.Substring(4)}" : roundId.Substring(4);
+        }
+
         private bool IsRealFinalRound(string roundId, string showId) {
             if ((showId.StartsWith("show_wle_s10_") && showId.IndexOf("_srs", StringComparison.OrdinalIgnoreCase) != -1)
                  || showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1
@@ -443,7 +447,9 @@ namespace FallGuysStats {
                 if (logRound.Info.UseShareCode) {
                     logRound.Info.Name = this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66));
                 } else {
-                    logRound.Info.Name = line.Line.Substring(index + 62, index2 - index - 62);
+                    logRound.Info.Name = !logRound.Info.ShowNameId.Equals("wle_mrs_shuffle_show")
+                                         ? line.Line.Substring(index + 62, index2 - index - 62)
+                                         : this.GetCorrectRoundId(line.Line.Substring(index + 62, index2 - index - 62));
                 }
 
                 if (this.IsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
