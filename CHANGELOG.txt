@@ -1,11 +1,17 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.224 ~ 05/10/2023
-    - +Corrigé: Détection des manches non finales de "Hex-Anneau" pour l'émission "Ronde Hexathlon"
-    - ++Changé: Base de données GeoLite2 datant du 06/10/2023
+  - v1.225 ~ 11/10/2023
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+    - +Corrigé: Détection de la manche finale pour l'émission "Sélection Dérangée De Digi"
+    - +Corrigé: Détection des manches non finales de "Fonte des Glaces" pour l'émission "Ronde la Glace"
+    - ++Changé: Base de données GeoLite2 datant du 10/10/2023
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
+  - v1.224 ~ 05/10/2023
+    - +Corrigé: Détection des manches non finales de "Hex-Anneau" pour l'émission "Ronde Hexathlon"
+    - ++Changé: Base de données GeoLite2 datant du 06/10/2023
 
   - v1.223 ~ 04/10/2023
   { Correction de bugs de la "FE" }
