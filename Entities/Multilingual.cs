@@ -2165,6 +2165,7 @@ namespace FallGuysStats {
                             {"wle_s10_player_round_wk6_17", "Slippery Helixes"},
                             {"wle_s10_player_round_wk6_18", "Recess"},
                             {"wle_s10_player_round_wk6_19", "Parrot river"},
+                            {"wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -2604,6 +2605,7 @@ namespace FallGuysStats {
                             {"wle_s10_player_round_wk6_17", "Slippery Helixes"},
                             {"wle_s10_player_round_wk6_18", "Recess"},
                             {"wle_s10_player_round_wk6_19", "Parrot river"},
+                            {"wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -3042,6 +3044,8 @@ namespace FallGuysStats {
                             {"wle_s10_player_round_wk6_15", "SCHOOL OF FISH"},
                             {"wle_s10_player_round_wk6_17", "Slippery Helixes"},
                             {"wle_s10_player_round_wk6_18", "Recess"},
+                            {"wle_s10_player_round_wk6_19", "Parrot river"},
+                            {"wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -3481,6 +3485,7 @@ namespace FallGuysStats {
                             {"wle_s10_player_round_wk6_17", "Slippery Helixes"},
                             {"wle_s10_player_round_wk6_18", "Recess"},
                             {"wle_s10_player_round_wk6_19", "Parrot river"},
+                            {"wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -3920,6 +3925,7 @@ namespace FallGuysStats {
                             {"wle_s10_player_round_wk6_17", "Slippery Helixes"},
                             {"wle_s10_player_round_wk6_18", "Recess"},
                             {"wle_s10_player_round_wk6_19", "Parrot river"},
+                            {"wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                             {"current_wle_fp3_07_01", "Block Sledding"},
                             {"current_wle_fp3_07_02", "Layup Wallop"},
@@ -4534,6 +4540,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_player_round_wk6_17", "Slippery Helixes"},
                     {"show_wle_s10_player_round_wk6_18", "Recess"},
                     {"show_wle_s10_player_round_wk6_19", "Parrot river"},
+                    {"show_wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                     {"show_wle_s10_wk07_srs_01", "Tower of Fall"},
                     {"show_wle_s10_wk07_srs_02", "SOLO FULL-TILT RAGE"},
@@ -5190,6 +5197,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_player_round_wk6_17", "Slippery Helixes"},
                     {"show_wle_s10_player_round_wk6_18", "Recess"},
                     {"show_wle_s10_player_round_wk6_19", "Parrot river"},
+                    {"show_wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                     {"show_wle_s10_wk07_srs_01", "Tower of Fall"},
                     {"show_wle_s10_wk07_srs_02", "SOLO FULL-TILT RAGE"},
@@ -5846,6 +5854,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_player_round_wk6_17", "Slippery Helixes"},
                     {"show_wle_s10_player_round_wk6_18", "Recess"},
                     {"show_wle_s10_player_round_wk6_19", "Parrot river"},
+                    {"show_wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                     {"show_wle_s10_wk07_srs_01", "Tower of Fall"},
                     {"show_wle_s10_wk07_srs_02", "SOLO FULL-TILT RAGE"},
@@ -6502,6 +6511,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_player_round_wk6_17", "Slippery Helixes"},
                     {"show_wle_s10_player_round_wk6_18", "Recess"},
                     {"show_wle_s10_player_round_wk6_19", "Parrot river"},
+                    {"show_wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                     {"show_wle_s10_wk07_srs_01", "Tower of Fall"},
                     {"show_wle_s10_wk07_srs_02", "SOLO FULL-TILT RAGE"},
@@ -7158,6 +7168,7 @@ namespace FallGuysStats {
                     {"show_wle_s10_player_round_wk6_17", "Slippery Helixes"},
                     {"show_wle_s10_player_round_wk6_18", "Recess"},
                     {"show_wle_s10_player_round_wk6_19", "Parrot river"},
+                    {"show_wle_s10_player_round_wk6_20", "PARKOUR CITY 城市跑酷"},
 
                     {"show_wle_s10_wk07_srs_01", "Tower of Fall"},
                     {"show_wle_s10_wk07_srs_02", "SOLO FULL-TILT RAGE"},
