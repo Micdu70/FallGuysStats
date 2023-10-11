@@ -586,9 +586,6 @@ namespace FallGuysStats {
                                 Stats.EndedShow = true;
                                 return true;
                             }
-                            if (round[i].Name.StartsWith("ugc-")) {
-                                round[i].Name = round[i].Name.Substring(4);
-                            }
                             round[i].VerifyName();
                             if (i == 0) {
                                 showStart = round[i].Start;
@@ -648,25 +645,27 @@ namespace FallGuysStats {
                         int roundNum = detail[7] - 0x30 + 1;
                         string roundName = detail.Substring(11, detail.Length - 12);
 
-                        if (roundName.StartsWith("ugc-")) {
-                            roundName = roundName.Substring(4);
-                        }
-
                         if (roundNum - 1 < round.Count) {
                             if (roundNum > maxRound) {
                                 maxRound = roundNum;
                             }
 
                             roundInfo = round[roundNum - 1];
+
                             if (string.IsNullOrEmpty(roundInfo.Name)) {
                                 return false;
                             }
-                            if (roundInfo.Name.StartsWith("ugc-")) {
-                                roundInfo.Name = roundInfo.Name.Substring(4);
+
+                            if (roundInfo.ShowNameId.Equals("wle_mrs_shuffle_show")) {
+                                roundName = this.GetCorrectRoundId(roundName);
+                            } else if (roundName.StartsWith("ugc-")) {
+                                roundName = this.StatsForm.GetRoundIdFromShareCode(roundName.Substring(4));
                             }
+
                             if (!roundInfo.Name.Equals(roundName, StringComparison.OrdinalIgnoreCase)) {
                                 return false;
                             }
+
                             roundInfo.VerifyName();
 
                             if (roundNum == 1) {
