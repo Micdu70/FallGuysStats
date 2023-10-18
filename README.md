@@ -31,7 +31,7 @@ Ce programme utilise les données GeoLite2 créées par MaxMind pour la géoloca
 
 -> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
 
-INFO: Date des données GeoLite2 utilisées => 10/10/2023
+INFO: Date des données GeoLite2 utilisées => 17/10/2023
 
 
 INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
@@ -49,7 +49,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.225` ~ 11/10/2023
+**Dernière version:** `v1.226` ~ 18/10/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -59,13 +59,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog de la dernière version
 
-- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
-- +Corrigé: Détection de la manche finale pour l'émission "Sélection Dérangée De Digi"
-- +Corrigé: Détection des manches non finales de "Fonte des Glaces" pour l'émission "Ronde la Glace"
-- ++Changé: Base de données GeoLite2 datant du 10/10/2023
+- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+- ++Changé: Base de données GeoLite2 datant du 17/10/2023
 
 
-### Il y a 0 bug génant connu dans la v1.225 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.226 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -228,6 +226,10 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.226` ~ 18/10/2023
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+    - ++Changé: Base de données GeoLite2 datant du 17/10/2023
 
   - `v1.225` ~ 11/10/2023
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
