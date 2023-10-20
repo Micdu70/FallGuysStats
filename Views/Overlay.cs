@@ -825,7 +825,7 @@ namespace FallGuysStats {
                                                    : this.lastRound.Position > 0 ? $"# {Multilingual.GetWord("overlay_position_prefix")}{this.lastRound.Position}{Multilingual.GetWord("overlay_position_suffix")} | {time:m\\:ss\\.ff}" : $"{time:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = (Stats.InShow && !Stats.EndedShow) || this.lastRound.Crown ? this.ForeColor : Color.Pink;
 
-                        if ((this.levelException == 0 && (levelType == LevelType.Creative || levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans)) || this.levelException == 1) {
+                        if (this.levelException == 1 || (this.levelException == 0 && (levelType == LevelType.Creative || levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans))) {
                             if (time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
