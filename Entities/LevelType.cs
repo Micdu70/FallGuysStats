@@ -13,6 +13,11 @@ namespace FallGuysStats {
         Creative,
         Unknown
     }
+    public enum RecordType {
+        Fastest,
+        Longest,
+        HighScore
+    }
 
     internal static class LevelTypeBehavior {
         public static int FastestLabel(this LevelType type) {

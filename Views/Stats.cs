@@ -2387,7 +2387,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
+                            LevelStats newLevel = new LevelStats(roundName, LevelType.Creative, RecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
 
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
@@ -2625,7 +2625,7 @@ namespace FallGuysStats {
                     : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
             }
         }
-        public StatSummary GetLevelInfo(string roundName, int levelException) {
+        public StatSummary GetLevelInfo(string roundName, RecordType recordType) {
             StatSummary summary = new StatSummary {
                 AllWins = 0,
                 TotalShows = 0,
@@ -2637,7 +2637,7 @@ namespace FallGuysStats {
             int lastShow = -1;
 
             if (!this.StatLookup.TryGetValue(roundName, out LevelStats currentLevel)) {
-                currentLevel = new LevelStats(roundName, LevelType.Creative, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
+                currentLevel = new LevelStats(roundName, LevelType.Creative, RecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
             }
 
             for (int i = 0; i < this.AllStats.Count; i++) {
@@ -2692,7 +2692,7 @@ namespace FallGuysStats {
                     }
 
                     if (isInFastestFilter) {
-                        if ((!hasLevelDetails || levelDetails.Type == LevelType.Team || levelException == 2)
+                        if ((!hasLevelDetails || recordType == RecordType.HighScore)
                             && info.Score.HasValue && (!summary.BestScore.HasValue || info.Score.Value > summary.BestScore.Value)) {
                             summary.BestScore = info.Score;
                         }
@@ -4430,7 +4430,7 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                // 349
+                    // 349
             }
             return shareCode;
         }

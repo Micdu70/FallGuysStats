@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -30,7 +29,6 @@ namespace FallGuysStats {
         private Bitmap Background, DrawImage;
         private Graphics DrawGraphics;
         private RoundInfo lastRound;
-        private int levelException;
         private int drawWidth, drawHeight;
         private bool startedPlaying;
         private DateTime startTime;
@@ -582,13 +580,12 @@ namespace FallGuysStats {
                     break;
             }
         }
-        private void SetFastestLabel(StatSummary levelInfo, LevelType type) {
+        private void SetFastestLabel(StatSummary levelInfo, RecordType recordType) {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
-                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 :
-                                     (type == LevelType.Team && this.levelException != 1) || this.levelException == 2 ? 2 : 1;
+                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 : recordType == RecordType.HighScore ? 2 : 1;
             }
-            switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && this.levelException != 1) ? 3 : 2)) {
+            switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && recordType != RecordType.Fastest) ? 3 : 2)) {
                 case 0:
                     this.lblFastest.Text = $"{Multilingual.GetWord("overlay_longest_time")} :";
                     this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
@@ -599,7 +596,7 @@ namespace FallGuysStats {
                         this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
                     } else {
                         this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
-                        if ((type == LevelType.Survival || type == LevelType.Logic) && this.levelException != 1) {
+                        if (recordType == RecordType.Longest) {
                             this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                         } else {
                             this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
@@ -702,28 +699,6 @@ namespace FallGuysStats {
                 if (this.lastRound != null && !string.IsNullOrEmpty(this.lastRound.Name)) {
                     string roundName = this.lastRound.VerifiedName();
 
-                    this.levelException = 0;
-                    switch (roundName) {
-                        case "round_pixelperfect_almond":
-                        case "round_hoverboardsurvival_s4_show":
-                        case "round_hoverboardsurvival2_almond":
-                        case "round_snowy_scrap":
-                        case "round_jinxed":
-                        case "round_rocknroll":
-                        case "round_conveyor_arena":
-                            this.levelException = 1; // Level is like a "Race" level type (fastest time info is most important - also hide high-score info)
-                            this.lblRound.IsShareCodeFormat = false;
-                            break;
-                        case "round_1v1_button_basher":
-                        case "round_1v1_volleyfall_symphony_launch_show":
-                            this.levelException = 2; // Level is like a "Team" level type (score info is most important)
-                            this.lblRound.IsShareCodeFormat = false;
-                            break;
-                        default:
-                            this.lblRound.IsShareCodeFormat = this.lastRound.UseShareCode ? (Regex.IsMatch(this.lastRound.Name, @"^[0-9]{4}-[0-9]{4}-[0-9]{4}$") ? true : false) : false;
-                            break;
-                    }
-
                     if (this.StatsForm.StatLookup.TryGetValue(roundName, out LevelStats level)) {
                         roundName = level.Name.ToUpper();
                     } else if (roundName.StartsWith("round_", StringComparison.OrdinalIgnoreCase)) {
@@ -732,22 +707,21 @@ namespace FallGuysStats {
                         roundName = roundName.Replace('_', ' ').ToUpper();
                     }
 
-                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, this.levelException);
+                    LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
+                    RecordType recordType = (level?.RecordType).GetValueOrDefault(RecordType.Fastest);
+                    StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, recordType);
 
                     if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
 
-                    this.lblRound.IsCreativeRound = level == null || level.IsCreative || this.lastRound.UseShareCode;
-
-                    LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
+                    this.lblRound.IsCreativeRound = levelType == LevelType.Creative || levelType == LevelType.Unknown;
 
                     if (this.StatsForm.CurrentSettings.ColorByRoundType) {
                         this.lblRound.Text = $"{Multilingual.GetWord("overlay_round_abbreviation_prefix")}{this.lastRound.Round}{Multilingual.GetWord("overlay_round_abbreviation_suffix")} :";
                         this.lblRound.LevelColor = levelType.LevelBackColor(this.lastRound.IsFinal, this.lastRound.IsTeam, 223);
                         this.lblRound.RoundIcon = level?.RoundBigIcon;
                         if (this.lblRound.RoundIcon == null) {
-                            this.lblRound.RoundIcon = this.lastRound.UseShareCode ? Properties.Resources.round_creative_icon : null;
-                        }
-                        if (this.lblRound.RoundIcon != null) {
+                            this.lblRound.RoundIcon = this.lblRound.IsCreativeRound ? Properties.Resources.round_creative_icon : null;
+                        } else {
                             if (this.lblRound.RoundIcon.Height != 23) {
                                 this.lblRound.ImageHeight = 23;
                                 this.lblRound.ImageWidth = (int)Math.Ceiling(Convert.ToDouble(this.lblRound.ImageHeight) / this.lblRound.RoundIcon.Height * this.lblRound.RoundIcon.Width);
@@ -784,7 +758,7 @@ namespace FallGuysStats {
                     this.lblFinals.TextRight = $"{finalText}{finalChanceDisplay}";
 
                     this.SetQualifyChanceLabel(levelInfo);
-                    this.SetFastestLabel(levelInfo, levelType);
+                    this.SetFastestLabel(levelInfo, recordType);
                     this.SetPlayersLabel();
                     this.SetStreakInfo(levelInfo);
                     if (this.isTimeToSwitch) {
@@ -825,7 +799,7 @@ namespace FallGuysStats {
                                                    : this.lastRound.Position > 0 ? $"# {Multilingual.GetWord("overlay_position_prefix")}{this.lastRound.Position}{Multilingual.GetWord("overlay_position_suffix")} | {time:m\\:ss\\.ff}" : $"{time:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = (Stats.InShow && !Stats.EndedShow) || this.lastRound.Crown ? this.ForeColor : Color.Pink;
 
-                        if (this.levelException == 1 || (this.levelException == 0 && (levelType == LevelType.Creative || levelType == LevelType.Race || levelType == LevelType.Hunt || levelType == LevelType.Invisibeans))) {
+                        if (recordType == RecordType.Fastest) {
                             if (time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {

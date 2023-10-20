@@ -18,7 +18,7 @@ namespace FallGuysStats {
         public Dictionary<string, int[]> roundScoreData;
         public IOrderedEnumerable<KeyValuePair<string, string>> roundList;
         private RadialGaugePlot radialGauges;
-        private string[] labelList = {
+        private readonly string[] labelList = {
             Multilingual.GetWord("main_played"), Multilingual.GetWord("level_detail_gold"),
             Multilingual.GetWord("level_detail_silver"), Multilingual.GetWord("level_detail_bronze"),
             Multilingual.GetWord("level_detail_pink"), Multilingual.GetWord("level_detail_eliminated")
@@ -29,7 +29,7 @@ namespace FallGuysStats {
         public RoundStatsDisplay() {
             this.InitializeComponent();
         }
-        
+
         private class CustomPalette : IPalette {
             public string Name { get; } = "Custom Palette";
 
@@ -46,7 +46,7 @@ namespace FallGuysStats {
             this.SetTheme(Stats.CurrentTheme);
             this.ResumeLayout(false);
             this.ChangeLanguage();
-            
+
             this.cboRoundList.DataSource = new BindingSource(this.roundList, null);
             this.cboRoundList.DisplayMember = "Value";
             this.cboRoundList.ValueMember = "Key";
@@ -55,7 +55,7 @@ namespace FallGuysStats {
             this.SetGraph();
             this.isInitComplete = true;
         }
-        
+
         private void SetTheme(MetroThemeStyle theme) {
             this.Theme = theme;
             if (theme == MetroThemeStyle.Dark) {
@@ -86,7 +86,7 @@ namespace FallGuysStats {
                 this.picRoundIcon.Size = level.RoundBigIcon.Size;
                 this.picRoundIcon.Image = level.RoundBigIcon;
                 this.formsPlot.Plot.Title(level.Name);
-                
+
                 LevelType levelType = level.Type;
                 this.lblRoundType.Text = levelType.LevelTitle(level.IsFinal);
                 this.lblRoundType.borderColor = levelType.LevelDefaultColor(level.IsFinal);
@@ -116,7 +116,7 @@ namespace FallGuysStats {
                         this.picRoundIcon.Size = creativeLevel.RoundBigIcon.Size;
                         this.picRoundIcon.Image = creativeLevel.RoundBigIcon;
                         this.formsPlot.Plot.Title(selectedRoundPair.Value);
-                        
+
                         LevelType levelType = creativeLevel.Type;
                         this.lblRoundType.Text = levelType.LevelTitle(creativeLevel.IsFinal);
                         this.lblRoundType.borderColor = levelType.LevelDefaultColor(creativeLevel.IsFinal);
@@ -138,7 +138,7 @@ namespace FallGuysStats {
             TimeSpan duration = this.roundDurationData[roundId];
             this.lblRoundTime.Text = $"{Multilingual.GetWord("level_round_played_prefix")} {(int)duration.TotalHours}{Multilingual.GetWord("main_hour")}{duration:mm}{Multilingual.GetWord("main_min")}{duration:ss}{Multilingual.GetWord("main_sec")} {Multilingual.GetWord("level_round_played_suffix")}";
             double[] values = this.roundGraphData[roundId];
-            
+
             this.formsPlot.Plot.Palette = new CustomPalette();
 
             this.goldMedalPercent = $@"{Math.Round((values[1] / values[0]) * 100, 2)}%";
@@ -146,19 +146,19 @@ namespace FallGuysStats {
             this.bronzeMedalPercent = $@"{Math.Round((values[3] / values[0]) * 100, 2)}%";
             this.pinkMedalPercent = $@"{Math.Round((values[4] / values[0]) * 100, 2)}%";
             this.eliminatedMedalPercent = $@"{Math.Round((values[5] / values[0]) * 100, 2)}%";
-            
+
             this.goldMedalCount = $@"{values[1]:N0}";
             this.silverMedalCount = $@"{values[2]:N0}";
             this.bronzeMedalCount = $@"{values[3]:N0}";
             this.pinkMedalCount = $@"{values[4]:N0}";
             this.eliminatedMedalCount = $@"{values[5]:N0}";
-            
+
             this.lblCountGoldMedal.Text = this.goldMedalCount;
             this.lblCountSilverMedal.Text = this.silverMedalCount;
             this.lblCountBronzeMedal.Text = this.bronzeMedalCount;
             this.lblCountPinkMedal.Text = this.pinkMedalCount;
             this.lblCountEliminatedMedal.Text = this.eliminatedMedalCount;
-            
+
             this.radialGauges = this.formsPlot.Plot.AddRadialGauge(values);
             this.radialGauges.OrderInsideOut = false;
             //this.radialGauges.Clockwise = false;
