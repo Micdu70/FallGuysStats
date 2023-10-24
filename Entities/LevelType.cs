@@ -36,7 +36,7 @@ namespace FallGuysStats {
             return 1;
         }
         public static string LevelTitle(this LevelType type, bool isFinal) {
-            if (isFinal) {
+            if (isFinal && type != LevelType.Invisibeans) {
                 return Multilingual.GetWord("level_detail_final");
             }
             switch (type) {
@@ -58,7 +58,7 @@ namespace FallGuysStats {
             return "Unknown";
         }
         public static Color LevelDefaultColor(this LevelType type, bool isFinal) {
-            if (isFinal) {
+            if (isFinal && type != LevelType.Invisibeans) {
                 return Color.FromArgb(250, 195, 0);
             }
             switch (type) {
@@ -80,7 +80,7 @@ namespace FallGuysStats {
             return Color.DarkGray;
         }
         public static Color LevelBackColor(this LevelType type, bool isFinal, bool isTeam, int alpha) {
-            if (isFinal) {
+            if (isFinal && type != LevelType.Invisibeans) {
                 return Color.FromArgb(alpha, 250, 195, 0);
             }
             if (isTeam) {
@@ -105,7 +105,7 @@ namespace FallGuysStats {
             return Color.DarkGray;
         }
         public static Color LevelForeColor(this LevelType type, bool isFinal, bool isTeam, MetroThemeStyle theme = MetroThemeStyle.Default) {
-            if (isFinal) {
+            if (isFinal && type != LevelType.Invisibeans) {
                 return Color.FromArgb(130, 100, 0);
             }
             if (isTeam) {

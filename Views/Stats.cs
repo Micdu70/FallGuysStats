@@ -1823,6 +1823,25 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 18;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 18) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (info.Name.Equals("round_invisibeans") || info.Name.Equals("round_pumpkin_pie")) {
+                        if (info.Name.Equals("round_pumpkin_pie")) {
+                            info.Name = "round_invisibeans";
+                        }
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 19;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1900,7 +1919,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 18
+                FrenchyEditionDB = 19
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -2995,7 +3014,7 @@ namespace FallGuysStats {
                 float fBrightness = 0.7F;
                 switch (this.gridDetails.Columns[e.ColumnIndex].Name) {
                     case "RoundIcon":
-                        if (levelStats.IsFinal) {
+                        if (levelStats.IsFinal && levelStats.Type != LevelType.Invisibeans) {
                             e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
                                 ? Color.FromArgb(255, 245, 205)
                                 : Color.FromArgb((int)(255 * fBrightness), (int)(245 * fBrightness), (int)(205 * fBrightness));
@@ -3047,7 +3066,7 @@ namespace FallGuysStats {
                     case "Name":
                         e.CellStyle.ForeColor = Color.Black;
                         this.gridDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = Multilingual.GetWord("level_detail_tooltiptext");
-                        if (levelStats.IsFinal) {
+                        if (levelStats.IsFinal && levelStats.Type != LevelType.Invisibeans) {
                             e.CellStyle.BackColor = this.Theme == MetroThemeStyle.Light
                                 ? Color.FromArgb(255, 245, 205)
                                 : Color.FromArgb((int)(255 * fBrightness), (int)(245 * fBrightness), (int)(205 * fBrightness));
@@ -3206,8 +3225,8 @@ namespace FallGuysStats {
             SortOrder sortOrder = isInitialize ? SortOrder.None : this.gridDetails.GetSortOrder(columnName);
 
             this.StatDetails.Sort((one, two) => {
-                LevelType oneType = one.IsFinal ? LevelType.Final : one.Type;
-                LevelType twoType = two.IsFinal ? LevelType.Final : two.Type;
+                LevelType oneType = one.IsFinal && one.Type != LevelType.Invisibeans ? LevelType.Final : one.Type;
+                LevelType twoType = two.IsFinal && two.Type != LevelType.Invisibeans ? LevelType.Final : two.Type;
 
                 int typeCompare = this.CurrentSettings.IgnoreLevelTypeWhenSorting && sortOrder != SortOrder.None ? 0 : ((int)oneType).CompareTo((int)twoType);
 
@@ -4380,7 +4399,7 @@ namespace FallGuysStats {
                 // case "0986-9263-8815": return "current_wle_fp5_wk3_1_03";
                 case "0936-8338-2826": return "current_wle_fp5_wk3_1_04";
                 case "3851-6647-1283": return "current_wle_fp5_wk3_1_05";
-                case "2046-9186-5835": return "current_wle_fp5_wk3_1_06";
+                // case "2046-9186-5835": return "current_wle_fp5_wk3_1_06";
                 case "3705-0014-9536": return "current_wle_fp5_wk3_2_01";
                 case "9323-9497-7975": return "current_wle_fp5_wk3_2_02";
                 case "5732-7608-2538": return "current_wle_fp5_wk3_2_03";
@@ -4392,17 +4411,115 @@ namespace FallGuysStats {
                 case "4915-3461-7638": return "current_wle_fp5_wk3_3_04";
                 // 321
 
+                case "8402-8758-0032": return "current_wle_fp5_falloween_1_01";
+                case "6240-3462-3481": return "current_wle_fp5_falloween_1_02";
+                case "6121-7790-1504": return "current_wle_fp5_falloween_1_03";
+                case "6067-2941-9905": return "current_wle_fp5_falloween_1_04";
+                case "5651-2398-0054": return "current_wle_fp5_falloween_1_05";
+                case "5024-3460-6816": return "current_wle_fp5_falloween_1_06";
+                case "4849-8243-4656": return "current_wle_fp5_falloween_1_07";
+                case "4488-9051-9724": return "current_wle_fp5_falloween_1_08";
+                case "4218-2924-3419": return "current_wle_fp5_falloween_1_09";
+                case "4176-6208-9294": return "current_wle_fp5_falloween_1_10";
+                case "4084-9651-9519": return "current_wle_fp5_falloween_1_11";
+                case "2735-9945-7419": return "current_wle_fp5_falloween_1_12";
+                case "2306-3017-3066": return "current_wle_fp5_falloween_1_13";
+                case "1401-4773-3736": return "current_wle_fp5_falloween_1_14";
+                case "5664-5599-7711": return "current_wle_fp5_falloween_2_01";
+                case "1799-5939-4570": return "current_wle_fp5_falloween_2_02";
+                case "5484-7576-2527": return "current_wle_fp5_falloween_2_03_01";
+                case "7175-6459-2516": return "current_wle_fp5_falloween_2_03_02";
+                case "7190-1032-9714": return "current_wle_fp5_falloween_2_03_03";
+                case "8090-4478-3076": return "current_wle_fp5_falloween_2_03_04";
+                case "3613-2575-7647": return "current_wle_fp5_falloween_2_03_05";
+                case "0755-6177-0051": return "current_wle_fp5_falloween_2_03_06";
+                case "0655-0213-7224": return "current_wle_fp5_falloween_2_03";
+                case "8631-7291-8107": return "current_wle_fp5_falloween_3_01";
+                case "4501-8526-4946": return "current_wle_fp5_falloween_3_02";
+                case "1100-1065-3063": return "current_wle_fp5_falloween_3_03";
+                case "0069-7749-5727": return "current_wle_fp5_falloween_3_04";
+                case "9994-8017-8706": return "current_wle_fp5_falloween_4_01";
+                case "9657-6107-5958": return "current_wle_fp5_falloween_4_02";
+                case "9368-3971-3271": return "current_wle_fp5_falloween_4_03";
+                case "9258-3697-5491": return "current_wle_fp5_falloween_4_04";
+                case "7928-7118-4810": return "current_wle_fp5_falloween_4_05";
+                case "7120-7897-2692": return "current_wle_fp5_falloween_4_06";
+                case "6533-6356-0472": return "current_wle_fp5_falloween_4_07";
+                case "6396-1389-0514": return "current_wle_fp5_falloween_4_08";
+                case "5741-2031-8043": return "current_wle_fp5_falloween_4_09";
+                case "5476-2662-9927": return "current_wle_fp5_falloween_4_10";
+                case "4430-7014-2805": return "current_wle_fp5_falloween_4_11";
+                case "4382-9645-4115": return "current_wle_fp5_falloween_4_12";
+                case "3624-9104-8937": return "current_wle_fp5_falloween_4_13";
+                case "2864-3013-2704": return "current_wle_fp5_falloween_4_14";
+                case "1448-1995-9095": return "current_wle_fp5_falloween_4_15";
+                case "0797-7676-9358": return "current_wle_fp5_falloween_4_16";
+                case "0788-2763-9253": return "current_wle_fp5_falloween_4_17";
+                case "0634-3389-9948": return "current_wle_fp5_falloween_4_18";
+                case "0216-4798-7097": return "current_wle_fp5_falloween_4_19";
+                case "9266-0794-7999": return "current_wle_fp5_falloween_5_01";
+                case "8757-8658-1590": return "current_wle_fp5_falloween_5_02";
+                case "5608-5038-4603": return "current_wle_fp5_falloween_5_03";
+                case "4310-0672-7447": return "current_wle_fp5_falloween_5_04";
+                case "2573-8965-6602": return "current_wle_fp5_falloween_5_05";
+                case "1793-2460-5757": return "current_wle_fp5_falloween_5_06";
+                case "1029-3640-0683": return "current_wle_fp5_falloween_5_07";
+                case "1885-0687-3381": return "current_wle_fp5_falloween_6_01";
+                case "2046-9186-5835": return "current_wle_fp5_falloween_6_02";
+                case "9944-2261-7096": return "current_wle_fp5_falloween_6_03";
+                case "8245-2536-0397": return "current_wle_fp5_falloween_7_01_01";
+                case "5120-5302-3364": return "current_wle_fp5_falloween_7_01_02";
+                case "2005-7268-3932": return "current_wle_fp5_falloween_7_01_03";
+                case "9744-9959-6162": return "current_wle_fp5_falloween_7_01_04";
+                case "6044-9178-1352": return "current_wle_fp5_falloween_7_01_05";
+                case "7336-7844-4312": return "current_wle_fp5_falloween_7_01_06";
+                case "7153-1520-5779": return "current_wle_fp5_falloween_7_01_07";
+                case "5105-6932-4910": return "current_wle_fp5_falloween_7_01_08";
+                case "0003-1341-4714": return "current_wle_fp5_falloween_7_01_09";
+                case "3499-1607-5514": return "current_wle_fp5_falloween_7_02_01";
+                case "5031-9941-3572": return "current_wle_fp5_falloween_7_03_01";
+                case "9256-6209-5924": return "current_wle_fp5_falloween_7_04_01";
+                case "0368-4641-9952": return "current_wle_fp5_falloween_7_04_02";
+                case "3357-4326-2937": return "current_wle_fp5_falloween_7_04_03";
+                case "4095-3239-4107": return "current_wle_fp5_falloween_7_04_04";
+                case "2438-2715-1526": return "current_wle_fp5_falloween_7_05_01";
+                case "2247-7408-5638": return "current_wle_fp5_falloween_7_05_02";
+                case "2525-3294-8408": return "current_wle_fp5_falloween_7_05_03";
+                case "8138-0025-5565": return "current_wle_fp5_falloween_7_05_04";
+                case "2322-8913-6415": return "current_wle_fp5_falloween_7_06_01";
+                case "5658-3251-2803": return "current_wle_fp5_falloween_7_06_02";
+                // case "1885-0687-3381": return "current_wle_fp5_falloween_7_06_03";
+                case "7399-1384-6084": return "current_wle_fp5_falloween_7_06_04";
+                case "6733-6429-1092": return "current_wle_fp5_falloween_7_06_05";
+                case "1511-8704-2066": return "current_wle_fp5_falloween_7_08_01";
+                case "0851-5131-6366": return "current_wle_fp5_falloween_7_10_01";
+                case "4157-3882-8459": return "current_wle_fp5_falloween_7_10_02";
+                case "9477-8846-0602": return "current_wle_fp5_falloween_9_01";
+                case "8003-0564-1815": return "current_wle_fp5_falloween_9_02";
+                case "4672-3819-0320": return "current_wle_fp5_falloween_9_03";
+                case "0453-7588-2618": return "current_wle_fp5_falloween_9_04";
+                case "6237-3643-0250": return "current_wle_fp5_falloween_9_05";
+                case "8245-1512-8620": return "current_wle_fp5_falloween_10_01";
+                case "0592-4433-7070": return "current_wle_fp5_falloween_10_02";
+                case "2919-6281-3490": return "current_wle_fp5_falloween_11_01";
+                case "0389-3465-9605": return "current_wle_fp5_falloween_12_01";
+                case "1843-2013-5149": return "current_wle_fp5_falloween_12_02";
+                case "0970-9754-5183": return "current_wle_fp5_falloween_13_01";
+                case "2532-1174-5060": return "current_wle_fp5_falloween_14_01";
+                case "0697-1204-1880": return "current_wle_fp5_falloween_15_01";
+                // 417
+
                 case "9334-9348-1212": return "wle_s10_bt_round_001";
                 case "9596-6865-9561": return "wle_s10_bt_round_002";
                 case "1575-3397-3154": return "wle_s10_bt_round_003";
                 case "4676-0921-9816": return "wle_s10_bt_round_004";
-                // 325
+                // 421
 
                 case "5065-6325-4646": return "wle_s10_cf_round_001";
                 case "6581-1890-6801": return "wle_s10_cf_round_002";
                 case "6656-2033-4324": return "wle_s10_cf_round_003";
                 case "7277-7302-9886": return "wle_s10_cf_round_004";
-                // 329
+                // 425
 
                 case "9100-1195-6052": return "wle_mrs_bagel_opener_1";
                 case "9299-0471-0746": return "wle_mrs_bagel_opener_2";
@@ -4414,7 +4531,7 @@ namespace FallGuysStats {
                 case "8489-4249-0438": return "wle_mrs_bagel_filler_4";
                 case "7476-9346-3120": return "wle_mrs_bagel_final_1";
                 case "9201-4959-0276": return "wle_mrs_bagel_final_2";
-                // 339
+                // 435
 
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
@@ -4426,7 +4543,7 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                    // 349
+                // 445
             }
             return shareCode;
         }

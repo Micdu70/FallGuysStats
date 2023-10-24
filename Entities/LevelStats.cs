@@ -215,7 +215,7 @@ namespace FallGuysStats {
             { "round_thin_ice",                   new LevelStats("Thin Ice", LevelType.Survival, BestRecordType.Longest, false, true, 3, Properties.Resources.round_thin_ice_icon, Properties.Resources.round_thin_ice_big_icon) },
             { "round_tiptoefinale_almond",        new LevelStats("Tip Toe Finale", LevelType.Race, BestRecordType.Fastest, false, true, 8, Properties.Resources.round_tip_toe_finale_icon, Properties.Resources.round_tip_toe_finale_big_icon) },
 
-            { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, BestRecordType.Fastest, false, false, 6, Properties.Resources.round_sweet_thieves_icon, Properties.Resources.round_sweet_thieves_big_icon) },
+            { "round_invisibeans",                new LevelStats("Sweet Thieves", LevelType.Invisibeans, BestRecordType.Fastest, false, true, 6, Properties.Resources.round_sweet_thieves_icon, Properties.Resources.round_sweet_thieves_big_icon) },
 
             //
             //S10 (SS4) Creative Rounds
@@ -786,6 +786,7 @@ namespace FallGuysStats {
             { "FallGuy_Starlink",                  "round_starlink_almond" },
             { "FallGuy_HexSnake",                  "round_hexsnake_almond" },
             { "FallGuy_Tip_Toe_Finale",            "round_tiptoefinale_almond" },
+            { "FallGuy_PumpkinPie",                "round_invisibeans" },
 
             { "FallGuy_BlastBallRuins",            "round_blastballruins" },
             { "FallGuy_FollowTheLine",             "round_follow_the_line" },
