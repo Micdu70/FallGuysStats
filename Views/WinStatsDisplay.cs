@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,7 +9,6 @@ using ScottPlot.Plottable;
 namespace FallGuysStats {
     public partial class WinStatsDisplay : MetroFramework.Forms.MetroForm {
         public double[] dates, shows, finals, wins;
-        public Dictionary<double, SortedList<string, int>> winsInfo;
         public int manualSpacing = 1;
         public Stats StatsForm { get; set; }
         public WinStatsDisplay() {
@@ -188,6 +186,7 @@ namespace FallGuysStats {
         private void FormsPlot_MouseMove(object sender, MouseEventArgs e) {
             if (this.dates == null) { return; }
             if (!(this.MyScatterPlot1.IsVisible || this.MyScatterPlot2.IsVisible || this.MyScatterPlot3.IsVisible)) { return; }
+
             this.formsPlot.Plot.Remove(this.tooltip);
 
             (double mouseCoordX, double mouseCoordY) = this.formsPlot.GetMouseCoordinates();
@@ -230,30 +229,14 @@ namespace FallGuysStats {
                     currentIndex = pointIndex1;
                     break;
                 case 2:
-                    this.HighlightedPoint.X = pointX2;
-                    this.HighlightedPoint.Y = pointY2;
-                    currentIndex = pointIndex2;
-                    break;
                 case 3:
                     this.HighlightedPoint.X = pointX2;
                     this.HighlightedPoint.Y = pointY2;
                     currentIndex = pointIndex2;
                     break;
                 case 4:
-                    this.HighlightedPoint.X = pointX3;
-                    this.HighlightedPoint.Y = pointY3;
-                    currentIndex = pointIndex3;
-                    break;
                 case 5:
-                    this.HighlightedPoint.X = pointX3;
-                    this.HighlightedPoint.Y = pointY3;
-                    currentIndex = pointIndex3;
-                    break;
                 case 6:
-                    this.HighlightedPoint.X = pointX3;
-                    this.HighlightedPoint.Y = pointY3;
-                    currentIndex = pointIndex3;
-                    break;
                 case 7:
                     this.HighlightedPoint.X = pointX3;
                     this.HighlightedPoint.Y = pointY3;
@@ -261,26 +244,30 @@ namespace FallGuysStats {
                     break;
             }
 
+            this.HighlightedPoint.IsVisible = true;
+
             this.tooltip = this.formsPlot.Plot.AddTooltip(label: $"{DateTime.FromOADate(this.MyScatterPlot1.Xs[currentIndex]).ToString(Multilingual.GetWord("level_date_format"))}{Environment.NewLine}" +
                                                                  (this.MyScatterPlot1.IsVisible ? $"{Multilingual.GetWord("level_detail_shows")} : {this.MyScatterPlot1.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot2.IsVisible ? $"{Multilingual.GetWord("level_detail_finals")} : {this.MyScatterPlot2.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}{Environment.NewLine}" : "") +
                                                                  (this.MyScatterPlot3.IsVisible ? $"{Multilingual.GetWord("level_detail_wins")} : {this.MyScatterPlot3.Ys[currentIndex]}{Multilingual.GetWord("main_inning")}" : ""),
                                                           x: this.HighlightedPoint.X, y: this.HighlightedPoint.Y);
 
-            this.tooltip.BorderWidth = 1;
-            this.tooltip.BorderColor = this.Theme == MetroThemeStyle.Light ? Color.FromArgb(239, 49, 51, 56) : Color.FromArgb(239, 211, 211, 211);
+            this.tooltip.BorderWidth = 1.7f;
+            // this.tooltip.BorderColor = Color.FromArgb(239, this.Theme == MetroThemeStyle.Light ? Color.Black : Color.Snow);
+            this.tooltip.BorderColor = Color.FromArgb(239, this.Theme == MetroThemeStyle.Light ? Color.Black : Color.Crimson);
             this.tooltip.FillColor = Color.FromArgb(239, 49, 51, 56);
-            this.tooltip.Font.Size = 13;
             this.tooltip.Font.Color = Color.White;
+            this.tooltip.Font.Family = Overlay.GetMainFontFamilies(Stats.CurrentLanguage);
+            this.tooltip.Font.Size = 15f;
             this.tooltip.ArrowSize = 5;
 
-            this.HighlightedPoint.IsVisible = true;
             this.formsPlot.Render();
         }
 
         private void FormsPlot_MouseLeave(object sender, EventArgs e) {
             if (this.dates == null) { return; }
             if (!(this.MyScatterPlot1.IsVisible || this.MyScatterPlot2.IsVisible || this.MyScatterPlot3.IsVisible)) { return; }
+
             this.HighlightedPoint.IsVisible = false;
             this.HighlightedPoint.X = 0;
             this.HighlightedPoint.Y = 0;
