@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-
-namespace FallGuysStats {
+﻿namespace FallGuysStats {
     partial class WinStatsDisplay {
         /// <summary>
         /// Required designer variable.
@@ -25,8 +22,7 @@ namespace FallGuysStats {
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WinStatsDisplay));
             this.picSwitchGraphStyle = new System.Windows.Forms.PictureBox();
             this.chkWins = new MetroFramework.Controls.MetroCheckBox();
@@ -40,9 +36,11 @@ namespace FallGuysStats {
             // 
             this.picSwitchGraphStyle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picSwitchGraphStyle.BackColor = System.Drawing.Color.Transparent;
+            this.picSwitchGraphStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picSwitchGraphStyle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSwitchGraphStyle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picSwitchGraphStyle.Image = global::FallGuysStats.Properties.Resources.scatter_plot_icon;
-            this.picSwitchGraphStyle.Location = new System.Drawing.Point(880, 30);
+            this.picSwitchGraphStyle.Location = new System.Drawing.Point(880, 34);
             this.picSwitchGraphStyle.Name = "picSwitchGraphStyle";
             this.picSwitchGraphStyle.Size = new System.Drawing.Size(27, 24);
             this.picSwitchGraphStyle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -55,10 +53,12 @@ namespace FallGuysStats {
             this.chkWins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkWins.AutoSize = true;
             this.chkWins.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkWins.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
+            this.chkWins.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
             this.chkWins.ForeColor = System.Drawing.Color.Red;
-            this.chkWins.Location = new System.Drawing.Point(961, 38);
+            this.chkWins.Location = new System.Drawing.Point(1003, 35);
             this.chkWins.Name = "chkWins";
-            this.chkWins.Size = new System.Drawing.Size(49, 15);
+            this.chkWins.Size = new System.Drawing.Size(70, 25);
             this.chkWins.TabIndex = 2;
             this.chkWins.Text = "Wins";
             this.chkWins.UseCustomForeColor = true;
@@ -70,10 +70,12 @@ namespace FallGuysStats {
             this.chkFinals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkFinals.AutoSize = true;
             this.chkFinals.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkFinals.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
+            this.chkFinals.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
             this.chkFinals.ForeColor = System.Drawing.Color.Green;
-            this.chkFinals.Location = new System.Drawing.Point(1053, 38);
+            this.chkFinals.Location = new System.Drawing.Point(1088, 35);
             this.chkFinals.Name = "chkFinals";
-            this.chkFinals.Size = new System.Drawing.Size(53, 15);
+            this.chkFinals.Size = new System.Drawing.Size(76, 25);
             this.chkFinals.TabIndex = 3;
             this.chkFinals.Text = "Finals";
             this.chkFinals.UseCustomForeColor = true;
@@ -85,10 +87,12 @@ namespace FallGuysStats {
             this.chkShows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkShows.AutoSize = true;
             this.chkShows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkShows.FontSize = MetroFramework.MetroCheckBoxSize.Tall;
+            this.chkShows.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
             this.chkShows.ForeColor = System.Drawing.Color.Blue;
-            this.chkShows.Location = new System.Drawing.Point(1147, 38);
+            this.chkShows.Location = new System.Drawing.Point(1175, 35);
             this.chkShows.Name = "chkShows";
-            this.chkShows.Size = new System.Drawing.Size(57, 15);
+            this.chkShows.Size = new System.Drawing.Size(82, 25);
             this.chkShows.TabIndex = 4;
             this.chkShows.Text = "Shows";
             this.chkShows.UseCustomForeColor = true;
@@ -97,21 +101,20 @@ namespace FallGuysStats {
             // 
             // formsPlot
             // 
-            this.formsPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.formsPlot.Location = new System.Drawing.Point(2, 58);
+            this.formsPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.formsPlot.Location = new System.Drawing.Point(0, 58);
             this.formsPlot.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.formsPlot.Name = "formsPlot";
-            this.formsPlot.Size = new System.Drawing.Size(1278, 680);
+            this.formsPlot.Size = new System.Drawing.Size(1280, 860);
             this.formsPlot.TabIndex = 5;
             this.formsPlot.MouseLeave += new System.EventHandler(this.FormsPlot_MouseLeave);
             this.formsPlot.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FormsPlot_MouseMove);
             // 
-            // StatsDisplay
+            // WinStatsDisplay
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1294, 720);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(1294, 900);
             this.Controls.Add(this.formsPlot);
             this.Controls.Add(this.picSwitchGraphStyle);
             this.Controls.Add(this.chkShows);
@@ -133,9 +136,8 @@ namespace FallGuysStats {
             ((System.ComponentModel.ISupportInitialize)(this.picSwitchGraphStyle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-        
+
         #endregion
         private ScottPlot.FormsPlot formsPlot;
         private System.Windows.Forms.PictureBox picSwitchGraphStyle;

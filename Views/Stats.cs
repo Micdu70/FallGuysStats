@@ -4711,8 +4711,8 @@ namespace FallGuysStats {
         private void ChangeMainLanguage() {
             this.currentLanguage = CurrentLanguage;
             this.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
-            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(CurrentLanguage, 18)).Width;
-            this.BackImagePadding = new Padding(TextWidth + (CurrentLanguage == 2 ? 100 : CurrentLanguage == 3 ? 70 : 45), 8, 0, 0);
+            int TextWidth = TextRenderer.MeasureText(this.Text, Overlay.GetDefaultFont(18, this.currentLanguage)).Width;
+            this.BackImagePadding = new Padding(TextWidth + (this.currentLanguage == 2 ? 100 : this.currentLanguage == 3 ? 70 : 45), 8, 0, 0);
 
             this.lblManualUpdateVersion.Text = Multilingual.GetWord("main_subtitle");
 
