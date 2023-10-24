@@ -804,11 +804,19 @@ namespace FallGuysStats {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.Gold;
+                            } else {
+                                this.lblFinish.ForeColor = this.ForeColor;
                             }
-                        } else if (time > levelInfo.LongestFinish && time < levelInfo.LongestFinishOverall) {
-                            this.lblFinish.ForeColor = Color.LightGreen;
-                        } else if (time > levelInfo.LongestFinishOverall) {
-                            this.lblFinish.ForeColor = Color.Gold;
+                        } else if (recordType == BestRecordType.Longest) {
+                            if (time > levelInfo.LongestFinish && time < levelInfo.LongestFinishOverall) {
+                                this.lblFinish.ForeColor = Color.LightGreen;
+                            } else if (time > levelInfo.LongestFinishOverall) {
+                                this.lblFinish.ForeColor = Color.Gold;
+                            } else {
+                                this.lblFinish.ForeColor = this.ForeColor;
+                            }
+                        } else {
+                            this.lblFinish.ForeColor = this.ForeColor;
                         }
                     } else if (end != DateTime.MinValue) {
                         TimeSpan time = end - start;
