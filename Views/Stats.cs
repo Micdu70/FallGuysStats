@@ -13,7 +13,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiteDB;
@@ -199,7 +198,6 @@ namespace FallGuysStats {
         public readonly DateTime startupTime = DateTime.UtcNow;
         private DateTime lastAddedShow = DateTime.MinValue;
         private int askedPreviousShows = 0;
-        private readonly TextInfo textInfo;
         private int currentProfile;
         private int currentLanguage;
         private Color infoStripForeColor;
@@ -292,8 +290,6 @@ namespace FallGuysStats {
             DwmSetWindowAttribute(this.menuStatsFilter.DropDown.Handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref windowConerPreference, sizeof(uint));
             DwmSetWindowAttribute(this.menuPartyFilter.DropDown.Handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref windowConerPreference, sizeof(uint));
             DwmSetWindowAttribute(this.menuProfile.DropDown.Handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref windowConerPreference, sizeof(uint));
-
-            this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 
             this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
             this.Profiles = this.StatsDB.GetCollection<Profiles>("Profiles");
