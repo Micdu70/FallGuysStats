@@ -184,7 +184,7 @@ namespace FallGuysStats {
             return Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
         }
 
-        private void formsPlot_MouseMove(object sender, MouseEventArgs e) {
+        private void FormsPlot_MouseMove(object sender, MouseEventArgs e) {
             if (this.dates == null) { return; }
             if (!(this.MyScatterPlot1.IsVisible || this.MyScatterPlot2.IsVisible || this.MyScatterPlot3.IsVisible)) { return; }
             
@@ -326,7 +326,7 @@ namespace FallGuysStats {
             this.formsPlot.Render();
         }
 
-        private void formsPlot_MouseLeave(object sender, EventArgs e) {
+        private void FormsPlot_MouseLeave(object sender, EventArgs e) {
             if (this.dates == null) { return; }
             if (!(this.MyScatterPlot1.IsVisible || this.MyScatterPlot2.IsVisible || this.MyScatterPlot3.IsVisible)) { return; }
             this.HighlightedPoint.IsVisible = false;
@@ -357,7 +357,7 @@ namespace FallGuysStats {
                 this.Close();
             }
         }
-        private void picSwitchGraphStyle_MouseClick(object sender, MouseEventArgs e) {
+        private void PicSwitchGraphStyle_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 this.switchGraphStyle += 1;
                 if (this.switchGraphStyle > 2) { this.switchGraphStyle = 0; }
@@ -369,7 +369,7 @@ namespace FallGuysStats {
             if (this.dates == null) { return; }
             this.ChangeFormsPlotStyle(this.switchGraphStyle);
         }
-        private void chkWins_CheckedChanged(object sender, EventArgs e) {
+        private void ChkWins_CheckedChanged(object sender, EventArgs e) {
             if (this.dates == null) { return; }
             if (this.switchGraphStyle == 1) {
                 this.MyScatterPlot3.IsVisible = this.chkWins.Checked;
@@ -384,7 +384,7 @@ namespace FallGuysStats {
             }
             this.formsPlot.Refresh();
         }
-        private void chkFinals_CheckedChanged(object sender, EventArgs e) {
+        private void ChkFinals_CheckedChanged(object sender, EventArgs e) {
             if (this.dates == null) { return; }
             if (this.switchGraphStyle == 1) {
                 this.MyScatterPlot2.IsVisible = this.chkFinals.Checked;
@@ -399,7 +399,7 @@ namespace FallGuysStats {
             }
             this.formsPlot.Refresh();
         }
-        private void chkShows_CheckedChanged(object sender, EventArgs e) {
+        private void ChkShows_CheckedChanged(object sender, EventArgs e) {
             if (this.dates == null) { return; }
             if (this.switchGraphStyle == 1) {
                 this.MyScatterPlot1.IsVisible = this.chkShows.Checked;

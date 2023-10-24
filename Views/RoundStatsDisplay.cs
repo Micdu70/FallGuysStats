@@ -190,13 +190,13 @@ namespace FallGuysStats {
             this.lblCountEliminatedMedal.Text = this.eliminatedMedalCount;
         }
 
-        private void cboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
+        private void CboRoundList_SelectedIndexChanged(object sender, EventArgs e) {
             if (this.isInitComplete) {
                 this.formsPlot.Plot.Clear();
                 this.SetGraph();
             }
         }
-        
+
         private void RoundStatsDisplay_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.DialogResult = DialogResult.Cancel;
