@@ -27,14 +27,12 @@
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
-Ce programme utilise les données GeoLite2 créées par MaxMind pour la géolocalisation des serveurs de Fall Guys.
+Ce programme utilise la base de données gratuite provenant du site IPinfo.io (https://ipinfo.io) pour la géolocalisation des serveurs de Fall Guys.
 
--> Les données GeoLite2 sont disponibles sur https://www.maxmind.com
-
-INFO: Date des données GeoLite2 utilisées => 17/10/2023
+INFO: Date de la base de données IPinfo.io => 24/10/2023
 
 
-INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/FallGuysStats
+IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 
 ## Différences entre la "FE" et la Version Officielle
@@ -49,7 +47,7 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Téléchargement
 
-**Dernière version:** `v1.226` ~ 18/10/2023
+**Dernière version:** `v1.227` ~ 24/10/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -59,11 +57,12 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 ## Changelog de la dernière version
 
-- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
-- ++Changé: Base de données GeoLite2 datant du 17/10/2023
+- +Corrigé: Détection de la manche "Voleurs de bonbon" ( manche détectée comme "Voleurs Sucrés" car étant une variante )
+- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+- ++Changé: Base de données IPinfo.io datant du 24/10/2023
 
 
-### Il y a 0 bug génant connu dans la v1.226 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.227 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -226,6 +225,11 @@ INFO: La Version Officielle est disponible ici => https://github.com/ShootMe/Fal
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.227` ~ 24/10/2023
+    - +Corrigé: Détection de la manche "Voleurs de bonbon" ( manche détectée comme "Voleurs Sucrés" car étant une variante )
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+    - ++Changé: Base de données IPinfo.io datant du 24/10/2023
 
   - `v1.226` ~ 18/10/2023
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]

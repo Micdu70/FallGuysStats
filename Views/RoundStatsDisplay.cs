@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Controls;
@@ -79,15 +79,15 @@ namespace FallGuysStats {
         private void SetGraph() {
             //this.formsPlot.Plot.Grid(false);
             //this.formsPlot.Plot.Frameless();
-            KeyValuePair<string, string> selectedRoundPair = (KeyValuePair<string, string>)this.cboRoundList.SelectedItem;
-            //string roundId = (string)this.cboRoundList.SelectedValue;
-            string roundId = selectedRoundPair.Key;
+            //KeyValuePair<string, string> selectedRoundPair = (KeyValuePair<string, string>)this.cboRoundList.SelectedItem;
+            string roundId = (string)this.cboRoundList.SelectedValue;
+
             if (this.StatsForm.StatLookup.TryGetValue(roundId, out LevelStats level)) {
                 this.picRoundIcon.Size = level.RoundBigIcon.Size;
                 this.picRoundIcon.Image = level.RoundBigIcon;
                 this.formsPlot.Plot.Title(level.Name);
 
-                LevelType levelType = level.Type;
+                LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
                 this.lblRoundType.Text = levelType.LevelTitle(level.IsFinal);
                 this.lblRoundType.borderColor = levelType.LevelDefaultColor(level.IsFinal);
                 this.lblRoundType.backColor = levelType.LevelDefaultColor(level.IsFinal);
@@ -110,31 +110,8 @@ namespace FallGuysStats {
                 this.lblWorstRecord.Text = recordType == 0 ? $"{Multilingual.GetWord("overlay_fastest_time")} : {level.Fastest:m\\:ss\\.ff}" :
                                            recordType == 1 ? $"{Multilingual.GetWord("overlay_longest_time")} : {level.Longest:m\\:ss\\.ff}" :
                                            recordType == 2 ? $"{Multilingual.GetWord("overlay_worst_score")} : {this.roundScoreData[roundId][1]}" : "-";
-            } else {
-                MatchCollection matches = Regex.Matches(roundId, @"^\d{4}-\d{4}-\d{4}$");
-                if (matches.Count > 0) { // user creative round
-                    if (this.StatsForm.StatLookup.TryGetValue(this.StatsForm.AllStats.Find(ri => roundId.Equals(ri.ShowNameId)).Name, out LevelStats creativeLevel)) {
-                        this.picRoundIcon.Size = creativeLevel.RoundBigIcon.Size;
-                        this.picRoundIcon.Image = creativeLevel.RoundBigIcon;
-                        this.formsPlot.Plot.Title(selectedRoundPair.Value);
-
-                        LevelType levelType = creativeLevel.Type;
-                        this.lblRoundType.Text = levelType.LevelTitle(creativeLevel.IsFinal);
-                        this.lblRoundType.borderColor = levelType.LevelDefaultColor(creativeLevel.IsFinal);
-                        this.lblRoundType.backColor = levelType.LevelDefaultColor(creativeLevel.IsFinal);
-                        this.lblRoundType.Width = TextRenderer.MeasureText(this.lblRoundType.Text, this.lblRoundType.Font).Width + 12;
-                        int recordType = levelType.FastestLabel();
-                        this.lblBestRecord.Left = this.lblRoundType.Right + 12;
-                        this.lblWorstRecord.Left = this.lblRoundType.Right + 12;
-                        this.lblBestRecord.Text = recordType == 0 ? $"{Multilingual.GetWord("overlay_longest_time")} : {creativeLevel.Longest:m\\:ss\\.ff}" :
-                            recordType == 1 ? $"{Multilingual.GetWord("overlay_fastest_time")} : {creativeLevel.Fastest:m\\:ss\\.ff}" :
-                            recordType == 2 ? $"{Multilingual.GetWord("overlay_best_score")} : {this.roundScoreData[roundId][0]}" : "-";
-                        this.lblWorstRecord.Text = recordType == 0 ? $"{Multilingual.GetWord("overlay_fastest_time")} : {creativeLevel.Fastest:m\\:ss\\.ff}" :
-                            recordType == 1 ? $"{Multilingual.GetWord("overlay_longest_time")} : {creativeLevel.Longest:m\\:ss\\.ff}" :
-                            recordType == 2 ? $"{Multilingual.GetWord("overlay_worst_score")} : {this.roundScoreData[roundId][1]}" : "-";
-                    }
-                }
             }
+
 
             TimeSpan duration = this.roundDurationData[roundId];
             this.lblRoundTime.Text = $"{Multilingual.GetWord("level_round_played_prefix")} {(int)duration.TotalHours}{Multilingual.GetWord("main_hour")}{duration:mm}{Multilingual.GetWord("main_min")}{duration:ss}{Multilingual.GetWord("main_sec")} {Multilingual.GetWord("level_round_played_suffix")}";

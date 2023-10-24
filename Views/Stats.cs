@@ -16,10 +16,12 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiteDB;
+using MaxMind.Db;
 using Microsoft.Win32;
 using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Components;
+using System.Net;
 
 namespace FallGuysStats {
     public partial class Stats : MetroFramework.Forms.MetroForm {
@@ -194,7 +196,7 @@ namespace FallGuysStats {
         public UserSettings CurrentSettings;
         public Overlay overlay;
         public bool isUpdate;
-        public readonly string pathToGeoLite2Db = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GeoLite2-Country.mmdb");
+        public readonly string pathToIPinfoDb = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "country.mmdb");
         public readonly DateTime startupTime = DateTime.UtcNow;
         private DateTime lastAddedShow = DateTime.MinValue;
         private int askedPreviousShows = 0;
@@ -1860,6 +1862,24 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 20;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 20) {
+                string filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string[] fileList = {
+                    Path.Combine(filePath, "LiteDB.dll"), Path.Combine(filePath, "GeoLite2-Country.mmdb"),
+                    Path.Combine(filePath, "COPYRIGHT-GEOLITE2.txt"), Path.Combine(filePath, "LICENSE-GEOLITE2.txt")
+                };
+                foreach (string file in fileList) {
+                    if (File.Exists(file)) {
+                        try {
+                            File.SetAttributes(file, FileAttributes.Normal);
+                            File.Delete(file);
+                        } catch { }
+                    }
+                }
+                this.CurrentSettings.FrenchyEditionDB = 21;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1937,7 +1957,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 20
+                FrenchyEditionDB = 21
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -4644,7 +4664,7 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                // 443
+                    // 443
             }
             return shareCode;
         }
@@ -4671,10 +4691,10 @@ namespace FallGuysStats {
             if (!File.Exists(dbFile)) { return string.Empty; }
 
             try {
-                MaxMind.GeoIP2.DatabaseReader reader = new MaxMind.GeoIP2.DatabaseReader(dbFile);
-
-                var country = reader.Country(ip);
-                return country.Country.IsoCode;
+                Reader reader = new Reader(dbFile);
+                IPAddress parsedIp = IPAddress.Parse(ip);
+                Dictionary<string, string> ipData = reader.Find<Dictionary<string, string>>(parsedIp);
+                return $"{ipData["country"]}";
             } catch {
                 return string.Empty;
             }
@@ -4897,6 +4917,14 @@ namespace FallGuysStats {
         private void MenuTodaysShow_Click(object sender, EventArgs e) {
             try {
                 Process.Start(@"https://fallguys-db.pages.dev/upcoming_shows");
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LinkToIPinfoWebsite_Click(object sender, EventArgs e) {
+            try {
+                Process.Start("https://ipinfo.io");
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -403,7 +403,7 @@ namespace FallGuysStats {
                     Stats.ConnectedToServerDate = line.Date;
                     int ipIndex = line.Line.IndexOf("IP:");
                     Stats.LastServerIp = line.Line.Substring(ipIndex + 3);
-                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(this.StatsForm.pathToGeoLite2Db, Stats.LastServerIp).ToLower();
+                    Stats.LastServerCountryCode = this.StatsForm.GetCountryCode(this.StatsForm.pathToIPinfoDb, Stats.LastServerIp).ToLower();
                 }
                 if (line.Date > this.StatsForm.startupTime) { this.serverPing.Start(); }
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) >= 0) {
