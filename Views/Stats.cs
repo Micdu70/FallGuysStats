@@ -1842,6 +1842,24 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 19;
                 this.SaveUserSettings();
             }
+
+            if (this.CurrentSettings.FrenchyEditionDB == 19) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        info.ShowNameId.Equals("wle_mrs_shuffle_show") &&
+                        info.Name.StartsWith("shuffle_halloween_")) {
+                        info.Name = $"wle_fp5_falloween_round_{info.Name.Substring(info.Name.LastIndexOf('_') + 1)}";
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 20;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1919,7 +1937,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 19
+                FrenchyEditionDB = 20
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -4409,7 +4427,7 @@ namespace FallGuysStats {
                 case "2240-5868-2714": return "current_wle_fp5_wk3_3_02";
                 case "8497-6718-8016": return "current_wle_fp5_wk3_3_03";
                 case "4915-3461-7638": return "current_wle_fp5_wk3_3_04";
-                // 321
+                // 320
 
                 case "8402-8758-0032": return "current_wle_fp5_falloween_1_01";
                 case "6240-3462-3481": return "current_wle_fp5_falloween_1_02";
@@ -4507,19 +4525,102 @@ namespace FallGuysStats {
                 case "0970-9754-5183": return "current_wle_fp5_falloween_13_01";
                 case "2532-1174-5060": return "current_wle_fp5_falloween_14_01";
                 case "0697-1204-1880": return "current_wle_fp5_falloween_15_01";
-                // 417
+                // 415
+
+                // case "8245-2536-0397": return "wle_fp5_falloween_round_1";
+                // case "5120-5302-3364": return "wle_fp5_falloween_round_2";
+                // case "3499-1607-5514": return "wle_fp5_falloween_round_3";
+                // case "2005-7268-3932": return "wle_fp5_falloween_round_4";
+                // case "6044-9178-1352": return "wle_fp5_falloween_round_5";
+                // case "7336-7844-4312": return "wle_fp5_falloween_round_6";
+                // case "7153-1520-5779": return "wle_fp5_falloween_round_7";
+                // case "5105-6932-4910": return "wle_fp5_falloween_round_8";
+                // case "0003-1341-4714": return "wle_fp5_falloween_round_9";
+                // case "9256-6209-5924": return "wle_fp5_falloween_round_10";
+                // case "0851-5131-6366": return "wle_fp5_falloween_round_12";
+                // case "3357-4326-2937": return "wle_fp5_falloween_round_13";
+                // case "4095-3239-4107": return "wle_fp5_falloween_round_14";
+                // case "5031-9941-3572": return "wle_fp5_falloween_round_15";
+                // case "2438-2715-1526": return "wle_fp5_falloween_round_16";
+                // case "2322-8913-6415": return "wle_fp5_falloween_round_17";
+                // case "2247-7408-5638": return "wle_fp5_falloween_round_18";
+                // case "2525-3294-8408": return "wle_fp5_falloween_round_19";
+                // case "5658-3251-2803": return "wle_fp5_falloween_round_20";
+                // case "7399-1384-6084": return "wle_fp5_falloween_round_22";
+                // case "6733-6429-1092": return "wle_fp5_falloween_round_23";
+                // case "6067-2941-9905": return "wle_fp5_falloween_round_25";
+                // case "2735-9945-7419": return "wle_fp5_falloween_round_26";
+                // case "1401-4773-3736": return "wle_fp5_falloween_round_27";
+                // case "4084-9651-9519": return "wle_fp5_falloween_round_29";
+                // case "8402-8758-0032": return "wle_fp5_falloween_round_30";
+                // case "5651-2398-0054": return "wle_fp5_falloween_round_31";
+                // case "5024-3460-6816": return "wle_fp5_falloween_round_32";
+                // case "5664-5599-7711": return "wle_fp5_falloween_round_33";
+                // case "2046-9186-5835": return "wle_fp5_falloween_round_34";
+                // case "9944-2261-7096": return "wle_fp5_falloween_round_35";
+                // case "2919-6281-3490": return "wle_fp5_falloween_round_36";
+                // case "1799-5939-4570": return "wle_fp5_falloween_round_37";
+                // case "4218-2924-3419": return "wle_fp5_falloween_round_38";
+                // case "4488-9051-9724": return "wle_fp5_falloween_round_40";
+                // case "0655-0213-7224": return "wle_fp5_falloween_round_41";
+                // case "9368-3971-3271": return "wle_fp5_falloween_round_42";
+                // case "4430-7014-2805": return "wle_fp5_falloween_round_43";
+                // case "6396-1389-0514": return "wle_fp5_falloween_round_44";
+                // case "3624-9104-8937": return "wle_fp5_falloween_round_45";
+                // case "4382-9645-4115": return "wle_fp5_falloween_round_47";
+                // case "9477-8846-0602": return "wle_fp5_falloween_round_48";
+                // case "5484-7576-2527": return "wle_fp5_falloween_round_49";
+                // case "4672-3819-0320": return "wle_fp5_falloween_round_50";
+                // case "8003-0564-1815": return "wle_fp5_falloween_round_51";
+                // case "0453-7588-2618": return "wle_fp5_falloween_round_52";
+                // case "7175-6459-2516": return "wle_fp5_falloween_round_53";
+                // case "6237-3643-0250": return "wle_fp5_falloween_round_54";
+                // case "7190-1032-9714": return "wle_fp5_falloween_round_55";
+                // case "8090-4478-3076": return "wle_fp5_falloween_round_56";
+                // case "3613-2575-7647": return "wle_fp5_falloween_round_57";
+                // case "0755-6177-0051": return "wle_fp5_falloween_round_58";
+                // case "8245-1512-8620": return "wle_fp5_falloween_round_59";
+                // case "2532-1174-5060": return "wle_fp5_falloween_round_60";
+                // case "0592-4433-7070": return "wle_fp5_falloween_round_61";
+                // case "0389-3465-9605": return "wle_fp5_falloween_round_64";
+                // case "1843-2013-5149": return "wle_fp5_falloween_round_65";
+                // case "0970-9754-5183": return "wle_fp5_falloween_round_66";
+                // case "9657-6107-5958": return "wle_fp5_falloween_round_67";
+                // case "5741-2031-8043": return "wle_fp5_falloween_round_68";
+                // case "0216-4798-7097": return "wle_fp5_falloween_round_69";
+                // case "2573-8965-6602": return "wle_fp5_falloween_round_70";
+                // case "4310-0672-7447": return "wle_fp5_falloween_round_71";
+                // case "5608-5038-4603": return "wle_fp5_falloween_round_72";
+                // case "1029-3640-0683": return "wle_fp5_falloween_round_73";
+                // case "1793-2460-5757": return "wle_fp5_falloween_round_74";
+                // case "5476-2662-9927": return "wle_fp5_falloween_round_75";
+                // case "7928-7118-4810": return "wle_fp5_falloween_round_76";
+                // case "1448-1995-9095": return "wle_fp5_falloween_round_77";
+                // case "7120-7897-2692": return "wle_fp5_falloween_round_78";
+                // case "0788-2763-9253": return "wle_fp5_falloween_round_79";
+                // case "6533-6356-0472": return "wle_fp5_falloween_round_80";
+                // case "2864-3013-2704": return "wle_fp5_falloween_round_81";
+                // case "9994-8017-8706": return "wle_fp5_falloween_round_82";
+                // case "0797-7676-9358": return "wle_fp5_falloween_round_83";
+                // case "9258-3697-5491": return "wle_fp5_falloween_round_84";
+                // case "0634-3389-9948": return "wle_fp5_falloween_round_85";
+                // case "6121-7790-1504": return "wle_fp5_falloween_round_86";
+                // case "0069-7749-5727": return "wle_fp5_falloween_round_87";
+                // case "1100-1065-3063": return "wle_fp5_falloween_round_88";
+                // case "4501-8526-4946": return "wle_fp5_falloween_round_90";
+                // 415
 
                 case "9334-9348-1212": return "wle_s10_bt_round_001";
                 case "9596-6865-9561": return "wle_s10_bt_round_002";
                 case "1575-3397-3154": return "wle_s10_bt_round_003";
                 case "4676-0921-9816": return "wle_s10_bt_round_004";
-                // 421
+                // 419
 
                 case "5065-6325-4646": return "wle_s10_cf_round_001";
                 case "6581-1890-6801": return "wle_s10_cf_round_002";
                 case "6656-2033-4324": return "wle_s10_cf_round_003";
                 case "7277-7302-9886": return "wle_s10_cf_round_004";
-                // 425
+                // 423
 
                 case "9100-1195-6052": return "wle_mrs_bagel_opener_1";
                 case "9299-0471-0746": return "wle_mrs_bagel_opener_2";
@@ -4531,7 +4632,7 @@ namespace FallGuysStats {
                 case "8489-4249-0438": return "wle_mrs_bagel_filler_4";
                 case "7476-9346-3120": return "wle_mrs_bagel_final_1";
                 case "9201-4959-0276": return "wle_mrs_bagel_final_2";
-                // 435
+                // 433
 
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
@@ -4543,7 +4644,7 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                // 445
+                // 443
             }
             return shareCode;
         }

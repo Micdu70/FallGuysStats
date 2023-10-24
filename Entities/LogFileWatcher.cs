@@ -272,11 +272,15 @@ namespace FallGuysStats {
         }
 
         private readonly Dictionary<string, string> _sceneNameReplacer = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-            { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }
+            { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }, { "FallGuy_PumpkinPie", "FallGuy_Invisibeans" }
         };
 
         private string GetCorrectRoundId(string roundId) { // Shuffle Show
-            return roundId.StartsWith("mrs_wle_fp") ? $"current_{roundId.Substring(4)}" : roundId.Substring(4);
+            if (roundId.StartsWith("wle_shuffle_halloween_")) {
+                return $"wle_fp5_falloween_round_{roundId.Substring(roundId.LastIndexOf('_') + 1)}";
+            } else {
+                return roundId.StartsWith("mrs_wle_fp") ? $"current_{roundId.Substring(4)}" : roundId.Substring(4);
+            }
         }
 
         private bool IsRealFinalRound(string roundId, string showId) {
