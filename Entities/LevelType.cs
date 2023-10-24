@@ -13,7 +13,7 @@ namespace FallGuysStats {
         Creative,
         Unknown
     }
-    public enum RecordType {
+    public enum BestRecordType {
         Fastest,
         Longest,
         HighScore

@@ -580,12 +580,12 @@ namespace FallGuysStats {
                     break;
             }
         }
-        private void SetFastestLabel(StatSummary levelInfo, RecordType recordType) {
+        private void SetFastestLabel(StatSummary levelInfo, BestRecordType recordType) {
             int fastestSwitchCount = this.switchCount;
             if (!this.StatsForm.CurrentSettings.SwitchBetweenLongest) {
-                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 : recordType == RecordType.HighScore ? 2 : 1;
+                fastestSwitchCount = this.StatsForm.CurrentSettings.OnlyShowLongest ? 0 : recordType == BestRecordType.HighScore ? 2 : 1;
             }
-            switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && recordType != RecordType.Fastest) ? 3 : 2)) {
+            switch (fastestSwitchCount % ((levelInfo.BestScore.HasValue && recordType != BestRecordType.Fastest) ? 3 : 2)) {
                 case 0:
                     this.lblFastest.Text = $"{Multilingual.GetWord("overlay_longest_time")} :";
                     this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
@@ -596,7 +596,7 @@ namespace FallGuysStats {
                         this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
                     } else {
                         this.lblFastest.Text = $"{Multilingual.GetWord("overlay_best_time")} :";
-                        if (recordType == RecordType.Longest) {
+                        if (recordType == BestRecordType.Longest) {
                             this.lblFastest.TextRight = levelInfo.LongestFinish.HasValue ? $"{levelInfo.LongestFinish:m\\:ss\\.ff}" : "-";
                         } else {
                             this.lblFastest.TextRight = levelInfo.BestFinish.HasValue ? $"{levelInfo.BestFinish:m\\:ss\\.ff}" : "-";
@@ -708,7 +708,7 @@ namespace FallGuysStats {
                     }
 
                     LevelType levelType = (level?.Type).GetValueOrDefault(LevelType.Creative);
-                    RecordType recordType = (level?.RecordType).GetValueOrDefault(RecordType.Fastest);
+                    BestRecordType recordType = (level?.BestRecordType).GetValueOrDefault(BestRecordType.Fastest);
                     StatSummary levelInfo = this.StatsForm.GetLevelInfo(roundName, recordType);
 
                     if (roundName.Length > 30) { roundName = roundName.Substring(0, 30); }
@@ -799,7 +799,7 @@ namespace FallGuysStats {
                                                    : this.lastRound.Position > 0 ? $"# {Multilingual.GetWord("overlay_position_prefix")}{this.lastRound.Position}{Multilingual.GetWord("overlay_position_suffix")} | {time:m\\:ss\\.ff}" : $"{time:m\\:ss\\.ff}";
                         this.lblFinish.ForeColor = (Stats.InShow && !Stats.EndedShow) || this.lastRound.Crown ? this.ForeColor : Color.Pink;
 
-                        if (recordType == RecordType.Fastest) {
+                        if (recordType == BestRecordType.Fastest) {
                             if (time < levelInfo.BestFinish.GetValueOrDefault(TimeSpan.MaxValue) && time > levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {
                                 this.lblFinish.ForeColor = Color.LightGreen;
                             } else if (time < levelInfo.BestFinishOverall.GetValueOrDefault(TimeSpan.MaxValue)) {

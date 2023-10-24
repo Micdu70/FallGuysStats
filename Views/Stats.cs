@@ -2387,7 +2387,7 @@ namespace FallGuysStats {
                                 roundName = roundName.Replace('_', ' ');
                             }
 
-                            LevelStats newLevel = new LevelStats(roundName, LevelType.Creative, RecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
+                            LevelStats newLevel = new LevelStats(roundName, LevelType.Creative, BestRecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
 
                             this.StatLookup.Add(stat.Name, newLevel);
                             this.StatDetails.Add(newLevel);
@@ -2625,7 +2625,7 @@ namespace FallGuysStats {
                     : (Color)new ColorConverter().ConvertFromString(this.CurrentSettings.OverlayFontColorSerialized));
             }
         }
-        public StatSummary GetLevelInfo(string roundName, RecordType recordType) {
+        public StatSummary GetLevelInfo(string roundName, BestRecordType recordType) {
             StatSummary summary = new StatSummary {
                 AllWins = 0,
                 TotalShows = 0,
@@ -2637,7 +2637,7 @@ namespace FallGuysStats {
             int lastShow = -1;
 
             if (!this.StatLookup.TryGetValue(roundName, out LevelStats currentLevel)) {
-                currentLevel = new LevelStats(roundName, LevelType.Creative, RecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
+                currentLevel = new LevelStats(roundName, LevelType.Creative, BestRecordType.Fastest, true, false, 0, Properties.Resources.round_creative_icon, Properties.Resources.round_creative_big_icon);
             }
 
             for (int i = 0; i < this.AllStats.Count; i++) {
@@ -2692,7 +2692,7 @@ namespace FallGuysStats {
                     }
 
                     if (isInFastestFilter) {
-                        if ((!hasLevelDetails || recordType == RecordType.HighScore)
+                        if ((!hasLevelDetails || recordType == BestRecordType.HighScore)
                             && info.Score.HasValue && (!summary.BestScore.HasValue || info.Score.Value > summary.BestScore.Value)) {
                             summary.BestScore = info.Score;
                         }
