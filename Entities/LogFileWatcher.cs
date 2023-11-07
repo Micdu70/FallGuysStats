@@ -197,8 +197,8 @@ namespace FallGuysStats {
                                        || line.Line.IndexOf("[EOSPartyPlatformService.Base] Reset, reason: Shutdown", StringComparison.OrdinalIgnoreCase) >= 0) {
                                 offset = i > 0 ? tempLines[i - 1].Offset : offset;
                                 lastDate = line.Date;
-                            } else if (line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) >= 0) {
-                                if (this.autoChangeProfile && Stats.IsGameRunning && Stats.InShow && !Stats.EndedShow) {
+                            } else if (this.autoChangeProfile && line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase) >= 0) {
+                                if (Stats.IsGameRunning && Stats.InShow && !Stats.EndedShow) {
                                     this.StatsForm.SetLinkedProfileMenu(this.selectedShowId, logRound.PrivateLobby, this.StatsForm.IsCreativeShow(this.selectedShowId));
                                 }
                             }
@@ -315,7 +315,10 @@ namespace FallGuysStats {
                     || roundId.EndsWith("_xtreme_party_final", StringComparison.OrdinalIgnoreCase)
 
                     || (roundId.IndexOf("_squads_squadcelebration", StringComparison.OrdinalIgnoreCase) != -1
-                        && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase));
+                        && roundId.EndsWith("_final", StringComparison.OrdinalIgnoreCase))
+
+                    || (showId.Equals("event_only_hoverboard_template")
+                        && roundId.Equals("round_hoverboardsurvival_final"));
         }
 
         private bool IsModeException(string roundId) {

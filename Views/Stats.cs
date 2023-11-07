@@ -246,12 +246,14 @@ namespace FallGuysStats {
             "event_only_thin_ice_template",
             "event_only_slime_climb",
             "event_only_jump_club_template",
+            "event_only_hoverboard_template",
             "event_walnut_template",
             "survival_of_the_fittest",
             "show_robotrampage_ss2_show1_template",
             "event_le_anchovy_template",
             "event_pixel_palooza_template",
             "xtreme_party",
+            "invisibeans_mode",
             "fall_guys_creative_mode",
             "private_lobbies"
         };
@@ -2575,8 +2577,13 @@ namespace FallGuysStats {
         }
         private string GetLinkedShowId(string showId) {
             switch (showId) {
-                case "squadcelebration": return "squads_4player";
                 case "turbo_show": return "main_show";
+                case "squadcelebration":
+                case "event_day_at_races_squads_template":
+                    return "squads_4player";
+                case "invisibeans_template":
+                case "invisibeans_pistachio_template":
+                    return "invisibeans_mode";
             }
             return showId;
         }
