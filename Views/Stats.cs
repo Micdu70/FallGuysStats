@@ -1882,6 +1882,23 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 21;
                 this.SaveUserSettings();
             }
+            if (this.CurrentSettings.FrenchyEditionDB == 21) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        info.ShowNameId.Equals("event_only_hoverboard_template") &&
+                        info.Round == 3) {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 22;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -1959,7 +1976,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 21
+                FrenchyEditionDB = 22
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
