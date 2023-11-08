@@ -1,26 +1,16 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.227 du 24/10/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.228 du 08/11/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
 Ce programme utilise la base de données gratuite provenant du site IPinfo.io (https://ipinfo.io) pour la géolocalisation des serveurs de Fall Guys.
 
-INFO: Date de la base de données IPinfo.io => 24/10/2023
+INFO: Date de la base de données IPinfo.io => 08/11/2023
 
 
 IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 
-### Il y a 0 bug génant connu dans la v1.227 de la "FE" (Frenchy Edition)
-
-
-## Différences entre la "FE" et la Version Officielle
-
-- La "FE" enregistre les stats des manches des émissions abandonnées (quittées prématurément) ou lors d'un crash du jeu contrairement à la Version Officielle
-- L'overlay de la "FE" fonctionne aussi en mode spectateur contrairement à la Version Officielle
-- L'overlay de la "FE" indique le nombre d'haricots qui ont réussi la manche (fini la course/survécu/TO en finale) contrairement à la Version Officielle
-
-- La "FE" ne possède pas d'icône de notification (systray) contrairement à la Version Officielle qui l'a rajoutée
-- La "FE" utilise toujours l'ancienne fenêtre de "Configuration" contrairement à la Version Officielle qui possède maintenant des "tuiles"
+### Il y a 0 bug génant connu dans la v1.228 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation

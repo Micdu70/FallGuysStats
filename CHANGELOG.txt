@@ -1,12 +1,16 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
+  - v1.228 ~ 08/11/2023
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
+    - ++Changé: Base de données IPinfo.io datant du 08/11/2023
+
+
+# Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
   - v1.227 ~ 24/10/2023
     - +Corrigé: Détection de la manche "Voleurs de bonbon" ( manche détectée comme "Voleurs Sucrés" car étant une variante )
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle + Modifications "FE"]
     - ++Changé: Base de données IPinfo.io datant du 24/10/2023
-
-
-# Changelog des précédentes versions de la "FE" (Frenchy Edition)
 
   - v1.226 ~ 18/10/2023
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
