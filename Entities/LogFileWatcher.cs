@@ -275,6 +275,15 @@ namespace FallGuysStats {
             { "FallGuy_FollowTheLeader_UNPACKED", "FallGuy_FollowTheLeader" }, { "FallGuy_BlueJay_UNPACKED", "FallGuy_BlueJay" }, { "FallGuy_PumpkinPie", "FallGuy_Invisibeans" }
         };
 
+        private string ChangeShowAndRoundId(string id) { // Fix MT mistakes...
+            switch (id) {
+                case "current_wle_fp5_falloween_7_01_04":
+                    return "current_wle_fp5_falloween_7_01_05";
+                default:
+                    return id;
+            }
+        }
+
         private string GetCorrectRoundId(string roundId) { // Shuffle Show
             if (roundId.StartsWith("wle_shuffle_halloween_")) {
                 return $"wle_fp5_falloween_round_{roundId.Substring(roundId.LastIndexOf('_') + 1)}";
@@ -410,13 +419,10 @@ namespace FallGuysStats {
                 }
                 if (line.Date > this.StatsForm.startupTime) { this.serverPing.Start(); }
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Selected show is", StringComparison.OrdinalIgnoreCase)) >= 0) {
-                this.selectedShowId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
-                if (this.selectedShowId.StartsWith("ugc-")) {
-                    this.selectedShowId = this.selectedShowId.Substring(4);
-                    this.useShareCode = true;
-                } else {
-                    this.useShareCode = false;
-                }
+                string showId = line.Line.Substring(line.Line.Length - (line.Line.Length - index - 41));
+                this.useShareCode = showId.StartsWith("ugc-");
+                this.selectedShowId = this.useShareCode ? showId.Substring(4) :
+                                      this.ChangeShowAndRoundId(showId);
             } else if ((index = line.Line.IndexOf("[HandleSuccessfulLogin] Session: ", StringComparison.OrdinalIgnoreCase)) >= 0) {
                 //Store SessionID to prevent duplicates (for fallalytics)
                 this.sessionId = line.Line.Substring(index + 33);
@@ -451,13 +457,9 @@ namespace FallGuysStats {
                 int index2 = line.Line.IndexOf(". ", index + 62);
                 if (index2 < 0) { index2 = line.Line.Length; }
 
-                if (logRound.Info.UseShareCode) {
-                    logRound.Info.Name = this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66));
-                } else {
-                    logRound.Info.Name = !logRound.Info.ShowNameId.Equals("wle_mrs_shuffle_show")
-                                         ? line.Line.Substring(index + 62, index2 - index - 62)
-                                         : this.GetCorrectRoundId(line.Line.Substring(index + 62, index2 - index - 62));
-                }
+                logRound.Info.Name = logRound.Info.UseShareCode ? this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66)) :
+                                     logRound.Info.ShowNameId.Equals("wle_mrs_shuffle_show") ? this.GetCorrectRoundId(line.Line.Substring(index + 62, index2 - index - 62)) :
+                                     this.ChangeShowAndRoundId(line.Line.Substring(index + 62, index2 - index - 62));
 
                 if (this.IsRealFinalRound(logRound.Info.Name, this.selectedShowId) || logRound.Info.UseShareCode) {
                     logRound.Info.IsFinal = true;

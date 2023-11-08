@@ -9815,13 +9815,14 @@ namespace FallGuysStats {
         };
 
         public static string GetCurrentLanguage() {
-            string lang = string.Empty;
+            string lang;
             switch (Stats.CurrentLanguage) {
                 case 0: lang = "eng"; break;
                 case 1: lang = "fre"; break;
                 case 2: lang = "kor"; break;
                 case 3: lang = "jpn"; break;
                 case 4: lang = "chs"; break;
+                default: lang = "fre"; break;
             }
             return lang;
         }

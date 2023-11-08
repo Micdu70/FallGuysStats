@@ -1888,6 +1888,23 @@ namespace FallGuysStats {
                 for (int i = this.AllStats.Count - 1; i >= 0; i--) {
                     RoundInfo info = this.AllStats[i];
                     if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        info.ShowNameId.Equals("current_wle_fp5_falloween_7_01_04")) {
+                        info.ShowNameId = "current_wle_fp5_falloween_7_01_05";
+                        info.Name = "current_wle_fp5_falloween_7_01_05";
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 22;
+                this.SaveUserSettings();
+            }
+            if (this.CurrentSettings.FrenchyEditionDB == 22) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
                         info.ShowNameId.Equals("event_only_hoverboard_template") &&
                         info.Round == 3) {
                         info.IsFinal = true;
@@ -1896,7 +1913,7 @@ namespace FallGuysStats {
                 }
                 this.StatsDB.Commit();
                 this.AllStats.Clear();
-                this.CurrentSettings.FrenchyEditionDB = 22;
+                this.CurrentSettings.FrenchyEditionDB = 23;
                 this.SaveUserSettings();
             }
         }
@@ -1976,7 +1993,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 22
+                FrenchyEditionDB = 23
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -2229,6 +2246,10 @@ namespace FallGuysStats {
                     case 5:
                         this.menuSessionStats.Checked = true;
                         this.MenuStats_Click(this.menuSessionStats, EventArgs.Empty);
+                        break;
+                    default:
+                        this.menuAllStats.Checked = true;
+                        this.MenuStats_Click(this.menuAllStats, EventArgs.Empty);
                         break;
                 }
 
@@ -2594,15 +2615,17 @@ namespace FallGuysStats {
         }
         private string GetLinkedShowId(string showId) {
             switch (showId) {
-                case "turbo_show": return "main_show";
+                case "turbo_show":
+                    return "main_show";
                 case "squadcelebration":
                 case "event_day_at_races_squads_template":
                     return "squads_4player";
                 case "invisibeans_template":
                 case "invisibeans_pistachio_template":
                     return "invisibeans_mode";
+                default:
+                    return showId;
             }
-            return showId;
         }
         private int GetLinkedProfileId(string showId, bool isPrivateLobbies, bool isCreativeShow) {
             if (string.IsNullOrEmpty(showId)) { return 0; }
@@ -4532,8 +4555,8 @@ namespace FallGuysStats {
                 case "8245-2536-0397": return "current_wle_fp5_falloween_7_01_01";
                 case "5120-5302-3364": return "current_wle_fp5_falloween_7_01_02";
                 case "2005-7268-3932": return "current_wle_fp5_falloween_7_01_03";
-                case "6044-9178-1352": return "current_wle_fp5_falloween_7_01_04";
-                // case "6044-9178-1352": return "current_wle_fp5_falloween_7_01_05";
+                case "9744-9959-6162": return "current_wle_fp5_falloween_7_01_04";
+                case "6044-9178-1352": return "current_wle_fp5_falloween_7_01_05";
                 case "7336-7844-4312": return "current_wle_fp5_falloween_7_01_06";
                 case "7153-1520-5779": return "current_wle_fp5_falloween_7_01_07";
                 case "5105-6932-4910": return "current_wle_fp5_falloween_7_01_08";
@@ -4569,7 +4592,7 @@ namespace FallGuysStats {
                 case "0970-9754-5183": return "current_wle_fp5_falloween_13_01";
                 case "2532-1174-5060": return "current_wle_fp5_falloween_14_01";
                 case "0697-1204-1880": return "current_wle_fp5_falloween_15_01";
-                // 414
+                // 415
 
                 case "3916-1541-0243": return "current_wle_fp6_1_01";
                 case "3948-0002-3038": return "current_wle_fp6_1_02";
@@ -4598,7 +4621,7 @@ namespace FallGuysStats {
                 case "1076-4735-0083": return "current_wle_fp6_3_06";
                 case "0255-4663-0790": return "current_wle_fp6_3_07";
                 case "8297-7587-2491": return "current_wle_fp6_3_08";
-                // 441
+                // 442
 
                 // case "8245-2536-0397": return "wle_fp5_falloween_round_1";
                 // case "5120-5302-3364": return "wle_fp5_falloween_round_2";
@@ -4681,19 +4704,19 @@ namespace FallGuysStats {
                 // case "0069-7749-5727": return "wle_fp5_falloween_round_87";
                 // case "1100-1065-3063": return "wle_fp5_falloween_round_88";
                 // case "4501-8526-4946": return "wle_fp5_falloween_round_90";
-                // 441
+                // 442
 
                 case "9334-9348-1212": return "wle_s10_bt_round_001";
                 case "9596-6865-9561": return "wle_s10_bt_round_002";
                 case "1575-3397-3154": return "wle_s10_bt_round_003";
                 case "4676-0921-9816": return "wle_s10_bt_round_004";
-                // 445
+                // 446
 
                 case "5065-6325-4646": return "wle_s10_cf_round_001";
                 case "6581-1890-6801": return "wle_s10_cf_round_002";
                 case "6656-2033-4324": return "wle_s10_cf_round_003";
                 case "7277-7302-9886": return "wle_s10_cf_round_004";
-                // 449
+                // 450
 
                 case "9100-1195-6052": return "wle_mrs_bagel_opener_1";
                 case "9299-0471-0746": return "wle_mrs_bagel_opener_2";
@@ -4705,7 +4728,7 @@ namespace FallGuysStats {
                 case "8489-4249-0438": return "wle_mrs_bagel_filler_4";
                 case "7476-9346-3120": return "wle_mrs_bagel_final_1";
                 case "9201-4959-0276": return "wle_mrs_bagel_final_2";
-                // 459
+                // 460
 
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
@@ -4717,9 +4740,10 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                // 469
+                // 470
+
+                default: return shareCode;
             }
-            return shareCode;
         }
         public string[] FindCreativeAuthor(JsonElement authorData) {
             string[] creativeAuthorInfo = { "N/A", "N/A" };
