@@ -36,6 +36,7 @@ namespace FallGuysStats {
             this.menuFilters = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStatsFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomRangeStats = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuAllStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSeasonStats = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWeekStats = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +125,7 @@ namespace FallGuysStats {
             // 
             this.menuStatsFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCustomRangeStats,
+            this.menuSeparator1,
             this.menuAllStats,
             this.menuSeasonStats,
             this.menuWeekStats,
@@ -145,6 +147,11 @@ namespace FallGuysStats {
             this.menuCustomRangeStats.Click += new System.EventHandler(this.MenuStats_Click);
             this.menuCustomRangeStats.MouseLeave += new System.EventHandler(this.SetCursor_MouseLeave);
             this.menuCustomRangeStats.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SetCursor_MouseMove);
+            // 
+            // menuSeparator1
+            // 
+            this.menuSeparator1.Name = "menuSeparator1";
+            this.menuSeparator1.Size = new System.Drawing.Size(226, 6);
             // 
             // menuAllStats
             // 
@@ -650,6 +657,7 @@ namespace FallGuysStats {
         private System.Windows.Forms.ToolStripMenuItem menuTodaysShow;
         private System.Windows.Forms.ToolStripMenuItem menuEditProfiles;
         private System.Windows.Forms.ToolStripMenuItem menuCustomRangeStats;
+        private System.Windows.Forms.ToolStripSeparator menuSeparator1;
         private MetroFramework.Controls.MetroLabel lblManualUpdateVersion;
         private MetroFramework.Controls.MetroLabel linkToIPinfoWebsite;
     }

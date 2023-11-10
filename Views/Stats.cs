@@ -589,18 +589,30 @@ namespace FallGuysStats {
                         tsmi1.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                         tsmi1.MouseEnter += this.Menu_MouseEnter;
                         tsmi1.MouseLeave += this.Menu_MouseLeave;
-                        foreach (ToolStripMenuItem tsmi2 in tsmi1.DropDownItems) {
-                            if (tsmi2.Name.Equals("menuEditProfiles")) { tsmi2.Image = theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; }
-                            tsmi2.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                            tsmi2.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
-                            tsmi2.MouseEnter += this.Menu_MouseEnter;
-                            tsmi2.MouseLeave += this.Menu_MouseLeave;
-                            foreach (ToolStripMenuItem tsmi3 in tsmi2.DropDownItems) {
-                                if (tsmi3.Name.Equals("menuCustomRangeStats")) { tsmi3.Image = theme == MetroThemeStyle.Light ? Properties.Resources.calendar_icon : Properties.Resources.calendar_gray_icon; }
-                                tsmi3.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
-                                tsmi3.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
-                                tsmi3.MouseEnter += this.Menu_MouseEnter;
-                                tsmi3.MouseLeave += this.Menu_MouseLeave;
+                        foreach (var item1 in tsmi1.DropDownItems) {
+                            if (item1 is ToolStripMenuItem subTsmi1) {
+                                if (subTsmi1.Name.Equals("menuEditProfiles")) { subTsmi1.Image = theme == MetroThemeStyle.Light ? Properties.Resources.setting_icon : Properties.Resources.setting_gray_icon; }
+                                subTsmi1.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                subTsmi1.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
+                                subTsmi1.MouseEnter += this.Menu_MouseEnter;
+                                subTsmi1.MouseLeave += this.Menu_MouseLeave;
+                                foreach (var item2 in subTsmi1.DropDownItems) {
+                                    if (item2 is ToolStripMenuItem subTsmi2) {
+                                        if (subTsmi2.Name.Equals("menuCustomRangeStats")) { subTsmi2.Image = theme == MetroThemeStyle.Light ? Properties.Resources.calendar_icon : Properties.Resources.calendar_gray_icon; }
+                                        subTsmi2.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                        subTsmi2.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
+                                        subTsmi2.MouseEnter += this.Menu_MouseEnter;
+                                        subTsmi2.MouseLeave += this.Menu_MouseLeave;
+                                    } else if (item2 is ToolStripSeparator subTss2) {
+                                        subTss2.Paint += this.CustomToolStripSeparatorCustom_Paint;
+                                        subTss2.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
+                                        subTss2.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
+                                    }
+                                }
+                            } else if (item1 is ToolStripSeparator subTss1) {
+                                subTss1.Paint += this.CustomToolStripSeparatorCustom_Paint;
+                                subTss1.BackColor = theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17);
+                                subTss1.ForeColor = theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray;
                             }
                         }
                     }
@@ -669,6 +681,11 @@ namespace FallGuysStats {
 
             this.ResumeLayout(false);
             this.Refresh();
+        }
+        private void CustomToolStripSeparatorCustom_Paint(Object sender, PaintEventArgs e) {
+            ToolStripSeparator separator = (ToolStripSeparator)sender;
+            e.Graphics.FillRectangle(new SolidBrush(this.Theme == MetroThemeStyle.Light ? Color.White : Color.FromArgb(17, 17, 17)), 0, 0, separator.Width, separator.Height); // CUSTOM_COLOR_BACKGROUND
+            e.Graphics.DrawLine(new Pen(this.Theme == MetroThemeStyle.Light ? Color.Black : Color.DarkGray), 30, separator.Height / 2, separator.Width - 4, separator.Height / 2); // CUSTOM_COLOR_FOREGROUND
         }
         private void CMenu_MouseEnter(object sender, EventArgs e) {
             if (sender is ToolStripMenuItem tsi) {
