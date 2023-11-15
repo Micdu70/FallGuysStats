@@ -1933,6 +1933,22 @@ namespace FallGuysStats {
                 this.CurrentSettings.FrenchyEditionDB = 23;
                 this.SaveUserSettings();
             }
+            if (this.CurrentSettings.FrenchyEditionDB == 23) {
+                this.AllStats.AddRange(this.RoundDetails.FindAll());
+                this.StatsDB.BeginTrans();
+                for (int i = this.AllStats.Count - 1; i >= 0; i--) {
+                    RoundInfo info = this.AllStats[i];
+                    if (!string.IsNullOrEmpty(info.ShowNameId) &&
+                        info.ShowNameId.Equals("wle_shuffle_discover")) {
+                        info.IsFinal = true;
+                        this.RoundDetails.Update(info);
+                    }
+                }
+                this.StatsDB.Commit();
+                this.AllStats.Clear();
+                this.CurrentSettings.FrenchyEditionDB = 24;
+                this.SaveUserSettings();
+            }
         }
         private UserSettings GetDefaultSettings() {
             return new UserSettings {
@@ -2010,7 +2026,7 @@ namespace FallGuysStats {
                 ShowChangelog = true,
                 Visible = true,
                 Version = 50,
-                FrenchyEditionDB = 23
+                FrenchyEditionDB = 24
             };
         }
         private bool IsFinalWithCreativeLevel(string levelId) {
@@ -4135,6 +4151,7 @@ namespace FallGuysStats {
                    showId.IndexOf("wle_s10_player_round_", StringComparison.OrdinalIgnoreCase) != -1 ||
                    showId.Equals("wle_mrs_bagel") ||
                    showId.Equals("wle_mrs_shuffle_show") ||
+                   showId.Equals("wle_shuffle_discover") ||
                    showId.StartsWith("current_wle_fp") ||
                    showId.StartsWith("wle_s10_cf_round_");
         }
@@ -4357,7 +4374,7 @@ namespace FallGuysStats {
                 case "4164-0494-9264": return "current_wle_fp4_05_01_02";
                 case "4166-2880-4137": return "current_wle_fp4_05_01_03";
                 case "4222-3581-1925": return "current_wle_fp4_05_01_04";
-                case "4398-7555-7009": return "current_wle_fp4_05_01_05";
+                // case "4398-7555-7009": return "current_wle_fp4_05_01_05";
                 case "0510-4142-2680": return "current_wle_fp4_05_01";
                 case "0665-1582-4029": return "current_wle_fp4_05_02";
                 case "9117-2376-3176": return "current_wle_fp4_05_03_01";
@@ -4368,7 +4385,7 @@ namespace FallGuysStats {
                 case "6595-2972-5515": return "current_wle_fp4_05_2_01";
                 case "7696-3433-8713": return "current_wle_fp4_05_2_02";
                 case "9212-2213-6190": return "current_wle_fp4_05_2_03";
-                // 204
+                // 203
 
                 case "7421-3397-8915": return "current_wle_fp4_06_01";
                 case "0897-2632-3022": return "current_wle_fp4_06_02";
@@ -4384,7 +4401,7 @@ namespace FallGuysStats {
                 case "0226-5184-6884": return "current_wle_fp4_06_1_04";
                 case "9410-7962-1207": return "current_wle_fp4_06_1_05";
                 case "6002-7812-7859": return "current_wle_fp4_06_1_06";
-                // 219
+                // 218
 
                 case "9414-6564-4192": return "current_wle_fp4_07_01";
                 case "7909-3465-4598": return "current_wle_fp4_07_02";
@@ -4394,7 +4411,7 @@ namespace FallGuysStats {
                 case "0513-9569-5079": return "current_wle_fp4_07_06";
                 case "9825-0849-5439": return "current_wle_fp4_07_07";
                 case "9963-3475-5634": return "current_wle_fp4_07_0_01";
-                // 227
+                // 226
 
                 case "9795-5277-9654": return "current_wle_fp4_08_01";
                 case "7200-6187-0157": return "current_wle_fp4_08_0_01";
@@ -4410,7 +4427,7 @@ namespace FallGuysStats {
                 case "4045-6389-6161": return "current_wle_fp4_08_1_04";
                 case "0873-3500-8955": return "current_wle_fp4_08_2_01";
                 case "1364-9647-0717": return "current_wle_fp4_08_3_01";
-                // 241
+                // 240
 
                 case "9687-4558-9242": return "current_wle_fp4_09_01";
                 case "8824-3354-1460": return "current_wle_fp4_09_02";
@@ -4422,7 +4439,7 @@ namespace FallGuysStats {
                 case "0090-3881-4137": return "current_wle_fp4_09_1_01";
                 case "0996-7164-5913": return "current_wle_fp4_09_1_02";
                 case "3953-9880-4802": return "current_wle_fp4_09_2_01";
-                // 251
+                // 250
 
                 case "0994-7335-6422": return "current_wle_fp4_10_01";
                 case "1943-4681-1638": return "current_wle_fp4_10_02";
@@ -4439,7 +4456,7 @@ namespace FallGuysStats {
                 case "2742-4277-9915": return "current_wle_fp4_10_21";
                 case "6377-3695-4327": return "current_wle_fp4_10_0_01";
                 case "7833-7019-9317": return "current_wle_fp4_10_0_02";
-                // 266
+                // 265
 
                 case "3825-5284-9253": return "current_wle_fp5_2_01_01";
                 case "3790-8589-1520": return "current_wle_fp5_2_01_02";
@@ -4466,7 +4483,7 @@ namespace FallGuysStats {
                 case "7110-3642-5704": return "current_wle_fp5_2_05";
                 case "6376-5036-1691": return "current_wle_fp5_2_06";
                 case "6010-5013-1494": return "current_wle_fp5_2_07";
-                // 287
+                // 286
 
                 case "1721-2831-3075": return "current_wle_fp5_3_05_01";
                 case "0986-9263-8815": return "current_wle_fp5_3_05_02_01";
@@ -4475,7 +4492,7 @@ namespace FallGuysStats {
                 case "8567-8219-8609": return "current_wle_fp5_4_01_03";
                 case "5880-2278-9229": return "current_wle_fp5_4_01_04";
                 case "2319-3617-4913": return "current_wle_fp5_4_01_05";
-                // 294
+                // 293
 
                 case "4063-2641-0298": return "current_wle_fp5_10_01";
                 case "8299-0006-6070": return "current_wle_fp5_10_0_01";
@@ -4494,7 +4511,7 @@ namespace FallGuysStats {
                 case "3906-5688-1706": return "current_wle_fp5_10_2_09";
                 case "0358-6970-6379": return "current_wle_fp5_10_2_10";
                 case "3969-7959-8728": return "current_wle_fp5_10_2_11";
-                // 307
+                // 306
 
                 case "0321-9239-5763": return "current_wle_fp5_wk3_1_01";
                 case "5272-3542-2094": return "current_wle_fp5_wk3_1_02";
@@ -4511,7 +4528,7 @@ namespace FallGuysStats {
                 case "2240-5868-2714": return "current_wle_fp5_wk3_3_02";
                 case "8497-6718-8016": return "current_wle_fp5_wk3_3_03";
                 case "4915-3461-7638": return "current_wle_fp5_wk3_3_04";
-                // 320
+                // 319
 
                 case "8402-8758-0032": return "current_wle_fp5_falloween_1_01";
                 case "6240-3462-3481": return "current_wle_fp5_falloween_1_02";
@@ -4609,7 +4626,7 @@ namespace FallGuysStats {
                 case "0970-9754-5183": return "current_wle_fp5_falloween_13_01";
                 case "2532-1174-5060": return "current_wle_fp5_falloween_14_01";
                 case "0697-1204-1880": return "current_wle_fp5_falloween_15_01";
-                // 415
+                // 414
 
                 case "3916-1541-0243": return "current_wle_fp6_1_01";
                 case "3948-0002-3038": return "current_wle_fp6_1_02";
@@ -4633,12 +4650,12 @@ namespace FallGuysStats {
                 case "3071-2833-2289": return "current_wle_fp6_3_01";
                 case "2569-1984-5105": return "current_wle_fp6_3_02";
                 case "2324-3489-1583": return "current_wle_fp6_3_03";
-                case "2306-9699-8428": return "current_wle_fp6_3_04";
+                // case "2306-9699-8428": return "current_wle_fp6_3_04";
                 case "1964-6897-7083": return "current_wle_fp6_3_05";
                 case "1076-4735-0083": return "current_wle_fp6_3_06";
                 case "0255-4663-0790": return "current_wle_fp6_3_07";
                 case "8297-7587-2491": return "current_wle_fp6_3_08";
-                // 442
+                // 440
 
                 case "0676-8023-9854": return "current_wle_fp6_wk2_01";
                 case "8224-4301-6958": return "current_wle_fp6_wk2_02";
@@ -4660,7 +4677,59 @@ namespace FallGuysStats {
                 case "1588-3248-4201": return "current_wle_fp6_wk2_1_07";
                 case "8574-2024-6514": return "current_wle_fp6_wk2_1_08";
                 case "3750-6876-3150": return "current_wle_fp6_wk2_1_09";
-                // 462
+                // 460
+
+                case "9038-5995-0613": return "wle_discover_level_wk2_001";
+                case "4904-4223-0526": return "wle_discover_level_wk2_002";
+                case "5275-3298-6913": return "wle_discover_level_wk2_003";
+                case "4398-7555-7009": return "wle_discover_level_wk2_004";
+                case "5362-9288-2858": return "wle_discover_level_wk2_005";
+                case "3291-2140-7680": return "wle_discover_level_wk2_006";
+                case "8237-7159-3977": return "wle_discover_level_wk2_007";
+                case "2964-4225-1009": return "wle_discover_level_wk2_008";
+                case "6421-3169-3667": return "wle_discover_level_wk2_009";
+                case "1796-2312-9416": return "wle_discover_level_wk2_010";
+                case "3533-8159-6854": return "wle_discover_level_wk2_011";
+                case "5086-5243-9680": return "wle_discover_level_wk2_012";
+                case "1389-8884-2061": return "wle_discover_level_wk2_013";
+                case "9324-7797-9946": return "wle_discover_level_wk2_014";
+                case "8128-3640-3460": return "wle_discover_level_wk2_015";
+                case "1544-6104-2453": return "wle_discover_level_wk2_016";
+                case "5441-5981-3430": return "wle_discover_level_wk2_017";
+                case "0089-2044-0703": return "wle_discover_level_wk2_018";
+                case "5121-0443-6799": return "wle_discover_level_wk2_019";
+                case "7571-2950-1286": return "wle_discover_level_wk2_020";
+                case "2246-3279-7448": return "wle_discover_level_wk2_021";
+                case "8787-5820-1328": return "wle_discover_level_wk2_022";
+                case "8257-1760-0020": return "wle_discover_level_wk2_023";
+                case "8207-5307-7171": return "wle_discover_level_wk2_024";
+                case "2722-3817-6628": return "wle_discover_level_wk2_025";
+                case "0777-3024-0228": return "wle_discover_level_wk2_026";
+                case "7721-7953-1307": return "wle_discover_level_wk2_027";
+                case "8266-7988-9989": return "wle_discover_level_wk2_028";
+                case "8696-7950-5029": return "wle_discover_level_wk2_029";
+                case "0707-0032-0823": return "wle_discover_level_wk2_030";
+                case "9015-3378-5798": return "wle_discover_level_wk2_031";
+                case "1907-7914-9110": return "wle_discover_level_wk2_032";
+                case "7244-3167-1509": return "wle_discover_level_wk2_033";
+                case "1002-4872-3000": return "wle_discover_level_wk2_034";
+                case "9410-3554-3998": return "wle_discover_level_wk2_035";
+                case "5353-5711-2408": return "wle_discover_level_wk2_036";
+                case "2339-7794-6638": return "wle_discover_level_wk2_037";
+                case "7984-3310-2143": return "wle_discover_level_wk2_038";
+                case "2118-2980-8240": return "wle_discover_level_wk2_039";
+                case "3936-9524-9756": return "wle_discover_level_wk2_040";
+                case "1893-8327-1728": return "wle_discover_level_wk2_041";
+                case "1225-4872-0162": return "wle_discover_level_wk2_042";
+                case "2910-3365-2494": return "wle_discover_level_wk2_043";
+                case "5244-0881-7559": return "wle_discover_level_wk2_044";
+                case "2306-9699-8428": return "wle_discover_level_wk2_045";
+                case "3317-4973-3298": return "wle_discover_level_wk2_046";
+                case "4916-2277-5636": return "wle_discover_level_wk2_047";
+                case "0755-3864-7172": return "wle_discover_level_wk2_048";
+                case "4750-3581-7195": return "wle_discover_level_wk2_049";
+                case "3874-0613-2428": return "wle_discover_level_wk2_050";
+                // 510
 
                 // case "8245-2536-0397": return "wle_fp5_falloween_round_1";
                 // case "5120-5302-3364": return "wle_fp5_falloween_round_2";
@@ -4743,19 +4812,19 @@ namespace FallGuysStats {
                 // case "0069-7749-5727": return "wle_fp5_falloween_round_87";
                 // case "1100-1065-3063": return "wle_fp5_falloween_round_88";
                 // case "4501-8526-4946": return "wle_fp5_falloween_round_90";
-                // 462
+                // 510
 
                 case "9334-9348-1212": return "wle_s10_bt_round_001";
                 case "9596-6865-9561": return "wle_s10_bt_round_002";
                 case "1575-3397-3154": return "wle_s10_bt_round_003";
                 case "4676-0921-9816": return "wle_s10_bt_round_004";
-                // 466
+                // 514
 
                 case "5065-6325-4646": return "wle_s10_cf_round_001";
                 case "6581-1890-6801": return "wle_s10_cf_round_002";
                 case "6656-2033-4324": return "wle_s10_cf_round_003";
                 case "7277-7302-9886": return "wle_s10_cf_round_004";
-                // 470
+                // 518
 
                 case "9100-1195-6052": return "wle_mrs_bagel_opener_1";
                 case "9299-0471-0746": return "wle_mrs_bagel_opener_2";
@@ -4767,7 +4836,7 @@ namespace FallGuysStats {
                 case "8489-4249-0438": return "wle_mrs_bagel_filler_4";
                 case "7476-9346-3120": return "wle_mrs_bagel_final_1";
                 case "9201-4959-0276": return "wle_mrs_bagel_final_2";
-                // 480
+                // 528
 
                 case "0733-6671-4871": return "wle_s10_orig_round_010";
                 case "6498-0353-5009": return "wle_s10_orig_round_011";
@@ -4779,7 +4848,7 @@ namespace FallGuysStats {
                 case "6464-4069-3540": return "wle_s10_orig_round_031";
                 case "8993-4568-6925": return "wle_s10_round_004";
                 case "7495-5141-5265": return "wle_s10_round_009";
-                // 490
+                // 538
 
                 default: return shareCode;
             }
