@@ -1,16 +1,16 @@
-# Tracker Fall Guys "FE" (Frenchy Edition) v1.229 du 15/11/2023 ~ par Micdu70
+# Tracker Fall Guys "FE" (Frenchy Edition) v1.230 du 16/11/2023 ~ par Micdu70
 
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
 Ce programme utilise la base de données gratuite provenant du site IPinfo.io (https://ipinfo.io) pour la géolocalisation des serveurs de Fall Guys.
 
-INFO: Date de la base de données IPinfo.io => 14/11/2023
+INFO: Date de la base de données IPinfo.io => 15/11/2023
 
 
 IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 
-### Il y a 0 bug génant connu dans la v1.229 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.230 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
