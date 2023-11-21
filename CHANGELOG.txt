@@ -1,11 +1,14 @@
 # Changelog de la dernière version de la "FE" (Frenchy Edition)
 
-  - v1.230 ~ 16/11/2023
-    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
-    - ++Changé: Base de données IPinfo.io datant du 15/11/2023
+  - v1.231 ~ 21/11/2023
+    - Veuillez migrer vers la version Officielle du tracker
 
 
 # Changelog des précédentes versions de la "FE" (Frenchy Edition)
+
+  - v1.230 ~ 16/11/2023
+    - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
+    - ++Changé: Base de données IPinfo.io datant du 15/11/2023
 
   - v1.229 ~ 15/11/2023
   { Correction de bugs de la "FE" }

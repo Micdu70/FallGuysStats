@@ -1,3 +1,7 @@
+**/!\ LA VERSION "FE" DU TRACKER NE SERA PLUS MAINTENU A JOUR /!\**
+
+**/!\ POUR MIGRER CORRECTEMENT VERS LA VERSION OFFICIELLE, VEUILLEZ UTILISER AU MOINS UNE FOIS LA DERNIERE VERSION "FE" (v1.231) /!\**
+
 # Sommaire
 
   - [**Tracker Fall Guys "FE" (Frenchy Edition) par Micdu70**](#-tracker-fall-guys-fe-frenchy-edition-par-micdu70)
@@ -25,6 +29,10 @@
 
 **IMPORTANT: Cette application n'a aucune affiliation avec MediaTonic. Les images de Fall Guys sont la propriété de Mediatonic Limited.**
 
+**/!\ LA VERSION "FE" DU TRACKER NE SERA PLUS MAINTENU A JOUR /!\**
+
+**/!\ POUR MIGRER CORRECTEMENT VERS LA VERSION OFFICIELLE, VEUILLEZ UTILISER AU MOINS UNE FOIS LA DERNIERE VERSION "FE" (v1.231) /!\**
+
 Programme qui permet de récupérer les stats de Fall Guys (via la lecture des logs) pour suivre ce que vous faites en jeu.
 
 Ce programme utilise la base de données gratuite provenant du site IPinfo.io (https://ipinfo.io) pour la géolocalisation des serveurs de Fall Guys.
@@ -32,12 +40,16 @@ Ce programme utilise la base de données gratuite provenant du site IPinfo.io (h
 INFO: Date de la base de données IPinfo.io => 15/11/2023
 
 
+**/!\ LA VERSION "FE" DU TRACKER NE SERA PLUS MAINTENU A JOUR /!\**
+
+**/!\ POUR MIGRER CORRECTEMENT VERS LA VERSION OFFICIELLE, VEUILLEZ UTILISER AU MOINS UNE FOIS LA DERNIERE VERSION "FE" (v1.231) /!\**
+
 IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => https://github.com/ShootMe/FallGuysStats
 
 
 ## Téléchargement
 
-**Dernière version:** `v1.230` ~ 16/11/2023
+**Dernière version:** `v1.231` ~ 21/11/2023
 
 　　<a href="https://raw.githubusercontent.com/Micdu70/FallGuysStats/master/FallGuysStats.zip">![FallGuysStats.zip](Resources/FallGuysStats-download.svg)</a>
   - Si votre logiciel antivirus bloque l'utilisation du tracker, utilisez alors la version ci-dessous qui ne possède pas la fonction de MAJ automatique.
@@ -47,11 +59,10 @@ IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => http
 
 ## Changelog de la dernière version
 
-- ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
-- ++Changé: Base de données IPinfo.io datant du 15/11/2023
+- Veuillez migrer vers la version Officielle du tracker
 
 
-### Il y a 0 bug génant connu dans la v1.230 de la "FE" (Frenchy Edition)
+### Il y a 0 bug génant connu dans la v1.231 de la "FE" (Frenchy Edition)
 
 
 ## Utilisation
@@ -214,6 +225,9 @@ IMPORTANT: La Version Officielle du tracker Fall Guys est disponible ici => http
 
 
 ## Changelog complet de la "FE" (Frenchy Edition)
+
+  - `v1.231` ~ 21/11/2023
+    - Veuillez migrer vers la version Officielle du tracker
 
   - `v1.230` ~ 16/11/2023
     - ++Ajouté: Nom des nouvelles manches / émissions [Version Officielle]
