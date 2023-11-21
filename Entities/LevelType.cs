@@ -3,6 +3,7 @@ using MetroFramework;
 
 namespace FallGuysStats {
     public enum LevelType {
+        CreativeRace,
         Race,
         Survival,
         Hunt,
@@ -22,6 +23,7 @@ namespace FallGuysStats {
     internal static class LevelTypeBehavior {
         public static int FastestLabel(this LevelType type) {
             switch (type) {
+                case LevelType.CreativeRace:
                 case LevelType.Race:
                 case LevelType.Hunt:
                 case LevelType.Invisibeans:
@@ -40,6 +42,7 @@ namespace FallGuysStats {
                 return Multilingual.GetWord("level_detail_final");
             }
             switch (type) {
+                case LevelType.CreativeRace:
                 case LevelType.Race:
                     return Multilingual.GetWord("level_detail_race");
                 case LevelType.Survival:
@@ -62,6 +65,7 @@ namespace FallGuysStats {
                 return Color.FromArgb(250, 195, 0);
             }
             switch (type) {
+                case LevelType.CreativeRace:
                 case LevelType.Race:
                     return Color.FromArgb(0, 235, 105);
                 case LevelType.Survival:
@@ -87,6 +91,7 @@ namespace FallGuysStats {
                 return Color.FromArgb(alpha, 250, 80, 0);
             }
             switch (type) {
+                case LevelType.CreativeRace:
                 case LevelType.Race:
                     return Color.FromArgb(alpha, 0, 235, 105);
                 case LevelType.Survival:
@@ -112,6 +117,7 @@ namespace FallGuysStats {
                 return Color.FromArgb(130, 40, 0);
             }
             switch (type) {
+                case LevelType.CreativeRace:
                 case LevelType.Race:
                     return Color.FromArgb(0, 130, 55);
                 case LevelType.Survival:

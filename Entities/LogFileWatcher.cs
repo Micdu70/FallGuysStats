@@ -286,10 +286,14 @@ namespace FallGuysStats {
 
         private string GetCorrectRoundId(string roundId) { // Shuffle Show
             if (roundId.StartsWith("wle_shuffle_halloween_")) {
-                return $"wle_fp5_falloween_round_{roundId.Substring(roundId.LastIndexOf('_') + 1)}";
+                if (this.StatsForm.LevelIdReplacerInDigisShuffleShow.TryGetValue(roundId, out string newName)) {
+                    return newName;
+                }
             } else {
-                return roundId.StartsWith("mrs_wle_fp") ? $"current_{roundId.Substring(4)}" : roundId.Substring(4);
+                string newName = roundId.Substring(4);
+                return roundId.StartsWith("mrs_wle_fp") ? $"current_{newName}" : newName;
             }
+            return roundId;
         }
 
         private bool IsRealFinalRound(string roundId, string showId) {
@@ -458,7 +462,10 @@ namespace FallGuysStats {
                 int index2 = line.Line.IndexOf(". ", index + 62);
                 if (index2 < 0) { index2 = line.Line.Length; }
 
-                logRound.Info.Name = logRound.Info.UseShareCode ? this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66)) :
+                /* logRound.Info.Name = logRound.Info.UseShareCode ? this.StatsForm.GetRoundIdFromShareCode(line.Line.Substring(index + 66, index2 - index - 66)) :
+                                     logRound.Info.ShowNameId.Equals("wle_mrs_shuffle_show") ? this.GetCorrectRoundId(line.Line.Substring(index + 62, index2 - index - 62)) :
+                                     this.ChangeShowAndRoundId(line.Line.Substring(index + 62, index2 - index - 62)); */
+                logRound.Info.Name = logRound.Info.UseShareCode ? "user_creative_race_round" :
                                      logRound.Info.ShowNameId.Equals("wle_mrs_shuffle_show") ? this.GetCorrectRoundId(line.Line.Substring(index + 62, index2 - index - 62)) :
                                      this.ChangeShowAndRoundId(line.Line.Substring(index + 62, index2 - index - 62));
 
@@ -669,7 +676,7 @@ namespace FallGuysStats {
                             if (roundInfo.ShowNameId.Equals("wle_mrs_shuffle_show")) {
                                 roundName = this.GetCorrectRoundId(roundName);
                             } else if (roundName.StartsWith("ugc-")) {
-                                roundName = this.StatsForm.GetRoundIdFromShareCode(roundName.Substring(4));
+                                roundName = "user_creative_race_round";
                             }
 
                             if (!roundInfo.Name.Equals(roundName, StringComparison.OrdinalIgnoreCase)) {
