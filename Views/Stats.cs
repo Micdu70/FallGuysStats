@@ -80,6 +80,7 @@ namespace FallGuysStats {
             }
         }
         
+        public static readonly string DEBUGFILENAME = "debug.txt";
         private static readonly string LOGFILENAME = "Player.log";
         public static List<DateTime> Seasons = new List<DateTime> {
             new DateTime(2020, 8, 4, 0, 0, 0, DateTimeKind.Utc),
@@ -680,38 +681,82 @@ namespace FallGuysStats {
         }
 
         private Stats() {
+            File.Delete(DEBUGFILENAME);
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME)) {
+                sw.WriteLine("[INFO] Tracker is initializing...");
+                sw.WriteLine("[INFO] Starting DatabaseMigration...");
+            }
             this.DatabaseMigration();
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] DatabaseMigration is done.");
+            }
+
             this.mainWndTitle = $"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
             this.StatsDB = new LiteDatabase(@"data.db");
             this.StatsDB.Pragma("UTC_DATE", true);
             this.UserSettings = this.StatsDB.GetCollection<UserSettings>("UserSettings");
-            
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Starting UserSettings checks...");
+            }
             if (this.UserSettings.Count() == 0) {
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] UserSettings is empty. Inserting default settings...");
+                }
                 this.CurrentSettings = this.GetDefaultSettings();
                 this.StatsDB.BeginTrans();
                 this.UserSettings.Insert(this.CurrentSettings);
                 this.StatsDB.Commit();
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] Default settings inserted.");
+                }
             } else {
                 try {
                     this.CurrentSettings = this.UserSettings.FindAll().First();
                     CurrentLanguage = (Language)this.CurrentSettings.Multilingual;
                     CurrentTheme = this.CurrentSettings.Theme == 0 ? MetroThemeStyle.Light : MetroThemeStyle.Dark;
                 } catch {
+                    using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                        sw.WriteLine("[ERROR] UserSettings checks failed! Restoring default settings now!");
+                    }
                     this.CurrentSettings = GetDefaultSettings();
                     this.StatsDB.BeginTrans();
                     this.UserSettings.DeleteAll();
                     this.UserSettings.Insert(this.CurrentSettings);
                     this.StatsDB.Commit();
+                    using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                        sw.WriteLine("[INFO] Default settings restored.");
+                    }
                 }
             }
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] UserSettings checks done.");
+            }
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Starting Removing any previous tracker version.");
+            }
             this.RemoveUpdateFiles();
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Removing any previous tracker version done.");
+            }
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] InitializeComponent...");
+            }
             this.InitializeComponent();
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] InitializeComponent done.");
+            }
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Starting display events for 'Stats' window.");
+            }
             this.SetEventWaitHandle();
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Display events for 'Stats' window done.");
+            }
+
 #if !AllowUpdate
             this.menu.Items.Remove(this.menuUpdate);
             this.trayCMenu.Items.Remove(this.trayUpdate);
@@ -721,7 +766,7 @@ namespace FallGuysStats {
             this.Opacity = 0;
             this.trayCMenu.Opacity = 0;
             this.textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
-            
+
             UseWebProxy = this.CurrentSettings.UseProxyServer;
             ProxyAddress = this.CurrentSettings.ProxyAddress;
             ProxyPort = this.CurrentSettings.ProxyPort;
@@ -729,20 +774,36 @@ namespace FallGuysStats {
             ProxyUsername = this.CurrentSettings.ProxyUsername;
             ProxyPassword = this.CurrentSettings.ProxyPassword;
             SucceededTestProxy = this.CurrentSettings.SucceededTestProxy;
-            
+
             IpGeolocationService = this.CurrentSettings.IpGeolocationService;
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Starting IPinfo Token checks...");
+            }
             if (File.Exists(IPinfoTokenFilePath)) {
                 try {
                     StreamReader sr = new StreamReader(IPinfoTokenFilePath);
                     IPinfoToken = sr.ReadLine();
                     sr.Close();
+                    using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                        sw.WriteLine("[SUCCESS] IPinfo Token file found and no error returned!");
+                    }
                 } catch {
+                    using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                        sw.WriteLine("[ERROR] IPinfo Token file found but seems empty!");
+                    }
                     IPinfoToken = string.Empty;
                 }
             } else {
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] IPinfo Token file not found.");
+                }
                 IPinfoToken = string.Empty;
             }
-            
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] IPinfo Token checks done.");
+                sw.WriteLine("[INFO] Staring Database checks (3 steps).");
+            }
             this.RoundDetails = this.StatsDB.GetCollection<RoundInfo>("RoundDetails");
             this.Profiles = this.StatsDB.GetCollection<Profiles>("Profiles");
             this.ServerConnectionLog = this.StatsDB.GetCollection<ServerConnectionLog>("ServerConnectionLog");
@@ -750,34 +811,40 @@ namespace FallGuysStats {
             this.FallalyticsPbLog = this.StatsDB.GetCollection<FallalyticsPbLog>("FallalyticsPbLog");
             this.FallalyticsCrownLog = this.StatsDB.GetCollection<FallalyticsCrownLog>("FallalyticsCrownLog");
             this.UpcomingShow = this.StatsDB.GetCollection<UpcomingShow>("UpcomingShow");
-            
+
             this.StatsDB.BeginTrans();
             this.RoundDetails.EnsureIndex(r => r.Name);
             this.RoundDetails.EnsureIndex(r => r.ShowID);
             this.RoundDetails.EnsureIndex(r => r.Round);
             this.RoundDetails.EnsureIndex(r => r.Start);
             this.RoundDetails.EnsureIndex(r => r.InParty);
-            
+
             this.Profiles.EnsureIndex(p => p.ProfileId);
-            
+
             this.ServerConnectionLog.EnsureIndex(f => f.SessionId);
             this.PersonalBestLog.EnsureIndex(f => f.PbDate);
-            
+
             this.FallalyticsPbLog.EnsureIndex(f => f.PbId);
             this.FallalyticsPbLog.EnsureIndex(f => f.RoundId);
             this.FallalyticsPbLog.EnsureIndex(f => f.ShowId);
-            
+
             this.FallalyticsCrownLog.EnsureIndex(f => f.Id);
             this.FallalyticsCrownLog.EnsureIndex(f => f.SessionId);
-            
+
             this.UpcomingShow.EnsureIndex(f => f.LevelId);
             this.StatsDB.Commit();
-            
+
             this.UpdateUpcomingShow();
             this.GenerateLevelStats();
             this.UpdateUpcomingShowJob();
-            
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] (1/3) Database checks done! Continue...");
+            }
             if (this.Profiles.Count() == 0) {
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] 'Profiles' is empty!");
+                }
                 string sysLang = CultureInfo.CurrentUICulture.Name.StartsWith("zh") ?
                                  CultureInfo.CurrentUICulture.Name :
                                  CultureInfo.CurrentUICulture.Name.Substring(0, 2);
@@ -808,8 +875,14 @@ namespace FallGuysStats {
                     this.EnableInfoStrip(true);
                     this.EnableMainMenu(true);
                 }
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] 'Profiles' is initialized.");
+                }
             }
-            
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] (2/3) Database checks done! Continue...");
+            }
             this.StatLookup = LevelStats.ALL.ToDictionary(entry => entry.Key, entry => entry.Value);
             this.StatDetails = LevelStats.ALL
                 .Where(entry => !string.IsNullOrEmpty(entry.Value.ShareCode))
@@ -817,10 +890,20 @@ namespace FallGuysStats {
                 .Select(group => group.First().Value)
                 .Concat(LevelStats.ALL.Where(entry => string.IsNullOrEmpty(entry.Value.ShareCode)).Select(entry => entry.Value))
                 .ToList();
-            
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Updating Database...");
+            }
             this.UpdateDatabaseDateFormat();
             this.UpdateDatabaseVersion();
-            
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Database updated.");
+                sw.WriteLine("[INFO] (3/3) Database checks done!");
+            }
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Starting 'Stats' window load...");
+            }
             this.BackImage = this.Icon.ToBitmap();
             this.BackMaxSize = 32;
             this.BackImagePadding = new Padding(18, 18, 0, 0);
@@ -829,14 +912,14 @@ namespace FallGuysStats {
             this.InitMainDataGridView();
             this.UpdateGridRoundName();
             this.UpdateHoopsieLegends();
-            
+
             this.overlay = new Overlay { Text = @"Fall Guys Stats Overlay", StatsForm = this, Icon = this.Icon, ShowIcon = true, BackgroundResourceName = this.CurrentSettings.OverlayBackgroundResourceName, TabResourceName = this.CurrentSettings.OverlayTabResourceName };
-            
+
             Screen screen = Utils.GetCurrentScreen(this.overlay.Location);
             Point screenLocation = screen != null ? screen.Bounds.Location : Screen.PrimaryScreen.Bounds.Location;
             Size screenSize = screen != null ? screen.Bounds.Size : Screen.PrimaryScreen.Bounds.Size;
             this.screenCenter = new Point(screenLocation.X + (screenSize.Width / 2), screenLocation.Y + (screenSize.Height / 2));
-            
+
             this.logFile.OnParsedLogLines += this.LogFile_OnParsedLogLines;
             this.logFile.OnNewLogFileDate += this.LogFile_OnNewLogFileDate;
             this.logFile.OnServerConnectionNotification += this.LogFile_OnServerConnectionNotification;
@@ -844,7 +927,7 @@ namespace FallGuysStats {
             this.logFile.OnError += this.LogFile_OnError;
             this.logFile.OnParsedLogLinesCurrent += this.LogFile_OnParsedLogLinesCurrent;
             this.logFile.StatsForm = this;
-            
+
             string fixedPosition = this.CurrentSettings.OverlayFixedPosition;
             this.overlay.SetFixedPosition(
                 string.Equals(fixedPosition, "ne"),
@@ -858,11 +941,20 @@ namespace FallGuysStats {
             this.overlay.Show();
             this.overlay.Hide();
             this.overlay.StartTimer();
-            
+
             this.SetSystemTrayIcon(this.CurrentSettings.SystemTrayIcon);
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] 'Stats' window load done.");
+                sw.WriteLine("[INFO] Updating Game Exe Location...");
+            }
             this.UpdateGameExeLocation();
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] Game Exe Location updated.");
+                sw.WriteLine("[SUCCESS] Tracker is initialized!");
+                sw.WriteLine("==============================");
+            }
         }
-        
+
         public void cmtt_levelDetails_Draw(object sender, DrawToolTipEventArgs e) {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
@@ -4518,7 +4610,7 @@ namespace FallGuysStats {
 
                                 this.RoundDetails.Insert(stat);
                                 this.AllStats.Add(stat);
-                                
+
                                 // Below is where reporting to fallalytics happen
                                 // Must have enabled the setting to enable tracking
                                 // Must not be a private lobby
@@ -4529,35 +4621,62 @@ namespace FallGuysStats {
                                     }
 
                                     if (OnlineServiceType != OnlineServiceTypes.None) {
+                                        using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                            sw.WriteLine("| OnlineServiceType: '" + OnlineServiceType + "' (Fallalytics)");
+                                        }
                                         string[] userInfo = null;
                                         if (OnlineServiceType == OnlineServiceTypes.Steam) {
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine("* Searching for Steam userInfo... (Fallalytics)");
+                                            }
                                             userInfo = this.FindSteamUserInfo();
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine($"* Steam userInfo: '{userInfo[0]}' - '{userInfo[1]}' (Fallalytics)");
+                                            }
                                         } else if (OnlineServiceType == OnlineServiceTypes.EpicGames) {
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine("* Searching for EpicGames userInfo... (Fallalytics)");
+                                            }
                                             userInfo = this.FindEpicGamesUserInfo();
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine($"* EpicGames userInfo: '{userInfo[0]}' - '{userInfo[1]}' (Fallalytics)");
+                                            }
                                         }
 
                                         if (userInfo != null && !string.IsNullOrEmpty(userInfo[0]) && !string.IsNullOrEmpty(userInfo[1])) {
                                             OnlineServiceId = userInfo[0];
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine("-- OnlineServiceId: '" + OnlineServiceId + "' (Fallalytics)");
+                                            }
                                             OnlineServiceNickname = userInfo[1];
+                                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                sw.WriteLine("-- OnlineServiceNickname: '" + OnlineServiceNickname + "' (Fallalytics)");
+                                            }
                                         }
-                                        
+
                                         if (!string.IsNullOrEmpty(OnlineServiceId) && !string.IsNullOrEmpty(OnlineServiceNickname)) {
                                             if (string.IsNullOrEmpty(HostCountryCode)) {
+                                                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                    sw.WriteLine("* Getting Country Info from your IP... (Fallalytics)");
+                                                }
                                                 HostCountryCode = Utils.GetCountryCode(Utils.GetUserPublicIp());
+                                                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                                    sw.WriteLine("-- HostCountryCode: '" + HostCountryCode + "' (Fallalytics)");
+                                                }
                                             }
-                                            
+
                                             if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FALLALYTICS_KEY"))) {
                                                 if (this.CurrentSettings.EnableFallalyticsReporting) {
                                                     if (stat.Finish.HasValue && (this.StatLookup.TryGetValue(stat.Name, out LevelStats level) && level.Type == LevelType.Race)) {
                                                         Task.Run(() => this.FallalyticsRegisterPb(stat));
                                                     }
                                                 }
-                                                
+
                                                 if (this.CurrentSettings.EnableFallalyticsWeeklyCrownLeague) {
                                                     if (stat.Crown) {
                                                         Task.Run(() => this.FallalyticsWeeklyCrown(stat)).ContinueWith(prevTask => this.FallalyticsResendWeeklyCrown());
                                                     }
-                                                    
+
                                                     bool existsTransferFailedLogs = this.FallalyticsCrownLogCache.Exists(l => l.IsTransferSuccess == false && l.OnlineServiceType == (int)OnlineServiceType && string.Equals(l.OnlineServiceId, OnlineServiceId));
                                                     if (existsTransferFailedLogs) {
                                                         Task.Run(this.FallalyticsResendWeeklyCrown);
@@ -6513,10 +6632,17 @@ namespace FallGuysStats {
                 MetroMessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         public void UpdateGameExeLocation() {
             string fallGuysShortcutLocation = this.FindEpicGamesShortcutLocation();
             string fallGuysExeLocation = this.FindSteamExeLocation();
+
+            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                sw.WriteLine("[INFO] == Game Exe Location ==");
+                sw.WriteLine("-- Shortcut: '" + fallGuysShortcutLocation + "'");
+                sw.WriteLine("-- Exe: '" + fallGuysExeLocation + "'");
+                sw.WriteLine("==============================");
+            }
 
             if (string.IsNullOrEmpty(fallGuysShortcutLocation) && !string.IsNullOrEmpty(fallGuysExeLocation)) {
                 this.menuLaunchFallGuys.Image = Properties.Resources.steam_main_icon;
@@ -6535,6 +6661,7 @@ namespace FallGuysStats {
             this.CurrentSettings.GameExeLocation = fallGuysExeLocation;
             this.SaveUserSettings();
         }
+
         
         public string[] FindEpicGamesUserInfo() {
             string[] userInfo = { string.Empty, string.Empty };
@@ -6617,65 +6744,111 @@ namespace FallGuysStats {
             }
             return userInfo;
         }
-        
+
         public string FindEpicGamesShortcutLocation() {
             try {
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] Searching for Fall Guys in the Epic Games Launcher Library...");
+                }
+
+                string debugEGLogFile = @"debug-epicgames.txt";
+                File.Delete(debugEGLogFile);
                 object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher", "AppDataPath", null);
                 if (regValue == null) { return string.Empty; }
-                
+
                 string epicGamesPath = Path.Combine((string)regValue, "Manifests");
-                
+
                 if (Directory.Exists(epicGamesPath)) {
                     DirectoryInfo di = new DirectoryInfo(epicGamesPath);
                     foreach (FileInfo file in di.GetFiles()) {
                         if (!string.Equals(file.Extension, ".item")) continue;
+                        string content = File.ReadAllText(file.FullName);
                         JsonClass json = Json.Read(File.ReadAllText(file.FullName)) as JsonClass;
-                        if (string.Equals(json["MainGameCatalogNamespace"].AsString(), "50118b7f954e450f8823df1614b24e80") || string.Equals(json["CatalogNamespace"].AsString(), "50118b7f954e450f8823df1614b24e80")) {
+
+                        if (!File.Exists(debugEGLogFile)) {
+                            using (StreamWriter sw = new StreamWriter(debugEGLogFile)) {
+                                sw.WriteLine("File path: '" + file.FullName + "'");
+                                sw.WriteLine("== File content ==");
+                                sw.WriteLine(content);
+                                sw.WriteLine("== End of file ==");
+                                sw.WriteLine("");
+                            }
+                        }
+
+                        using (StreamWriter sw = new StreamWriter(debugEGLogFile, true)) {
+                            sw.WriteLine("File path: '" + file.FullName + "'");
+                            sw.WriteLine("== File content ==");
+                            sw.WriteLine(content);
+                            sw.WriteLine("== End of file ==");
+                            sw.WriteLine("");
+                        }
+
+                        if ((json["MainGameCatalogNamespace"] != null && string.Equals(json["MainGameCatalogNamespace"].AsString(), "50118b7f954e450f8823df1614b24e80"))
+                             || (json["CatalogNamespace"] != null && string.Equals(json["CatalogNamespace"].AsString(), "50118b7f954e450f8823df1614b24e80"))) {
+                            using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                                sw.WriteLine("[SUCCESS] Fall Guys Found in the Epic Games Launcher Library!");
+                            }
                             return "com.epicgames.launcher://apps/50118b7f954e450f8823df1614b24e80%3A38ec4849ea4f4de6aa7b6fb0f2d278e1%3A0a2d9f6403244d12969e11da6713137b?action=launch&silent=true";
                         }
                     }
                 }
+
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] Fall Guys Not Found in the Epic Games Launcher Library.");
+                }
             } catch (Exception ex) {
                 MetroMessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return string.Empty;
         }
-        
+
+
         public string FindSteamExeLocation() {
             try {
-                string steamPath;
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
-                    string userName = Environment.UserName;
-                    steamPath = Path.Combine("/", "home", userName, ".local", "share", "Steam");
-                } else {
-                    // get steam install folder
-                    object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam", "InstallPath", null);
-                    if (regValue == null) { return string.Empty; }
+                using (StreamWriter sw = new StreamWriter(DEBUGFILENAME, true)) {
+                    sw.WriteLine("[INFO] Searching for Fall Guys in the Steam Library...");
+                    string steamPath;
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                        string userName = Environment.UserName;
+                        steamPath = Path.Combine("/", "home", userName, ".local", "share", "Steam");
+                    } else {
+                        // get steam install folder
+                        object regValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam", "InstallPath", null);
+                        if (regValue == null) { return string.Empty; }
 
-                    steamPath = (string)regValue;
-                }
+                        steamPath = (string)regValue;
+                    }
 
-                string fallGuysSteamPath = Path.Combine(steamPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
-                
-                if (File.Exists(fallGuysSteamPath)) { return fallGuysSteamPath; }
-                // read libraryfolders.vdf from install folder to get games installation folder
-                // note: this parsing is terrible, but does technically work fine. There's a better way by specifying a schema and
-                // fully parsing the file or something like that. This is quick and dirty, for sure.
-                FileInfo libraryFoldersFile = new FileInfo(Path.Combine(steamPath, "steamapps", "libraryfolders.vdf"));
-                if (libraryFoldersFile.Exists) {
-                    JsonClass json = Json.Read(File.ReadAllText(libraryFoldersFile.FullName)) as JsonClass;
-                    foreach (JsonObject obj in json) {
-                        if (obj is JsonClass library) {
-                            string libraryPath = library["path"].AsString();
-                            if (!string.IsNullOrEmpty(libraryPath)) {
-                                // look for exe in standard location under library
-                                fallGuysSteamPath = Path.Combine(libraryPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
-                                
-                                if (File.Exists(fallGuysSteamPath)) { return fallGuysSteamPath; }
+                    string fallGuysSteamPath = Path.Combine(steamPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
+
+                    if (File.Exists(fallGuysSteamPath)) {
+                        sw.WriteLine("[SUCCESS] Default Fall Guys Exe Location Found!");
+                        return fallGuysSteamPath;
+                    }
+                    sw.WriteLine("[INFO] Default Fall Guys Exe Location Not Found, but will continue the search...");
+                    // read libraryfolders.vdf from install folder to get games installation folder
+                    // note: this parsing is terrible, but does technically work fine. There's a better way by specifying a schema and
+                    // fully parsing the file or something like that. This is quick and dirty, for sure.
+                    FileInfo libraryFoldersFile = new FileInfo(Path.Combine(steamPath, "steamapps", "libraryfolders.vdf"));
+                    if (libraryFoldersFile.Exists) {
+                        JsonClass json = Json.Read(File.ReadAllText(libraryFoldersFile.FullName)) as JsonClass;
+                        foreach (JsonObject obj in json) {
+                            if (obj is JsonClass library) {
+                                string libraryPath = library["path"].AsString();
+                                if (!string.IsNullOrEmpty(libraryPath)) {
+                                    // look for exe in standard location under library
+                                    fallGuysSteamPath = Path.Combine(libraryPath, "steamapps", "common", "Fall Guys", "FallGuys_client_game.exe");
+
+                                    if (File.Exists(fallGuysSteamPath)) {
+                                        sw.WriteLine("[SUCCESS] Fall Guys Exe Location Found in the Steam Library!");
+                                        return fallGuysSteamPath;
+                                    }
+                                }
                             }
                         }
                     }
+                    sw.WriteLine("[INFO] Fall Guys Exe Location Not Found in the Steam Library.");
                 }
             } catch (Exception ex) {
                 MetroMessageBox.Show(this, ex.ToString(), $"{Multilingual.GetWord("message_program_error_caption")}", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -6683,6 +6856,7 @@ namespace FallGuysStats {
 
             return string.Empty;
         }
+
         
         private void EnableMainMenu(bool enable) {
             this.menuSettings.Enabled = enable;
@@ -7756,7 +7930,7 @@ namespace FallGuysStats {
         private void ChangeLanguage() {
             this.SuspendLayout();
             this.currentLanguage = (int)CurrentLanguage;
-            this.mainWndTitle = $@"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            this.mainWndTitle = $@"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} [DEBUG]";
             this.trayIcon.Text = this.mainWndTitle.Trim();
             this.Text = this.mainWndTitle;
             this.menu.Font = Overlay.GetMainFont(12);

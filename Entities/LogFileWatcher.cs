@@ -149,15 +149,33 @@ namespace FallGuysStats {
                                         string subsystemsPath = line.Substring(44);
                                         string[] userInfo;
                                         if (subsystemsPath.IndexOf("steamapps", StringComparison.OrdinalIgnoreCase) != -1) {
+                                            using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                                sw.WriteLine("* Searching for Steam userInfo... (LogFileWatcher)");
+                                            }
                                             Stats.OnlineServiceType = OnlineServiceTypes.Steam;
                                             userInfo = this.StatsForm.FindSteamUserInfo();
+                                            using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                                sw.WriteLine($"* Steam userInfo: '{userInfo[0]}' - '{userInfo[1]}' (LogFileWatcher)");
+                                            }
                                         } else {
+                                            using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                                sw.WriteLine("* Searching for EpicGames userInfo... (LogFileWatcher)");
+                                            }
                                             Stats.OnlineServiceType = OnlineServiceTypes.EpicGames;
                                             userInfo = this.StatsForm.FindEpicGamesUserInfo();
+                                            using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                                sw.WriteLine($"* EpicGames userInfo: '{userInfo[0]}' - '{userInfo[1]}' (LogFileWatcher)");
+                                            }
                                         }
                                         
                                         Stats.OnlineServiceId = userInfo[0];
+                                        using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                            sw.WriteLine($"-- OnlineServiceId: '{Stats.OnlineServiceId}' (LogFileWatcher)");
+                                        }
                                         Stats.OnlineServiceNickname = userInfo[1];
+                                        using (StreamWriter sw = new StreamWriter(Stats.DEBUGFILENAME, true)) {
+                                            sw.WriteLine($"-- OnlineServiceNickname: '{Stats.OnlineServiceNickname}' (LogFileWatcher)");
+                                        }
                                         this.StatsForm.SetSecretKey();
                                         this.StatsForm.SetLeaderboardTitle();
                                     }
