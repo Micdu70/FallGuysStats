@@ -45,10 +45,10 @@ namespace FallGuysStats {
         
         [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern long DwmSetWindowAttribute(IntPtr hWnd, DWMWINDOWATTRIBUTE attribute, ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute, uint cbAttribute);
-
+        
         [DllImport("user32")]
         public static extern bool AnimateWindow(IntPtr hwnd, int time, int flags);
-
+        
         public static string GetGuid() {
 			var guid = Guid.NewGuid();
 			return guid.ToString("N");
@@ -163,27 +163,40 @@ namespace FallGuysStats {
         public static bool IsInternetConnected() {
             const string NCSI_TEST_URL = "http://www.msftncsi.com/ncsi.txt";
             const string NCSI_TEST_RESULT = "Microsoft NCSI";
-            const string NCSI_DNS = "dns.msftncsi.com";
-            const string NCSI_DNS_IP_ADDRESS = "131.107.255.255";
+            const string GOOGLE_TEST_URL = "http://google.com/generate_204";
 
+            Console.WriteLine("===============================");
+            Console.WriteLine("Checking Internet connection...");
             try {
                 // Check NCSI test link
-                var webClient = new WebClient();
-                string result = webClient.DownloadString(NCSI_TEST_URL);
-                if (result != NCSI_TEST_RESULT){
-                    return false;
-                }
-
-                // Check NCSI DNS IP
-                IPHostEntry dnsHost = Dns.GetHostEntry(NCSI_DNS);
-                if (dnsHost.AddressList.Count() < 0 || dnsHost.AddressList[0].ToString() != NCSI_DNS_IP_ADDRESS) {
-                    return false;
+                Console.WriteLine($"Testing URL: {NCSI_TEST_URL}");
+                using (var webClient = new WebClient()) {
+                    string result = webClient.DownloadString(NCSI_TEST_URL);
+                    Console.WriteLine($"Test Result: {result}");
+                    if (!string.Equals(result, NCSI_TEST_RESULT)) {
+                        Console.WriteLine("Test succeeded! (1)");
+                        return true;
+                    } else {
+                        Console.WriteLine("Test failed! (1)");
+                        throw new Exception("NCSI test failed => Try Google test now");
+                    }
                 }
             } catch {
-                return false;
+                Console.WriteLine("NCSI test failed => Trying Google test now");
+                try {
+                    // Check Google test link
+                    Console.WriteLine($"Testing URL: {GOOGLE_TEST_URL}");
+                    using (var webClient = new WebClient())
+                    using (webClient.OpenRead(GOOGLE_TEST_URL)) {
+                        Console.WriteLine("Test succeeded! (2)");
+                        return true;
+                    }
+                } catch {
+                    Console.WriteLine("Test failed! (2)");
+                    Console.WriteLine("All tests failed!");
+                    return false;
+                }
             }
-
-            return true;
         }
         
         public static bool IsDomainNameValid(string url) {

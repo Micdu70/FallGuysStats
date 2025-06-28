@@ -796,7 +796,7 @@ namespace FallGuysStats {
         private Stats() {
             this.DatabaseMigration();
 
-            this.mainWndTitle = $"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            this.mainWndTitle = $"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} [DEBUG (Network detection)]";
             this.StatsDB = new LiteDatabase($@"{CURRENTDIR}data.db");
             this.StatsDB.Pragma("UTC_DATE", true);
             this.UserSettings = this.StatsDB.GetCollection<UserSettings>("UserSettings");
@@ -8099,7 +8099,7 @@ namespace FallGuysStats {
         private void ChangeLanguage() {
             this.SuspendLayout();
             this.currentLanguage = (int)CurrentLanguage;
-            this.mainWndTitle = $@"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            this.mainWndTitle = $@"     {Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} [DEBUG (Network detection)]";
             this.trayIcon.Text = this.mainWndTitle.Trim();
             this.Text = this.mainWndTitle;
             this.menu.Font = Overlay.GetMainFont(12);
