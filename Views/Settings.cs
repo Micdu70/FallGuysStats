@@ -1312,9 +1312,9 @@ namespace FallGuysStats {
             this.btnCheckUpdates.Width = TextRenderer.MeasureText(this.btnCheckUpdates.Text, this.btnCheckUpdates.Font).Width + 30;
             this.lblthirdpartyLicences.Font = Overlay.GetMainFont(18);
 #if AllowUpdate
-            this.lblVersion.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)}";
+            this.lblVersion.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
 #else
-            this.lblVersion.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(2)} ({Multilingual.GetWord("main_manual_update_version")})";
+            this.lblVersion.Text = $"{Multilingual.GetWord("main_fall_guys_stats")} v{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)} ({Multilingual.GetWord("main_manual_update_version")})";
             this.chkAutoUpdate.Visible = false;
 #endif
             Stats.CurrentLanguage = tempLanguage;
