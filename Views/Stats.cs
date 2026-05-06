@@ -548,9 +548,12 @@ namespace FallGuysStats {
                             List<LevelTimeLimit> newList = new List<LevelTimeLimit>();
                             foreach (var roundpool in levelTimeLimit.data.roundpools) {
                                 foreach (var level in roundpool.levels) {
-                                    newList.Add(new LevelTimeLimit { LevelId = level.id, Duration = level.duration });
+                                    if (!newList.Any(l => string.Equals(l.LevelId, level.id))) {
+                                        newList.Add(new LevelTimeLimit { LevelId = level.id, Duration = level.duration });
+                                    }
                                 }
                             }
+                            this.LevelTimeLimitCache.Clear();
                             this.LevelTimeLimitCache = newList;
 
                             lock (this.StatsDB) {

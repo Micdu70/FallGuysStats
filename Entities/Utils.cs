@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace FallGuysStats {
 	public static class Utils {
-        public static readonly string FALLGUYSSTATS_LATEST_DB_VERSIONS_URL = "https://raw.githubusercontent.com/ShootMe/FallGuysStats/refs/heads/master/DB_Versions.json";
-        public static readonly string FALLGUYSSTATS_LEVEL_TIME_LIMIT_DB_URL = "https://raw.githubusercontent.com/ShootMe/FallGuysStats/refs/heads/master/LevelTimeLimitDB.json";
-        public static readonly string FALLGUYSSTATS_UPCOMING_SHOW_DB_URL = "https://raw.githubusercontent.com/ShootMe/FallGuysStats/refs/heads/master/UpcomingShowDB.json";
+        public static readonly string FALLGUYSSTATS_LATEST_DB_VERSIONS_URL = "https://raw.githubusercontent.com/Micdu70/FallGuysStats/refs/heads/dev/DB_Versions.json";
+        public static readonly string FALLGUYSSTATS_LEVEL_TIME_LIMIT_DB_URL = "https://raw.githubusercontent.com/Micdu70/FallGuysStats/refs/heads/dev/LevelTimeLimitDB.json";
+        public static readonly string FALLGUYSSTATS_UPCOMING_SHOW_DB_URL = "https://raw.githubusercontent.com/Micdu70/FallGuysStats/refs/heads/dev/UpcomingShowDB.json";
         public static readonly string FALLGUYSSTATS_RELEASES_LATEST_INFO_URL = "https://api.github.com/repos/ShootMe/FallGuysStats/releases/latest";
         public static readonly string FALLGUYSSTATS_RELEASES_LATEST_DOWNLOAD_URL = "https://github.com/ShootMe/FallGuysStats/releases/latest/download/FallGuysStats.zip";
         public static readonly string FALLGUYSDB_API_URL = "https://api2.fallguysdb.info/api/"; // $"{FALLGUYSDB_API_URL}creative/{shareCode}.json" or $"{FALLGUYSDB_API_URL}upcoming-shows"
