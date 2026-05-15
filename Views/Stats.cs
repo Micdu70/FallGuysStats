@@ -6780,7 +6780,7 @@ namespace FallGuysStats {
                     break;
                 case "Qualified":
                     sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
-                    sizeOfText += CurrentLanguage == Language.English || CurrentLanguage == Language.French ? 0 : 5;
+                    sizeOfText += CurrentLanguage == Language.English || CurrentLanguage == Language.French || CurrentLanguage == Language.Spanish ? 0 : 5;
                     break;
                 case "Gold":
                     sizeOfText = TextRenderer.MeasureText(columnText, this.dataGridViewCellStyle1.Font).Width;
@@ -8729,6 +8729,7 @@ namespace FallGuysStats {
         private void SetMinimumSize() {
             this.MinimumSize = new Size(CurrentLanguage == Language.English ? 730 :
                                         CurrentLanguage == Language.French ? 860 :
+                                        CurrentLanguage == Language.Spanish ? 860 :
                                         CurrentLanguage == Language.Korean ? 710 :
                                         CurrentLanguage == Language.Japanese ? 805 : 685
                                         , 350);
